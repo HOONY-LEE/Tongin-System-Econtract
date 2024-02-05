@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CustomButton from "../components/common/customButton";
 import { useNavigate } from "react-router-dom";
 import { Container, Wrapper } from "../components/common/flexWrapper";
+import AdminTabComponent from "../components/common/adminTabComponent";
 
 const BtnBox = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const BtnBox = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 30%;
-  margin-top: 20vh;
+  margin-top: 6vh;
 `;
 
 export default function Admin() {
@@ -24,12 +25,7 @@ export default function Admin() {
       <Container>
         <Wrapper>
           <BtnBox>
-            <CustomButton
-              text={"사원 관리"}
-              onClick={moveToCreate}
-            ></CustomButton>
-            <CustomButton text={"관리자 메뉴1"}></CustomButton>
-            <CustomButton text={"관리자 메뉴2"}></CustomButton>
+            <AdminTabComponent></AdminTabComponent>
           </BtnBox>
         </Wrapper>
       </Container>

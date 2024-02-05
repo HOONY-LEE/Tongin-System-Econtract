@@ -6,7 +6,7 @@ export default function TabComponent(props: any) {
   const { onLogin, userId } = props;
   return (
     <>
-      <h1 onClick={onLogin}>탭 컴포넌트 : {userId}</h1>
+      <h1 onClick={onLogin}>탭 컴포넌트 {userId}</h1>
     </>
   );
 }
