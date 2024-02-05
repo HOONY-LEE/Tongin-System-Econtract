@@ -39,29 +39,42 @@ const TitleBox = styled.div`
 `;
 
 export default function AdminTabComponent(props: any) {
+  const { selectedTab, setSelectedTab } = props;
+
+  const init = () => {};
+  init();
   const navigate = useNavigate();
 
   const onClickHandle = (e: any) => {
-    alert(e.target.id);
+    console.log(e.target.dataset.id);
+    setSelectedTab(e.target.dataset.id);
   };
   return (
     <>
       <Wrapper>
-        <TabItem id="aa1" onClick={onClickHandle}>
+        <TabItem>
           <Marker></Marker>
-          <TitleBox>계정 관리</TitleBox>
+          <TitleBox data-id={"admin"} onClick={onClickHandle}>
+            계정 관리
+          </TitleBox>
         </TabItem>
-        <TabItem id="aa2" onClick={onClickHandle}>
+        <TabItem>
           <Marker></Marker>
-          <TitleBox>계정 생성</TitleBox>
+          <TitleBox data-id={"create"} onClick={onClickHandle}>
+            계정 생성
+          </TitleBox>
         </TabItem>
-        <TabItem id="aa3" onClick={onClickHandle}>
+        <TabItem>
           <Marker></Marker>
-          <TitleBox>관리자 메뉴1</TitleBox>
+          <TitleBox data-id={"menu1"} onClick={onClickHandle}>
+            관리자 메뉴1
+          </TitleBox>
         </TabItem>
-        <TabItem id="aa4" onClick={onClickHandle}>
+        <TabItem>
           <Marker></Marker>
-          <TitleBox>관리자 메뉴2</TitleBox>
+          <TitleBox data-id={"menu2"} onClick={onClickHandle}>
+            관리자 메뉴2
+          </TitleBox>
         </TabItem>
       </Wrapper>
     </>

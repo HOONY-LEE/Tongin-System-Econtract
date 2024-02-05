@@ -3,6 +3,8 @@ import CustomButton from "../components/common/customButton";
 import { useNavigate } from "react-router-dom";
 import { Container, Wrapper } from "../components/common/flexWrapper";
 import AdminTabComponent from "../components/common/adminTabComponent";
+import { useState } from "react";
+import { Tab } from "../components/admin/tabComponent";
 
 const BtnBox = styled.div`
   display: flex;
@@ -15,6 +17,7 @@ const BtnBox = styled.div`
 
 export default function Admin() {
   const navigate = useNavigate();
+  const [selectedTab, setSelectedTab] = useState("admin");
 
   const moveToCreate = () => {
     navigate("/admin/create-account");
@@ -25,7 +28,7 @@ export default function Admin() {
       <Container>
         <Wrapper>
           <BtnBox>
-            <AdminTabComponent></AdminTabComponent>
+            <Tab></Tab>
           </BtnBox>
         </Wrapper>
       </Container>
