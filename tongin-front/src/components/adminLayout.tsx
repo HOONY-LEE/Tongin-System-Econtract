@@ -13,9 +13,9 @@ const Header = styled.div`
 `;
 
 const Image = styled.img.attrs({})`
-  margin-left: 3vh;
-  width: 3.4vh;
-  height: 3.4vh;
+  margin-left: 2vh;
+  width: 3.6vh;
+  height: 3.6vh;
 `;
 
 const Title = styled.div`
@@ -61,8 +61,8 @@ const AdminHeader = () => {
           <Image
             src="img/tongin_logo.png"
             alt="로고 이미지"
-            width={"40vh"}
-            height={"40vh"}
+            width={"10vw"}
+            height={"10vw"}
           />
         </LeftBox>
         <MidBox>
@@ -71,9 +71,9 @@ const AdminHeader = () => {
         <RightBox>
           <CustomButton
             onClick={logout}
-            width={"7vh"}
-            height={"3vh"}
-            size={"1vh"}
+            width={"6vh"}
+            height={"3.2vh"}
+            size={"1.2vh"}
             radius={"0.4vh"}
             text={"로그아웃"}
           ></CustomButton>

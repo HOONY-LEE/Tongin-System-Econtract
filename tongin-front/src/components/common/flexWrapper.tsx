@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 82%;
-  height: 94vh;
-  outline: 1px dashed green;
+  width: 86vw;
+  /* outline: 1px dashed green; */
 `;
