@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import CreateAccountComponent from "./createAccountComponent";
+import MemberListComponent from "./memberListComponent";
 
 // Styled-Component 라이브러리를 활용해 TabMenu 와 Desc 컴포넌트의 CSS를 구현.
 
@@ -41,6 +42,8 @@ const TabMenu = styled.ul`
 `;
 
 const ContentBox = styled.div`
+  display: flex;
+  flex-direction: column;
   text-align: center;
   width: 100%;
   height: 100%;
@@ -51,6 +54,7 @@ const ContentBox = styled.div`
 
 const ListBox = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: start;
   outline: 1px dashed red;
@@ -58,6 +62,7 @@ const ListBox = styled.div`
 
 const CreateBox = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   outline: 1px dashed red;
@@ -111,19 +116,12 @@ export const AdminTabComponent = () => {
         {currentTab === 0 ? (
           <ListBox>
             <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
-            <div>계정 목록 리스트</div>
           </ListBox>
         ) : null}
         {currentTab === 1 ? (
           <CreateBox>
             <CreateAccountComponent></CreateAccountComponent>
+            <MemberListComponent></MemberListComponent>
           </CreateBox>
         ) : null}
         {currentTab === 2 ? <Menu1>[메뉴1] 미구현</Menu1> : null}

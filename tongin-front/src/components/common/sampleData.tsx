@@ -182,8 +182,8 @@ export const createRequest = {
   body: {
     name: "김통인",
     contact: "010-2311-4221",
-    branch: "송파방이점",
-    branchCode: "BE0052",
+    empCode: "AC0123",
+    beCode: "BE0052",
     userId: "BE0052_001",
     password: "123456789a",
   },
