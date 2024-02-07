@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { InputComponent } from "../common/InputComponent";
 import CustomButton from "../common/customButton";
+import axios from "axios";
 
 const BoxWrapper = styled.div`
   display: flex;
@@ -41,8 +42,29 @@ export default function CreateAccountComponent() {
     console.log(e.target.value);
   };
 
-  const createAccountClick = (e: React.MouseEvent<Element, MouseEvent>) => {
-    console.log(e);
+  const createAccountClick = async (
+    e: React.MouseEvent<Element, MouseEvent>
+  ) => {
+    const requestParam = {
+      header: {},
+      body: {
+        name: "이성훈2",
+        contact: "010-1234-1234",
+        branchCode: "BE0049",
+        userId: "leesh123",
+        password: "12341234",
+        empCode: "20210815",
+      },
+    };
+
+    const response: any = await axios.post(
+      "https://homenmove.net/v1/api/auth/sign-in",
+      requestParam
+    );
+
+    console.log("response");
+    console.log(response);
+    console.log(response.body.data.user.userId);
   };
 
   return (
