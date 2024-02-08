@@ -182,8 +182,8 @@ export const createRequest = {
   body: {
     name: "김통인",
     contact: "010-2311-4221",
-    branch: "송파방이점",
-    branchCode: "BE0052",
+    empCode: "AC0123",
+    beCode: "BE0052",
     userId: "BE0052_001",
     password: "123456789a",
   },
@@ -194,5 +194,45 @@ export const loginRequest = {
   body: {
     userId: "BE0052_001",
     password: "123456789a",
+  },
+};
+
+export const getAllEmployRequest = {
+  header: {},
+  body: {
+    userId: "BE0052_001",
+    password: "123456789a",
+  },
+};
+
+export const getAllEmployResponse = {
+  header: {},
+  body: {
+    data: [
+      {
+        name: "김과장",
+        empCode: "AC0123",
+        contact: "010-1321-4921",
+        beCode: "BE0052",
+        branchName: "송파지점",
+        bossName: "최대표",
+      },
+      {
+        name: "박통인",
+        empCode: "AC0124",
+        contact: "010-4471-4921",
+        beCode: "BE0053",
+        branchName: "강남지점",
+        bossName: "최대표",
+      },
+      {
+        name: "이직원",
+        empCode: "AC0125",
+        contact: "010-5211-3921",
+        beCode: "BE0052",
+        branchName: "서초지점",
+        bossName: "홍대표",
+      },
+    ],
   },
 };
