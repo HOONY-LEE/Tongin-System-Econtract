@@ -6,7 +6,7 @@ export default function ProtectedRouteAdmin({ children }: any) {
   // "ADMIN" 이면 관리자 페이지로 라우팅
   // "USER 이면 로그인된 회원으로 메인페이지로 라우팅
   // null 이면 로그아웃 된 상태로 로그인 페이지로 라우팅
-  const [userType, setUserType] = useState<"USER" | "ADMIN" | null>("USER");
+  const [userType, setUserType] = useState<"USER" | "ADMIN" | null>("ADMIN");
   if (userType === null) {
     return <Navigate to="/login"></Navigate>;
   } else if (userType === "USER") {

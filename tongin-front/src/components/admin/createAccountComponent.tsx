@@ -63,30 +63,28 @@ export default function CreateAccountComponent() {
     );
   };
 
-  const createAccountClick = async (
-    e: React.MouseEvent<Element, MouseEvent>
-  ) => {
+  const createAccountClick = async () => {
     const requestParam = {
       header: {},
       body: {
         name: "이성훈",
         contact: "010-5259-6024",
         branchCode: "BE0049",
-        userId: "leesh132",
+        userId: "leesh1329999",
         password: "asdf2011!",
-        empCode: "2024031212",
+        empCode: "202403121211",
       },
     };
 
-    const response: any = await axios.post(
-      "https://homenmove.net/v1/api/auth/sign-up",
-      requestParam
-    );
-
-    console.log("response");
-    console.log(response);
-    setAccessToken(response.data.body.data.tokens.accessToken);
-    setRefreshToken(response.data.body.data.tokens.refreshToken);
+    try {
+      const response: any = await axios.post(
+        "https://homenmove.net/v1/api/auth/sign-up",
+        requestParam
+      );
+      console.log(response);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
