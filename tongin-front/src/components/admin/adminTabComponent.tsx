@@ -6,6 +6,7 @@ import MemberListComponent from "./memberListComponent";
 // Styled-Component 라이브러리를 활용해 TabMenu 와 Desc 컴포넌트의 CSS를 구현.
 
 const TabMenu = styled.ul`
+  // 탭 메뉴들 포함하고 있는 영역
   color: rgb(232, 234, 237);
   font-weight: bold;
   display: flex;
@@ -20,7 +21,7 @@ const TabMenu = styled.ul`
     cursor: pointer;
   }
   .submenu {
-    // 기본 Tabmenu 에 대한 CSS를 구현
+    // 각 탭하나당 CSS
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +36,6 @@ const TabMenu = styled.ul`
   }
 
   .focused {
-    //선택된 Tabmenu 에만 적용되는 CSS를 구현
     background-color: #ff7f3b;
     color: white;
   }
@@ -52,48 +52,48 @@ const ContentBox = styled.div`
   padding: 1vw;
 `;
 
+// 계정관리 탭
 const ListBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  outline: 1px dashed red;
 `;
 
+// 계정 생성 탭
 const CreateBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  outline: 1px dashed red;
   height: 70vh;
 `;
 
+// 메뉴1 탭
 const Menu1 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: 1px dashed red;
   height: 40vh;
 `;
 
+// 메뉴2 탭
 const Menu2 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: 1px dashed red;
   height: 40vh;
 `;
 
 export const AdminTabComponent = () => {
-  // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
+  // 현재 선택된 탭, 디폴트는 0(계정 관리)
   const [currentTab, setCurrentTab] = useState(0);
 
   const menuArr = [
-    { name: "계정 관리", content: "계정관리" },
-    { name: "계정 생성", content: "계정생성" },
-    { name: "메뉴1", content: "메뉴1" },
-    { name: "메뉴2", content: "메뉴2" },
+    { name: "계정 관리", content: "계정관리 영역" },
+    { name: "계정 생성", content: "계정생성 영역" },
+    { name: "메뉴1", content: "메뉴1 영역" },
+    { name: "메뉴2", content: "메뉴2 영역" },
   ];
 
   const selectMenuHandler = (index: any) => {
@@ -105,6 +105,7 @@ export const AdminTabComponent = () => {
       <TabMenu>
         {menuArr.map((item, index) => (
           <li
+            key={index}
             className={index === currentTab ? "submenu focused" : "submenu"}
             onClick={() => selectMenuHandler(index)}
           >
