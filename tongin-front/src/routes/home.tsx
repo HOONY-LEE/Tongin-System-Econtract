@@ -10,6 +10,9 @@ import InvoiceListComponent from "../components/home/invoiceListComponent";
 import SearchComponent from "../components/home/searchComponent";
 import TabComponent from "../components/home/tabComponent";
 import styled from "styled-components";
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
 
 const HomeContainer = styled.div`
   width: 80%;
@@ -50,6 +53,8 @@ export default function Home() {
     alert("버튼을 클릭했습니다.");
   };
 
+  const refreshToken = cookies.get("refreshToken");
+
   return (
     <>
       <FlexXY>
@@ -75,7 +80,7 @@ export default function Home() {
         onClick={onClick}
         width={"700px"}
         height={"50px"}
-        text={`로그인`}
+        text={`${refreshToken}`}
         $bgColor={`#0C8CE9`}
         color={`white`}
         radius={"8px"}

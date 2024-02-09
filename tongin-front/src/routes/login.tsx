@@ -3,6 +3,10 @@ import styled from "styled-components";
 import TabComponent from "../components/home/tabComponent";
 import CustomButton from "../components/common/customButton";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
 
 const ContainerLogin = styled.div`
   display: flex;
@@ -107,6 +111,8 @@ export default function Login() {
   const [onDisable, setOnDisable] = useState("#B9C1C9");
   const [id, setId] = useState("");
   const [pswd, setPswd] = useState("");
+  const [accessToken, setAccessToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
 
   const onFocusHandle = (e: any) => {
     if (e.target.id === "Id") setoutLineId(tonginOrange);
@@ -123,17 +129,60 @@ export default function Login() {
     if (e.target.id === "Id") setId(e.target.value);
     else if (e.target.id === "Pw") setPswd(e.target.value);
     if (id.length > 3 && pswd.length > 3) {
-      console.log("wkrehd");
       onDisableLogin();
     }
   };
 
-  const onLogin = () => {
-    alert("로그인하였습니다.");
-    navigate("/", {
-      state: { loginUser: { id: id, userType: "USER" } },
-    });
+  const createTestClick = async (e: React.MouseEvent<Element, MouseEvent>) => {
+    const requestParam = {
+      header: {
+        Authorization: {
+          accessToken,
+          refreshToken,
+        },
+      },
+      body: {},
+    };
   };
+  const createAccountClick = async () => {
+    const requestParam = {
+      header: {},
+      body: {
+        userId: id,
+        password: pswd,
+      },
+    };
+
+    try {
+      const response: any = await axios.post(
+        "https://homenmove.net/v1/api/auth/login",
+        requestParam
+      );
+      alert("로그인하였습니다.");
+      console.log(response);
+      localStorage.setItem(
+        "accessToken",
+        response.data.data.tokens.accessToken
+      );
+      localStorage.setItem(
+        "loginUser",
+        JSON.stringify(response.data.data.user)
+      );
+      cookies.set("refreshToken", response.data.data.tokens.refreshToken);
+      navigate("/");
+    } catch (error) {
+      alert(error);
+    } finally {
+      console.log("accessToken", accessToken);
+    }
+  };
+
+  // const onLogin = () => {
+  //   alert("로그인하였습니다.");
+  //   navigate("/", {
+  //     state: { loginUser: { id: id, userType: "USER" } },
+  //   });
+  // };
 
   return (
     <>
@@ -165,7 +214,7 @@ export default function Login() {
             <CheckText>아이디/비밀번호 기억하기</CheckText>
           </CheckContainer>
           <CustomButton
-            onClick={onLogin}
+            onClick={createAccountClick}
             width={"100%"}
             height={"70px"}
             text={`로그인`}
