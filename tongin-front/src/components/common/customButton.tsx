@@ -27,15 +27,15 @@ const Box: any = styled.div<{
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : "600")};
   outline: ${(props) => (props.$outline ? props.$outline : "none")};
   &:hover {
-    background: ${(props) =>
+    /* background: ${(props) =>
       props.$hoverBgColor ? props.$hoverBgColor : "#FF8F53"};
     color: ${(props) => (props.$hoverColor ? props.$hoverColor : "white")};
-    transition: 0.5s;
+    transition: 0.5s; */
     cursor: ${(props) => (props.cursor ? props.cursor : "pointer")};
   }
-  :disabled {
+  /* :disabled {
     background-color: gray;
-  }
+  } */
 `;
 
 export default function CustomButton(props: any) {
