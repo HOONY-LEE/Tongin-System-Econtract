@@ -13,13 +13,13 @@ const ContainerLogin = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 `;
 
 const ContainerSub = styled.div`
-  width: 60%;
-  height: 50%;
+  width: 60vw;
+  height: 58vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -28,73 +28,74 @@ const ContainerSub = styled.div`
 `;
 
 const LoginLogo = styled.div`
-  width: 20%;
-  height: 20%;
+  width: 20vw;
+  height: 20vh;
   outline: 2px solid red;
 `;
 const LogoText = styled.div`
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 2.2vw;
   color: #ea5404;
 `;
 const OutlineInputbox = styled.div<{
   $outLine?: string;
 }>`
-  width: 100%;
-  height: 12%;
-  border-radius: 8px;
+  width: 60vw;
+  height: 7vh;
+  border-radius: 0.7vw;
   background-color: white;
   outline: ${(props) => props.$outLine};
 `;
 
 const Inputbox = styled.input`
   background-color: transparent;
-  margin-left: 20px;
-  font-size: 20px;
+  margin-left: 2vw;
+  font-size: 2.2vw;
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   -o-appearance: none;
   appearance: none;
   border: none;
-  width: 100%;
-  height: 100%;
+  width: 58vw;
+  height: 7vh;
 `;
 
-const CheckContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 5%;
-`;
-const CheckBox = styled.input`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: start;
-  /* outline: 1px dashed blue; */
-`;
-const CheckText = styled.div`
-  font-size: 20px;
-`;
-const LoginBtn = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 10%;
-  font-size: 20px;
-`;
+// const CheckContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+//   width: 100%;
+//   height: 5%;
+// `;
+// const CheckBox = styled.input`
+//   width: 20px;
+//   height: 20px;
+//   display: flex;
+//   align-items: start;
+//   /* outline: 1px dashed blue; */
+// `;
+// const CheckText = styled.div`
+//   font-size: 20px;
+// `;
+// const LoginBtn = styled.button`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+//   height: 10vh;
+//   font-size: 20px;
+// `;
 const MemoryLogin = styled.div`
-  width: 100%;
-  height: 10%;
-  font-size: 20px;
+  width: 100vw;
+  height: 10vw;
+  font-size: 2.2vw;
+  color: #b3b3b3;
   text-decoration: underline;
   display: flex;
   flex-direction: column;
@@ -104,47 +105,48 @@ const MemoryLogin = styled.div`
 
 export default function Login() {
   const navigate = useNavigate();
-  const tonginOrange = "1.5px solid #FF7F3B";
-  const tonginDisable = "1.5px solid #B9C1C9";
+  const tonginOrange = "0.3vw solid #FF7F3B";
+  const tonginDisable = "0.2vw solid #E7E7E7";
   const [outLineId, setoutLineId] = useState(tonginDisable);
   const [outLinePswd, setoutLinePswd] = useState(tonginDisable);
-  const [onDisable, setOnDisable] = useState("#B9C1C9");
+  const [bgColor, setBgColor] = useState("#B9C1C9");
+  const [desabled, setDesabled] = useState(true);
+
   const [id, setId] = useState("");
   const [pswd, setPswd] = useState("");
-  const [accessToken, setAccessToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
 
   const onFocusHandle = (e: any) => {
     if (e.target.id === "Id") setoutLineId(tonginOrange);
     else if (e.target.id === "Pw") setoutLinePswd(tonginOrange);
   };
+
   const onblurHandle = (e: any) => {
     setoutLineId(tonginDisable);
     setoutLinePswd(tonginDisable);
   };
-  const onDisableLogin = () => {
-    setOnDisable("#FF7F3B");
-  };
-  const onInputText = (e: any) => {
-    if (e.target.id === "Id") setId(e.target.value);
-    else if (e.target.id === "Pw") setPswd(e.target.value);
-    if (id.length > 3 && pswd.length > 3) {
-      onDisableLogin();
+
+  const onDisabled = (desabled: any) => {
+    if (desabled) {
+      setBgColor("#B9C1C9");
+      setDesabled(true);
+    }
+    if (desabled === false) {
+      setBgColor("#FF7F3B");
+      setDesabled(false);
     }
   };
 
-  const createTestClick = async (e: React.MouseEvent<Element, MouseEvent>) => {
-    const requestParam = {
-      header: {
-        Authorization: {
-          accessToken,
-          refreshToken,
-        },
-      },
-      body: {},
-    };
+  const onInputText = (e: any) => {
+    if (e.target.id === "Id") setId(e.target.value);
+    if (e.target.id === "Pw") setPswd(e.target.value);
+    if (id.length > 3 && pswd.length > 1) {
+      onDisabled(false);
+    } else {
+      onDisabled(true);
+    }
   };
-  const createAccountClick = async () => {
+
+  const onLogin = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const requestParam = {
       header: {},
       body: {
@@ -152,7 +154,6 @@ export default function Login() {
         password: pswd,
       },
     };
-
     try {
       const response: any = await axios.post(
         "https://homenmove.net/v1/api/auth/login",
@@ -172,17 +173,8 @@ export default function Login() {
       navigate("/");
     } catch (error) {
       alert(error);
-    } finally {
-      console.log("accessToken", accessToken);
     }
   };
-
-  // const onLogin = () => {
-  //   alert("로그인하였습니다.");
-  //   navigate("/", {
-  //     state: { loginUser: { id: id, userType: "USER" } },
-  //   });
-  // };
 
   return (
     <>
@@ -209,19 +201,20 @@ export default function Login() {
               placeholder="비밀번호를 입력해 주세요"
             ></Inputbox>
           </OutlineInputbox>
-          <CheckContainer>
+          {/* <CheckContainer>
             <CheckBox type="checkbox"></CheckBox>
             <CheckText>아이디/비밀번호 기억하기</CheckText>
-          </CheckContainer>
+          </CheckContainer> */}
           <CustomButton
-            onClick={createAccountClick}
-            width={"100%"}
-            height={"70px"}
+            onClick={desabled ? onInputText : onLogin}
+            width={"60vw"}
+            height={"8vw"}
             text={`로그인`}
-            size={"30px"}
-            $bgColor={onDisable}
+            size={"2.5vw"}
+            radius={"0.7vw"}
+            disabled={desabled}
+            $bgColor={bgColor}
           ></CustomButton>
-
           <MemoryLogin> 아이디/비밀번호 찾기</MemoryLogin>
         </ContainerSub>
       </ContainerLogin>
