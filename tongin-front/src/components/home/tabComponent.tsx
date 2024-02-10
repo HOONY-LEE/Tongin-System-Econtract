@@ -22,8 +22,8 @@ const TabMenu = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 24%;
-    height: 100%;
+    width: 19vw;
+    height: 5vh;
     padding: 10px;
     font-size: 2vw;
     transition: 0.2s;
@@ -42,10 +42,10 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 100%;
-  height: 100%;
+  width: 80vw;
+  height: 100vh;
   border-radius: 0px 0px 0.6vw 0.6vw;
-  background-color: white;
+  /* background-color: white; */
   padding: 1vw;
 `;
 
@@ -55,6 +55,7 @@ const ListBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  height: 70vh;
 `;
 
 // 미계약리스트 탭
