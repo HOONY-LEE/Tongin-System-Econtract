@@ -1,18 +1,38 @@
+import { userInfo } from "os";
 import React from "react";
 import styled from "styled-components";
 
 const ContentBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 76vw;
   height: 7vh;
   border-radius: 0.7vw;
   background-color: white;
-  outline: 0.2vw solid gray;
+  /* outline: 0.2vw solid gray; */
+  margin: 0.7vh 0vh 0.7vh 0vh;
+  box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
+    0 0.5vh 0.5vh rgba(0, 0, 0, 0.033);
+`;
+const ContentText = styled.div`
+  margin: 0.5vw 2vw;
+  width: 76vw;
+  display: flex;
+  outline: 1px solid red;
+  align-items: center;
+  justify-content: space-between;
 `;
 
-export default function InvoiceListComponent() {
+const UserInfo = styled.div`
+  font-weight: 600;
+  display: flex;
+  outline: 1px solid red;
+  font-size: 2vw;
+  align-items: center;
+  justify-content: center;
+`;
+export default function InvoiceListComponent(prop: any) {
   const sampleArr = {
     userList: [
       {
@@ -73,13 +93,17 @@ export default function InvoiceListComponent() {
       },
     ],
   };
+  const str = /[^A-Za-z가-힣]/g;
 
   return (
     <>
-      {sampleArr.userList.map((user) => (
-        <ContentBox>
-          {user.name}
-          {user.empCode}
+      {sampleArr.userList.map((user, index) => (
+        <ContentBox key={index}>
+          <ContentText>
+            <UserInfo>{user.name.replace(str, "")}</UserInfo>
+            <UserInfo>{user.empCode}</UserInfo>
+            <UserInfo>{user.beCode}</UserInfo>
+          </ContentText>
         </ContentBox>
       ))}
 
