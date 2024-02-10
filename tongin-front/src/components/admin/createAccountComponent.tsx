@@ -67,12 +67,12 @@ export default function CreateAccountComponent() {
     const requestParam = {
       header: {},
       body: {
-        name: "이성훈",
-        contact: "010-5259-6024",
+        name: "허정연",
+        contact: "010-2863-7447",
         branchCode: "BE0049",
-        userId: "leesh1329999",
-        password: "asdf2011!",
-        empCode: "202403121211",
+        userId: "wupee7273",
+        password: "1234",
+        empCode: "202403121210",
       },
     };
 
