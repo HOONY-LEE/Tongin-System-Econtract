@@ -8,11 +8,11 @@ export default function ProtectedRouteUser({ children }: any) {
   const role = loginUser ? loginUser.role : null;
   console.log(localStorage.getItem("loginUser"));
   console.log(role);
-  if (role === null) {
-    return <Navigate to="/login"></Navigate>;
+  if (role === 1) {
+    return children;
   } else if (role === 9) {
     return <Navigate to="/admin"></Navigate>;
-  } else if (role === 1) {
-    return children;
+  } else {
+    return <Navigate to="/login"></Navigate>;
   }
 }
