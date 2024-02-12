@@ -21,14 +21,61 @@ const ContentText = styled.div`
   display: flex;
   outline: 1px solid red;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 `;
 
-const UserInfo = styled.div`
+const UserName = styled.div`
+  font-weight: 600;
+  width: 12vw;
+  display: flex;
+  outline: 1px solid red;
+  font-size: 1.6vw;
+  align-items: center;
+  justify-content: start;
+`;
+const UserPhone = styled.div`
+  font-weight: 400;
+  display: flex;
+  width: 14vw;
+  outline: 1px solid red;
+  font-size: 1.6vw;
+  align-items: center;
+  justify-content: center;
+`;
+
+const UserAcceptDate = styled.div`
+  width: 11vw;
+  font-weight: 400;
+  display: flex;
+  outline: 1px solid red;
+  font-size: 1.6vw;
+  align-items: center;
+  justify-content: center;
+`;
+const UserConsulDate = styled.div`
+  width: 11vw;
+  font-weight: 400;
+  display: flex;
+  outline: 1px solid red;
+  font-size: 1.6vw;
+  align-items: center;
+  justify-content: center;
+`;
+const UserMoveDate = styled.div`
+  width: 11vw;
+  font-weight: 400;
+  display: flex;
+  outline: 1px solid red;
+  font-size: 1.6vw;
+  align-items: center;
+  justify-content: center;
+`;
+const UserStatus = styled.div`
+  width: 14vw;
   font-weight: 600;
   display: flex;
   outline: 1px solid red;
-  font-size: 2vw;
+  font-size: 1.6vw;
   align-items: center;
   justify-content: center;
 `;
@@ -100,9 +147,12 @@ export default function InvoiceListComponent(prop: any) {
       {sampleArr.userList.map((user, index) => (
         <ContentBox key={index}>
           <ContentText>
-            <UserInfo>{user.name.replace(str, "")}</UserInfo>
-            <UserInfo>{user.empCode}</UserInfo>
-            <UserInfo>{user.beCode}</UserInfo>
+            <UserName>{user.name.replace(str, "")}</UserName>
+            <UserAcceptDate>24.01.01</UserAcceptDate>
+            <UserConsulDate>24.01.02</UserConsulDate>
+            <UserMoveDate>24.01.04</UserMoveDate>
+            <UserPhone>010-2863-0000</UserPhone>
+            <UserStatus>상담접수</UserStatus>
           </ContentText>
         </ContentBox>
       ))}
