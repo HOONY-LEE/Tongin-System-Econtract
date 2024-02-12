@@ -48,7 +48,7 @@ const ContentBox = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 0px 0px 0.6vw 0.6vw;
-  background-color: white;
+  /* background-color: white; */
   padding: 1vw;
 `;
 
@@ -66,7 +66,7 @@ const CreateBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 100%;
 `;
 
 // 메뉴1 탭
