@@ -13,27 +13,32 @@ const ContainerLogin = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
   height: 100vh;
 `;
 
 const ContainerSub = styled.div`
-  width: 60vw;
-  height: 58vh;
+  width: 66%;
+  height: 70vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   /* outline: 1px solid red; */
 `;
 
 const LoginLogo = styled.div`
-  width: 20vw;
-  height: 20vh;
-  outline: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12vw;
+  height: 12vw;
 `;
+
+const Image = styled.img.attrs({})``;
+
 const LogoText = styled.div`
-  width: 100vw;
+  width: 100%;
+  height: 6vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,14 +50,20 @@ const LogoText = styled.div`
 const OutlineInputbox = styled.div<{
   $outLine?: string;
 }>`
-  width: 60vw;
-  height: 7vh;
+  margin-bottom: 4vw;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 6vw;
   border-radius: 0.7vw;
   background-color: white;
   outline: ${(props) => props.$outLine};
 `;
 
 const Inputbox = styled.input`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   margin-left: 2vw;
   font-size: 2.2vw;
@@ -92,8 +103,9 @@ const Inputbox = styled.input`
 //   font-size: 20px;
 // `;
 const MemoryLogin = styled.div`
-  width: 100vw;
-  height: 10vw;
+  width: 100%;
+  margin-top: 4vw;
+  height: 4vw;
   font-size: 2.2vw;
   color: #b3b3b3;
   text-decoration: underline;
@@ -180,7 +192,14 @@ export default function Login() {
     <>
       <ContainerLogin>
         <ContainerSub>
-          <LoginLogo>logo</LoginLogo>
+          <LoginLogo>
+            <Image
+              src="img/tongin_logo.png"
+              alt="로고 이미지"
+              width={"100%"}
+              height={""}
+            />
+          </LoginLogo>
           <LogoText>TONGIN LOGIN</LogoText>
           <OutlineInputbox $outLine={outLineId}>
             <Inputbox
@@ -207,8 +226,8 @@ export default function Login() {
           </CheckContainer> */}
           <CustomButton
             onClick={desabled ? onInputText : onLogin}
-            width={"60vw"}
-            height={"8vw"}
+            width={"100%"}
+            height={"6vw"}
             text={`로그인`}
             size={"2.5vw"}
             radius={"0.7vw"}

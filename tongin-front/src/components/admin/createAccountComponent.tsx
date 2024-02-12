@@ -18,50 +18,33 @@ const BoxWrapper = styled.div`
 const UpperBox = styled.div`
   display: flex;
   justify-content: space-between;
-  outline: 1px dashed red;
   width: 100%;
-  height: 14vh;
+  height: 18%;
+  outline: 1px solid red;
 `;
 
 const MidBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
-  outline: 1px dashed red;
   width: 100%;
-  height: 14vh;
+  height: 18%;
+  outline: 1px solid red;
 `;
 
 const LowerBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
-  height: 10vh;
-  outline: 1px dashed red;
+  height: 18%;
+  outline: 1px solid red;
 `;
 
 export default function CreateAccountComponent() {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-
-  const createTestClick = async (e: React.MouseEvent<Element, MouseEvent>) => {
-    const requestParam = {
-      header: {
-        Authorization: {
-          accessToken,
-          refreshToken,
-        },
-      },
-      body: {},
-    };
-
-    const response: any = await axios.post(
-      "https://homenmove.net/v1/api/auth/sign-up",
-      requestParam
-    );
-  };
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
   const createAccountClick = async () => {
     const requestParam = {
@@ -95,8 +78,8 @@ export default function CreateAccountComponent() {
             onChange={handleInput}
             label={"사원 이름"}
             inputType={"text"}
-            placeholder={"지점코드+사원코드로 생성"}
-            width={"20vw"}
+            placeholder={"이름을 입력하세요."}
+            width={"26vw"}
             height={"4vw"}
           ></InputComponent>
           <InputComponent
@@ -104,7 +87,7 @@ export default function CreateAccountComponent() {
             label={"사원 연락처"}
             inputType={"text"}
             placeholder={"010-1234-1234"}
-            width={"20vw"}
+            width={"26vw"}
             height={"4vw"}
           ></InputComponent>
           <InputComponent
@@ -112,7 +95,7 @@ export default function CreateAccountComponent() {
             label={"소속 지점"}
             inputType={"text"}
             placeholder={"소속 지점"}
-            width={"10vw"}
+            width={"16vw"}
             height={"4vw"}
           ></InputComponent>
         </UpperBox>
@@ -141,15 +124,7 @@ export default function CreateAccountComponent() {
             height={"4vw"}
           ></CustomButton>
         </MidBox>
-        <LowerBox>
-          <CustomButton
-            onClick={createTestClick}
-            text={"테스트요청"}
-            size={"1.4vw"}
-            width={"16vw"}
-            height={"4vw"}
-          ></CustomButton>
-        </LowerBox>
+        <LowerBox></LowerBox>
       </BoxWrapper>
     </>
   );
