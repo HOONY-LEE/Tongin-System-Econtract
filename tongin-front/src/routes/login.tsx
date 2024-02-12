@@ -74,7 +74,7 @@ const Inputbox = styled.input`
   appearance: none;
   border: none;
   width: 58vw;
-  height: 7vh;
+  height: 6vw;
 `;
 
 // const CheckContainer = styled.div`
@@ -158,7 +158,7 @@ export default function Login() {
     }
   };
 
-  const onLogin = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onLogin = async (e: React.KeyboardEvent) => {
     const requestParam = {
       header: {},
       body: {
@@ -185,6 +185,11 @@ export default function Login() {
       navigate("/");
     } catch (error) {
       alert(error);
+    }
+  };
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      onLogin(e);
     }
   };
 
@@ -218,6 +223,7 @@ export default function Login() {
               onBlur={onblurHandle}
               type="password"
               placeholder="비밀번호를 입력해 주세요"
+              onKeyPress={handleKeyDown}
             ></Inputbox>
           </OutlineInputbox>
           {/* <CheckContainer>
