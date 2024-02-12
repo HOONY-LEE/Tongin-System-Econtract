@@ -5,7 +5,6 @@ const InputArea = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  outline: 1px dashed black;
 `;
 
 const Label = styled.div`
@@ -25,7 +24,7 @@ const InputBox = styled.div<{
   width: ${(props) => (props.width ? props.width : "24vw")};
   height: ${(props) => (props.height ? props.height : "4vw")};
   background-color: white;
-  border-radius: 8px;
+  border-radius: 0.4vw;
   outline: 1px solid gray;
 `;
 

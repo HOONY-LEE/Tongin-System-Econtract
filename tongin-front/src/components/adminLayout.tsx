@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CustomButton from "./common/customButton";
 
@@ -49,9 +49,14 @@ const RightBox = styled.div`
 `;
 
 const AdminHeader = () => {
+  const navigate = useNavigate();
+
   const logout = () => {
     // eslint-disable-next-line no-restricted-globals
     confirm("로그아웃 하시겠습니까?");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("loginUser");
+    navigate("/login");
   };
 
   return (

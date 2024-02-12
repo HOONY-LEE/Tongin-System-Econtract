@@ -122,7 +122,6 @@ export const AdminTabComponent = () => {
         {currentTab === 1 ? (
           <CreateBox>
             <CreateAccountComponent></CreateAccountComponent>
-            <MemberListComponent></MemberListComponent>
           </CreateBox>
         ) : null}
         {currentTab === 2 ? <Menu1>[메뉴1] 미구현</Menu1> : null}
