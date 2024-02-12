@@ -16,12 +16,12 @@ const cookies = new Cookies();
 
 const HomeContainer = styled.div`
   width: 80vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  outline: 2px solid red;
+  outline: 2px solid green;
+  margin-bottom: 6vw;
 `;
 const SearchContainer = styled.div`
   width: 80vw;
@@ -35,7 +35,7 @@ const SearchContainer = styled.div`
 
 const TabContainer = styled.div`
   width: 80vw;
-  height: 20vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

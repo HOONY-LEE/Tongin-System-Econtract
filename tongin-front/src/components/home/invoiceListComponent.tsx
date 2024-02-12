@@ -1,13 +1,17 @@
 import { userInfo } from "os";
 import React from "react";
 import styled from "styled-components";
+import { useState } from "react";
+import react, { useEffect } from "react";
+import TabComponent from "./tabComponent";
+import axios from "axios";
 
 const ContentBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 76vw;
-  height: 7vh;
+  height: 6vw;
   border-radius: 0.7vw;
   background-color: white;
   /* outline: 0.2vw solid gray; */
@@ -19,26 +23,25 @@ const ContentText = styled.div`
   margin: 0.5vw 2vw;
   width: 76vw;
   display: flex;
-  outline: 1px solid red;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: start;
 `;
 
 const UserName = styled.div`
   font-weight: 600;
-  width: 12vw;
-  display: flex;
-  outline: 1px solid red;
-  font-size: 1.6vw;
-  align-items: center;
-  justify-content: start;
+  width: 11vw;
+  font-size: 1.5vw;
+  margin-right: 1vw;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const UserPhone = styled.div`
-  font-weight: 400;
+  font-weight: 600;
   display: flex;
   width: 14vw;
-  outline: 1px solid red;
-  font-size: 1.6vw;
+  font-size: 1.4vw;
   align-items: center;
   justify-content: center;
 `;
@@ -47,8 +50,7 @@ const UserAcceptDate = styled.div`
   width: 11vw;
   font-weight: 400;
   display: flex;
-  outline: 1px solid red;
-  font-size: 1.6vw;
+  font-size: 1.4vw;
   align-items: center;
   justify-content: center;
 `;
@@ -56,8 +58,7 @@ const UserConsulDate = styled.div`
   width: 11vw;
   font-weight: 400;
   display: flex;
-  outline: 1px solid red;
-  font-size: 1.6vw;
+  font-size: 1.4vw;
   align-items: center;
   justify-content: center;
 `;
@@ -65,8 +66,7 @@ const UserMoveDate = styled.div`
   width: 11vw;
   font-weight: 400;
   display: flex;
-  outline: 1px solid red;
-  font-size: 1.6vw;
+  font-size: 1.4vw;
   align-items: center;
   justify-content: center;
 `;
@@ -74,91 +74,116 @@ const UserStatus = styled.div`
   width: 14vw;
   font-weight: 600;
   display: flex;
-  outline: 1px solid red;
   font-size: 1.6vw;
   align-items: center;
   justify-content: center;
 `;
-export default function InvoiceListComponent(prop: any) {
-  const sampleArr = {
-    userList: [
-      {
-        name: "홈페이지",
-        empCode: "20120208",
-        contact: "",
-        beNm: "통인익스프레스",
-        beCode: "BE0002",
-        bossNm: "",
-      },
-      {
-        name: "모바일홈페이지",
-        empCode: "20130103",
-        contact: "",
-        beNm: "통인익스프레스",
-        beCode: "BE0002",
-        bossNm: "",
-      },
-      {
-        name: "0033. 유선호",
-        empCode: "20210406",
-        contact: "",
-        beNm: "통인익스프레스",
-        beCode: "BE0002",
-        bossNm: "",
-      },
-      {
-        name: "윤성진",
-        empCode: "20220301",
-        contact: "",
-        beNm: "통인익스프레스",
-        beCode: "BE0002",
-        bossNm: "",
-      },
-      {
-        name: "0054. 박상선",
-        empCode: "20220401",
-        contact: "",
-        beNm: "통인익스프레스",
-        beCode: "BE0002",
-        bossNm: "",
-      },
-      {
-        name: "0065. 김영호",
-        empCode: "20230702",
-        contact: "",
-        beNm: "통인익스프레스",
-        beCode: "BE0002",
-        bossNm: "",
-      },
-      {
-        name: "0067. 이명구",
-        empCode: "20230801",
-        contact: "",
-        beNm: "통인익스프레스",
-        beCode: "BE0002",
-        bossNm: "",
-      },
-    ],
+const UserStatusColor = styled.div<{
+  $bgColor?: string;
+}>`
+  background-color: ${(props) => props.$bgColor};
+  width: 9.4vw;
+  height: 2.4vw;
+  font-weight: 600;
+  display: flex;
+  color: white;
+  font-size: 1.6vw;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4vw;
+`;
+
+const BorderLeft = styled.div`
+  border-left: 0.1vw solid #e7e7e7;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export default function InvoiceListComponent(props: any) {
+  const { invoiceList } = props;
+
+  const [receiptList, setReceiptList] = useState<any[]>([]);
+  const userStatusColor = (status: string) => {
+    switch (status) {
+      case "CA":
+        return "#9BAABB";
+      case "41":
+        return "#1E1E1E";
+      case "32":
+        return "#9C39FF";
+      case "31":
+        return "#0C8CE9";
+      case "22":
+        return "#2FD04B";
+      case "21":
+        return "#FF7F3B";
+      case "14":
+        return "#00BAF7";
+      case "13":
+        return "#FFD600";
+      case "12":
+        return "#FD6C60";
+      case "11":
+        return "#9BAABB";
+    }
   };
+  // const authorization = localStorage
+  //   ? localStorage.getItem("accessToken")
+  //   : null;
+  // const loginUser = localStorage
+  //   ? JSON.parse(localStorage.getItem("loginUser") || "{}")
+  //   : null;
+  // const requestParam: any = {
+  //   headers: {
+  //     authorization: `Bearer ${authorization}`,
+  //     empCod: loginUser.empCod,
+  //   },
+  // };
+  // const fetchData = async () => {
+  //   const data: any = await axios.get(
+  //     "https://homenmove.net/v1/api/receipt/list",
+  //     requestParam
+  //   );
+  //   setReceiptList(data.data.receiptList);
+  // };
+
+  useEffect(() => {
+    // fetchData();
+  }, []);
+
   const str = /[^A-Za-z가-힣]/g;
+  const date = /^(\d{4})(\d{2})(\d{2})$/;
 
   return (
     <>
-      {sampleArr.userList.map((user, index) => (
-        <ContentBox key={index}>
+      {invoiceList.map((user: any) => (
+        <ContentBox key={user.no}>
           <ContentText>
             <UserName>{user.name.replace(str, "")}</UserName>
-            <UserAcceptDate>24.01.01</UserAcceptDate>
-            <UserConsulDate>24.01.02</UserConsulDate>
-            <UserMoveDate>24.01.04</UserMoveDate>
-            <UserPhone>010-2863-0000</UserPhone>
-            <UserStatus>상담접수</UserStatus>
+            <BorderLeft />
+            <UserPhone>{user.contact}</UserPhone>
+            <BorderLeft />
+            <UserAcceptDate>
+              {user.receptionDate.replace(date, "$1-$2-$3")}
+            </UserAcceptDate>
+            <BorderLeft />
+            <UserConsulDate>
+              {user.contractDate.replace(date, "$1-$2-$3")}
+            </UserConsulDate>
+            <BorderLeft />
+            <UserMoveDate>
+              {user.movingDate.replace(date, "$1-$2-$3")}
+            </UserMoveDate>
+            <BorderLeft />
+            <UserStatus>
+              <UserStatusColor $bgColor={userStatusColor(user.statusCode)}>
+                {user.status}
+              </UserStatusColor>
+            </UserStatus>
           </ContentText>
         </ContentBox>
       ))}
-
-      {/* <ContentBox>{user.name}</ContentBox> */}
-      <div>계약리스트 test</div>
     </>
   );
 }
