@@ -49,7 +49,7 @@ const ContentBox = styled.div`
   height: 100%;
   border-radius: 0px 0px 0.6vw 0.6vw;
   /* background-color: white; */
-  padding: 1vw;
+  /* padding: 1vw; */
 `;
 
 // 계정관리 탭

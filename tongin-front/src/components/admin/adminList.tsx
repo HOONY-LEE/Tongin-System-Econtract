@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const ListTitle = styled.div`
-  margin-top: 0.4vw;
+  margin-top: 0.8vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -28,21 +28,21 @@ const SelectedItemStyle = css`
 `;
 
 // ListItemBox 컴포넌트 정의
-const ListItemBox = styled.div<{ isSelected?: boolean }>`
-  margin-top: 0.4vw;
+const ListItemBox = styled.div<{ isselected?: boolean }>`
+  margin-top: 0.8vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 2.4vw;
-  border-radius: 0.2vw;
-  font-size: 1vw;
+  height: 4vw;
+  border-radius: 0.3vw;
+  font-size: 1.2vw;
   background-color: white;
   box-shadow: 1px 1px 3vw 1vw #dddddd35;
   cursor: pointer;
 
-  // isSelected prop이 true일 때 SelectedItemStyle을 적용합니다.
-  ${(props) => props.isSelected && SelectedItemStyle}
+  // isselected prop이 true일 때 SelectedItemStyle을 적용합니다.
+  ${(props) => props.isselected && SelectedItemStyle}
 
   &:hover {
     background-color: #fff7f0; // hover 시 배경색상을 변경합니다.
@@ -128,7 +128,7 @@ function ListItem(props: any) {
           <ListItemBox
             key={index}
             onClick={() => onClickListItem(index)}
-            isSelected={selectedItemIndex === index}
+            isselected={selectedItemIndex === index ? true : false}
           >
             <NameBox>{item.name.match(/[가-힣A-Za-z()]+[^,()]+/)}</NameBox>
             <EmpCodeBox>{item.empCode}</EmpCodeBox>

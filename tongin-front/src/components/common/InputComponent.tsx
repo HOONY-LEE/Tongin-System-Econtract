@@ -17,7 +17,7 @@ const Label = styled.div`
 const InputBox = styled.div<{
   width?: string;
   height?: string;
-  backgroundColor?: string;
+  $backgroundColor?: string;
 }>`
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@ const InputBox = styled.div<{
   width: ${(props) => (props.width ? props.width : "24vw")};
   height: ${(props) => (props.height ? props.height : "4vw")};
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "white"};
+    props.$backgroundColor ? props.$backgroundColor : "white"};
   border-radius: 0.4vw;
   outline: 1px solid gray;
 `;
@@ -33,14 +33,14 @@ const InputBox = styled.div<{
 const InputText: any = styled.input.attrs((props: { maxLength?: number }) => ({
   type: "text",
   maxLength: props.maxLength,
-}))<{ backgroundColor?: string; maxLength?: number }>`
+}))<{ $backgroundColor?: string; maxLength?: number }>`
   width: 94%;
   height: 100%;
   font-size: 1.2vw;
   outline: none;
   border: none;
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "white"};
+    props.$backgroundColor ? props.$backgroundColor : "white"};
 `;
 
 const InputPassword: any = styled.input.attrs({
@@ -57,14 +57,14 @@ const InputPassword: any = styled.input.attrs({
 
 const InputNumber: any = styled.input.attrs({
   type: "number",
-})<{ backgroundColor?: string }>`
+})<{ $backgroundColor?: string }>`
   width: 94%;
   height: 100%;
   font-size: 1.2vw;
   outline: none;
   border: none;
-  background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "white"};
+  $background-color: ${(props) =>
+    props.$backgroundColor ? props.$backgroundColor : "white"};
 `;
 
 export const InputComponent = (props: any) => {
@@ -75,9 +75,10 @@ export const InputComponent = (props: any) => {
     height,
     inputType,
     onChange,
+    defaultValue,
     value,
-    backgroundColor,
-    maxlength,
+    $backgroundColor,
+    maxLength,
   } = props;
 
   return (
@@ -87,33 +88,36 @@ export const InputComponent = (props: any) => {
         <InputBox
           width={width}
           height={height}
-          backgroundColor={backgroundColor}
+          $backgroundColor={$backgroundColor}
         >
           {inputType === "text" ? (
             <InputText
               placeholder={placeholder}
               onChange={onChange}
+              defaultValue={defaultValue}
               value={value}
-              backgroundColor={backgroundColor}
-              maxlength={maxlength}
+              $backgroundColor={$backgroundColor}
+              maxLength={maxLength}
             ></InputText>
           ) : null}
           {inputType === "password" ? (
             <InputPassword
               placeholder={placeholder}
               onChange={onChange}
+              defaultValue={defaultValue}
               value={value}
-              backgroundColor={backgroundColor}
-              maxlength={maxlength}
+              $backgroundColor={$backgroundColor}
+              maxLength={maxLength}
             ></InputPassword>
           ) : null}
           {inputType === "number" ? (
             <InputNumber
               placeholder={placeholder}
               onChange={onChange}
+              defaultValue={defaultValue}
               value={value}
-              backgroundColor={backgroundColor}
-              maxlength={maxlength}
+              $backgroundColor={$backgroundColor}
+              maxLength={maxLength}
             ></InputNumber>
           ) : null}
         </InputBox>
