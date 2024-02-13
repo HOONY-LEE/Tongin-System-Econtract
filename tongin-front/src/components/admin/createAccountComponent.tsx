@@ -4,14 +4,14 @@ import CustomButton from "../common/customButton";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AdminList from "./adminList";
+import SearchComponent from "../common/searchComponent";
 
 const BoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  /* outline: 1px solid black; */
-  width: 90%;
+  width: 100%;
   height: 100%;
   padding-top: 2vw;
 `;
@@ -42,9 +42,21 @@ const LowerBox = styled.div`
   height: 100%;
 `;
 
+const SearchBox = styled.div`
+  margin-bottom: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4vw;
+  /* background-color: red; */
+`;
+
 export default function CreateAccountComponent() {
   const accessToken = localStorage.getItem("accessToken");
-  const [empList, setEmpList] = useState([]);
+  const [empList, setEmpList] = useState<any[]>([]);
+  const [searchedText, setSearchedText] = useState("");
+  const [searchedList, setSearchedList] = useState(empList);
   const [empName, setEmpName] = useState("");
   const [empCode, setEmpCode] = useState("");
   const [contact, setContact] = useState("");
@@ -54,7 +66,6 @@ export default function CreateAccountComponent() {
   const [password, setPassword] = useState("");
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setEmpName(e.target.value);
   };
   const onChangeContact = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +74,7 @@ export default function CreateAccountComponent() {
       .replace(regExp, "")
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
       .replace(/(\-{1,2})$/g, "");
-
+    console.log(filteredNumber);
     setContact(filteredNumber);
   };
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +82,29 @@ export default function CreateAccountComponent() {
   };
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+  };
+
+  // 검색 결과에 따른 목록 재정렬
+  const onChangeSearch = (e: any) => {
+    setSearchedText(e.target.value);
+    const keyword = e.target.value.toLowerCase();
+
+    const filterdList = empList.filter(
+      (item) =>
+        item.name.includes(keyword) ||
+        item.beNm.toLowerCase().includes(keyword) ||
+        item.beCode.toLowerCase().includes(keyword) ||
+        item.empCode.includes(keyword) ||
+        item.contact.includes(keyword)
+    );
+
+    setSearchedList(filterdList);
+  };
+
+  // 검색 내용 초기화
+  const resetSearch = (e: any) => {
+    setSearchedText("");
+    setSearchedList(empList);
   };
 
   const getEmpList = async () => {
@@ -83,6 +117,7 @@ export default function CreateAccountComponent() {
           },
         }
       );
+      console.log("getEmpList");
       setEmpList(response.data.userList);
     } catch (error) {
       alert(error);
@@ -93,27 +128,45 @@ export default function CreateAccountComponent() {
     getEmpList();
   }, []);
 
+  useEffect(() => {
+    setSearchedList(empList);
+  }, [empList]);
+
   const createAccountClick = async () => {
     const requestParam = {
       header: {},
       body: {
         name: empName,
         contact: contact,
-        branchCode: beCode,
+        // beCode 데이터베이스에 들어간 뒤 변경 해야함, 현재 임시조치
+        // branchCode: beCode,
+        branchCode: "BE0049",
         userId: userId,
         password: password,
         empCode: empCode,
       },
     };
+    const requestHeader = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
 
-    try {
+    const message = `    가입 승인하시겠습니까?
+
+    사원명 : ${requestParam.body.name}
+    연락처 : ${requestParam.body.contact}
+    소속코드 : ${requestParam.body.branchCode}
+    직원코드 : ${requestParam.body.empCode}
+    아이디 : ${requestParam.body.userId}
+    비밀번호 : ${requestParam.body.password}`;
+    if (window.confirm(message)) {
       const response: any = await axios.post(
         "https://homenmove.net/v1/api/auth/sign-up",
-        requestParam
+        requestParam,
+        requestHeader
       );
       console.log(response);
-    } catch (error) {
-      alert(error);
     }
   };
 
@@ -127,7 +180,7 @@ export default function CreateAccountComponent() {
             label={"사원 이름"}
             inputType={"text"}
             placeholder={"이름을 입력하세요."}
-            width={"26vw"}
+            width={"22vw"}
             height={"3vw"}
           ></InputComponent>
           <InputComponent
@@ -136,18 +189,38 @@ export default function CreateAccountComponent() {
             label={"사원 연락처"}
             inputType={"text"}
             placeholder={"연락처 입력"}
-            width={"26vw"}
+            width={"22vw"}
             height={"3vw"}
-            maxlength={13}
+            maxLength={13}
           ></InputComponent>
           <InputComponent
-            value={`${beName}(${beCode})`}
-            label={"소속 지점"}
+            value={empCode}
+            label={"직원코드"}
             inputType={"text"}
             placeholder={"소속 지점"}
-            width={"16vw"}
+            width={"6.2vw"}
             height={"3vw"}
-            backgroundColor={"#cdcdcd"}
+            $backgroundColor={"#cdcdcd"}
+            readonly
+          ></InputComponent>
+          <InputComponent
+            value={beCode}
+            label={"지점코드"}
+            inputType={"text"}
+            placeholder={"소속 지점"}
+            width={"8vw"}
+            height={"3vw"}
+            $backgroundColor={"#cdcdcd"}
+            readonly
+          ></InputComponent>
+          <InputComponent
+            value={beName}
+            label={"지점이름"}
+            inputType={"text"}
+            placeholder={"소속 지점"}
+            width={"12vw"}
+            height={"3vw"}
+            $backgroundColor={"#cdcdcd"}
             readonly
           ></InputComponent>
         </UpperBox>
@@ -156,7 +229,7 @@ export default function CreateAccountComponent() {
             onChange={onChangeId}
             label={"아이디"}
             inputType={"text"}
-            placeholder={"지점코드+사원코드"}
+            placeholder={"아이디 입력"}
             width={"26vw"}
             height={"3vw"}
           ></InputComponent>
@@ -177,8 +250,16 @@ export default function CreateAccountComponent() {
           ></CustomButton>
         </MidBox>
         <LowerBox>
+          <SearchBox>
+            <SearchComponent
+              searchedText={searchedText}
+              setSearchedText={setSearchedText}
+              onChange={onChangeSearch}
+              resetSearch={resetSearch}
+            ></SearchComponent>
+          </SearchBox>
           <AdminList
-            empList={empList}
+            empList={searchedList}
             setEmpName={setEmpName}
             setEmpCode={setEmpCode}
             setContact={setContact}
