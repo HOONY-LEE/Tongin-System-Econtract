@@ -55,6 +55,7 @@ const SearchBox = styled.div`
 export default function CreateAccountComponent() {
   const accessToken = localStorage.getItem("accessToken");
   const [empList, setEmpList] = useState<any[]>([]);
+  const [searchedText, setSearchedText] = useState("");
   const [searchedList, setSearchedList] = useState(empList);
   const [empName, setEmpName] = useState("");
   const [empCode, setEmpCode] = useState("");
@@ -85,19 +86,25 @@ export default function CreateAccountComponent() {
 
   // 검색 결과에 따른 목록 재정렬
   const onChangeSearch = (e: any) => {
-    const keyword = e.target.value;
-    const keyword2 = "홈페이지";
-    console.log(keyword);
-    console.log(keyword2);
-    const filtered = keyword2.includes(keyword);
-    console.log(filtered);
-    // const filterdList = empList.filter((item) => {
-    //   console.log(item.name);
-    //   item.name.includes(keyword);
-    // });
+    setSearchedText(e.target.value);
+    const keyword = e.target.value.toLowerCase();
 
-    // setSearchedList(filterdList);
-    // console.log(filterdList[0]);
+    const filterdList = empList.filter(
+      (item) =>
+        item.name.includes(keyword) ||
+        item.beNm.toLowerCase().includes(keyword) ||
+        item.beCode.toLowerCase().includes(keyword) ||
+        item.empCode.includes(keyword) ||
+        item.contact.includes(keyword)
+    );
+
+    setSearchedList(filterdList);
+  };
+
+  // 검색 내용 초기화
+  const resetSearch = (e: any) => {
+    setSearchedText("");
+    setSearchedList(empList);
   };
 
   const getEmpList = async () => {
@@ -110,6 +117,7 @@ export default function CreateAccountComponent() {
           },
         }
       );
+      console.log("getEmpList");
       setEmpList(response.data.userList);
     } catch (error) {
       alert(error);
@@ -119,6 +127,10 @@ export default function CreateAccountComponent() {
   useEffect(() => {
     getEmpList();
   }, []);
+
+  useEffect(() => {
+    setSearchedList(empList);
+  }, [empList]);
 
   const createAccountClick = async () => {
     const requestParam = {
@@ -239,10 +251,15 @@ export default function CreateAccountComponent() {
         </MidBox>
         <LowerBox>
           <SearchBox>
-            <SearchComponent onChange={onChangeSearch}></SearchComponent>
+            <SearchComponent
+              searchedText={searchedText}
+              setSearchedText={setSearchedText}
+              onChange={onChangeSearch}
+              resetSearch={resetSearch}
+            ></SearchComponent>
           </SearchBox>
           <AdminList
-            empList={empList}
+            empList={searchedList}
             setEmpName={setEmpName}
             setEmpCode={setEmpCode}
             setContact={setContact}
