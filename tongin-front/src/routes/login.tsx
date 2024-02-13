@@ -172,7 +172,6 @@ export default function Login() {
         requestParam
       );
       alert("로그인하였습니다.");
-      console.log(response);
       localStorage.setItem(
         "accessToken",
         response.data.data.tokens.accessToken

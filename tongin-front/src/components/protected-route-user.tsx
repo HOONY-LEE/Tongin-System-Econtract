@@ -6,8 +6,6 @@ export default function ProtectedRouteUser({ children }: any) {
     localStorage.getItem("loginUser") || "{}"
   );
   const role = loginUser ? loginUser.role : null;
-  console.log(localStorage.getItem("loginUser"));
-  console.log(role);
   if (role === 1) {
     return children;
   } else if (role === 9) {
