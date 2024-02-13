@@ -87,13 +87,13 @@ export default function CreateAccountComponent() {
   // 검색 결과에 따른 목록 재정렬
   const onChangeSearch = (e: any) => {
     setSearchedText(e.target.value);
-    const keyword = e.target.value.toLowerCase();
+    const keyword = e.target.value;
 
     const filterdList = empList.filter(
       (item) =>
         item.name.includes(keyword) ||
-        item.beNm.toLowerCase().includes(keyword) ||
-        item.beCode.toLowerCase().includes(keyword) ||
+        item.beNm.includes(keyword) ||
+        // item.beCode.toLowerCase().includes(keyword) ||
         item.empCode.includes(keyword) ||
         item.contact.includes(keyword)
     );
