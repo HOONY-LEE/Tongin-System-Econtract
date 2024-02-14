@@ -4,7 +4,6 @@ import CustomButton from "../common/customButton";
 import { useEffect, useState } from "react";
 import AdminList from "./adminList";
 import SearchComponent from "../common/searchComponent";
-import apiInstance from "../../API/API";
 import API from "../../API/API";
 
 const BoxWrapper = styled.div`
