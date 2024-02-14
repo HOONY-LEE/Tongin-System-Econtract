@@ -104,8 +104,7 @@ export default function TabComponent(props: any) {
   const [isDetailPage, setIsDetailPage] = useState(false);
 
   const onDetailPage = () => {
-    setIsDetailPage(true);
-    props.detailPage(true);
+    props.detailPage();
   };
   const authorization = localStorage
     ? localStorage.getItem("accessToken")

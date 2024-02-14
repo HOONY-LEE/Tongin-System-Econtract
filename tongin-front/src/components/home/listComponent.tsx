@@ -143,7 +143,7 @@ export default function ListComponent(props: any) {
   const date = /^(\d{4})(\d{2})(\d{2})$/;
 
   const handleClick = () => {
-    props.onDetailPage(true);
+    props.onDetailPage();
   };
   return (
     <>
