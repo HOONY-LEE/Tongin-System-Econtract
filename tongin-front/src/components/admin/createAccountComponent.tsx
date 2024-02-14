@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { InputComponent } from "../common/InputComponent";
 import CustomButton from "../common/customButton";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import AdminList from "./adminList";
 import SearchComponent from "../common/searchComponent";
+import apiInstance from "../../API/API";
+import API from "../../API/API";
 
 const BoxWrapper = styled.div`
   display: flex;
@@ -102,14 +103,7 @@ export default function CreateAccountComponent() {
 
   const getEmpList = async () => {
     try {
-      const response = await axios.get(
-        "https://homenmove.net/v1/api/user/activate/list",
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await API.get("user/activate/list");
       setEmpList(response.data.userList);
     } catch (error) {
       alert(error);
@@ -134,11 +128,6 @@ export default function CreateAccountComponent() {
         empCode: empCode,
       },
     };
-    const requestHeader = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
 
     const message = `    가입 승인하시겠습니까?
 
@@ -149,11 +138,7 @@ export default function CreateAccountComponent() {
     아이디 : ${requestParam.body.userId}
     비밀번호 : ${requestParam.body.password}`;
     if (window.confirm(message)) {
-      const response: any = await axios.post(
-        "https://homenmove.net/v1/api/auth/sign-up",
-        requestParam,
-        requestHeader
-      );
+      const response = await API.post("auth/sign-up", requestParam);
       console.log(response);
     }
   };

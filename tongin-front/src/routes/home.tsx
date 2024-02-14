@@ -49,8 +49,6 @@ const TabContainer = styled.div`
 // `;
 
 export default function Home() {
-  const refreshToken = cookies.get("refreshToken");
-
   return (
     <>
       <FlexXY>
