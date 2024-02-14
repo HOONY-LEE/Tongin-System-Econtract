@@ -4,7 +4,8 @@ import ListComponent from "./listComponent";
 import { useState } from "react";
 import react, { useEffect } from "react";
 import axios from "axios";
-
+import DetailComponent from "./detailComponent";
+import Home from "../../routes/home";
 const TabMenu = styled.ul`
   // 탭 메뉴들 포함하고 있는 영역
   color: rgb(232, 234, 237);
@@ -15,7 +16,7 @@ const TabMenu = styled.ul`
   justify-content: space-between;
   list-style: none;
   margin-top: 10px;
-  width: 80vw;
+  width: 84vw;
   height: 5vw;
   :hover {
     cursor: pointer;
@@ -25,8 +26,8 @@ const TabMenu = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 19vw;
-    height: 5vh;
+    width: 20vw;
+    height: 5vw;
     padding: 10px;
     font-size: 2vw;
     transition: 0.2s;
@@ -45,7 +46,7 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 80vw;
+  width: 84vw;
   height: 100%;
   border-radius: 0px 0px 0.6vw 0.6vw;
   /* background-color: white; */
@@ -59,7 +60,7 @@ const ListBox = styled.div`
   align-items: center;
   justify-content: start;
   height: 100%;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 
   /* outline: 1px solid red; */
 `;
@@ -91,37 +92,20 @@ const Menu2 = styled.div`
 
 export default function TabComponent(props: any) {
   // 현재 선택된 탭, 디폴트는 0(계정 관리)
-  const userStatusColor = (status: string) => {
-    switch (status) {
-      case "CA":
-        return "#9BAABB";
-      case "41":
-        return "#1E1E1E";
-      case "32":
-        return "#9C39FF";
-      case "31":
-        return "#0C8CE9";
-      case "22":
-        return "#2FD04B";
-      case "21":
-        return "#FF7F3B";
-      case "14":
-        return "#00BAF7";
-      case "13":
-        return "#FFD600";
-      case "12":
-        return "#FD6C60";
-      case "11":
-        return "#9BAABB";
-    }
-  };
+
   const [receiptList, setReceiptList] = useState<any[]>([]); // user list
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [invoiceList, setInvoiceList] = useState<any[]>([]); //견적리스트
   const [uncontractedList, setUncontractedList] = useState<any[]>([]); //미계약리스트
   const [contractList, setcontractList] = useState<any[]>([]); //계약리스트
   const [worklist, setWorklist] = useState<any[]>([]); //작업리스트
+  const { detailPage } = props;
+  const [isDetailPage, setIsDetailPage] = useState(false);
 
+  const onDetailPage = () => {
+    setIsDetailPage(true);
+    props.detailPage(true);
+  };
   const authorization = localStorage
     ? localStorage.getItem("accessToken")
     : null;
@@ -210,22 +194,34 @@ export default function TabComponent(props: any) {
       <ContentBox>
         {currentTab === 0 ? (
           <ListBox>
-            <ListComponent currentList={invoiceList}></ListComponent>
+            <ListComponent
+              onDetailPage={onDetailPage}
+              currentList={invoiceList}
+            ></ListComponent>
           </ListBox>
         ) : null}
         {currentTab === 1 ? (
           <ListBox>
-            <ListComponent currentList={uncontractedList}></ListComponent>
+            <ListComponent
+              onDetailPage={onDetailPage}
+              currentList={uncontractedList}
+            ></ListComponent>
           </ListBox>
         ) : null}
         {currentTab === 2 ? (
           <ListBox>
-            <ListComponent currentList={contractList}></ListComponent>
+            <ListComponent
+              onDetailPage={onDetailPage}
+              currentList={contractList}
+            ></ListComponent>
           </ListBox>
         ) : null}
         {currentTab === 3 ? (
           <ListBox>
-            <ListComponent currentList={worklist}></ListComponent>
+            <ListComponent
+              onDetailPage={onDetailPage}
+              currentList={worklist}
+            ></ListComponent>
           </ListBox>
         ) : null}
       </ContentBox>
