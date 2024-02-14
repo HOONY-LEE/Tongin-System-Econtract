@@ -5,19 +5,21 @@ import { useState } from "react";
 import react, { useEffect } from "react";
 import TabComponent from "./tabComponent";
 import axios from "axios";
+import detailComponent from "./detailComponent";
 
 const ContentBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 80vw;
+  justify-content: center;
+  width: 84vw;
   height: 6vw;
+
   border-radius: 0.7vw;
   background-color: white;
   /* outline: 0.2vw solid gray; */
   margin: 0.7vh 0vh 0.7vh 0vh;
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
-    0 0.5vh 0.5vh rgba(0, 0, 0, 0.033);
+    0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
 const ContentText = styled.div`
   margin: 0.5vw 2vw;
@@ -31,19 +33,19 @@ const ContentText = styled.div`
 const UserName = styled.div`
   font-weight: 600;
   width: 8vw;
-  font-size: 1.5vw;
+  font-size: 1.7vw;
   margin-right: 1vw;
   text-align: start;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 `;
 const UserPhone = styled.div`
   font-weight: 600;
   display: flex;
   width: 14vw;
-  font-size: 1.4vw;
+  font-size: 1.6vw;
   align-items: center;
   justify-content: center;
   /* outline: 1px solid red; */
@@ -108,8 +110,10 @@ const BorderLeft = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export default function listComponent(props: any) {
-  const { currentList } = props;
+
+export default function ListComponent(props: any) {
+  const { currentList, onDtailPage } = props;
+
   const userStatusColor = (status: string) => {
     switch (status) {
       case "CA":
@@ -138,11 +142,14 @@ export default function listComponent(props: any) {
   const str = /[^A-Za-z가-힣]/g;
   const date = /^(\d{4})(\d{2})(\d{2})$/;
 
+  const handleClick = () => {
+    props.onDetailPage(true);
+  };
   return (
     <>
       {currentList?.map((user: any) => {
         return (
-          <ContentBox key={user.no}>
+          <ContentBox key={user.no} onClick={() => handleClick()}>
             <ContentText>
               <UserName>{user.name.replace(str, "")}</UserName>
               <BorderLeft />

@@ -11,11 +11,13 @@ import SearchComponent from "../components/home/searchComponent";
 import TabComponent from "../components/home/tabComponent";
 import styled from "styled-components";
 import { Cookies } from "react-cookie";
-
+import { useState } from "react";
+import DetailTabComponent from "../components/home/detailTabComponent";
+import react, { useEffect } from "react";
 const cookies = new Cookies();
 
 const HomeContainer = styled.div`
-  width: 80vw;
+  width: 84vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -24,7 +26,7 @@ const HomeContainer = styled.div`
   margin-bottom: 6vw;
 `;
 const SearchContainer = styled.div`
-  width: 80vw;
+  width: 84vw;
   height: 10vh;
   outline: 2px solid green;
   display: flex;
@@ -34,7 +36,7 @@ const SearchContainer = styled.div`
 `;
 
 const TabContainer = styled.div`
-  width: 80vw;
+  width: 84vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -48,9 +50,17 @@ const TabContainer = styled.div`
 //   outline: 2px solid red;
 // `;
 
-export default function Home() {
+export default function Home(props: any) {
   const refreshToken = cookies.get("refreshToken");
+  // const [onDetailPage, setOnDetailPage] = useState(false); // detail page
 
+  const [isDetailPage, setIsDetailPage] = useState(false);
+  const detailPage = () => {
+    setIsDetailPage(true);
+  };
+  const listPage = () => {
+    setIsDetailPage(false);
+  };
   return (
     <>
       <FlexXY>
@@ -58,9 +68,16 @@ export default function Home() {
           <SearchContainer>
             <SearchComponent></SearchComponent>
           </SearchContainer>
-          <TabContainer>
-            <TabComponent></TabComponent>
-          </TabContainer>
+          {isDetailPage ? (
+            //detail page
+            <TabContainer>
+              <DetailTabComponent listPage={listPage}></DetailTabComponent>
+            </TabContainer>
+          ) : (
+            <TabContainer>
+              <TabComponent detailPage={detailPage}></TabComponent>
+            </TabContainer>
+          )}
         </HomeContainer>
       </FlexXY>
     </>
