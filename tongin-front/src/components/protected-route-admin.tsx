@@ -6,8 +6,6 @@ export default function ProtectedRouteAdmin({ children }: any) {
     localStorage.getItem("loginUser") || "{}"
   );
   const role = loginUser ? loginUser.role : null;
-  console.log(localStorage.getItem("loginUser"));
-  console.log(role);
   if (role === 9) {
     return children;
   } else if (role === 1) {
