@@ -102,7 +102,7 @@ export default function DetailTabComponent(props: any) {
     { name: "견적•계약서", content: "작업리스트 영역" },
   ];
   const listShow = () => {
-    props.listPage(false);
+    props.listPage();
   };
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
