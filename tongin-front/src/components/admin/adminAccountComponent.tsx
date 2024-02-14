@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CustomButton from "../common/customButton";
 import API from "../../API/API";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminUserList from "./adminUserList";
 
 const Title = styled.div`
@@ -21,27 +21,16 @@ export default function AdminAccountComponent() {
     }
   };
 
+  useEffect(() => {
+    getUserList();
+  }, []);
+
   return (
     <>
-      <CustomButton
-        onClick={getUserList}
-        text={"유저리스트 요청"}
-      ></CustomButton>
-      <AdminUserList empList={userList}></AdminUserList>
-
-      {userList.map((item) => {
-        return (
-          <div key={item.id}>
-            <div>{item.no}</div>
-            <div>{item.name}</div>
-            <div>{item.empCod}</div>
-            <div>{item.branch.branchName}</div>
-            <div>{item.branch.branchCode}</div>
-            <div>{item.userId}</div>
-            <div>{item.password}</div>
-          </div>
-        );
-      })}
+      <AdminUserList
+        dataList={userList}
+        getUserList={getUserList}
+      ></AdminUserList>
     </>
   );
 }

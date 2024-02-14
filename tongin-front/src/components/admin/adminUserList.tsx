@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
+import CustomButton from "../common/customButton";
+import API from "../../API/API";
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +20,7 @@ const ListTitle = styled.div`
   width: 100%;
   height: 1.8vw;
   border-radius: 0.2vw;
-  background-color: #dddddd;
+  background-color: #ebebeb;
   font-size: 0.8vw;
 `;
 
@@ -50,7 +52,7 @@ const ListItemBox = styled.div<{ isselected?: boolean }>`
 `;
 
 const NumberBox = styled.div`
-  width: 10%;
+  width: 5%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -61,7 +63,7 @@ const NumberBox = styled.div`
 `;
 
 const NameBox = styled.div`
-  width: 12%;
+  width: 14%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -72,7 +74,7 @@ const NameBox = styled.div`
 `;
 
 const EmpCodeBox = styled.div`
-  width: 10%;
+  width: 8%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -83,7 +85,7 @@ const EmpCodeBox = styled.div`
 `;
 
 const ContactBox = styled.div`
-  width: 26%;
+  width: 16%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -94,7 +96,7 @@ const ContactBox = styled.div`
 `;
 
 const BeNmBox = styled.div`
-  width: 26%;
+  width: 16%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -116,36 +118,56 @@ const BeCodeBox = styled.div`
 `;
 
 function ListItem(props: any) {
-  const { empList, setEmpName, setEmpCode, setContact, setBeName, setBeCode } =
-    props;
+  const { dataList, getUserList } = props;
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(
     null
   );
 
-  const onClickListItem = (index: number) => {
-    setSelectedItemIndex(index);
-    const selectedEmp = empList[index];
-    setEmpName(selectedEmp.name);
-    setEmpCode(selectedEmp.empCode);
-    setContact(selectedEmp.contact);
-    setBeName(selectedEmp.beNm);
-    setBeCode(selectedEmp.beCode);
+  // const onClickListItem = (index: number) => {
+  //   setSelectedItemIndex(index);
+  //   const selectedEmp = dataList[index];
+  // };
+
+  const deleteAccount = async (id: string, name: string) => {
+    if (
+      window.confirm(`정말 "${name}" 아이디 : ${id} 사용자를 삭제하시겠습니까?`)
+    ) {
+      const response = await API.delete(`/user/${id}`);
+      console.log(response);
+      alert("정상적으로 삭제되었습니다.");
+      getUserList();
+    }
   };
+
   return (
     <>
-      {empList.map((item: any, index: number) => {
+      {dataList.map((item: any, index: number) => {
         return (
           <ListItemBox
-            key={index}
-            onClick={() => onClickListItem(index)}
-            isselected={selectedItemIndex === index ? true : false}
+            key={item.no}
+            // onClick={() => onClickListItem(index)}
+            // isselected={selectedItemIndex === index ? true : false}
           >
-            <NameBox>{item.name.match(/[가-힣A-Za-z()]+[^,()]+/)}</NameBox>
-            <EmpCodeBox>{item.empCode}</EmpCodeBox>
+            <NumberBox>{item.no}</NumberBox>
+            <NameBox>{item.name}</NameBox>
+            <EmpCodeBox>{item.empCod}</EmpCodeBox>
             <ContactBox>{item.contact}</ContactBox>
-            <BeNmBox>{item.beNm.match(/[가-힣A-Za-z()]+[^,()]+/)}</BeNmBox>
-            <BeCodeBox>{item.beCode}</BeCodeBox>
+            <BeNmBox>{item.branch.branchName}</BeNmBox>
+            <BeCodeBox>{item.branch.branchCode}</BeCodeBox>
+            <BeCodeBox>{item.userId}</BeCodeBox>
+            <BeCodeBox>{item.password}</BeCodeBox>
+            <CustomButton
+              onClick={() => {
+                deleteAccount(item.id, item.name);
+              }}
+              width={"3vw"}
+              height={"2vw"}
+              $backgroundColor={"red"}
+              size={"1vw"}
+              text={"삭제"}
+              radius={"0.4vw"}
+            ></CustomButton>
           </ListItemBox>
         );
       })}
@@ -154,8 +176,7 @@ function ListItem(props: any) {
 }
 
 export default function AdminUserList(props: any) {
-  const { empList, setEmpName, setEmpCode, setContact, setBeName, setBeCode } =
-    props;
+  const { dataList } = props;
 
   return (
     <>
@@ -169,15 +190,9 @@ export default function AdminUserList(props: any) {
           <BeCodeBox>지점코드</BeCodeBox>
           <BeCodeBox>아이디</BeCodeBox>
           <BeCodeBox>비밀번호</BeCodeBox>
+          <BeCodeBox>삭제</BeCodeBox>
         </ListTitle>
-        <ListItem
-          empList={empList}
-          setEmpName={setEmpName}
-          setEmpCode={setEmpCode}
-          setContact={setContact}
-          setBeName={setBeName}
-          setBeCode={setBeCode}
-        ></ListItem>
+        <ListItem dataList={dataList}></ListItem>
       </Wrapper>
     </>
   );
