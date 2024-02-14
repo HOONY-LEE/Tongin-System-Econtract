@@ -6,6 +6,7 @@ import react, { useEffect } from "react";
 import axios from "axios";
 import DetailComponent from "./detailComponent";
 import Home from "../../routes/home";
+import API from "../../API/API";
 const TabMenu = styled.ul`
   // 탭 메뉴들 포함하고 있는 영역
   color: rgb(232, 234, 237);
@@ -114,20 +115,25 @@ export default function TabComponent(props: any) {
     : null;
   const requestParam: any = {
     headers: {
-      authorization: `Bearer ${authorization}`,
+      // authorization: `Bearer ${authorization}`,
       empCod: loginUser.empCod,
     },
   };
   const fetchData = async () => {
-    try {
-      const data: any = await axios.get(
-        "https://homenmove.net/v1/api/receipt/list",
-        requestParam
-      );
-      setReceiptList(data.data.receiptList);
-    } catch (error) {
-      alert(error);
-    }
+    //   try {
+    //     const data: any = await axios.get(
+    //       "https://homenmove.net/v1/api/receipt/list",
+    //       requestParam
+    //     );
+    //     setReceiptList(data.data.receiptList);
+    //   } catch (error) {
+    //     alert(error);
+    //   }
+
+    const data = await API.get("/receipt/list", requestParam);
+
+    console.log(data);
+    setReceiptList(data.data.receiptList);
   };
 
   useEffect(() => {

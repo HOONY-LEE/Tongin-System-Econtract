@@ -4,7 +4,6 @@ import CustomButton from "../common/customButton";
 import { useEffect, useState } from "react";
 import AdminList from "./adminList";
 import SearchComponent from "../common/searchComponent";
-import apiInstance from "../../API/API";
 import API from "../../API/API";
 
 const BoxWrapper = styled.div`
@@ -54,7 +53,6 @@ const SearchBox = styled.div`
 `;
 
 export default function CreateAccountComponent() {
-  const accessToken = localStorage.getItem("accessToken");
   const [empList, setEmpList] = useState<any[]>([]);
   const [searchedText, setSearchedText] = useState("");
   const [searchedList, setSearchedList] = useState(empList);
