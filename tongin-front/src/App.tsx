@@ -10,10 +10,10 @@ import reset from "styled-reset";
 import LoadingScreen from "./components/loading-screen";
 import ProtectedRouteUser from "./components/protected-route-user";
 import Admin from "./routes/admin";
-import Invoice from "./routes/invoice";
 import ProtectedRouteAdmin from "./components/protected-route-admin";
 import AdminLayout from "./components/adminLayout";
 import "./static/fonts/font.css";
+import Detail from "./routes/detail";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "invoice",
-        element: <Invoice></Invoice>,
+        path: "detail",
+        element: <Detail></Detail>,
       },
       {
         path: "profile",

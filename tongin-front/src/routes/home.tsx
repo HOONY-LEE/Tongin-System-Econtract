@@ -50,17 +50,7 @@ const TabContainer = styled.div`
 //   outline: 2px solid red;
 // `;
 
-export default function Home(props: any) {
-  const refreshToken = cookies.get("refreshToken");
-  // const [onDetailPage, setOnDetailPage] = useState(false); // detail page
-
-  const [isDetailPage, setIsDetailPage] = useState(false);
-  const detailPage = () => {
-    setIsDetailPage(true);
-  };
-  const listPage = () => {
-    setIsDetailPage(false);
-  };
+export default function Home() {
   return (
     <>
       <FlexXY>
@@ -68,16 +58,9 @@ export default function Home(props: any) {
           <SearchContainer>
             <SearchComponent></SearchComponent>
           </SearchContainer>
-          {isDetailPage ? (
-            //detail page
-            <TabContainer>
-              <DetailTabComponent listPage={listPage}></DetailTabComponent>
-            </TabContainer>
-          ) : (
-            <TabContainer>
-              <TabComponent detailPage={detailPage}></TabComponent>
-            </TabContainer>
-          )}
+          <TabContainer>
+            <TabComponent></TabComponent>
+          </TabContainer>
         </HomeContainer>
       </FlexXY>
     </>

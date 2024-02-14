@@ -193,34 +193,22 @@ export default function TabComponent(props: any) {
       <ContentBox>
         {currentTab === 0 ? (
           <ListBox>
-            <ListComponent
-              onDetailPage={onDetailPage}
-              currentList={invoiceList}
-            ></ListComponent>
+            <ListComponent currentList={invoiceList}></ListComponent>
           </ListBox>
         ) : null}
         {currentTab === 1 ? (
           <ListBox>
-            <ListComponent
-              onDetailPage={onDetailPage}
-              currentList={uncontractedList}
-            ></ListComponent>
+            <ListComponent currentList={uncontractedList}></ListComponent>
           </ListBox>
         ) : null}
         {currentTab === 2 ? (
           <ListBox>
-            <ListComponent
-              onDetailPage={onDetailPage}
-              currentList={contractList}
-            ></ListComponent>
+            <ListComponent currentList={contractList}></ListComponent>
           </ListBox>
         ) : null}
         {currentTab === 3 ? (
           <ListBox>
-            <ListComponent
-              onDetailPage={onDetailPage}
-              currentList={worklist}
-            ></ListComponent>
+            <ListComponent currentList={worklist}></ListComponent>
           </ListBox>
         ) : null}
       </ContentBox>

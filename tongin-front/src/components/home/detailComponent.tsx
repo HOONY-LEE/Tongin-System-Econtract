@@ -89,13 +89,16 @@ const InfoContent = styled.div`
 `;
 
 export default function DetailComponent(props: any) {
+  const { detailShow } = props;
+  const [detailUserData, setDetailUserData] = useState<any[]>([]);
+
   return (
     <>
       <ContentBox>
         <ContentTop>
           <ContentTopLF>
             <InfoBox>
-              <InfoTitle>title</InfoTitle>
+              <InfoTitle>{detailShow.name}</InfoTitle>
               <InfoContent>내용들어감</InfoContent>
             </InfoBox>
             <InfoBox>
@@ -118,7 +121,7 @@ export default function DetailComponent(props: any) {
             </InfoBox>
           </ContentTopRh>
         </ContentTop>
-        <ContentBottom>dd</ContentBottom>
+        <ContentBottom>{detailShow.name}</ContentBottom>
       </ContentBox>
     </>
   );
