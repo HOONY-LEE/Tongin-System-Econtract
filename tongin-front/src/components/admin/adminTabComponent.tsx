@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import CreateAccountComponent from "./createAccountComponent";
 import MemberListComponent from "./memberListComponent";
+import AdminAccountComponent from "./adminAccountComponent";
 
 // Styled-Component 라이브러리를 활용해 TabMenu 와 Desc 컴포넌트의 CSS를 구현.
 
@@ -53,11 +54,12 @@ const ContentBox = styled.div`
 `;
 
 // 계정관리 탭
-const ListBox = styled.div`
+const AdminBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  background-color: white;
 `;
 
 // 계정 생성 탭
@@ -115,9 +117,9 @@ export const AdminTabComponent = () => {
       </TabMenu>
       <ContentBox>
         {currentTab === 0 ? (
-          <ListBox>
-            <div>계정 목록 리스트</div>
-          </ListBox>
+          <AdminBox>
+            <AdminAccountComponent></AdminAccountComponent>
+          </AdminBox>
         ) : null}
         {currentTab === 1 ? (
           <CreateBox>
