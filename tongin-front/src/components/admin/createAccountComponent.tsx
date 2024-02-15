@@ -73,7 +73,6 @@ export default function CreateAccountComponent() {
       .replace(regExp, "")
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
       .replace(/(\-{1,2})$/g, "");
-    console.log(filteredNumber);
     setContact(filteredNumber);
   };
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +81,9 @@ export default function CreateAccountComponent() {
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
+
+  // 사용하지 않지만 value 속성을 에러없이 사용하기 위해 만들어놓은 핸들러
+  const onChangeHandle = () => {};
 
   // 검색 결과에 따른 목록 재정렬
   const onChangeSearch = (e: any) => {
@@ -108,7 +110,7 @@ export default function CreateAccountComponent() {
 
   const getEmpList = async () => {
     try {
-      const response = await API.get("user/activate/list");
+      const response = await API.get("user/tongin/list");
       setEmpList(response.data.userList);
     } catch (error) {
       alert(error);
@@ -149,6 +151,11 @@ export default function CreateAccountComponent() {
     if (window.confirm(message)) {
       const response = await API.post("auth/sign-up", requestParam);
       console.log(response);
+      if (response.status == 200) {
+        alert(
+          `"${response.data.data.user.name}"님이 정상적으로 가입되었습니다.`
+        );
+      }
     }
   };
 
@@ -176,6 +183,7 @@ export default function CreateAccountComponent() {
             maxLength={13}
           ></InputComponent>
           <InputComponent
+            onChange={onChangeHandle}
             value={empCode}
             label={"직원코드"}
             inputType={"text"}
@@ -186,6 +194,7 @@ export default function CreateAccountComponent() {
             readonly
           ></InputComponent>
           <InputComponent
+            onChange={onChangeHandle}
             value={beCode}
             label={"지점코드"}
             inputType={"text"}
@@ -196,6 +205,7 @@ export default function CreateAccountComponent() {
             readonly
           ></InputComponent>
           <InputComponent
+            onChange={onChangeHandle}
             value={beName}
             label={"지점이름"}
             inputType={"text"}

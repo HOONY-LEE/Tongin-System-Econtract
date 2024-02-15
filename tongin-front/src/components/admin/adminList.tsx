@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
+import DefaultSearchResult from "./defaultSearchResult";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,9 +17,9 @@ const ListTitle = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 1.8vw;
+  height: 2vw;
   border-radius: 0.2vw;
-  background-color: #dddddd;
+  background-color: #ebebeb;
   font-size: 0.8vw;
 `;
 
@@ -156,14 +157,18 @@ export default function AdminList(props: any) {
           <BeNmBox>지점이름</BeNmBox>
           <BeCodeBox>지점코드</BeCodeBox>
         </ListTitle>
-        <ListItem
-          empList={empList}
-          setEmpName={setEmpName}
-          setEmpCode={setEmpCode}
-          setContact={setContact}
-          setBeName={setBeName}
-          setBeCode={setBeCode}
-        ></ListItem>
+        {empList.length > 0 ? (
+          <ListItem
+            empList={empList}
+            setEmpName={setEmpName}
+            setEmpCode={setEmpCode}
+            setContact={setContact}
+            setBeName={setBeName}
+            setBeCode={setBeCode}
+          ></ListItem>
+        ) : (
+          <DefaultSearchResult></DefaultSearchResult>
+        )}
       </Wrapper>
     </>
   );
