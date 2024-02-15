@@ -6,7 +6,7 @@ import react, { useEffect } from "react";
 import TabComponent from "./tabComponent";
 import axios from "axios";
 import detailComponent from "./detailComponent";
-
+import { useNavigate } from "react-router-dom";
 const ContentBox = styled.div`
   display: flex;
   align-items: center;
@@ -142,14 +142,15 @@ export default function ListComponent(props: any) {
   const str = /[^A-Za-z가-힣]/g;
   const date = /^(\d{4})(\d{2})(\d{2})$/;
 
-  const handleClick = () => {
-    props.onDetailPage();
+  const navigate = useNavigate();
+  const detailPageShow = () => {
+    navigate("/detail");
   };
   return (
     <>
       {currentList?.map((user: any) => {
         return (
-          <ContentBox key={user.no} onClick={() => handleClick()}>
+          <ContentBox key={user.no} onClick={() => detailPageShow()}>
             <ContentText>
               <UserName>{user.name.replace(str, "")}</UserName>
               <BorderLeft />
