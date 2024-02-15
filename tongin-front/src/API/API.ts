@@ -42,7 +42,6 @@ API.interceptors.response.use(
             withCredentials: true,
           }
         );
-        console.log("토큰 받았다!!");
         const newAccessToken = response.data.data.accessToken;
         localStorage.setItem("accessToken", newAccessToken);
         cookies.set("refreshToken", response.data.data.refreshToken);
