@@ -171,15 +171,16 @@ export default function Login() {
         "https://homenmove.net/v1/api/auth/login",
         requestParam
       );
-      alert("로그인하였습니다.");
       localStorage.setItem(
         "accessToken",
         response.data.data.tokens.accessToken
       );
+
       localStorage.setItem(
         "loginUser",
         JSON.stringify(response.data.data.user)
       );
+
       cookies.set("refreshToken", response.data.data.tokens.refreshToken);
       navigate("/");
     } catch (error) {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
 import CustomButton from "../common/customButton";
-import API from "../../API/API";
+import DefaultSearchResult from "./defaultSearchResult";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,14 +13,15 @@ const Wrapper = styled.div`
 `;
 
 const ListTitle = styled.div`
-  margin-top: 0.8vw;
+  margin-top: 2vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 1.8vw;
+  height: 2vw;
   border-radius: 0.2vw;
   background-color: #ebebeb;
+  box-shadow: 1px 1px 3vw 1vw #dddddd35;
   font-size: 0.8vw;
 `;
 
@@ -41,7 +42,7 @@ const ListItemBox = styled.div<{ isselected?: boolean }>`
   font-size: 1.2vw;
   background-color: white;
   box-shadow: 1px 1px 3vw 1vw #dddddd35;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   // isselected prop이 true일 때 SelectedItemStyle을 적용합니다.
   ${(props) => props.isselected && SelectedItemStyle}
@@ -52,73 +53,70 @@ const ListItemBox = styled.div<{ isselected?: boolean }>`
 `;
 
 const NumberBox = styled.div`
-  width: 5%;
+  width: 2vw;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
 const NameBox = styled.div`
-  width: 14%;
+  width: 8vw;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
 const EmpCodeBox = styled.div`
-  width: 8%;
-  height: 100%;
+  width: 10vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
 const ContactBox = styled.div`
-  width: 16%;
+  width: 10vw;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
 const BeNmBox = styled.div`
-  width: 16%;
+  width: 10vw;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
 const BeCodeBox = styled.div`
-  width: 10%;
+  width: 5vw;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+`;
+
+const IdPwBox = styled.div`
+  width: 10vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DeleteBox = styled.div`
+  width: 6vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 function ListItem(props: any) {
-  const { dataList, getUserList } = props;
+  const { dataList, getUserList, deactivateAccount, activateAccount } = props;
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(
     null
@@ -128,17 +126,6 @@ function ListItem(props: any) {
   //   setSelectedItemIndex(index);
   //   const selectedEmp = dataList[index];
   // };
-
-  const deleteAccount = async (id: string, name: string) => {
-    if (
-      window.confirm(`정말 "${name}" 아이디 : ${id} 사용자를 삭제하시겠습니까?`)
-    ) {
-      const response = await API.delete(`/user/${id}`);
-      console.log(response);
-      alert("정상적으로 삭제되었습니다.");
-      getUserList();
-    }
-  };
 
   return (
     <>
@@ -155,19 +142,37 @@ function ListItem(props: any) {
             <ContactBox>{item.contact}</ContactBox>
             <BeNmBox>{item.branch.branchName}</BeNmBox>
             <BeCodeBox>{item.branch.branchCode}</BeCodeBox>
-            <BeCodeBox>{item.userId}</BeCodeBox>
-            <BeCodeBox>{item.password}</BeCodeBox>
-            <CustomButton
-              onClick={() => {
-                deleteAccount(item.id, item.name);
-              }}
-              width={"3vw"}
-              height={"2vw"}
-              $backgroundColor={"red"}
-              size={"1vw"}
-              text={"삭제"}
-              radius={"0.4vw"}
-            ></CustomButton>
+            <IdPwBox>{item.userId}</IdPwBox>
+            <IdPwBox>{item.password}</IdPwBox>
+            <DeleteBox>
+              {item.status === 1 ? (
+                <CustomButton
+                  onClick={() => {
+                    deactivateAccount(item.id, item.name);
+                  }}
+                  width={"3vw"}
+                  height={"2vw"}
+                  $bgColor={"#2FD04B"}
+                  text={"활성화"}
+                  radius={"0.4vw"}
+                  size={"0.7vw"}
+                  fontWeight={"300"}
+                ></CustomButton>
+              ) : (
+                <CustomButton
+                  onClick={() => {
+                    activateAccount(item.id, item.name);
+                  }}
+                  width={"3vw"}
+                  height={"2vw"}
+                  $bgColor={"gray"}
+                  text={"비활성화"}
+                  radius={"0.4vw"}
+                  size={"0.7vw"}
+                  fontWeight={"300"}
+                ></CustomButton>
+              )}
+            </DeleteBox>
           </ListItemBox>
         );
       })}
@@ -176,7 +181,7 @@ function ListItem(props: any) {
 }
 
 export default function AdminUserList(props: any) {
-  const { dataList } = props;
+  const { dataList, deleteAccount, deactivateAccount, activateAccount } = props;
 
   return (
     <>
@@ -188,11 +193,19 @@ export default function AdminUserList(props: any) {
           <ContactBox>연락처</ContactBox>
           <BeNmBox>지점이름</BeNmBox>
           <BeCodeBox>지점코드</BeCodeBox>
-          <BeCodeBox>아이디</BeCodeBox>
-          <BeCodeBox>비밀번호</BeCodeBox>
-          <BeCodeBox>삭제</BeCodeBox>
+          <IdPwBox>아이디</IdPwBox>
+          <IdPwBox>비밀번호</IdPwBox>
+          <DeleteBox>비활성화</DeleteBox>
         </ListTitle>
-        <ListItem dataList={dataList}></ListItem>
+        {dataList.length > 0 ? (
+          <ListItem
+            dataList={dataList}
+            deactivateAccount={deactivateAccount}
+            activateAccount={activateAccount}
+          ></ListItem>
+        ) : (
+          <DefaultSearchResult></DefaultSearchResult>
+        )}
       </Wrapper>
     </>
   );

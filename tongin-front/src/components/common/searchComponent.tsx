@@ -6,7 +6,7 @@ const SearchWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
-  width: 70%;
+  width: 80%;
 `;
 
 export default function SearchComponent(props: any) {
@@ -23,7 +23,7 @@ export default function SearchComponent(props: any) {
           placeholder={
             "사원명 or 사원코드 or 연락처 or 지점이름 or 지점코드로 검색하기"
           }
-          width={"50vw"}
+          width={"60vw"}
           height={"3vw"}
         ></InputComponent>
         <CustomButton

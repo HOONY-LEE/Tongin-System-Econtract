@@ -59,7 +59,7 @@ const AdminBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  background-color: white;
+  margin-bottom: 6vw;
 `;
 
 // 계정 생성 탭
@@ -69,6 +69,7 @@ const CreateBox = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
+  margin-bottom: 6vw;
 `;
 
 // 메뉴1 탭
