@@ -19,13 +19,14 @@ import { Cookies } from "react-cookie";
 import DetailTabComponent from "../components/home/detailTabComponent";
 import API from "../API/API";
 const HomeContainer = styled.div`
-  width: 84vw;
+  width: 90vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  outline: 2px solid green;
+  /* outline: 2px solid green; */
   margin-bottom: 6vw;
+  /* background-color: red; */
 `;
 const TabMenu = styled.ul`
   // 탭 메뉴들 포함하고 있는 영역
@@ -34,10 +35,11 @@ const TabMenu = styled.ul`
   display: flex;
   flex-direction: row;
   align-items: center;
+  /* background-color: aqua; */
   justify-content: space-between;
   list-style: none;
   margin-top: 10px;
-  width: 84vw;
+  width: 100%;
   height: 5vw;
   :hover {
     cursor: pointer;
@@ -47,7 +49,7 @@ const TabMenu = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20vw;
+    width: 22vw;
     height: 5vw;
     padding: 10px;
     font-size: 2vw;
@@ -67,11 +69,10 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 84vw;
+  width: 100%;
   height: 100%;
   border-radius: 0px 0px 0.6vw 0.6vw;
-  /* background-color: white; */
-  padding: 1vw 0 1vw 0;
+  /* background-color: RED */
 `;
 
 //  탭
