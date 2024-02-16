@@ -27,7 +27,6 @@ const ContentTop = styled.div`
   justify-content: start;
   width: 84vw;
   height: 20vw;
-
   outline: 0.2vw solid gray;
   margin: 0.7vh 0vh 0.7vh 0vh;
 `;
@@ -35,17 +34,18 @@ const ContentTopLF = styled.div`
   display: flex;
   align-items: start;
   justify-content: space-between;
-  width: 42vw;
+  width: 40vw;
   height: 20vw;
+  flex-direction: column;
   flex-wrap: wrap;
-  outline: 0.2vw solid red;
+  outline: 0.2vw solid yellow;
   margin: 0.7vh 0vh 0.7vh 0vh;
 `;
 const ContentTopRh = styled.div`
   display: flex;
   align-items: start;
   justify-content: end;
-  width: 42vw;
+  width: 84vw;
   height: 20vw;
 
   outline: 0.2vw solid gray;
@@ -71,17 +71,22 @@ const InfoBox = styled.div`
 `;
 const InfoTitle = styled.div`
   width: 14vw;
-  height: 10vw;
+  height: 3vw;
   display: flex;
+  font-size: 1.3vw;
+  font-weight: 300;
   flex-direction: column;
   align-items: start;
+  color: #b2b2b2;
   justify-content: start;
   outline: 0.2vw solid red;
 `;
 const InfoContent = styled.div`
   width: 14vw;
-  height: 10vw;
+  height: 5vw;
   display: flex;
+  font-size: 1.8vw;
+  font-weight: 600;
   flex-direction: column;
   align-items: start;
   outline: 0.2vw solid blue;
@@ -98,19 +103,21 @@ export default function DetailComponent(props: any) {
         <ContentTop>
           <ContentTopLF>
             <InfoBox>
-              <InfoTitle>{detailShow.name}</InfoTitle>
-              <InfoContent>내용들어감</InfoContent>
+              <InfoTitle>고객명</InfoTitle>
+              <InfoContent>{detailShow.name}</InfoContent>
             </InfoBox>
             <InfoBox>
-              <InfoTitle>title</InfoTitle>
-              <InfoContent>내용들어감</InfoContent>
+              <InfoTitle>계약번호</InfoTitle>
+              <InfoContent>{detailShow.recNum}</InfoContent>
+            </InfoBox>
+          </ContentTopLF>
+          <ContentTopLF>
+            <InfoBox>
+              <InfoTitle>전화번호</InfoTitle>
+              <InfoContent>{detailShow.contact}</InfoContent>
             </InfoBox>
             <InfoBox>
-              <InfoTitle>title</InfoTitle>
-              <InfoContent>내용들어감</InfoContent>
-            </InfoBox>
-            <InfoBox>
-              <InfoTitle>title</InfoTitle>
+              <InfoTitle>전화번호</InfoTitle>
               <InfoContent>내용들어감</InfoContent>
             </InfoBox>
           </ContentTopLF>
@@ -121,7 +128,7 @@ export default function DetailComponent(props: any) {
             </InfoBox>
           </ContentTopRh>
         </ContentTop>
-        <ContentBottom>{detailShow.name}</ContentBottom>
+        <ContentBottom>{detailShow.recNum}</ContentBottom>
       </ContentBox>
     </>
   );
