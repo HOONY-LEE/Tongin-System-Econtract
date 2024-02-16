@@ -6,7 +6,7 @@ import HomeSearchComponent from "../common/homeSearchComponent";
 
 const SearchContainer = styled.div`
   width: 90vw;
-  height: 10vh;
+  height: 10vw;
   display: flex;
   flex-direction: column;
   align-items: center;
