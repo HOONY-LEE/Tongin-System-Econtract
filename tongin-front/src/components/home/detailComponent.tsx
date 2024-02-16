@@ -11,12 +11,12 @@ const ContentBox = styled.div`
   align-items: center;
   justify-content: start;
   flex-direction: column;
-  width: 84vw;
+  width: 100%;
   height: 100vw;
-  border-radius: 0.7vw;
+  border-radius: 0 0 0.7vw 0.7vw;
   background-color: white;
   /* outline: 0.2vw solid gray; */
-  margin: 0.7vh 0vh 0.7vh 0vh;
+  /* margin: 0.7vh 0vh 0.7vh 0vh; */
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
@@ -25,7 +25,7 @@ const ContentTop = styled.div`
   display: flex;
   align-items: start;
   justify-content: start;
-  width: 84vw;
+  width: 95%;
   height: 20vw;
   outline: 0.2vw solid gray;
   margin: 0.7vh 0vh 0.7vh 0vh;
@@ -115,10 +115,6 @@ export default function DetailComponent(props: any) {
             <InfoBox>
               <InfoTitle>전화번호</InfoTitle>
               <InfoContent>{detailShow.contact}</InfoContent>
-            </InfoBox>
-            <InfoBox>
-              <InfoTitle>전화번호</InfoTitle>
-              <InfoContent>내용들어감</InfoContent>
             </InfoBox>
           </ContentTopLF>
           <ContentTopRh>
