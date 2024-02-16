@@ -29,7 +29,7 @@ const InputBox = styled.div<{
   background-color: ${(props) =>
     props.$backgroundColor ? props.$backgroundColor : "white"};
   border-radius: 0.4vw;
-  outline: 0.1vw solid gray;
+  outline: 0.2vw solid #c4c4c4;
 
   /* 포커스 되었을 때의 스타일 */
   ${(props) =>

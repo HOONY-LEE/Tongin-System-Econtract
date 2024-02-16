@@ -113,7 +113,7 @@ const BorderLeft = styled.div`
 `;
 
 const TitleBorderLeft = styled.div`
-  border-left: 0.1vw solid #3a3a3a;
+  border-left: 0.1vw solid #c4c4c4;
   height: 1.2vw;
   display: flex;
   align-items: center;

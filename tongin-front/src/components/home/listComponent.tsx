@@ -33,22 +33,24 @@ const ContentBox = styled.div`
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
 const ContentText = styled.div`
-  margin: 0.5vw 2vw;
+  margin: 0.5vw 0vw;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  /* outline: 1px solid red; */
 `;
 
 const UserName = styled.div`
   font-weight: 600;
-  width: 10vw;
+  width: 12vw;
   font-size: 1.7vw;
-  margin-right: 1vw;
+  margin-left: 1vw;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  /* outline: 1px dashed green; */
 `;
 const UserPhone = styled.div`
   font-weight: 600;
@@ -57,6 +59,7 @@ const UserPhone = styled.div`
   font-size: 1.6vw;
   align-items: center;
   justify-content: center;
+  /* outline: 1px dashed green; */
 `;
 
 const UserAcceptDate = styled.div`
@@ -66,6 +69,7 @@ const UserAcceptDate = styled.div`
   font-size: 1.4vw;
   align-items: center;
   justify-content: center;
+  /* outline: 1px dashed green; */
 `;
 const UserConsulDate = styled.div`
   width: 10vw;
@@ -74,6 +78,7 @@ const UserConsulDate = styled.div`
   font-size: 1.4vw;
   align-items: center;
   justify-content: center;
+  /* outline: 1px dashed green; */
 `;
 const UserMoveDate = styled.div`
   width: 10vw;
@@ -82,6 +87,7 @@ const UserMoveDate = styled.div`
   font-size: 1.4vw;
   align-items: center;
   justify-content: center;
+  /* outline: 1px dashed green; */
 `;
 const UserStatus = styled.div`
   width: 5vw;
@@ -89,7 +95,8 @@ const UserStatus = styled.div`
   font-size: 1.6vw;
   align-items: center;
   justify-content: center;
-  margin-left: 2vw;
+  /* outline: 1px dashed green; */
+  margin-right: 1vw;
 `;
 const UserStatusColor = styled.div<{
   $bgColor?: string;
@@ -115,7 +122,7 @@ const BorderLeft = styled.div`
 `;
 
 const TitleBorderLeft = styled.div`
-  border-left: 0.1vw solid #3a3a3a;
+  border-left: 0.1vw solid #c4c4c4;
   height: 1.2vw;
   display: flex;
   align-items: center;
