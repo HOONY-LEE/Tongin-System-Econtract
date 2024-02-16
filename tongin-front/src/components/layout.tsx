@@ -53,10 +53,11 @@ const AdminHeader = () => {
 
   const logout = () => {
     // eslint-disable-next-line no-restricted-globals
-    confirm("로그아웃 하시겠습니까?");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("loginUser");
-    navigate("/login");
+    if (confirm("로그아웃 하시겠습니까?")) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("loginUser");
+      navigate("/login");
+    }
   };
 
   const goHome = () => {
