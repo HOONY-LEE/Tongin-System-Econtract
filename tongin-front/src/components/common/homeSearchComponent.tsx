@@ -6,11 +6,12 @@ const SearchWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
-  width: 80%;
+  width: 100%;
 `;
 
-export default function SearchComponent(props: any) {
-  const { onChange, resetSearch, searchedText, setSearchedList } = props;
+export default function HomeSearchComponent(props: any) {
+  const { onChange, resetSearch, searchedText, setSearchedList, onFocus } =
+    props;
 
   return (
     <>
@@ -19,17 +20,19 @@ export default function SearchComponent(props: any) {
           setSearchedList={setSearchedList}
           value={searchedText}
           onChange={onChange}
+          onFocus={onFocus}
           inputType={"text"}
           placeholder={"검색하기"}
-          width={"60vw"}
-          height={"3vw"}
+          width={"80vw"}
+          height={"5vw"}
+          fontSize={"2vw"}
         ></InputComponent>
         <CustomButton
           onClick={resetSearch}
-          size={"1.2vw"}
-          text={"초기화"}
+          size={"1.8vw"}
+          text={"검색"}
           width={"8vw"}
-          height={"3vw"}
+          height={"5vw"}
         ></CustomButton>
       </SearchWrapper>
     </>

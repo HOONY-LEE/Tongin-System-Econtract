@@ -11,7 +11,7 @@ const ContentBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 84vw;
+  width: 100%;
   height: 6vw;
 
   border-radius: 0.7vw;
