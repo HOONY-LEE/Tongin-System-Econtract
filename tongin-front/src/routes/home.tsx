@@ -1,42 +1,25 @@
-import {
-  FlexBox,
-  FlexBoxRow,
-  FlexX,
-  FlexXY,
-  FlexY,
-} from "../components/common/flexBox";
+import { FlexXY } from "../components/common/flexBox";
 import CustomButton from "../components/common/customButton";
 
-import SearchComponent from "../components/home/searchComponent";
 import TabComponent from "../components/home/tabComponent";
 import styled from "styled-components";
 import { Cookies } from "react-cookie";
 import { useState } from "react";
-import DetailTabComponent from "../components/home/detailTabComponent";
-import react, { useEffect } from "react";
+
+import HomeSearchComponent from "../components/common/homeSearchComponent";
 const cookies = new Cookies();
 
 const HomeContainer = styled.div`
-  width: 84vw;
+  width: 90vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  outline: 2px solid green;
   margin-bottom: 6vw;
-`;
-const SearchContainer = styled.div`
-  width: 84vw;
-  height: 10vh;
-  outline: 2px solid green;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
 const TabContainer = styled.div`
-  width: 84vw;
+  width: 90vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -55,9 +38,6 @@ export default function Home() {
     <>
       <FlexXY>
         <HomeContainer>
-          <SearchContainer>
-            <SearchComponent></SearchComponent>
-          </SearchContainer>
           <TabContainer>
             <TabComponent></TabComponent>
           </TabContainer>

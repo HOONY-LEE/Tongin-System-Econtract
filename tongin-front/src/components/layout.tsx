@@ -1,15 +1,6 @@
 import styled from "styled-components";
 import CustomButton from "./common/customButton";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-
-const Tmp = styled.div`
-  width: 100%;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-`;
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Header = styled.div`
   display: flex;
@@ -68,10 +59,14 @@ const AdminHeader = () => {
     navigate("/login");
   };
 
+  const goHome = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <Header>
-        <LeftBox>
+        <LeftBox onClick={goHome}>
           <Image
             src="img/tongin_logo.png"
             alt="로고 이미지"
@@ -80,7 +75,7 @@ const AdminHeader = () => {
           />
         </LeftBox>
         <MidBox>
-          <Title>헤더</Title>
+          <Title>전자계약시스템</Title>
         </MidBox>
         <RightBox>
           <CustomButton

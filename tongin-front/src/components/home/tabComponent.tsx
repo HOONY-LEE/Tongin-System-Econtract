@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ListComponent from "./listComponent";
-import { useState } from "react";
-import react, { useEffect } from "react";
-import axios from "axios";
-import DetailComponent from "./detailComponent";
-import Home from "../../routes/home";
 import API from "../../API/API";
+import HomeSearchComponent from "../common/homeSearchComponent";
+
+const SearchContainer = styled.div`
+  width: 90vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const TabMenu = styled.ul`
   // 탭 메뉴들 포함하고 있는 영역
   color: rgb(232, 234, 237);
@@ -17,7 +23,7 @@ const TabMenu = styled.ul`
   justify-content: space-between;
   list-style: none;
   margin-top: 10px;
-  width: 84vw;
+  width: 100%;
   height: 5vw;
   :hover {
     cursor: pointer;
@@ -27,9 +33,9 @@ const TabMenu = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20vw;
-    height: 5vw;
-    padding: 10px;
+    width: 17vw;
+    height: 100%;
+    padding: 3vw;
     font-size: 2vw;
     transition: 0.2s;
     border-radius: 0.4vw 0.4vw 0px 0px;
@@ -47,7 +53,7 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 84vw;
+  width: 100%;
   height: 100%;
   border-radius: 0px 0px 0.6vw 0.6vw;
   /* background-color: white; */
@@ -61,130 +67,82 @@ const ListBox = styled.div`
   align-items: center;
   justify-content: start;
   height: 100%;
-  /* outline: 1px solid red; */
-
-  /* outline: 1px solid red; */
 `;
 
-// 미계약리스트 탭
-const CreateBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 70vh;
-`;
-
-// 계약리스트 탭
-const Menu1 = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40vh;
-`;
-
-// 작업리스트 탭
-const Menu2 = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40vh;
-`;
-
-export default function TabComponent(props: any) {
-  // 현재 선택된 탭, 디폴트는 0(계정 관리)
-
-  const [receiptList, setReceiptList] = useState<any[]>([]); // user list
-  const [currentTab, setCurrentTab] = useState(0); //tab
-  const [invoiceList, setInvoiceList] = useState<any[]>([]); //견적리스트
-  const [uncontractedList, setUncontractedList] = useState<any[]>([]); //미계약리스트
-  const [contractList, setcontractList] = useState<any[]>([]); //계약리스트
-  const [worklist, setWorklist] = useState<any[]>([]); //작업리스트
-  const { detailPage } = props;
-  const [isDetailPage, setIsDetailPage] = useState(false);
-
-  const onDetailPage = () => {
-    props.detailPage();
-  };
-  const authorization = localStorage
-    ? localStorage.getItem("accessToken")
-    : null;
-
-  const loginUser = localStorage
-    ? JSON.parse(localStorage.getItem("loginUser") || "{}")
-    : null;
-  const requestParam: any = {
-    headers: {
-      // authorization: `Bearer ${authorization}`,
-      empCod: loginUser.empCod,
-    },
-  };
-  const fetchData = async () => {
-    //   try {
-    //     const data: any = await axios.get(
-    //       "https://homenmove.net/v1/api/receipt/list",
-    //       requestParam
-    //     );
-    //     setReceiptList(data.data.receiptList);
-    //   } catch (error) {
-    //     alert(error);
-    //   }
-
-    const data = await API.get("/receipt/list", requestParam);
-
-    console.log(data);
-    setReceiptList(data.data.receiptList);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    // 견적리스트 : 접수완료 11, 상담토스12, 상담승인13
-    const invoiceListBox = receiptList.filter(
-      (content) =>
-        content.statusCode === "11" ||
-        content.statusCode === "12" ||
-        content.statusCode === "13"
-    );
-    setInvoiceList(invoiceListBox);
-
-    // 미계약리스트 : 상담완료14, 계약미승인21
-    const uncontractedListBox = receiptList.filter(
-      (content) => content.statusCode === "14" || content.statusCode === "21"
-    );
-    setUncontractedList(uncontractedListBox);
-
-    // 계약리스트 : 계약22
-    const contractListBox = receiptList.filter(
-      (content) => content.statusCode === "22"
-    );
-    setcontractList(contractListBox);
-
-    // 작업리스트 : 작업토스31, 작업승인32, 완료41
-    const worklistBox = receiptList.filter(
-      (content) =>
-        content.statusCode === "31" ||
-        content.statusCode === "32" ||
-        content.statusCode === "41"
-    );
-    setWorklist(worklistBox);
-  }, [receiptList]);
+export default function TabComponent() {
+  const [receiptList, setReceiptList] = useState<any[]>([]); // receipt list
+  const [currentTab, setCurrentTab] = useState(0); // current tab
+  const [invoiceList, setInvoiceList] = useState<any[]>([]); // quotation list
+  const [uncontractedList, setUncontractedList] = useState<any[]>([]); // uncontracted list
+  const [contractList, setContractList] = useState<any[]>([]); // contract list
+  const [worklist, setWorklist] = useState<any[]>([]); // work list
 
   const menuArr = [
     { name: "견적리스트", content: "견적리스트 영역" },
     { name: "미계약리스트", content: "미계약 리스트 영역" },
     { name: "계약리스트", content: "계약 리스트 영역" },
     { name: "작업리스트", content: "작업리스트 영역" },
+    { name: "전체보기", content: "전체리스트 영역" },
   ];
 
-  const selectMenuHandler = (index: any) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
+        const requestParam = {
+          headers: {
+            empCod: loginUser.empCod,
+          },
+        };
+        const response = await API.get("/receipt/list", requestParam);
+        const data = response.data.receiptList;
+        setReceiptList(data);
+      } catch (error) {
+        console.error("Error fetching receipt list:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const updateLists = () => {
+      setInvoiceList(
+        receiptList.filter((content) =>
+          ["11", "12", "13"].includes(content.statusCode)
+        )
+      );
+      setUncontractedList(
+        receiptList.filter((content) =>
+          ["14", "21"].includes(content.statusCode)
+        )
+      );
+      setContractList(
+        receiptList.filter((content) => content.statusCode === "22")
+      );
+      setWorklist(
+        receiptList.filter((content) =>
+          ["31", "32", "41"].includes(content.statusCode)
+        )
+      );
+    };
+
+    updateLists();
+  }, [receiptList]);
+
+  const onSearchInputFocus = () => {
+    setCurrentTab(4); // "전체보기" 탭으로 설정
+  };
+
+  const selectMenuHandler = (index: number) => {
     setCurrentTab(index);
   };
 
   return (
     <>
+      <SearchContainer>
+        <HomeSearchComponent onFocus={onSearchInputFocus} />
+      </SearchContainer>
       <TabMenu>
         {menuArr.map((item, index) => (
           <li
@@ -197,26 +155,31 @@ export default function TabComponent(props: any) {
         ))}
       </TabMenu>
       <ContentBox>
-        {currentTab === 0 ? (
+        {currentTab === 0 && (
           <ListBox>
-            <ListComponent currentList={invoiceList}></ListComponent>
+            <ListComponent currentList={invoiceList} />
           </ListBox>
-        ) : null}
-        {currentTab === 1 ? (
+        )}
+        {currentTab === 1 && (
           <ListBox>
-            <ListComponent currentList={uncontractedList}></ListComponent>
+            <ListComponent currentList={uncontractedList} />
           </ListBox>
-        ) : null}
-        {currentTab === 2 ? (
+        )}
+        {currentTab === 2 && (
           <ListBox>
-            <ListComponent currentList={contractList}></ListComponent>
+            <ListComponent currentList={contractList} />
           </ListBox>
-        ) : null}
-        {currentTab === 3 ? (
+        )}
+        {currentTab === 3 && (
           <ListBox>
-            <ListComponent currentList={worklist}></ListComponent>
+            <ListComponent currentList={worklist} />
           </ListBox>
-        ) : null}
+        )}
+        {currentTab === 4 && (
+          <ListBox>
+            <ListComponent currentList={receiptList} />
+          </ListBox>
+        )}
       </ContentBox>
     </>
   );

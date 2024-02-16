@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { useState } from "react";
+import styled, { css } from "styled-components";
 
 const InputArea = styled.div`
   display: flex;
@@ -18,6 +19,7 @@ const InputBox = styled.div<{
   width?: string;
   height?: string;
   $backgroundColor?: string;
+  isFocused?: boolean; // 포커스 여부를 받을 수 있는 속성 추가
 }>`
   display: flex;
   justify-content: center;
@@ -27,16 +29,25 @@ const InputBox = styled.div<{
   background-color: ${(props) =>
     props.$backgroundColor ? props.$backgroundColor : "white"};
   border-radius: 0.4vw;
-  outline: 1px solid gray;
+  outline: 0.1vw solid gray;
+
+  /* 포커스 되었을 때의 스타일 */
+  ${(props) =>
+    props.isFocused &&
+    css`
+      outline: 0.2vw solid #ff7f3b;
+    `}
 `;
 
-const InputText: any = styled.input.attrs((props: { maxLength?: number }) => ({
-  type: "text",
-  maxLength: props.maxLength,
-}))<{ $backgroundColor?: string; maxLength?: number }>`
+const InputText: any = styled.input.attrs(
+  (props: { maxLength?: number; fontSize?: string }) => ({
+    type: "text",
+    maxLength: props.maxLength,
+  })
+)<{ $backgroundColor?: string; maxLength?: number; fontSize: string }>`
   width: 94%;
   height: 100%;
-  font-size: 1.2vw;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1.2vw")};
   outline: none;
   border: none;
   background-color: ${(props) =>
@@ -45,22 +56,22 @@ const InputText: any = styled.input.attrs((props: { maxLength?: number }) => ({
 
 const InputPassword: any = styled.input.attrs({
   type: "password",
-})<{ backgroundColor?: string }>`
+})<{ $backgroundColor?: string; maxLength?: number; fontSize: string }>`
   width: 94%;
   height: 100%;
-  font-size: 1.2vw;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1.2vw")};
   outline: none;
   border: none;
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "white"};
+    props.$backgroundColor ? props.$backgroundColor : "white"};
 `;
 
 const InputNumber: any = styled.input.attrs({
   type: "number",
-})<{ $backgroundColor?: string }>`
+})<{ $backgroundColor?: string; maxLength?: number; fontSize: string }>`
   width: 94%;
   height: 100%;
-  font-size: 1.2vw;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1.2vw")};
   outline: none;
   border: none;
   $background-color: ${(props) =>
@@ -79,7 +90,12 @@ export const InputComponent = (props: any) => {
     value,
     $backgroundColor,
     maxLength,
+    fontSize,
+    onFocus,
   } = props;
+
+  // 포커스 여부를 상태로 관리
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <>
@@ -89,6 +105,7 @@ export const InputComponent = (props: any) => {
           width={width}
           height={height}
           $backgroundColor={$backgroundColor}
+          isFocused={isFocused}
         >
           {inputType === "text" ? (
             <InputText
@@ -98,6 +115,12 @@ export const InputComponent = (props: any) => {
               value={value}
               $backgroundColor={$backgroundColor}
               maxLength={maxLength}
+              fontSize={fontSize}
+              onFocus={(e: any) => {
+                setIsFocused(true); // 1.isFocused를 true로 변경
+                onFocus && onFocus(e); // 2. 부모 컴포넌트로 포커스 이벤트 전달
+              }}
+              onBlur={() => setIsFocused(false)}
             ></InputText>
           ) : null}
           {inputType === "password" ? (
@@ -108,6 +131,12 @@ export const InputComponent = (props: any) => {
               value={value}
               $backgroundColor={$backgroundColor}
               maxLength={maxLength}
+              fontSize={fontSize}
+              onFocus={(e: any) => {
+                setIsFocused(true); // 1.isFocused를 true로 변경
+                onFocus && onFocus(e); // 2. 부모 컴포넌트로 포커스 이벤트 전달
+              }}
+              onBlur={() => setIsFocused(false)}
             ></InputPassword>
           ) : null}
           {inputType === "number" ? (
@@ -118,6 +147,12 @@ export const InputComponent = (props: any) => {
               value={value}
               $backgroundColor={$backgroundColor}
               maxLength={maxLength}
+              fontSize={fontSize}
+              onFocus={(e: any) => {
+                setIsFocused(true); // 1.isFocused를 true로 변경
+                onFocus && onFocus(e); // 2. 부모 컴포넌트로 포커스 이벤트 전달
+              }}
+              onBlur={() => setIsFocused(false)}
             ></InputNumber>
           ) : null}
         </InputBox>
