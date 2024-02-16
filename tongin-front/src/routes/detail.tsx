@@ -13,11 +13,9 @@ import {
   FlexXY,
   FlexY,
 } from "../components/common/flexBox";
-import SearchComponent from "../components/home/searchComponent";
-import TabComponent from "../components/home/tabComponent";
-import { Cookies } from "react-cookie";
-import DetailTabComponent from "../components/home/detailTabComponent";
+
 import API from "../API/API";
+import ProductComponent from "../components/detail/productComponent";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -72,19 +70,45 @@ const ContentBox = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 0px 0px 0.6vw 0.6vw;
-  /* background-color: RED */
 `;
 
-//  탭
-const ListBox = styled.div`
+//  상세정보 탭
+const DetialTabBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
   height: 100%;
-  /* outline: 1px solid red; */
+`;
 
-  /* outline: 1px solid red; */
+//  물품추가 탭
+const ProductTabBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+  /* outline: 1px solid green; */
+`;
+
+//  옵션선택 탭
+const OptionTabBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+  /* outline: 1px solid green; */
+`;
+
+//  견적계약서 탭
+const ContractTabBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+  /* outline: 1px solid green; */
 `;
 
 export default function Detail(props: any) {
@@ -128,13 +152,21 @@ export default function Detail(props: any) {
           </TabMenu>
           <ContentBox>
             {currentTab === 0 ? (
-              <ListBox>
+              <DetialTabBox>
                 <DetailComponent detailShow={detailShow}></DetailComponent>
-              </ListBox>
+              </DetialTabBox>
             ) : null}
-            {currentTab === 1 ? <ListBox>준비중</ListBox> : null}
-            {currentTab === 2 ? <ListBox>준비중</ListBox> : null}
-            {currentTab === 3 ? <ListBox>준비중</ListBox> : null}
+            {currentTab === 1 ? (
+              <ProductTabBox>
+                <ProductComponent></ProductComponent>
+              </ProductTabBox>
+            ) : null}
+            {currentTab === 2 ? (
+              <OptionTabBox>옵션선택 준비중</OptionTabBox>
+            ) : null}
+            {currentTab === 3 ? (
+              <ContractTabBox>계약서 준비중</ContractTabBox>
+            ) : null}
           </ContentBox>
         </HomeContainer>
       </FlexXY>
