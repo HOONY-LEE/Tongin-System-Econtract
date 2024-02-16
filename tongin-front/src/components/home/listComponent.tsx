@@ -1,16 +1,27 @@
-import { userInfo } from "os";
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import react, { useEffect } from "react";
-import TabComponent from "./tabComponent";
-import axios from "axios";
-import detailComponent from "./detailComponent";
 import { useNavigate } from "react-router-dom";
+import DefaultSearchResult from "../admin/defaultSearchResult";
+
+const TitleBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3vw;
+  border-radius: 0.4vw;
+  background-color: #dddddd90;
+  /* outline: 0.2vw solid gray; */
+  margin: 0.7vh 0vh 0.7vh 0vh;
+  box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
+    0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
+`;
+
 const ContentBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   height: 6vw;
 
@@ -23,23 +34,21 @@ const ContentBox = styled.div`
 `;
 const ContentText = styled.div`
   margin: 0.5vw 2vw;
-  width: 76vw;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* outline: 2px solid red; */
 `;
 
 const UserName = styled.div`
   font-weight: 600;
-  width: 8vw;
+  width: 10vw;
   font-size: 1.7vw;
   margin-right: 1vw;
-  text-align: start;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  /* outline: 1px solid red; */
 `;
 const UserPhone = styled.div`
   font-weight: 600;
@@ -48,72 +57,79 @@ const UserPhone = styled.div`
   font-size: 1.6vw;
   align-items: center;
   justify-content: center;
-  /* outline: 1px solid red; */
 `;
 
 const UserAcceptDate = styled.div`
-  width: 11vw;
+  width: 10vw;
   font-weight: 400;
   display: flex;
   font-size: 1.4vw;
   align-items: center;
   justify-content: center;
-  /* outline: 1px solid red; */
 `;
 const UserConsulDate = styled.div`
-  width: 11vw;
+  width: 10vw;
   font-weight: 400;
   display: flex;
   font-size: 1.4vw;
   align-items: center;
   justify-content: center;
-  /* outline: 1px solid red; */
 `;
 const UserMoveDate = styled.div`
-  width: 11vw;
+  width: 10vw;
   font-weight: 400;
   display: flex;
   font-size: 1.4vw;
   align-items: center;
   justify-content: center;
-  /* outline: 1px solid red; */
 `;
 const UserStatus = styled.div`
-  width: 9.4vw;
-  font-weight: 600;
+  width: 5vw;
   display: flex;
   font-size: 1.6vw;
   align-items: center;
   justify-content: center;
-  /* outline: 1px solid red; */
   margin-left: 2vw;
 `;
 const UserStatusColor = styled.div<{
   $bgColor?: string;
 }>`
   background-color: ${(props) => props.$bgColor};
-  width: 9.2vw;
-  height: 3.2vw;
+  width: 6vw;
+  height: 3vw;
   font-weight: 300;
   display: flex;
   color: white;
-  font-size: 1.4vw;
+  font-size: 1vw;
   align-items: center;
   justify-content: center;
   border-radius: 0.4vw;
 `;
 
 const BorderLeft = styled.div`
-  border-left: 0.1vw solid #e7e7e7;
+  border-left: 0.1vw solid #c4c4c4;
   height: 1.2vw;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export default function ListComponent(props: any) {
-  const { currentList, onDtailPage } = props;
+const TitleBorderLeft = styled.div`
+  border-left: 0.1vw solid #3a3a3a;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
+const TitleText = styled.h3`
+  text-align: center;
+  font-size: 1.2vw;
+  font-weight: 300;
+`;
+
+export default function ListComponent(props: any) {
+  const { currentList } = props;
   const userStatusColor = (status: string) => {
     switch (status) {
       case "CA":
@@ -143,40 +159,74 @@ export default function ListComponent(props: any) {
   const date = /^(\d{4})(\d{2})(\d{2})$/;
 
   const navigate = useNavigate();
-  const detailPageShow = () => {
-    navigate("/detail");
+  const detailPageShow = (recNum: string) => {
+    navigate(`/detail/${recNum}`);
   };
   return (
     <>
-      {currentList?.map((user: any) => {
-        return (
-          <ContentBox key={user.no} onClick={() => detailPageShow()}>
-            <ContentText>
-              <UserName>{user.name.replace(str, "")}</UserName>
-              <BorderLeft />
-              <UserPhone>{user.contact}</UserPhone>
-              <BorderLeft />
-              <UserAcceptDate>
-                {user.receptionDate.replace(date, "$1-$2-$3")}
-              </UserAcceptDate>
-              <BorderLeft />
-              <UserConsulDate>
-                {user.contractDate.replace(date, "$1-$2-$3")}
-              </UserConsulDate>
-              <BorderLeft />
-              <UserMoveDate>
-                {user.movingDate.replace(date, "$1-$2-$3")}
-              </UserMoveDate>
-              <BorderLeft />
-              <UserStatus>
-                <UserStatusColor $bgColor={userStatusColor(user.statusCode)}>
-                  {user.status}
-                </UserStatusColor>
-              </UserStatus>
-            </ContentText>
-          </ContentBox>
-        );
-      })}
+      <TitleBox>
+        <ContentText>
+          <UserName>
+            <TitleText>고객명</TitleText>
+          </UserName>
+          <TitleBorderLeft />
+          <UserPhone>
+            <TitleText>연락처</TitleText>
+          </UserPhone>
+          <TitleBorderLeft />
+          <UserAcceptDate>
+            <TitleText>접수일</TitleText>
+          </UserAcceptDate>
+          <TitleBorderLeft />
+          <UserConsulDate>
+            <TitleText>상담일</TitleText>
+          </UserConsulDate>
+          <TitleBorderLeft />
+          <UserMoveDate>
+            <TitleText>이사일</TitleText>
+          </UserMoveDate>
+          <TitleBorderLeft />
+          <UserStatus>
+            <TitleText>상태</TitleText>
+          </UserStatus>
+        </ContentText>
+      </TitleBox>
+      {currentList.length > 0 ? (
+        currentList?.map((user: any) => {
+          return (
+            <ContentBox
+              key={user.no}
+              onClick={() => detailPageShow(user.recNum)}
+            >
+              <ContentText>
+                <UserName>{user.name.replace(str, "")}</UserName>
+                <BorderLeft />
+                <UserPhone>{user.contact}</UserPhone>
+                <BorderLeft />
+                <UserAcceptDate>
+                  {user.receptionDate.replace(date, "$1-$2-$3")}
+                </UserAcceptDate>
+                <BorderLeft />
+                <UserConsulDate>
+                  {user.contractDate.replace(date, "$1-$2-$3")}
+                </UserConsulDate>
+                <BorderLeft />
+                <UserMoveDate>
+                  {user.movingDate.replace(date, "$1-$2-$3")}
+                </UserMoveDate>
+                <BorderLeft />
+                <UserStatus>
+                  <UserStatusColor $bgColor={userStatusColor(user.statusCode)}>
+                    {user.status}
+                  </UserStatusColor>
+                </UserStatus>
+              </ContentText>
+            </ContentBox>
+          );
+        })
+      ) : (
+        <DefaultSearchResult></DefaultSearchResult>
+      )}
     </>
   );
 }

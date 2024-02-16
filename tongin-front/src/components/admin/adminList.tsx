@@ -104,6 +104,21 @@ const BeCodeBox = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+const BorderLeft = styled.div`
+  border-left: 0.1vw solid #c4c4c4;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TitleBorderLeft = styled.div`
+  border-left: 0.1vw solid #3a3a3a;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 function ListItem(props: any) {
   const { empList, setEmpName, setEmpCode, setContact, setBeName, setBeCode } =
@@ -132,9 +147,13 @@ function ListItem(props: any) {
             isselected={selectedItemIndex === index ? true : false}
           >
             <NameBox>{item.name.match(/[가-힣A-Za-z()]+[^,()]+/)}</NameBox>
+            <BorderLeft />
             <EmpCodeBox>{item.empCode}</EmpCodeBox>
+            <BorderLeft />
             <ContactBox>{item.contact}</ContactBox>
+            <BorderLeft />
             <BeNmBox>{item.beNm.match(/[가-힣A-Za-z()]+[^,()]+/)}</BeNmBox>
+            <BorderLeft />
             <BeCodeBox>{item.beCode}</BeCodeBox>
           </ListItemBox>
         );
@@ -152,9 +171,13 @@ export default function AdminList(props: any) {
       <Wrapper>
         <ListTitle>
           <NameBox>사원명</NameBox>
+          <TitleBorderLeft />
           <EmpCodeBox>사원코드</EmpCodeBox>
+          <TitleBorderLeft />
           <ContactBox>연락처</ContactBox>
+          <TitleBorderLeft />
           <BeNmBox>지점이름</BeNmBox>
+          <TitleBorderLeft />
           <BeCodeBox>지점코드</BeCodeBox>
         </ListTitle>
         {empList.length > 0 ? (

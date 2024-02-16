@@ -76,6 +76,8 @@ export default function TabComponent() {
   const [uncontractedList, setUncontractedList] = useState<any[]>([]); // uncontracted list
   const [contractList, setContractList] = useState<any[]>([]); // contract list
   const [worklist, setWorklist] = useState<any[]>([]); // work list
+  const [searchedText, setSearchedText] = useState("");
+  const [searchedList, setSearchedList] = useState<any[]>([]);
 
   const menuArr = [
     { name: "견적리스트", content: "견적리스트 영역" },
@@ -97,6 +99,7 @@ export default function TabComponent() {
         const response = await API.get("/receipt/list", requestParam);
         const data = response.data.receiptList;
         setReceiptList(data);
+        setSearchedList(data);
       } catch (error) {
         console.error("Error fetching receipt list:", error);
       }
@@ -125,6 +128,7 @@ export default function TabComponent() {
           ["31", "32", "41"].includes(content.statusCode)
         )
       );
+      setSearchedList(receiptList);
     };
 
     updateLists();
@@ -138,10 +142,25 @@ export default function TabComponent() {
     setCurrentTab(index);
   };
 
+  const onChangeSearch = (e: any) => {
+    const keyword = e.target.value;
+    setSearchedText(keyword);
+    console.log(receiptList[0].name.includes(keyword));
+    const filterdList = receiptList.filter(
+      (item) => item.name.includes(keyword) || item.contact.includes(keyword)
+    );
+    setSearchedList(filterdList);
+  };
+
   return (
     <>
       <SearchContainer>
-        <HomeSearchComponent onFocus={onSearchInputFocus} />
+        <HomeSearchComponent
+          onChange={onChangeSearch}
+          onFocus={onSearchInputFocus}
+          searchedText={searchedText}
+          setSearchedText={setSearchedText}
+        />
       </SearchContainer>
       <TabMenu>
         {menuArr.map((item, index) => (
@@ -177,7 +196,7 @@ export default function TabComponent() {
         )}
         {currentTab === 4 && (
           <ListBox>
-            <ListComponent currentList={receiptList} />
+            <ListComponent currentList={searchedList} />
           </ListBox>
         )}
       </ContentBox>

@@ -115,6 +115,22 @@ const DeleteBox = styled.div`
   align-items: center;
 `;
 
+const BorderLeft = styled.div`
+  border-left: 0.1vw solid #c4c4c4;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TitleBorderLeft = styled.div`
+  border-left: 0.1vw solid #3a3a3a;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 function ListItem(props: any) {
   const { dataList, getUserList, deactivateAccount, activateAccount } = props;
 
@@ -137,13 +153,21 @@ function ListItem(props: any) {
             // isselected={selectedItemIndex === index ? true : false}
           >
             <NumberBox>{item.no}</NumberBox>
+            <BorderLeft />
             <NameBox>{item.name}</NameBox>
+            <BorderLeft />
             <EmpCodeBox>{item.empCod}</EmpCodeBox>
+            <BorderLeft />
             <ContactBox>{item.contact}</ContactBox>
+            <BorderLeft />
             <BeNmBox>{item.branch.branchName}</BeNmBox>
+            <BorderLeft />
             <BeCodeBox>{item.branch.branchCode}</BeCodeBox>
+            <BorderLeft />
             <IdPwBox>{item.userId}</IdPwBox>
+            <BorderLeft />
             <IdPwBox>{item.password}</IdPwBox>
+            <BorderLeft />
             <DeleteBox>
               {item.status === 1 ? (
                 <CustomButton
@@ -188,13 +212,21 @@ export default function AdminUserList(props: any) {
       <Wrapper>
         <ListTitle>
           <NumberBox>No.</NumberBox>
+          <TitleBorderLeft />
           <NameBox>이름</NameBox>
+          <TitleBorderLeft />
           <EmpCodeBox>사원코드</EmpCodeBox>
+          <TitleBorderLeft />
           <ContactBox>연락처</ContactBox>
+          <TitleBorderLeft />
           <BeNmBox>지점이름</BeNmBox>
+          <TitleBorderLeft />
           <BeCodeBox>지점코드</BeCodeBox>
+          <TitleBorderLeft />
           <IdPwBox>아이디</IdPwBox>
+          <TitleBorderLeft />
           <IdPwBox>비밀번호</IdPwBox>
+          <TitleBorderLeft />
           <DeleteBox>비활성화</DeleteBox>
         </ListTitle>
         {dataList.length > 0 ? (
