@@ -95,7 +95,7 @@ const InputCBMNumber = styled.p`
 `;
 
 const Title = styled.p`
-  font-size: 3vw;
+  font-size: 2.4vw;
   font-weight: 600;
   height: 4vw;
   display: flex;
@@ -157,7 +157,7 @@ export default function RoomItemComponent(props: any) {
           <RoomNameBox>
             <IndexBox>{index + 1}</IndexBox>
             <RoomName>
-              <Title>{roomItem.locationName}</Title>
+              <Title>{roomItem.locationName.substring(0, 8)}</Title>
               <Subtitle>{`/${roomItem.locationNameEng}`}</Subtitle>
             </RoomName>
           </RoomNameBox>
