@@ -4,7 +4,7 @@ import ListComponent from "../components/home/listComponent";
 import { useState } from "react";
 import react, { useEffect } from "react";
 import axios from "axios";
-import DetailComponent from "../components/home/detailComponent";
+import DetailComponent from "../components/detail/detailComponent";
 import CustomButton from "../components/common/customButton";
 import {
   FlexBox,
@@ -125,15 +125,19 @@ export default function Detail(props: any) {
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
-  const fetchData = async () => {
-    const response: any = await API.get("receipt/detail/12");
-    console.log(response.data.receiptDetail);
-    setDetailShow(response.data.receiptDetail);
-  };
+  // const fetchData = async () => {
+  //   const response: any = await API.get("receipt/detail/12");
+  //   if (response.status === 200) {
+  //     console.log(response.data.receiptDetail);
+  //     setDetailShow(response.data.receiptDetail);
+  //   } else {
+  //     console.log("에러");
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <>
@@ -153,7 +157,7 @@ export default function Detail(props: any) {
           <ContentBox>
             {currentTab === 0 ? (
               <DetialTabBox>
-                <DetailComponent detailShow={detailShow}></DetailComponent>
+                <DetailComponent></DetailComponent>
               </DetialTabBox>
             ) : null}
             {currentTab === 1 ? (
