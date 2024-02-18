@@ -106,26 +106,12 @@ const InputNumber = styled.p`
   width: 70%;
 `;
 
-export default function ProductComponent() {
-  const [roomDataList, setRoomDataList] = useState([]);
+export default function ProductComponent(props: any) {
+  const { currentProductList, setCurrentProductList } = props;
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [totalCBM, setTotalCBM] = useState<number>(0);
   const [selectedTab, setSelectedTab] = useState<number>(0);
-
-  const getProductList = async () => {
-    const response = await API.get("receipt/default/menu");
-    if (response.status === 200) {
-      console.log(response.data.locationData[0]);
-      setRoomDataList(response.data.locationData);
-    } else {
-      console.log("물품 정보 데이터를 불러오지 못했습니다.");
-    }
-  };
-
-  useEffect(() => {
-    getProductList();
-  }, []);
 
   return (
     <>
@@ -164,7 +150,7 @@ export default function ProductComponent() {
           </CBMBox>
         </TotalBox>
         <RoomListBox>
-          {roomDataList.map((item, index) => {
+          {currentProductList.map((item: any, index: number) => {
             return (
               <RoomItemComponent
                 key={index + 1}
@@ -173,6 +159,7 @@ export default function ProductComponent() {
                 roomItem={item}
                 selectedTab={selectedTab}
                 setSelectedTab={setSelectedTab}
+                setCurrentProductList={setCurrentProductList}
               ></RoomItemComponent>
             );
           })}

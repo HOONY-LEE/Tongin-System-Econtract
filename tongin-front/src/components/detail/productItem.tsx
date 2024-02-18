@@ -60,7 +60,7 @@ const Subtitle = styled.p`
 `;
 
 export default function ProductItem(props: any) {
-  const { item } = props;
+  const { item, setCurrentProductList, roomId, articleId } = props;
 
   return (
     <ProductItemBox key={item.sortingNumber}>
@@ -72,7 +72,14 @@ export default function ProductItem(props: any) {
         <QuantityComponent></QuantityComponent>
       </QuantityBox>
       <CBMBox>
-        <QuantityInputComponent></QuantityInputComponent>
+        <QuantityInputComponent
+          setCurrentProductList={setCurrentProductList}
+          quantity={item.article.quantity}
+          articleName={item.article.articleName}
+          unit={"CBM"}
+          roomId={roomId}
+          articleId={articleId}
+        ></QuantityInputComponent>
       </CBMBox>
       <HandleBox>
         <QuantityInputComponent></QuantityInputComponent>
