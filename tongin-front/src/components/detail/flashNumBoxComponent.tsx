@@ -28,7 +28,7 @@ const flash = keyframes`
 `;
 
 // NumBox 컴포넌트에 플래시 효과 적용하는 스타일
-const FlashNumBox = styled.div<{ isFlash?: boolean }>`
+const FlashNumBox = styled.div<{ $isFlash?: boolean }>`
   width: 14vw;
   height: 100%;
   border: 0.2vw solid #b8b8b8;
@@ -43,7 +43,7 @@ const FlashNumBox = styled.div<{ isFlash?: boolean }>`
 
   /* 플래시 효과 적용 */
   ${(props) =>
-    props.isFlash &&
+    props.$isFlash &&
     css`
       /* 애니메이션 스타일 추가 */
       animation: ${flash} 0.3s ease-in-out;
@@ -71,7 +71,7 @@ export default function FlashNumBoxComponent(props: any) {
 
   return (
     <>
-      <FlashNumBox onClick={onClickHandle} isFlash={isFlash}>
+      <FlashNumBox onClick={onClickHandle} $isFlash={isFlash}>
         {number}
       </FlashNumBox>
     </>

@@ -155,17 +155,43 @@ const ColBox = styled.div`
 `;
 
 const CalculatorComponent = (props: any) => {
-  const { onClose, inputValue, setInputValue } = props;
+  const {
+    onClose,
+    inputValue,
+    setInputValue,
+    title,
+    unit,
+    setCurrentProductList,
+    roomId,
+    articleId,
+  } = props;
   const [tmpValue, setTmpValue] = useState(inputValue);
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
 
   const onClickOkHandle = () => {
     if (validate) {
-      if (tmpValue.slice(-1) === ".") {
-        setInputValue(tmpValue.slice(0, -1));
+      let result = "";
+      if (tmpValue.toString().slice(-1) === ".") {
+        result = tmpValue.toString().slice(0, -1);
+        setInputValue(result);
+        setCurrentProductList((prev: any) => {
+          const updatedList = [...prev];
+          updatedList[roomId].ArticleDefaultLocation[
+            articleId
+          ].article.quantity = Number(result).toString().slice(0, -1);
+          return updatedList;
+        });
       } else {
-        setInputValue(tmpValue.toString());
+        result = tmpValue.toString();
+        setInputValue(result);
+        setCurrentProductList((prev: any) => {
+          const updatedList = [...prev];
+          updatedList[roomId].ArticleDefaultLocation[
+            articleId
+          ].article.quantity = Number(result);
+          return updatedList;
+        });
       }
       onClose();
     }
@@ -193,12 +219,11 @@ const CalculatorComponent = (props: any) => {
       >
         <Wrapper>
           <TopArea>
-            <Title>{`[ CBM 입력창 ]`}</Title>
-            <CloseIcon onClick={onClose}>[닫기]</CloseIcon>
+            <Title>{title}</Title>
           </TopArea>
           <ShowArea>
             <NumberInput>{tmpValue}</NumberInput>
-            <UnitText>CBM</UnitText>
+            <UnitText>{unit}</UnitText>
           </ShowArea>
           {!validate && <ErrorArea>{error}</ErrorArea>}
           <ButtonArea>

@@ -16,6 +16,7 @@ import {
 
 import API from "../API/API";
 import ProductComponent from "../components/detail/productComponent";
+import { sampleProductDataList } from "../components/common/sampleData";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -111,9 +112,12 @@ const ContractTabBox = styled.div`
   /* outline: 1px solid green; */
 `;
 
-export default function Detail(props: any) {
+export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
-  const [detailData, setDetailData] = useState<any>([]);
+  const [detailData, setDetailData] = useState<any[]>([]);
+  const [roomDataList, setRoomDataList] = useState<any[]>([]);
+  const [currentProductList, setCurrentProductList] = useState<any[]>([]);
+
   const menuArr = [
     { name: "상세정보", content: "견적리스트 영역" },
     { name: "물품정보", content: "미계약 리스트 영역" },
@@ -133,10 +137,29 @@ export default function Detail(props: any) {
       console.log("에러");
     }
   };
+  const getProductList = async () => {
+    setRoomDataList(sampleProductDataList);
+
+    // API 변경후 다시 적용
+    // const response = await API.get("receipt/default/menu");
+    // if (response.status === 200) {
+    //   const result = response.data.locationData;
+    //   console.log(result);
+
+    //   setRoomDataList(result);
+    // } else {
+    //   console.log("물품 정보 데이터를 불러오지 못했습니다.");
+    // }
+  };
 
   useEffect(() => {
     fetchData();
+    getProductList();
   }, []);
+
+  useEffect(() => {
+    setCurrentProductList(roomDataList);
+  }, [roomDataList]);
 
   return (
     <>
@@ -164,7 +187,10 @@ export default function Detail(props: any) {
             ) : null}
             {currentTab === 1 ? (
               <ProductTabBox>
-                <ProductComponent></ProductComponent>
+                <ProductComponent
+                  currentProductList={currentProductList}
+                  setCurrentProductList={setCurrentProductList}
+                ></ProductComponent>
               </ProductTabBox>
             ) : null}
             {currentTab === 2 ? (

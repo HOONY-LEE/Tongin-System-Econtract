@@ -32,8 +32,17 @@ const InputText = styled.p`
 `;
 
 export default function QuantityInputComponent(props: any) {
+  const {
+    articleName,
+    unit,
+    quantity,
+    setCurrentProductList,
+    roomId,
+    articleId,
+  } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState("0");
+  const [inputValue, setInputValue] = useState<string>(quantity);
+
   // 모달 열기 핸들러
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -43,6 +52,12 @@ export default function QuantityInputComponent(props: any) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  // setCurrentProductList((prev: any) => {
+  //   const updatedList = [...prev];
+  //   updatedList[0].ArticleDefaultLocation[0].article.quantity = inputValue;
+  //   return updatedList;
+  // });
 
   return (
     <>
@@ -59,9 +74,14 @@ export default function QuantityInputComponent(props: any) {
       </Wrapper>
       {isModalOpen && (
         <CalculatorComponent
+          title={`[${articleName}] CBM 입력창`}
+          unit={unit}
           onClose={handleCloseModal}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          setCurrentProductList={setCurrentProductList}
+          roomId={roomId}
+          articleId={articleId}
         />
       )}
     </>

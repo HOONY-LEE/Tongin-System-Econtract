@@ -191,20 +191,66 @@ const OpenedBox = styled.div`
   justify-content: end;
 `;
 
+const TitleBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: 94%;
+  height: 3vw;
+  margin-top: 2vw;
+  font-size: 1.6vw;
+  font-weight: 500;
+`;
+
+const NameBox = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 32vw;
+  height: 100%;
+  padding-left: 2vw;
+`;
+
+const QuantityBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  height: 100%;
+`;
+const CBMBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 19vw;
+  height: 100%;
+`;
+const MethodBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 11vw;
+  height: 100%;
+`;
 const ProductListBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 94%;
   height: 95%;
-  margin-top: 2vw;
+  margin-top: 1vw;
   margin-bottom: 2vw;
 `;
 
 export default function RoomItemComponent(props: any) {
-  const { discardCBM, roomItem, index, selectedTab, setSelectedTab } = props;
+  const {
+    discardCBM,
+    roomItem,
+    index,
+    selectedTab,
+    setSelectedTab,
+    setCurrentProductList,
+  } = props;
   const [isOpened, setIsOpened] = useState<boolean>(false);
-
   const handleOnClick = (index: number) => {
     if (!isOpened) {
       setSelectedTab(index);
@@ -260,9 +306,23 @@ export default function RoomItemComponent(props: any) {
       </RoomItemBox>
       {isOpened ? (
         <OpenedBox>
+          <TitleBox>
+            <NameBox>물품명</NameBox>
+            <QuantityBox>수량</QuantityBox>
+            <CBMBox>부피(CBM)</CBMBox>
+            <MethodBox>처리방법</MethodBox>
+          </TitleBox>
           <ProductListBox>
-            {roomItem.ArticleDefaultLocation.map((item: any, index: number) => {
-              return <ProductItem item={item} key={index}></ProductItem>;
+            {roomItem.ArticleDefaultLocation.map((item: any, id: number) => {
+              return (
+                <ProductItem
+                  key={index - 1}
+                  item={item}
+                  articleId={id}
+                  roomId={index - 1}
+                  setCurrentProductList={setCurrentProductList}
+                ></ProductItem>
+              );
             })}
           </ProductListBox>
           <SliderCloseBox onClick={sliderClose}>
