@@ -18,7 +18,7 @@ const TotalBox = styled.div`
   align-items: center;
   background-color: white;
   width: 100%;
-  height: 10vw;
+  height: 8vw;
   border-bottom-left-radius: 0.6vw;
   border-bottom-right-radius: 0.6vw;
   box-shadow: 1px 1px 3vw 1vw #dddddd35;
@@ -54,7 +54,7 @@ const CBMBox = styled.div`
 `;
 
 const Title = styled.p`
-  font-size: 3vw;
+  font-size: 2.4vw;
   font-weight: 600;
   height: 4vw;
   display: flex;
@@ -111,6 +111,7 @@ export default function ProductComponent() {
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [totalCBM, setTotalCBM] = useState<number>(0);
+  const [selectedTab, setSelectedTab] = useState<number>(0);
 
   const getProductList = async () => {
     const response = await API.get("receipt/default/menu");
@@ -165,14 +166,14 @@ export default function ProductComponent() {
         <RoomListBox>
           {roomDataList.map((item, index) => {
             return (
-              <>
-                <RoomItemComponent
-                  key={index}
-                  index={index}
-                  discardCBM={discardCBM}
-                  roomItem={item}
-                ></RoomItemComponent>
-              </>
+              <RoomItemComponent
+                key={index + 1}
+                index={index + 1}
+                discardCBM={discardCBM}
+                roomItem={item}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              ></RoomItemComponent>
             );
           })}
         </RoomListBox>
