@@ -1,18 +1,32 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Image } from "../common/image";
+import { useEffect, useState } from "react";
+import ProductItem from "./productItem";
 
-const RoomItemBox = styled.div`
+const RoomItemBox = styled.div<{
+  $isOpened?: boolean;
+  selectedTab?: number;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
   width: 100%;
   height: 8vw;
-  border-radius: 0.8vw;
+  border-top-right-radius: 0.8vw;
+  border-top-left-radius: 0.8vw;
   background-color: white;
-  box-shadow: 1px 1px 3vw 1vw #dddddd35;
   margin-top: 2vw;
+  box-shadow: 4px 4px 3vw 2vw #dddddd11;
   cursor: pointer;
+
+  // 슬라이더가 열렸을 때 스타일
+  ${(props) =>
+    props.$isOpened &&
+    css`
+      border: 0.2vw solid #ff7f3b;
+      border-bottom: none;
+    `}
 `;
 
 const RoomInfoBox = styled.div`
@@ -45,31 +59,47 @@ const SumBox = styled.div`
 const SliderBox = styled.div`
   display: flex;
   align-items: center;
-  width: 28vw;
-  height: 2.3vw;
-  overflow: hidden;
-  /* outline: 1px dashed green; */
+  justify-content: center;
+  width: 100%;
+  height: 2vw;
+  background-color: white;
+  border-bottom-right-radius: 0.8vw;
+  border-bottom-left-radius: 0.8vw;
+  box-shadow: 4px 4px 3vw 2vw #dddddd11;
+`;
+
+const SliderCloseBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21.8vw;
+  height: 2vw;
+  /* background-color: white; */
+  border-bottom: 0.8vw solid #ff7f3b;
+  /* border-bottom-right-radius: 0.8vw; */
+  /* border-bottom-left-radius: 0.8vw; */
+  /* box-shadow: 4px 4px 3vw 2vw #dddddd11; */
 `;
 
 const IndexBox = styled.div`
-  width: 4vw;
-  height: 4vw;
+  width: 3vw;
+  height: 3vw;
   border-radius: 100%;
   background-color: #ff7f3b;
-  margin-top: 1vw;
+  margin-top: 2vw;
   margin-left: 2vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.4vw;
+  font-size: 1.4vw;
   font-weight: 500;
   color: white;
 `;
 
-const RoomName = styled.p`
+const RoomName = styled.div`
   width: 24vw;
   height: 4vw;
-  margin-top: 1vw;
+  margin-top: 2vw;
   margin-left: 2vw;
   display: flex;
 `;
@@ -147,15 +177,66 @@ const InputNumber = styled.p`
   width: 70%;
 `;
 
+const OpenedBox = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 0.2vw solid #ff7f3b;
+  border-top: 0.1vw solid gray;
+  border-bottom-left-radius: 1vw;
+  border-bottom-right-radius: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+`;
+
+const ProductListBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 94%;
+  height: 95%;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
+`;
+
 export default function RoomItemComponent(props: any) {
-  const { discardCBM, roomItem, index } = props;
+  const { discardCBM, roomItem, index, selectedTab, setSelectedTab } = props;
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+
+  const handleOnClick = (index: number) => {
+    if (!isOpened) {
+      setSelectedTab(index);
+    } else {
+      setSelectedTab(0);
+    }
+  };
+
+  const sliderClose = () => {
+    setIsOpened(false);
+    setSelectedTab(0);
+  };
+
+  useEffect(() => {
+    if (selectedTab === index) {
+      setIsOpened(true);
+    } else {
+      setIsOpened(false);
+    }
+  }, [selectedTab]);
 
   return (
     <>
-      <RoomItemBox>
+      <RoomItemBox
+        onClick={() => {
+          handleOnClick(index);
+        }}
+        $isOpened={isOpened}
+      >
         <RoomInfoBox>
           <RoomNameBox>
-            <IndexBox>{index + 1}</IndexBox>
+            <IndexBox>{index}</IndexBox>
             <RoomName>
               <Title>{roomItem.locationName.substring(0, 8)}</Title>
               <Subtitle>{`/${roomItem.locationNameEng}`}</Subtitle>
@@ -176,14 +257,35 @@ export default function RoomItemComponent(props: any) {
             </InputArea>
           </SumBox>
         </RoomInfoBox>
-        <SliderBox>
+      </RoomItemBox>
+      {isOpened ? (
+        <OpenedBox>
+          <ProductListBox>
+            {roomItem.ArticleDefaultLocation.map((item: any, index: number) => {
+              return <ProductItem item={item} key={index}></ProductItem>;
+            })}
+          </ProductListBox>
+          <SliderCloseBox onClick={sliderClose}>
+            <Image
+              src={"/img/slider_up_icon.png"}
+              width={"26vw"}
+              height={"4vw"}
+            ></Image>
+          </SliderCloseBox>
+        </OpenedBox>
+      ) : (
+        <SliderBox
+          onClick={() => {
+            handleOnClick(index);
+          }}
+        >
           <Image
             src={"/img/slider_down_icon.png"}
-            width={"100%"}
-            height={"4.3vw"}
+            width={"26vw"}
+            height={"4vw"}
           ></Image>
         </SliderBox>
-      </RoomItemBox>
+      )}
     </>
   );
 }

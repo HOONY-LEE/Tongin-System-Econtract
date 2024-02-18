@@ -19,7 +19,7 @@ const InputBox = styled.div<{
   width?: string;
   height?: string;
   $backgroundColor?: string;
-  isFocused?: boolean; // 포커스 여부를 받을 수 있는 속성 추가
+  $isFocused?: boolean; // 타입을 명시적으로 지정
 }>`
   display: flex;
   justify-content: center;
@@ -33,7 +33,7 @@ const InputBox = styled.div<{
 
   /* 포커스 되었을 때의 스타일 */
   ${(props) =>
-    props.isFocused &&
+    props.$isFocused &&
     css`
       outline: 0.2vw solid #ff7f3b;
     `}
@@ -95,7 +95,7 @@ export const InputComponent = (props: any) => {
   } = props;
 
   // 포커스 여부를 상태로 관리
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   return (
     <>
@@ -105,7 +105,7 @@ export const InputComponent = (props: any) => {
           width={width}
           height={height}
           $backgroundColor={$backgroundColor}
-          isFocused={isFocused}
+          $isFocused={isFocused}
         >
           {inputType === "text" ? (
             <InputText
