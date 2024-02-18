@@ -9,7 +9,10 @@ import CustomButton from "../common/customButton";
 import DaumPostcode from "react-daum-postcode";
 import PostModalComponent from "./postModalComponent";
 import ModalComponent from "../common/modalComponent";
-
+import DayPicker from "react-day-picker";
+// import "react-day-picker/lib/style.css";
+import DateModalComponent from "./dateModalComponent";
+import { format } from "date-fns";
 const ContentTop = styled.div`
   display: flex;
   justify-content: space-between;
@@ -321,11 +324,20 @@ export default function DetailEditComponent(props: any) {
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
   const [currentBtn, setCurrentBtn] = useState(0);
-  const [postModal, setPostModal] = useState(false);
   const [addressType, setAddressType] = useState();
+  const [dateType, setDateType] = useState();
+  const [dateData, setDateData] = useState<any>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [movingDate, setMovingDate] = useState(new Date(detailData.movingDate));
   const [prevAddressDetail, setPrevAddressDetail] = useState(
     detailData.preAddressDetail
-  );
+  ); //전 상세주소value
+
+  const [afterAddressDetail, setAfterAddressDetail] = useState(
+    detailData.afterAddressDetail
+  ); //후 상세주소value preAddress
 
   const BtnArr = [
     { name: "가정이사" },
@@ -334,17 +346,17 @@ export default function DetailEditComponent(props: any) {
     { name: "해외이사" },
     { name: "미니이사" },
   ];
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // 모달 열기 핸들러
-  const handleOpenModal = (type: any) => {
+  ////////////////////주소 모달 시작////////////////////
+
+  //주소 모달 열기 핸들러
+  const postHandleOpenModal = (type: any) => {
     setAddressType(type);
     setIsModalOpen(true);
   };
 
-  // 모달 닫기 핸들러
-  const handleCloseModal = () => {
+  //주소 모달 닫기 핸들러
+  const postHandleCloseModal = () => {
     setIsModalOpen(false);
   };
 
@@ -362,41 +374,82 @@ export default function DetailEditComponent(props: any) {
     }
   };
 
-  // 외부 클릭 시 모달 닫기 핸들러
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (
-      wrapperRef.current &&
-      !wrapperRef.current.contains(event.target as Node)
-    ) {
-      setIsModalOpen(false);
-    }
-  };
-
+  //전 상세주소
   const onChangePrevAddressDetail = (e: any) => {
     console.log(e.target.value);
     setPrevAddressDetail(e.target.value);
   };
+  //후 상세주소
+  const onChangAfterAddressDetail = (e: any) => {
+    console.log(e.target.value);
+    setAfterAddressDetail(e.target.value);
+  };
 
-  // 컴포넌트가 마운트될 때와 모달이 열릴 때 외부 클릭 이벤트 리스너 추가
-  useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
+  ////////////////////날짜 모달 시작////////////////////
+  // 날짜 모달 열기 핸들러
+  const dateHandleOpenModal = (type: any) => {
+    setIsDateModalOpen(true);
+    setDateType(type);
+  };
+
+  // // 날짜 모달 닫기 핸들러
+  const dateHandleCloseModal = () => {
+    setIsDateModalOpen(false);
+  };
+
+  const dateValueInput = (data: any) => {
+    console.log("dateValueInput", data);
+    const myData = new Date(data);
+    // setDateData(data);
+    console.log(format(myData, "y-MM-dd"));
+    if (!Number.isNaN(new Date(myData).getTime())) {
+      if (dateType === "reception") {
+        detailData.receptionDate = format(myData, "y-MM-dd");
+      } else if (dateType === "moving") {
+        detailData.movingDate = format(myData, "y-MM-dd");
+      } else if (dateType === "contract") {
+        detailData.contractDate = format(myData, "y-MM-dd");
+      } else if (dateType === "consultation") {
+        detailData.consultationDate = format(myData, "y-MM-dd");
+      } else {
+        return "";
+      }
     } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      return "";
     }
+  };
+  // 에러방지를 위한 onChangeHandle
+  const onChangeHandle = () => {};
 
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isModalOpen]);
-
+  const deteValueDelete = () => {
+    if (dateType === "reception") {
+      detailData.receptionDate = "";
+    } else if (dateType === "moving") {
+      detailData.movingDate = "";
+    } else if (dateType === "contract") {
+      detailData.contractDate = "";
+    } else if (dateType === "consultation") {
+      detailData.consultationDate = "";
+    } else {
+      return "";
+    }
+    dateHandleCloseModal();
+  };
+  const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
   return (
     <>
       {isModalOpen && (
         <PostModalComponent
-          onClose={handleCloseModal}
+          onClose={postHandleCloseModal}
           postValueInput={postValueInput}
           addressType={addressType}
+        />
+      )}
+      {isDateModalOpen && (
+        <DateModalComponent
+          dateValueInput={dateValueInput}
+          onClose={dateHandleCloseModal}
+          deteValueDelete={deteValueDelete}
         />
       )}
       <ContentTop>
@@ -408,6 +461,7 @@ export default function DetailEditComponent(props: any) {
                 <InputBox
                   placeholder="아이디를 입력해 주세요"
                   value={detailData?.name}
+                  onChange={onChangeHandle}
                 ></InputBox>
               </InfoLfEditContent>
             </InfoLfBox>
@@ -423,6 +477,7 @@ export default function DetailEditComponent(props: any) {
                 <InputBox
                   placeholder="전화번호를 입력해 주세요"
                   value={detailData?.contact}
+                  onChange={onChangeHandle}
                 ></InputBox>
               </InfoLfEditContent>
             </InfoLfBox>
@@ -467,7 +522,7 @@ export default function DetailEditComponent(props: any) {
           <UserAddressTitle>전 주소</UserAddressTitle>
           <UserAddressEditInput
             onClick={() => {
-              handleOpenModal("prev");
+              postHandleOpenModal("prev");
             }}
           >
             <InputBox
@@ -489,37 +544,94 @@ export default function DetailEditComponent(props: any) {
           <UserAddressEditInput>
             <InputBox
               onClick={() => {
-                handleOpenModal("after");
+                postHandleOpenModal("after");
               }}
               placeholder="후 주소를 입력해 주세요"
               value={detailData?.afterAddress}
+              onChange={onChangeHandle}
             ></InputBox>
           </UserAddressEditInput>
           <UserAddressEditInput>
             <InputBox
               placeholder="후 상세주소를 입력해 주세요"
-              value={detailData?.afterAddressDetail}
+              defaultValue={afterAddressDetail}
+              onChange={onChangAfterAddressDetail}
             ></InputBox>
           </UserAddressEditInput>
         </UserAddressBox>
         <MoveDateContainer>
           <MoveDateBox>
             <MoveDateTitle>접수일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput
+              onClick={() => {
+                dateHandleOpenModal("reception");
+              }}
+            >
+              <InputBox
+                readOnly
+                placeholder="--"
+                value={(detailData?.receptionDate).replace(
+                  formattedDate,
+                  "$1-$2-$3"
+                )}
+              ></InputBox>
+              {/* <InputBox
+                value={format(movingDate, "y-MM-dd").toString()}
+              ></InputBox> */}
+            </MoveDateInput>
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>계약일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput
+              onClick={() => {
+                dateHandleOpenModal("contract");
+              }}
+            >
+              <InputBox
+                placeholder="--"
+                readOnly
+                value={(detailData?.contractDate).replace(
+                  formattedDate,
+                  "$1-$2-$3"
+                )}
+              ></InputBox>
+            </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
         <MoveDateContainer>
           <MoveDateBox>
             <MoveDateTitle>상담일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput
+              onClick={() => {
+                dateHandleOpenModal("consultation");
+              }}
+            >
+              <InputBox
+                placeholder="--"
+                readOnly
+                value={(detailData?.consultationDate).replace(
+                  formattedDate,
+                  "$1-$2-$3"
+                )}
+              ></InputBox>
+            </MoveDateInput>
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>이사일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput
+              onClick={() => {
+                dateHandleOpenModal("moving");
+              }}
+            >
+              <InputBox
+                placeholder="--"
+                readOnly
+                value={(detailData?.movingDate).replace(
+                  formattedDate,
+                  "$1-$2-$3"
+                )}
+              ></InputBox>
+            </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
         <MoveBtnContainer>

@@ -14,6 +14,7 @@ import ProtectedRouteAdmin from "./components/protected-route-admin";
 import AdminLayout from "./components/adminLayout";
 import "./static/fonts/font.css";
 import Detail from "./routes/detail";
+import "react-day-picker/dist/style.css";
 
 const router = createBrowserRouter([
   {
