@@ -12,6 +12,7 @@ import ModalComponent from "../common/modalComponent";
 import DayPicker from "react-day-picker";
 // import "react-day-picker/lib/style.css";
 import DateModalComponent from "./dateModalComponent";
+import DetailEditSelectBoxComponent from "./detailEditSelectBoxComponent";
 import { format } from "date-fns";
 const ContentTop = styled.div`
   display: flex;
@@ -94,6 +95,7 @@ const InfoLfEditContent = styled.div`
   outline: 0.2vw solid #dbdbdb;
   border-radius: 0.5vw;
   justify-content: start;
+  padding-left: 2vw;
 `;
 const InfoRhBox = styled.div`
   height: 10vw;
@@ -238,7 +240,7 @@ const MoveDateInput = styled.div`
   width: 100%;
   height: 5vw;
   display: flex;
-  font-size: 2vw;
+  font-size: 1.8vw;
   font-weight: 500;
   flex-direction: column;
   align-items: center;
@@ -270,18 +272,46 @@ const MoveBtnTitle = styled.div`
   justify-content: start;
   /* outline: 0.2vw solid red; */
 `;
-const MoveBtn = styled.div`
+const MoveBtn = styled.li`
   display: flex;
   align-items: center;
   font-size: 1.8vw;
   font-weight: 600;
-  color: #ffffff;
-  width: 15vw;
-  height: 4vw;
-  background-color: #ff7f3b;
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
+  /* width: 15vw;
+  height: 4vw; */
+  width: 100%;
+
   border-radius: 0.6vw;
   /* margin: 1vw 0 1vw 0; */
+  .focused {
+    background-color: #ff7f3b;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 1.8vw;
+    font-weight: 600;
+
+    width: 15vw;
+    height: 5vw;
+
+    justify-content: center;
+    border-radius: 0.6vw;
+  }
+  .desabled {
+    display: flex;
+    align-items: center;
+    font-size: 1.8vw;
+    font-weight: 600;
+
+    width: 15vw;
+    height: 5vw;
+
+    justify-content: center;
+    border-radius: 0.6vw;
+    background-color: #f4f4f4;
+  }
 `;
 const MoveBtnDesabled = styled.div`
   width: 15vw;
@@ -302,7 +332,7 @@ const InputBox = styled.input.attrs({})<{}>`
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  margin-left: 1vw;
+  /* margin-left: 1vw; */
   font-size: 1.8vw;
   font-weight: 500;
   outline: none;
@@ -338,7 +368,9 @@ export default function DetailEditComponent(props: any) {
   const [afterAddressDetail, setAfterAddressDetail] = useState(
     detailData.afterAddressDetail
   ); //후 상세주소value preAddress
-
+  const [userName, setUserName] = useState(detailData.name);
+  const [userContact, setUserContact] = useState(detailData.contact);
+  const [currentTab, setCurrentTab] = useState(0); //btn
   const BtnArr = [
     { name: "가정이사" },
     { name: "보관이사" },
@@ -347,6 +379,39 @@ export default function DetailEditComponent(props: any) {
     { name: "미니이사" },
   ];
 
+  const selectMenuHandler = (index: number) => {
+    console.log(index);
+    setCurrentTab(index);
+  };
+
+  const onChangUserName = (e: any) => {
+    console.log(e.target.value);
+    setUserName(e.target.value);
+  };
+  const onChangUserContact = (e: any) => {
+    const regExp = /[^0-9]/g;
+    let formattedValue = e.target.value.replace(regExp, "").substring(0, 13);
+
+    if (formattedValue.length === 9) {
+      formattedValue = formattedValue.replace(
+        /^(\d{2})(\d{3})(\d{4})$/,
+        "$1-$2-$3"
+      );
+    } else if (formattedValue.length === 10) {
+      formattedValue = formattedValue.replace(
+        /^(\d{3})(\d{3})(\d{4})$/,
+        "$1-$2-$3"
+      );
+    } else if (formattedValue.length === 11) {
+      formattedValue = formattedValue.replace(
+        /^(\d{3})(\d{4})(\d{4})$/,
+        "$1-$2-$3"
+      );
+    }
+
+    e.target.value = formattedValue;
+    setUserContact(formattedValue);
+  };
   ////////////////////주소 모달 시작////////////////////
 
   //주소 모달 열기 핸들러
@@ -459,9 +524,9 @@ export default function DetailEditComponent(props: any) {
               <InfoLfTitle>고객명</InfoLfTitle>
               <InfoLfEditContent>
                 <InputBox
-                  placeholder="아이디를 입력해 주세요"
-                  value={detailData?.name}
-                  onChange={onChangeHandle}
+                  placeholder="고객명을 입력해 주세요"
+                  defaultValue={userName}
+                  onChange={onChangUserName}
                 ></InputBox>
               </InfoLfEditContent>
             </InfoLfBox>
@@ -476,8 +541,8 @@ export default function DetailEditComponent(props: any) {
               <InfoLfEditContent>
                 <InputBox
                   placeholder="전화번호를 입력해 주세요"
-                  value={detailData?.contact}
-                  onChange={onChangeHandle}
+                  defaultValue={userContact}
+                  onChange={onChangUserContact}
                 ></InputBox>
               </InfoLfEditContent>
             </InfoLfBox>
@@ -500,11 +565,8 @@ export default function DetailEditComponent(props: any) {
 
               <InfoRhContent>
                 <UserStatus>
-                  <UserStatusColor
-                  // $bgColor={userStatusColor(detailData?.statusCode)}
-                  >
-                    {detailData?.status}
-                  </UserStatusColor>
+                  <DetailEditSelectBoxComponent />
+                  {/* {detailData?.status} */}
                 </UserStatus>
               </InfoRhContent>
             </InfoRhBox>
@@ -637,11 +699,17 @@ export default function DetailEditComponent(props: any) {
         <MoveBtnContainer>
           <MoveBtnTitle>이사종류</MoveBtnTitle>
           <MoveBtnBox>
-            <MoveBtn>가정이사</MoveBtn>
-            <MoveBtnDesabled>보관이사</MoveBtnDesabled>
-            <MoveBtnDesabled>기업이사</MoveBtnDesabled>
-            <MoveBtnDesabled>해외이사</MoveBtnDesabled>
-            <MoveBtnDesabled>미니이사</MoveBtnDesabled>
+            <MoveBtn>
+              {BtnArr.map((item, index) => (
+                <li
+                  key={index}
+                  className={index === currentTab ? "focused" : "desabled"}
+                  onClick={() => selectMenuHandler(index)}
+                >
+                  {item.name}
+                </li>
+              ))}
+            </MoveBtn>
           </MoveBtnBox>
         </MoveBtnContainer>
         <BtnBox>

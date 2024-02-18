@@ -6,6 +6,7 @@ import react, { useEffect } from "react";
 import TabComponent from "../home/tabComponent";
 import axios from "axios";
 import CustomButton from "../common/customButton";
+import SelectBoxComponent from "../common/selectBoxComponent";
 
 const ContentTop = styled.div`
   display: flex;
@@ -269,6 +270,7 @@ export default function DetailViewComponent(props: any) {
 
   const [currentBtn, setCurrentBtn] = useState(0);
   const [detailUserData, setDetailUserData] = useState<any[]>([]);
+
   const BtnArr = [
     { name: "가정이사" },
     { name: "보관이사" },
@@ -303,7 +305,7 @@ export default function DetailViewComponent(props: any) {
         return "#ff2aa3";
     }
   };
-
+  const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
   return (
     <>
       <ContentTop>
@@ -373,21 +375,29 @@ export default function DetailViewComponent(props: any) {
         <MoveDateContainer>
           <MoveDateBox>
             <MoveDateTitle>접수일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput>
+              {detailData?.receptionDate?.replace(formattedDate, "$1-$2-$3")}
+            </MoveDateInput>
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>계약일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput>
+              {detailData?.contractDate?.replace(formattedDate, "$1-$2-$3")}
+            </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
         <MoveDateContainer>
           <MoveDateBox>
             <MoveDateTitle>상담일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput>
+              {detailData?.consultationDate?.replace(formattedDate, "$1-$2-$3")}
+            </MoveDateInput>
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>이사일</MoveDateTitle>
-            <MoveDateInput>20000000</MoveDateInput>
+            <MoveDateInput>
+              {detailData?.movingDate?.replace(formattedDate, "$1-$2-$3")}
+            </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
         <MoveBtnContainer>
