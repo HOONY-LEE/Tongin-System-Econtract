@@ -25,8 +25,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 30vw;
-  height: 35vw;
+  width: 35vw;
+  height: 42vw;
   background-color: white;
   border-radius: 0.8vw;
 `;
@@ -35,7 +35,7 @@ const Today = styled.div`
 `;
 const BtnBox = styled.div`
   margin-bottom: 2vw;
-  width: 90%;
+  width: 70%;
   display: flex;
   justify-content: space-between;
   /* outline: 1px solid red; */
@@ -74,7 +74,7 @@ const DateModalComponent = (props: any) => {
 
         <BtnBox>
           <CustomButton
-            width={"48%"}
+            width={"12vw"}
             height={"3vw"}
             text={`날짜 삭제`}
             size={"1.8vw"}
@@ -85,7 +85,7 @@ const DateModalComponent = (props: any) => {
             onClick={deteValueDelete}
           ></CustomButton>
           <CustomButton
-            width={"48%"}
+            width={"12vw"}
             height={"3vw"}
             text={`확인`}
             size={"1.8vw"}
