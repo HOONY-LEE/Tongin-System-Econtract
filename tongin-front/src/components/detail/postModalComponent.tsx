@@ -16,8 +16,12 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
-  width: 50vw;
-  height: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 52vw;
+  height: 66vw;
   background-color: white;
   border-radius: 0.8vw;
 `;
@@ -36,11 +40,18 @@ const PostModalComponent = (props: any) => {
     // emphTextColor: "#ff7f3b",
     outlineColor: "#ff7f3b",
   };
+  const postCodeStyle = {
+    width: "50vw",
+    height: "60vw",
+  };
+
   return (
     <>
       <Backdrop /> {/* 모달이 열릴 때 배경을 어둡게 하는 역할을 합니다. */}
       <Wrapper>
+        <button onClick={onClose}>닫기</button>
         <DaumPostcode
+          style={postCodeStyle}
           theme={theme}
           onClose={onClose}
           onComplete={handleComplete}

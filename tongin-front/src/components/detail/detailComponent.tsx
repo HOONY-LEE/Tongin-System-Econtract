@@ -23,22 +23,22 @@ const ContentBox = styled.div`
 `;
 
 export default function DetailComponent(props: any) {
-  const [detailData, setDetailData] = useState<any>([]); //tab
+  const { detailData, setDetailData } = props;
   const [isDetailEdit, setIsDetailEdit] = useState(false);
 
-  const fetchData = async () => {
-    const response: any = await API.get("receipt/detail/12");
-    if (response.status === 200) {
-      console.log(response.data.receiptDetail);
-      setDetailData(response.data.receiptDetail);
-    } else {
-      console.log("에러");
-    }
-  };
+  // const fetchData = async () => {
+  //   const response: any = await API.get("receipt/detail/12");
+  //   if (response.status === 200) {
+  //     console.log(response.data.receiptDetail);
+  //     setDetailData(response.data.receiptDetail);
+  //   } else {
+  //     console.log("에러");
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const detailEditVisible = (mode: any) => {
     console.log("tlfgd");

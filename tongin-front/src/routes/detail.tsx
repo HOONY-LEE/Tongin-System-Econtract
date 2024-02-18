@@ -113,8 +113,7 @@ const ContractTabBox = styled.div`
 
 export default function Detail(props: any) {
   const [currentTab, setCurrentTab] = useState(0); //tab
-  const [detailShow, setDetailShow] = useState<any>([]); //tab
-
+  const [detailData, setDetailData] = useState<any>([]);
   const menuArr = [
     { name: "상세정보", content: "견적리스트 영역" },
     { name: "물품정보", content: "미계약 리스트 영역" },
@@ -125,19 +124,19 @@ export default function Detail(props: any) {
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
-  // const fetchData = async () => {
-  //   const response: any = await API.get("receipt/detail/12");
-  //   if (response.status === 200) {
-  //     console.log(response.data.receiptDetail);
-  //     setDetailShow(response.data.receiptDetail);
-  //   } else {
-  //     console.log("에러");
-  //   }
-  // };
+  const fetchData = async () => {
+    const response: any = await API.get("receipt/detail/12");
+    if (response.status === 200) {
+      console.log(response.data.receiptDetail);
+      setDetailData(response.data.receiptDetail);
+    } else {
+      console.log("에러");
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -157,7 +156,10 @@ export default function Detail(props: any) {
           <ContentBox>
             {currentTab === 0 ? (
               <DetialTabBox>
-                <DetailComponent></DetailComponent>
+                <DetailComponent
+                  detailData={detailData}
+                  setDetailData={setDetailData}
+                ></DetailComponent>
               </DetialTabBox>
             ) : null}
             {currentTab === 1 ? (
