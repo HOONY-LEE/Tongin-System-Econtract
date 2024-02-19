@@ -25,7 +25,7 @@ const SelectBox = styled.div<{
 const Label = styled.label`
   display: flex;
   justify-content: space-around;
-  font-size: 1.5vw;
+  font-size: 1.7vw;
   align-items: center;
   width: 88%;
   text-align: center;
@@ -53,7 +53,7 @@ const SelectOptions = styled.ul<{
   }
 `;
 const Option = styled.ul`
-  font-size: 1.5vw;
+  font-size: 1.7vw;
   padding: 1vw 0.5vw;
   height: 4vw;
 
@@ -63,20 +63,31 @@ const Option = styled.ul`
   }
 `;
 const MethodSelectBoxComponent = (props: any) => {
+  const { method, setCurrentProductList, roomId, articleId } = props;
+
   const data = [
-    { status: "운반", statusCode: 1 },
-    { status: "폐기", statusCode: 2 },
-    { status: "하역", statusCode: 3 },
-    { status: "경유", statusCode: 4 },
-    { status: "방치", statusCode: 5 },
-    { status: "기타", statusCode: 6 },
+    { status: "운반", statusCode: 0 },
+    { status: "폐기", statusCode: 1 },
+    { status: "하역", statusCode: 2 },
+    { status: "경유", statusCode: 3 },
+    { status: "방치", statusCode: 4 },
+    { status: "기타", statusCode: 5 },
   ];
 
-  const [currentValue, setCurrentValue] = useState<any>(data[0].status);
+  const [currentValue, setCurrentValue] = useState<string>(
+    data[method ? method : 0].status
+  );
   const [showOptions, setShowOptions] = useState(false);
+
   const handleOnChangeSelectValue = (e: any) => {
-    const { innerText } = e.target;
-    setCurrentValue(innerText);
+    const value = e.target.value;
+    setCurrentValue(data[value].status);
+    setCurrentProductList((prev: any) => {
+      const updatedList = [...prev];
+      updatedList[roomId].ArticleDefaultLocation[articleId].article.method =
+        value;
+      return updatedList;
+    });
   };
 
   return (

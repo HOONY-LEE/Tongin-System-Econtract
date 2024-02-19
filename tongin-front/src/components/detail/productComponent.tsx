@@ -18,7 +18,7 @@ const TotalBox = styled.div`
   align-items: center;
   background-color: white;
   width: 100%;
-  height: 8vw;
+  height: 9vw;
   border-bottom-left-radius: 0.6vw;
   border-bottom-right-radius: 0.6vw;
   box-shadow: 1px 1px 3vw 1vw #dddddd35;
@@ -70,8 +70,8 @@ const Subtitle = styled.p`
 `;
 
 const SubText = styled.p`
-  font-size: 1.2vw;
-  font-weight: 300;
+  font-size: 1.4vw;
+  font-weight: 400;
   height: 2vw;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@ const InputBox = styled.div`
   display: flex;
   justify-content: center;
   width: 8vw;
-  height: 80%;
+  height: 78%;
   background-color: #ff7f3b;
   border-radius: 0.4vw;
   margin-right: 1vw;
@@ -101,7 +101,7 @@ const InputNumber = styled.p`
   justify-content: end;
   align-items: center;
   color: white;
-  font-size: 3vw;
+  font-size: 2.6vw;
   font-weight: 400;
   width: 70%;
 `;
@@ -112,6 +112,36 @@ export default function ProductComponent(props: any) {
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [totalCBM, setTotalCBM] = useState<number>(0);
   const [selectedTab, setSelectedTab] = useState<number>(0);
+
+  const calculateTotalCBM = (currentProductList: any) => {
+    let movingSum = 0;
+    let discardSum = 0;
+    let totalSum = 0;
+
+    currentProductList.forEach((item: any) => {
+      const articleList = item.ArticleDefaultLocation;
+      articleList.forEach((article: any) => {
+        // 운반, 경유는 이사물량으로 합계
+        if (article.article.method == 0 || article.article.method == 3) {
+          movingSum += article.article.cbm;
+
+          // 폐기, 하역은 폐기물량으로 합계
+        } else if (article.article.method == 1 || article.article.method == 2) {
+          discardSum += article.article.cbm;
+        }
+        // 방치는 계산 안함
+      });
+    });
+    // 전체 물량 = 이사물량 + 폐기물량
+    totalSum = movingSum + discardSum;
+
+    setMovingCBM(movingSum);
+    setDiscardCBM(discardSum);
+    setTotalCBM(totalSum);
+  };
+  useEffect(() => {
+    calculateTotalCBM(currentProductList);
+  }, [currentProductList]);
 
   return (
     <>
