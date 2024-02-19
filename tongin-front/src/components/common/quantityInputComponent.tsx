@@ -18,7 +18,7 @@ const InputBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d9d9d9;
+  background-color: white;
   border-radius: 0.4vw;
 `;
 
@@ -52,12 +52,6 @@ export default function QuantityInputComponent(props: any) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-  // setCurrentProductList((prev: any) => {
-  //   const updatedList = [...prev];
-  //   updatedList[0].ArticleDefaultLocation[0].article.quantity = inputValue;
-  //   return updatedList;
-  // });
 
   return (
     <>
