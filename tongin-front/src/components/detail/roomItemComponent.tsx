@@ -24,7 +24,7 @@ const RoomItemBox = styled.div<{
   ${(props) =>
     props.$isOpened &&
     css`
-      border: 0.2vw solid #ff7f3b;
+      border: 0.3vw solid #ff7f3b;
       border-bottom: none;
     `}
 `;
@@ -52,8 +52,8 @@ const SumBox = styled.div`
   align-items: center;
   width: 32vw;
   height: 100%;
-  /* outline: 1px solid green; */
   padding-top: 1.8vw;
+  margin-right: 2vw;
 `;
 
 const SliderBox = styled.div`
@@ -107,11 +107,11 @@ const RoomName = styled.div`
 const InputCBMBox = styled.div`
   display: flex;
   justify-content: center;
-  width: 8vw;
-  height: 80%;
-  background-color: #dddddd;
-  border-radius: 0.8vw;
-  margin-right: 1vw;
+  width: 8.7vw;
+  height: 4.6vw;
+  background-color: #f4f4f4;
+  border-radius: 0.6vw;
+  margin-right: 0.8vw;
 `;
 
 const InputCBMNumber = styled.p`
@@ -119,8 +119,8 @@ const InputCBMNumber = styled.p`
   justify-content: end;
   align-items: center;
   color: black;
-  font-size: 2.4vw;
-  font-weight: 300;
+  font-size: 2.6vw;
+  font-weight: 500;
   width: 70%;
 `;
 
@@ -181,7 +181,7 @@ const OpenedBox = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
-  border: 0.2vw solid #ff7f3b;
+  border: 0.3vw solid #ff7f3b;
   border-top: 0.1vw solid gray;
   border-bottom-left-radius: 1vw;
   border-bottom-right-radius: 1vw;
@@ -243,14 +243,29 @@ const ProductListBox = styled.div`
 
 export default function RoomItemComponent(props: any) {
   const {
-    discardCBM,
     roomItem,
     index,
     selectedTab,
     setSelectedTab,
+    currentProductList,
     setCurrentProductList,
   } = props;
   const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [totalCBM, setTotalCBM] = useState(0);
+  const [totalNum, setTotalNum] = useState([
+    { id: 1, quantity: 3, cbm: 0 },
+    { id: 2, quantity: 4, cbm: 0 },
+    { id: 3, quantity: 0, cbm: 0 },
+    { id: 4, quantity: 0, cbm: 0 },
+    { id: 5, quantity: 0, cbm: 0 },
+    { id: 6, quantity: 0, cbm: 0 },
+    { id: 7, quantity: 0, cbm: 0 },
+    { id: 8, quantity: 0, cbm: 0 },
+    { id: 9, quantity: 5, cbm: 0 },
+    { id: 10, quantity: 0, cbm: 0 },
+  ]);
+
   const handleOnClick = (index: number) => {
     if (!isOpened) {
       setSelectedTab(index);
@@ -272,6 +287,24 @@ export default function RoomItemComponent(props: any) {
     }
   }, [selectedTab]);
 
+  const calculateTotals = (articleList: any) => {
+    let quantitySum = 0;
+    let cbmSum = 0;
+
+    articleList.forEach((item: any) => {
+      quantitySum += item.article.quantity;
+      cbmSum += item.article.cbm;
+    });
+
+    setTotalQuantity(quantitySum);
+    setTotalCBM(cbmSum);
+  };
+  useEffect(() => {
+    const articleList =
+      currentProductList[roomItem.id - 1].ArticleDefaultLocation;
+    calculateTotals(articleList);
+  }, [currentProductList]);
+
   return (
     <>
       <RoomItemBox
@@ -291,13 +324,13 @@ export default function RoomItemComponent(props: any) {
           <SumBox>
             <InputArea>
               <InputCBMBox>
-                <InputCBMNumber>{discardCBM}</InputCBMNumber>
+                <InputCBMNumber>{totalQuantity}</InputCBMNumber>
               </InputCBMBox>
               <SubText>개</SubText>
             </InputArea>
             <InputArea>
               <InputCBMBox>
-                <InputCBMNumber>{discardCBM}</InputCBMNumber>
+                <InputCBMNumber>{totalCBM}</InputCBMNumber>
               </InputCBMBox>
               <SubText>CBM</SubText>
             </InputArea>
@@ -316,11 +349,15 @@ export default function RoomItemComponent(props: any) {
             {roomItem.ArticleDefaultLocation.map((item: any, id: number) => {
               return (
                 <ProductItem
-                  key={index - 1}
+                  key={id}
                   item={item}
                   articleId={id}
                   roomId={index - 1}
                   setCurrentProductList={setCurrentProductList}
+                  totalQuantity={totalQuantity}
+                  totalCBM={totalCBM}
+                  setTotalQuantity={setTotalQuantity}
+                  setTotalCBM={setTotalCBM}
                 ></ProductItem>
               );
             })}

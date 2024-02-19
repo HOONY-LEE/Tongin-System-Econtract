@@ -171,25 +171,24 @@ const CalculatorComponent = (props: any) => {
 
   const onClickOkHandle = () => {
     if (validate) {
-      let result = "";
+      let result = 0;
       if (tmpValue.toString().slice(-1) === ".") {
-        result = tmpValue.toString().slice(0, -1);
+        result = Number(tmpValue.toString().slice(0, -1));
         setInputValue(result);
         setCurrentProductList((prev: any) => {
           const updatedList = [...prev];
-          updatedList[roomId].ArticleDefaultLocation[
-            articleId
-          ].article.quantity = Number(result).toString().slice(0, -1);
+          updatedList[roomId].ArticleDefaultLocation[articleId].article.cbm =
+            result;
           return updatedList;
         });
       } else {
-        result = tmpValue.toString();
+        result = Number(tmpValue.toString());
         setInputValue(result);
+        console.log(result);
         setCurrentProductList((prev: any) => {
           const updatedList = [...prev];
-          updatedList[roomId].ArticleDefaultLocation[
-            articleId
-          ].article.quantity = Number(result);
+          updatedList[roomId].ArticleDefaultLocation[articleId].article.cbm =
+            result;
           return updatedList;
         });
       }

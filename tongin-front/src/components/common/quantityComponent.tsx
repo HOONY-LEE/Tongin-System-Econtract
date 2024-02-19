@@ -33,7 +33,7 @@ const InputBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d9d9d9;
+  background-color: white;
   border-radius: 0.4vw;
 `;
 
@@ -56,24 +56,40 @@ const IncreaseBtn = styled.div`
   border-radius: 0.4vw;
 `;
 
-export default function QuantityComponent() {
+export default function QuantityComponent(props: any) {
+  const {
+    quantity,
+    setCurrentProductList,
+    articleId,
+    roomId,
+    totalQuantity,
+    totalCBM,
+    setTotalQuantity,
+    setTotalCBM,
+  } = props;
   const [isActivate, setIsActivate] = useState<boolean>(false);
-  const [quantity, setQuantity] = useState<number>(0);
+  const [inputData, setInputData] = useState<number>(quantity);
 
   const decreaseNum = () => {
     if (!isActivate) return;
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
+    if (inputData > 0) {
+      setInputData(inputData - 1);
     }
   };
 
   useEffect(() => {
-    if (quantity > 0) {
+    if (inputData > 0) {
       setIsActivate(true);
     } else {
       setIsActivate(false);
     }
-  }, [quantity]);
+    setCurrentProductList((prev: any) => {
+      const updatedList = [...prev];
+      updatedList[roomId].ArticleDefaultLocation[articleId].article.quantity =
+        inputData;
+      return updatedList;
+    });
+  }, [inputData]);
 
   return (
     <>
@@ -82,9 +98,9 @@ export default function QuantityComponent() {
           <Image src="/icon/minus_icon.png" width={"2.6vw"}></Image>
         </DecreaseBtn>
         <InputBtn>
-          <InputText>{quantity}</InputText>
+          <InputText>{inputData}</InputText>
         </InputBtn>
-        <IncreaseBtn onClick={() => setQuantity(quantity + 1)}>
+        <IncreaseBtn onClick={() => setInputData(inputData + 1)}>
           <Image src="/icon/plus_icon.png" width={"4vw"} height={"4vw"}></Image>
         </IncreaseBtn>
       </Wrapper>

@@ -92,7 +92,7 @@ const InputBox = styled.div`
   width: 8vw;
   height: 80%;
   background-color: #ff7f3b;
-  border-radius: 0.8vw;
+  border-radius: 0.4vw;
   margin-right: 1vw;
 `;
 
@@ -155,10 +155,10 @@ export default function ProductComponent(props: any) {
               <RoomItemComponent
                 key={index + 1}
                 index={index + 1}
-                discardCBM={discardCBM}
                 roomItem={item}
                 selectedTab={selectedTab}
                 setSelectedTab={setSelectedTab}
+                currentProductList={currentProductList}
                 setCurrentProductList={setCurrentProductList}
               ></RoomItemComponent>
             );

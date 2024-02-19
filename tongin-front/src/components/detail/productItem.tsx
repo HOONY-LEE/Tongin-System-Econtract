@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import QuantityComponent from "../common/quantityComponent";
 import QuantityInputComponent from "../common/quantityInputComponent";
+import MethodSelectBoxComponent from "./methodSelectBoxComponent";
 
 const ProductItemBox = styled.div`
   display: flex;
@@ -60,7 +61,16 @@ const Subtitle = styled.p`
 `;
 
 export default function ProductItem(props: any) {
-  const { item, setCurrentProductList, roomId, articleId } = props;
+  const {
+    item,
+    setCurrentProductList,
+    roomId,
+    articleId,
+    totalQuantity,
+    totalCBM,
+    setTotalQuantity,
+    setTotalCBM,
+  } = props;
 
   return (
     <ProductItemBox key={item.sortingNumber}>
@@ -69,20 +79,33 @@ export default function ProductItem(props: any) {
         <Subtitle>{item.article.articleNameEng}</Subtitle>
       </NameBox>
       <QuantityBox>
-        <QuantityComponent></QuantityComponent>
+        <QuantityComponent
+          roomId={roomId}
+          articleId={articleId}
+          quantity={item.article.quantity}
+          setCurrentProductList={setCurrentProductList}
+          totalQuantity={totalQuantity}
+          totalCBM={totalCBM}
+          setTotalQuantity={setTotalQuantity}
+          setTotalCBM={setTotalCBM}
+        ></QuantityComponent>
       </QuantityBox>
       <CBMBox>
         <QuantityInputComponent
           setCurrentProductList={setCurrentProductList}
-          quantity={item.article.quantity}
+          quantity={item.article.cbm}
           articleName={item.article.articleName}
           unit={"CBM"}
           roomId={roomId}
           articleId={articleId}
+          totalQuantity={totalQuantity}
+          totalCBM={totalCBM}
+          setTotalQuantity={setTotalQuantity}
+          setTotalCBM={setTotalCBM}
         ></QuantityInputComponent>
       </CBMBox>
       <HandleBox>
-        <QuantityInputComponent></QuantityInputComponent>
+        <MethodSelectBoxComponent></MethodSelectBoxComponent>
       </HandleBox>
     </ProductItemBox>
   );
