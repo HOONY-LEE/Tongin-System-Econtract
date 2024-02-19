@@ -105,7 +105,12 @@ export default function ProductItem(props: any) {
         ></QuantityInputComponent>
       </CBMBox>
       <HandleBox>
-        <MethodSelectBoxComponent></MethodSelectBoxComponent>
+        <MethodSelectBoxComponent
+          method={item.article.method}
+          roomId={roomId}
+          articleId={articleId}
+          setCurrentProductList={setCurrentProductList}
+        ></MethodSelectBoxComponent>
       </HandleBox>
     </ProductItemBox>
   );
