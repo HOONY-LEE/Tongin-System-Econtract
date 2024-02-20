@@ -129,10 +129,11 @@ export default function Detail() {
     setCurrentTab(index);
   };
   const fetchData = async () => {
-    const response: any = await API.get("receipt/detail/12");
+    const response: any = await API.get("receipt/detail/R20240201447");
     if (response.status === 200) {
-      console.log(response.data.receiptDetail);
-      setDetailData(response.data.receiptDetail);
+      const result = response.data.receiptDetail;
+      console.log(result);
+      setDetailData(result);
     } else {
       console.log("에러");
     }

@@ -9,7 +9,7 @@ const Header = styled.div`
   width: 100%;
   height: 5vh;
   background-color: white;
-  border-bottom: 1px solid gray;
+  box-shadow: 1vw 1vw 1vw 1vw #adadad10;
 `;
 
 const Image = styled.img.attrs({})`

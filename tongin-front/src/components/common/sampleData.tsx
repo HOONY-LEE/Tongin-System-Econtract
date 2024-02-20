@@ -3557,3 +3557,2596 @@ export const sampleProductDataList: any[] = [
     ],
   },
 ];
+
+const sampleYK = [
+  {
+    id: 1,
+    sortingNumber: 1,
+    locationName: "안방",
+    locationNameEng: "MASTER'S ROOM",
+    ArticleDefaultLocation: [
+      {
+        id: 1,
+        sortingNumber: 1,
+        article: {
+          id: 1,
+          articleName: "장롱",
+          articleNameEng: "Wardrobe",
+          ReceiptArticle: [
+            {
+              id: 30,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 2,
+        sortingNumber: 2,
+        article: {
+          id: 2,
+          articleName: "이불",
+          articleNameEng: "Bedding",
+          ReceiptArticle: [
+            {
+              id: 29,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 9,
+        sortingNumber: 3,
+        article: {
+          id: 9,
+          articleName: "공기청정기",
+          articleNameEng: "AirPurifier",
+          ReceiptArticle: [
+            {
+              id: 27,
+              cbm: 2,
+              amount: 3,
+              carryType: {
+                id: 4,
+                name: "경유",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 4,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 3,
+        sortingNumber: 3,
+        article: {
+          id: 3,
+          articleName: "의류",
+          articleNameEng: "Clothes",
+          ReceiptArticle: [
+            {
+              id: 21,
+              cbm: 1,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 4,
+        sortingNumber: 4,
+        article: {
+          id: 4,
+          articleName: "침대",
+          articleNameEng: "Bed(s)",
+          ReceiptArticle: [
+            {
+              id: 22,
+              cbm: 4,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 6,
+        sortingNumber: 6,
+        article: {
+          id: 6,
+          articleName: "책장",
+          articleNameEng: "BookShelf",
+          ReceiptArticle: [
+            {
+              id: 24,
+              cbm: 6,
+              amount: 8,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 5,
+        sortingNumber: 6,
+        article: {
+          id: 5,
+          articleName: "협탁",
+          articleNameEng: "SideTable",
+          ReceiptArticle: [
+            {
+              id: 23,
+              cbm: 3,
+              amount: 3,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 7,
+        sortingNumber: 7,
+        article: {
+          id: 7,
+          articleName: "책",
+          articleNameEng: "Books",
+          ReceiptArticle: [
+            {
+              id: 25,
+              cbm: 3,
+              amount: 7,
+              carryType: {
+                id: 3,
+                name: "하역",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 3,
+              },
+            },
+            {
+              id: 43,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 8,
+        sortingNumber: 8,
+        article: {
+          id: 8,
+          articleName: "장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [
+            {
+              id: 26,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 10,
+        sortingNumber: 10,
+        article: {
+          id: 10,
+          articleName: "고가구",
+          articleNameEng: "AntiqueChest",
+          ReceiptArticle: [
+            {
+              id: 28,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 11,
+        sortingNumber: 11,
+        article: {
+          id: 11,
+          articleName: "화장대",
+          articleNameEng: "Dresser",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 12,
+        sortingNumber: 12,
+        article: {
+          id: 12,
+          articleName: "서랍장",
+          articleNameEng: "Drawers",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 13,
+        sortingNumber: 13,
+        article: {
+          id: 13,
+          articleName: "탁자/책상",
+          articleNameEng: "Table,Desk",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 14,
+        sortingNumber: 14,
+        article: {
+          id: 14,
+          articleName: "의자",
+          articleNameEng: "Chair",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 15,
+        sortingNumber: 15,
+        article: {
+          id: 15,
+          articleName: "홈시어터",
+          articleNameEng: "TV",
+          ReceiptArticle: [
+            {
+              id: 44,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 16,
+        sortingNumber: 16,
+        article: {
+          id: 16,
+          articleName: "오디오",
+          articleNameEng: "Audio",
+          ReceiptArticle: [
+            {
+              id: 45,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 17,
+        sortingNumber: 17,
+        article: {
+          id: 17,
+          articleName: "컴퓨터",
+          articleNameEng: "Computer",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 18,
+        sortingNumber: 18,
+        article: {
+          id: 18,
+          articleName: "피아노",
+          articleNameEng: "Piano",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 19,
+        sortingNumber: 19,
+        article: {
+          id: 19,
+          articleName: "에어컨",
+          articleNameEng: "A/C",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 20,
+        sortingNumber: 20,
+        article: {
+          id: 20,
+          articleName: "장난감",
+          articleNameEng: "Toys",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 21,
+        sortingNumber: 21,
+        article: {
+          id: 21,
+          articleName: "BOX류",
+          articleNameEng: "Boxes",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 22,
+        sortingNumber: 22,
+        article: {
+          id: 22,
+          articleName: "에어드레서",
+          articleNameEng: "AirDresser",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    sortingNumber: 2,
+    locationName: "건너방",
+    locationNameEng: "BED ROOM",
+    ArticleDefaultLocation: [
+      {
+        id: 23,
+        sortingNumber: 1,
+        article: {
+          id: 1,
+          articleName: "장롱",
+          articleNameEng: "Wardrobe",
+          ReceiptArticle: [
+            {
+              id: 30,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 24,
+        sortingNumber: 2,
+        article: {
+          id: 2,
+          articleName: "이불",
+          articleNameEng: "Bedding",
+          ReceiptArticle: [
+            {
+              id: 29,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 25,
+        sortingNumber: 3,
+        article: {
+          id: 3,
+          articleName: "의류",
+          articleNameEng: "Clothes",
+          ReceiptArticle: [
+            {
+              id: 21,
+              cbm: 1,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 31,
+        sortingNumber: 3,
+        article: {
+          id: 9,
+          articleName: "공기청정기",
+          articleNameEng: "AirPurifier",
+          ReceiptArticle: [
+            {
+              id: 27,
+              cbm: 2,
+              amount: 3,
+              carryType: {
+                id: 4,
+                name: "경유",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 4,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 26,
+        sortingNumber: 4,
+        article: {
+          id: 4,
+          articleName: "침대",
+          articleNameEng: "Bed(s)",
+          ReceiptArticle: [
+            {
+              id: 22,
+              cbm: 4,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 28,
+        sortingNumber: 6,
+        article: {
+          id: 6,
+          articleName: "책장",
+          articleNameEng: "BookShelf",
+          ReceiptArticle: [
+            {
+              id: 24,
+              cbm: 6,
+              amount: 8,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 27,
+        sortingNumber: 6,
+        article: {
+          id: 5,
+          articleName: "협탁",
+          articleNameEng: "SideTable",
+          ReceiptArticle: [
+            {
+              id: 23,
+              cbm: 3,
+              amount: 3,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 29,
+        sortingNumber: 7,
+        article: {
+          id: 7,
+          articleName: "책",
+          articleNameEng: "Books",
+          ReceiptArticle: [
+            {
+              id: 25,
+              cbm: 3,
+              amount: 7,
+              carryType: {
+                id: 3,
+                name: "하역",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 3,
+              },
+            },
+            {
+              id: 43,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 30,
+        sortingNumber: 8,
+        article: {
+          id: 8,
+          articleName: "장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [
+            {
+              id: 26,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 32,
+        sortingNumber: 10,
+        article: {
+          id: 10,
+          articleName: "고가구",
+          articleNameEng: "AntiqueChest",
+          ReceiptArticle: [
+            {
+              id: 28,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 33,
+        sortingNumber: 11,
+        article: {
+          id: 11,
+          articleName: "화장대",
+          articleNameEng: "Dresser",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 34,
+        sortingNumber: 12,
+        article: {
+          id: 12,
+          articleName: "서랍장",
+          articleNameEng: "Drawers",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 35,
+        sortingNumber: 13,
+        article: {
+          id: 13,
+          articleName: "탁자/책상",
+          articleNameEng: "Table,Desk",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 36,
+        sortingNumber: 14,
+        article: {
+          id: 14,
+          articleName: "의자",
+          articleNameEng: "Chair",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 37,
+        sortingNumber: 15,
+        article: {
+          id: 15,
+          articleName: "홈시어터",
+          articleNameEng: "TV",
+          ReceiptArticle: [
+            {
+              id: 44,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 38,
+        sortingNumber: 16,
+        article: {
+          id: 16,
+          articleName: "오디오",
+          articleNameEng: "Audio",
+          ReceiptArticle: [
+            {
+              id: 45,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 39,
+        sortingNumber: 17,
+        article: {
+          id: 17,
+          articleName: "컴퓨터",
+          articleNameEng: "Computer",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 40,
+        sortingNumber: 18,
+        article: {
+          id: 18,
+          articleName: "피아노",
+          articleNameEng: "Piano",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 41,
+        sortingNumber: 19,
+        article: {
+          id: 19,
+          articleName: "에어컨",
+          articleNameEng: "A/C",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 42,
+        sortingNumber: 20,
+        article: {
+          id: 20,
+          articleName: "장난감",
+          articleNameEng: "Toys",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 43,
+        sortingNumber: 21,
+        article: {
+          id: 21,
+          articleName: "BOX류",
+          articleNameEng: "Boxes",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 44,
+        sortingNumber: 22,
+        article: {
+          id: 22,
+          articleName: "에어드레서",
+          articleNameEng: "AirDresser",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    sortingNumber: 3,
+    locationName: "건너방2",
+    locationNameEng: "BED ROOM",
+    ArticleDefaultLocation: [
+      {
+        id: 45,
+        sortingNumber: 1,
+        article: {
+          id: 1,
+          articleName: "장롱",
+          articleNameEng: "Wardrobe",
+          ReceiptArticle: [
+            {
+              id: 30,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 46,
+        sortingNumber: 2,
+        article: {
+          id: 2,
+          articleName: "이불",
+          articleNameEng: "Bedding",
+          ReceiptArticle: [
+            {
+              id: 29,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 53,
+        sortingNumber: 3,
+        article: {
+          id: 9,
+          articleName: "공기청정기",
+          articleNameEng: "AirPurifier",
+          ReceiptArticle: [
+            {
+              id: 27,
+              cbm: 2,
+              amount: 3,
+              carryType: {
+                id: 4,
+                name: "경유",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 4,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 47,
+        sortingNumber: 3,
+        article: {
+          id: 3,
+          articleName: "의류",
+          articleNameEng: "Clothes",
+          ReceiptArticle: [
+            {
+              id: 21,
+              cbm: 1,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 48,
+        sortingNumber: 4,
+        article: {
+          id: 4,
+          articleName: "침대",
+          articleNameEng: "Bed(s)",
+          ReceiptArticle: [
+            {
+              id: 22,
+              cbm: 4,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 50,
+        sortingNumber: 6,
+        article: {
+          id: 6,
+          articleName: "책장",
+          articleNameEng: "BookShelf",
+          ReceiptArticle: [
+            {
+              id: 24,
+              cbm: 6,
+              amount: 8,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 49,
+        sortingNumber: 6,
+        article: {
+          id: 5,
+          articleName: "협탁",
+          articleNameEng: "SideTable",
+          ReceiptArticle: [
+            {
+              id: 23,
+              cbm: 3,
+              amount: 3,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 51,
+        sortingNumber: 7,
+        article: {
+          id: 7,
+          articleName: "책",
+          articleNameEng: "Books",
+          ReceiptArticle: [
+            {
+              id: 25,
+              cbm: 3,
+              amount: 7,
+              carryType: {
+                id: 3,
+                name: "하역",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 3,
+              },
+            },
+            {
+              id: 43,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 52,
+        sortingNumber: 8,
+        article: {
+          id: 8,
+          articleName: "장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [
+            {
+              id: 26,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 54,
+        sortingNumber: 10,
+        article: {
+          id: 10,
+          articleName: "고가구",
+          articleNameEng: "AntiqueChest",
+          ReceiptArticle: [
+            {
+              id: 28,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 55,
+        sortingNumber: 11,
+        article: {
+          id: 11,
+          articleName: "화장대",
+          articleNameEng: "Dresser",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 56,
+        sortingNumber: 12,
+        article: {
+          id: 12,
+          articleName: "서랍장",
+          articleNameEng: "Drawers",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 57,
+        sortingNumber: 13,
+        article: {
+          id: 13,
+          articleName: "탁자/책상",
+          articleNameEng: "Table,Desk",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 58,
+        sortingNumber: 14,
+        article: {
+          id: 14,
+          articleName: "의자",
+          articleNameEng: "Chair",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 59,
+        sortingNumber: 15,
+        article: {
+          id: 15,
+          articleName: "홈시어터",
+          articleNameEng: "TV",
+          ReceiptArticle: [
+            {
+              id: 44,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 60,
+        sortingNumber: 16,
+        article: {
+          id: 16,
+          articleName: "오디오",
+          articleNameEng: "Audio",
+          ReceiptArticle: [
+            {
+              id: 45,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 61,
+        sortingNumber: 17,
+        article: {
+          id: 17,
+          articleName: "컴퓨터",
+          articleNameEng: "Computer",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 62,
+        sortingNumber: 18,
+        article: {
+          id: 18,
+          articleName: "피아노",
+          articleNameEng: "Piano",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 63,
+        sortingNumber: 19,
+        article: {
+          id: 19,
+          articleName: "에어컨",
+          articleNameEng: "A/C",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 64,
+        sortingNumber: 20,
+        article: {
+          id: 20,
+          articleName: "장난감",
+          articleNameEng: "Toys",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 65,
+        sortingNumber: 21,
+        article: {
+          id: 21,
+          articleName: "BOX류",
+          articleNameEng: "Boxes",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 66,
+        sortingNumber: 22,
+        article: {
+          id: 22,
+          articleName: "에어드레서",
+          articleNameEng: "AirDresser",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 4,
+    sortingNumber: 4,
+    locationName: "건너방3",
+    locationNameEng: "BED ROOM",
+    ArticleDefaultLocation: [
+      {
+        id: 67,
+        sortingNumber: 1,
+        article: {
+          id: 1,
+          articleName: "장롱",
+          articleNameEng: "Wardrobe",
+          ReceiptArticle: [
+            {
+              id: 30,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 68,
+        sortingNumber: 2,
+        article: {
+          id: 2,
+          articleName: "이불",
+          articleNameEng: "Bedding",
+          ReceiptArticle: [
+            {
+              id: 29,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 69,
+        sortingNumber: 3,
+        article: {
+          id: 3,
+          articleName: "의류",
+          articleNameEng: "Clothes",
+          ReceiptArticle: [
+            {
+              id: 21,
+              cbm: 1,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 75,
+        sortingNumber: 3,
+        article: {
+          id: 9,
+          articleName: "공기청정기",
+          articleNameEng: "AirPurifier",
+          ReceiptArticle: [
+            {
+              id: 27,
+              cbm: 2,
+              amount: 3,
+              carryType: {
+                id: 4,
+                name: "경유",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 4,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 70,
+        sortingNumber: 4,
+        article: {
+          id: 4,
+          articleName: "침대",
+          articleNameEng: "Bed(s)",
+          ReceiptArticle: [
+            {
+              id: 22,
+              cbm: 4,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 71,
+        sortingNumber: 6,
+        article: {
+          id: 5,
+          articleName: "협탁",
+          articleNameEng: "SideTable",
+          ReceiptArticle: [
+            {
+              id: 23,
+              cbm: 3,
+              amount: 3,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 72,
+        sortingNumber: 6,
+        article: {
+          id: 6,
+          articleName: "책장",
+          articleNameEng: "BookShelf",
+          ReceiptArticle: [
+            {
+              id: 24,
+              cbm: 6,
+              amount: 8,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 73,
+        sortingNumber: 7,
+        article: {
+          id: 7,
+          articleName: "책",
+          articleNameEng: "Books",
+          ReceiptArticle: [
+            {
+              id: 25,
+              cbm: 3,
+              amount: 7,
+              carryType: {
+                id: 3,
+                name: "하역",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 3,
+              },
+            },
+            {
+              id: 43,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 74,
+        sortingNumber: 8,
+        article: {
+          id: 8,
+          articleName: "장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [
+            {
+              id: 26,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 76,
+        sortingNumber: 10,
+        article: {
+          id: 10,
+          articleName: "고가구",
+          articleNameEng: "AntiqueChest",
+          ReceiptArticle: [
+            {
+              id: 28,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 77,
+        sortingNumber: 11,
+        article: {
+          id: 11,
+          articleName: "화장대",
+          articleNameEng: "Dresser",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 78,
+        sortingNumber: 12,
+        article: {
+          id: 12,
+          articleName: "서랍장",
+          articleNameEng: "Drawers",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 79,
+        sortingNumber: 13,
+        article: {
+          id: 13,
+          articleName: "탁자/책상",
+          articleNameEng: "Table,Desk",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 80,
+        sortingNumber: 14,
+        article: {
+          id: 14,
+          articleName: "의자",
+          articleNameEng: "Chair",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 81,
+        sortingNumber: 15,
+        article: {
+          id: 15,
+          articleName: "홈시어터",
+          articleNameEng: "TV",
+          ReceiptArticle: [
+            {
+              id: 44,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 82,
+        sortingNumber: 16,
+        article: {
+          id: 16,
+          articleName: "오디오",
+          articleNameEng: "Audio",
+          ReceiptArticle: [
+            {
+              id: 45,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 83,
+        sortingNumber: 17,
+        article: {
+          id: 17,
+          articleName: "컴퓨터",
+          articleNameEng: "Computer",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 84,
+        sortingNumber: 18,
+        article: {
+          id: 18,
+          articleName: "피아노",
+          articleNameEng: "Piano",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 85,
+        sortingNumber: 19,
+        article: {
+          id: 19,
+          articleName: "에어컨",
+          articleNameEng: "A/C",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 86,
+        sortingNumber: 20,
+        article: {
+          id: 20,
+          articleName: "장난감",
+          articleNameEng: "Toys",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 87,
+        sortingNumber: 21,
+        article: {
+          id: 21,
+          articleName: "BOX류",
+          articleNameEng: "Boxes",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 88,
+        sortingNumber: 22,
+        article: {
+          id: 22,
+          articleName: "에어드레서",
+          articleNameEng: "AirDresser",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 5,
+    sortingNumber: 5,
+    locationName: "건너방4",
+    locationNameEng: "BED ROOM",
+    ArticleDefaultLocation: [
+      {
+        id: 89,
+        sortingNumber: 1,
+        article: {
+          id: 1,
+          articleName: "장롱",
+          articleNameEng: "Wardrobe",
+          ReceiptArticle: [
+            {
+              id: 30,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 90,
+        sortingNumber: 2,
+        article: {
+          id: 2,
+          articleName: "이불",
+          articleNameEng: "Bedding",
+          ReceiptArticle: [
+            {
+              id: 29,
+              cbm: 3,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 97,
+        sortingNumber: 3,
+        article: {
+          id: 9,
+          articleName: "공기청정기",
+          articleNameEng: "AirPurifier",
+          ReceiptArticle: [
+            {
+              id: 27,
+              cbm: 2,
+              amount: 3,
+              carryType: {
+                id: 4,
+                name: "경유",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 4,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 91,
+        sortingNumber: 3,
+        article: {
+          id: 3,
+          articleName: "의류",
+          articleNameEng: "Clothes",
+          ReceiptArticle: [
+            {
+              id: 21,
+              cbm: 1,
+              amount: 2,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 92,
+        sortingNumber: 4,
+        article: {
+          id: 4,
+          articleName: "침대",
+          articleNameEng: "Bed(s)",
+          ReceiptArticle: [
+            {
+              id: 22,
+              cbm: 4,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 94,
+        sortingNumber: 6,
+        article: {
+          id: 6,
+          articleName: "책장",
+          articleNameEng: "BookShelf",
+          ReceiptArticle: [
+            {
+              id: 24,
+              cbm: 6,
+              amount: 8,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 93,
+        sortingNumber: 6,
+        article: {
+          id: 5,
+          articleName: "협탁",
+          articleNameEng: "SideTable",
+          ReceiptArticle: [
+            {
+              id: 23,
+              cbm: 3,
+              amount: 3,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 95,
+        sortingNumber: 7,
+        article: {
+          id: 7,
+          articleName: "책",
+          articleNameEng: "Books",
+          ReceiptArticle: [
+            {
+              id: 25,
+              cbm: 3,
+              amount: 7,
+              carryType: {
+                id: 3,
+                name: "하역",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 3,
+              },
+            },
+            {
+              id: 43,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 96,
+        sortingNumber: 8,
+        article: {
+          id: 8,
+          articleName: "장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [
+            {
+              id: 26,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 98,
+        sortingNumber: 10,
+        article: {
+          id: 10,
+          articleName: "고가구",
+          articleNameEng: "AntiqueChest",
+          ReceiptArticle: [
+            {
+              id: 28,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 99,
+        sortingNumber: 11,
+        article: {
+          id: 11,
+          articleName: "화장대",
+          articleNameEng: "Dresser",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 100,
+        sortingNumber: 12,
+        article: {
+          id: 12,
+          articleName: "서랍장",
+          articleNameEng: "Drawers",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 101,
+        sortingNumber: 13,
+        article: {
+          id: 13,
+          articleName: "탁자/책상",
+          articleNameEng: "Table,Desk",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 102,
+        sortingNumber: 14,
+        article: {
+          id: 14,
+          articleName: "의자",
+          articleNameEng: "Chair",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 103,
+        sortingNumber: 15,
+        article: {
+          id: 15,
+          articleName: "홈시어터",
+          articleNameEng: "TV",
+          ReceiptArticle: [
+            {
+              id: 44,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 104,
+        sortingNumber: 16,
+        article: {
+          id: 16,
+          articleName: "오디오",
+          articleNameEng: "Audio",
+          ReceiptArticle: [
+            {
+              id: 45,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 105,
+        sortingNumber: 17,
+        article: {
+          id: 17,
+          articleName: "컴퓨터",
+          articleNameEng: "Computer",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 106,
+        sortingNumber: 18,
+        article: {
+          id: 18,
+          articleName: "피아노",
+          articleNameEng: "Piano",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 107,
+        sortingNumber: 19,
+        article: {
+          id: 19,
+          articleName: "에어컨",
+          articleNameEng: "A/C",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 108,
+        sortingNumber: 20,
+        article: {
+          id: 20,
+          articleName: "장난감",
+          articleNameEng: "Toys",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 109,
+        sortingNumber: 21,
+        article: {
+          id: 21,
+          articleName: "BOX류",
+          articleNameEng: "Boxes",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 110,
+        sortingNumber: 22,
+        article: {
+          id: 22,
+          articleName: "에어드레서",
+          articleNameEng: "AirDresser",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 6,
+    sortingNumber: 6,
+    locationName: "거실",
+    locationNameEng: "LIVING ROOM",
+    ArticleDefaultLocation: [
+      {
+        id: 111,
+        sortingNumber: 1,
+        article: {
+          id: 23,
+          articleName: "쇼파",
+          articleNameEng: "Sofa",
+          ReceiptArticle: [
+            {
+              id: 41,
+              cbm: 3,
+              amount: 4,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 112,
+        sortingNumber: 2,
+        article: {
+          id: 24,
+          articleName: "탁자",
+          articleNameEng: "Table",
+          ReceiptArticle: [
+            {
+              id: 42,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 113,
+        sortingNumber: 3,
+        article: {
+          id: 7,
+          articleName: "책",
+          articleNameEng: "Books",
+          ReceiptArticle: [
+            {
+              id: 25,
+              cbm: 3,
+              amount: 7,
+              carryType: {
+                id: 3,
+                name: "하역",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 3,
+              },
+            },
+            {
+              id: 43,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 114,
+        sortingNumber: 4,
+        article: {
+          id: 25,
+          articleName: "책상",
+          articleNameEng: "Book",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 115,
+        sortingNumber: 5,
+        article: {
+          id: 10,
+          articleName: "고가구",
+          articleNameEng: "AntiqueChest",
+          ReceiptArticle: [
+            {
+              id: 28,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 116,
+        sortingNumber: 6,
+        article: {
+          id: 26,
+          articleName: "도자기류",
+          articleNameEng: "ChinaWare",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 117,
+        sortingNumber: 7,
+        article: {
+          id: 15,
+          articleName: "홈시어터",
+          articleNameEng: "TV",
+          ReceiptArticle: [
+            {
+              id: 44,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 118,
+        sortingNumber: 8,
+        article: {
+          id: 16,
+          articleName: "오디오",
+          articleNameEng: "Audio",
+          ReceiptArticle: [
+            {
+              id: 45,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 119,
+        sortingNumber: 9,
+        article: {
+          id: 8,
+          articleName: "장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [
+            {
+              id: 26,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 120,
+        sortingNumber: 10,
+        article: {
+          id: 27,
+          articleName: "장식품",
+          articleNameEng: "Ornaments",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 121,
+        sortingNumber: 11,
+        article: {
+          id: 19,
+          articleName: "에어컨",
+          articleNameEng: "A/C",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 122,
+        sortingNumber: 12,
+        article: {
+          id: 28,
+          articleName: "콘솔",
+          articleNameEng: "Consol",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 123,
+        sortingNumber: 13,
+        article: {
+          id: 29,
+          articleName: "거실장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 124,
+        sortingNumber: 14,
+        article: {
+          id: 22,
+          articleName: "에어드레서",
+          articleNameEng: "AirDresser",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 125,
+        sortingNumber: 15,
+        article: {
+          id: 9,
+          articleName: "공기청정기",
+          articleNameEng: "AirPurifier",
+          ReceiptArticle: [
+            {
+              id: 27,
+              cbm: 2,
+              amount: 3,
+              carryType: {
+                id: 4,
+                name: "경유",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 4,
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 7,
+    sortingNumber: 7,
+    locationName: "주방",
+    locationNameEng: "DINING ROOM",
+    ArticleDefaultLocation: [
+      {
+        id: 126,
+        sortingNumber: 1,
+        article: {
+          id: 30,
+          articleName: "식탁/의자",
+          articleNameEng: "Table,Chair",
+          ReceiptArticle: [
+            {
+              id: 46,
+              cbm: 4,
+              amount: 8,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 127,
+        sortingNumber: 2,
+        article: {
+          id: 8,
+          articleName: "장식장",
+          articleNameEng: "Chest(s)",
+          ReceiptArticle: [
+            {
+              id: 26,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 128,
+        sortingNumber: 3,
+        article: {
+          id: 31,
+          articleName: "수납장",
+          articleNameEng: "StorageCabinet",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 129,
+        sortingNumber: 4,
+        article: {
+          id: 32,
+          articleName: "냉장고",
+          articleNameEng: "Refrigerator",
+          ReceiptArticle: [
+            {
+              id: 47,
+              cbm: 3,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 130,
+        sortingNumber: 5,
+        article: {
+          id: 33,
+          articleName: "정수기냉장고",
+          articleNameEng: "Refrigerator",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 131,
+        sortingNumber: 6,
+        article: {
+          id: 34,
+          articleName: "냉동고",
+          articleNameEng: "Freezer",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 132,
+        sortingNumber: 7,
+        article: {
+          id: 35,
+          articleName: "식기세척기",
+          articleNameEng: "DishWasher",
+          ReceiptArticle: [
+            {
+              id: 48,
+              cbm: 1,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 133,
+        sortingNumber: 8,
+        article: {
+          id: 36,
+          articleName: "식기건조기",
+          articleNameEng: "DishDryer",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 134,
+        sortingNumber: 9,
+        article: {
+          id: 37,
+          articleName: "김치냉장고",
+          articleNameEng: "Refrigerator",
+          ReceiptArticle: [
+            {
+              id: 49,
+              cbm: 1,
+              amount: 5,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 135,
+        sortingNumber: 10,
+        article: {
+          id: 38,
+          articleName: "가스렌지",
+          articleNameEng: "GasRange",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 136,
+        sortingNumber: 11,
+        article: {
+          id: 39,
+          articleName: "전자렌지",
+          articleNameEng: "Microwave",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 137,
+        sortingNumber: 12,
+        article: {
+          id: 40,
+          articleName: "쌀통",
+          articleNameEng: "RiceBox",
+          ReceiptArticle: [
+            {
+              id: 50,
+              cbm: 6,
+              amount: 1,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 138,
+        sortingNumber: 13,
+        article: {
+          id: 41,
+          articleName: "식기류",
+          articleNameEng: "Dishes",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 139,
+        sortingNumber: 14,
+        article: {
+          id: 42,
+          articleName: "정수기",
+          articleNameEng: "WaterPurifier",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 8,
+    sortingNumber: 8,
+    locationName: "앞 발코니",
+    locationNameEng: "BALCONY",
+    ArticleDefaultLocation: [
+      {
+        id: 140,
+        sortingNumber: 1,
+        article: {
+          id: 43,
+          articleName: "화분",
+          articleNameEng: "FlowerPots",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 141,
+        sortingNumber: 2,
+        article: {
+          id: 44,
+          articleName: "항아리",
+          articleNameEng: "Pots",
+          ReceiptArticle: [],
+        },
+      },
+      {
+        id: 142,
+        sortingNumber: 3,
+        article: {
+          id: 45,
+          articleName: "운동기구",
+          articleNameEng: "SportsGoods",
+          ReceiptArticle: [
+            {
+              id: 51,
+              cbm: 1,
+              amount: 2,
+              carryType: {
+                id: 2,
+                name: "폐기",
+                cbmCalculate: 2,
+                remark: null,
+                sortingNumber: 2,
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 143,
+        sortingNumber: 4,
+        article: {
+          id: 46,
+          articleName: "자전거",
+          articleNameEng: "Bicycle",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 9,
+    sortingNumber: 9,
+    locationName: "뒤 발코니",
+    locationNameEng: "BALCONY",
+    ArticleDefaultLocation: [
+      {
+        id: 144,
+        sortingNumber: 1,
+        article: {
+          id: 47,
+          articleName: "세탁기/건조기",
+          articleNameEng: "Dryer",
+          ReceiptArticle: [],
+        },
+      },
+    ],
+  },
+  {
+    id: 10,
+    sortingNumber: 10,
+    locationName: "다용도실, 현관, 화장실, 창고",
+    locationNameEng: "ETC",
+    ArticleDefaultLocation: [
+      {
+        id: 145,
+        sortingNumber: 1,
+        article: {
+          id: 48,
+          articleName: "신발류",
+          articleNameEng: "Shoes",
+          ReceiptArticle: [
+            {
+              id: 53,
+              cbm: 3,
+              amount: 12,
+              carryType: {
+                id: 1,
+                name: "운반",
+                cbmCalculate: 1,
+                remark: null,
+                sortingNumber: 1,
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+];

@@ -71,7 +71,6 @@ const MethodSelectBoxComponent = (props: any) => {
     { status: "하역", statusCode: 2 },
     { status: "경유", statusCode: 3 },
     { status: "방치", statusCode: 4 },
-    { status: "기타", statusCode: 5 },
   ];
 
   const [currentValue, setCurrentValue] = useState<string>(
