@@ -165,7 +165,7 @@ const CalculatorComponent = (props: any) => {
     roomId,
     articleId,
   } = props;
-  const [tmpValue, setTmpValue] = useState(inputValue);
+  const [tmpValue, setTmpValue] = useState<String>(inputValue.toString());
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
 
@@ -197,10 +197,10 @@ const CalculatorComponent = (props: any) => {
   };
 
   useEffect(() => {
-    if (tmpValue >= 100) {
+    if (Number(tmpValue) >= 100) {
       setError("[ CBM은 100 미만으로만 입력가능합니다. ]");
       setValidate(false);
-    } else if (tmpValue % 0.5 !== 0) {
+    } else if (Number(tmpValue) % 0.5 !== 0) {
       setError("[ CBM은 0.5 단위로만 입력가능합니다. ]");
       setValidate(false);
     } else {
