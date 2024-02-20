@@ -17,6 +17,7 @@ import {
 import API from "../API/API";
 import ProductComponent from "../components/detail/productComponent";
 import { sampleProductDataList } from "../components/common/sampleData";
+import OptionComponent from "../components/detail/optionComponent";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -99,7 +100,6 @@ const OptionTabBox = styled.div`
   align-items: center;
   justify-content: start;
   height: 100%;
-  /* outline: 1px solid green; */
 `;
 
 //  견적계약서 탭
@@ -119,10 +119,10 @@ export default function Detail() {
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
 
   const menuArr = [
-    { name: "상세정보", content: "견적리스트 영역" },
-    { name: "물품정보", content: "미계약 리스트 영역" },
-    { name: "옵션선택", content: "계약 리스트 영역" },
-    { name: "견적•계약서", content: "작업리스트 영역" },
+    { name: "1. 상세정보", content: "견적리스트 영역" },
+    { name: "2. 물품정보", content: "미계약 리스트 영역" },
+    { name: "3. 옵션선택", content: "계약 리스트 영역" },
+    { name: "4. 견적•계약서", content: "작업리스트 영역" },
   ];
 
   const selectMenuHandler = (index: any) => {
@@ -195,7 +195,9 @@ export default function Detail() {
               </ProductTabBox>
             ) : null}
             {currentTab === 2 ? (
-              <OptionTabBox>옵션선택 준비중</OptionTabBox>
+              <OptionTabBox>
+                <OptionComponent></OptionComponent>
+              </OptionTabBox>
             ) : null}
             {currentTab === 3 ? (
               <ContractTabBox>계약서 준비중</ContractTabBox>

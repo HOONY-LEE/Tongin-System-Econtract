@@ -23,12 +23,12 @@ const ContentBox = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 6vw;
+  height: 8vw;
 
   border-radius: 0.7vw;
   background-color: white;
   /* outline: 0.2vw solid gray; */
-  margin: 0.7vh 0vh 0.7vh 0vh;
+  margin-bottom: 1vw;
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
@@ -90,7 +90,7 @@ const UserMoveDate = styled.div`
   /* outline: 1px dashed green; */
 `;
 const UserStatus = styled.div`
-  width: 5vw;
+  width: 7vw;
   display: flex;
   font-size: 1.6vw;
   align-items: center;
@@ -102,12 +102,12 @@ const UserStatusColor = styled.div<{
   $bgColor?: string;
 }>`
   background-color: ${(props) => props.$bgColor};
-  width: 6vw;
+  width: 7vw;
   height: 3vw;
-  font-weight: 300;
+  font-weight: 400;
   display: flex;
   color: white;
-  font-size: 1vw;
+  font-size: 1.4vw;
   align-items: center;
   justify-content: center;
   border-radius: 0.4vw;

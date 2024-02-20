@@ -62,8 +62,14 @@ export default function FlashDeleteBoxComponent(props: any) {
       } else {
         setTmpValue("0");
       }
+    } else if (tmpValue.length === 0) {
+      setTmpValue("0");
     } else {
-      setTmpValue(tmpValue.slice(0, -1));
+      if (tmpValue.slice(0, -1).length === 0) {
+        setTmpValue("0");
+      } else {
+        setTmpValue(tmpValue.slice(0, -1));
+      }
     }
     setIsFlash(true);
     setTimeout(() => {
