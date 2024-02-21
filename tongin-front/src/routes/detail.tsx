@@ -203,6 +203,7 @@ export default function Detail() {
               <ContractTabBox>계약서 준비중</ContractTabBox>
             ) : null}
           </ContentBox>
+          
         </HomeContainer>
       </FlexXY>
     </>
