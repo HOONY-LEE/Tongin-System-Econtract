@@ -100,7 +100,7 @@ export const InputComponent = (props: any) => {
   return (
     <>
       <InputArea>
-        <Label>{label}</Label>
+        {label && <Label>{label}</Label>}
         <InputBox
           width={width}
           height={height}

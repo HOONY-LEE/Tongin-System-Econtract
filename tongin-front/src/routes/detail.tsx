@@ -132,25 +132,24 @@ export default function Detail() {
     const response: any = await API.get("receipt/detail/R20240201447");
     if (response.status === 200) {
       const result = response.data.receiptDetail;
-      console.log(result);
       setDetailData(result);
     } else {
       console.log("에러");
     }
   };
   const getProductList = async () => {
-    setRoomDataList(sampleProductDataList);
+    // setRoomDataList(sampleProductDataList);
 
-    // API 변경후 다시 적용
-    // const response = await API.get("receipt/default/menu");
-    // if (response.status === 200) {
-    //   const result = response.data.locationData;
-    //   console.log(result);
+    //API 변경후 다시 적용
+    const response = await API.get("receipt/detail/v2");
+    if (response.status === 200) {
+      const result = response.data.receiptArticleData;
+      // console.log(result);
 
-    //   setRoomDataList(result);
-    // } else {
-    //   console.log("물품 정보 데이터를 불러오지 못했습니다.");
-    // }
+      setRoomDataList(result);
+    } else {
+      console.log("물품 정보 데이터를 불러오지 못했습니다.");
+    }
   };
 
   useEffect(() => {

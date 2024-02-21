@@ -85,8 +85,7 @@ export default function QuantityComponent(props: any) {
     }
     setCurrentProductList((prev: any) => {
       const updatedList = [...prev];
-      updatedList[roomId].ArticleDefaultLocation[articleId].article.quantity =
-        inputData;
+      updatedList[roomId].articleData[articleId].article.amount = inputData;
       return updatedList;
     });
   }, [inputData]);

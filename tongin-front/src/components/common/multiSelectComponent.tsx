@@ -11,10 +11,10 @@ const SelectList = styled.div`
 
 const SelectBox = styled.div<{
   width?: string;
-  itemCount?: string;
-  isSelected?: boolean;
+  $itemCount?: string;
+  $isSelected?: boolean;
 }>`
-  width: ${(props) => (props.itemCount ? props.itemCount : "24vw")};
+  width: ${(props) => (props.$itemCount ? props.$itemCount : "24vw")};
   height: 5vw;
   background-color: #f4f4f4;
   display: flex;
@@ -27,7 +27,7 @@ const SelectBox = styled.div<{
     cursor: pointer;
   }
   ${(props) =>
-    props.isSelected &&
+    props.$isSelected &&
     css`
       background-color: #ff7f3b;
       color: white;
@@ -52,9 +52,9 @@ export default function MultiSelectComponent(props: any) {
         return (
           <SelectBox
             onClick={(e) => selectOptionHandle(index)}
-            itemCount={`${94 / optionList.length}%`}
+            $itemCount={`${94 / optionList.length}%`}
             key={index}
-            isSelected={item.isSelected}
+            $isSelected={item.isSelected}
           >
             {item.name}
           </SelectBox>
