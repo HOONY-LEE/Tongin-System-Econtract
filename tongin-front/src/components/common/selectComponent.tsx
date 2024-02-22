@@ -36,6 +36,7 @@ const SelectBox = styled.div<{
 
 export default function SelectComponent(props: any) {
   const { optionList, setOptionList } = props;
+  const [selectedItem, setSelectedItem] = useState<string>(optionList[0].name);
 
   const selectOptionHandle = (index: number) => {
     setOptionList((prev: any) => {

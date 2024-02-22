@@ -118,6 +118,13 @@ export default function OptionComponent(props: any) {
     { id: 4, name: "기타", description: "", isSelected: false },
   ]);
 
+  const [optionList2, setOptionList2] = useState([
+    { id: 1, name: "사다리", description: "", isSelected: false },
+    { id: 2, name: "엘리베이터", description: "", isSelected: false },
+    { id: 3, name: "계단", description: "", isSelected: false },
+    { id: 4, name: "기타", description: "", isSelected: false },
+  ]);
+
   // 모달 열기 핸들러
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -164,8 +171,8 @@ export default function OptionComponent(props: any) {
               <SubText>평</SubText>
             </InputArea>
             <SelectComponent
-              optionList={optionList}
-              setOptionList={setOptionList}
+              optionList={optionList2}
+              setOptionList={setOptionList2}
             ></SelectComponent>
           </OptionBox>
         </OptionArea>
