@@ -41,6 +41,11 @@ export default function SelectComponent(props: any) {
   const selectOptionHandle = (index: number) => {
     setOptionList((prev: any) => {
       const updatedList = [...prev];
+      for (let i = 0; i < updatedList.length; i++) {
+        if (updatedList[i].isSelected === true) {
+          updatedList[i].isSelected = false;
+        }
+      }
       updatedList[index].isSelected = !updatedList[index].isSelected;
 
       return updatedList;

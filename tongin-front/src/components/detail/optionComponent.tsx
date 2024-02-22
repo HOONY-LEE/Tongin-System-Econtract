@@ -3,8 +3,9 @@ import CustomButton from "../common/customButton";
 import { useState } from "react";
 import MultiSelectComponent from "../common/multiSelectComponent";
 import RooomsizeInputComoponent from "../common/roomsizeInputComponent";
-import CalculatorComponent from "../common/calculatorComponent";
+import CalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 import SelectComponent from "../common/selectComponent";
+import RoomSizeCalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 
 const ContentBox = styled.div`
   display: flex;
@@ -110,7 +111,8 @@ export default function OptionComponent(props: any) {
   const [editMode, setEditMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<number>(0);
-
+  const [prevRoomSize, setPrevRoomSize] = useState<number>(0);
+  const [afterRoomSize, setAfterRoomSize] = useState<number>(0);
   const [optionList, setOptionList] = useState([
     { id: 1, name: "사다리", description: "", isSelected: false },
     { id: 2, name: "엘리베이터", description: "", isSelected: false },
@@ -147,17 +149,15 @@ export default function OptionComponent(props: any) {
                   setIsModalOpen(true);
                 }}
               >
-                <InputCBMNumber>{0}</InputCBMNumber>
+                <InputCBMNumber>{prevRoomSize}</InputCBMNumber>
               </InputCBMBox>
               <SubText>평</SubText>
             </InputArea>
-            <MultiSelectComponent
+            <SelectComponent
               optionList={optionList}
               setOptionList={setOptionList}
-            ></MultiSelectComponent>
+            ></SelectComponent>
           </OptionBox>
-        </OptionArea>
-        <OptionArea>
           <Subtitle>작업 조건(후)</Subtitle>
           <OptionBox>
             <InputArea>
@@ -211,12 +211,12 @@ export default function OptionComponent(props: any) {
         )}
       </Wrapper>
       {isModalOpen && (
-        <CalculatorComponent
+        <RoomSizeCalculatorComponent
           title={`[평수] 입력창`}
           unit={"평"}
           onClose={handleCloseModal}
-          inputValue={1}
-          setInputValue={setInputValue}
+          roomSize={prevRoomSize}
+          setRoomSize={setPrevRoomSize}
           // setCurrentProductList={setCurrentProductList}
         />
       )}

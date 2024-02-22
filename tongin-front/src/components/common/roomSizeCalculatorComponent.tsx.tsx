@@ -154,18 +154,18 @@ const ColBox = styled.div`
   justify-content: space-between;
 `;
 
-const CalculatorComponent = (props: any) => {
+const RoomSizeCalculatorComponent = (props: any) => {
   const {
     onClose,
-    inputValue,
-    setInputValue,
+    roomSize,
+    setRoomSize,
     title,
     unit,
     setCurrentProductList,
     roomId,
     articleId,
   } = props;
-  const [tmpValue, setTmpValue] = useState<string>(inputValue.toString());
+  const [tmpValue, setTmpValue] = useState<string>(roomSize.toString());
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
 
@@ -174,21 +174,21 @@ const CalculatorComponent = (props: any) => {
       let result = 0;
       if (tmpValue.slice(-1) === ".") {
         result = Number(tmpValue.slice(0, -1));
-        setInputValue(result);
-        setCurrentProductList((prev: any) => {
-          const updatedList = [...prev];
-          updatedList[roomId].articleData[articleId].article.cbm = result;
-          return updatedList;
-        });
+        setRoomSize(result);
+        // setCurrentProductList((prev: any) => {
+        //   const updatedList = [...prev];
+        //   updatedList[roomId].articleData[articleId].article.cbm = result;
+        //   return updatedList;
+        // });
       } else {
         result = Number(tmpValue);
-        setInputValue(result);
+        setRoomSize(result);
         console.log(result);
-        setCurrentProductList((prev: any) => {
-          const updatedList = [...prev];
-          updatedList[roomId].articleData[articleId].article.cbm = result;
-          return updatedList;
-        });
+        // setCurrentProductList((prev: any) => {
+        //   const updatedList = [...prev];
+        //   updatedList[roomId].articleData[articleId].article.cbm = result;
+        //   return updatedList;
+        // });
       }
       onClose();
     }
@@ -302,4 +302,4 @@ const CalculatorComponent = (props: any) => {
   );
 };
 
-export default CalculatorComponent;
+export default RoomSizeCalculatorComponent;
