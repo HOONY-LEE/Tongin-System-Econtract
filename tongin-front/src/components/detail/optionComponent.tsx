@@ -4,6 +4,7 @@ import { useState } from "react";
 import MultiSelectComponent from "../common/multiSelectComponent";
 import RooomsizeInputComoponent from "../common/roomsizeInputComponent";
 import CalculatorComponent from "../common/calculatorComponent";
+import SelectComponent from "../common/selectComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -147,6 +148,25 @@ export default function OptionComponent(props: any) {
               optionList={optionList}
               setOptionList={setOptionList}
             ></MultiSelectComponent>
+          </OptionBox>
+        </OptionArea>
+        <OptionArea>
+          <Subtitle>작업 조건(후)</Subtitle>
+          <OptionBox>
+            <InputArea>
+              <InputCBMBox
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
+              >
+                <InputCBMNumber>{0}</InputCBMNumber>
+              </InputCBMBox>
+              <SubText>평</SubText>
+            </InputArea>
+            <SelectComponent
+              optionList={optionList}
+              setOptionList={setOptionList}
+            ></SelectComponent>
           </OptionBox>
         </OptionArea>
         {editMode ? (
