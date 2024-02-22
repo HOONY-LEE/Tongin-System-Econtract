@@ -83,8 +83,7 @@ const MethodSelectBoxComponent = (props: any) => {
     setCurrentValue(data[value].status);
     setCurrentProductList((prev: any) => {
       const updatedList = [...prev];
-      updatedList[roomId].ArticleDefaultLocation[articleId].article.method =
-        value;
+      updatedList[roomId].articleData[articleId].article.carryType = value;
       return updatedList;
     });
   };

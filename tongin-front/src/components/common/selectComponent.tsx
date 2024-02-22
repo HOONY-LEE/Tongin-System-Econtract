@@ -34,7 +34,7 @@ const SelectBox = styled.div<{
     `}
 `;
 
-export default function MultiSelectComponent(props: any) {
+export default function SelectComponent(props: any) {
   const { optionList, setOptionList } = props;
 
   const selectOptionHandle = (index: number) => {

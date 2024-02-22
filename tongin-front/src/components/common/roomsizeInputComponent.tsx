@@ -31,15 +31,8 @@ const InputText = styled.p`
   font-weight: 500;
 `;
 
-export default function QuantityInputComponent(props: any) {
-  const {
-    articleName,
-    unit,
-    quantity,
-    setCurrentProductList,
-    roomId,
-    articleId,
-  } = props;
+export default function RooomsizeInputComoponent(props: any) {
+  const { unit, quantity, setCurrentProductList, roomId, articleId } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<number>(quantity);
 
@@ -67,7 +60,7 @@ export default function QuantityInputComponent(props: any) {
       </Wrapper>
       {isModalOpen && (
         <CalculatorComponent
-          title={`[${articleName}] CBM 입력창`}
+          title={`[방 크기 입력창] `}
           unit={unit}
           onClose={handleCloseModal}
           inputValue={inputValue}

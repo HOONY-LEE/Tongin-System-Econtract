@@ -82,7 +82,7 @@ export default function ProductItem(props: any) {
         <QuantityComponent
           roomId={roomId}
           articleId={articleId}
-          quantity={item.article.quantity}
+          quantity={item.article.amount}
           setCurrentProductList={setCurrentProductList}
           totalQuantity={totalQuantity}
           totalCBM={totalCBM}
@@ -106,7 +106,7 @@ export default function ProductItem(props: any) {
       </CBMBox>
       <HandleBox>
         <MethodSelectBoxComponent
-          method={item.article.method}
+          method={item.article.carryType}
           roomId={roomId}
           articleId={articleId}
           setCurrentProductList={setCurrentProductList}

@@ -3,6 +3,7 @@ import API from "../../API/API";
 import { useEffect, useState } from "react";
 import { Image } from "../common/image";
 import RoomItemComponent from "./roomItemComponent";
+import CustomButton from "../common/customButton";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,18 +40,17 @@ const TotalAMountBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20vw;
+  width: 16vw;
   height: 6vw;
 `;
 
 const CBMBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  align-items: start;
   width: 14vw;
   height: 7vw;
-  outline: 1px;
 `;
 
 const Title = styled.p`
@@ -75,43 +75,66 @@ const SubText = styled.p`
   height: 2vw;
   display: flex;
   align-items: center;
+  margin-left: 1vw;
 `;
 
 const InputArea = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100%;
   height: 5vw;
-  margin-left: 2vw;
 `;
 
 const InputBox = styled.div`
   display: flex;
   justify-content: center;
-  width: 8vw;
+  width: 10vw;
   height: 78%;
-  background-color: #ff7f3b;
+  background-color: #f4f4f4;
   border-radius: 0.4vw;
-  margin-right: 1vw;
 `;
 
 const InputNumber = styled.p`
   display: flex;
   justify-content: end;
   align-items: center;
-  color: white;
   font-size: 2.6vw;
   font-weight: 400;
   width: 70%;
 `;
 
 export default function ProductComponent(props: any) {
-  const { currentProductList, setCurrentProductList } = props;
+  const { currentProductList, setCurrentProductList, reNum, getProductList } =
+    props;
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [totalCBM, setTotalCBM] = useState<number>(0);
   const [selectedTab, setSelectedTab] = useState<number>(0);
+
+  // console.log("currentProductList>>>");
+  // console.log(currentProductList);
+
+  const saveProductList = async () => {
+    // TODO : 물품정보 업데이트 API 호출
+    console.log(currentProductList);
+
+    try {
+      const requestParam = {
+        receiptArticleData: currentProductList,
+      };
+      const response = await API.post(`/receipt/detail/${reNum}`, requestParam);
+      if (response.status === 200) {
+        alert("성공적으로 저장되었습니다.");
+        await getProductList();
+        console.log(currentProductList);
+        calculateTotalCBM(currentProductList);
+      } else {
+        alert("물품정보 저장에 실패하였습니다.");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   const calculateTotalCBM = (currentProductList: any) => {
     let movingSum = 0;
@@ -119,14 +142,17 @@ export default function ProductComponent(props: any) {
     let totalSum = 0;
 
     currentProductList.forEach((item: any) => {
-      const articleList = item.ArticleDefaultLocation;
-      articleList.forEach((article: any) => {
+      const articleData = item.articleData;
+      articleData.forEach((article: any) => {
         // 운반, 경유는 이사물량으로 합계
-        if (article.article.method == 0 || article.article.method == 3) {
+        if (article.article.carryType == 0 || article.article.carryType == 3) {
           movingSum += article.article.cbm;
 
           // 폐기, 하역은 폐기물량으로 합계
-        } else if (article.article.method == 1 || article.article.method == 2) {
+        } else if (
+          article.article.carryType == 1 ||
+          article.article.carryType == 2
+        ) {
           discardSum += article.article.cbm;
         }
         // 방치는 계산 안함
@@ -141,14 +167,14 @@ export default function ProductComponent(props: any) {
   };
   useEffect(() => {
     calculateTotalCBM(currentProductList);
-  }, [currentProductList]);
+  }, [currentProductList, getProductList]);
 
   return (
     <>
       <Wrapper>
         <TotalBox>
           <TotalAMountBox>
-            <Title>물량 합계</Title>
+            <Title>합계</Title>
             <Subtitle>/Total Amount</Subtitle>
           </TotalAMountBox>
           <CBMBox>
@@ -177,6 +203,16 @@ export default function ProductComponent(props: any) {
               </InputBox>
               <SubText>CBM</SubText>
             </InputArea>
+          </CBMBox>
+          <CBMBox>
+            <CustomButton
+              onClick={saveProductList}
+              text={"저장하기"}
+              width={"12vw"}
+              height={"6.4vw"}
+              size={"2vw"}
+              radius={"0.4vw"}
+            ></CustomButton>
           </CBMBox>
         </TotalBox>
         <RoomListBox>

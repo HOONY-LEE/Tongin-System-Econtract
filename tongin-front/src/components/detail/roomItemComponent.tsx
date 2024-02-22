@@ -292,7 +292,7 @@ export default function RoomItemComponent(props: any) {
     let cbmSum = 0;
 
     articleList.forEach((item: any) => {
-      quantitySum += item.article.quantity;
+      quantitySum += item.article.amount;
       cbmSum += item.article.cbm;
     });
 
@@ -300,9 +300,8 @@ export default function RoomItemComponent(props: any) {
     setTotalCBM(cbmSum);
   };
   useEffect(() => {
-    const articleList =
-      currentProductList[roomItem.id - 1].ArticleDefaultLocation;
-    calculateTotals(articleList);
+    const articleData = currentProductList[roomItem.id - 1].articleData;
+    calculateTotals(articleData);
   }, [currentProductList]);
 
   return (
@@ -346,7 +345,7 @@ export default function RoomItemComponent(props: any) {
             <MethodBox>처리방법</MethodBox>
           </TitleBox>
           <ProductListBox>
-            {roomItem.ArticleDefaultLocation.map((item: any, id: number) => {
+            {roomItem.articleData.map((item: any, id: number) => {
               return (
                 <ProductItem
                   key={id}

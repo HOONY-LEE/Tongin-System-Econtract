@@ -165,30 +165,28 @@ const CalculatorComponent = (props: any) => {
     roomId,
     articleId,
   } = props;
-  const [tmpValue, setTmpValue] = useState<String>(inputValue.toString());
+  const [tmpValue, setTmpValue] = useState<string>(inputValue.toString());
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
 
   const onClickOkHandle = () => {
     if (validate) {
       let result = 0;
-      if (tmpValue.toString().slice(-1) === ".") {
-        result = Number(tmpValue.toString().slice(0, -1));
+      if (tmpValue.slice(-1) === ".") {
+        result = Number(tmpValue.slice(0, -1));
         setInputValue(result);
         setCurrentProductList((prev: any) => {
           const updatedList = [...prev];
-          updatedList[roomId].ArticleDefaultLocation[articleId].article.cbm =
-            result;
+          updatedList[roomId].articleData[articleId].article.cbm = result;
           return updatedList;
         });
       } else {
-        result = Number(tmpValue.toString());
+        result = Number(tmpValue);
         setInputValue(result);
         console.log(result);
         setCurrentProductList((prev: any) => {
           const updatedList = [...prev];
-          updatedList[roomId].ArticleDefaultLocation[articleId].article.cbm =
-            result;
+          updatedList[roomId].articleData[articleId].article.cbm = result;
           return updatedList;
         });
       }
