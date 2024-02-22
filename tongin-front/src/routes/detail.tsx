@@ -18,6 +18,7 @@ import API from "../API/API";
 import ProductComponent from "../components/detail/productComponent";
 import { sampleProductDataList } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
+import { useParams } from "react-router-dom";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -118,6 +119,8 @@ export default function Detail() {
   const [roomDataList, setRoomDataList] = useState<any[]>([]);
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
 
+  const reNum = useParams().id;
+
   const menuArr = [
     { name: "1. 상세정보", content: "견적리스트 영역" },
     { name: "2. 물품정보", content: "미계약 리스트 영역" },
@@ -129,7 +132,7 @@ export default function Detail() {
     setCurrentTab(index);
   };
   const fetchData = async () => {
-    const response: any = await API.get("receipt/detail/R20240201447");
+    const response: any = await API.get(`/receipt/detail/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptDetail;
       setDetailData(result);
@@ -141,7 +144,7 @@ export default function Detail() {
     // setRoomDataList(sampleProductDataList);
 
     //API 변경후 다시 적용
-    const response = await API.get("receipt/detail/v2");
+    const response = await API.get(`/receipt/article/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptArticleData;
       // console.log(result);
@@ -188,6 +191,8 @@ export default function Detail() {
             {currentTab === 1 ? (
               <ProductTabBox>
                 <ProductComponent
+                  reNum={reNum}
+                  getProductList={getProductList}
                   currentProductList={currentProductList}
                   setCurrentProductList={setCurrentProductList}
                 ></ProductComponent>

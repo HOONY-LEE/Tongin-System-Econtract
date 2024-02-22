@@ -104,7 +104,8 @@ const InputNumber = styled.p`
 `;
 
 export default function ProductComponent(props: any) {
-  const { currentProductList, setCurrentProductList } = props;
+  const { currentProductList, setCurrentProductList, reNum, getProductList } =
+    props;
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [totalCBM, setTotalCBM] = useState<number>(0);
@@ -115,15 +116,23 @@ export default function ProductComponent(props: any) {
 
   const saveProductList = async () => {
     // TODO : 물품정보 업데이트 API 호출
+    console.log(currentProductList);
+
     try {
-      const response = await API.post("url");
+      const requestParam = {
+        receiptArticleData: currentProductList,
+      };
+      const response = await API.post(`/receipt/detail/${reNum}`, requestParam);
       if (response.status === 200) {
         alert("성공적으로 저장되었습니다.");
+        await getProductList();
+        console.log(currentProductList);
+        calculateTotalCBM(currentProductList);
       } else {
         alert("물품정보 저장에 실패하였습니다.");
       }
     } catch (error) {
-      alert("물품정보 저장에 실패하였습니다.");
+      alert(error);
     }
   };
 
@@ -158,7 +167,7 @@ export default function ProductComponent(props: any) {
   };
   useEffect(() => {
     calculateTotalCBM(currentProductList);
-  }, [currentProductList]);
+  }, [currentProductList, getProductList]);
 
   return (
     <>

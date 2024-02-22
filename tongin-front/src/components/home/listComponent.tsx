@@ -203,7 +203,7 @@ export default function ListComponent(props: any) {
           return (
             <ContentBox
               key={user.no}
-              onClick={() => detailPageShow(user.recNum)}
+              onClick={() => detailPageShow("R20240201447")}
             >
               <ContentText>
                 <UserName>{user.name.replace(str, "")}</UserName>
