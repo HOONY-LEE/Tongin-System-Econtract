@@ -6,6 +6,7 @@ import RooomsizeInputComoponent from "../common/roomsizeInputComponent";
 import CalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 import SelectComponent from "../common/selectComponent";
 import RoomSizeCalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
+import RoomSizeBox from "./roomSizeBox";
 
 const ContentBox = styled.div`
   display: flex;
@@ -143,16 +144,10 @@ export default function OptionComponent(props: any) {
         <OptionArea>
           <Subtitle>작업 조건(전)</Subtitle>
           <OptionBox>
-            <InputArea>
-              <InputCBMBox
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
-              >
-                <InputCBMNumber>{prevRoomSize}</InputCBMNumber>
-              </InputCBMBox>
-              <SubText>평</SubText>
-            </InputArea>
+            <RoomSizeBox
+              inputValue={prevRoomSize}
+              setInputValue={setPrevRoomSize}
+            ></RoomSizeBox>
             <SelectComponent
               optionList={optionList}
               setOptionList={setOptionList}
@@ -160,16 +155,10 @@ export default function OptionComponent(props: any) {
           </OptionBox>
           <Subtitle>작업 조건(후)</Subtitle>
           <OptionBox>
-            <InputArea>
-              <InputCBMBox
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
-              >
-                <InputCBMNumber>{0}</InputCBMNumber>
-              </InputCBMBox>
-              <SubText>평</SubText>
-            </InputArea>
+            <RoomSizeBox
+              inputValue={afterRoomSize}
+              setInputValue={setAfterRoomSize}
+            ></RoomSizeBox>
             <SelectComponent
               optionList={optionList2}
               setOptionList={setOptionList2}
@@ -210,16 +199,6 @@ export default function OptionComponent(props: any) {
           </ButtonArea>
         )}
       </Wrapper>
-      {isModalOpen && (
-        <RoomSizeCalculatorComponent
-          title={`[평수] 입력창`}
-          unit={"평"}
-          onClose={handleCloseModal}
-          roomSize={prevRoomSize}
-          setRoomSize={setPrevRoomSize}
-          // setCurrentProductList={setCurrentProductList}
-        />
-      )}
     </ContentBox>
   );
 }

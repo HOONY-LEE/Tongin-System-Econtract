@@ -174,6 +174,9 @@ const RoomSizeCalculatorComponent = (props: any) => {
       let result = 0;
       if (tmpValue.slice(-1) === ".") {
         result = Number(tmpValue.slice(0, -1));
+        if (isNaN(result)) {
+          result = 0;
+        }
         setRoomSize(result);
         // setCurrentProductList((prev: any) => {
         //   const updatedList = [...prev];
@@ -182,6 +185,9 @@ const RoomSizeCalculatorComponent = (props: any) => {
         // });
       } else {
         result = Number(tmpValue);
+        if (isNaN(result)) {
+          result = 0;
+        }
         setRoomSize(result);
         console.log(result);
         // setCurrentProductList((prev: any) => {
@@ -195,11 +201,8 @@ const RoomSizeCalculatorComponent = (props: any) => {
   };
 
   useEffect(() => {
-    if (Number(tmpValue) >= 100) {
-      setError("[ CBM은 100 미만으로만 입력가능합니다. ]");
-      setValidate(false);
-    } else if (Number(tmpValue) % 0.5 !== 0) {
-      setError("[ CBM은 0.5 단위로만 입력가능합니다. ]");
+    if (Number(tmpValue) >= 10000) {
+      setError("[ 집 평수는 10000 미만으로만 입력가능합니다. ]");
       setValidate(false);
     } else {
       setValidate(true);
