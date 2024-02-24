@@ -27,8 +27,8 @@ const Label = styled.label`
   text-align: center;
   /* outline: 1px solid red; */
 `;
-const SelectOptions = styled.ul<{
-  show?: boolean;
+const SelectOptions = styled.div<{
+  $show?: boolean;
 }>`
   position: absolute;
   list-style: none;
@@ -38,9 +38,9 @@ const SelectOptions = styled.ul<{
   overflow: hidden;
   text-align: center;
   /* height: 4vw; */
-  max-height: ${(props) => (props.show ? "none" : "0")};
+  max-height: ${(props) => (props.$show ? "none" : "0")};
   padding: 0;
-  outline: ${(props) => (props.show ? "0.2vw solid #ff7f3b" : "none")};
+  outline: ${(props) => (props.$show ? "0.2vw solid #ff7f3b" : "none")};
   border-radius: 0.4vw;
   background-color: #fdfdfd;
   color: #222222;
@@ -48,7 +48,7 @@ const SelectOptions = styled.ul<{
     background-color: #ff7f3b;
   }
 `;
-const Option = styled.li`
+const Option = styled.div`
   font-size: 14px;
   padding: 1vw 0.5vw;
   height: 4vw;
@@ -75,8 +75,7 @@ const DetailEditSelectBoxComponent = (props: any) => {
   ];
 
   const [currentValue, setCurrentValue] = useState<any>(data[0].status);
-  const [showOptions, setShowOptions] = useState(false);
-  const { show } = props;
+  const [showOptions, setShowOptions] = useState<boolean>(false);
   const handleOnChangeSelectValue = (e: any) => {
     const { innerText } = e.target;
     setCurrentValue(innerText);
@@ -94,14 +93,10 @@ const DetailEditSelectBoxComponent = (props: any) => {
         />
       </Label>
 
-      <SelectOptions show={showOptions}>
+      <SelectOptions $show={showOptions}>
         {data.map((item, index) => (
-          <Option>
-            <li
-              key={index}
-              value={item.statusCode}
-              onClick={handleOnChangeSelectValue}
-            >
+          <Option key={index}>
+            <li value={item.statusCode} onClick={handleOnChangeSelectValue}>
               {item.status}
             </li>
           </Option>

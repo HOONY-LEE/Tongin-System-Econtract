@@ -272,7 +272,7 @@ const MoveBtnTitle = styled.div`
   justify-content: start;
   /* outline: 0.2vw solid red; */
 `;
-const MoveBtn = styled.li`
+const MoveBtn = styled.div`
   display: flex;
   align-items: center;
   font-size: 1.8vw;
