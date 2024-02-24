@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CustomButton from "../common/customButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MultiSelectComponent from "../common/multiSelectComponent";
 import RooomsizeInputComoponent from "../common/roomsizeInputComponent";
 import CalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
@@ -109,11 +109,17 @@ const SubText = styled.p`
 `;
 
 export default function OptionComponent(props: any) {
+  const { optionData, setOptionData } = props;
+
   const [editMode, setEditMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<number>(0);
-  const [prevRoomSize, setPrevRoomSize] = useState<number>(0);
-  const [afterRoomSize, setAfterRoomSize] = useState<number>(0);
+  const [prevRoomSize, setPrevRoomSize] = useState<number>(
+    optionData.beforeWorkCondition.pyeong
+  );
+  const [afterRoomSize, setAfterRoomSize] = useState<number>(
+    optionData.afterWorkCondition.pyeong
+  );
   const [optionList, setOptionList] = useState([
     { id: 1, name: "사다리", description: "", isSelected: false },
     { id: 2, name: "엘리베이터", description: "", isSelected: false },
@@ -128,6 +134,15 @@ export default function OptionComponent(props: any) {
     { id: 4, name: "기타", description: "", isSelected: false },
   ]);
 
+  const [cleaningServiceList, setCleaningServiceList] = useState<any[]>([
+    { id: 1, name: "입주클리닝", description: "", selected: false },
+    { id: 2, name: "입주클리닝 프리미엄", description: "", selected: false },
+    { id: 3, name: "입주클리닝 VIP", description: "", selected: false },
+  ]);
+
+  console.log("optionData>>>");
+  console.log(optionData);
+
   // 모달 열기 핸들러
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -137,6 +152,27 @@ export default function OptionComponent(props: any) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    setCleaningServiceList((prev: any) => {
+      const updatedList = [...prev];
+      if (optionData.livingService.movingCleaningService.selected === true) {
+        updatedList[
+          optionData.livingService.movingCleaningService.serviceType - 1
+        ].selected = true;
+      }
+      return updatedList;
+    });
+  }, [optionList]);
+
+  useEffect(() => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.beforeWorkCondition.pyeong = prevRoomSize;
+      updatedData.afterWorkCondition.pyeong = afterRoomSize;
+      return updatedData;
+    });
+  }, [prevRoomSize, afterRoomSize]);
 
   return (
     <ContentBox>
@@ -164,40 +200,25 @@ export default function OptionComponent(props: any) {
               setOptionList={setOptionList2}
             ></SelectComponent>
           </OptionBox>
+          <OptionBox>
+            <Subtitle>입주청소서비스</Subtitle>
+            <SelectComponent
+              optionList={cleaningServiceList}
+              setOptionList={setCleaningServiceList}
+            ></SelectComponent>
+          </OptionBox>
         </OptionArea>
-        {editMode ? (
-          <ButtonArea>
-            <CustomButton
-              onClick={() => setEditMode(false)}
-              width={"48%"}
-              height={"6vw"}
-              text={`닫기`}
-              size={"2vw"}
-              radius={"0.6vw"}
-              $bgColor={"#ffffff"}
-              $outline={"0.15vw solid #dcdcdc"}
-              color={"black"}
-            ></CustomButton>
-            <CustomButton
-              width={"48%"}
-              height={"6vw"}
-              text={`저장`}
-              size={"2vw"}
-              radius={"0.6vw"}
-            ></CustomButton>
-          </ButtonArea>
-        ) : (
-          <ButtonArea>
-            <CustomButton
-              onClick={() => setEditMode(true)}
-              width={"100%"}
-              height={"6vw"}
-              text={`옵션정보 저장하기`}
-              size={"2vw"}
-              radius={"0.6vw"}
-            ></CustomButton>
-          </ButtonArea>
-        )}
+
+        <ButtonArea>
+          <CustomButton
+            onClick={console.log("save")}
+            width={"100%"}
+            height={"6vw"}
+            text={`옵션정보 저장하기`}
+            size={"2vw"}
+            radius={"0.6vw"}
+          ></CustomButton>
+        </ButtonArea>
       </Wrapper>
     </ContentBox>
   );

@@ -117,6 +117,7 @@ export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
   const [roomDataList, setRoomDataList] = useState<any[]>([]);
+  const [optionData, setOptionData] = useState<object>({});
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
 
   const reNum = useParams().id;
@@ -131,7 +132,9 @@ export default function Detail() {
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
-  const fetchData = async () => {
+
+  // 상세정보 호출API
+  const getDetailList = async () => {
     const response: any = await API.get(`/receipt/detail/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptDetail;
@@ -140,14 +143,12 @@ export default function Detail() {
       console.log("에러");
     }
   };
-  const getProductList = async () => {
-    // setRoomDataList(sampleProductDataList);
 
-    //API 변경후 다시 적용
+  // 물품정보 호출API
+  const getProductList = async () => {
     const response = await API.get(`/receipt/article/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptArticleData;
-      // console.log(result);
 
       setRoomDataList(result);
     } else {
@@ -155,9 +156,18 @@ export default function Detail() {
     }
   };
 
+  // 옵션정보 호출API
+  const getOptionList = async () => {
+    const response = await API.get(`/receipt/option/${reNum}`);
+    if (response.status === 200) {
+      setOptionData(response.data.receiptOptionData);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    getDetailList();
     getProductList();
+    getOptionList();
   }, []);
 
   useEffect(() => {
@@ -200,7 +210,10 @@ export default function Detail() {
             ) : null}
             {currentTab === 2 ? (
               <OptionTabBox>
-                <OptionComponent></OptionComponent>
+                <OptionComponent
+                  optionData={optionData}
+                  setOptionData={setOptionData}
+                ></OptionComponent>
               </OptionTabBox>
             ) : null}
             {currentTab === 3 ? (
