@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Image } from "./image";
 import { useState, useRef, useEffect } from "react";
-import CalculatorComponent from "./calculatorComponent";
+import CalculatorComponent from "./calculateComponent";
 
 const Wrapper = styled.div`
   position: relative;

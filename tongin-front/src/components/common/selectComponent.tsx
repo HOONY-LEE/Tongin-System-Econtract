@@ -35,14 +35,13 @@ const SelectBox = styled.div<{
 `;
 
 export default function SelectComponent(props: any) {
-  const { optionList, setOptionList } = props;
+  const { optionList, selectedValue, setSelectedValue } = props;
 
-  const selectOptionHandle = (index: number) => {
-    setOptionList((prev: any) => {
-      const updatedList = [...prev];
-      updatedList[index].isSelected = !updatedList[index].isSelected;
-
-      return updatedList;
+  const selectOptionHandle = (id: number) => {
+    setSelectedValue((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.transportationMethod = id;
+      return updatedData;
     });
   };
 
@@ -51,10 +50,10 @@ export default function SelectComponent(props: any) {
       {optionList.map((item: any, index: number) => {
         return (
           <SelectBox
-            onClick={(e) => selectOptionHandle(index)}
+            onClick={(e) => selectOptionHandle(item.id)}
             $itemCount={`${94 / optionList.length}%`}
             key={index}
-            $isSelected={item.isSelected}
+            $isSelected={item.id === selectedValue}
           >
             {item.name}
           </SelectBox>

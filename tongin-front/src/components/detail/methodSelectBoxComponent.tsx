@@ -78,12 +78,11 @@ const MethodSelectBoxComponent = (props: any) => {
   );
   const [showOptions, setShowOptions] = useState(false);
 
-  const handleOnChangeSelectValue = (e: any) => {
-    const value = e.target.value;
-    setCurrentValue(data[value].status);
+  const handleOnChangeSelectValue = (e: any, statusCode: number) => {
+    setCurrentValue(data[statusCode].status);
     setCurrentProductList((prev: any) => {
       const updatedList = [...prev];
-      updatedList[roomId].articleData[articleId].article.carryType = value;
+      updatedList[roomId].articleData[articleId].article.carryType = statusCode;
       return updatedList;
     });
   };
@@ -105,10 +104,11 @@ const MethodSelectBoxComponent = (props: any) => {
 
       <SelectOptions $show={showOptions}>
         {data.map((item, index) => (
-          <Option key={index}>
-            <li value={item.statusCode} onClick={handleOnChangeSelectValue}>
-              {item.status}
-            </li>
+          <Option
+            key={index}
+            onClick={(e) => handleOnChangeSelectValue(e, item.statusCode)}
+          >
+            <li value={item.statusCode}>{item.status}</li>
           </Option>
         ))}
       </SelectOptions>

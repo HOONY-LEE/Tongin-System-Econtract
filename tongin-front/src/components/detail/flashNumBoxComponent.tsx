@@ -61,7 +61,7 @@ export default function FlashNumBoxComponent(props: any) {
         newValue = newValue.substr(1);
       }
     }
-    if (newValue.length > 13) {
+    if (newValue.length > 11) {
       newValue = tmpValue;
     }
     setTmpValue(newValue);
