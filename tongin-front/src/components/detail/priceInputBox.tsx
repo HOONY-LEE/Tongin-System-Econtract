@@ -1,20 +1,19 @@
 import styled from "styled-components";
-import RoomSizeCalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 import { useState } from "react";
+import PriceCalculatorComponent from "./../common/priceCalculatorComponent";
 
 const InputArea = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: end;
   align-items: center;
-  width: 14vw;
+  width: 20vw;
   height: 5vw;
-  margin-right: 3vw;
 `;
 
 const InputCBMBox = styled.div`
   display: flex;
   justify-content: center;
-  width: 10vw;
+  width: 18vw;
   height: 100%;
   background-color: #f4f4f4;
   border-radius: 0.6vw;
@@ -31,7 +30,7 @@ const InputCBMNumber = styled.p`
   color: black;
   font-size: 2.2vw;
   font-weight: 400;
-  width: 70%;
+  width: 88%;
 `;
 
 const SubText = styled.p`
@@ -42,14 +41,9 @@ const SubText = styled.p`
   align-items: end;
 `;
 
-export default function RoomSizeBox(props: any) {
+export default function PriceInputBox(props: any) {
   const { inputValue, setInputValue } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  // 모달 열기 핸들러
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
 
   // 모달 닫기 핸들러
   const handleCloseModal = () => {
@@ -65,14 +59,14 @@ export default function RoomSizeBox(props: any) {
       >
         <InputCBMNumber>{inputValue}</InputCBMNumber>
       </InputCBMBox>
-      <SubText>평</SubText>
+      <SubText>원</SubText>
       {isModalOpen && (
-        <RoomSizeCalculatorComponent
-          title={`[평수] 입력창`}
-          unit={"평"}
+        <PriceCalculatorComponent
+          title={`[금액] 입력창`}
+          unit={"원"}
           onClose={handleCloseModal}
-          roomSize={inputValue}
-          setRoomSize={setInputValue}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
         />
       )}
     </InputArea>

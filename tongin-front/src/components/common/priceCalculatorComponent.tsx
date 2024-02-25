@@ -118,15 +118,6 @@ const Title = styled.p`
   font-weight: 400;
 `;
 
-const CloseIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5vw;
-  height: 4vw;
-  font-size: 2vw;
-`;
-
 const NumberInput = styled.div`
   display: flex;
   justify-content: end;
@@ -154,9 +145,9 @@ const ColBox = styled.div`
   justify-content: space-between;
 `;
 
-const RoomSizeCalculatorComponent = (props: any) => {
-  const { onClose, roomSize, setRoomSize, title, unit } = props;
-  const [tmpValue, setTmpValue] = useState<string>(roomSize.toString());
+const PriceCalculatorComponent = (props: any) => {
+  const { onClose, inputValue, setInputValue, title, unit } = props;
+  const [tmpValue, setTmpValue] = useState<string>(inputValue.toString());
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
 
@@ -174,9 +165,9 @@ const RoomSizeCalculatorComponent = (props: any) => {
           result = 0;
         }
       }
-      setRoomSize((prev: any) => {
+      setInputValue((prev: any) => {
         const updatedData = { ...prev };
-        updatedData.pyeong = result;
+        updatedData.servicePayment = result;
         return updatedData;
       });
       onClose();
@@ -184,8 +175,8 @@ const RoomSizeCalculatorComponent = (props: any) => {
   };
 
   useEffect(() => {
-    if (Number(tmpValue) >= 10000) {
-      setError("[ 집 평수는 10000 미만으로만 입력가능합니다. ]");
+    if (Number(tmpValue) >= 10000000000) {
+      setError("[ 금액은 10000000000 미만으로만 입력가능합니다. ]");
       setValidate(false);
     } else {
       setValidate(true);
@@ -272,7 +263,7 @@ const RoomSizeCalculatorComponent = (props: any) => {
                 setTmpValue={setTmpValue}
               ></FlashNumBoxComponent>
               <FlashNumBoxComponent
-                number={"."}
+                number={""}
                 tmpValue={tmpValue}
                 setTmpValue={setTmpValue}
               ></FlashNumBoxComponent>
@@ -288,4 +279,4 @@ const RoomSizeCalculatorComponent = (props: any) => {
   );
 };
 
-export default RoomSizeCalculatorComponent;
+export default PriceCalculatorComponent;
