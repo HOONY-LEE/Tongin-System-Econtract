@@ -19,6 +19,7 @@ import ProductComponent from "../components/detail/productComponent";
 import { sampleProductDataList } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
 import { useParams } from "react-router-dom";
+import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -118,6 +119,8 @@ export default function Detail() {
   const [detailData, setDetailData] = useState<any[]>([]);
   const [roomDataList, setRoomDataList] = useState<any[]>([]);
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
+  const [drawingPanel, setDrawingPanel] = useState(true);
+  const [isSave, setIsSave] = useState<any[]>([]);
 
   const reNum = useParams().id;
 
@@ -207,6 +210,13 @@ export default function Detail() {
               <ContractTabBox>계약서 준비중</ContractTabBox>
             ) : null}
           </ContentBox>
+          <button onClick={() => setDrawingPanel(true)}> 드로잉 </button>
+          {drawingPanel && (
+            <DetailDrawingPanelComponent
+              setIsSave={setIsSave}
+              onClose={() => setDrawingPanel(false)}
+            />
+          )}
         </HomeContainer>
       </FlexXY>
     </>
