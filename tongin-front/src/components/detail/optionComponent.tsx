@@ -12,6 +12,8 @@ import QuantityInputComponent from "../common/quantityInputComponent";
 import ServiceSelectComponent from "./serviceSelectComponent";
 import DateModalComponent from "./dateModalComponent";
 import { format } from "date-fns";
+import ServicePaymentSelectComponent from "./servicePaymentSelectComponent";
+import OptionProductComponent from "./optionProductComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -22,8 +24,6 @@ const ContentBox = styled.div`
   height: 100%;
   border-radius: 0 0 0.7vw 0.7vw;
   background-color: white;
-  /* outline: 0.2vw solid gray; */
-  /* margin: 0.7vh 0vh 0.7vh 0vh; */
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 80vw;
-  height: 110vw;
+  height: 100%;
   margin-top: 1vw;
   margin-bottom: 3vw;
 `;
@@ -73,60 +73,8 @@ const Subtitle = styled.div`
   margin-top: 2vw;
 `;
 
-const MoveDateBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-`;
-const MoveDateTitle = styled.div`
-  height: 3vw;
-  display: flex;
-  font-size: 1.8vw;
-  font-weight: 300;
-  flex-direction: column;
-  align-items: start;
-  color: #b2b2b2;
-  justify-content: start;
-  /* outline: 0.2vw solid red; */
-`;
-const MoveDateInput = styled.div`
-  width: 100%;
-  height: 5vw;
-  display: flex;
-  font-size: 1.8vw;
-  font-weight: 500;
-  flex-direction: column;
-  align-items: center;
-  outline: 0.2vw solid #dbdbdb;
-  border-radius: 0.6vw;
-  justify-content: center;
-  /* outline: 0.2vw solid red; */
-  padding-left: 0.8vw;
-  margin-bottom: 1vw;
-`;
-
-const InputBox = styled.input.attrs({})<{}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  /* margin-left: 1vw; */
-  font-size: 1.8vw;
-  font-weight: 500;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  border: none;
-  width: 90%;
-  height: 100%;
-`;
-
 export default function OptionComponent(props: any) {
   const { optionData, setOptionData } = props;
-  const [dateType, setDateType] = useState();
-  const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const [prevOptionData, setPrevOptionData] = useState(
     optionData.beforeWorkCondition
   );
@@ -143,6 +91,12 @@ export default function OptionComponent(props: any) {
     optionData.livingService.organizationStorageService
   );
 
+  const [optionServiceList, setOptionServiceList] = useState(
+    Object.values(optionData.optionService)
+  );
+
+  const saveOptionData = () => {};
+
   const transportMethodList = [
     { id: 0, name: "선택안함", description: "" },
     { id: 1, name: "사다리", description: "" },
@@ -154,73 +108,31 @@ export default function OptionComponent(props: any) {
   const cleaningServiceList = [
     { id: 0, name: "선택안함", description: "선택안함" },
     { id: 1, name: "스탠다드", description: "입주클리닝" },
-    { id: 2, name: "프리미엄", description: "입주클리닝+탈취살균" },
+    { id: 2, name: "프리미엄", description: "입주클리닝 + 탈취살균" },
     {
       id: 3,
       name: "VIP",
-      description: "입주클리닝+탈취살균1+매트리스클리닝+탈취살균2",
+      description: "입주클리닝 + 탈취살균1 + 매트리스클리닝 + 탈취살균2",
     },
   ];
   const deodorizationServiceList = [
     { id: 0, name: "선택안함", description: "" },
-    { id: 1, name: "탈취살균서비스", description: "" },
+    { id: 1, name: "탈취살균", description: "" },
   ];
 
   const organizingServiceList = [
     { id: 0, name: "선택안함", description: "" },
-    { id: 1, name: "정리수납서비스", description: "" },
+    { id: 1, name: "정리수납", description: "" },
   ];
 
-  console.log("optionData>>>");
-  console.log(optionData);
-
-  ////////////////////날짜 모달 시작////////////////////
-  // 날짜 모달 열기 핸들러
-  const dateHandleOpenModal = (type: any) => {
-    setIsDateModalOpen(true);
-    setDateType(type);
-  };
-
-  // // 날짜 모달 닫기 핸들러
-  const dateHandleCloseModal = () => {
-    setIsDateModalOpen(false);
-  };
-
-  const deteValueDelete = () => {
-    if (dateType === "cleaning") {
-      cleaningService.serviceRequestDate = "";
-    } else if (dateType === "deodorazation") {
-      deodorizationService.serviceRequestDate = "";
-    } else if (dateType === "organizing") {
-      organizingService.serviceRequestDate = "";
-    } else {
-      return "";
-    }
-
-    dateHandleCloseModal();
-  };
-
-  const dateValueInput = (data: any) => {
-    console.log("dateValueInput", data);
-    const myData = new Date(data);
-    // setDateData(data);
-    console.log(format(myData, "y-MM-dd"));
-    if (!Number.isNaN(new Date(myData).getTime())) {
-      if (dateType === "cleaning") {
-        cleaningService.serviceRequestDate = format(myData, "y-MM-dd");
-      } else if (dateType === "deodorazation") {
-        deodorizationService.serviceRequestDate = format(myData, "y-MM-dd");
-      } else if (dateType === "organizing") {
-        organizingService.serviceRequestDate = format(myData, "y-MM-dd");
-      } else {
-        return "";
-      }
-    } else {
-      return "";
-    }
-  };
-
-  const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
+  const servicePaymentMethodList = [
+    { id: 0, name: "선택안함", description: "" },
+    { id: 1, name: "현금", description: "" },
+    { id: 2, name: "온라인", description: "" },
+    { id: 3, name: "카드", description: "" },
+    { id: 4, name: "무빙팀 수금", description: "" },
+    { id: 5, name: "리빙팀 수금", description: "" },
+  ];
 
   useEffect(() => {
     setOptionData((prev: any) => {
@@ -228,10 +140,18 @@ export default function OptionComponent(props: any) {
       updatedData.beforeWorkCondition = prevOptionData;
       updatedData.afterWorkCondition = afterOptionData;
       updatedData.livingService.movingCleaningService = cleaningService;
+      updatedData.livingService.deodorizationService = deodorizationService;
+      updatedData.livingService.organizationStorageService = organizingService;
 
       return updatedData;
     });
-  }, [prevOptionData, afterOptionData, cleaningService]);
+  }, [
+    prevOptionData,
+    afterOptionData,
+    cleaningService,
+    deodorizationService,
+    organizingService,
+  ]);
 
   return (
     <ContentBox>
@@ -269,23 +189,6 @@ export default function OptionComponent(props: any) {
               setSelectedValue={setCleaningService}
             ></CleaningSelectComponent>
           </OptionBox>
-          <MoveDateBox>
-            <MoveDateTitle>계약일</MoveDateTitle>
-            <MoveDateInput
-              onClick={() => {
-                dateHandleOpenModal("cleaning");
-              }}
-            >
-              <InputBox
-                placeholder="--"
-                readOnly
-                value={cleaningService.serviceRequestDate.replace(
-                  formattedDate,
-                  "$1-$2-$3"
-                )}
-              ></InputBox>
-            </MoveDateInput>
-          </MoveDateBox>
           <Subtitle>탈취살균서비스</Subtitle>
           <OptionBox>
             <ServiceSelectComponent
@@ -302,11 +205,26 @@ export default function OptionComponent(props: any) {
               setSelectedValue={setOrganizingService}
             ></ServiceSelectComponent>
           </OptionBox>
+          <Subtitle>서비스 결제방법</Subtitle>
+          <OptionBox>
+            <ServicePaymentSelectComponent
+              optionList={servicePaymentMethodList}
+              selectedValue={organizingService}
+              setSelectedValue={setOrganizingService}
+            ></ServicePaymentSelectComponent>
+          </OptionBox>
+          <Subtitle>옵션 품목</Subtitle>
+          <OptionBox>
+            <OptionProductComponent
+              optionServiceList={optionServiceList}
+              setOptionServiceList={setOptionServiceList}
+            ></OptionProductComponent>
+          </OptionBox>
         </OptionArea>
 
         <ButtonArea>
           <CustomButton
-            onClick={console.log("save")}
+            onClick={saveOptionData}
             width={"100%"}
             height={"6vw"}
             text={`옵션정보 저장하기`}
@@ -314,13 +232,6 @@ export default function OptionComponent(props: any) {
             radius={"0.6vw"}
           ></CustomButton>
         </ButtonArea>
-        {isDateModalOpen && (
-          <DateModalComponent
-            dateValueInput={dateValueInput}
-            onClose={dateHandleCloseModal}
-            deteValueDelete={deteValueDelete}
-          />
-        )}
       </Wrapper>
     </ContentBox>
   );

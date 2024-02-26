@@ -125,6 +125,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
+            stroke={""}
             ref={stageRef}
           >
             <Layer>

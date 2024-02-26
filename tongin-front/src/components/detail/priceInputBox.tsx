@@ -6,18 +6,19 @@ const InputArea = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  width: 20vw;
+  width: 30vw;
   height: 5vw;
 `;
 
 const InputCBMBox = styled.div`
   display: flex;
   justify-content: center;
-  width: 18vw;
+  width: 28vw;
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: white;
   border-radius: 0.6vw;
   margin-right: 0.8vw;
+  outline: 0.2vw solid #dbdbdb;
   &:hover {
     cursor: pointer;
   }
@@ -30,7 +31,7 @@ const InputCBMNumber = styled.p`
   color: black;
   font-size: 2.2vw;
   font-weight: 400;
-  width: 88%;
+  width: 80%;
 `;
 
 const SubText = styled.p`
@@ -57,7 +58,7 @@ export default function PriceInputBox(props: any) {
           setIsModalOpen(true);
         }}
       >
-        <InputCBMNumber>{inputValue}</InputCBMNumber>
+        <InputCBMNumber>{inputValue.toLocaleString()}</InputCBMNumber>
       </InputCBMBox>
       <SubText>원</SubText>
       {isModalOpen && (

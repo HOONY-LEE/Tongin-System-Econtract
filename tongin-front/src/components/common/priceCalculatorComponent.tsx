@@ -196,7 +196,7 @@ const PriceCalculatorComponent = (props: any) => {
             <Title>{title}</Title>
           </TopArea>
           <ShowArea>
-            <NumberInput>{tmpValue}</NumberInput>
+            <NumberInput>{Number(tmpValue).toLocaleString()}</NumberInput>
             <UnitText>{unit}</UnitText>
           </ShowArea>
           {!validate && <ErrorArea>{error}</ErrorArea>}
