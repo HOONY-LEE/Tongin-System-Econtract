@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
-import PriceCalculatorComponent from "./../common/priceCalculatorComponent";
+import PriceCalculatorComponent from "../common/priceCalculatorComponent";
+import OptionPriceCalculatorComponent from "../common/optionPriceCalculatorComponent";
 
 const InputArea = styled.div`
   display: flex;
@@ -42,8 +43,8 @@ const SubText = styled.p`
   align-items: end;
 `;
 
-export default function PriceInputBox(props: any) {
-  const { inputValue, setInputValue } = props;
+export default function OptionPriceInputBox(props: any) {
+  const { inputValue, setInputValue, optionType } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 모달 닫기 핸들러
@@ -62,10 +63,11 @@ export default function PriceInputBox(props: any) {
       </InputCBMBox>
       <SubText>원</SubText>
       {isModalOpen && (
-        <PriceCalculatorComponent
-          title={`[금액] 입력창`}
+        <OptionPriceCalculatorComponent
+          title={`[옵션 금액] 입력창`}
           unit={"원"}
           onClose={handleCloseModal}
+          optionType={optionType}
           inputValue={inputValue}
           setInputValue={setInputValue}
         />

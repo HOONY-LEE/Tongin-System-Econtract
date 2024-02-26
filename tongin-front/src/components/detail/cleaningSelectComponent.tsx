@@ -35,6 +35,7 @@ const DescriptionBox = styled.div`
   justify-content: center;
   width: 100%;
   height: 4vw;
+  font-size: 2vw;
 `;
 
 const SelectBox = styled.div<{

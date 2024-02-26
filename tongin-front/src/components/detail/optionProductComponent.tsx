@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import MultiSelectComponent from "../common/multiSelectComponent";
+import { useState } from "react";
+import PriceInputBox from "./priceInputBox";
+import OptionPriceInputBox from "./optionPriceInputBox";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -7,6 +10,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  border-radius: 0.4vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
 `;
 
 const OptionItem = styled.div`
@@ -14,32 +20,30 @@ const OptionItem = styled.div`
   height: 8vw;
   border-radius: 0.4vw;
   display: flex;
-  outline: 0.1vw solid black;
+  outline: 0.1vw solid #b1b1b1;
   margin-bottom: 1vw;
 `;
 
 const NameBox = styled.div`
-  width: 30%;
+  width: 24%;
   height: 100%;
-  outline: 0.1vw solid red;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 2vw;
 `;
 
 const SelectBox = styled.div`
-  width: 40%;
+  width: 32%;
   height: 100%;
-  outline: 0.1vw solid red;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const PriceBox = styled.div`
-  width: 30%;
+  width: 44%;
   height: 100%;
-  outline: 0.1vw solid red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +51,8 @@ const PriceBox = styled.div`
 
 export default function OptionProductComponent(props: any) {
   const { optionServiceList, setOptionServiceList } = props;
-
+  console.log("optionServiceList>>>");
+  console.log(optionServiceList);
   return (
     <Wrapper>
       {optionServiceList.map((item: any) => {
@@ -55,9 +60,22 @@ export default function OptionProductComponent(props: any) {
           <OptionItem key={item.id}>
             <NameBox>{item.optionName}</NameBox>
             <SelectBox>
-              {/* <MultiSelectComponent></MultiSelectComponent> */}
+              <MultiSelectComponent
+                optionList={[
+                  { id: 0, name: "분해", isSelected: item.decomposition },
+                  { id: 1, name: "설치", isSelected: item.installation },
+                ]}
+                setOptionList={setOptionServiceList}
+                optionType={item.optionType - 1}
+              ></MultiSelectComponent>
             </SelectBox>
-            <PriceBox></PriceBox>
+            <PriceBox>
+              <OptionPriceInputBox
+                inputValue={item.optionPayment}
+                setInputValue={setOptionServiceList}
+                optionType={item.optionType - 1}
+              ></OptionPriceInputBox>
+            </PriceBox>
           </OptionItem>
         );
       })}

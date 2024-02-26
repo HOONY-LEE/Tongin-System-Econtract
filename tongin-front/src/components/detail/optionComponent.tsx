@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import CustomButton from "../common/customButton";
 import { useEffect, useState } from "react";
-import MultiSelectComponent from "../common/multiSelectComponent";
 import RooomsizeInputComoponent from "../common/roomsizeInputComponent";
 import CalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 import SelectComponent from "../common/selectComponent";
@@ -142,6 +141,7 @@ export default function OptionComponent(props: any) {
       updatedData.livingService.movingCleaningService = cleaningService;
       updatedData.livingService.deodorizationService = deodorizationService;
       updatedData.livingService.organizationStorageService = organizingService;
+      updatedData.optionService = updatedData.optionService;
 
       return updatedData;
     });
@@ -151,6 +151,7 @@ export default function OptionComponent(props: any) {
     cleaningService,
     deodorizationService,
     organizingService,
+    optionServiceList,
   ]);
 
   return (
