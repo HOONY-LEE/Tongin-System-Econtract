@@ -96,13 +96,23 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     setEraserSizeVisible(true);
     setPenColorVisible(false);
     setTool("eraser");
+    setEraserSize(20);
   };
   const divRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState<any>({
     width: 0,
     height: 0,
   });
-
+  const colorArr = [
+    { color: "#000000", name: "Black" },
+    { color: "#ff7f3b", name: "red" },
+    { color: "#009dff", name: "blue" },
+  ];
+  const eraserArr = [
+    { size: 20, name: "1px" },
+    { size: 60, name: "10px" },
+    { size: 110, name: "50px" },
+  ];
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
   useEffect(() => {
@@ -112,6 +122,10 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
         height: divRef.current.offsetHeight,
       });
     }
+  }, []);
+  useEffect(() => {
+    setTool("pen");
+    setPenColor("#000000");
   }, []);
 
   return (
@@ -125,6 +139,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
+            onTouchStart={handleMouseDown}
+            onTouchMove={handleMouseMove}
+            onTouchEnd={handleMouseUp}
             ref={stageRef}
           >
             <Layer>
@@ -147,16 +164,20 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
           <div style={{ position: "absolute", top: 10, left: 10 }}>
             {penColorVisible && (
               <div>
-                <button onClick={() => setPenColor("#df4b26")}>red</button>
-                <button onClick={() => setPenColor("#00ff44")}>green</button>
-                <button onClick={() => setPenColor("#000000")}>black</button>
+                {colorArr.map((colorArr, i) => (
+                  <button onClick={() => setPenColor(colorArr.color)} key={i}>
+                    {colorArr.name}
+                  </button>
+                ))}
               </div>
             )}
             {eraserSizeVisible && (
               <div>
-                <button onClick={() => setEraserSize(10)}>1px</button>
-                <button onClick={() => setEraserSize(40)}>10px</button>
-                <button onClick={() => setEraserSize(100)}>100px</button>
+                {eraserArr.map((eraser, i) => (
+                  <button onClick={() => setEraserSize(eraser.size)} key={i}>
+                    {eraser.name}
+                  </button>
+                ))}
               </div>
             )}
             <button value="pen" onClick={() => selectPen()}>
