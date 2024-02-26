@@ -18,8 +18,8 @@ const CalculatorComponentWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
-  width: 32vw;
-  height: 40vw;
+  width: 90vw;
+  height: 120vw;
   background-color: #2d2d2d60;
   border-radius: 0.8vw;
   display: flex;
@@ -32,8 +32,8 @@ const CanvasPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28vw;
-  height: 36vw;
+  width: 86vw;
+  height: 115vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
 `;
@@ -143,6 +143,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             onTouchMove={handleMouseMove}
             onTouchEnd={handleMouseUp}
             ref={stageRef}
+            stroke={""}
           >
             <Layer>
               {lines.map((line, i) => (
