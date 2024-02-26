@@ -145,8 +145,8 @@ const ColBox = styled.div`
   justify-content: space-between;
 `;
 
-const PriceCalculatorComponent = (props: any) => {
-  const { onClose, inputValue, setInputValue, title, unit } = props;
+const OptionPriceCalculatorComponent = (props: any) => {
+  const { onClose, inputValue, setInputValue, title, unit, optionType } = props;
   const [tmpValue, setTmpValue] = useState<string>(inputValue.toString());
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
@@ -165,9 +165,13 @@ const PriceCalculatorComponent = (props: any) => {
           result = 0;
         }
       }
+
       setInputValue((prev: any) => {
         const updatedData = { ...prev };
-        updatedData.servicePayment = result;
+        console.log("here>>");
+        // console.log(updatedData[optionType]);
+        updatedData[optionType].optionPayment = result;
+        alert("여기까진 왔어");
         return updatedData;
       });
       onClose();
@@ -279,4 +283,4 @@ const PriceCalculatorComponent = (props: any) => {
   );
 };
 
-export default PriceCalculatorComponent;
+export default OptionPriceCalculatorComponent;

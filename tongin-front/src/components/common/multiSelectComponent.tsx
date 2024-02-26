@@ -35,12 +35,22 @@ const SelectBox = styled.div<{
 `;
 
 export default function MultiSelectComponent(props: any) {
-  const { optionList, setOptionList } = props;
+  const { optionList, setOptionList, optionType } = props;
 
-  const selectOptionHandle = (index: number) => {
+  const selectOptionHandle = (index: number, optionType: number) => {
+    console.log("index>>>");
+    console.log(index);
     setOptionList((prev: any) => {
       const updatedList = [...prev];
-      updatedList[index].isSelected = !updatedList[index].isSelected;
+      if (index === 0) {
+        console.log("분해");
+        updatedList[optionType].decomposition =
+          !updatedList[optionType].decomposition;
+      } else if (index === 1) {
+        console.log("조립");
+        updatedList[optionType].installation =
+          !updatedList[optionType].installation;
+      }
 
       return updatedList;
     });
@@ -51,7 +61,7 @@ export default function MultiSelectComponent(props: any) {
       {optionList.map((item: any, index: number) => {
         return (
           <SelectBox
-            onClick={(e) => selectOptionHandle(index)}
+            onClick={(e) => selectOptionHandle(index, optionType)}
             $itemCount={`${94 / optionList.length}%`}
             key={index}
             $isSelected={item.isSelected}

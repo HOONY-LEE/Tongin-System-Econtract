@@ -16,7 +16,7 @@ const SelectListBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 34%;
+  width: 100%;
   height: 6vw;
 `;
 
@@ -24,7 +24,7 @@ const SelectList = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   height: 6vw;
 `;
 
@@ -105,7 +105,7 @@ const InputBox = styled.input.attrs({})<{}>`
   height: 100%;
 `;
 
-export default function ServiceSelectComponent(props: any) {
+export default function ServicePaymentSelectComponent(props: any) {
   const { optionList, selectedValue, setSelectedValue } = props;
   const [isSelected, setIsSelected] = useState(selectedValue.selected);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
@@ -113,43 +113,16 @@ export default function ServiceSelectComponent(props: any) {
 
   // 옵션 선택 핸들러
   const selectOptionHandle = (id: number) => {
+    if (id === 0) {
+      setIsSelected(false);
+    } else {
+      setIsSelected(true);
+    }
     setSelectedValue((prev: any) => {
       const updatedData = { ...prev };
-      if (id === 0) {
-        setIsSelected(false);
-        updatedData.selected = false;
-      } else if (id === 1) {
-        setIsSelected(true);
-        updatedData.selected = true;
-      }
+      updatedData.serviceType = id;
       return updatedData;
     });
-  };
-
-  // 날짜 모달 열기 핸들러
-  const dateHandleOpenModal = () => {
-    setIsDateModalOpen(true);
-  };
-
-  // // 날짜 모달 닫기 핸들러
-  const dateHandleCloseModal = () => {
-    setIsDateModalOpen(false);
-  };
-
-  const dateValueInput = (data: any) => {
-    // console.log("dateValueInput", data);
-    const myData = new Date(data);
-    // console.log(format(myData, "y-MM-dd"));
-    if (!Number.isNaN(new Date(myData).getTime())) {
-      selectedValue.serviceRequestDate = format(myData, "y-MM-dd");
-    } else {
-      return "";
-    }
-  };
-
-  const deteValueDelete = () => {
-    selectedValue.serviceRequestDate = "";
-    dateHandleCloseModal();
   };
 
   return (
@@ -162,7 +135,7 @@ export default function ServiceSelectComponent(props: any) {
                 onClick={(e) => selectOptionHandle(item.id)}
                 $itemCount={`${94 / optionList.length}%`}
                 key={index}
-                $isSelected={item.id == selectedValue.selected}
+                $isSelected={item.id === selectedValue.serviceType}
               >
                 {item.name}
               </SelectBox>
@@ -170,39 +143,6 @@ export default function ServiceSelectComponent(props: any) {
           })}
         </SelectList>
       </SelectListBox>
-      {isSelected && (
-        <>
-          <OptionalBox>
-            <MoveDateBox>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal();
-                }}
-              >
-                <InputBox
-                  placeholder="--"
-                  readOnly
-                  value={selectedValue.serviceRequestDate.replace(
-                    formattedDate,
-                    "$1-$2-$3"
-                  )}
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox>
-            <PriceInputBox
-              inputValue={selectedValue.servicePayment}
-              setInputValue={setSelectedValue}
-            ></PriceInputBox>
-          </OptionalBox>
-        </>
-      )}
-      {isDateModalOpen && (
-        <DateModalComponent
-          dateValueInput={dateValueInput}
-          onClose={dateHandleCloseModal}
-          deteValueDelete={deteValueDelete}
-        />
-      )}
     </Wrarpper>
   );
 }
