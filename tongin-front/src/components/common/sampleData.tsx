@@ -9544,9 +9544,10 @@ export const optionDummyData = {
         servicePayment: 0,
         selected: false,
       },
+      paymentMethod: 0,
     },
-    optionService: {
-      wardrobeOption: {
+    optionService: [
+      {
         id: 1,
         optionType: 1,
         optionName: "조립장롱",
@@ -9555,7 +9556,7 @@ export const optionDummyData = {
         optionPayment: 0,
         selected: false,
       },
-      airConditionerOption: {
+      {
         id: 2,
         optionType: 2,
         optionName: "에어컨",
@@ -9564,7 +9565,7 @@ export const optionDummyData = {
         optionPayment: 0,
         selected: false,
       },
-      refrigeratorOption: {
+      {
         id: 3,
         optionType: 3,
         optionName: "냉장고",
@@ -9573,7 +9574,7 @@ export const optionDummyData = {
         optionPayment: 100000,
         selected: true,
       },
-      dishWasherOption: {
+      {
         id: 4,
         optionType: 4,
         optionName: "식기세척기",
@@ -9582,7 +9583,7 @@ export const optionDummyData = {
         optionPayment: 100000,
         selected: true,
       },
-      tvOption: {
+      {
         id: 5,
         optionType: 5,
         optionName: "PDP/LCD",
@@ -9591,7 +9592,7 @@ export const optionDummyData = {
         optionPayment: 100000,
         selected: true,
       },
-      audioOption: {
+      {
         id: 6,
         optionType: 6,
         optionName: "홈시어터/오디오",
@@ -9600,7 +9601,7 @@ export const optionDummyData = {
         optionPayment: 100000,
         selected: true,
       },
-      stoneBedOption: {
+      {
         id: 7,
         optionType: 7,
         optionName: "돌침대(1인/2인)",
@@ -9609,7 +9610,7 @@ export const optionDummyData = {
         optionPayment: 100000,
         selected: true,
       },
-      etcOption: {
+      {
         id: 8,
         optionType: 8,
         optionName: "기타",
@@ -9618,6 +9619,6 @@ export const optionDummyData = {
         optionPayment: 0,
         selected: false,
       },
-    },
+    ],
   },
 };
