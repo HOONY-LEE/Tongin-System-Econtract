@@ -107,22 +107,12 @@ const InputBox = styled.input.attrs({})<{}>`
 
 export default function ServicePaymentSelectComponent(props: any) {
   const { optionList, selectedValue, setSelectedValue } = props;
-  const [isSelected, setIsSelected] = useState(selectedValue.selected);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
 
   // 옵션 선택 핸들러
   const selectOptionHandle = (id: number) => {
-    if (id === 0) {
-      setIsSelected(false);
-    } else {
-      setIsSelected(true);
-    }
-    setSelectedValue((prev: any) => {
-      const updatedData = { ...prev };
-      updatedData.serviceType = id;
-      return updatedData;
-    });
+    setSelectedValue(id);
   };
 
   return (
@@ -135,7 +125,7 @@ export default function ServicePaymentSelectComponent(props: any) {
                 onClick={(e) => selectOptionHandle(item.id)}
                 $itemCount={`${94 / optionList.length}%`}
                 key={index}
-                $isSelected={item.id === selectedValue.serviceType}
+                $isSelected={item.id === selectedValue}
               >
                 {item.name}
               </SelectBox>

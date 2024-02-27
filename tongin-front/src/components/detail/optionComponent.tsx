@@ -89,9 +89,12 @@ export default function OptionComponent(props: any) {
   const [organizingService, setOrganizingService] = useState(
     optionData.livingService.organizationStorageService
   );
+  const [paymentMethod, setPaymentMethod] = useState(
+    optionData.livingService.paymentMethod
+  );
 
   const [optionServiceList, setOptionServiceList] = useState(
-    Object.values(optionData.optionService)
+    optionData.optionService
   );
 
   const saveOptionData = () => {};
@@ -141,6 +144,8 @@ export default function OptionComponent(props: any) {
       updatedData.livingService.movingCleaningService = cleaningService;
       updatedData.livingService.deodorizationService = deodorizationService;
       updatedData.livingService.organizationStorageService = organizingService;
+      updatedData.livingService.paymentMethod = paymentMethod;
+      updatedData.optionService = optionServiceList;
 
       return updatedData;
     });
@@ -151,6 +156,7 @@ export default function OptionComponent(props: any) {
     cleaningService,
     deodorizationService,
     organizingService,
+    paymentMethod,
     optionServiceList,
   ]);
 
@@ -210,8 +216,8 @@ export default function OptionComponent(props: any) {
           <OptionBox>
             <ServicePaymentSelectComponent
               optionList={servicePaymentMethodList}
-              selectedValue={organizingService}
-              setSelectedValue={setOrganizingService}
+              selectedValue={paymentMethod}
+              setSelectedValue={setPaymentMethod}
             ></ServicePaymentSelectComponent>
           </OptionBox>
           <Subtitle>옵션 품목</Subtitle>
