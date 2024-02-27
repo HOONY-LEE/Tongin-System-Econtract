@@ -19,7 +19,7 @@ const CalculatorComponentWrapper = styled.div`
   transform: translate(-50%, -50%);
   z-index: 9999;
   width: 90vw;
-  height: 120vw;
+  height: 90vh;
   background-color: #2d2d2d60;
   border-radius: 0.8vw;
   display: flex;
@@ -33,11 +33,11 @@ const CanvasPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 115vw;
+  height: 80vh;
   background-color: #ffffff;
   border-radius: 0.8vw;
 `;
-
+const CanvasPanelMask = styled.div``;
 interface CalculatorComponentProps {
   onClose: () => void;
   style?: React.CSSProperties;
