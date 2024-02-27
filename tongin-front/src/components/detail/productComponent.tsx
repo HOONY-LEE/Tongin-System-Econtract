@@ -122,7 +122,10 @@ export default function ProductComponent(props: any) {
       const requestParam = {
         receiptArticleData: currentProductList,
       };
-      const response = await API.post(`/receipt/detail/${reNum}`, requestParam);
+      const response = await API.post(
+        `/receipt/article/${reNum}`,
+        requestParam
+      );
       if (response.status === 200) {
         alert("성공적으로 저장되었습니다.");
         await getProductList();
