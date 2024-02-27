@@ -141,10 +141,10 @@ export default function OptionComponent(props: any) {
       updatedData.livingService.movingCleaningService = cleaningService;
       updatedData.livingService.deodorizationService = deodorizationService;
       updatedData.livingService.organizationStorageService = organizingService;
-      updatedData.optionService = updatedData.optionService;
 
       return updatedData;
     });
+    console.log(optionData);
   }, [
     prevOptionData,
     afterOptionData,

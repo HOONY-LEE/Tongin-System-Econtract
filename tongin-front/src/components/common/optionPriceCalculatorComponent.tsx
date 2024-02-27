@@ -167,11 +167,8 @@ const OptionPriceCalculatorComponent = (props: any) => {
       }
 
       setInputValue((prev: any) => {
-        const updatedData = { ...prev };
-        console.log("here>>");
-        // console.log(updatedData[optionType]);
+        const updatedData = [...prev];
         updatedData[optionType].optionPayment = result;
-        alert("여기까진 왔어");
         return updatedData;
       });
       onClose();
