@@ -20,6 +20,7 @@ import { sampleProductDataList } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
 import { useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
+import ContractComponent from "../components/detail/contractComponent";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -222,7 +223,9 @@ export default function Detail() {
               </OptionTabBox>
             ) : null}
             {currentTab === 3 ? (
-              <ContractTabBox>계약서 준비중</ContractTabBox>
+              <ContractTabBox>
+                <ContractComponent></ContractComponent>
+              </ContractTabBox>
             ) : null}
           </ContentBox>
           <button onClick={() => setDrawingPanel(true)}> 드로잉 </button>
