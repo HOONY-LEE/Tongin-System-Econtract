@@ -118,7 +118,7 @@ const ContractTabBox = styled.div`
 export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
-  const [roomDataList, setRoomDataList] = useState<any[]>([]);
+  const [articleDataList, setArticleDataList] = useState<any[]>([]);
   const [optionData, setOptionData] = useState<object>({});
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
@@ -154,7 +154,7 @@ export default function Detail() {
     if (response.status === 200) {
       const result = response.data.receiptArticleData;
 
-      setRoomDataList(result);
+      setArticleDataList(result);
     } else {
       console.log("물품 정보 데이터를 불러오지 못했습니다.");
     }
@@ -177,8 +177,8 @@ export default function Detail() {
   }, []);
 
   useEffect(() => {
-    setCurrentProductList(roomDataList);
-  }, [roomDataList]);
+    setCurrentProductList(articleDataList);
+  }, [articleDataList]);
 
   return (
     <>
@@ -224,7 +224,11 @@ export default function Detail() {
             ) : null}
             {currentTab === 3 ? (
               <ContractTabBox>
-                <ContractComponent></ContractComponent>
+                <ContractComponent
+                  detailData={detailData}
+                  articleDataList={articleDataList}
+                  optionData={optionData}
+                ></ContractComponent>
               </ContractTabBox>
             ) : null}
           </ContentBox>

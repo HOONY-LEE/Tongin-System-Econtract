@@ -16,7 +16,8 @@ const InputCBMBox = styled.div`
   justify-content: center;
   width: 10vw;
   height: 100%;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
+  border: 0.2vw solid #dbdbdb;
   border-radius: 0.6vw;
   margin-right: 0.8vw;
   &:hover {
