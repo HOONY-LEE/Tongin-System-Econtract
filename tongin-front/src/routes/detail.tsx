@@ -117,8 +117,9 @@ const ContractTabBox = styled.div`
 //  스크롤 LOCK
 const ScrollLock = styled.div`
   .isScroll {
-    overflow: hidden;
+    overflow: hidden !important;
     position: fixed;
+    touch-action: none;
   }
 `;
 
@@ -190,9 +191,9 @@ export default function Detail() {
 
   return (
     <>
-      <FlexXY>
-        <ScrollLock>
-          <div className={isScrolled ? "" : "isScroll"}>
+      <ScrollLock>
+        <div className={isScrolled ? "" : "isScroll"}>
+          <FlexXY>
             <HomeContainer>
               <TabMenu>
                 {menuArr.map((item, index) => (
@@ -259,9 +260,9 @@ export default function Detail() {
                 />
               )}
             </HomeContainer>
-          </div>
-        </ScrollLock>
-      </FlexXY>
+          </FlexXY>
+        </div>
+      </ScrollLock>
     </>
   );
 }
