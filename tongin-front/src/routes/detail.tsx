@@ -189,80 +189,108 @@ export default function Detail() {
     setCurrentProductList(roomDataList);
   }, [roomDataList]);
 
+  // 스크롤 잠금
+  const scrollRock = () => {
+    const { body } = document;
+    if (!body.getAttribute("scrollY")) {
+      const pageY = window.pageYOffset;
+
+      body.setAttribute("scrollY", pageY.toString());
+
+      body.style.overflow = "hidden";
+      body.style.position = "fixed";
+      body.style.left = "0px";
+      body.style.right = "0px";
+      body.style.bottom = "0px";
+      body.style.top = `-${pageY}px`;
+    }
+  };
+
+  // 스크롤 잠금 해제
+  const disableScrollLock = () => {
+    const { body } = document;
+
+    if (body.getAttribute("scrollY")) {
+      body.style.removeProperty("overflow");
+      body.style.removeProperty("position");
+      body.style.removeProperty("top");
+      body.style.removeProperty("left");
+      body.style.removeProperty("right");
+      body.style.removeProperty("bottom");
+
+      window.scrollTo(0, Number(body.getAttribute("scrollY")));
+
+      body.removeAttribute("scrollY");
+    }
+  };
   return (
     <>
-      <ScrollLock>
-        <div className={isScrolled ? "" : "isScroll"}>
-          <FlexXY>
-            <HomeContainer>
-              <TabMenu>
-                {menuArr.map((item, index) => (
-                  <li
-                    key={index}
-                    className={
-                      index === currentTab ? "submenu focused" : "submenu"
-                    }
-                    onClick={() => selectMenuHandler(index)}
-                  >
-                    {item.name}
-                  </li>
-                ))}
-              </TabMenu>
-
-              <ContentBox>
-                {currentTab === 0 ? (
-                  <DetialTabBox>
-                    <DetailComponent
-                      detailData={detailData}
-                      setDetailData={setDetailData}
-                    ></DetailComponent>
-                  </DetialTabBox>
-                ) : null}
-                {currentTab === 1 ? (
-                  <ProductTabBox>
-                    <ProductComponent
-                      reNum={reNum}
-                      getProductList={getProductList}
-                      currentProductList={currentProductList}
-                      setCurrentProductList={setCurrentProductList}
-                    ></ProductComponent>
-                  </ProductTabBox>
-                ) : null}
-                {currentTab === 2 ? (
-                  <OptionTabBox>
-                    <OptionComponent
-                      optionData={optionData}
-                      setOptionData={setOptionData}
-                    ></OptionComponent>
-                  </OptionTabBox>
-                ) : null}
-                {currentTab === 3 ? (
-                  <ContractTabBox>계약서 준비중</ContractTabBox>
-                ) : null}
-              </ContentBox>
-              <button
-                onClick={() => {
-                  setDrawingPanel(true);
-                  setIsScrolled(false);
-                }}
+      <FlexXY>
+        <HomeContainer>
+          <TabMenu>
+            {menuArr.map((item, index) => (
+              <li
+                key={index}
+                className={index === currentTab ? "submenu focused" : "submenu"}
+                onClick={() => selectMenuHandler(index)}
               >
-                {" "}
-                드로잉{" "}
-              </button>
-              {drawingPanel && (
-                <DetailDrawingPanelComponent
-                  setIsSave={setIsSave}
-                  setIsScrolled={setIsScrolled}
-                  onClose={() => {
-                    setDrawingPanel(false);
-                    setIsScrolled(true);
-                  }}
-                />
-              )}
-            </HomeContainer>
-          </FlexXY>
-        </div>
-      </ScrollLock>
+                {item.name}
+              </li>
+            ))}
+          </TabMenu>
+
+          <ContentBox>
+            {currentTab === 0 ? (
+              <DetialTabBox>
+                <DetailComponent
+                  detailData={detailData}
+                  setDetailData={setDetailData}
+                ></DetailComponent>
+              </DetialTabBox>
+            ) : null}
+            {currentTab === 1 ? (
+              <ProductTabBox>
+                <ProductComponent
+                  reNum={reNum}
+                  getProductList={getProductList}
+                  currentProductList={currentProductList}
+                  setCurrentProductList={setCurrentProductList}
+                ></ProductComponent>
+              </ProductTabBox>
+            ) : null}
+            {currentTab === 2 ? (
+              <OptionTabBox>
+                <OptionComponent
+                  optionData={optionData}
+                  setOptionData={setOptionData}
+                ></OptionComponent>
+              </OptionTabBox>
+            ) : null}
+            {currentTab === 3 ? (
+              <ContractTabBox>계약서 준비중</ContractTabBox>
+            ) : null}
+          </ContentBox>
+          <button
+            onClick={() => {
+              setDrawingPanel(true);
+              scrollRock();
+            }}
+          >
+            {" "}
+            드로잉{" "}
+          </button>
+          {drawingPanel && (
+            <DetailDrawingPanelComponent
+              setIsSave={setIsSave}
+              setIsScrolled={setIsScrolled}
+              onClose={() => {
+                setDrawingPanel(false);
+                disableScrollLock();
+              }}
+            />
+          )}
+        </HomeContainer>
+      </FlexXY>
     </>
   );
 }
