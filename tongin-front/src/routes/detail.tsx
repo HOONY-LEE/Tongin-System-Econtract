@@ -114,6 +114,14 @@ const ContractTabBox = styled.div`
   /* outline: 1px solid green; */
 `;
 
+//  스크롤 LOCK
+const ScrollLock = styled.div`
+  .isScroll {
+    overflow: hidden;
+    position: fixed;
+  }
+`;
+
 export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
@@ -122,6 +130,7 @@ export default function Detail() {
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
   const [isSave, setIsSave] = useState<any[]>([]);
+  const [isScrolled, setIsScrolled] = useState<any>(true);
 
   const reNum = useParams().id;
 
@@ -182,57 +191,76 @@ export default function Detail() {
   return (
     <>
       <FlexXY>
-        <HomeContainer>
-          <TabMenu>
-            {menuArr.map((item, index) => (
-              <li
-                key={index}
-                className={index === currentTab ? "submenu focused" : "submenu"}
-                onClick={() => selectMenuHandler(index)}
+        <ScrollLock>
+          <div className={isScrolled ? "" : "isScroll"}>
+            <HomeContainer>
+              <TabMenu>
+                {menuArr.map((item, index) => (
+                  <li
+                    key={index}
+                    className={
+                      index === currentTab ? "submenu focused" : "submenu"
+                    }
+                    onClick={() => selectMenuHandler(index)}
+                  >
+                    {item.name}
+                  </li>
+                ))}
+              </TabMenu>
+
+              <ContentBox>
+                {currentTab === 0 ? (
+                  <DetialTabBox>
+                    <DetailComponent
+                      detailData={detailData}
+                      setDetailData={setDetailData}
+                    ></DetailComponent>
+                  </DetialTabBox>
+                ) : null}
+                {currentTab === 1 ? (
+                  <ProductTabBox>
+                    <ProductComponent
+                      reNum={reNum}
+                      getProductList={getProductList}
+                      currentProductList={currentProductList}
+                      setCurrentProductList={setCurrentProductList}
+                    ></ProductComponent>
+                  </ProductTabBox>
+                ) : null}
+                {currentTab === 2 ? (
+                  <OptionTabBox>
+                    <OptionComponent
+                      optionData={optionData}
+                      setOptionData={setOptionData}
+                    ></OptionComponent>
+                  </OptionTabBox>
+                ) : null}
+                {currentTab === 3 ? (
+                  <ContractTabBox>계약서 준비중</ContractTabBox>
+                ) : null}
+              </ContentBox>
+              <button
+                onClick={() => {
+                  setDrawingPanel(true);
+                  setIsScrolled(false);
+                }}
               >
-                {item.name}
-              </li>
-            ))}
-          </TabMenu>
-          <ContentBox>
-            {currentTab === 0 ? (
-              <DetialTabBox>
-                <DetailComponent
-                  detailData={detailData}
-                  setDetailData={setDetailData}
-                ></DetailComponent>
-              </DetialTabBox>
-            ) : null}
-            {currentTab === 1 ? (
-              <ProductTabBox>
-                <ProductComponent
-                  reNum={reNum}
-                  getProductList={getProductList}
-                  currentProductList={currentProductList}
-                  setCurrentProductList={setCurrentProductList}
-                ></ProductComponent>
-              </ProductTabBox>
-            ) : null}
-            {currentTab === 2 ? (
-              <OptionTabBox>
-                <OptionComponent
-                  optionData={optionData}
-                  setOptionData={setOptionData}
-                ></OptionComponent>
-              </OptionTabBox>
-            ) : null}
-            {currentTab === 3 ? (
-              <ContractTabBox>계약서 준비중</ContractTabBox>
-            ) : null}
-          </ContentBox>
-          <button onClick={() => setDrawingPanel(true)}> 드로잉 </button>
-          {drawingPanel && (
-            <DetailDrawingPanelComponent
-              setIsSave={setIsSave}
-              onClose={() => setDrawingPanel(false)}
-            />
-          )}
-        </HomeContainer>
+                {" "}
+                드로잉{" "}
+              </button>
+              {drawingPanel && (
+                <DetailDrawingPanelComponent
+                  setIsSave={setIsSave}
+                  setIsScrolled={setIsScrolled}
+                  onClose={() => {
+                    setDrawingPanel(false);
+                    setIsScrolled(true);
+                  }}
+                />
+              )}
+            </HomeContainer>
+          </div>
+        </ScrollLock>
       </FlexXY>
     </>
   );
