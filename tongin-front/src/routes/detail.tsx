@@ -20,6 +20,7 @@ import { sampleProductDataList } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
 import { useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
+import ContractComponent from "../components/detail/contractComponent";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -126,7 +127,7 @@ const ScrollLock = styled.div`
 export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
-  const [roomDataList, setRoomDataList] = useState<any[]>([]);
+  const [articleDataList, setArticleDataList] = useState<any[]>([]);
   const [optionData, setOptionData] = useState<object>({});
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
@@ -163,7 +164,7 @@ export default function Detail() {
     if (response.status === 200) {
       const result = response.data.receiptArticleData;
 
-      setRoomDataList(result);
+      setArticleDataList(result);
     } else {
       console.log("물품 정보 데이터를 불러오지 못했습니다.");
     }
@@ -186,8 +187,8 @@ export default function Detail() {
   }, []);
 
   useEffect(() => {
-    setCurrentProductList(roomDataList);
-  }, [roomDataList]);
+    setCurrentProductList(articleDataList);
+  }, [articleDataList]);
 
   // 스크롤 잠금
   const scrollRock = () => {
@@ -272,7 +273,13 @@ export default function Detail() {
               </OptionTabBox>
             ) : null}
             {currentTab === 3 ? (
-              <ContractTabBox>계약서 준비중</ContractTabBox>
+              <ContractTabBox>
+                <ContractComponent
+                  detailData={detailData}
+                  articleDataList={articleDataList}
+                  optionData={optionData}
+                ></ContractComponent>
+              </ContractTabBox>
             ) : null}
           </ContentBox>
           <button
