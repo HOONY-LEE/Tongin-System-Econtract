@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import OptionPriceInputBox from "./optionPriceInputBox";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -13,11 +14,39 @@ const ListBox = styled.div`
   border-radius: 0.6vw;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 2vw;
 `;
 
+const TitleArea = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Title = styled.div`
+  margin-left: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 2.4vw;
+  font-weight: 500;
+`;
+
+const Subtile = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 1.6vw;
+  margin-top: 1vw;
+`;
+
+const PriceInputArea = styled.div`
+  display: flex;
+  width: 30vw;
+`;
+
 export default function ChargeListComponent(props: any) {
+  const { optionData } = props;
   const ChargeMenuList = [
     { id: 0, title: "이사 비용", subtitle: "Moving Charge" },
     { id: 1, title: "옵션 비용", subtitle: "Moving Charge" },
@@ -33,7 +62,21 @@ export default function ChargeListComponent(props: any) {
   return (
     <Wrapper>
       {ChargeMenuList.map((item: any) => {
-        return <ListBox>{item.title}</ListBox>;
+        return (
+          <ListBox key={item.id}>
+            <TitleArea>
+              <Title>{item.title}</Title>
+              <Subtile>/{item.subtitle}</Subtile>
+            </TitleArea>
+            <PriceInputArea>
+              <OptionPriceInputBox
+                inputValue={1}
+                setInputValue={1}
+                optionType={1}
+              ></OptionPriceInputBox>
+            </PriceInputArea>
+          </ListBox>
+        );
       })}
     </Wrapper>
   );

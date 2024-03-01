@@ -180,7 +180,7 @@ export default function ContractComponent(props: any) {
             </CBMBox>
           </CBMArea>
           <ChargeListArea>
-            <ChargeListComponent></ChargeListComponent>
+            <ChargeListComponent optionData={optionData}></ChargeListComponent>
           </ChargeListArea>
         </InputArea>
         <ButtonArea>
