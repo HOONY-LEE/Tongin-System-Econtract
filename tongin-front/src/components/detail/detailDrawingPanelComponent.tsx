@@ -42,12 +42,14 @@ interface CalculatorComponentProps {
   onClose: () => void;
   style?: React.CSSProperties;
   setIsSave: any;
+  setIsScrolled: any;
 }
 
 const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   onClose,
   style,
   setIsSave,
+  setIsScrolled,
 }) => {
   const stageRef = useRef<any>(null);
   const [tool, setTool] = useState<string>("pen");
