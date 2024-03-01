@@ -243,7 +243,7 @@ export default function Detail() {
               </li>
             ))}
           </TabMenu>
-          바뀌었다!!!
+          <h1>바뀟다!</h1>
           <ContentBox>
             {currentTab === 0 ? (
               <DetialTabBox>
