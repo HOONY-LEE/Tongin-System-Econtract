@@ -43,13 +43,19 @@ interface CalculatorComponentProps {
   style?: React.CSSProperties;
   setIsSave: any;
   setIsScrolled: any;
+  isSave: any;
+  lines: any;
+  setLines: any;
 }
 
 const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   onClose,
   style,
   setIsSave,
+  isSave,
   setIsScrolled,
+  lines,
+  setLines,
 }) => {
   const stageRef = useRef<any>(null);
   const [tool, setTool] = useState<string>("pen");
@@ -58,7 +64,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [eraserSize, setEraserSize] = useState<number>();
   const [penColor, setPenColor] = useState<any>();
   const [penSize, setPenSize] = useState<number>();
-  const [lines, setLines] = useState<any[]>([]);
+
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
 
   const handleMouseDown = (e: any) => {
@@ -88,6 +94,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
 
   const handleMouseUp = () => {
     setIsDrawing(false);
+    setIsSave(lines);
   };
   const selectPen = () => {
     setPenColorVisible(true);
@@ -125,9 +132,11 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
       });
     }
   }, []);
+
   useEffect(() => {
     setTool("pen");
     setPenColor("#000000");
+    setIsSave([]);
   }, []);
 
   return (
@@ -148,7 +157,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             stroke={""}
           >
             <Layer>
-              {lines.map((line, i) => (
+              {lines.map((line: any, i: any) => (
                 <Line
                   key={i}
                   points={line.points}
