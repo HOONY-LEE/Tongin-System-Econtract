@@ -133,7 +133,7 @@ export default function Detail() {
   const [drawingPanel, setDrawingPanel] = useState(false);
   const [isSave, setIsSave] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState<any>(true);
-
+  const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
 
   const menuArr = [
@@ -229,6 +229,11 @@ export default function Detail() {
       body.removeAttribute("scrollY");
     }
   };
+  useEffect(() => {
+    if (isSave.length > 0) {
+      setLines(isSave);
+    }
+  }, [isSave]);
   return (
     <>
       <FlexXY>
@@ -244,7 +249,6 @@ export default function Detail() {
               </li>
             ))}
           </TabMenu>
-          <h1>바뀟다!</h1>
           <ContentBox>
             {currentTab === 0 ? (
               <DetialTabBox>
@@ -288,13 +292,15 @@ export default function Detail() {
               scrollRock();
             }}
           >
-            {" "}
-            드로잉{" "}
+            드로잉
           </button>
           {drawingPanel && (
             <DetailDrawingPanelComponent
               setIsSave={setIsSave}
+              isSave={isSave}
               setIsScrolled={setIsScrolled}
+              setLines={setLines}
+              lines={lines}
               onClose={() => {
                 setDrawingPanel(false);
                 disableScrollLock();
