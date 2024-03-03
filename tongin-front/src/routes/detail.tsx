@@ -24,6 +24,7 @@ import OptionComponent from "../components/detail/optionComponent";
 import { useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
 import ContractComponent from "../components/detail/contractComponent";
+import PencilIcon from "../components/icon/pencil";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -124,6 +125,24 @@ const ScrollLock = styled.div`
     overflow: hidden !important;
     position: fixed;
     touch-action: none;
+  }
+`;
+const DrawingBtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7vw;
+  height: 7vw;
+  border-radius: 50%;
+  background-color: #ff7f3b;
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.073),
+    0 0.5vh 0.5vh rgba(0, 0, 0, 0.023);
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(255, 144, 85);
   }
 `;
 
@@ -293,14 +312,17 @@ export default function Detail() {
               </ContractTabBox>
             ) : null}
           </ContentBox>
-          <button
-            onClick={() => {
-              setDrawingPanel(true);
-              scrollRock();
-            }}
-          >
-            드로잉
-          </button>
+
+          <DrawingBtn>
+            <PencilIcon
+              onClick={() => {
+                setDrawingPanel(true);
+                scrollRock();
+              }}
+              height={"4vw"}
+              fill={"#ffffff"}
+            />
+          </DrawingBtn>
           {drawingPanel && (
             <DetailDrawingPanelComponent
               setIsSave={setIsSave}
