@@ -9622,3 +9622,24 @@ export const optionDummyData = {
     ],
   },
 };
+
+export const chargeData = [
+  {
+    id: 0,
+    chargeName: "이사 비용",
+    chargeNameEng: "Moving Charge",
+    amount: 0,
+  },
+  {
+    id: 1,
+    chargeName: "보관 비용",
+    chargeNameEng: "Moving Charge",
+    amount: 0,
+  },
+  {
+    id: 2,
+    chargeName: "부가세",
+    chargeNameEng: "Moving Charge",
+    amount: 0,
+  },
+];
