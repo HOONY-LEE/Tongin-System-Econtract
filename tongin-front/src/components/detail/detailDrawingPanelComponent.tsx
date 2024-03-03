@@ -17,6 +17,11 @@ const Backdrop = styled.div`
 `;
 
 const CalculatorComponentWrapper = styled.div`
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+  user-select: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -272,36 +277,42 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />
           </CloseBox>
         </ToolContainer>
-        <CanvasPanel ref={divRef}>
-          <Stage
-            width={dimensions.width}
-            height={dimensions.height}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleMouseDown}
-            onTouchMove={handleMouseMove}
-            onTouchEnd={handleMouseUp}
-            ref={stageRef}
-            stroke={""}
-          >
-            <Layer>
-              {lines.map((line: any, i: any) => (
-                <Line
-                  key={i}
-                  points={line.points}
-                  stroke={line.stroke}
-                  strokeWidth={line.strokeWidth}
-                  tension={0.8}
-                  lineCap="round"
-                  globalCompositeOperation={
-                    line.tool === "eraser" ? "destination-out" : "source-over"
-                  }
-                />
-              ))}
-            </Layer>
-          </Stage>
-        </CanvasPanel>
+        <div
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <CanvasPanel ref={divRef}>
+            <Stage
+              width={dimensions.width}
+              height={dimensions.height}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onTouchStart={handleMouseDown}
+              onTouchMove={handleMouseMove}
+              onTouchEnd={handleMouseUp}
+              ref={stageRef}
+              stroke={""}
+            >
+              <Layer>
+                {lines.map((line: any, i: any) => (
+                  <Line
+                    key={i}
+                    points={line.points}
+                    stroke={line.stroke}
+                    strokeWidth={line.strokeWidth}
+                    tension={0.8}
+                    lineCap="round"
+                    globalCompositeOperation={
+                      line.tool === "eraser" ? "destination-out" : "source-over"
+                    }
+                  />
+                ))}
+              </Layer>
+            </Stage>
+          </CanvasPanel>
+        </div>
       </CalculatorComponentWrapper>
     </>
   );
