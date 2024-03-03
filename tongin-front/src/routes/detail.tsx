@@ -16,7 +16,10 @@ import {
 
 import API from "../API/API";
 import ProductComponent from "../components/detail/productComponent";
-import { sampleProductDataList } from "../components/common/sampleData";
+import {
+  drawingSampleData,
+  sampleProductDataList,
+} from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
 import { useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
@@ -135,6 +138,7 @@ export default function Detail() {
   const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
+  const drawingData: any = drawingSampleData;
 
   const menuArr = [
     { name: "1. 상세정보", content: "견적리스트 영역" },
@@ -184,6 +188,7 @@ export default function Detail() {
     getDetailList();
     getProductList();
     getOptionList();
+    setLines(drawingData);
   }, []);
 
   useEffect(() => {
@@ -230,8 +235,10 @@ export default function Detail() {
     }
   };
   useEffect(() => {
+    console.log(isSave);
     if (isSave.length > 0) {
       setLines(isSave);
+      // setLines(drawingData);
     }
   }, [isSave]);
   return (
