@@ -16,11 +16,15 @@ import {
 
 import API from "../API/API";
 import ProductComponent from "../components/detail/productComponent";
-import { sampleProductDataList } from "../components/common/sampleData";
+import {
+  drawingSampleData,
+  sampleProductDataList,
+} from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
 import { useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
 import ContractComponent from "../components/detail/contractComponent";
+import PencilIcon from "../components/icon/pencil";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -123,6 +127,24 @@ const ScrollLock = styled.div`
     touch-action: none;
   }
 `;
+const DrawingBtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7vw;
+  height: 7vw;
+  border-radius: 50%;
+  background-color: #ff7f3b;
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.073),
+    0 0.5vh 0.5vh rgba(0, 0, 0, 0.023);
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(255, 144, 85);
+  }
+`;
 
 export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
@@ -133,8 +155,9 @@ export default function Detail() {
   const [drawingPanel, setDrawingPanel] = useState(false);
   const [isSave, setIsSave] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState<any>(true);
-
+  const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
+  const drawingData: any = drawingSampleData;
 
   const menuArr = [
     { name: "1. 상세정보", content: "견적리스트 영역" },
@@ -184,6 +207,7 @@ export default function Detail() {
     getDetailList();
     getProductList();
     getOptionList();
+    setLines(drawingData);
   }, []);
 
   useEffect(() => {
@@ -229,6 +253,13 @@ export default function Detail() {
       body.removeAttribute("scrollY");
     }
   };
+  useEffect(() => {
+    console.log(isSave);
+    if (isSave.length > 0) {
+      setLines(isSave);
+      // setLines(drawingData);
+    }
+  }, [isSave]);
   return (
     <>
       <FlexXY>
@@ -281,19 +312,24 @@ export default function Detail() {
               </ContractTabBox>
             ) : null}
           </ContentBox>
-          <button
-            onClick={() => {
-              setDrawingPanel(true);
-              scrollRock();
-            }}
-          >
-            {" "}
-            드로잉{" "}
-          </button>
+
+          <DrawingBtn>
+            <PencilIcon
+              onClick={() => {
+                setDrawingPanel(true);
+                scrollRock();
+              }}
+              height={"4vw"}
+              fill={"#ffffff"}
+            />
+          </DrawingBtn>
           {drawingPanel && (
             <DetailDrawingPanelComponent
               setIsSave={setIsSave}
+              isSave={isSave}
               setIsScrolled={setIsScrolled}
+              setLines={setLines}
+              lines={lines}
               onClose={() => {
                 setDrawingPanel(false);
                 disableScrollLock();
