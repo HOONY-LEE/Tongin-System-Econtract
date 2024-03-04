@@ -384,11 +384,10 @@ export default function ContractComponent(props: any) {
           <ChargeListArea>
             <ChargeListComponent
               inputChargeList={inputChargeList}
-              setInputChargelist={setInputChargeList}
-              optionData={optionData}
+              setInputChargeList={setInputChargeList}
             ></ChargeListComponent>
           </ChargeListArea>
-          <PaymentArea>
+          {/* <PaymentArea>
             <TotalChargeBox>
               <TitleArea>
                 <Title>총 비용</Title>
@@ -442,7 +441,7 @@ export default function ContractComponent(props: any) {
                 </PriceInputArea>
               </ListBox>
             </BalanceBox>
-          </PaymentArea>
+          </PaymentArea> */}
         </InputArea>
         <ButtonArea>
           <PreviewBtn>견적서 미리보기</PreviewBtn>

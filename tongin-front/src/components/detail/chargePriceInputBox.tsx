@@ -45,7 +45,7 @@ const SubText = styled.p`
 `;
 
 export default function ChargePriceInputBox(props: any) {
-  const { inputValue, setInputValue, optionType } = props;
+  const { inputValue, setInputValue, optionType, id } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 모달 닫기 핸들러
@@ -71,6 +71,7 @@ export default function ChargePriceInputBox(props: any) {
           optionType={optionType}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          id={id}
         />
       )}
     </InputArea>

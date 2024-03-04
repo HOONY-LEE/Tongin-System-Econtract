@@ -9633,13 +9633,31 @@ export const chargeData = [
   {
     id: 1,
     chargeName: "보관 비용",
-    chargeNameEng: "Moving Charge",
+    chargeNameEng: "Storage Charge",
     amount: 0,
   },
   {
     id: 2,
     chargeName: "부가세",
-    chargeNameEng: "Moving Charge",
+    chargeNameEng: "VAT",
+    amount: 0,
+  },
+  {
+    id: 3,
+    chargeName: "총비용",
+    chargeNameEng: "Total Charge",
+    amount: 0,
+  },
+  {
+    id: 4,
+    chargeName: "계약금",
+    chargeNameEng: "Down Charge",
+    amount: 0,
+  },
+  {
+    id: 5,
+    chargeName: "잔금",
+    chargeNameEng: "Balance",
     amount: 0,
   },
 ];

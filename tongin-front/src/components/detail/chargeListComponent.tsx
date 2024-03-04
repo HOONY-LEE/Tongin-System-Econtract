@@ -46,32 +46,60 @@ const PriceInputArea = styled.div`
   width: 30vw;
 `;
 
+const TotalChargeBox = styled.div`
+  background-color: #f4f4f4;
+  width: 100%;
+  height: 12vw;
+  border-radius: 0.6vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+  border: 0.4vw solid #ff7f3b;
+`;
+
 export default function ChargeListComponent(props: any) {
-  const { optionData, inputChargeList, setInputChargeList } = props;
-  const ChargeMenuList = [
-    { id: 0, title: "이사 비용", subtitle: "Moving Charge" },
-    { id: 1, title: "보관 비용", subtitle: "Storage Charge" },
-    { id: 2, title: "부가세", subtitle: "VAT" },
-  ];
+  const { inputChargeList, setInputChargeList } = props;
 
   return (
     <Wrapper>
       {inputChargeList.map((item: any) => {
-        return (
-          <ListBox key={item.id}>
-            <TitleArea>
-              <Title>{item.chargeName}</Title>
-              <Subtile>/{item.chargeNameEng}</Subtile>
-            </TitleArea>
-            <PriceInputArea>
-              <ChargePriceInputBox
-                inputValue={item.amount}
-                setInputValue={setInputChargeList}
-                optionType={item.chargeName}
-              ></ChargePriceInputBox>
-            </PriceInputArea>
-          </ListBox>
-        );
+        // 총 비용의 경우 UI
+        if (item.id === 3) {
+          return (
+            <TotalChargeBox key={item.id}>
+              <TitleArea>
+                <Title>{item.chargeName}</Title>
+                <Subtile>/{item.chargeNameEng}</Subtile>
+              </TitleArea>
+              <PriceInputArea>
+                <ChargePriceInputBox
+                  inputValue={item.amount}
+                  setInputValue={setInputChargeList}
+                  optionType={item.chargeName}
+                  id={item.id}
+                ></ChargePriceInputBox>
+              </PriceInputArea>
+            </TotalChargeBox>
+          );
+        } else {
+          return (
+            <ListBox key={item.id}>
+              <TitleArea>
+                <Title>{item.chargeName}</Title>
+                <Subtile>/{item.chargeNameEng}</Subtile>
+              </TitleArea>
+              <PriceInputArea>
+                <ChargePriceInputBox
+                  inputValue={item.amount}
+                  setInputValue={setInputChargeList}
+                  optionType={item.chargeName}
+                  id={item.id}
+                ></ChargePriceInputBox>
+              </PriceInputArea>
+            </ListBox>
+          );
+        }
       })}
     </Wrapper>
   );

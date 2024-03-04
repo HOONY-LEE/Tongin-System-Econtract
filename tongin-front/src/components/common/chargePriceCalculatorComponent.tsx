@@ -146,7 +146,8 @@ const ColBox = styled.div`
 `;
 
 const ChargePriceCalculatorComponent = (props: any) => {
-  const { onClose, inputValue, setInputValue, title, unit, optionType } = props;
+  const { onClose, inputValue, setInputValue, title, unit, optionType, id } =
+    props;
   const [tmpValue, setTmpValue] = useState<string>(inputValue.toString());
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
@@ -168,7 +169,7 @@ const ChargePriceCalculatorComponent = (props: any) => {
 
       setInputValue((prev: any) => {
         const updatedData = [...prev];
-        updatedData[optionType].optionPayment = result;
+        updatedData[id].amount = result;
         return updatedData;
       });
       onClose();
