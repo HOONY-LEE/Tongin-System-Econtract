@@ -9623,6 +9623,45 @@ export const optionDummyData = {
   },
 };
 
+export const chargeData = [
+  {
+    id: 0,
+    chargeName: "이사 비용",
+    chargeNameEng: "Moving Charge",
+    amount: 0,
+  },
+  {
+    id: 1,
+    chargeName: "보관 비용",
+    chargeNameEng: "Storage Charge",
+    amount: 0,
+  },
+  {
+    id: 2,
+    chargeName: "부가세",
+    chargeNameEng: "VAT",
+    amount: 0,
+  },
+  {
+    id: 3,
+    chargeName: "총비용",
+    chargeNameEng: "Total Charge",
+    amount: 0,
+  },
+  {
+    id: 4,
+    chargeName: "계약금",
+    chargeNameEng: "Down Charge",
+    amount: 0,
+  },
+  {
+    id: 5,
+    chargeName: "잔금",
+    chargeNameEng: "Balance",
+    amount: 0,
+  },
+];
+
 export const drawingSampleData = [
   {
     tool: "pen",
