@@ -387,61 +387,6 @@ export default function ContractComponent(props: any) {
               setInputChargeList={setInputChargeList}
             ></ChargeListComponent>
           </ChargeListArea>
-          {/* <PaymentArea>
-            <TotalChargeBox>
-              <TitleArea>
-                <Title>총 비용</Title>
-                <Subtile>/Total Charge(부가세 별도)</Subtile>
-              </TitleArea>
-              <PriceInputArea>
-                <TotalInputBox>
-                  <TotalInputNumber>
-                    {
-                      optionData.livingService.movingCleaningService
-                        .servicePayment
-                    }
-                  </TotalInputNumber>
-                </TotalInputBox>
-                <SubText>원</SubText>
-              </PriceInputArea>
-            </TotalChargeBox>
-            <ListBox>
-              <TitleArea>
-                <Title>계약금</Title>
-                <Subtile>/Down Payment</Subtile>
-              </TitleArea>
-              <PriceInputArea>
-                <InputCBMBox>
-                  <InputCBMNumber>
-                    {
-                      optionData.livingService.organizationStorageService
-                        .servicePayment
-                    }
-                  </InputCBMNumber>
-                </InputCBMBox>
-                <SubText>원</SubText>
-              </PriceInputArea>
-            </ListBox>
-            <BalanceBox>
-              <ListBox>
-                <TitleArea>
-                  <Title>잔금</Title>
-                  <Subtile>/Balance</Subtile>
-                </TitleArea>
-                <PriceInputArea>
-                  <InputCBMBox>
-                    <InputCBMNumber>
-                      {
-                        optionData.livingService.organizationStorageService
-                          .servicePayment
-                      }
-                    </InputCBMNumber>
-                  </InputCBMBox>
-                  <SubText>원</SubText>
-                </PriceInputArea>
-              </ListBox>
-            </BalanceBox>
-          </PaymentArea> */}
         </InputArea>
         <ButtonArea>
           <PreviewBtn>견적서 미리보기</PreviewBtn>
