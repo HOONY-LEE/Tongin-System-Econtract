@@ -244,15 +244,18 @@ const SubText = styled.p`
 `;
 
 export default function ContractComponent(props: any) {
-  const { detailData, articleDataList, optionData } = props;
+  const {
+    detailData,
+    articleDataList,
+    optionData,
+    priceDataList,
+    setPirceDataList,
+  } = props;
 
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
-  const [inputChargeList, setInputChargeList] = useState(chargeData);
-
-  console.log("optionData>>>");
-  console.log(optionData);
+  // const [inputChargeList, setInputChargeList] = useState(chargeData);
 
   // CBM계산을 위한 함수
   const calculateTotalCBM = (articleDataList: any) => {
@@ -383,8 +386,8 @@ export default function ContractComponent(props: any) {
           </CalculatedListArea>
           <ChargeListArea>
             <ChargeListComponent
-              inputChargeList={inputChargeList}
-              setInputChargeList={setInputChargeList}
+              inputChargeList={priceDataList}
+              setInputChargeList={setPirceDataList}
             ></ChargeListComponent>
           </ChargeListArea>
         </InputArea>

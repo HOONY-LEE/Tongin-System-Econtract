@@ -63,9 +63,9 @@ export default function ChargeListComponent(props: any) {
 
   return (
     <Wrapper>
-      {inputChargeList.map((item: any) => {
+      {inputChargeList.map((item: any, index: number) => {
         // 총 비용의 경우 UI
-        if (item.id === 3) {
+        if (index === 3) {
           return (
             <TotalChargeBox key={item.id}>
               <TitleArea>

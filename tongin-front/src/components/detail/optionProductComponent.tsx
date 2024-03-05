@@ -51,8 +51,7 @@ const PriceBox = styled.div`
 
 export default function OptionProductComponent(props: any) {
   const { optionServiceList, setOptionServiceList } = props;
-  console.log("optionServiceList>>>");
-  console.log(optionServiceList);
+
   return (
     <Wrapper>
       {optionServiceList.map((item: any) => {
