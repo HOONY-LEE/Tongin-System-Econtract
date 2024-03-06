@@ -208,8 +208,6 @@ export default function Detail() {
   const getPriceList = async () => {
     const response = await API.get(`/receipt/price/${reNum}`);
     if (response.status === 200) {
-      console.log("Price Data >>>");
-      console.log(response.data.receiptPriceData);
       setPriceDataList(response.data.receiptPriceData);
     } else {
       console.log("Fail to getPriceList()");
@@ -268,7 +266,7 @@ export default function Detail() {
     }
   };
   useEffect(() => {
-    console.log(isSave);
+    // console.log(isSave);
     if (isSave.length > 0) {
       setLines(isSave);
       // setLines(drawingData);
@@ -324,6 +322,7 @@ export default function Detail() {
                   optionData={optionData}
                   priceDataList={priceDataList}
                   setPriceDataList={setPriceDataList}
+                  reNum={reNum}
                 ></ContractComponent>
               </ContractTabBox>
             ) : null}

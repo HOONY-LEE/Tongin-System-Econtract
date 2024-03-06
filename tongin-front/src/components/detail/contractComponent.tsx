@@ -3,6 +3,8 @@ import OptionPriceInputBox from "./optionPriceInputBox";
 import { useEffect, useState } from "react";
 import ChargeListComponent from "./chargeListComponent";
 import { chargeData } from "../common/sampleData";
+import API from "../../API/API";
+import DateModalComponent from "./dateModalComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -245,17 +247,44 @@ const SubText = styled.p`
 
 export default function ContractComponent(props: any) {
   const {
-    detailData,
     articleDataList,
     optionData,
     priceDataList,
-    setPirceDataList,
+    setPriceDataList,
+    reNum,
   } = props;
 
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
-  // const [inputChargeList, setInputChargeList] = useState(chargeData);
+  const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
+
+  // 날짜 모달 열기 핸들러
+  const dateHandleOpenModal = () => {
+    setIsDateModalOpen(true);
+  };
+
+  // // 날짜 모달 닫기 핸들러
+  const dateHandleCloseModal = () => {
+    setIsDateModalOpen(false);
+  };
+
+  // 계약서 미리보기
+  const previewContract = async () => {
+    // TODO: 미리보기 기능
+    // TMP: 가격 정보 수정 API
+
+    // const requestParam = {
+    //   receiptPriceData: priceDataList,
+    // };
+    // const response = await API.post(`/receipt/price/${reNum}`, requestParam);
+    // if (response.status === 200) {
+    //   alert("가격정보 수정 성공!");
+    // } else {
+    //   alert("가격정보 수정 실패!");
+    // }
+    dateHandleOpenModal();
+  };
 
   // CBM계산을 위한 함수
   const calculateTotalCBM = (articleDataList: any) => {
@@ -387,15 +416,22 @@ export default function ContractComponent(props: any) {
           <ChargeListArea>
             <ChargeListComponent
               inputChargeList={priceDataList}
-              setInputChargeList={setPirceDataList}
+              setInputChargeList={setPriceDataList}
             ></ChargeListComponent>
           </ChargeListArea>
         </InputArea>
         <ButtonArea>
-          <PreviewBtn>견적서 미리보기</PreviewBtn>
+          <PreviewBtn onClick={previewContract}>견적서 미리보기</PreviewBtn>
           <ExportBtn>견적서 내보내기</ExportBtn>
         </ButtonArea>
       </Wrapper>
+      {isDateModalOpen && (
+        <DateModalComponent
+          dateValueInput={1}
+          onClose={dateHandleCloseModal}
+          deteValueDelete={1}
+        />
+      )}
     </ContentBox>
   );
 }

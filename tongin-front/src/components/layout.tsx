@@ -48,7 +48,7 @@ const RightBox = styled.div`
   height: 4vh;
 `;
 
-const AdminHeader = () => {
+const HomeHeader = () => {
   const navigate = useNavigate();
 
   const logout = () => {
@@ -69,7 +69,7 @@ const AdminHeader = () => {
       <Header>
         <LeftBox onClick={goHome}>
           <Image
-            src="img/tongin_logo.png"
+            src="../img/tongin_logo.png"
             alt="로고 이미지"
             width={"10vw"}
             height={"10vw"}
@@ -95,7 +95,7 @@ const AdminHeader = () => {
 export default function Layout() {
   return (
     <>
-      <AdminHeader />
+      <HomeHeader />
       <Outlet></Outlet>
     </>
   );

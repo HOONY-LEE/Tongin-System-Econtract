@@ -19,8 +19,8 @@ const PencilIcon = ({ width, height, fill, onClick }: PencilIconProps) => {
         fill={fill}
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M5.66045 31.2571L11.9418 29.2179L26.7357 14.4239L20.7017 8.38996L5.90779 23.1839L3.86857 29.4652C3.50985 30.5702 4.55549 31.6158 5.66045 31.2571ZM20.7017 12.4126L22.7131 14.4239L10.4136 26.7234L7.43539 27.6903L8.40225 24.7121L20.7017 12.4126Z"
         fill={fill}
       />

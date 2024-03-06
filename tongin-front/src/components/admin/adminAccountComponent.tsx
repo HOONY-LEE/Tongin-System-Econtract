@@ -24,9 +24,16 @@ export default function AdminAccountComponent() {
         `정말 "${name}" 아이디 : ${id} 사용자를 비활성화하시겠습니까?`
       )
     ) {
-      const response = await API.delete(`/user/${id}`);
-      console.log(response);
-      alert("정상적으로 비활성화 되었습니다.");
+      try {
+        const response = await API.delete(`/user/${id}`);
+        if (response.status === 200) {
+          alert("정상적으로 비활성화 되었습니다.");
+        } else {
+          alert("비활성화 실패!");
+        }
+      } catch (error) {
+        alert(error);
+      }
       getUserList();
     }
   };
@@ -37,9 +44,16 @@ export default function AdminAccountComponent() {
         `정말 "${name}" 아이디 : ${id} 사용자를 활성화하시곘습니까?`
       )
     ) {
-      const response = await API.put(`/user/reactivate/${id}`);
-      console.log(response);
-      alert("정상적으로 활성화되었습니다.");
+      try {
+        const response = await API.put(`/user/reactivate/${id}`);
+        if (response.status === 200) {
+          alert("정상적으로 활성화되었습니다.");
+        } else {
+          alert("활성화 실패!");
+        }
+      } catch (error) {
+        alert(error);
+      }
       getUserList();
     }
   };
