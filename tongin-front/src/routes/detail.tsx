@@ -152,6 +152,7 @@ export default function Detail() {
   const [articleDataList, setArticleDataList] = useState<any[]>([]);
   const [optionData, setOptionData] = useState<object>({});
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
+  const [priceDataList, setPriceDataList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
   const [isSave, setIsSave] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState<any>(true);
@@ -177,7 +178,7 @@ export default function Detail() {
       const result = response.data.receiptDetail;
       setDetailData(result);
     } else {
-      console.log("에러");
+      console.log("Fail to getDetailList()");
     }
   };
 
@@ -189,7 +190,7 @@ export default function Detail() {
 
       setArticleDataList(result);
     } else {
-      console.log("물품 정보 데이터를 불러오지 못했습니다.");
+      console.log("Fail to getProductList()");
     }
   };
 
@@ -199,7 +200,17 @@ export default function Detail() {
     if (response.status === 200) {
       setOptionData(response.data.receiptOptionData);
     } else {
-      console.log("옵션정보 호출API 실패");
+      console.log("Fail to getOptionList()");
+    }
+  };
+
+  // 가격정보 호출API
+  const getPriceList = async () => {
+    const response = await API.get(`/receipt/price/${reNum}`);
+    if (response.status === 200) {
+      setPriceDataList(response.data.receiptPriceData);
+    } else {
+      console.log("Fail to getPriceList()");
     }
   };
 
@@ -207,6 +218,7 @@ export default function Detail() {
     getDetailList();
     getProductList();
     getOptionList();
+    getPriceList();
     setLines(drawingData);
   }, []);
 
@@ -254,7 +266,7 @@ export default function Detail() {
     }
   };
   useEffect(() => {
-    console.log(isSave);
+    // console.log(isSave);
     if (isSave.length > 0) {
       setLines(isSave);
       // setLines(drawingData);
@@ -308,6 +320,9 @@ export default function Detail() {
                   detailData={detailData}
                   articleDataList={articleDataList}
                   optionData={optionData}
+                  priceDataList={priceDataList}
+                  setPriceDataList={setPriceDataList}
+                  reNum={reNum}
                 ></ContractComponent>
               </ContractTabBox>
             ) : null}

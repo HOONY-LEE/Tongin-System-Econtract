@@ -149,7 +149,6 @@ export default function OptionComponent(props: any) {
 
       return updatedData;
     });
-    console.log(optionData);
   }, [
     prevOptionData,
     afterOptionData,

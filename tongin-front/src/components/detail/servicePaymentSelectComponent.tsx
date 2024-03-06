@@ -107,8 +107,6 @@ const InputBox = styled.input.attrs({})<{}>`
 
 export default function ServicePaymentSelectComponent(props: any) {
   const { optionList, selectedValue, setSelectedValue } = props;
-  const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
-  const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
 
   // 옵션 선택 핸들러
   const selectOptionHandle = (id: number) => {

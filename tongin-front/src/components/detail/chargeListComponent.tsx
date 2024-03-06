@@ -60,14 +60,13 @@ const TotalChargeBox = styled.div`
 
 export default function ChargeListComponent(props: any) {
   const { inputChargeList, setInputChargeList } = props;
-
   return (
     <Wrapper>
-      {inputChargeList.map((item: any) => {
+      {inputChargeList.map((item: any, index: number) => {
         // 총 비용의 경우 UI
-        if (item.id === 3) {
+        if (index === 3) {
           return (
-            <TotalChargeBox key={item.id}>
+            <TotalChargeBox key={index}>
               <TitleArea>
                 <Title>{item.chargeName}</Title>
                 <Subtile>/{item.chargeNameEng}</Subtile>
@@ -77,14 +76,14 @@ export default function ChargeListComponent(props: any) {
                   inputValue={item.amount}
                   setInputValue={setInputChargeList}
                   optionType={item.chargeName}
-                  id={item.id}
+                  id={index}
                 ></ChargePriceInputBox>
               </PriceInputArea>
             </TotalChargeBox>
           );
         } else {
           return (
-            <ListBox key={item.id}>
+            <ListBox key={index}>
               <TitleArea>
                 <Title>{item.chargeName}</Title>
                 <Subtile>/{item.chargeNameEng}</Subtile>
@@ -94,7 +93,7 @@ export default function ChargeListComponent(props: any) {
                   inputValue={item.amount}
                   setInputValue={setInputChargeList}
                   optionType={item.chargeName}
-                  id={item.id}
+                  id={index}
                 ></ChargePriceInputBox>
               </PriceInputArea>
             </ListBox>

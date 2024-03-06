@@ -172,6 +172,7 @@ const ChargePriceCalculatorComponent = (props: any) => {
         updatedData[id].amount = result;
         return updatedData;
       });
+
       onClose();
     }
   };
