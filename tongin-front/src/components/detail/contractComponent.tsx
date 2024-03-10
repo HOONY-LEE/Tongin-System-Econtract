@@ -1,10 +1,7 @@
 import styled from "styled-components";
-import OptionPriceInputBox from "./optionPriceInputBox";
 import { useEffect, useState } from "react";
 import ChargeListComponent from "./chargeListComponent";
-import { chargeData } from "../common/sampleData";
-import API from "../../API/API";
-import DateModalComponent from "./dateModalComponent";
+import ContractPreviewModalComponent from "./contractPreviewModalComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -257,16 +254,16 @@ export default function ContractComponent(props: any) {
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
-  const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState<boolean>(false);
 
-  // 날짜 모달 열기 핸들러
-  const dateHandleOpenModal = () => {
-    setIsDateModalOpen(true);
+  // 계약서 미리보기 모달 열기
+  const handleOpenModal = () => {
+    setIsPreviewModalOpen(true);
   };
 
-  // // 날짜 모달 닫기 핸들러
-  const dateHandleCloseModal = () => {
-    setIsDateModalOpen(false);
+  // 계약서 미리보기 모달 닫기
+  const handleCloseModal = () => {
+    setIsPreviewModalOpen(false);
   };
 
   // 계약서 미리보기
@@ -283,7 +280,8 @@ export default function ContractComponent(props: any) {
     // } else {
     //   alert("가격정보 수정 실패!");
     // }
-    dateHandleOpenModal();
+
+    handleOpenModal();
   };
 
   // CBM계산을 위한 함수
@@ -425,11 +423,10 @@ export default function ContractComponent(props: any) {
           <ExportBtn>견적서 내보내기</ExportBtn>
         </ButtonArea>
       </Wrapper>
-      {isDateModalOpen && (
-        <DateModalComponent
-          dateValueInput={1}
-          onClose={dateHandleCloseModal}
-          deteValueDelete={1}
+      {isPreviewModalOpen && (
+        <ContractPreviewModalComponent
+          reNum={reNum}
+          onClose={handleCloseModal}
         />
       )}
     </ContentBox>
