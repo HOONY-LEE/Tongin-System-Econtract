@@ -425,9 +425,8 @@ export default function ContractComponent(props: any) {
       </Wrapper>
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
-          dateValueInput={1}
+          reNum={reNum}
           onClose={handleCloseModal}
-          deteValueDelete={1}
         />
       )}
     </ContentBox>

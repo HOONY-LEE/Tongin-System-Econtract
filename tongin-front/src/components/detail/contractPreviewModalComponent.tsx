@@ -1,10 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ClassNames, DayPicker } from "react-day-picker";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ko } from "date-fns/locale";
 import { format } from "date-fns";
 import styles from "react-day-picker/dist/style.module.css";
 import CustomButton from "../common/customButton";
+import EraserIcon from "../icon/eraserIcon";
+import ArrowLeftIcon from "../icon/arrowLeftIcon";
+import ArrowRightIcon from "../icon/arrowRightIcon";
+import API from "../../API/API";
+import FirstPage from "./firstPage";
+
 const Backdrop = styled.div`
   position: fixed;
   top: 0;
@@ -25,8 +31,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 90vw;
-  height: 90vh;
+  width: 92vw;
+  height: 92vh;
   background-color: white;
   border-radius: 0.8vw;
 `;
@@ -61,8 +67,11 @@ const RightArea = styled.div`
 const ContractArea = styled.div`
   margin-top: 2vw;
   width: 86vw;
-  height: 82vh;
+  height: 84vh;
   background-color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CloseBtn = styled.div`
@@ -80,17 +89,19 @@ const CloseBtn = styled.div`
   }
 `;
 
-const PrevBox = styled.div`
+const PrevBox = styled.div<{ isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: #ff7f3b;
+  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  &&:hover {
-    cursor: pointer;
-  }
+  ${(props) =>
+    !props.isActivate &&
+    css`
+      pointer-events: none;
+    `}
 `;
 
 const NumBox = styled.div`
@@ -105,20 +116,82 @@ const NumBox = styled.div`
   font-weight: 600;
 `;
 
-const NextBox = styled.div`
+const NextBox = styled.div<{ isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: #ff7f3b;
+  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  &&:hover {
-    cursor: pointer;
-  }
+  ${(props) =>
+    !props.isActivate &&
+    css`
+      pointer-events: none;
+    `}
 `;
+
+const SecondPage = styled.div`
+  width: 90%;
+  height: 90%;
+  background-color: white;
+`;
+
 const ContractPreviewModalComponent = (props: any) => {
-  const { onClose } = props;
+  const { onClose, reNum } = props;
+
+  const [contractImageList, setContractImageList] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [prevBoxActive, setPrevBoxActive] = useState<boolean>(false);
+  const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
+  const maxIndex = 2;
+
+  const getContractImage = async () => {
+    const response = await API.get(`receipt/contract-image/${reNum}`);
+    if (response.status === 200) {
+      console.log("response>>>");
+      console.log(response.data.contractImageList);
+      setContractImageList(response.data.contractImageList);
+    }
+  };
+
+  const clickPrevPage = (e: any) => {
+    if (currentPage <= 1) {
+      return;
+    } else {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const clickNextPage = (e: any) => {
+    if (currentPage >= maxIndex) {
+      return;
+    }
+    setCurrentPage(currentPage + 1);
+  };
+
+  useEffect(() => {
+    if (currentPage <= 1) {
+      setPrevBoxActive(false);
+      setNextBoxActive(true);
+    } else {
+      setPrevBoxActive(true);
+      if (currentPage >= maxIndex) {
+        setNextBoxActive(false);
+      } else {
+        setNextBoxActive(true);
+      }
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    getContractImage();
+  }, []);
+
+  useEffect(() => {
+    console.log("contractImageList>>");
+    console.log(contractImageList);
+  }, [contractImageList]);
 
   return (
     <>
@@ -127,15 +200,36 @@ const ContractPreviewModalComponent = (props: any) => {
         <TopArea>
           <LeftArea></LeftArea>
           <MidArea>
-            <PrevBox></PrevBox>
-            <NumBox>{1}</NumBox>
-            <NextBox></NextBox>
+            <PrevBox isActivate={prevBoxActive}>
+              <ArrowLeftIcon
+                onClick={(e: any) => clickPrevPage(e)}
+                width={"4.2vw"}
+                height={"4.2vw"}
+                fill={"white"}
+              />
+            </PrevBox>
+            <NumBox>{currentPage}</NumBox>
+            <NextBox isActivate={nextBoxActive}>
+              <ArrowRightIcon
+                onClick={(e: any) => clickNextPage(e)}
+                width={"4.2vw"}
+                height={"4.2vw"}
+                fill={"white"}
+              />
+            </NextBox>
           </MidArea>
           <RightArea>
             <CloseBtn onClick={onClose}>닫기</CloseBtn>
           </RightArea>
         </TopArea>
-        <ContractArea></ContractArea>
+        <ContractArea>
+          {currentPage === 1 && (
+            <div>
+              <FirstPage></FirstPage>
+            </div>
+          )}
+          {currentPage === 2 && <SecondPage></SecondPage>}
+        </ContractArea>
       </Wrapper>
     </>
   );
