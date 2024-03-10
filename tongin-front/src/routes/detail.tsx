@@ -298,9 +298,11 @@ export default function Detail() {
     }
   };
   useEffect(() => {
-    if (isSave.length > 0) {
+    if (isSave?.length >= 0) {
       setLines(isSave);
       // setLines(drawingData);
+    } else {
+      setIsSave([]);
     }
   }, [isSave]);
   return (
