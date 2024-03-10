@@ -214,6 +214,38 @@ export default function Detail() {
     }
   };
 
+  // 메모장 전송 API
+  const postDrawingData = async () => {
+    const requestParam = {
+      receiptMemoData: isSave,
+    };
+    const response = await API.post(`receipt/memo/${reNum}`, requestParam);
+    if (response.status === 200) {
+      const result = response.data;
+      console.log("저장성공", result);
+    } else {
+      console.log("Fail to postDrawingData()");
+    }
+  };
+  // 메모장 호출 API
+  const getDrawingData = async () => {
+    const response = await API.get(`receipt/memo/${reNum}`);
+    if (response.status === 200) {
+      console.log(response);
+      const result = response.data.receiptMemoData;
+      setIsSave(result);
+      console.log("불러오기성공", result);
+    } else {
+      console.log("Fail to getDrawingData()");
+    }
+  };
+
+  const onClose = async () => {
+    postDrawingData();
+    setDrawingPanel(false);
+    disableScrollLock();
+  };
+
   useEffect(() => {
     getDetailList();
     getProductList();
@@ -266,7 +298,6 @@ export default function Detail() {
     }
   };
   useEffect(() => {
-    // console.log(isSave);
     if (isSave.length > 0) {
       setLines(isSave);
       // setLines(drawingData);
@@ -333,6 +364,7 @@ export default function Detail() {
               onClick={() => {
                 setDrawingPanel(true);
                 scrollRock();
+                getDrawingData();
               }}
               height={"4vw"}
               fill={"#ffffff"}
@@ -340,14 +372,14 @@ export default function Detail() {
           </DrawingBtn>
           {drawingPanel && (
             <DetailDrawingPanelComponent
+              reNum={reNum}
               setIsSave={setIsSave}
               isSave={isSave}
               setIsScrolled={setIsScrolled}
               setLines={setLines}
               lines={lines}
               onClose={() => {
-                setDrawingPanel(false);
-                disableScrollLock();
+                onClose();
               }}
             />
           )}

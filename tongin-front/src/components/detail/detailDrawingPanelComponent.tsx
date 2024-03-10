@@ -5,6 +5,7 @@ import CloseIcon from "../icon/closeIcon";
 import BlankBoxIcon from "../icon/blankBox";
 import EraserIcon from "../icon/eraserIcon";
 import DrawingPen from "../icon/drawingPen";
+import API from "../../API/API";
 const TopArea = styled.div``;
 const Backdrop = styled.div`
   position: fixed;
@@ -129,6 +130,7 @@ interface CalculatorComponentProps {
   isSave: any;
   lines: any;
   setLines: any;
+  reNum?: string;
 }
 
 const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
@@ -139,6 +141,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   setIsScrolled,
   lines,
   setLines,
+  reNum,
 }) => {
   const stageRef = useRef<any>(null);
   const [tool, setTool] = useState<string>("pen");
@@ -205,6 +208,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     { size: 60, width: "3vw", height: "2.3vh" },
     { size: 110, width: "4.1vw", height: "3vh" },
   ];
+
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
   useEffect(() => {
