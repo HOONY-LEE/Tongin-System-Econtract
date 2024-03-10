@@ -2,13 +2,15 @@ type BlankIconProps = {
   width?: string;
   height: string;
   fill: string;
+  onClick?: any;
 };
 
-const BlankBoxIcon = ({ width, height, fill }: BlankIconProps) => {
+const BlankBoxIcon = ({ width, height, fill, onClick }: BlankIconProps) => {
   return (
     <svg
       width={width}
       height={height}
+      onClick={onClick}
       viewBox="0 0 34 34"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

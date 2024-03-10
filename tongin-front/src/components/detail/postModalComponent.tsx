@@ -50,7 +50,7 @@ const PostModalComponent = (props: any) => {
 
   return (
     <>
-      <Backdrop /> {/* 모달이 열릴 때 배경을 어둡게 하는 역할을 합니다. */}
+      <Backdrop /> {/* 모달이 열릴 때 배경을 어둡게 하는 역할을 합니다. */}.
       <Wrapper>
         <CloseBox>
           <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />

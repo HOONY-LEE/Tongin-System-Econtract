@@ -6,6 +6,7 @@ import BlankBoxIcon from "../icon/blankBox";
 import EraserIcon from "../icon/eraserIcon";
 import DrawingPen from "../icon/drawingPen";
 import API from "../../API/API";
+import DetailDrawBlankModalComponent from "./detailDrawBlankModal";
 const TopArea = styled.div``;
 const Backdrop = styled.div`
   position: fixed;
@@ -150,6 +151,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [eraserSize, setEraserSize] = useState<number>();
   const [penColor, setPenColor] = useState<any>();
   const [penSize, setPenSize] = useState<number>();
+  const [blankBoxVisible, setBlankBoxVisible] = useState<boolean>(false);
 
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
 
@@ -193,6 +195,17 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     setTool("eraser");
     setEraserSize(20);
   };
+
+  const isBlank = () => {
+    setBlankBoxVisible(true);
+  };
+  const onBlankData = () => {
+    setBlankBoxVisible(false);
+    setIsSave((e: any) => isSave.splice[0]);
+  };
+  const BlankClose = () => {
+    setBlankBoxVisible(false);
+  };
   const divRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState<any>({
     width: 0,
@@ -231,6 +244,12 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     <>
       <Backdrop />
       <CalculatorComponentWrapper style={style}>
+        {blankBoxVisible && (
+          <DetailDrawBlankModalComponent
+            onBlank={onBlankData}
+            onClose={BlankClose}
+          ></DetailDrawBlankModalComponent>
+        )}
         <ToolContainer>
           <ColorCanvasBox>
             <ColorCanvastitle>
@@ -274,7 +293,11 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
                 height={"4vw"}
                 fill={tool === "eraser" ? "#FF7F3B" : "#AEAEAE"}
               />
-              <BlankBoxIcon height={"4vw"} fill={"#AEAEAE"} />
+              <BlankBoxIcon
+                onClick={() => isBlank()}
+                height={"4vw"}
+                fill={"#AEAEAE"}
+              />
             </CanvasTool>
           </CanvasToolBox>
           <CloseBox>
