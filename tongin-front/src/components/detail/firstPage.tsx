@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
 // FirstPage 컴포넌트 정의
 const FirstPage = () => (
-  <Wrapper>
+  <Wrapper className="firstPageBox">
     <h1>페이지1</h1>
   </Wrapper>
 );

@@ -10,6 +10,7 @@ import ArrowLeftIcon from "../icon/arrowLeftIcon";
 import ArrowRightIcon from "../icon/arrowRightIcon";
 import API from "../../API/API";
 import FirstPage from "./firstPage";
+import makePdf from "../../API/makePDF";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -146,6 +147,13 @@ const ContractPreviewModalComponent = (props: any) => {
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
   const maxIndex = 2;
 
+  const onClickMakePDF = async (e: any) => {
+    e.preventDefault();
+    const response = await makePdf.viewWithPdf(reNum);
+    // const response = await makePdf._sendToServer(pdf, reNum);
+    // console.log(response);
+  };
+
   const getContractImage = async () => {
     const response = await API.get(`receipt/contract-image/${reNum}`);
     if (response.status === 200) {
@@ -198,7 +206,9 @@ const ContractPreviewModalComponent = (props: any) => {
       <Backdrop />
       <Wrapper>
         <TopArea>
-          <LeftArea></LeftArea>
+          <LeftArea>
+            <button onClick={onClickMakePDF}>pdf로 보기</button>
+          </LeftArea>
           <MidArea>
             <PrevBox isActivate={prevBoxActive}>
               <ArrowLeftIcon
