@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
+import CloseIcon from "../icon/closeIcon";
 const Backdrop = styled.div`
   position: fixed;
   top: 0;
@@ -25,7 +26,9 @@ const Wrapper = styled.div`
   background-color: white;
   border-radius: 0.8vw;
 `;
-
+const CloseBox = styled.div`
+  margin: 1vw 2vw 1vw auto;
+`;
 const TopArea = styled.div``;
 
 const PostModalComponent = (props: any) => {
@@ -49,7 +52,9 @@ const PostModalComponent = (props: any) => {
     <>
       <Backdrop /> {/* 모달이 열릴 때 배경을 어둡게 하는 역할을 합니다. */}
       <Wrapper>
-        <button onClick={onClose}>닫기</button>
+        <CloseBox>
+          <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />
+        </CloseBox>
         <DaumPostcode
           style={postCodeStyle}
           theme={theme}
