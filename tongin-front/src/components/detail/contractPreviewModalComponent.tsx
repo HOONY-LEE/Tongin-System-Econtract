@@ -32,22 +32,26 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 92vw;
-  height: 92vh;
+  width: 84vw;
+  height: 120vw;
   background-color: white;
   border-radius: 0.8vw;
 `;
 
 const TopArea = styled.div`
   width: 86vw;
-  height: 6vw;
+  height: 9vw;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 1px solid green;
 `;
 
 const LeftArea = styled.div`
   width: 37%;
   height: 100%;
   display: flex;
+  outline: 1px solid red;
 `;
 
 const MidArea = styled.div`
@@ -58,7 +62,7 @@ const MidArea = styled.div`
   align-items: end;
 `;
 const RightArea = styled.div`
-  width: 37%;
+  width: 28%;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -67,8 +71,8 @@ const RightArea = styled.div`
 
 const ContractArea = styled.div`
   margin-top: 2vw;
-  width: 86vw;
-  height: 84vh;
+  width: 72vw;
+  height: 101.8224vw;
   background-color: #e6e6e6;
   display: flex;
   justify-content: center;
