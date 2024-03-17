@@ -10,6 +10,7 @@ import ArrowLeftIcon from "../icon/arrowLeftIcon";
 import ArrowRightIcon from "../icon/arrowRightIcon";
 import API from "../../API/API";
 import FirstPage from "./firstPage";
+import makePdf from "../../API/makePDF";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -138,13 +139,20 @@ const SecondPage = styled.div`
 `;
 
 const ContractPreviewModalComponent = (props: any) => {
-  const { onClose, reNum } = props;
+  const { onClose, reNum, priceDataList } = props;
 
   const [contractImageList, setContractImageList] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [prevBoxActive, setPrevBoxActive] = useState<boolean>(false);
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
   const maxIndex = 2;
+
+  const onClickMakePDF = async (e: any) => {
+    e.preventDefault();
+    const response = await makePdf.viewWithPdf(reNum);
+    // const response = await makePdf._sendToServer(pdf, reNum);
+    // console.log(response);
+  };
 
   const getContractImage = async () => {
     const response = await API.get(`receipt/contract-image/${reNum}`);
@@ -198,7 +206,9 @@ const ContractPreviewModalComponent = (props: any) => {
       <Backdrop />
       <Wrapper>
         <TopArea>
-          <LeftArea></LeftArea>
+          <LeftArea>
+            <button onClick={onClickMakePDF}>pdf로 보기</button>
+          </LeftArea>
           <MidArea>
             <PrevBox isActivate={prevBoxActive}>
               <ArrowLeftIcon
@@ -225,7 +235,7 @@ const ContractPreviewModalComponent = (props: any) => {
         <ContractArea>
           {currentPage === 1 && (
             <div>
-              <FirstPage></FirstPage>
+              <FirstPage priceDataList={priceDataList}></FirstPage>
             </div>
           )}
           {currentPage === 2 && <SecondPage></SecondPage>}
