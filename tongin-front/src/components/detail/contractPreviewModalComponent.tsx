@@ -139,7 +139,7 @@ const SecondPage = styled.div`
 `;
 
 const ContractPreviewModalComponent = (props: any) => {
-  const { onClose, reNum } = props;
+  const { onClose, reNum, priceDataList } = props;
 
   const [contractImageList, setContractImageList] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -235,7 +235,7 @@ const ContractPreviewModalComponent = (props: any) => {
         <ContractArea>
           {currentPage === 1 && (
             <div>
-              <FirstPage></FirstPage>
+              <FirstPage priceDataList={priceDataList}></FirstPage>
             </div>
           )}
           {currentPage === 2 && <SecondPage></SecondPage>}

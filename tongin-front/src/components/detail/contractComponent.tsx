@@ -425,6 +425,7 @@ export default function ContractComponent(props: any) {
       </Wrapper>
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
+          priceDataList={priceDataList}
           reNum={reNum}
           onClose={handleCloseModal}
         />
