@@ -11,6 +11,7 @@ import ArrowRightIcon from "../icon/arrowRightIcon";
 import API from "../../API/API";
 import FirstPage from "./firstPage";
 import makePdf from "../../API/makePDF";
+import makeHtmltoImage from "../../API/makePDF";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -153,9 +154,9 @@ const ContractPreviewModalComponent = (props: any) => {
 
   const onClickMakePDF = async (e: any) => {
     e.preventDefault();
-    const response = await makePdf.viewWithPdf(reNum);
-    // const response = await makePdf._sendToServer(pdf, reNum);
-    // console.log(response);
+    // const response = await makeHtmltoImage.viewWithPdf(reNum);
+    const response = await makeHtmltoImage._convertToImg(reNum);
+    console.log(response);
   };
 
   const getContractImage = async () => {
