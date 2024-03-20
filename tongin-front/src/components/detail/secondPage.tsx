@@ -175,7 +175,7 @@ const EstimateTable = styled.table`
   height: 100%;
 `;
 // FirstPage 컴포넌트 정의
-const FirstPage = (props: any) => {
+const SecondPage = (props: any) => {
   const {
     priceDataList,
     articleDataList,
@@ -213,11 +213,11 @@ const FirstPage = (props: any) => {
   };
 
   return (
-    <Wrapper className="firstPageBox">
+    <Wrapper className="secondPageBox">
       <Container>
         <Header>
           <LogoImg onClick={data}>logo</LogoImg>
-          <HeaderTitle>계약서 • 견적서</HeaderTitle>
+          <HeaderTitle>이사 물량 견적표</HeaderTitle>
         </Header>
         <TopTable>
           <TopTr>
@@ -341,36 +341,8 @@ const FirstPage = (props: any) => {
             </ApplyInfoTr>
           )}
         </ApplyInfoTable>
-        <BottomComponent>
-          <MemoBox>
-            <MemoRound ref={divRef}>
-              {"memo"}
-              <Stage
-                onMouseDown={handleMouseDown}
-                ref={stageRef}
-                width={100}
-                height={100}
-                stroke={""}
-              >
-                <Layer>
-                  {drawingData.map((line: any, i: any) => (
-                    <Line
-                      key={i}
-                      points={line.points}
-                      stroke={line.stroke}
-                      strokeWidth={line.strokeWidth}
-                      tension={0.8}
-                      lineCap="round"
-                    />
-                  ))}
-                </Layer>
-              </Stage>
-            </MemoRound>
-          </MemoBox>
-          <EstimateTable></EstimateTable>
-        </BottomComponent>
       </Container>
     </Wrapper>
   );
 };
-export default FirstPage;
+export default SecondPage;

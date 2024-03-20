@@ -425,6 +425,7 @@ export default function ContractComponent(props: any) {
       </Wrapper>
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
+          reNum={reNum}
           setLines={setLines}
           drawingData={drawingData}
           lines={lines}

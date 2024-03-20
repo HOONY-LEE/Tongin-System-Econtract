@@ -3,23 +3,26 @@ import jsPDF from "jspdf";
 import API from "./API";
 import axios from "axios";
 
-const makePdf = {
+const makeHtmltoImage = {
   viewWithPdf: async (reNum: string) => {
     // html to imageFile
-    const imageFile = await makePdf._converToImg(reNum);
+    const imageFiles = await makeHtmltoImage._convertToImg(reNum);
+    await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
 
-    // imageFile to Pdf
     // const pdf = makePdf._converToPdf(imageFile, reNum);
-
-    await makePdf._sendImgToServer(imageFile, reNum);
   },
-  _converToImg: async (reNum: string) => {
+  _convertToImg: async (reNum: string) => {
     // html to imageFile
-    const paper: any = document.querySelector(".firstPageBox");
+    const firstPage: any = document.querySelector(".firstPageBox");
+    const secondPage: any = document.querySelector(".secondPageBox");
 
-    const canvas = await html2canvas(paper);
-    const imageFile = canvas.toDataURL("image/png", 1.0);
-    return imageFile;
+    const canvas1 = await html2canvas(firstPage);
+    const canvas2 = await html2canvas(secondPage);
+    const imageFiles = [
+      canvas1.toDataURL("image/png", 1.0),
+      canvas2.toDataURL("image/png", 1.0),
+    ];
+    return imageFiles;
   },
   // _converToPdf: (imageFile: any, reNum: string) => {
   //   // imageFile to pdf
@@ -70,13 +73,16 @@ const makePdf = {
   //   }
   // },
 
-  _sendImgToServer: async (imageFileDataUrl: string, reNum: string) => {
+  _sendImgToServer: async (imageFileDataUrl: string[], reNum: string) => {
     // Data URL을 Blob 객체로 변환
-    const blob = await fetch(imageFileDataUrl).then((res) => res.blob());
+    const blob1 = await fetch(imageFileDataUrl[0]).then((res) => res.blob());
+    const blob2 = await fetch(imageFileDataUrl[1]).then((res) => res.blob());
 
     // FormData 생성 및 Blob 추가
     const formData = new FormData();
-    formData.append("imageData", blob, "test.png");
+    formData.append("imageData", blob1, "Page1.png");
+    formData.append("type", "png");
+    formData.append("imageData", blob2, "Page2.png");
     formData.append("type", "png");
     const accessToken = localStorage.getItem("accessToken");
     console.log(formData);
@@ -101,4 +107,4 @@ const makePdf = {
   },
 };
 
-export default makePdf;
+export default makeHtmltoImage;
