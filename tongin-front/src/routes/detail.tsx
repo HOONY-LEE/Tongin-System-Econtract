@@ -350,6 +350,9 @@ export default function Detail() {
             {currentTab === 3 ? (
               <ContractTabBox>
                 <ContractComponent
+                setLines={setLines}
+                isSave={isSave}
+                  lines={lines}
                   detailData={detailData}
                   articleDataList={articleDataList}
                   optionData={optionData}
