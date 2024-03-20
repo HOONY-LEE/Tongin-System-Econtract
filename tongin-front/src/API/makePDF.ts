@@ -4,74 +4,20 @@ import API from "./API";
 import axios from "axios";
 
 const makeHtmltoImage = {
-  viewWithPdf: async (reNum: string) => {
-    // html to imageFile
-    const imageFiles = await makeHtmltoImage._convertToImg(reNum);
-    await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
-
-    // const pdf = makePdf._converToPdf(imageFile, reNum);
+  _makeImageHandler: async (reNum: string) => {
+    // const imageFiles = await makeHtmltoImage._convertToImg();
+    // await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
   },
-  _convertToImg: async (reNum: string) => {
+  _convertToImg: async (className: string) => {
     // html to imageFile
-    const firstPage: any = document.querySelector(".firstPageBox");
-    const secondPage: any = document.querySelector(".secondPageBox");
+    const page: any = document.querySelector(className);
 
-    const canvas1 = await html2canvas(firstPage);
-    const canvas2 = await html2canvas(secondPage);
-    const imageFiles = [
-      canvas1.toDataURL("image/png", 1.0),
-      canvas2.toDataURL("image/png", 1.0),
-    ];
-    return imageFiles;
+    const canvas = await html2canvas(page);
+
+    const imageFile = canvas.toDataURL("image/png", 1.0);
+
+    return imageFile;
   },
-  // _converToPdf: (imageFile: any, reNum: string) => {
-  //   // imageFile to pdf
-
-  //   const doc = new jsPDF("p", "mm", "a4");
-
-  //   const pageWidth = doc.internal.pageSize.getWidth();
-  //   const pageHeight = doc.internal.pageSize.getHeight();
-
-  //   doc.addImage(imageFile, "JPEG", 0, 0, pageWidth, pageHeight);
-
-  //   // doc.save("test.pdf");
-
-  //   window.open(doc.output("bloburl"));
-
-  //   const pdf = new File([doc.output("blob")], "test.pdf", {
-  //     type: "application/pdf",
-  //   });
-
-  //   return pdf;
-  // },
-  // _sendToServer: async (pdf: any, reNum: string) => {
-  //   const formData = new FormData();
-  //   formData.append("file", pdf);
-  //   formData.append("type", "pdf");
-  //   const accessToken = localStorage.getItem("accessToken");
-  //   console.log(formData);
-  //   const config = {
-  //     headers: {
-  //       Authorization: accessToken,
-  //       ContentType: "multipart/form-data",
-  //     },
-  //     body: {
-  //       imageData: formData,
-  //     },
-  //   };
-
-  //   const response = await axios.post(
-  //     `https://homenmove.net/v1/api/receipt/contract-image/${reNum}`,
-  //     formData,
-  //     config
-  //   );
-
-  //   if (response.status === 200) {
-  //     alert("성공적으로 PDF저장");
-  //   } else {
-  //     alert("PDF 저장 실패!");
-  //   }
-  // },
 
   _sendImgToServer: async (imageFileDataUrl: string[], reNum: string) => {
     // Data URL을 Blob 객체로 변환
