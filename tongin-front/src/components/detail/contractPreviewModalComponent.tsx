@@ -150,7 +150,7 @@ const ContractPreviewModalComponent = (props: any) => {
     articleDataList,
     optionData,
     lines,
-    isSave,
+    drawingData,
     setLines,
   } = props;
 
@@ -250,7 +250,7 @@ const ContractPreviewModalComponent = (props: any) => {
             <div>
               <FirstPage
                 setLines={setLines}
-                isSave={isSave}
+                drawingData={drawingData}
                 lines={lines}
                 priceDataList={priceDataList}
                 articleDataList={articleDataList}

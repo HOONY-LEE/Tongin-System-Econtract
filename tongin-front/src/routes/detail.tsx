@@ -154,11 +154,10 @@ export default function Detail() {
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
   const [priceDataList, setPriceDataList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
-  const [isSave, setIsSave] = useState<any[]>([]);
+  const [drawingData, setDrawingData] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
-  const drawingData: any = drawingSampleData;
 
   const menuArr = [
     { name: "1. 상세정보", content: "견적리스트 영역" },
@@ -217,7 +216,7 @@ export default function Detail() {
   // 메모장 전송 API
   const postDrawingData = async () => {
     const requestParam = {
-      receiptMemoData: isSave,
+      receiptMemoData: drawingData,
     };
     const response = await API.post(`receipt/memo/${reNum}`, requestParam);
     if (response.status === 200) {
@@ -233,7 +232,7 @@ export default function Detail() {
     if (response.status === 200) {
       console.log(response);
       const result = response.data.receiptMemoData;
-      setIsSave(result);
+      setDrawingData(result);
       console.log("불러오기성공", result);
     } else {
       console.log("Fail to getDrawingData()");
@@ -251,7 +250,6 @@ export default function Detail() {
     getProductList();
     getOptionList();
     getPriceList();
-    setLines(drawingData);
   }, []);
 
   useEffect(() => {
@@ -298,13 +296,13 @@ export default function Detail() {
     }
   };
   useEffect(() => {
-    if (isSave?.length >= 0) {
-      setLines(isSave);
+    if (drawingData?.length >= 0) {
+      setLines(drawingData);
       // setLines(drawingData);
     } else {
-      setIsSave([]);
+      setDrawingData([]);
     }
-  }, [isSave]);
+  }, [drawingData]);
   return (
     <>
       <FlexXY>
@@ -350,8 +348,8 @@ export default function Detail() {
             {currentTab === 3 ? (
               <ContractTabBox>
                 <ContractComponent
-                setLines={setLines}
-                isSave={isSave}
+                  setLines={setLines}
+                  drawingData={drawingData}
                   lines={lines}
                   detailData={detailData}
                   articleDataList={articleDataList}
@@ -378,8 +376,8 @@ export default function Detail() {
           {drawingPanel && (
             <DetailDrawingPanelComponent
               reNum={reNum}
-              setIsSave={setIsSave}
-              isSave={isSave}
+              setDrawingData={setDrawingData}
+              drawingData={drawingData}
               setIsScrolled={setIsScrolled}
               setLines={setLines}
               lines={lines}

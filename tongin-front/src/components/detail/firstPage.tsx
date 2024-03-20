@@ -182,7 +182,7 @@ const FirstPage = (props: any) => {
     articleDataList,
     optionData,
     lines,
-    isSave,
+    drawingData,
     setLines,
   } = props;
   const divRef = useRef<any>(null);
@@ -208,8 +208,8 @@ const FirstPage = (props: any) => {
       optionData,
       "lines",
       lines,
-      "isSave",
-      isSave
+      "drawingData",
+      drawingData
     );
   };
 
@@ -354,7 +354,7 @@ const FirstPage = (props: any) => {
                 stroke={""}
               >
                 <Layer>
-                  {isSave.map((line: any, i: any) => (
+                  {drawingData.map((line: any, i: any) => (
                     <Line
                       key={i}
                       points={line.points}

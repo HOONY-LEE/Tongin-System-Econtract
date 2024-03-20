@@ -249,8 +249,9 @@ export default function ContractComponent(props: any) {
     priceDataList,
     setPriceDataList,
     lines,
-    isSave,
-    reNum,setLines
+    drawingData,
+    reNum,
+    setLines,
   } = props;
 
   const [movingCBM, setMovingCBM] = useState<number>(0);
@@ -424,8 +425,8 @@ export default function ContractComponent(props: any) {
       </Wrapper>
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
-        setLines={setLines}
-          isSave={isSave}
+          setLines={setLines}
+          drawingData={drawingData}
           lines={lines}
           articleDataList={articleDataList}
           optionData={optionData}
