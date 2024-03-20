@@ -158,9 +158,22 @@ const ContractPreviewModalComponent = (props: any) => {
 
   const onClickMakePDF = async (e: any) => {
     e.preventDefault();
-    // const response = await makeHtmltoImage.viewWithPdf(reNum);
-    const response = await makeHtmltoImage._convertToImg(reNum);
-    console.log(response);
+
+    // 첫 번째 페이지를 렌더링하고 이미지로 변환
+    setCurrentPage(1); // 첫 번째 페이지로 설정
+    await new Promise((resolve) => setTimeout(resolve, 500)); // 렌더링 완료를 위한 시간 지연
+    const firstPageImage = await makeHtmltoImage._convertToImg(".firstPageBox");
+
+    // 두 번째 페이지를 렌더링하고 이미지로 변환
+    setCurrentPage(2); // 두 번째 페이지로 설정
+    await new Promise((resolve) => setTimeout(resolve, 500)); // 렌더링 완료를 위한 시간 지연
+    const secondPageImage = await makeHtmltoImage._convertToImg(
+      ".secondPageBox"
+    );
+
+    // 두 이미지를 합쳐서 서버로 전송
+    const imageFiles = [firstPageImage, secondPageImage];
+    await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
   };
 
   const getContractImage = async () => {
@@ -243,7 +256,6 @@ const ContractPreviewModalComponent = (props: any) => {
         </TopArea>
         <ContractArea>
           {currentPage === 1 && (
-            // <div>
             <FirstPage
               setLines={setLines}
               drawingData={drawingData}
@@ -252,7 +264,6 @@ const ContractPreviewModalComponent = (props: any) => {
               articleDataList={articleDataList}
               optionData={optionData}
             ></FirstPage>
-            // </div>
           )}
           {currentPage === 2 && (
             <SecondPage
