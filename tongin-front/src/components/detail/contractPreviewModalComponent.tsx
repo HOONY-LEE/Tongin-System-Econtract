@@ -12,6 +12,7 @@ import API from "../../API/API";
 import FirstPage from "./firstPage";
 import makePdf from "../../API/makePDF";
 import makeHtmltoImage from "../../API/makePDF";
+import SecondPage from "./secondPage";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -137,12 +138,6 @@ const NextBox = styled.div<{ isActivate: boolean }>`
     `}
 `;
 
-const SecondPage = styled.div`
-  width: 90%;
-  height: 90%;
-  background-color: white;
-`;
-
 const ContractPreviewModalComponent = (props: any) => {
   const {
     onClose,
@@ -169,7 +164,7 @@ const ContractPreviewModalComponent = (props: any) => {
   };
 
   const getContractImage = async () => {
-    const response = await API.get(`receipt/contract-image/${reNum}`);
+    const response = await API.get(`/receipt/contract-image/${reNum}`);
     if (response.status === 200) {
       console.log("response>>>");
       console.log(response.data.contractImageList);
@@ -207,7 +202,7 @@ const ContractPreviewModalComponent = (props: any) => {
   }, [currentPage]);
 
   useEffect(() => {
-    // getContractImage();
+    getContractImage();
   }, []);
 
   useEffect(() => {
@@ -248,18 +243,27 @@ const ContractPreviewModalComponent = (props: any) => {
         </TopArea>
         <ContractArea>
           {currentPage === 1 && (
-            <div>
-              <FirstPage
-                setLines={setLines}
-                drawingData={drawingData}
-                lines={lines}
-                priceDataList={priceDataList}
-                articleDataList={articleDataList}
-                optionData={optionData}
-              ></FirstPage>
-            </div>
+            // <div>
+            <FirstPage
+              setLines={setLines}
+              drawingData={drawingData}
+              lines={lines}
+              priceDataList={priceDataList}
+              articleDataList={articleDataList}
+              optionData={optionData}
+            ></FirstPage>
+            // </div>
           )}
-          {currentPage === 2 && <SecondPage></SecondPage>}
+          {currentPage === 2 && (
+            <SecondPage
+              setLines={setLines}
+              drawingData={drawingData}
+              lines={lines}
+              priceDataList={priceDataList}
+              articleDataList={articleDataList}
+              optionData={optionData}
+            ></SecondPage>
+          )}
         </ContractArea>
       </Wrapper>
     </>
