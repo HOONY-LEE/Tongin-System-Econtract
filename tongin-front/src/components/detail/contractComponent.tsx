@@ -248,7 +248,10 @@ export default function ContractComponent(props: any) {
     optionData,
     priceDataList,
     setPriceDataList,
+    lines,
+    drawingData,
     reNum,
+    setLines,
   } = props;
 
   const [movingCBM, setMovingCBM] = useState<number>(0);
@@ -283,7 +286,6 @@ export default function ContractComponent(props: any) {
 
     handleOpenModal();
   };
-
   // CBM계산을 위한 함수
   const calculateTotalCBM = (articleDataList: any) => {
     let movingSum = 0;
@@ -322,12 +324,10 @@ export default function ContractComponent(props: any) {
     });
     setOptionTotalCharge(totalOptionCharge);
   };
-
   useEffect(() => {
     calculateTotalCBM(articleDataList);
     calculateTotalOptionCharge(optionData);
   }, [articleDataList, optionData]);
-
   return (
     <ContentBox>
       <Wrapper>
@@ -425,8 +425,12 @@ export default function ContractComponent(props: any) {
       </Wrapper>
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
+          setLines={setLines}
+          drawingData={drawingData}
+          lines={lines}
+          articleDataList={articleDataList}
+          optionData={optionData}
           priceDataList={priceDataList}
-          reNum={reNum}
           onClose={handleCloseModal}
         />
       )}
