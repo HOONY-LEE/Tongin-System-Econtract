@@ -126,9 +126,9 @@ const CanvasPanelMask = styled.div``;
 interface CalculatorComponentProps {
   onClose: () => void;
   style?: React.CSSProperties;
-  setIsSave: any;
+  setDrawingData: any;
   setIsScrolled: any;
-  isSave: any;
+  drawingData: any;
   lines: any;
   setLines: any;
   reNum?: string;
@@ -137,8 +137,8 @@ interface CalculatorComponentProps {
 const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   onClose,
   style,
-  setIsSave,
-  isSave,
+  setDrawingData,
+  drawingData,
   setIsScrolled,
   lines,
   setLines,
@@ -177,12 +177,12 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     let lastLine = lines[lines.length - 1];
     lastLine.points = lastLine.points.concat([point.x, point.y]);
     setLines([...lines]);
-    setIsSave([...lines]);
+    setDrawingData([...lines]);
   };
 
   const handleMouseUp = () => {
     setIsDrawing(false);
-    setIsSave(lines);
+    setDrawingData(lines);
   };
   const selectPen = () => {
     setPenColorVisible(true);
@@ -201,7 +201,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   };
   const onBlankData = () => {
     setBlankBoxVisible(false);
-    setIsSave((e: any) => isSave.splice[0]);
+    setDrawingData((e: any) => drawingData.splice[0]);
   };
   const BlankClose = () => {
     setBlankBoxVisible(false);
@@ -237,7 +237,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     setPenColorVisible(true);
     setTool("pen");
     setPenColor("#000000");
-    setIsSave([]);
+    setDrawingData([]);
   }, []);
 
   return (
