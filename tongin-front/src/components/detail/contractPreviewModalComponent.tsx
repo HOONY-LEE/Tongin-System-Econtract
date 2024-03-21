@@ -41,19 +41,17 @@ const Wrapper = styled.div`
 `;
 
 const TopArea = styled.div`
-  width: 86vw;
+  width: 84vw;
   height: 9vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  outline: 1px solid green;
 `;
 
 const LeftArea = styled.div`
-  width: 37%;
   height: 100%;
   display: flex;
-  outline: 1px solid red;
+  align-items: center;
 `;
 
 const MidArea = styled.div`
@@ -61,14 +59,13 @@ const MidArea = styled.div`
   height: 100%;
   display: flex;
   justify-content: space-around;
-  align-items: end;
+  align-items: center;
 `;
 const RightArea = styled.div`
-  width: 28%;
   height: 100%;
   display: flex;
   justify-content: end;
-  align-items: end;
+  align-items: center;
 `;
 
 const ContractArea = styled.div`
@@ -82,8 +79,8 @@ const ContractArea = styled.div`
 `;
 
 const CloseBtn = styled.div`
-  width: 8vw;
-  height: 4vw;
+  width: 12vw;
+  height: 5vw;
   background-color: #ff7f3b;
   border-radius: 0.4vw;
   font-size: 1.6vw;
@@ -230,7 +227,7 @@ const ContractPreviewModalComponent = (props: any) => {
       <Wrapper>
         <TopArea>
           <LeftArea>
-            <button onClick={onClickMakePDF}>pdf로 보기</button>
+            <CloseBtn onClick={onClickMakePDF}>견적서 내보내기</CloseBtn>
           </LeftArea>
           <MidArea>
             <PrevBox isActivate={prevBoxActive}>
