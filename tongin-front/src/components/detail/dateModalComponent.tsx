@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { ClassNames, DayPicker } from "react-day-picker";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ko } from "date-fns/locale";
 import { format } from "date-fns";
 import styles from "react-day-picker/dist/style.module.css";
 import CustomButton from "../common/customButton";
+
 const Backdrop = styled.div`
   position: fixed;
   top: 0;
@@ -35,15 +36,35 @@ const Today = styled.div`
 `;
 const BtnBox = styled.div`
   margin-bottom: 2vw;
-  width: 70%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   /* outline: 1px solid red; */
+`;
+const ReactDayPick = styled(DayPicker)`
+  * {
+    --rdp-cell-size: 4vw;
+    --rdp-caption-font-size: 2vw;
+    --rdp-accent-color: #ff7f3b;
+    --rdp-background-color: #ff7f3b;
+    /* Switch to dark colors for dark themes */
+    --rdp-accent-color-dark: #ff7f3b;
+    --rdp-background-color-dark: #ff7f3b;
+    /* Outline border for focused elements */
+    --rdp-outline: 0.2vw solid var(--rdp-accent-color);
+    /* Outline border for focused and selected elements */
+    --rdp-outline-selected: 0.2vw solid #dbdbdb;
+  }
 `;
 const DateModalComponent = (props: any) => {
   const today = new Date();
   const { dateValueInput, onClose, deteValueDelete, style } = props;
   const [selectedDay, setSelectedDay] = useState<Date | undefined>();
+  const divRef = useRef<any>(null);
+  const [dimensions, setDimensions] = useState<any>({
+    width: 0,
+    height: 0,
+  });
   const handleComplete = (data: any) => {
     if (data) {
       //더블 클릭 시 데이터 없음으로 에러나기때문에 분기처리
@@ -51,45 +72,54 @@ const DateModalComponent = (props: any) => {
       setSelectedDay(data);
     }
   };
-
+  useEffect(() => {
+    console.log(divRef);
+    if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
+      setDimensions({
+        width: divRef.current.offsetWidth,
+        height: divRef.current.offsetHeight,
+      });
+    }
+  }, []);
   return (
     <>
       <Backdrop />
-      <Wrapper>
-        <DayPicker
+      <Wrapper ref={divRef} style={{ transform: "translate(1.2)" }}>
+        <ReactDayPick
           mode="single"
           styles={{
             caption: { color: "#ff7f3b" },
             head_cell: {
-              width: "100px",
+              width: "100vw",
             },
           }}
           modifiersStyles={{
-            width: { width: "100%" },
+            width: dimensions.width,
+            day_selected: { color: "#e30000" },
           }}
           onSelect={handleComplete}
           selected={selectedDay}
           locale={ko}
-        ></DayPicker>
+        ></ReactDayPick>
 
         <BtnBox>
           <CustomButton
-            width={"12vw"}
-            height={"3vw"}
+            width={"13vw"}
+            height={"3.5vw"}
             text={`날짜 삭제`}
             size={"1.8vw"}
-            radius={"0.6vw"}
+            radius={"0.4vw"}
             $bgColor={"#ffffff"}
             $outline={"0.15vw solid #dcdcdc"}
             color={"#333333"}
             onClick={deteValueDelete}
           ></CustomButton>
           <CustomButton
-            width={"12vw"}
-            height={"3vw"}
+            width={"13vw"}
+            height={"3.5vw"}
             text={`확인`}
             size={"1.8vw"}
-            radius={"0.6vw"}
+            radius={"0.4vw"}
             onClick={onClose}
           ></CustomButton>
         </BtnBox>

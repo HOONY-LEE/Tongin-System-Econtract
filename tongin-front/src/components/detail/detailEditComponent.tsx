@@ -14,6 +14,8 @@ import DayPicker from "react-day-picker";
 import DateModalComponent from "./dateModalComponent";
 import DetailEditSelectBoxComponent from "./detailEditSelectBoxComponent";
 import { format } from "date-fns";
+import API from "../../API/API";
+import { useParams } from "react-router-dom";
 const ContentTop = styled.div`
   display: flex;
   justify-content: space-between;
@@ -253,6 +255,7 @@ const MoveDateInput = styled.div`
 `;
 const MoveBtnContainer = styled.div`
   display: flex;
+
   flex-direction: column;
   width: 100%;
   margin: 1vw 0 1vw 0;
@@ -286,7 +289,7 @@ const MoveBtn = styled.div`
   border-radius: 0.6vw;
   /* margin: 1vw 0 1vw 0; */
   .focused {
-    background-color: #ff7f3b;
+    background-color: #5a5a5a;
     color: white;
     display: flex;
     align-items: center;
@@ -361,13 +364,14 @@ export default function DetailEditComponent(props: any) {
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [movingDate, setMovingDate] = useState(new Date(detailData.movingDate));
+  const reNum = useParams().id;
   const [prevAddressDetail, setPrevAddressDetail] = useState(
     detailData.preAddressDetail
   ); //전 상세주소value
 
   const [afterAddressDetail, setAfterAddressDetail] = useState(
     detailData.afterAddressDetail
-  ); //후 상세주소value preAddress
+  );
   const [userName, setUserName] = useState(detailData.name);
   const [userContact, setUserContact] = useState(detailData.contact);
   const [currentTab, setCurrentTab] = useState(0); //btn
@@ -410,7 +414,7 @@ export default function DetailEditComponent(props: any) {
     }
 
     e.target.value = formattedValue;
-    setUserContact(formattedValue);
+    setUserContact(e.target.value);
   };
   ////////////////////주소 모달 시작////////////////////
 
@@ -430,11 +434,15 @@ export default function DetailEditComponent(props: any) {
 
     if (addressType === "prev") {
       detailData.preAddress = `${data.address}${
-        data.buildingName ? " (" + data.buildingName + ")" : ""
+        data.buildingName
+          ? " (" + data.buildingName + ") (" + data.zonecode + ")"
+          : ""
       }`;
     } else if (addressType === "after") {
       detailData.afterAddress = `${data.address}${
-        data.buildingName ? " (" + data.buildingName + ")" : ""
+        data.buildingName
+          ? " (" + data.buildingName + ") (" + data.zonecode + ")"
+          : ""
       }`;
     }
   };
@@ -501,6 +509,19 @@ export default function DetailEditComponent(props: any) {
     dateHandleCloseModal();
   };
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
+
+  // 상세정보 수정API
+  const putDetailData = async () => {
+    const response: any = await API.put(`/receipt/detail/${reNum}`, detailData);
+    if (response.status === 200) {
+      console.log("성공");
+      console.log(detailData);
+      detailEditVisible(false);
+    } else {
+      console.log("Fail to getDetailList()");
+    }
+  };
+
   return (
     <>
       {isModalOpen && (
@@ -703,8 +724,11 @@ export default function DetailEditComponent(props: any) {
               {BtnArr.map((item, index) => (
                 <li
                   key={index}
-                  className={index === currentTab ? "focused" : "desabled"}
-                  onClick={() => selectMenuHandler(index)}
+                  className={
+                    detailData?.movingType === item.name
+                      ? "focused"
+                      : "desabled"
+                  }
                 >
                   {item.name}
                 </li>
@@ -730,6 +754,7 @@ export default function DetailEditComponent(props: any) {
             text={`저장`}
             size={"2vw"}
             radius={"0.6vw"}
+            onClick={() => putDetailData()}
           ></CustomButton>
         </BtnBox>
       </ContentBottom>

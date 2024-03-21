@@ -251,6 +251,7 @@ export default function ContractComponent(props: any) {
     lines,
     drawingData,
     reNum,
+    setDrawingData,
     setLines,
   } = props;
 
@@ -428,6 +429,7 @@ export default function ContractComponent(props: any) {
           reNum={reNum}
           setLines={setLines}
           drawingData={drawingData}
+          setDrawingData={setDrawingData}
           lines={lines}
           articleDataList={articleDataList}
           optionData={optionData}

@@ -144,6 +144,7 @@ const ContractPreviewModalComponent = (props: any) => {
     reNum,
     priceDataList,
     articleDataList,
+    setDrawingData,
     optionData,
     lines,
     drawingData,
@@ -257,12 +258,14 @@ const ContractPreviewModalComponent = (props: any) => {
         <ContractArea>
           {currentPage === 1 && (
             <FirstPage
+              reNum={reNum}
               setLines={setLines}
               drawingData={drawingData}
               lines={lines}
               priceDataList={priceDataList}
               articleDataList={articleDataList}
               optionData={optionData}
+              setDrawingData={setDrawingData}
             ></FirstPage>
           )}
           {currentPage === 2 && (
