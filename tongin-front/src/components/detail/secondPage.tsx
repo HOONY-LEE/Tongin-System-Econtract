@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Line, Text } from "react-konva";
+import DrawingViewPanel from "./detailDrawingPanelComponent";
+import DetailDrawView from "./dtailDrawView";
+import API from "../../API/API";
+import { Image } from "../common/image";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -14,7 +18,7 @@ const Wrapper = styled.div`
   height: 106.065vw;
 `;
 const Container = styled.div`
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   width: 88%;
   height: 94%;
   display: flex;
@@ -35,7 +39,6 @@ const HeaderTitle = styled.div`
   font-size: 3.4vw;
 `;
 const LogoImg = styled.div`
-  outline: 1px solid red;
   border-radius: 0.4vw;
   width: 20vw;
   height: 5vw;
@@ -47,7 +50,6 @@ const TopTable = styled.table`
   font-size: 2vw;
   width: 100%;
   border-top: 0.15vw solid black;
-  height: 4%;
   border-bottom: 0.15vw solid black;
 `;
 const TopTr = styled.tr<{
@@ -62,13 +64,13 @@ const TopTr = styled.tr<{
   justify-content: space-between;
 `;
 const TopTdTitle = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
   font-size: 1.5vw;
   background-color: #f4f4f4;
-  width: ${(props) => (props.width ? props.width : "10vw")};
+  width: ${(props) => (props.$width ? props.$width : "10vw")};
   height: 4vw;
   display: flex;
   align-items: center;
@@ -79,14 +81,14 @@ const TopTdTitle = styled.td<{
   border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
 `;
 const TopTd = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
   font-size: 1.5vw;
   border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
   border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
-  width: ${(props) => (props.width ? props.width : "10vw")};
+  width: ${(props) => (props.$width ? props.$width : "10vw")};
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -107,7 +109,7 @@ const ApplyInfoTable = styled.table`
   height: 4%;
 `;
 const ApplyInfoTr = styled.tr<{
-  width?: string;
+  $width?: string;
 }>`
   /* outline: 4px solid green; */
   display: flex;
@@ -116,12 +118,12 @@ const ApplyInfoTr = styled.tr<{
   border-bottom: 0.15vw solid #e4e4e4;
 `;
 const ApplyInfoTdTitle = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
   background-color: #f4f4f4;
-  width: ${(props) => (props.width ? props.width : "8vw")};
+  width: ${(props) => (props.$width ? props.$width : "8vw")};
   height: 4vw;
   display: flex;
   align-items: center;
@@ -133,11 +135,11 @@ const ApplyInfoTdTitle = styled.td<{
   border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
 `;
 const ApplyInfoTd = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
-  width: ${(props) => (props.width ? props.width : "12vw")};
+  width: ${(props) => (props.$width ? props.$width : "12vw")};
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -148,7 +150,7 @@ const ApplyInfoTd = styled.td<{
 `;
 const MemoBox = styled.div`
   width: 100%;
-  outline: 1px solid green;
+  /* outline: 1px solid green; */
   height: 100%;
   display: flex;
   align-items: center;
@@ -162,28 +164,101 @@ const MemoRound = styled.div`
 `;
 const BottomComponent = styled.div`
   display: flex;
-  outline: 1px solid green;
+  /* outline: 1px solid green; */
   width: 100%;
   height: 50%;
+`;
+const EstimateContainer = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 `;
 const EstimateTable = styled.table`
   text-align: center;
   border-top: 0.15vw solid black;
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
   font-size: 1.3vw;
   width: 100%;
   height: 100%;
 `;
-// FirstPage 컴포넌트 정의
+const EstimateTr = styled.tr<{
+  $width?: string;
+  $borderBottom?: string;
+}>`
+  /* outline: 4px solid green; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.05vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+`;
+const EstimateTitle = styled.td<{
+  $width?: string;
+  borderRight?: string;
+  borderLeft?: string;
+  $borderBottom?: string;
+  $height?: string;
+}>`
+  text-align: start;
+  background-color: #f4f4f4;
+  width: ${(props) => (props.$width ? props.$width : "8vw")};
+  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.3vw;
+  justify-content: center;
+  border-right: ${(props) =>
+    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+  border-bottom: 0.05vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+`;
+const EstimateTd = styled.td<{
+  $width?: string;
+  borderRight?: string;
+  borderLeft?: string;
+  $borderBottom?: string;
+  $height?: string;
+}>`
+  /* outline: 1px solid red; */
+  background-color: #ffffff;
+  width: ${(props) => (props.$width ? props.$width : "100%")};
+  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.3vw;
+  justify-content: center;
+  border-right: ${(props) =>
+    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+  border-bottom: 0.05vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+  text-align: end;
+`;
+const TotalTitle = styled.td<{
+  $width?: string;
+  borderRight?: string;
+  borderLeft?: string;
+  $borderBottom?: string;
+  $height?: string;
+}>`
+  width: ${(props) => (props.$width ? props.$width : "8vw")};
+  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.3vw;
+  justify-content: center;
+
+  border-bottom: 0.15vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+`;
+// SecondPage 컴포넌트 정의
 const SecondPage = (props: any) => {
-  const {
-    priceDataList,
-    articleDataList,
-    optionData,
-    lines,
-    drawingData,
-    setLines,
-  } = props;
+  const { priceDataList, articleDataList, optionData, lines, reNum, setLines } =
+    props;
   const divRef = useRef<any>(null);
   const stageRef = useRef<any>(null);
   const handleMouseDown = (e: any) => {
@@ -197,150 +272,27 @@ const SecondPage = (props: any) => {
       ]);
     }
   };
-  const data = () => {
-    console.log(
-      "priceDataList",
-      priceDataList,
-      "articleDataList",
-      articleDataList,
-      "optionData",
-      optionData,
-      "lines",
-      lines,
-      "drawingData",
-      drawingData
-    );
-  };
 
   return (
     <Wrapper className="secondPageBox">
       <Container>
         <Header>
-          <LogoImg onClick={data}>logo</LogoImg>
-          <HeaderTitle>이사 물량 견적표</HeaderTitle>
+          <LogoImg>
+            <Image
+              src="/icon/tonginLogo.png"
+              width={"100%"}
+              height={"100%"}
+            ></Image>
+          </LogoImg>
+          <HeaderTitle>이사물량 견적표</HeaderTitle>
         </Header>
         <TopTable>
-          <TopTr>
-            <TopTdTitle>dddd</TopTdTitle>
-            <TopTd>dddd</TopTd>
-            <TopTdTitle borderLeft={"0.1vw solid black"}>dddd</TopTdTitle>
-            <TopTd>dddd</TopTd>
-            <TopTdTitle borderLeft={"0.1vw solid black"}>dddd</TopTdTitle>
-            <TopTd>dddd</TopTd>
-          </TopTr>
+          <Image
+            src="/img/contractTmpImage.png"
+            width={"100%"}
+            height={"100%"}
+          ></Image>
         </TopTable>
-        <SubTitle>신청 정보</SubTitle>
-        <ApplyInfoTable>
-          <ApplyInfoTr>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd>dd</ApplyInfoTd>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}>dd</ApplyInfoTd>
-            <ApplyInfoTd>dd</ApplyInfoTd>
-          </ApplyInfoTr>
-          <ApplyInfoTr>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd>dd</ApplyInfoTd>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}>1</ApplyInfoTd>
-            <ApplyInfoTd>dd</ApplyInfoTd>
-          </ApplyInfoTr>
-        </ApplyInfoTable>
-        <SubTitle>신청 날짜</SubTitle>
-        <ApplyInfoTable>
-          <ApplyInfoTr>
-            <ApplyInfoTdTitle>견적일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>포장일</ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}>
-              2024.00.00
-            </ApplyInfoTd>
-          </ApplyInfoTr>
-          <ApplyInfoTr>
-            <ApplyInfoTdTitle>견적일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle></ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}></ApplyInfoTd>
-          </ApplyInfoTr>
-        </ApplyInfoTable>
-
-        <SubTitle>리빙서비스</SubTitle>
-        <ApplyInfoTable>
-          {/* 탈취살균서비스 */}
-          {optionData.livingService.deodorizationService.selected && (
-            <ApplyInfoTr>
-              <ApplyInfoTd width={"26%"}>
-                {optionData.livingService.deodorizationService.serviceName}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"17%"}>
-                {
-                  optionData.livingService.deodorizationService
-                    .serviceRequestDate
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
-                {optionData.livingService.deodorizationService.servicePayment} ₩
-              </ApplyInfoTd>
-              <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
-            </ApplyInfoTr>
-          )}
-
-          {/* "입주청소서비스" */}
-          {optionData.livingService.movingCleaningService.selected && (
-            <ApplyInfoTr>
-              <ApplyInfoTd width={"26%"}>
-                {optionData.livingService.movingCleaningService.serviceName}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"17%"}>
-                {
-                  optionData.livingService.movingCleaningService
-                    .serviceRequestDate
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
-                {optionData.livingService.movingCleaningService.servicePayment}
-                {"₩"}
-              </ApplyInfoTd>
-              <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
-            </ApplyInfoTr>
-          )}
-
-          {/* "정리수납서비스" */}
-          {optionData.livingService.organizationStorageService.selected && (
-            <ApplyInfoTr>
-              <ApplyInfoTd width={"26%"}>
-                {
-                  optionData.livingService.organizationStorageService
-                    .serviceName
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"17%"}>
-                {
-                  optionData.livingService.organizationStorageService
-                    .serviceRequestDate
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
-                {
-                  optionData.livingService.organizationStorageService
-                    .servicePayment
-                }
-                {" ₩ "}
-              </ApplyInfoTd>
-              <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
-            </ApplyInfoTr>
-          )}
-        </ApplyInfoTable>
       </Container>
     </Wrapper>
   );

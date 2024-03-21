@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import ChargeListComponent from "./chargeListComponent";
 import ContractPreviewModalComponent from "./contractPreviewModalComponent";
+import ContractListModalComponent from "./contractListModalComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -259,19 +260,31 @@ export default function ContractComponent(props: any) {
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState<boolean>(false);
+  const [isContractListModalOpen, setIsContractListModalOpen] =
+    useState<boolean>(false);
 
-  // 계약서 미리보기 모달 열기
+  // 계약서 생성하기 모달 열기
   const handleOpenModal = () => {
     setIsPreviewModalOpen(true);
   };
 
-  // 계약서 미리보기 모달 닫기
+  // 계약서 생성하기 모달 닫기
   const handleCloseModal = () => {
     setIsPreviewModalOpen(false);
   };
 
-  // 계약서 미리보기
-  const previewContract = async () => {
+  // 계약서 불러오기 모달 열기
+  const handleOpenContractListModal = () => {
+    setIsContractListModalOpen(true);
+  };
+
+  // 계약서 불러오기 모달 닫기
+  const handleCloseContractListModal = () => {
+    setIsContractListModalOpen(false);
+  };
+
+  // 계약서 생성하기 모달
+  const openCreateContractModal = async () => {
     // TODO: 미리보기 기능
     // TMP: 가격 정보 수정 API
 
@@ -287,6 +300,11 @@ export default function ContractComponent(props: any) {
 
     handleOpenModal();
   };
+
+  const openContractList = async () => {
+    handleOpenContractListModal();
+  };
+
   // CBM계산을 위한 함수
   const calculateTotalCBM = (articleDataList: any) => {
     let movingSum = 0;
@@ -420,10 +438,25 @@ export default function ContractComponent(props: any) {
           </ChargeListArea>
         </InputArea>
         <ButtonArea>
-          <PreviewBtn onClick={previewContract}>견적서 미리보기</PreviewBtn>
-          <ExportBtn>견적서 내보내기</ExportBtn>
+          <PreviewBtn onClick={openContractList}>견적서 불러오기</PreviewBtn>
+          <ExportBtn onClick={openCreateContractModal}>
+            견적서 생성하기
+          </ExportBtn>
         </ButtonArea>
       </Wrapper>
+      {isContractListModalOpen && (
+        <ContractListModalComponent
+          reNum={reNum}
+          setLines={setLines}
+          drawingData={drawingData}
+          setDrawingData={setDrawingData}
+          lines={lines}
+          articleDataList={articleDataList}
+          optionData={optionData}
+          priceDataList={priceDataList}
+          onClose={handleCloseContractListModal}
+        />
+      )}
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
           reNum={reNum}
