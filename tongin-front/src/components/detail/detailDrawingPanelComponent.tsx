@@ -69,23 +69,24 @@ const ColorCanvas = styled.div`
 
 const ColorPicker = styled.div<{
   $bgColor?: string;
-  outlineColor?: string;
+  $outlineColor?: string;
 }>`
   background-color: ${(props) => props.$bgColor};
   border-radius: 50vh;
   width: 3.4vw;
   height: 2.5vh;
-  outline: ${(props) => props.outlineColor} solid #ffffff;
+  outline: 0.3vw solid ${(props) => props.$outlineColor};
 `;
 const SizePicker = styled.div<{
   $widthSize?: string;
   $heightSize?: string;
+  $outlineColor?: string;
 }>`
   background-color: #ffffff;
   border-radius: 50vh;
   width: ${(props) => props.$widthSize};
   height: ${(props) => props.$heightSize};
-  outline: 0.2vw solid #e1e1e1;
+  outline: 0.2vw solid ${(props) => props.$outlineColor};
 `;
 const CanvasPanel = styled.div`
   display: flex;
@@ -152,7 +153,8 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [penColor, setPenColor] = useState<any>();
   const [penSize, setPenSize] = useState<number>();
   const [blankBoxVisible, setBlankBoxVisible] = useState<boolean>(false);
-
+  const [eraserCurrentOutLine, setEraserCurrentOutLine] = useState(0);
+  const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
 
   const handleMouseDown = (e: any) => {
@@ -206,6 +208,16 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const BlankClose = () => {
     setBlankBoxVisible(false);
   };
+  const eraserSetting = (size: number, index: number) => {
+    setEraserSize(size);
+    setEraserCurrentOutLine(index);
+  };
+
+  const penSetting = (color: string, index: number) => {
+    setPenColor(color);
+    setPenCurrentOutLine(index);
+  };
+
   const divRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState<any>({
     width: 0,
@@ -261,9 +273,12 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               <ColorCanvas>
                 {colorArr.map((colorArr, i) => (
                   <ColorPicker
-                    onClick={() => setPenColor(colorArr.color)}
+                    onClick={() => penSetting(colorArr.color, i)}
                     key={i}
                     $bgColor={colorArr.color}
+                    $outlineColor={
+                      i === penCurrentOutLine ? "#FF7F3B" : "#ffffff"
+                    }
                   ></ColorPicker>
                 ))}
               </ColorCanvas>
@@ -272,10 +287,13 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               <ColorCanvas>
                 {eraserArr.map((eraser, i) => (
                   <SizePicker
-                    onClick={() => setEraserSize(eraser.size)}
+                    onClick={() => eraserSetting(eraser.size, i)}
                     key={i}
                     $widthSize={eraser.width}
                     $heightSize={eraser.height}
+                    $outlineColor={
+                      i === eraserCurrentOutLine ? "#FF7F3B" : "#AEAEAE"
+                    }
                   ></SizePicker>
                 ))}
               </ColorCanvas>
@@ -344,5 +362,4 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     </>
   );
 };
-
 export default DetailDrawingPanelComponent;

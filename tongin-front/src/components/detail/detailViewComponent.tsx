@@ -7,6 +7,7 @@ import TabComponent from "../home/tabComponent";
 import axios from "axios";
 import CustomButton from "../common/customButton";
 import SelectBoxComponent from "../common/selectBoxComponent";
+import DetailDrawView from "./dtailDrawView";
 
 const ContentTop = styled.div`
   display: flex;
@@ -242,7 +243,7 @@ const MoveBtn = styled.div`
   font-weight: 600;
   color: #ffffff;
   width: 15vw;
-  height: 4vw;
+  height: 5vw;
   background-color: #ff7f3b;
   justify-content: center;
   border-radius: 0.6vw;
@@ -255,7 +256,7 @@ const MoveBtnDesabled = styled.div`
   font-size: 1.8vw;
   font-weight: 600;
   /* color: #ffffff; */
-  height: 4vw;
+  height: 5vw;
   background-color: #f4f4f4;
   justify-content: center;
   border-radius: 0.6vw;
@@ -414,7 +415,7 @@ export default function DetailViewComponent(props: any) {
           <CustomButton
             onClick={() => detailEditVisible(true)}
             width={"100%"}
-            height={"5vw"}
+            height={"6vw"}
             text={`상세정보 수정하기`}
             size={"2vw"}
             radius={"0.6vw"}

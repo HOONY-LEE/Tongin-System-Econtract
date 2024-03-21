@@ -25,6 +25,7 @@ import { useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
 import ContractComponent from "../components/detail/contractComponent";
 import PencilIcon from "../components/icon/pencil";
+import DetailDrawView from "../components/detail/dtailDrawView";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -348,15 +349,17 @@ export default function Detail() {
             {currentTab === 3 ? (
               <ContractTabBox>
                 <ContractComponent
-                  setLines={setLines}
+                  reNum={reNum}
+                  setDrawingData={setDrawingData}
                   drawingData={drawingData}
+                  setIsScrolled={setIsScrolled}
+                  setLines={setLines}
                   lines={lines}
                   detailData={detailData}
                   articleDataList={articleDataList}
                   optionData={optionData}
                   priceDataList={priceDataList}
                   setPriceDataList={setPriceDataList}
-                  reNum={reNum}
                 ></ContractComponent>
               </ContractTabBox>
             ) : null}

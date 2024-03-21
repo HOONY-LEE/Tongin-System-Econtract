@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Line, Text } from "react-konva";
+import DrawingViewPanel from "./detailDrawingPanelComponent";
+import DetailDrawView from "./dtailDrawView";
+import API from "../../API/API";
+import { Image } from "../common/image";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -14,7 +18,7 @@ const Wrapper = styled.div`
   height: 106.065vw;
 `;
 const Container = styled.div`
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   width: 88%;
   height: 94%;
   display: flex;
@@ -35,7 +39,6 @@ const HeaderTitle = styled.div`
   font-size: 3.4vw;
 `;
 const LogoImg = styled.div`
-  outline: 1px solid red;
   border-radius: 0.4vw;
   width: 20vw;
   height: 5vw;
@@ -62,13 +65,13 @@ const TopTr = styled.tr<{
   justify-content: space-between;
 `;
 const TopTdTitle = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
   font-size: 1.5vw;
   background-color: #f4f4f4;
-  width: ${(props) => (props.width ? props.width : "10vw")};
+  width: ${(props) => (props.$width ? props.$width : "10vw")};
   height: 4vw;
   display: flex;
   align-items: center;
@@ -79,14 +82,14 @@ const TopTdTitle = styled.td<{
   border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
 `;
 const TopTd = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
   font-size: 1.5vw;
   border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
   border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
-  width: ${(props) => (props.width ? props.width : "10vw")};
+  width: ${(props) => (props.$width ? props.$width : "10vw")};
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -107,7 +110,7 @@ const ApplyInfoTable = styled.table`
   height: 4%;
 `;
 const ApplyInfoTr = styled.tr<{
-  width?: string;
+  $width?: string;
 }>`
   /* outline: 4px solid green; */
   display: flex;
@@ -116,12 +119,12 @@ const ApplyInfoTr = styled.tr<{
   border-bottom: 0.15vw solid #e4e4e4;
 `;
 const ApplyInfoTdTitle = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
   background-color: #f4f4f4;
-  width: ${(props) => (props.width ? props.width : "8vw")};
+  width: ${(props) => (props.$width ? props.$width : "8vw")};
   height: 4vw;
   display: flex;
   align-items: center;
@@ -133,11 +136,11 @@ const ApplyInfoTdTitle = styled.td<{
   border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
 `;
 const ApplyInfoTd = styled.td<{
-  width?: string;
+  $width?: string;
   borderRight?: string;
   borderLeft?: string;
 }>`
-  width: ${(props) => (props.width ? props.width : "12vw")};
+  width: ${(props) => (props.$width ? props.$width : "12vw")};
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -148,7 +151,7 @@ const ApplyInfoTd = styled.td<{
 `;
 const MemoBox = styled.div`
   width: 100%;
-  outline: 1px solid green;
+  /* outline: 1px solid green; */
   height: 100%;
   display: flex;
   align-items: center;
@@ -162,17 +165,96 @@ const MemoRound = styled.div`
 `;
 const BottomComponent = styled.div`
   display: flex;
-  outline: 1px solid green;
+  /* outline: 1px solid green; */
   width: 100%;
   height: 50%;
+`;
+const EstimateContainer = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 `;
 const EstimateTable = styled.table`
   text-align: center;
   border-top: 0.15vw solid black;
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
   font-size: 1.3vw;
   width: 100%;
   height: 100%;
+`;
+const EstimateTr = styled.tr<{
+  $width?: string;
+  $borderBottom?: string;
+}>`
+  /* outline: 4px solid green; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.05vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+`;
+const EstimateTitle = styled.td<{
+  $width?: string;
+  borderRight?: string;
+  borderLeft?: string;
+  $borderBottom?: string;
+  $height?: string;
+}>`
+  text-align: start;
+  background-color: #f4f4f4;
+  width: ${(props) => (props.$width ? props.$width : "8vw")};
+  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.3vw;
+  justify-content: center;
+  border-right: ${(props) =>
+    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+  border-bottom: 0.05vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+`;
+const EstimateTd = styled.td<{
+  $width?: string;
+  borderRight?: string;
+  borderLeft?: string;
+  $borderBottom?: string;
+  $height?: string;
+}>`
+  /* outline: 1px solid red; */
+  background-color: #ffffff;
+  width: ${(props) => (props.$width ? props.$width : "100%")};
+  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.3vw;
+  justify-content: center;
+  border-right: ${(props) =>
+    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+  border-bottom: 0.05vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+  text-align: end;
+`;
+const TotalTitle = styled.td<{
+  $width?: string;
+  borderRight?: string;
+  borderLeft?: string;
+  $borderBottom?: string;
+  $height?: string;
+}>`
+  width: ${(props) => (props.$width ? props.$width : "8vw")};
+  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.3vw;
+  justify-content: center;
+
+  border-bottom: 0.15vw solid
+    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 // FirstPage 컴포넌트 정의
 const FirstPage = (props: any) => {
@@ -181,8 +263,10 @@ const FirstPage = (props: any) => {
     articleDataList,
     optionData,
     lines,
+    reNum,
     drawingData,
     setLines,
+    setDrawingData,
   } = props;
   const divRef = useRef<any>(null);
   const stageRef = useRef<any>(null);
@@ -211,39 +295,70 @@ const FirstPage = (props: any) => {
       drawingData
     );
   };
+  const getDrawingData = async () => {
+    const response = await API.get(`receipt/memo/${reNum}`);
+    if (response.status === 200) {
+      console.log(response);
+      const result = response.data.receiptMemoData;
+      setDrawingData(result);
+      console.log("불러오기성공", result);
+    } else {
+      console.log("Fail to getDrawingData()");
+    }
+  };
+  useEffect(() => {
+    getDrawingData();
+    setDrawingData([...lines]);
+    console.log("wd", drawingData);
+  }, []);
 
   return (
     <Wrapper className="firstPageBox">
       <Container>
         <Header>
-          <LogoImg onClick={data}>logo</LogoImg>
+          <LogoImg onClick={data}>
+            <Image
+              src="/icon/tonginLogo.png"
+              width={"100%"}
+              height={"100%"}
+            ></Image>
+          </LogoImg>
           <HeaderTitle>계약서 • 견적서</HeaderTitle>
         </Header>
         <TopTable>
           <TopTr>
-            <TopTdTitle>dddd</TopTdTitle>
-            <TopTd>dddd</TopTd>
-            <TopTdTitle borderLeft={"0.1vw solid black"}>dddd</TopTdTitle>
-            <TopTd>dddd</TopTd>
-            <TopTdTitle borderLeft={"0.1vw solid black"}>dddd</TopTdTitle>
-            <TopTd>dddd</TopTd>
+            <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
+            <TopTd>김통인</TopTd>
+            <TopTdTitle borderLeft={"0.1vw solid black"}>이사종류</TopTdTitle>
+            <TopTd>가정이사</TopTd>
+            <TopTdTitle borderLeft={"0.1vw solid black"}>전화번호</TopTdTitle>
+            <TopTd $width={"15vw"}>010-1122-3344</TopTd>
           </TopTr>
         </TopTable>
         <SubTitle>신청 정보</SubTitle>
         <ApplyInfoTable>
           <ApplyInfoTr>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd>dd</ApplyInfoTd>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}>dd</ApplyInfoTd>
-            <ApplyInfoTd>dd</ApplyInfoTd>
+            <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
+            <ApplyInfoTd $width={"56%"}>
+              ( 12032 ) 서초구 신반포5로 4-34, 201동 301호
+            </ApplyInfoTd>
+            <ApplyInfoTdTitle $width={"18%"}>작업조건 (전)</ApplyInfoTdTitle>
+            <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
+              E/V
+            </ApplyInfoTd>
+            <ApplyInfoTd $width={"14%"}>81평 </ApplyInfoTd>
           </ApplyInfoTr>
           <ApplyInfoTr>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd>dd</ApplyInfoTd>
-            <ApplyInfoTdTitle>d</ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}>1</ApplyInfoTd>
-            <ApplyInfoTd>dd</ApplyInfoTd>
+            <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
+            <ApplyInfoTd $width={"56%"}>
+              {" "}
+              ( 29801 ) 송파구 신천로 7길 6-1 , 101동 1006호
+            </ApplyInfoTd>
+            <ApplyInfoTdTitle $width={"18%"}>작업조건 (후)</ApplyInfoTdTitle>
+            <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
+              사다리
+            </ApplyInfoTd>
+            <ApplyInfoTd $width={"14%"}>67평</ApplyInfoTd>
           </ApplyInfoTr>
         </ApplyInfoTable>
         <SubTitle>신청 날짜</SubTitle>
@@ -344,30 +459,66 @@ const FirstPage = (props: any) => {
         <BottomComponent>
           <MemoBox>
             <MemoRound ref={divRef}>
-              {"memo"}
-              <Stage
-                onMouseDown={handleMouseDown}
-                ref={stageRef}
-                width={100}
-                height={100}
-                stroke={""}
-              >
-                <Layer>
-                  {drawingData.map((line: any, i: any) => (
-                    <Line
-                      key={i}
-                      points={line.points}
-                      stroke={line.stroke}
-                      strokeWidth={line.strokeWidth}
-                      tension={0.8}
-                      lineCap="round"
-                    />
-                  ))}
-                </Layer>
-              </Stage>
+              <DetailDrawView
+                reNum={reNum}
+                setDrawingData={setDrawingData}
+                drawingData={drawingData}
+                setLines={setLines}
+                lines={lines}
+              ></DetailDrawView>
             </MemoRound>
           </MemoBox>
-          <EstimateTable></EstimateTable>
+          <EstimateContainer>
+            <SubTitle>견적 금액 확인</SubTitle>
+            <EstimateTable>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">이사 물량</EstimateTitle>
+                <EstimateTd>32.0</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">이사 비용</EstimateTitle>
+                <EstimateTd>3,800,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">보관 비용</EstimateTitle>
+                <EstimateTd>3,600,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">계약금</EstimateTitle>
+                <EstimateTd>1,300,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">리빙서비스 </EstimateTitle>
+                <EstimateTd>520,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">옵션 비용</EstimateTitle>
+                <EstimateTd>700,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">부가세</EstimateTitle>
+                <EstimateTd>200,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw">잔금</EstimateTitle>
+                <EstimateTd>2,300,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <EstimateTitle $width="12vw" $borderBottom={"#000000"}>
+                  부가세
+                </EstimateTitle>
+                <EstimateTd $borderBottom={"#000000"}>200,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <TotalTitle>총 비용 (VAT별도)</TotalTitle>
+                <EstimateTd>8,620,000</EstimateTd>
+              </EstimateTr>
+              <EstimateTr>
+                <TotalTitle $height={"8vw"}>고객 서명</TotalTitle>
+                <EstimateTd $height={"8vw"}></EstimateTd>
+              </EstimateTr>
+            </EstimateTable>
+          </EstimateContainer>
         </BottomComponent>
       </Container>
     </Wrapper>
