@@ -97,7 +97,9 @@ export default function OptionComponent(props: any) {
     optionData.optionService
   );
 
-  const saveOptionData = () => {};
+  const saveOptionData = () => {
+    alert("옵션정보를 성공적으로 저장했습니다.");
+  };
 
   const transportMethodList = [
     { id: 0, name: "선택안함", description: "" },
