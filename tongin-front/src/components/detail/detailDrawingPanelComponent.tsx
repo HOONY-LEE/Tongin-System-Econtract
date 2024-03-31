@@ -158,9 +158,10 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [pointerType, setPointerType] = useState<any>("없음");
-  const handleMouseDown = (e: any) => {
+  const handlePointerDown = (e: any) => {
+    console.log("DOWN");
     console.log(pointerType);
-    if (pointerType === ("pen" && "mouse")) {
+    if (pointerType === ("mouse" || "pen")) {
       setIsDrawing(true);
       const pos = stageRef.current?.getPointerPosition();
       if (pos) {
@@ -176,22 +177,27 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
       }
     }
   };
-  const handleMouseMove = (e: any) => {
+  const handlePointerMove = (e: any) => {
     if (!isDrawing) return;
+
+    console.log("MOVE");
     console.log(pointerType);
-    if (pointerType === ("pen" && "mouse")) {
+    if (pointerType === ("mouse" || "pen")) {
       const stage = e.target.getStage();
       const point = stage.getPointerPosition();
       let lastLine = lines[lines.length - 1];
-      lastLine.points = lastLine.points.concat([point.x, point.y]);
+      lastLine.points = lastLine?.points?.concat([point.x, point.y]);
       setLines([...lines]);
       setDrawingData([...lines]);
     }
   };
 
-  const handleMouseUp = () => {
-    console.log(pointerType);
-    if (pointerType === ("pen" && "mouse")) {
+  const handlePointerUp = () => {
+    if (pointerType === ("mouse" || "pen")) {
+      console.log("UP");
+      console.log(pointerType);
+
+      console.log("UP if 걸림");
       setIsDrawing(false);
       setDrawingData(lines);
     }
@@ -366,12 +372,12 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             <Stage
               width={dimensions.width}
               height={dimensions.height}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onTouchStart={handleMouseUp}
-              onTouchMove={handleMouseMove}
-              onTouchEnd={handleMouseDown}
+              onMouseDown={handlePointerDown}
+              onMouseMove={handlePointerMove}
+              onMouseUp={handlePointerUp}
+              onTouchStart={handlePointerDown}
+              onTouchMove={handlePointerMove}
+              onTouchEnd={handlePointerUp}
               ref={stageRef}
               stroke={""}
             >
