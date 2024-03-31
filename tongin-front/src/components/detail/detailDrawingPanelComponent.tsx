@@ -157,7 +157,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [eraserCurrentOutLine, setEraserCurrentOutLine] = useState(0);
   const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
-
+  const [penType, setPenType] = useState<any>("없음");
   const handleMouseDown = (e: any) => {
     setIsDrawing(true);
     const pos = stageRef.current?.getPointerPosition();
@@ -234,6 +234,33 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     { size: 60, width: "3vw", height: "2.3vh" },
     { size: 110, width: "4.1vw", height: "3vh" },
   ];
+
+  const targetElement = document.querySelector("#CanvasPanel");
+
+  targetElement?.addEventListener(
+    "pointerdown",
+    (event: any) => {
+      // Call the appropriate pointer type handler
+      switch (event.pointerType) {
+        case "mouse":
+          setPenType("mouse");
+          // process_pointer_mouse(event);
+          console.log("mouse");
+          break;
+        case "pen":
+          setPenType("pen");
+          console.log("pen");
+          break;
+        case "touch":
+          setPenType("touch");
+          console.log("touch");
+          break;
+        default:
+          console.log(`pointerType ${event.pointerType} is not supported`);
+      }
+    },
+    false
+  );
 
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
@@ -323,12 +350,13 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />
           </CloseBox>
         </ToolContainer>
+        <h1>{penType}</h1>
         <div
           onContextMenu={(e) => {
             e.preventDefault();
           }}
         >
-          <CanvasPanel ref={divRef}>
+          <CanvasPanel ref={divRef} id={"CanvasPanel"}>
             <Stage
               width={dimensions.width}
               height={dimensions.height}
