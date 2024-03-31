@@ -159,9 +159,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [pointerType, setPointerType] = useState<any>("없음");
   const handlePointerDown = (e: any) => {
-    console.log("DOWN");
-    console.log(pointerType);
-    if (pointerType === ("mouse" || "pen")) {
+    if (pointerType === "mouse" || pointerType === "pen") {
       setIsDrawing(true);
       const pos = stageRef.current?.getPointerPosition();
       if (pos) {
@@ -179,10 +177,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   };
   const handlePointerMove = (e: any) => {
     if (!isDrawing) return;
-
-    console.log("MOVE");
-    console.log(pointerType);
-    if (pointerType === ("mouse" || "pen")) {
+    if (pointerType === "mouse" || pointerType === "pen") {
       const stage = e.target.getStage();
       const point = stage.getPointerPosition();
       let lastLine = lines[lines.length - 1];
@@ -193,11 +188,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   };
 
   const handlePointerUp = () => {
-    if (pointerType === ("mouse" || "pen")) {
-      console.log("UP");
-      console.log(pointerType);
-
-      console.log("UP if 걸림");
+    if (pointerType === "mouse" || pointerType === "pen") {
       setIsDrawing(false);
       setDrawingData(lines);
     }
@@ -367,7 +358,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             e.preventDefault();
           }}
         >
-          <h1>현재 타입3 : {pointerType}</h1>
+          <h1>현재 타입5 최종 : {pointerType}</h1>
           <CanvasPanel ref={divRef} id={"CanvasPanel"}>
             <Stage
               width={dimensions.width}
