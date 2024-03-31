@@ -97,7 +97,7 @@ const CanvasPanel = styled.div`
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
-  touch-action: none;
+  /* touch-action: none; */
 `;
 const CanvasToolBox = styled.div`
   width: 34vw;
