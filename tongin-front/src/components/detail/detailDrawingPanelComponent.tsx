@@ -352,7 +352,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             e.preventDefault();
           }}
         >
-          <h1>현재 타입 : {pointerType}</h1>
+          <h1>현재 타입2 : {pointerType}</h1>
           <CanvasPanel ref={divRef} id={"CanvasPanel"}>
             <Stage
               width={dimensions.width}
@@ -360,9 +360,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
-              onTouchup={pointerType === "pen" && handleMouseUp}
-              onTouchmove={pointerType === "pen" && handleMouseMove}
-              onTouchdown={pointerType === "pen" && handleMouseDown}
+              onTouchup={pointerType === "pen" ? handleMouseUp : ""}
+              onTouchmove={pointerType === "pen" ? handleMouseMove : ""}
+              onTouchdown={pointerType === "pen" ? handleMouseDown : ""}
               ref={stageRef}
               stroke={""}
             >
