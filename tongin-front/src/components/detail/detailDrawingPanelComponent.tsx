@@ -97,6 +97,7 @@ const CanvasPanel = styled.div`
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
+  touch-action: none;
 `;
 const CanvasToolBox = styled.div`
   width: 34vw;
@@ -334,9 +335,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
-              onTouchStart={handleMouseDown}
-              onTouchMove={handleMouseMove}
-              onTouchEnd={handleMouseUp}
+              pointerup={handleMouseUp}
+              pointermove={handleMouseMove}
+              pointerdown={handleMouseDown}
               ref={stageRef}
               stroke={""}
             >
