@@ -352,6 +352,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             e.preventDefault();
           }}
         >
+          <h1>현재 타입 : {pointerType}</h1>
           <CanvasPanel ref={divRef} id={"CanvasPanel"}>
             <Stage
               width={dimensions.width}
