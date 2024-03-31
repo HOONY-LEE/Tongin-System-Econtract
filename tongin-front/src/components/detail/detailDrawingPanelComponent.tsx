@@ -157,7 +157,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [eraserCurrentOutLine, setEraserCurrentOutLine] = useState(0);
   const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
-  const [penType, setPenType] = useState<any>("없음");
+  const [pointerType, setPointerType] = useState<any>("없음");
   const handleMouseDown = (e: any) => {
     setIsDrawing(true);
     const pos = stageRef.current?.getPointerPosition();
@@ -243,17 +243,13 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
       // Call the appropriate pointer type handler
       switch (event.pointerType) {
         case "mouse":
-          setPenType("mouse");
-          // process_pointer_mouse(event);
-          console.log("mouse");
+          setPointerType("mouse");
           break;
         case "pen":
-          setPenType("pen");
-          console.log("pen");
+          setPointerType("pen");
           break;
         case "touch":
-          setPenType("touch");
-          console.log("touch");
+          setPointerType("touch");
           break;
         default:
           console.log(`pointerType ${event.pointerType} is not supported`);
@@ -350,12 +346,13 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />
           </CloseBox>
         </ToolContainer>
-        <h1>{penType}</h1>
+        <h1>{pointerType}</h1>
         <div
           onContextMenu={(e) => {
             e.preventDefault();
           }}
         >
+          <h1>현재 타입 : {pointerType}</h1>
           <CanvasPanel ref={divRef} id={"CanvasPanel"}>
             <Stage
               width={dimensions.width}
@@ -363,9 +360,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
-              pointerup={handleMouseUp}
-              pointermove={handleMouseMove}
-              pointerdown={handleMouseDown}
+              onTouchup={pointerType === "pen" && handleMouseUp}
+              onTouchmove={pointerType === "pen" && handleMouseMove}
+              onTouchdown={pointerType === "pen" && handleMouseDown}
               ref={stageRef}
               stroke={""}
             >
