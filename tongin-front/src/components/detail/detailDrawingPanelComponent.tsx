@@ -159,33 +159,42 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [pointerType, setPointerType] = useState<any>("없음");
   const handleMouseDown = (e: any) => {
-    setIsDrawing(true);
-    const pos = stageRef.current?.getPointerPosition();
-    if (pos) {
-      setLines([
-        ...lines,
-        {
-          tool,
-          points: [pos.x, pos.y],
-          stroke: penColor,
-          strokeWidth: tool === "eraser" ? eraserSize : penSize,
-        },
-      ]);
+    console.log(pointerType);
+    if (pointerType === ("pen" && "mouse")) {
+      setIsDrawing(true);
+      const pos = stageRef.current?.getPointerPosition();
+      if (pos) {
+        setLines([
+          ...lines,
+          {
+            tool,
+            points: [pos.x, pos.y],
+            stroke: penColor,
+            strokeWidth: tool === "eraser" ? eraserSize : penSize,
+          },
+        ]);
+      }
     }
   };
   const handleMouseMove = (e: any) => {
     if (!isDrawing) return;
-    const stage = e.target.getStage();
-    const point = stage.getPointerPosition();
-    let lastLine = lines[lines.length - 1];
-    lastLine.points = lastLine.points.concat([point.x, point.y]);
-    setLines([...lines]);
-    setDrawingData([...lines]);
+    console.log(pointerType);
+    if (pointerType === ("pen" && "mouse")) {
+      const stage = e.target.getStage();
+      const point = stage.getPointerPosition();
+      let lastLine = lines[lines.length - 1];
+      lastLine.points = lastLine.points.concat([point.x, point.y]);
+      setLines([...lines]);
+      setDrawingData([...lines]);
+    }
   };
 
   const handleMouseUp = () => {
-    setIsDrawing(false);
-    setDrawingData(lines);
+    console.log(pointerType);
+    if (pointerType === ("pen" && "mouse")) {
+      setIsDrawing(false);
+      setDrawingData(lines);
+    }
   };
   const selectPen = () => {
     setPenColorVisible(true);
@@ -360,9 +369,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
-              onTouchStart={() => (pointerType === "pen" ? handleMouseUp : "")}
-              onTouchMove={() => (pointerType === "pen" ? handleMouseMove : "")}
-              onTouchEnd={() => (pointerType === "pen" ? handleMouseDown : "")}
+              onTouchStart={handleMouseUp}
+              onTouchMove={handleMouseMove}
+              onTouchEnd={handleMouseDown}
               ref={stageRef}
               stroke={""}
             >
