@@ -391,6 +391,7 @@ export default function DetailEditComponent(props: any) {
   const onChangUserName = (e: any) => {
     console.log(e.target.value);
     setUserName(e.target.value);
+    detailData.name = userName;
   };
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
@@ -415,6 +416,7 @@ export default function DetailEditComponent(props: any) {
 
     e.target.value = formattedValue;
     setUserContact(e.target.value);
+    detailData.contact = userContact;
   };
   ////////////////////주소 모달 시작////////////////////
 
@@ -512,9 +514,11 @@ export default function DetailEditComponent(props: any) {
 
   // 상세정보 수정API
   const putDetailData = async () => {
+    console.log("vvvvvv 보내기 전detailData vvvvv");
+    console.log(detailData);
     const response: any = await API.put(`/receipt/detail/${reNum}`, detailData);
     if (response.status === 200) {
-      console.log("성공");
+      console.log("vvvvv 보내진 후 detailData vvvvv ");
       console.log(detailData);
       detailEditVisible(false);
     } else {

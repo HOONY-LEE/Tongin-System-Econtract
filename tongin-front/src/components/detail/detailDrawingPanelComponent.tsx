@@ -30,7 +30,7 @@ const CalculatorComponentWrapper = styled.div`
   transform: translate(-50%, -50%);
   z-index: 9999;
   width: 90vw;
-  height: 98vh;
+  height: 94vh;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
@@ -41,12 +41,15 @@ const CalculatorComponentWrapper = styled.div`
 const ToolContainer = styled.div`
   padding-left: 4vw;
   width: 90vw;
-  height: 8vh;
+  height: 6.3vh;
+  /* outline: 1px solid red; */
+  justify-content: center;
   display: flex;
 `;
 const ColorCanvasBox = styled.div`
   width: 24vw;
-  height: 8vh;
+  /* outline: 1px solid red; */
+  height: 6vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,14 +59,15 @@ const ColorCanvastitle = styled.div`
   align-items: center;
   justify-content: center;
   height: 2vh;
-  margin-bottom: 0.8vh;
-  font-size: 1.6vw;
+  font-weight: 600;
+  margin-bottom: 0.3vh;
+  font-size: 1.8vw;
 `;
 const ColorCanvas = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0vw 3vw 0vw 3vw;
+  padding: 0vw 3vw 1vw 3vw;
   height: 3vh;
 `;
 
@@ -72,8 +76,8 @@ const ColorPicker = styled.div<{
   $outlineColor?: string;
 }>`
   background-color: ${(props) => props.$bgColor};
-  border-radius: 50vh;
-  width: 3.4vw;
+  border-radius: 50%;
+  width: 2.5vh;
   height: 2.5vh;
   outline: 0.3vw solid ${(props) => props.$outlineColor};
 `;
@@ -83,7 +87,8 @@ const SizePicker = styled.div<{
   $outlineColor?: string;
 }>`
   background-color: #ffffff;
-  border-radius: 50vh;
+  border-radius: 50%;
+
   width: ${(props) => props.$widthSize};
   height: ${(props) => props.$heightSize};
   outline: 0.2vw solid ${(props) => props.$outlineColor};
@@ -93,7 +98,7 @@ const CanvasPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 88vh;
+  height: 86vh;
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -101,7 +106,7 @@ const CanvasPanel = styled.div`
 `;
 const CanvasToolBox = styled.div`
   width: 34vw;
-  height: 8vh;
+  height: 6vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,7 +114,7 @@ const CanvasToolBox = styled.div`
 const CanvasTool = styled.div`
   border-radius: 10vw 10vw 10vw 10vw;
   width: 28vw;
-  height: 5.4vh;
+  height: 5vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -236,9 +241,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     { color: "#009dff", name: "blue" },
   ];
   const eraserArr = [
-    { size: 20, width: "2vw", height: "1.5vh" },
-    { size: 60, width: "3vw", height: "2.3vh" },
-    { size: 110, width: "4.1vw", height: "3vh" },
+    { size: 20, width: "1.5vh", height: "1.5vh" },
+    { size: 60, width: "2.3vh", height: "2.3vh" },
+    { size: 110, width: "3vh", height: "3vh" },
   ];
 
   const targetElement = document.querySelector("#CanvasPanel");
@@ -352,13 +357,13 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />
           </CloseBox>
         </ToolContainer>
-        <h1>{pointerType}</h1>
+        {/* <h1>{pointerType}</h1> */}
         <div
           onContextMenu={(e) => {
             e.preventDefault();
           }}
         >
-          <h1>현재 타입5 최종 : {pointerType}</h1>
+          {/* <h1>현재 타입5 최종 : {pointerType}</h1> */}
           <CanvasPanel ref={divRef} id={"CanvasPanel"}>
             <Stage
               width={dimensions.width}
