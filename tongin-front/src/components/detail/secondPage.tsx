@@ -14,8 +14,8 @@ const Wrapper = styled.div`
   justify-content: center;
   border-radius: 0.6vw;
   align-items: center;
-  width: 75vw;
-  height: 106.065vw;
+  width: 100%;
+  height: 100%;
 `;
 const Container = styled.div`
   /* outline: 1px solid red; */
@@ -52,17 +52,40 @@ const TopTable = styled.table`
   border-top: 0.15vw solid black;
   border-bottom: 0.15vw solid black;
 `;
-const TopTr = styled.tr<{
-  width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-}>`
-  /* outline: 4px solid green; */
-  border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
+const TopTr = styled.tr`
   display: flex;
-  align-items: center;
   justify-content: space-between;
 `;
+const TopTh = styled.th`
+  height: 3vh;
+  width: 14vw;
+  font-size: 2vw;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  outline: 1px solid black;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="gray" /></svg>');
+`;
+
+const LeftTd = styled.div`
+  text-align: left;
+  margin-left: 1vw;
+`;
+const RightTd = styled.div`
+  text-align: right;
+  margin-right: 1vw;
+`;
+const Th = styled.th`
+  border-right: 0.1vw solid black;
+  width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  font-weight: 600;
+`;
+
 const TopTdTitle = styled.td<{
   $width?: string;
   borderRight?: string;
@@ -287,11 +310,22 @@ const SecondPage = (props: any) => {
           <HeaderTitle>이사물량 견적표</HeaderTitle>
         </Header>
         <TopTable>
-          <Image
+          {/* <Image
             src="/img/contractTmpImage.png"
             width={"100%"}
             height={"100%"}
-          ></Image>
+          ></Image> */}
+          <TopTr>
+            <TopTh>
+              <RightTd>방</RightTd>
+              <LeftTd>품목</LeftTd>
+            </TopTh>
+            <Th>안방</Th>
+            <Th>건너방1</Th>
+            <Th>건너방2</Th>
+            <Th>건너방3</Th>
+            <Th>건너방4</Th>
+          </TopTr>
         </TopTable>
       </Container>
     </Wrapper>

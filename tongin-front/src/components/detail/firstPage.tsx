@@ -14,8 +14,8 @@ const Wrapper = styled.div`
   justify-content: center;
   border-radius: 0.6vw;
   align-items: center;
-  width: 75vw;
-  height: 106.065vw;
+  width: 100%;
+  height: 100%;
 `;
 const Container = styled.div`
   /* outline: 1px solid red; */
