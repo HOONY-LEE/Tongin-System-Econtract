@@ -45,39 +45,64 @@ const LogoImg = styled.div`
   font-size: 3vw;
 `;
 
-const TopTable = styled.table`
+const ContentArea = styled.table`
   text-align: center;
   font-size: 2vw;
   width: 100%;
   border-top: 0.15vw solid black;
   border-bottom: 0.15vw solid black;
 `;
-const TopTr = styled.tr`
+const TopArea = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
 `;
-const TopTh = styled.th`
-  height: 3vh;
-  width: 14vw;
-  font-size: 2vw;
+const NameArea = styled.div`
+  width: 10.7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 0.14vw solid black;
+`;
+
+const NameTitleBox = styled.div`
+  width: 100%;
+  height: 4.6vw;
+  font-size: 1.6vw;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  outline: 1px solid black;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="gray" /></svg>');
+  border-top: 0.14vw solid black;
+  border-bottom: 0.14vw solid black;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="black" /></svg>');
+`;
+const ItemNameBox = styled.div`
+  width: 100%;
+  height: 40vh;
+  /* height: 100%; */
 `;
 
+const ProductArea = styled.div`
+  width: 12vw;
+  font-size: 1.6vw;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 0.14vw solid black;
+  border-bottom: 0.14vw solid black;
+  border-left: 0.1vw solid black;
+`;
 const LeftTd = styled.div`
   text-align: left;
-  margin-left: 1vw;
+  margin-left: 0.4vw;
 `;
 const RightTd = styled.div`
   text-align: right;
-  margin-right: 1vw;
+  margin-right: 0.4vw;
 `;
 const Th = styled.th`
-  border-right: 0.1vw solid black;
+  border-right: 0.14vw solid black;
   width: 10vw;
   display: flex;
   justify-content: center;
@@ -295,6 +320,28 @@ const SecondPage = (props: any) => {
       ]);
     }
   };
+  const roomDataList: any = [];
+  const livingroomDataList: any = [];
+  const kitchen: any = [];
+  const frontDataList: any = [];
+  const backDataList: any = [];
+  const bathroommDataList: any = [];
+
+  articleDataList.forEach((item: any, index: number) => {
+    if (index < 5) {
+      roomDataList.push(item);
+    } else if (index === 5) {
+      livingroomDataList.push(item);
+    } else if (index === 6) {
+      kitchen.push(item);
+    } else if (index === 7) {
+      frontDataList.push(item);
+    } else if (index === 8) {
+      backDataList.push(item);
+    } else if (index === 9) {
+      bathroommDataList.push(item);
+    }
+  });
 
   return (
     <Wrapper className="secondPageBox">
@@ -309,24 +356,30 @@ const SecondPage = (props: any) => {
           </LogoImg>
           <HeaderTitle>이사물량 견적표</HeaderTitle>
         </Header>
-        <TopTable>
+        <ContentArea>
           {/* <Image
             src="/img/contractTmpImage.png"
             width={"100%"}
             height={"100%"}
           ></Image> */}
-          <TopTr>
-            <TopTh>
-              <RightTd>방</RightTd>
-              <LeftTd>품목</LeftTd>
-            </TopTh>
-            <Th>안방</Th>
-            <Th>건너방1</Th>
-            <Th>건너방2</Th>
-            <Th>건너방3</Th>
-            <Th>건너방4</Th>
-          </TopTr>
-        </TopTable>
+          <TopArea>
+            <NameArea>
+              <NameTitleBox>
+                <RightTd>방</RightTd>
+                <LeftTd>품목</LeftTd>
+              </NameTitleBox>
+              <ItemNameBox></ItemNameBox>
+            </NameArea>
+            {roomDataList.map((item: any, index: number) => {
+              return <ProductArea>{item.locationName}</ProductArea>;
+            })}
+            {/* <ProductArea></ProductArea> */}
+            {/* <ProductArea></ProductArea>
+            <ProductArea></ProductArea>
+            <ProductArea></ProductArea>
+            <ProductArea></ProductArea> */}
+          </TopArea>
+        </ContentArea>
       </Container>
     </Wrapper>
   );
