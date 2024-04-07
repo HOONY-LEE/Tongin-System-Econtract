@@ -23,7 +23,7 @@ const ContentBox = styled.div`
 `;
 
 export default function DetailComponent(props: any) {
-  const { detailData, setDetailData } = props;
+  const { detailData, setDetailData, getDetailList } = props;
   const [isDetailEdit, setIsDetailEdit] = useState(false);
 
   // const fetchData = async () => {
@@ -55,6 +55,7 @@ export default function DetailComponent(props: any) {
       <ContentBox>
         {isDetailEdit ? (
           <DetailEditComponent
+            getDetailList={getDetailList}
             detailData={detailData}
             detailEditVisible={detailEditVisible}
           ></DetailEditComponent>

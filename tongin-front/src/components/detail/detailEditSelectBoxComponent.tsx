@@ -2,10 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { Image } from "../common/image";
-const SelectBox = styled.div`
+import { isTemplateExpression } from "typescript";
+
+const SelectBox = styled.div<{
+  $show?: boolean;
+}>`
   position: relative;
-  width: 10vw;
-  height: 4vw;
+  width: 9vw;
+  height: 4.7vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,26 +17,27 @@ const SelectBox = styled.div`
   border-radius: 0.4vw;
   background-color: #ffffff;
   align-self: center;
+  border: ${(props) => (props.$show ? "0.3vw solid #ff7f3b" : "none")};
+
   /* box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003); */
   cursor: pointer;
 `;
 const Label = styled.label`
   display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin-left: 4px;
+  justify-content: space-around;
+  font-size: 1.7vw;
   align-items: center;
-  width: 8vw;
+  width: 88%;
   text-align: center;
-  /* outline: 1px solid red; */
 `;
-const SelectOptions = styled.div<{
+const SelectOptions = styled.ul<{
   $show?: boolean;
 }>`
+  z-index: 9997;
   position: absolute;
   list-style: none;
-  top: 4.5vw;
+  top: 5.1vw;
   left: 0;
   width: 100%;
   overflow: hidden;
@@ -40,7 +45,7 @@ const SelectOptions = styled.div<{
   /* height: 4vw; */
   max-height: ${(props) => (props.$show ? "none" : "0")};
   padding: 0;
-  outline: ${(props) => (props.$show ? "0.2vw solid #ff7f3b" : "none")};
+  outline: ${(props) => (props.$show ? "0.3vw solid #ff7f3b" : "none")};
   border-radius: 0.4vw;
   background-color: #fdfdfd;
   color: #222222;
@@ -48,8 +53,8 @@ const SelectOptions = styled.div<{
     background-color: #ff7f3b;
   }
 `;
-const Option = styled.div`
-  font-size: 14px;
+const Option = styled.ul`
+  font-size: 1.7vw;
   padding: 1vw 0.5vw;
   height: 4vw;
 
@@ -59,6 +64,7 @@ const Option = styled.div`
   }
 `;
 const DetailEditSelectBoxComponent = (props: any) => {
+  const { setStatusCode, statusCode, onSelectStatus } = props;
   const data = [
     { status: "접수완료", statusCode: "11" },
     { status: "상담토스", statusCode: "12" },
@@ -74,30 +80,48 @@ const DetailEditSelectBoxComponent = (props: any) => {
     { status: "완료", statusCode: "41" },
   ];
 
-  const [currentValue, setCurrentValue] = useState<any>(data[0].status);
-  const [showOptions, setShowOptions] = useState<boolean>(false);
-  const handleOnChangeSelectValue = (e: any) => {
-    const { innerText } = e.target;
-    setCurrentValue(innerText);
+  const [currentValue, setCurrentValue] = useState<any>(
+    data.filter((item) => item.statusCode === statusCode)[0]?.status
+  );
+
+  const [showOptions, setShowOptions] = useState(false);
+
+  const handleOnChangeSelectValue = (index: number, item: any) => {
+    setCurrentValue(item.status);
+    // setStatusCode((prev: any) => {
+    //   const updatedList = [...prev];
+    //   // updatedList[roomId].articleData[articleId].article.carryType = statusCode;
+    //   // return updatedList;
+    // });
+    setStatusCode(item.statusCode);
+    console.log("statusCode", statusCode);
+    onSelectStatus();
   };
 
   return (
-    <SelectBox onClick={() => setShowOptions((prev) => !prev)}>
+    <SelectBox
+      onClick={() => setShowOptions((prev) => !prev)}
+      $show={showOptions}
+    >
       <Label>
-        {currentValue}{" "}
+        {currentValue}
         <Image
           src="/icon/triangle.png"
           alt="로고 이미지"
-          width={"1.2vw"}
-          height={"1.2vw"}
+          width={"1.1vw"}
+          height={"0.8vw"}
         />
       </Label>
 
       <SelectOptions $show={showOptions}>
         {data.map((item, index) => (
-          <Option key={index}>
-            <li value={item.statusCode} onClick={handleOnChangeSelectValue}>
+          <Option
+            key={index}
+            onClick={(e) => handleOnChangeSelectValue(index, item)}
+          >
+            <li value={item.statusCode}>
               {item.status}
+              {/* {index} */}
             </li>
           </Option>
         ))}
