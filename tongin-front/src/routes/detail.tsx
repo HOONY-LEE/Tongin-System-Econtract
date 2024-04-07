@@ -176,6 +176,7 @@ export default function Detail() {
     const response: any = await API.get(`/receipt/detail/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptDetail;
+      console.log("detailData>>", result);
       setDetailData(result);
     } else {
       console.log("Fail to getDetailList()");
@@ -326,6 +327,7 @@ export default function Detail() {
             {currentTab === 0 ? (
               <DetialTabBox>
                 <DetailComponent
+                  getDetailList={getDetailList}
                   detailData={detailData}
                   setDetailData={setDetailData}
                 ></DetailComponent>
