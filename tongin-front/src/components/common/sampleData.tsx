@@ -10089,3 +10089,29 @@ export const optionData2 = {
     ],
   },
 };
+
+const smaple = {
+  recNum: "R20240203929",
+  name: "이ㅇㅇㄹㅇㄴㄹㅇㄴ",
+  contact: "010-1234-8888",
+  receptionDate: "20240225",
+  consultationScheduledDate: "20248888",
+  consultationDate: "20248888",
+  contractDate: "        ",
+  movingDate: "20240226",
+  status: "접수완료",
+  statusCode: "11",
+  movingType: "본사이벤트",
+  movingTypeCode: "P00617",
+  preAddress: "서울 마포구 성미산로15길 999",
+  preAddressDetail: "402호",
+  afterAddress: "서울 서초구 방배로36길 22",
+  afterAddressDetail: "B101호",
+  planner: { name: "허정연", contact: "010-2863-7447" },
+  branch: {
+    branchCode: "BE0049",
+    branchName: "VIP점",
+    branchBoss: "최인석",
+    region: "서울_강남",
+  },
+};
