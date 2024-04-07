@@ -6,6 +6,8 @@ import DrawingViewPanel from "./detailDrawingPanelComponent";
 import DetailDrawView from "./dtailDrawView";
 import API from "../../API/API";
 import { Image } from "../common/image";
+import ContractProductComponent from "../contract/contractProductComponent";
+import ContractProductNameComponent from "../contract/contractProductNameComponent";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -49,12 +51,18 @@ const ContentArea = styled.table`
   text-align: center;
   font-size: 2vw;
   width: 100%;
-  border-top: 0.15vw solid black;
-  border-bottom: 0.15vw solid black;
+  border-top: 0.16vw solid black;
 `;
 const TopArea = styled.div`
   display: flex;
   justify-content: start;
+  border-bottom: 0.16vw solid black;
+`;
+
+const MidArea = styled.div`
+  margin-top: 2vw;
+  display: flex;
+  justify-content: space-between;
 `;
 const NameArea = styled.div`
   width: 10.7vw;
@@ -67,19 +75,20 @@ const NameArea = styled.div`
 const NameTitleBox = styled.div`
   width: 100%;
   height: 4.6vw;
-  font-size: 1.6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  /* font-size: 1.4vw;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top: 0.14vw solid black;
-  border-bottom: 0.14vw solid black;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="black" /></svg>');
+  border-bottom: 0.16vw solid black;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="black" /></svg>'); */
 `;
 const ItemNameBox = styled.div`
   width: 100%;
-  height: 40vh;
-  /* height: 100%; */
 `;
 
 const ProductArea = styled.div`
@@ -89,8 +98,6 @@ const ProductArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top: 0.14vw solid black;
-  border-bottom: 0.14vw solid black;
   border-left: 0.1vw solid black;
 `;
 const LeftTd = styled.div`
@@ -101,208 +108,31 @@ const RightTd = styled.div`
   text-align: right;
   margin-right: 0.4vw;
 `;
-const Th = styled.th`
-  border-right: 0.14vw solid black;
-  width: 10vw;
+
+const ItemArea = styled.div`
+  width: 22.8vw;
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-size: 2vw;
-  font-weight: 600;
+  align-items: start;
+  border: 0.16vw solid black;
 `;
 
-const TopTdTitle = styled.td<{
-  $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-}>`
-  font-size: 1.5vw;
-  background-color: #f4f4f4;
-  width: ${(props) => (props.$width ? props.$width : "10vw")};
-  height: 4vw;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  justify-content: center;
-  border-right: ${(props) =>
-    props.borderRight ? props.borderRight : "0.1vw solid black"};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
-`;
-const TopTd = styled.td<{
-  $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-}>`
-  font-size: 1.5vw;
-  border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
-  width: ${(props) => (props.$width ? props.$width : "10vw")};
-  display: flex;
-  font-weight: 500;
-  align-items: center;
-  justify-content: center;
-  height: 4vw;
-`;
-const SubTitle = styled.div`
-  font-weight: 600;
-  margin: 1.3vw auto 0.6vw 0vw;
-  font-size: 1.7;
-`;
-
-const ApplyInfoTable = styled.table`
-  text-align: center;
-  border-top: 0.15vw solid black;
-  font-size: 1.3vw;
-  width: 100%;
-  height: 4%;
-`;
-const ApplyInfoTr = styled.tr<{
-  $width?: string;
-}>`
-  /* outline: 4px solid green; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 0.15vw solid #e4e4e4;
-`;
-const ApplyInfoTdTitle = styled.td<{
-  $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-}>`
-  background-color: #f4f4f4;
-  width: ${(props) => (props.$width ? props.$width : "8vw")};
-  height: 4vw;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 1.3vw;
-  justify-content: center;
-  border-right: ${(props) =>
-    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
-`;
-const ApplyInfoTd = styled.td<{
-  $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-}>`
-  width: ${(props) => (props.$width ? props.$width : "12vw")};
-  display: flex;
-  font-weight: 500;
-  align-items: center;
-  border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
-  justify-content: center;
-  font-size: 1.3vw;
-  height: 4vw;
-`;
-const MemoBox = styled.div`
-  width: 100%;
-  /* outline: 1px solid green; */
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const MemoRound = styled.div`
-  width: 90%;
-  outline: 0.3vw solid #ebebeb;
-  height: 90%;
-  border-radius: 1vw;
-`;
-const BottomComponent = styled.div`
-  display: flex;
-  /* outline: 1px solid green; */
-  width: 100%;
-  height: 50%;
-`;
-const EstimateContainer = styled.div`
-  width: 50%;
+const ItemArea2 = styled.div`
+  width: 22.8vw;
   display: flex;
   flex-direction: column;
-`;
-const EstimateTable = styled.table`
-  text-align: center;
-  border-top: 0.15vw solid black;
-  /* outline: 1px solid black; */
-  font-size: 1.3vw;
-  width: 100%;
-  height: 100%;
-`;
-const EstimateTr = styled.tr<{
-  $width?: string;
-  $borderBottom?: string;
-}>`
-  /* outline: 4px solid green; */
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  border-bottom: 0.05vw solid
-    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
-`;
-const EstimateTitle = styled.td<{
-  $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-  $borderBottom?: string;
-  $height?: string;
-}>`
-  text-align: start;
-  background-color: #f4f4f4;
-  width: ${(props) => (props.$width ? props.$width : "8vw")};
-  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
-  display: flex;
   align-items: center;
-  font-weight: 500;
-  font-size: 1.3vw;
-  justify-content: center;
-  border-right: ${(props) =>
-    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
-  border-bottom: 0.05vw solid
-    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
-const EstimateTd = styled.td<{
-  $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-  $borderBottom?: string;
-  $height?: string;
-}>`
-  /* outline: 1px solid red; */
-  background-color: #ffffff;
-  width: ${(props) => (props.$width ? props.$width : "100%")};
-  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 1.3vw;
-  justify-content: center;
-  border-right: ${(props) =>
-    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
-  border-bottom: 0.05vw solid
-    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
-  text-align: end;
-`;
-const TotalTitle = styled.td<{
-  $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
-  $borderBottom?: string;
-  $height?: string;
-}>`
-  width: ${(props) => (props.$width ? props.$width : "8vw")};
-  height: ${(props) => (props.$height ? props.$height : "3.4vw")};
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 1.3vw;
-  justify-content: center;
 
-  border-bottom: 0.15vw solid
-    ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
+const TopItemArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  border: 0.16vw solid black;
+  width: 100%;
 `;
+
 // SecondPage 컴포넌트 정의
 const SecondPage = (props: any) => {
   const { priceDataList, articleDataList, optionData, lines, reNum, setLines } =
@@ -320,6 +150,7 @@ const SecondPage = (props: any) => {
       ]);
     }
   };
+
   const roomDataList: any = [];
   const livingroomDataList: any = [];
   const kitchen: any = [];
@@ -365,20 +196,133 @@ const SecondPage = (props: any) => {
           <TopArea>
             <NameArea>
               <NameTitleBox>
-                <RightTd>방</RightTd>
-                <LeftTd>품목</LeftTd>
+                <Image src="/icon/titleBox.png" width={"100%"}></Image>
               </NameTitleBox>
-              <ItemNameBox></ItemNameBox>
+              <ItemNameBox>
+                <ContractProductNameComponent
+                  articleDataList={roomDataList[0].articleData}
+                ></ContractProductNameComponent>
+              </ItemNameBox>
             </NameArea>
             {roomDataList.map((item: any, index: number) => {
-              return <ProductArea>{item.locationName}</ProductArea>;
+              return (
+                <ProductArea>
+                  <ContractProductComponent
+                    articleData={item}
+                  ></ContractProductComponent>
+                </ProductArea>
+              );
             })}
-            {/* <ProductArea></ProductArea> */}
-            {/* <ProductArea></ProductArea>
-            <ProductArea></ProductArea>
-            <ProductArea></ProductArea>
-            <ProductArea></ProductArea> */}
           </TopArea>
+          <MidArea>
+            <ItemArea>
+              <NameArea>
+                <NameTitleBox>
+                  <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                </NameTitleBox>
+                <ItemNameBox>
+                  <ContractProductNameComponent
+                    articleDataList={livingroomDataList[0].articleData}
+                  ></ContractProductNameComponent>
+                </ItemNameBox>
+              </NameArea>
+              {livingroomDataList.map((item: any, index: number) => {
+                return (
+                  <ProductArea>
+                    <ContractProductComponent
+                      articleData={item}
+                    ></ContractProductComponent>
+                  </ProductArea>
+                );
+              })}
+            </ItemArea>
+            <ItemArea>
+              <NameArea>
+                <NameTitleBox>
+                  <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                </NameTitleBox>
+                <ItemNameBox>
+                  <ContractProductNameComponent
+                    articleDataList={kitchen[0].articleData}
+                  ></ContractProductNameComponent>
+                </ItemNameBox>
+              </NameArea>
+              {kitchen.map((item: any, index: number) => {
+                return (
+                  <ProductArea>
+                    <ContractProductComponent
+                      articleData={item}
+                    ></ContractProductComponent>
+                  </ProductArea>
+                );
+              })}
+            </ItemArea>
+            <ItemArea2>
+              <TopItemArea>
+                <NameArea>
+                  <NameTitleBox>
+                    <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                  </NameTitleBox>
+                  <ItemNameBox>
+                    <ContractProductNameComponent
+                      articleDataList={frontDataList[0].articleData}
+                    ></ContractProductNameComponent>
+                  </ItemNameBox>
+                </NameArea>
+                {frontDataList.map((item: any, index: number) => {
+                  return (
+                    <ProductArea>
+                      <ContractProductComponent
+                        articleData={item}
+                      ></ContractProductComponent>
+                    </ProductArea>
+                  );
+                })}
+              </TopItemArea>
+              <TopItemArea>
+                <NameArea>
+                  <NameTitleBox>
+                    <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                  </NameTitleBox>
+                  <ItemNameBox>
+                    <ContractProductNameComponent
+                      articleDataList={backDataList[0].articleData}
+                    ></ContractProductNameComponent>
+                  </ItemNameBox>
+                </NameArea>
+                {backDataList.map((item: any, index: number) => {
+                  return (
+                    <ProductArea>
+                      <ContractProductComponent
+                        articleData={item}
+                      ></ContractProductComponent>
+                    </ProductArea>
+                  );
+                })}
+              </TopItemArea>
+              <TopItemArea>
+                <NameArea>
+                  <NameTitleBox>
+                    <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                  </NameTitleBox>
+                  <ItemNameBox>
+                    <ContractProductNameComponent
+                      articleDataList={bathroommDataList[0].articleData}
+                    ></ContractProductNameComponent>
+                  </ItemNameBox>
+                </NameArea>
+                {bathroommDataList.map((item: any, index: number) => {
+                  return (
+                    <ProductArea>
+                      <ContractProductComponent
+                        articleData={item}
+                      ></ContractProductComponent>
+                    </ProductArea>
+                  );
+                })}
+              </TopItemArea>
+            </ItemArea2>
+          </MidArea>
         </ContentArea>
       </Container>
     </Wrapper>
