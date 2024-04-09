@@ -37,7 +37,7 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 2.2vw;
+  height: 2.1vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,7 +52,7 @@ const ArticleBox = styled.div<{ index: number }>`
 `;
 
 const TotalBox = styled.div<{ index: number }>`
-  height: 2.2vw;
+  height: 2.1vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,6 +73,14 @@ const ColumnName = styled.div`
   justify-content: center;
   align-items: center;
   border-right: 0.1vw solid black;
+`;
+
+const ColumnName2 = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default function ContractProductComponent(props: any) {
@@ -109,7 +117,7 @@ export default function ContractProductComponent(props: any) {
         <ColumnNameBox>
           <ColumnName>수량</ColumnName>
           <ColumnName>CBM</ColumnName>
-          <ColumnName>처리방법</ColumnName>
+          <ColumnName2>처리방법</ColumnName2>
         </ColumnNameBox>
       </RoomNameBox>
       <ContentsBox>
@@ -126,11 +134,11 @@ export default function ContractProductComponent(props: any) {
                   ? ""
                   : item.article.cbm}
               </ColumnName>
-              <ColumnName>
+              <ColumnName2>
                 {item.article.cbm === 0 && item.article.amount === 0
                   ? ""
                   : carryType[item.article.carryType].status}
-              </ColumnName>
+              </ColumnName2>
             </ArticleBox>
           );
         })}
@@ -140,19 +148,19 @@ export default function ContractProductComponent(props: any) {
           <ArticleBox index={articleData.articleData.length}>
             <ColumnName></ColumnName>
             <ColumnName></ColumnName>
-            <ColumnName></ColumnName>
+            <ColumnName2></ColumnName2>
           </ArticleBox>
           <TotalBox index={articleData.articleData.length + 1}>
             <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
             <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-            <ColumnName></ColumnName>
+            <ColumnName2></ColumnName2>
           </TotalBox>
         </>
       ) : (
         <TotalBox index={articleData.articleData.length}>
           <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
           <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-          <ColumnName></ColumnName>
+          <ColumnName2></ColumnName2>
         </TotalBox>
       )}
     </Wrapper>

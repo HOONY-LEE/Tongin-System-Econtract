@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   /* outline: 1px solid red; */
   width: 88%;
-  height: 94%;
+  height: 97%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,11 +51,11 @@ const ContentArea = styled.table`
   text-align: center;
   font-size: 2vw;
   width: 100%;
-  border-top: 0.16vw solid black;
 `;
 const TopArea = styled.div`
   display: flex;
   justify-content: start;
+  /* border-top: 0.16vw solid black; */
   border-bottom: 0.16vw solid black;
 `;
 
@@ -69,7 +69,7 @@ const NameArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-right: 0.14vw solid black;
+  /* border-right: 0.12vw solid black; */
 `;
 
 const NameTitleBox = styled.div`
@@ -79,13 +79,6 @@ const NameTitleBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  /* font-size: 1.4vw;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-bottom: 0.16vw solid black;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="black" /></svg>'); */
 `;
 const ItemNameBox = styled.div`
   width: 100%;
@@ -98,15 +91,8 @@ const ProductArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-left: 0.1vw solid black;
-`;
-const LeftTd = styled.div`
-  text-align: left;
-  margin-left: 0.4vw;
-`;
-const RightTd = styled.div`
-  text-align: right;
-  margin-right: 0.4vw;
+  border-left: 0.14vw solid black;
+  border-top: 0.16vw solid black;
 `;
 
 const ItemArea = styled.div`
@@ -114,7 +100,7 @@ const ItemArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  border: 0.16vw solid black;
+  /* border: 0.16vw solid black; */
 `;
 
 const ItemArea2 = styled.div`
@@ -129,10 +115,47 @@ const TopItemArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  border: 0.16vw solid black;
+  /* border: 0.16vw solid black; */
   width: 100%;
 `;
 
+const FooterArea = styled.div`
+  margin-top: 1vw;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 2vh;
+`;
+
+const FooterItem1 = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 12vw;
+  height: 100%;
+  font-size: 1vw;
+  font-weight: 500;
+`;
+
+const FooterItem2 = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 12vw;
+  height: 100%;
+  font-size: 1vw;
+  font-weight: 200;
+`;
+
+const FooterItem3 = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 22.6vw;
+  height: 100%;
+  font-size: 1.6vw;
+`;
 // SecondPage 컴포넌트 정의
 const SecondPage = (props: any) => {
   const { priceDataList, articleDataList, optionData, lines, reNum, setLines } =
@@ -206,7 +229,7 @@ const SecondPage = (props: any) => {
             </NameArea>
             {roomDataList.map((item: any, index: number) => {
               return (
-                <ProductArea>
+                <ProductArea key={index}>
                   <ContractProductComponent
                     articleData={item}
                   ></ContractProductComponent>
@@ -323,6 +346,13 @@ const SecondPage = (props: any) => {
               </TopItemArea>
             </ItemArea2>
           </MidArea>
+          <FooterArea>
+            <FooterItem1>www.tonginexp.com</FooterItem1>
+            <FooterItem2>고객센터: 1988-0123</FooterItem2>
+            <FooterItem2>본사: 02-0000-0000</FooterItem2>
+            <FooterItem2>팩스: 00-000-0000</FooterItem2>
+            <FooterItem3>SERIAL NO.</FooterItem3>
+          </FooterArea>
         </ContentArea>
       </Container>
     </Wrapper>

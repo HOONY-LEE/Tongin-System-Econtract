@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   /* outline: 1px solid red; */
   width: 88%;
-  height: 94%;
+  height: 97%;
   display: flex;
   flex-direction: column;
   align-items: center;

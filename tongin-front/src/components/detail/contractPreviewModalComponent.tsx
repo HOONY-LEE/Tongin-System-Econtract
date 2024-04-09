@@ -35,10 +35,9 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: start;
   width: 90vw;
-  height: 90vh;
+  height: 94vh;
   background-color: white;
   border-radius: 0.8vw;
-  outline: 1px solid red;
 `;
 
 const TopArea = styled.div`
@@ -47,7 +46,6 @@ const TopArea = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  outline: 1px solid green;
 `;
 
 const LeftArea = styled.div`
