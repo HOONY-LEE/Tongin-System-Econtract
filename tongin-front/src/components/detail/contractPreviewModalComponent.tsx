@@ -166,7 +166,9 @@ const ContractPreviewModalComponent = (props: any) => {
     detailData,
     lines,
     drawingData,
+    movingCBM,
     setLines,
+    optionTotalCharge,
   } = props;
 
   const [contractImageList, setContractImageList] = useState<any[]>([]);
@@ -282,9 +284,11 @@ const ContractPreviewModalComponent = (props: any) => {
               drawingData={drawingData}
               detailData={detailData}
               lines={lines}
+              movingCBM={movingCBM}
               priceDataList={priceDataList}
               articleDataList={articleDataList}
               optionData={optionData}
+              optionTotalCharge={optionTotalCharge}
               setDrawingData={setDrawingData}
             ></FirstPage>
           )}

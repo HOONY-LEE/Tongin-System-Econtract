@@ -466,6 +466,8 @@ export default function ContractComponent(props: any) {
           drawingData={drawingData}
           setDrawingData={setDrawingData}
           lines={lines}
+          movingCBM={movingCBM}
+          optionTotalCharge={optionTotalCharge}
           articleDataList={articleDataList}
           optionData={optionData}
           priceDataList={priceDataList}
