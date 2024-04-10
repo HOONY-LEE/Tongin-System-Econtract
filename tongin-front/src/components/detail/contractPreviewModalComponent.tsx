@@ -13,6 +13,7 @@ import FirstPage from "./firstPage";
 import makePdf from "../../API/makePDF";
 import makeHtmltoImage from "../../API/makePDF";
 import SecondPage from "./secondPage";
+import CloseIcon from "../icon/closeIcon";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -35,10 +36,9 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: start;
   width: 90vw;
-  height: 90vh;
+  height: 94vh;
   background-color: white;
   border-radius: 0.8vw;
-  outline: 1px solid red;
 `;
 
 const TopArea = styled.div`
@@ -47,11 +47,19 @@ const TopArea = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  outline: 1px solid green;
+`;
+
+const BottomArea = styled.div`
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 const LeftArea = styled.div`
   height: 100%;
+  width: 20%;
   display: flex;
   align-items: center;
 `;
@@ -65,9 +73,19 @@ const MidArea = styled.div`
 `;
 const RightArea = styled.div`
   height: 100%;
+  width: 20%;
   display: flex;
   justify-content: end;
   align-items: center;
+`;
+
+const CloseBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  &&:hover {
+    cursor: pointer;
+  }
 `;
 
 const ContractArea = styled.div`
@@ -80,9 +98,9 @@ const ContractArea = styled.div`
   align-items: center;
 `;
 
-const CloseBtn = styled.div`
-  width: 12vw;
-  height: 5vw;
+const ExportBtn = styled.div`
+  width: 80vw;
+  height: 6vw;
   background-color: #ff7f3b;
   border-radius: 0.4vw;
   font-size: 1.6vw;
@@ -228,9 +246,7 @@ const ContractPreviewModalComponent = (props: any) => {
       <Backdrop />
       <Wrapper>
         <TopArea>
-          <LeftArea>
-            <CloseBtn onClick={onClickMakePDF}>견적서 내보내기</CloseBtn>
-          </LeftArea>
+          <LeftArea></LeftArea>
           <MidArea>
             <PrevBox isActivate={prevBoxActive}>
               <ArrowLeftIcon
@@ -251,7 +267,10 @@ const ContractPreviewModalComponent = (props: any) => {
             </NextBox>
           </MidArea>
           <RightArea>
-            <CloseBtn onClick={onClose}>닫기</CloseBtn>
+            {/* <CloseBtn onClick={onClose}>닫기</CloseBtn> */}
+            <CloseBox>
+              <CloseIcon onClick={onClose} height={"3vw"} fill={"#AEAEAE"} />
+            </CloseBox>
           </RightArea>
         </TopArea>
         <ContractArea>
@@ -278,6 +297,9 @@ const ContractPreviewModalComponent = (props: any) => {
             ></SecondPage>
           )}
         </ContractArea>
+        <BottomArea>
+          <ExportBtn onClick={onClickMakePDF}>견적서 내보내기</ExportBtn>
+        </BottomArea>
       </Wrapper>
     </>
   );

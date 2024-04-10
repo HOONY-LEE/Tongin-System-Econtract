@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.div<{ index: number }>`
-  height: 2.2vw;
+  height: 2.1vw;
   display: flex;
   align-items: center;
   border-bottom: 0.1vw solid gray;
@@ -13,7 +13,7 @@ const Wrapper = styled.div<{ index: number }>`
 `;
 
 const Wrapper2 = styled.div<{ index: number }>`
-  height: 2.2vw;
+  height: 2.1vw;
   display: flex;
   align-items: center;
   border-top: 0.12vw solid gray;
