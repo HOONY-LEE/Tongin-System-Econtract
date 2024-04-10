@@ -35,8 +35,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 84vw;
-  height: 120vw;
+  width: 90vw;
+  height: 94vh;
   background-color: white;
   border-radius: 0.8vw;
 `;
@@ -72,9 +72,9 @@ const RightArea = styled.div`
 `;
 
 const ContractArea = styled.div`
-  margin-top: 2vw;
-  width: 68vw;
-  height: 100vw;
+  margin-top: 2vh;
+  width: 80vw;
+  height: 113.12vw;
   background-color: #e6e6e6;
   display: flex;
   justify-content: center;
