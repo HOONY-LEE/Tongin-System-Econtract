@@ -156,6 +156,17 @@ const FooterItem3 = styled.div`
   height: 100%;
   font-size: 1.6vw;
 `;
+
+const Index = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2vh;
+  font-size: 1vw;
+  font-weight: 100;
+`;
+
 // SecondPage 컴포넌트 정의
 const SecondPage = (props: any) => {
   const { priceDataList, articleDataList, optionData, lines, reNum, setLines } =
@@ -353,6 +364,7 @@ const SecondPage = (props: any) => {
             <FooterItem2>팩스: 00-000-0000</FooterItem2>
             <FooterItem3>SERIAL NO.</FooterItem3>
           </FooterArea>
+          <Index>- 2 -</Index>
         </ContentArea>
       </Container>
     </Wrapper>
