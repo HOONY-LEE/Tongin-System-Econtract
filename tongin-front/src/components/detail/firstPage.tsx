@@ -265,6 +265,7 @@ const FirstPage = (props: any) => {
     lines,
     reNum,
     drawingData,
+    detailData,
     setLines,
     setDrawingData,
   } = props;
@@ -283,6 +284,8 @@ const FirstPage = (props: any) => {
   };
   const data = () => {
     console.log(
+      "detailData",
+      detailData,
       "priceDataList",
       priceDataList,
       "articleDataList",
@@ -307,6 +310,7 @@ const FirstPage = (props: any) => {
     }
   };
   useEffect(() => {
+    data();
     getDrawingData();
     setDrawingData([...lines]);
     console.log("wd", drawingData);
@@ -328,11 +332,11 @@ const FirstPage = (props: any) => {
         <TopTable>
           <TopTr>
             <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
-            <TopTd>김통인</TopTd>
+            <TopTd>{detailData.name}</TopTd>
             <TopTdTitle borderLeft={"0.1vw solid black"}>이사종류</TopTdTitle>
-            <TopTd>가정이사</TopTd>
+            <TopTd>{detailData.movingType}</TopTd>
             <TopTdTitle borderLeft={"0.1vw solid black"}>전화번호</TopTdTitle>
-            <TopTd $width={"15vw"}>010-1122-3344</TopTd>
+            <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
           </TopTr>
         </TopTable>
         <SubTitle>신청 정보</SubTitle>
@@ -340,46 +344,45 @@ const FirstPage = (props: any) => {
           <ApplyInfoTr>
             <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
             <ApplyInfoTd $width={"56%"}>
-              ( 12032 ) 서초구 신반포5로 4-34, 201동 301호
+              {detailData.preAddress}
+              {detailData.preAddressDetail}
             </ApplyInfoTd>
             <ApplyInfoTdTitle $width={"18%"}>작업조건 (전)</ApplyInfoTdTitle>
             <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
-              E/V
+              {optionData.beforeWorkCondition.transportationMethod}
             </ApplyInfoTd>
-            <ApplyInfoTd $width={"14%"}>81평 </ApplyInfoTd>
+            <ApplyInfoTd $width={"14%"}>
+              {optionData.beforeWorkCondition.pyeong}
+            </ApplyInfoTd>
           </ApplyInfoTr>
           <ApplyInfoTr>
             <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
             <ApplyInfoTd $width={"56%"}>
-              {" "}
-              ( 29801 ) 송파구 신천로 7길 6-1 , 101동 1006호
+              {detailData.afterAddress}
+              {detailData.afterAddressDetail}
             </ApplyInfoTd>
             <ApplyInfoTdTitle $width={"18%"}>작업조건 (후)</ApplyInfoTdTitle>
             <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
-              사다리
+              {optionData.afterWorkCondition.transportationMethod}
             </ApplyInfoTd>
-            <ApplyInfoTd $width={"14%"}>67평</ApplyInfoTd>
+            <ApplyInfoTd $width={"14%"}>
+              {optionData.afterWorkCondition.pyeong}
+            </ApplyInfoTd>
           </ApplyInfoTr>
         </ApplyInfoTable>
         <SubTitle>신청 날짜</SubTitle>
         <ApplyInfoTable>
           <ApplyInfoTr>
-            <ApplyInfoTdTitle>견적일</ApplyInfoTdTitle>
+            <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
             <ApplyInfoTd>2024.00.00</ApplyInfoTd>
             <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
             <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>포장일</ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}>
-              2024.00.00
-            </ApplyInfoTd>
           </ApplyInfoTr>
           <ApplyInfoTr>
-            <ApplyInfoTdTitle>견적일</ApplyInfoTdTitle>
+            <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
             <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
+            <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
             <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle></ApplyInfoTdTitle>
-            <ApplyInfoTd borderRight={"0.1vw solid #e4e4e4"}></ApplyInfoTd>
           </ApplyInfoTr>
         </ApplyInfoTable>
 
