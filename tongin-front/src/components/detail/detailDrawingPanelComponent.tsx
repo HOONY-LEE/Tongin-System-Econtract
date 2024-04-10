@@ -30,7 +30,7 @@ const CalculatorComponentWrapper = styled.div`
   transform: translate(-50%, -50%);
   z-index: 9999;
   width: 90vw;
-  height: 94vh;
+  height: 91vh;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
@@ -41,7 +41,7 @@ const CalculatorComponentWrapper = styled.div`
 const ToolContainer = styled.div`
   padding-left: 4vw;
   width: 90vw;
-  height: 6.3vh;
+  height: 7vh;
   /* outline: 1px solid red; */
   justify-content: center;
   display: flex;
@@ -98,7 +98,7 @@ const CanvasPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 86vh;
+  height: 80vh;
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;

@@ -549,11 +549,12 @@ export default function DetailEditComponent(props: any) {
       requestPram
     );
     if (response.status === 200) {
-      console.log("vvvvv 보내진 후 detailData vvvvv ");
       console.log(response);
+      alert("수정완료");
       detailEditVisible(false);
       getDetailList();
     } else {
+      alert("Fail to getDetailList()");
       console.log("Fail to getDetailList()");
     }
   };

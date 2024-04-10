@@ -252,6 +252,7 @@ export default function ContractComponent(props: any) {
     lines,
     drawingData,
     reNum,
+    detailData,
     setDrawingData,
     setLines,
   } = props;
@@ -461,9 +462,12 @@ export default function ContractComponent(props: any) {
         <ContractPreviewModalComponent
           reNum={reNum}
           setLines={setLines}
+          detailData={detailData}
           drawingData={drawingData}
           setDrawingData={setDrawingData}
           lines={lines}
+          movingCBM={movingCBM}
+          optionTotalCharge={optionTotalCharge}
           articleDataList={articleDataList}
           optionData={optionData}
           priceDataList={priceDataList}
