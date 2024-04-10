@@ -103,7 +103,7 @@ const ExportBtn = styled.div`
   height: 6vw;
   background-color: #ff7f3b;
   border-radius: 0.4vw;
-  font-size: 1.6vw;
+  font-size: 2vw;
   color: white;
   display: flex;
   justify-content: center;
@@ -176,7 +176,13 @@ const ContractPreviewModalComponent = (props: any) => {
 
   const onClickMakePDF = async (e: any) => {
     e.preventDefault();
-
+    if (
+      !window.confirm(`      [ 알림 ]
+      견적서를 내보내면 시스템과 고객님에게 계약서가 전송됩니다.
+      정말 계약서를 내보내시겠습니까?`)
+    ) {
+      return;
+    }
     // 첫 번째 페이지를 렌더링하고 이미지로 변환
     setCurrentPage(1); // 첫 번째 페이지로 설정
     await new Promise((resolve) => setTimeout(resolve, 500)); // 렌더링 완료를 위한 시간 지연
@@ -267,7 +273,6 @@ const ContractPreviewModalComponent = (props: any) => {
             </NextBox>
           </MidArea>
           <RightArea>
-            {/* <CloseBtn onClick={onClose}>닫기</CloseBtn> */}
             <CloseBox>
               <CloseIcon onClick={onClose} height={"3vw"} fill={"#AEAEAE"} />
             </CloseBox>

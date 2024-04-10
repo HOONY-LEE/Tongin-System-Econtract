@@ -14,6 +14,7 @@ import makePdf from "../../API/makePDF";
 import makeHtmltoImage from "../../API/makePDF";
 import SecondPage from "./secondPage";
 import { Image } from "../common/image";
+import CloseIcon from "../icon/closeIcon";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -35,13 +36,14 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 90vw;
-  height: 94vh;
+  width: 92vw;
+  height: 96vh;
   background-color: white;
   border-radius: 0.8vw;
 `;
 
 const TopArea = styled.div`
+  margin-top: 1vh;
   width: 84vw;
   height: 9vw;
   display: flex;
@@ -50,7 +52,7 @@ const TopArea = styled.div`
 `;
 
 const LeftArea = styled.div`
-  width: 8%;
+  width: 30%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -64,36 +66,39 @@ const MidArea = styled.div`
   align-items: center;
 `;
 const RightArea = styled.div`
-  width: 8%;
+  width: 30%;
   height: 100%;
   display: flex;
   justify-content: end;
   align-items: center;
 `;
 
-const ContractArea = styled.div`
-  margin-top: 2vh;
-  width: 80vw;
-  height: 113.12vw;
-  background-color: #e6e6e6;
+const CloseBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  &&:hover {
+    cursor: pointer;
+  }
+`;
+
+const ContractWrapper = styled.div`
+  margin-top: 1vh;
+  width: 82vw;
+  height: 116vw;
+  border-radius: 0.8vw;
+  border: 0.16vw solid gray;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const CloseBtn = styled.div`
-  width: 12vw;
-  height: 5vw;
-  background-color: #ff7f3b;
-  border-radius: 0.4vw;
-  font-size: 1.6vw;
-  color: white;
+const ContractArea = styled.div`
+  width: 80vw;
+  height: 113.12vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  &&:hover {
-    cursor: pointer;
-  }
 `;
 
 const PrevBox = styled.div<{ isActivate: boolean }>`
@@ -135,6 +140,27 @@ const NextBox = styled.div<{ isActivate: boolean }>`
     !props.isActivate &&
     css`
       pointer-events: none;
+    `}
+`;
+
+const BottomArea = styled.div`
+  margin-top: 2vh;
+  width: 82vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+`;
+
+const ThumbnailBox = styled.div<{ index: number; currentPage: number }>`
+  width: 6.8vw;
+  outline: 0.1vw solid gray;
+  margin-right: 1.4vw;
+  margin-bottom: 1.4vw;
+  border-radius: 0.1vw;
+  ${(props) =>
+    props.index === props.currentPage - 1 &&
+    css`
+      outline: 0.3vw solid #ff7f3b;
     `}
 `;
 
@@ -233,22 +259,39 @@ const ContractListModalComponent = (props: any) => {
             </NextBox>
           </MidArea>
           <RightArea>
-            <CloseBtn onClick={onClose}>닫기</CloseBtn>
+            <CloseBox>
+              <CloseIcon onClick={onClose} height={"3vw"} fill={"#AEAEAE"} />
+            </CloseBox>
           </RightArea>
         </TopArea>
-        <ContractArea>
-          {contractImageList.map((item, index) => {
-            if (index + 1 === currentPage) {
-              return (
+        <ContractWrapper>
+          <ContractArea>
+            {contractImageList.map((item, index) => {
+              if (index + 1 === currentPage) {
+                return (
+                  <Image
+                    src={`https://homenmove.net/${item.path}`}
+                    width={"100%"}
+                    height={"100%"}
+                  ></Image>
+                );
+              }
+            })}
+          </ContractArea>
+        </ContractWrapper>
+        <BottomArea>
+          {contractImageList.map((item: any, index) => {
+            return (
+              <ThumbnailBox key={index} index={index} currentPage={currentPage}>
                 <Image
                   src={`https://homenmove.net/${item.path}`}
                   width={"100%"}
                   height={"100%"}
                 ></Image>
-              );
-            }
+              </ThumbnailBox>
+            );
           })}
-        </ContractArea>
+        </BottomArea>
       </Wrapper>
     </>
   );
