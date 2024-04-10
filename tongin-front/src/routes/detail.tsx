@@ -176,6 +176,7 @@ export default function Detail() {
     const response: any = await API.get(`/receipt/detail/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptDetail;
+      console.log("detailData>>", result);
       setDetailData(result);
     } else {
       console.log("Fail to getDetailList()");
@@ -222,7 +223,9 @@ export default function Detail() {
     const response = await API.post(`receipt/memo/${reNum}`, requestParam);
     if (response.status === 200) {
       const result = response.data;
-      console.log("저장성공", result);
+      disableScrollLock();
+      setIsScrolled(false);
+      // console.log("저장성공", result);
     } else {
       console.log("Fail to postDrawingData()");
     }
@@ -234,7 +237,8 @@ export default function Detail() {
       console.log(response);
       const result = response.data.receiptMemoData;
       setDrawingData(result);
-      console.log("불러오기성공", result);
+      setIsScrolled(true);
+      // console.log("불러오기성공", result);
     } else {
       console.log("Fail to getDrawingData()");
     }
@@ -323,6 +327,7 @@ export default function Detail() {
             {currentTab === 0 ? (
               <DetialTabBox>
                 <DetailComponent
+                  getDetailList={getDetailList}
                   detailData={detailData}
                   setDetailData={setDetailData}
                 ></DetailComponent>

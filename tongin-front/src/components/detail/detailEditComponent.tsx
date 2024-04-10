@@ -353,7 +353,7 @@ const BtnBox = styled.div`
   justify-content: space-between;
 `;
 export default function DetailEditComponent(props: any) {
-  const { detailData } = props;
+  const { detailData, getDetailList } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
   const [currentBtn, setCurrentBtn] = useState(0);
@@ -365,6 +365,9 @@ export default function DetailEditComponent(props: any) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [movingDate, setMovingDate] = useState(new Date(detailData.movingDate));
   const reNum = useParams().id;
+
+  const [statusCode, setStatusCode] = useState<any>(detailData.statusCode); //상태 번호 value
+
   const [prevAddressDetail, setPrevAddressDetail] = useState(
     detailData.preAddressDetail
   ); //전 상세주소value
@@ -391,6 +394,7 @@ export default function DetailEditComponent(props: any) {
   const onChangUserName = (e: any) => {
     console.log(e.target.value);
     setUserName(e.target.value);
+    detailData.name = userName;
   };
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
@@ -415,6 +419,7 @@ export default function DetailEditComponent(props: any) {
 
     e.target.value = formattedValue;
     setUserContact(e.target.value);
+    detailData.contact = userContact;
   };
   ////////////////////주소 모달 시작////////////////////
 
@@ -447,6 +452,11 @@ export default function DetailEditComponent(props: any) {
     }
   };
 
+  const onSelectStatus = () => {
+    detailData.statusCode = statusCode;
+    console.log("onSelectStatus", detailData.statusCode);
+  };
+
   //전 상세주소
   const onChangePrevAddressDetail = (e: any) => {
     console.log(e.target.value);
@@ -474,16 +484,17 @@ export default function DetailEditComponent(props: any) {
     console.log("dateValueInput", data);
     const myData = new Date(data);
     // setDateData(data);
-    console.log(format(myData, "y-MM-dd"));
+    console.log("myData", myData);
+    console.log(format(myData, "yMMdd"));
     if (!Number.isNaN(new Date(myData).getTime())) {
       if (dateType === "reception") {
-        detailData.receptionDate = format(myData, "y-MM-dd");
+        detailData.receptionDate = format(myData, "yMMdd");
       } else if (dateType === "moving") {
-        detailData.movingDate = format(myData, "y-MM-dd");
+        detailData.movingDate = format(myData, "yMMdd");
       } else if (dateType === "contract") {
-        detailData.contractDate = format(myData, "y-MM-dd");
+        detailData.contractDate = format(myData, "yMMdd");
       } else if (dateType === "consultation") {
-        detailData.consultationDate = format(myData, "y-MM-dd");
+        detailData.consultationDate = format(myData, "yMMdd");
       } else {
         return "";
       }
@@ -512,11 +523,36 @@ export default function DetailEditComponent(props: any) {
 
   // 상세정보 수정API
   const putDetailData = async () => {
-    const response: any = await API.put(`/receipt/detail/${reNum}`, detailData);
+    console.log("vvvvvv 보내기 전detailData vvvvv");
+    console.log(statusCode);
+    const requestPram = {
+      receiptDetail: {
+        name: detailData.name,
+        contact: detailData.contact,
+        statusCode: statusCode,
+        preZipCode: detailData.address,
+        preAddress: detailData.preAddress,
+        preAddressDetail: detailData.prevAddressDetail,
+        afterZipCode: detailData.address,
+        afterAddress: detailData.afterAddress,
+        afterAddressDetail: detailData.afterAddressDetail,
+        receptionDate: detailData.receptionDate, // 접수일
+        consultationScheduledDate: detailData.consultationDate, // 상담 예정일
+        consultationDate: detailData.consultationDate, // 상담일
+        contractDate: detailData.contractDate, // 계약일
+        movingDate: detailData.movingDate, //이사일
+      },
+    };
+
+    const response: any = await API.put(
+      `/receipt/detail/${reNum}`,
+      requestPram
+    );
     if (response.status === 200) {
-      console.log("성공");
-      console.log(detailData);
+      console.log("vvvvv 보내진 후 detailData vvvvv ");
+      console.log(response);
       detailEditVisible(false);
+      getDetailList();
     } else {
       console.log("Fail to getDetailList()");
     }
@@ -583,10 +619,14 @@ export default function DetailEditComponent(props: any) {
           <ContentTopRh>
             <InfoRhBox>
               <InfoRhTitle>진행상태</InfoRhTitle>
-
               <InfoRhContent>
                 <UserStatus>
-                  <DetailEditSelectBoxComponent />
+                  <DetailEditSelectBoxComponent
+                    statusCode={statusCode}
+                    setStatusCode={setStatusCode}
+                    onSelectStatus={onSelectStatus}
+                  />
+                  {/* 현재:{statusCode} */}
                   {/* {detailData?.status} */}
                 </UserStatus>
               </InfoRhContent>
