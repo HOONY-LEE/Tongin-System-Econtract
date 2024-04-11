@@ -286,7 +286,7 @@ const CalculatorComponent = (props: any) => {
                 setTmpValue={setTmpValue}
               ></FlashNumBoxComponent>
               <FlashNumBoxComponent
-                number={"."}
+                number={".5"}
                 tmpValue={tmpValue}
                 setTmpValue={setTmpValue}
               ></FlashNumBoxComponent>
