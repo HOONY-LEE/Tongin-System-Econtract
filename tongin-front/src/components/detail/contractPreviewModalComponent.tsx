@@ -100,11 +100,12 @@ const ContractArea = styled.div`
 `;
 
 const ExportBtn = styled.div`
-  width: 80vw;
+  width: 90vw;
   height: 6vw;
   background-color: #ff7f3b;
   border-radius: 0.4vw;
-  font-size: 2vw;
+  font-size: 2.4vw;
+  font-weight: 600;
   color: white;
   display: flex;
   justify-content: center;
