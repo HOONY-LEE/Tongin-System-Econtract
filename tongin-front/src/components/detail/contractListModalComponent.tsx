@@ -36,23 +36,22 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 92vw;
-  height: 96vh;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
-  border-radius: 0.8vw;
 `;
 
 const TopArea = styled.div`
   margin-top: 1vh;
-  width: 84vw;
-  height: 9vw;
+  width: 90vw;
+  height: 4vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const LeftArea = styled.div`
-  width: 30%;
+  width: 35%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -66,7 +65,7 @@ const MidArea = styled.div`
   align-items: center;
 `;
 const RightArea = styled.div`
-  width: 30%;
+  width: 35%;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -84,18 +83,18 @@ const CloseBox = styled.div`
 
 const ContractWrapper = styled.div`
   margin-top: 1vh;
-  width: 82vw;
-  height: 116vw;
-  border-radius: 0.8vw;
-  border: 0.16vw solid gray;
+  width: 90vw;
+  height: 127vw;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ContractArea = styled.div`
-  width: 80vw;
-  height: 113.12vw;
+  border-radius: 0.8vw;
+  border: 0.16vw solid gray;
+  width: 90vw;
+  height: 127vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,24 +143,27 @@ const NextBox = styled.div<{ isActivate: boolean }>`
 `;
 
 const BottomArea = styled.div`
-  margin-top: 2vh;
-  width: 82vw;
+  margin-top: 1vh;
+  width: 90vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
 `;
 
 const ThumbnailBox = styled.div<{ index: number; currentPage: number }>`
-  width: 6.8vw;
+  width: 8vw;
   outline: 0.1vw solid gray;
-  margin-right: 1.4vw;
-  margin-bottom: 1.4vw;
+  margin-right: 1vw;
+  margin-bottom: 1.2vw;
   border-radius: 0.1vw;
   ${(props) =>
     props.index === props.currentPage - 1 &&
     css`
       outline: 0.3vw solid #ff7f3b;
     `}
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ContractListModalComponent = (props: any) => {
@@ -205,6 +207,10 @@ const ContractListModalComponent = (props: any) => {
       return;
     }
     setCurrentPage(currentPage + 1);
+  };
+
+  const onclickThumbnail = (index: number) => {
+    setCurrentPage(index + 1);
   };
 
   useEffect(() => {
@@ -282,7 +288,12 @@ const ContractListModalComponent = (props: any) => {
         <BottomArea>
           {contractImageList.map((item: any, index) => {
             return (
-              <ThumbnailBox key={index} index={index} currentPage={currentPage}>
+              <ThumbnailBox
+                key={index}
+                index={index}
+                currentPage={currentPage}
+                onClick={(e: any) => onclickThumbnail(index)}
+              >
                 <Image
                   src={`https://homenmove.net/${item.path}`}
                   width={"100%"}

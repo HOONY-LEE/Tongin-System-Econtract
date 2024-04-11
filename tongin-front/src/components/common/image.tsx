@@ -6,5 +6,6 @@ export const Image = styled.img.attrs((props: {}) => ({}))`
   display: flex;
   justify-content: center;
   align-items: center;
-  object-fit: scale-down;
+  /* object-fit: scale-down; */
+  object-fit: fill;
 `;
