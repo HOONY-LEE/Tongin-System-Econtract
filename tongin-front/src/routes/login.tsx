@@ -54,7 +54,7 @@ const OutlineInputbox = styled.div<{
   display: flex;
   align-items: center;
   width: 100%;
-  height: 6vw;
+  height: 4.6vh;
   border-radius: 0.7vw;
   background-color: white;
   outline: ${(props) => props.$outLine};
@@ -233,7 +233,7 @@ export default function Login() {
           <CustomButton
             onClick={desabled ? onInputText : onLogin}
             width={"100%"}
-            height={"6vw"}
+            height={"4.6vh"}
             text={`로그인`}
             size={"2.5vw"}
             radius={"0.7vw"}

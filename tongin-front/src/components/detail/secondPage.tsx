@@ -11,21 +11,18 @@ import ContractProductNameComponent from "../contract/contractProductNameCompone
 
 const Wrapper = styled.div`
   background-color: white;
-  outline: 1px solid #e4e4e4;
   display: flex;
   justify-content: center;
-  border-radius: 0.6vw;
   align-items: center;
   width: 100%;
   height: 100%;
 `;
 const Container = styled.div`
-  /* outline: 1px solid red; */
   width: 88%;
   height: 97%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
 `;
 const Header = styled.div`
   width: 100%;
@@ -49,27 +46,31 @@ const LogoImg = styled.div`
 
 const ContentArea = styled.table`
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   font-size: 2vw;
   width: 100%;
+  height: 130vw;
 `;
 const TopArea = styled.div`
   display: flex;
   justify-content: start;
-  /* border-top: 0.16vw solid black; */
+  border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black;
 `;
 
 const MidArea = styled.div`
-  margin-top: 2vw;
+  margin-top: 2vh;
   display: flex;
   justify-content: space-between;
 `;
 const NameArea = styled.div`
-  width: 10.7vw;
+  width: 12vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* border-right: 0.12vw solid black; */
 `;
 
 const NameTitleBox = styled.div`
@@ -79,28 +80,31 @@ const NameTitleBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  border-bottom: 0.16vw solid black;
 `;
 const ItemNameBox = styled.div`
   width: 100%;
 `;
 
 const ProductArea = styled.div`
-  width: 12vw;
+  width: 13.4vw;
   font-size: 1.6vw;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-left: 0.14vw solid black;
-  border-top: 0.16vw solid black;
+  /* border-top: 0.16vw solid black; */
 `;
 
 const ItemArea = styled.div`
-  width: 22.8vw;
+  width: 26vw;
   display: flex;
   justify-content: center;
   align-items: start;
-  /* border: 0.16vw solid black; */
+  border: 0.16vw solid black;
+  /* border-top: 0.16vw solid black;
+  border-bottom: 0.16vw solid black; */
 `;
 
 const ItemArea2 = styled.div`
@@ -109,30 +113,40 @@ const ItemArea2 = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  /* border-top: 0.16vw solid black;
+  border-bottom: 0.16vw solid black; */
 `;
 
 const TopItemArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  /* border: 0.16vw solid black; */
+  border: 0.16vw solid black;
   width: 100%;
 `;
 
 const FooterArea = styled.div`
-  margin-top: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 6vw;
+`;
+
+const FooterItemBox = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
   width: 100%;
-  height: 2vh;
+  height: 4vh;
 `;
 
 const FooterItem1 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 12vw;
+  width: 18%;
   height: 100%;
   font-size: 1vw;
   font-weight: 500;
@@ -142,29 +156,32 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 12vw;
+  width: 14%;
   height: 100%;
   font-size: 1vw;
   font-weight: 200;
 `;
 
 const FooterItem3 = styled.div`
+  margin-left: 16vw;
   display: flex;
-  justify-content: end;
-  align-items: center;
-  width: 22.6vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  width: 20%;
   height: 100%;
   font-size: 1.6vw;
 `;
 
 const Index = styled.div`
+  margin-top: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 2vh;
-  font-size: 1vw;
-  font-weight: 100;
+  font-size: 1.4vw;
+  font-weight: 300;
 `;
 
 // SecondPage 컴포넌트 정의
@@ -222,15 +239,14 @@ const SecondPage = (props: any) => {
           <HeaderTitle>이사물량 견적표</HeaderTitle>
         </Header>
         <ContentArea>
-          {/* <Image
-            src="/img/contractTmpImage.png"
-            width={"100%"}
-            height={"100%"}
-          ></Image> */}
           <TopArea>
             <NameArea>
               <NameTitleBox>
-                <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                <Image
+                  src="/icon/titleBox.png"
+                  width={"100%"}
+                  height={"100%"}
+                ></Image>
               </NameTitleBox>
               <ItemNameBox>
                 <ContractProductNameComponent
@@ -252,7 +268,11 @@ const SecondPage = (props: any) => {
             <ItemArea>
               <NameArea>
                 <NameTitleBox>
-                  <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                  <Image
+                    src="/icon/titleBox.png"
+                    width={"100%"}
+                    height={"100%"}
+                  ></Image>
                 </NameTitleBox>
                 <ItemNameBox>
                   <ContractProductNameComponent
@@ -273,7 +293,11 @@ const SecondPage = (props: any) => {
             <ItemArea>
               <NameArea>
                 <NameTitleBox>
-                  <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                  <Image
+                    src="/icon/titleBox.png"
+                    width={"100%"}
+                    height={"100%"}
+                  ></Image>
                 </NameTitleBox>
                 <ItemNameBox>
                   <ContractProductNameComponent
@@ -295,7 +319,11 @@ const SecondPage = (props: any) => {
               <TopItemArea>
                 <NameArea>
                   <NameTitleBox>
-                    <Image src="/icon/titleBox.png" width={"100%"}></Image>
+                    <Image
+                      src="/icon/titleBox.png"
+                      width={"100%"}
+                      height={"100%"}
+                    ></Image>
                   </NameTitleBox>
                   <ItemNameBox>
                     <ContractProductNameComponent
@@ -357,15 +385,20 @@ const SecondPage = (props: any) => {
               </TopItemArea>
             </ItemArea2>
           </MidArea>
-          <FooterArea>
+        </ContentArea>
+        <FooterArea>
+          <FooterItemBox>
             <FooterItem1>www.tonginexp.com</FooterItem1>
             <FooterItem2>고객센터: 1988-0123</FooterItem2>
             <FooterItem2>본사: 02-0000-0000</FooterItem2>
             <FooterItem2>팩스: 00-000-0000</FooterItem2>
-            <FooterItem3>SERIAL NO.</FooterItem3>
-          </FooterArea>
+            <FooterItem3>
+              <div>SERIAL NO.</div>
+              <div>R-20240203929</div>
+            </FooterItem3>
+          </FooterItemBox>
           <Index>- 2 -</Index>
-        </ContentArea>
+        </FooterArea>
       </Container>
     </Wrapper>
   );

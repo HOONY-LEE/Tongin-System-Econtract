@@ -35,8 +35,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 90vw;
-  height: 94vh;
+  width: 94vw;
+  height: 96vh;
   background-color: white;
   border-radius: 0.8vw;
 `;
@@ -89,10 +89,11 @@ const CloseBox = styled.div`
 `;
 
 const ContractArea = styled.div`
-  margin-top: 2vh;
-  width: 80vw;
-  height: 113.12vw;
-  background-color: #e6e6e6;
+  margin-top: 1vh;
+  width: 90vw;
+  height: 127vw;
+  outline: 0.2vw solid #e4e4e4;
+  border-radius: 0.6vw;
   display: flex;
   justify-content: center;
   align-items: center;

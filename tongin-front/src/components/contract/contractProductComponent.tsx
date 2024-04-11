@@ -37,7 +37,7 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 2.1vw;
+  height: 2.2vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,7 +58,6 @@ const TotalBox = styled.div<{ index: number }>`
   align-items: center;
   font-size: 1vw;
   font-weight: 600;
-  border-top: 0.12vw solid gray;
   ${(props) =>
     props.index % 2 &&
     css`

@@ -9,21 +9,18 @@ import { Image } from "../common/image";
 
 const Wrapper = styled.div`
   background-color: white;
-  outline: 1px solid #e4e4e4;
   display: flex;
   justify-content: center;
-  border-radius: 0.6vw;
   align-items: center;
   width: 100%;
   height: 100%;
 `;
 const Container = styled.div`
-  /* outline: 1px solid red; */
   width: 88%;
   height: 97%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
 `;
 const Header = styled.div`
   width: 100%;
@@ -45,6 +42,17 @@ const LogoImg = styled.div`
   font-size: 3vw;
 `;
 
+const ContentArea = styled.table`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  font-size: 2vw;
+  width: 100%;
+  height: 130vw;
+`;
+
 const TopTable = styled.table`
   text-align: center;
   font-size: 2vw;
@@ -58,7 +66,6 @@ const TopTr = styled.tr<{
   borderRight?: string;
   borderLeft?: string;
 }>`
-  /* outline: 4px solid green; */
   border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
   display: flex;
   align-items: center;
@@ -112,7 +119,6 @@ const ApplyInfoTable = styled.table`
 const ApplyInfoTr = styled.tr<{
   $width?: string;
 }>`
-  /* outline: 4px solid green; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -151,27 +157,24 @@ const ApplyInfoTd = styled.td<{
 `;
 const MemoBox = styled.div`
   width: 100%;
-  /* outline: 1px solid green; */
   margin-top: 2vh;
   display: flex;
 `;
 const MemoRound = styled.div`
   width: 35.3vw;
-  height: 30.75vh;
+  height: 55.3vw;
   outline: 0.3vw solid #ebebeb;
   border-radius: 1vw;
 `;
 const BottomComponent = styled.div`
   display: flex;
-
   width: 100%;
-  height: 50%;
+  height: 60vw;
 `;
 const EstimateContainer = styled.div`
   margin-top: 1vh;
   width: 70%;
   display: flex;
-  /* outline: 1px solid green; */
   flex-direction: column;
 `;
 const EstimateTable = styled.table`
@@ -186,7 +189,6 @@ const EstimateTr = styled.tr<{
   $width?: string;
   $borderBottom?: string;
 }>`
-  /* outline: 4px solid green; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -278,16 +280,19 @@ const TotalTd = styled.td<{
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 const BottomLine = styled.div`
-  margin-top: 2vw;
+  margin-top: 1vw;
   width: 100%;
-  border-top: 0.2vw solid black;
+  border-top: 0.16vw solid black;
 `;
 const AgreeBox = styled.div`
-  margin-top: 2vw;
-  /* outline: 1px solid red; */
+  margin-top: 1vw;
+  height: 6vw;
   width: 100%;
   display: flex;
   align-items: start;
+  padding: 1vw;
+  background-color: #f7f7f7;
+  border-radius: 0.6vw;
 `;
 const AgreeCheckBox = styled.input`
   width: 1vw;
@@ -296,6 +301,66 @@ const AgreeCheckBox = styled.input`
     background-color: #ff7f3b;
   }
 `;
+
+const FooterArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 6vw;
+`;
+
+const FooterItemBox = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 4vh;
+`;
+
+const FooterItem1 = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 18%;
+  height: 100%;
+  font-size: 1vw;
+  font-weight: 500;
+`;
+
+const FooterItem2 = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 14%;
+  height: 100%;
+  font-size: 1vw;
+  font-weight: 200;
+`;
+
+const FooterItem3 = styled.div`
+  margin-left: 16vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  width: 20%;
+  height: 100%;
+  font-size: 1.6vw;
+`;
+
+const Index = styled.div`
+  margin-top: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2vh;
+  font-size: 1.4vw;
+  font-weight: 300;
+`;
+
 // FirstPage 컴포넌트 정의
 const FirstPage = (props: any) => {
   const {
@@ -365,227 +430,252 @@ const FirstPage = (props: any) => {
           </LogoImg>
           <HeaderTitle>계약서 • 견적서</HeaderTitle>
         </Header>
-        <TopTable>
-          <TopTr>
-            <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
-            <TopTd>{detailData.name}</TopTd>
-            <TopTdTitle borderLeft={"0.1vw solid black"}>이사종류</TopTdTitle>
-            <TopTd>{detailData.movingType}</TopTd>
-            <TopTdTitle borderLeft={"0.1vw solid black"}>전화번호</TopTdTitle>
-            <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
-          </TopTr>
-        </TopTable>
-        <SubTitle>신청 정보</SubTitle>
-        <ApplyInfoTable>
-          <ApplyInfoTr>
-            <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
-            <ApplyInfoTd $width={"56%"}>
-              {detailData.preAddress}
-              {detailData.preAddressDetail}
-            </ApplyInfoTd>
-            <ApplyInfoTdTitle $width={"18%"}>작업조건 (전)</ApplyInfoTdTitle>
-            <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
-              {optionData.beforeWorkCondition.transportationMethod}
-            </ApplyInfoTd>
-            <ApplyInfoTd $width={"14%"}>
-              {optionData.beforeWorkCondition.pyeong}
-            </ApplyInfoTd>
-          </ApplyInfoTr>
-          <ApplyInfoTr>
-            <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
-            <ApplyInfoTd $width={"56%"}>
-              {detailData.afterAddress}
-              {detailData.afterAddressDetail}
-            </ApplyInfoTd>
-            <ApplyInfoTdTitle $width={"18%"}>작업조건 (후)</ApplyInfoTdTitle>
-            <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
-              {optionData.afterWorkCondition.transportationMethod}
-            </ApplyInfoTd>
-            <ApplyInfoTd $width={"14%"}>
-              {optionData.afterWorkCondition.pyeong}
-            </ApplyInfoTd>
-          </ApplyInfoTr>
-        </ApplyInfoTable>
-        <SubTitle>신청 날짜</SubTitle>
-        <ApplyInfoTable>
-          <ApplyInfoTr>
-            <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-          </ApplyInfoTr>
-          {/* <ApplyInfoTr>
+        <ContentArea>
+          <TopTable>
+            <TopTr>
+              <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
+              <TopTd>{detailData.name}</TopTd>
+              <TopTdTitle borderLeft={"0.1vw solid black"}>이사종류</TopTdTitle>
+              <TopTd>{detailData.movingType}</TopTd>
+              <TopTdTitle borderLeft={"0.1vw solid black"}>전화번호</TopTdTitle>
+              <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
+            </TopTr>
+          </TopTable>
+          <SubTitle>신청 정보</SubTitle>
+          <ApplyInfoTable>
+            <ApplyInfoTr>
+              <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
+              <ApplyInfoTd $width={"56%"}>
+                {detailData.preAddress}
+                {detailData.preAddressDetail}
+              </ApplyInfoTd>
+              <ApplyInfoTdTitle $width={"18%"}>작업조건 (전)</ApplyInfoTdTitle>
+              <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
+                {optionData.beforeWorkCondition.transportationMethod}
+              </ApplyInfoTd>
+              <ApplyInfoTd $width={"14%"}>
+                {optionData.beforeWorkCondition.pyeong}
+              </ApplyInfoTd>
+            </ApplyInfoTr>
+            <ApplyInfoTr>
+              <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
+              <ApplyInfoTd $width={"56%"}>
+                {detailData.afterAddress}
+                {detailData.afterAddressDetail}
+              </ApplyInfoTd>
+              <ApplyInfoTdTitle $width={"18%"}>작업조건 (후)</ApplyInfoTdTitle>
+              <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
+                {optionData.afterWorkCondition.transportationMethod}
+              </ApplyInfoTd>
+              <ApplyInfoTd $width={"14%"}>
+                {optionData.afterWorkCondition.pyeong}
+              </ApplyInfoTd>
+            </ApplyInfoTr>
+          </ApplyInfoTable>
+          <SubTitle>신청 날짜</SubTitle>
+          <ApplyInfoTable>
+            <ApplyInfoTr>
+              <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
+              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
+              <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
+              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
+              <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
+              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
+              <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
+              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
+            </ApplyInfoTr>
+            {/* <ApplyInfoTr>
             <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
             <ApplyInfoTd>2024.00.00</ApplyInfoTd>
             <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
             <ApplyInfoTd>2024.00.00</ApplyInfoTd>
           </ApplyInfoTr> */}
-        </ApplyInfoTable>
+          </ApplyInfoTable>
 
-        <SubTitle>리빙서비스</SubTitle>
-        <ApplyInfoTable>
-          {/* 탈취살균서비스 */}
-          {optionData.livingService.deodorizationService.selected && (
-            <ApplyInfoTr>
-              <ApplyInfoTd width={"26%"}>
-                {optionData.livingService.deodorizationService.serviceName}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"17%"}>
-                {
-                  optionData.livingService.deodorizationService
-                    .serviceRequestDate
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
-                {optionData.livingService.deodorizationService.servicePayment} ₩
-              </ApplyInfoTd>
-              <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
-            </ApplyInfoTr>
-          )}
+          <SubTitle>리빙서비스</SubTitle>
+          <ApplyInfoTable>
+            {/* 탈취살균서비스 */}
+            {optionData.livingService.deodorizationService.selected && (
+              <ApplyInfoTr>
+                <ApplyInfoTd width={"26%"}>
+                  {optionData.livingService.deodorizationService.serviceName}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
+                <ApplyInfoTd width={"17%"}>
+                  {
+                    optionData.livingService.deodorizationService
+                      .serviceRequestDate
+                  }
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
+                <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
+                  {optionData.livingService.deodorizationService.servicePayment}{" "}
+                  ₩
+                </ApplyInfoTd>
+                <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
+              </ApplyInfoTr>
+            )}
 
-          {/* "입주청소서비스" */}
-          {optionData.livingService.movingCleaningService.selected && (
-            <ApplyInfoTr>
-              <ApplyInfoTd width={"26%"}>
-                {optionData.livingService.movingCleaningService.serviceName}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"17%"}>
-                {
-                  optionData.livingService.movingCleaningService
-                    .serviceRequestDate
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
-                {optionData.livingService.movingCleaningService.servicePayment}
-                {"₩"}
-              </ApplyInfoTd>
-              <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
-            </ApplyInfoTr>
-          )}
-
-          {/* "정리수납서비스" */}
-          {/* {optionData.livingService.organizationStorageService.selected && ( */}
-          <ApplyInfoTr>
-            <ApplyInfoTd width={"26%"}>
-              {optionData.livingService.organizationStorageService.serviceName}
-            </ApplyInfoTd>
-            <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-            <ApplyInfoTd width={"17%"}>
-              {
-                optionData.livingService.organizationStorageService
-                  .serviceRequestDate
-              }
-            </ApplyInfoTd>
-            <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-            <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
-              {
-                optionData.livingService.organizationStorageService
-                  .servicePayment
-              }
-              {" ₩ "}
-            </ApplyInfoTd>
-            <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
-          </ApplyInfoTr>
-          {/*  )} */}
-        </ApplyInfoTable>
-        <BottomComponent>
-          <MemoBox>
-            <MemoRound ref={divRef}></MemoRound>
-          </MemoBox>
-          <EstimateContainer>
-            <SubTitle>견적 금액 확인</SubTitle>
-            <EstimateTable>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">이사 물량</EstimateTitle>
-                <EstimateTd>{movingCBM}</EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">이사 비용</EstimateTitle>
-                <EstimateTd> {priceDataList[1].amount}</EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">보관 비용</EstimateTitle>
-                <EstimateTd>{priceDataList[2].amount}</EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">계약금</EstimateTitle>
-                <EstimateTd>{priceDataList[4].amount}</EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">탈취살균 서비스 </EstimateTitle>
-                <EstimateTd>
-                  {optionData.livingService.deodorizationService.servicePayment}
-                </EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">입주청소 서비스 </EstimateTitle>
-                <EstimateTd>
+            {/* "입주청소서비스" */}
+            {optionData.livingService.movingCleaningService.selected && (
+              <ApplyInfoTr>
+                <ApplyInfoTd width={"26%"}>
+                  {optionData.livingService.movingCleaningService.serviceName}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
+                <ApplyInfoTd width={"17%"}>
+                  {
+                    optionData.livingService.movingCleaningService
+                      .serviceRequestDate
+                  }
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
+                <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
                   {
                     optionData.livingService.movingCleaningService
                       .servicePayment
                   }
-                </EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">정리수납 서비스 </EstimateTitle>
-                <EstimateTd>
-                  {
-                    optionData.livingService.organizationStorageService
-                      .servicePayment
-                  }
-                </EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">옵션 비용</EstimateTitle>
-                <EstimateTd>{optionTotalCharge}</EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">부가세</EstimateTitle>
-                <EstimateTd>{priceDataList[2].amount}</EstimateTd>
-              </EstimateTr>
-              <EstimateTr>
-                <EstimateTitle $width="18vw">잔금</EstimateTitle>
-                <EstimateTd>{priceDataList[5].amount}</EstimateTd>
-              </EstimateTr>
-              {/* <EstimateTr>
+                  {"₩"}
+                </ApplyInfoTd>
+                <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
+              </ApplyInfoTr>
+            )}
+
+            {/* "정리수납서비스" */}
+            {/* {optionData.livingService.organizationStorageService.selected && ( */}
+            <ApplyInfoTr>
+              <ApplyInfoTd width={"26%"}>
+                {
+                  optionData.livingService.organizationStorageService
+                    .serviceName
+                }
+              </ApplyInfoTd>
+              <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
+              <ApplyInfoTd width={"17%"}>
+                {
+                  optionData.livingService.organizationStorageService
+                    .serviceRequestDate
+                }
+              </ApplyInfoTd>
+              <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
+              <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
+                {
+                  optionData.livingService.organizationStorageService
+                    .servicePayment
+                }
+                {" ₩ "}
+              </ApplyInfoTd>
+              <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
+            </ApplyInfoTr>
+            {/*  )} */}
+          </ApplyInfoTable>
+          <BottomComponent>
+            <MemoBox>
+              <MemoRound ref={divRef}></MemoRound>
+            </MemoBox>
+            <EstimateContainer>
+              <SubTitle>견적 금액 확인</SubTitle>
+              <EstimateTable>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">이사 물량</EstimateTitle>
+                  <EstimateTd>{movingCBM}</EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">이사 비용</EstimateTitle>
+                  <EstimateTd> {priceDataList[1].amount}</EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">보관 비용</EstimateTitle>
+                  <EstimateTd>{priceDataList[2].amount}</EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">계약금</EstimateTitle>
+                  <EstimateTd>{priceDataList[4].amount}</EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">탈취살균 서비스 </EstimateTitle>
+                  <EstimateTd>
+                    {
+                      optionData.livingService.deodorizationService
+                        .servicePayment
+                    }
+                  </EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">입주청소 서비스 </EstimateTitle>
+                  <EstimateTd>
+                    {
+                      optionData.livingService.movingCleaningService
+                        .servicePayment
+                    }
+                  </EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">정리수납 서비스 </EstimateTitle>
+                  <EstimateTd>
+                    {
+                      optionData.livingService.organizationStorageService
+                        .servicePayment
+                    }
+                  </EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">옵션 비용</EstimateTitle>
+                  <EstimateTd>{optionTotalCharge}</EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">부가세</EstimateTitle>
+                  <EstimateTd>{priceDataList[2].amount}</EstimateTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <EstimateTitle $width="18vw">잔금</EstimateTitle>
+                  <EstimateTd>{priceDataList[5].amount}</EstimateTd>
+                </EstimateTr>
+                {/* <EstimateTr>
                 <EstimateTitle $width="12vw" $borderBottom={"#000000"}>
-                  부가세
+                부가세
                 </EstimateTitle>
                 <EstimateTd $borderBottom={"#000000"}>200,000</EstimateTd>
               </EstimateTr> */}
-              <EstimateTr>
-                <TotalTitle $width={"20vw"} $height={"6vw"}>
-                  총 비용 (VAT별도)
-                </TotalTitle>
-                <TotalTd $height={"6vw"}>{priceDataList[2].amount}</TotalTd>
-              </EstimateTr>
-              <EstimateTr>
-                <TotalTitle $borderBottom={"none"} $height={"9 vw"}>
-                  고객 서명
-                </TotalTitle>
-                <TotalTd $borderBottom={"none"} $height={"9vw"}></TotalTd>
-              </EstimateTr>
-            </EstimateTable>
-          </EstimateContainer>
-        </BottomComponent>
-        <AgreeBox>
-          개인정보 수집 • 이용에 동의합니까?
-          <AgreeCheckBox
-            id={"agree"}
-            type={"checkbox"}
-            checked={true}
-            readOnly
-          />
-        </AgreeBox>
-        <BottomLine></BottomLine>
+                <EstimateTr>
+                  <TotalTitle $width={"20vw"} $height={"6vw"}>
+                    총 비용 (VAT별도)
+                  </TotalTitle>
+                  <TotalTd $height={"6vw"}>{priceDataList[2].amount}</TotalTd>
+                </EstimateTr>
+                <EstimateTr>
+                  <TotalTitle $borderBottom={"none"} $height={"9 vw"}>
+                    고객 서명
+                  </TotalTitle>
+                  <TotalTd $borderBottom={"none"} $height={"9vw"}></TotalTd>
+                </EstimateTr>
+              </EstimateTable>
+            </EstimateContainer>
+          </BottomComponent>
+          <AgreeBox>
+            개인정보 수집 • 이용에 동의합니까?
+            <AgreeCheckBox
+              id={"agree"}
+              type={"checkbox"}
+              checked={true}
+              readOnly
+            />
+          </AgreeBox>
+          <BottomLine></BottomLine>
+        </ContentArea>
+        <FooterArea>
+          <FooterItemBox>
+            <FooterItem1>www.tonginexp.com</FooterItem1>
+            <FooterItem2>고객센터: 1988-0123</FooterItem2>
+            <FooterItem2>본사: 02-0000-0000</FooterItem2>
+            <FooterItem2>팩스: 00-000-0000</FooterItem2>
+            <FooterItem3>
+              <div>SERIAL NO.</div>
+              <div>R-20240203929</div>
+            </FooterItem3>
+          </FooterItemBox>
+          <Index>- 1 -</Index>
+        </FooterArea>
       </Container>
     </Wrapper>
   );
