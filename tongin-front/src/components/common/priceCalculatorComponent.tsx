@@ -263,7 +263,7 @@ const PriceCalculatorComponent = (props: any) => {
                 setTmpValue={setTmpValue}
               ></FlashNumBoxComponent>
               <FlashNumBoxComponent
-                number={""}
+                number={"000"}
                 tmpValue={tmpValue}
                 setTmpValue={setTmpValue}
               ></FlashNumBoxComponent>
