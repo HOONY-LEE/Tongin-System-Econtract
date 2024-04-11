@@ -60,9 +60,9 @@ const TopArea = styled.div`
   border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black;
 `;
-
 const MidArea = styled.div`
   margin-top: 2vh;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
@@ -156,7 +156,7 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 14%;
+  width: 22%;
   height: 100%;
   font-size: 1vw;
   font-weight: 200;
@@ -390,8 +390,8 @@ const SecondPage = (props: any) => {
           <FooterItemBox>
             <FooterItem1>www.tonginexp.com</FooterItem1>
             <FooterItem2>고객센터: 1988-0123</FooterItem2>
-            <FooterItem2>본사: 02-0000-0000</FooterItem2>
-            <FooterItem2>팩스: 00-000-0000</FooterItem2>
+            <FooterItem2>본사: 02-3678-0123</FooterItem2>
+            <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
             <FooterItem3>
               <div>SERIAL NO.</div>
               <div>R-20240203929</div>

@@ -274,8 +274,8 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   useEffect(() => {
     if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
       setDimensions({
-        width: divRef.current.offsetWidth,
-        height: divRef.current.offsetHeight,
+        width: divRef.current.offsetWidth - 30,
+        height: divRef.current.offsetHeight - 30,
       });
     }
   }, []);

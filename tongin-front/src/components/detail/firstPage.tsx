@@ -161,10 +161,16 @@ const MemoBox = styled.div`
   display: flex;
 `;
 const MemoRound = styled.div`
-  width: 35.3vw;
-  height: 55.3vw;
-  outline: 0.3vw solid #ebebeb;
+  width: 38vw;
+  height: 54vw;
+  border: 0.2vw solid gray;
+  background-color: #f4f4f4;
   border-radius: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2vw;
+  padding-left: 2vw;
 `;
 const BottomComponent = styled.div`
   display: flex;
@@ -333,7 +339,7 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 14%;
+  width: 22%;
   height: 100%;
   font-size: 1vw;
   font-weight: 200;
@@ -378,6 +384,22 @@ const FirstPage = (props: any) => {
   } = props;
   const divRef = useRef<any>(null);
   const stageRef = useRef<any>(null);
+  const [dimensions, setDimensions] = useState<any>({
+    width: 0,
+    height: 0,
+  });
+  const [tool, setTool] = useState<string>("pen");
+  const [penColorVisible, setPenColorVisible] = useState<boolean>(false);
+  const [eraserSizeVisible, setEraserSizeVisible] = useState<boolean>(false);
+  const [eraserSize, setEraserSize] = useState<number>();
+  const [penColor, setPenColor] = useState<any>();
+  const [penSize, setPenSize] = useState<number>();
+  const [blankBoxVisible, setBlankBoxVisible] = useState<boolean>(false);
+  const [eraserCurrentOutLine, setEraserCurrentOutLine] = useState(0);
+  const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
+  const [isDrawing, setIsDrawing] = useState<boolean>(false);
+  const [pointerType, setPointerType] = useState<any>("없음");
+
   const handleMouseDown = (e: any) => {
     const pos = stageRef.current?.getPointerPosition();
     if (pos) {
@@ -390,14 +412,14 @@ const FirstPage = (props: any) => {
     }
   };
   const data = () => {
-    console.log("detailData", detailData);
-    console.log("priceDataList", priceDataList);
-    console.log("articleDataList", articleDataList);
-    console.log("optionData", optionData);
-    console.log("lines", lines);
-    console.log("drawingData", drawingData);
-    console.log("optionTotalCharge", optionTotalCharge);
-    console.log("movingCBM", movingCBM);
+    // console.log("detailData", detailData);
+    // console.log("priceDataList", priceDataList);
+    // console.log("articleDataList", articleDataList);
+    // console.log("optionData", optionData);
+    // console.log("lines", lines);
+    // console.log("drawingData", drawingData);
+    // console.log("optionTotalCharge", optionTotalCharge);
+    // console.log("movingCBM", movingCBM);
   };
   const getDrawingData = async () => {
     const response = await API.get(`receipt/memo/${reNum}`);
@@ -415,6 +437,24 @@ const FirstPage = (props: any) => {
     getDrawingData();
     setDrawingData([...lines]);
     console.log("wd", drawingData);
+  }, []);
+
+  useEffect(() => {
+    console.log("divRef.current====");
+    console.log(divRef.current.offsetHeight);
+    if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
+      setDimensions({
+        width: divRef.current.offsetWidth - 2,
+        height: divRef.current.offsetHeight - 2,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    setPenColorVisible(true);
+    setTool("pen");
+    setPenColor("#000000");
+    setDrawingData([]);
   }, []);
 
   return (
@@ -571,7 +611,34 @@ const FirstPage = (props: any) => {
           </ApplyInfoTable>
           <BottomComponent>
             <MemoBox>
-              <MemoRound ref={divRef}></MemoRound>
+              <MemoRound ref={divRef} id={"CanvasPanel"}>
+                <Stage
+                  width={dimensions.width}
+                  height={dimensions.height}
+                  ref={stageRef}
+                  stroke={""}
+                >
+                  <Layer>
+                    {lines.map((line: any, i: any) => (
+                      <Line
+                        key={i}
+                        points={line.points.map(
+                          (point: number) => point * 0.44
+                        )}
+                        stroke={line.stroke}
+                        strokeWidth={1}
+                        tension={0.8}
+                        lineCap="round"
+                        globalCompositeOperation={
+                          line.tool === "eraser"
+                            ? "destination-out"
+                            : "source-over"
+                        }
+                      />
+                    ))}
+                  </Layer>
+                </Stage>
+              </MemoRound>
             </MemoBox>
             <EstimateContainer>
               <SubTitle>견적 금액 확인</SubTitle>
@@ -667,8 +734,8 @@ const FirstPage = (props: any) => {
           <FooterItemBox>
             <FooterItem1>www.tonginexp.com</FooterItem1>
             <FooterItem2>고객센터: 1988-0123</FooterItem2>
-            <FooterItem2>본사: 02-0000-0000</FooterItem2>
-            <FooterItem2>팩스: 00-000-0000</FooterItem2>
+            <FooterItem2>본사: 02-3678-0123</FooterItem2>
+            <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
             <FooterItem3>
               <div>SERIAL NO.</div>
               <div>R-20240203929</div>
