@@ -88,13 +88,13 @@ const ContractWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0.8vw;
+  border: 0.16vw solid gray;
 `;
 
 const ContractArea = styled.div`
-  border-radius: 0.8vw;
-  border: 0.16vw solid gray;
-  width: 90vw;
-  height: 127vw;
+  width: 98%;
+  height: 98%;
   display: flex;
   justify-content: center;
   align-items: center;
