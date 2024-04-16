@@ -14,6 +14,8 @@ import { format } from "date-fns";
 import ServicePaymentSelectComponent from "./servicePaymentSelectComponent";
 import OptionProductComponent from "./optionProductComponent";
 import DropdownComponent from "../common/dropdownComponent";
+import { Image } from "../common/image";
+import OptionBoxComponent from "./optionBoxComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -92,6 +94,27 @@ const ButtonArea = styled.div`
   height: 9vw;
 `;
 
+const CheckedOptionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2vh;
+  width: 100%;
+`;
+
+const CheckedOptionTitle = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const Title = styled.div`
+  margin-left: 1vw;
+  display: flex;
+  align-items: center;
+  font-size: 2.4vw;
+  font-weight: 500;
+`;
+
 export default function NewOptionComponent(props: any) {
   const { optionData, setOptionData } = props;
 
@@ -132,6 +155,9 @@ export default function NewOptionComponent(props: any) {
   const [prevTransportaionMethod, setPrevTransportaionMethod] = useState(
     prevOptionData.transportationMethod
   );
+  const [afterTransportaionMethod, setAfterTransportaionMethod] = useState(
+    afterOptionData.transportationMethod
+  );
 
   const saveOptionData = () => {
     alert("옵션정보를 성공적으로 저장했습니다.");
@@ -160,13 +186,26 @@ export default function NewOptionComponent(props: any) {
     optionServiceList,
   ]);
 
+  useEffect(() => {
+    setPrevOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.transportationMethod = prevTransportaionMethod;
+      return updatedData;
+    });
+    setAfterOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.transportationMethod = afterTransportaionMethod;
+      return updatedData;
+    });
+  }, [prevTransportaionMethod, afterTransportaionMethod]);
+
   return (
     <ContentBox>
       <Wrapper>
         <OptionArea>
           <WorkConditionArea>
             <ConditionBox>
-              <ConditionTitleBox>작업조건(전)</ConditionTitleBox>
+              <ConditionTitleBox>작업 조건(전)</ConditionTitleBox>
               <CondtionContentsBox>
                 <RoomSizeBox
                   inputValue={prevOptionData.pyeong}
@@ -180,20 +219,78 @@ export default function NewOptionComponent(props: any) {
               </CondtionContentsBox>
             </ConditionBox>
             <ConditionBox>
-              <ConditionTitleBox>작업조건(전)</ConditionTitleBox>
+              <ConditionTitleBox>작업 조건(후)</ConditionTitleBox>
               <CondtionContentsBox>
                 <RoomSizeBox
-                  inputValue={prevOptionData.pyeong}
-                  setInputValue={setPrevOptionData}
+                  inputValue={afterOptionData.pyeong}
+                  setInputValue={setAfterOptionData}
                 ></RoomSizeBox>
                 <DropdownComponent
-                  selected={prevTransportaionMethod}
-                  setSelected={setPrevTransportaionMethod}
+                  selected={afterTransportaionMethod}
+                  setSelected={setAfterTransportaionMethod}
                   dropdownList={transportationMethodList}
                 ></DropdownComponent>
               </CondtionContentsBox>
             </ConditionBox>
           </WorkConditionArea>
+          <CheckedOptionBox>
+            <OptionBoxComponent></OptionBoxComponent>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CheckedOptionTitle>
+              <Image
+                src={"/icon/unchecked.png"}
+                alt="체크박스"
+                width={"3.4vw"}
+                height={"3.4vw"}
+              />
+              <Title>입주청소 서비스</Title>
+            </CheckedOptionTitle>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CheckedOptionTitle>
+              <Image
+                src={"/icon/unchecked.png"}
+                alt="체크박스"
+                width={"3.4vw"}
+                height={"3.4vw"}
+              />
+              <Title>정리수납 서비스</Title>
+            </CheckedOptionTitle>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CheckedOptionTitle>
+              <Image
+                src={"/icon/unchecked.png"}
+                alt="체크박스"
+                width={"3.4vw"}
+                height={"3.4vw"}
+              />
+              <Title>탈취살균 서비스</Title>
+            </CheckedOptionTitle>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CheckedOptionTitle>
+              <Image
+                src={"/icon/unchecked.png"}
+                alt="체크박스"
+                width={"3.4vw"}
+                height={"3.4vw"}
+              />
+              <Title>기타 서비스</Title>
+            </CheckedOptionTitle>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CheckedOptionTitle>
+              <Image
+                src={"/icon/unchecked.png"}
+                alt="체크박스"
+                width={"3.4vw"}
+                height={"3.4vw"}
+              />
+              <Title>옵션 품목(분해/설치)</Title>
+            </CheckedOptionTitle>
+          </CheckedOptionBox>
         </OptionArea>
 
         <ButtonArea>

@@ -8,7 +8,7 @@ const SelectBox = styled.div<{
 }>`
   position: relative;
   width: 16vw;
-  height: 3.4vh;
+  height: 3vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@ const SelectOptions = styled.ul<{
   max-height: ${(props) => (props.$show ? "none" : "0")};
   padding: 0;
   outline: ${(props) => (props.$show ? "0.3vw solid #ff7f3b" : "none")};
-  border-radius: 0.4vw;
+  border-radius: 0.2vw;
   background-color: #fdfdfd;
   color: #222222;
   /* :hover {
@@ -52,9 +52,9 @@ const SelectOptions = styled.ul<{
   box-shadow: 0 1vw 1vw rgba(0, 0, 0, 0.2), 0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
 const Option = styled.ul<{ index: number; selected: number }>`
-  font-size: 1.7vw;
+  font-size: 2vw;
   padding: 1vw 0.5vw;
-  height: 4vw;
+  height: 3vh;
   background-color: ${(props) =>
     props.index === props.selected ? "#ff7f3b" : "#ffffff"};
   color: ${(props) => (props.index === props.selected ? "#ffffff" : "#000000")};

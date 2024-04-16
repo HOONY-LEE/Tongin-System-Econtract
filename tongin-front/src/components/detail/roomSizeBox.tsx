@@ -7,7 +7,7 @@ const InputArea = styled.div`
   justify-content: start;
   align-items: center;
   width: 16vw;
-  height: 3.4vh;
+  height: 3vh;
   margin-right: 3vw;
 `;
 

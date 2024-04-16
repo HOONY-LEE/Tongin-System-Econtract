@@ -96,8 +96,8 @@ export default function QuantityComponent(props: any) {
         <DecreaseBtn onClick={decreaseNum} $isActivate={isActivate}>
           <Image
             src="/icon/minus_icon.png"
-            width={"3vw"}
-            height={"1.4w"}
+            width={"2.8vw"}
+            height={"0.3vw"}
           ></Image>
         </DecreaseBtn>
         <InputBtn>
