@@ -1,33 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import { Image } from "../common/image";
+import { Image } from "./image";
 
 const SelectBox = styled.div<{
   $show?: boolean;
 }>`
   position: relative;
-  width: 9vw;
-  height: 4.7vw;
+  width: 16vw;
+  height: 3.4vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: 0.2vw solid #f0f0f0;
   border-radius: 0.4vw;
   background-color: #ffffff;
   align-self: center;
-  border: ${(props) => (props.$show ? "0.3vw solid #ff7f3b" : "none")};
-
-  /* box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.01),
-    0 0.5vh 0.5vh rgba(0, 0, 0, 0.003); */
+  border: ${(props) =>
+    props.$show ? "0.3vw solid #ff7f3b" : "0.2vw solid #5f5f5f"};
   cursor: pointer;
 `;
 const Label = styled.label`
   display: flex;
   justify-content: space-around;
-  font-size: 1.7vw;
+  font-size: 2vw;
   align-items: center;
-  width: 88%;
+  width: 80%;
   text-align: center;
 `;
 const SelectOptions = styled.ul<{
@@ -48,43 +45,32 @@ const SelectOptions = styled.ul<{
   border-radius: 0.4vw;
   background-color: #fdfdfd;
   color: #222222;
-  :hover {
+  /* :hover {
     background-color: #ff7f3b;
-  }
+    color: #ffffff;
+  } */
+  box-shadow: 0 1vw 1vw rgba(0, 0, 0, 0.2), 0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
-const Option = styled.ul`
+const Option = styled.ul<{ index: number; selected: number }>`
   font-size: 1.7vw;
   padding: 1vw 0.5vw;
   height: 4vw;
+  background-color: ${(props) =>
+    props.index === props.selected ? "#ff7f3b" : "#ffffff"};
+  color: ${(props) => (props.index === props.selected ? "#ffffff" : "#000000")};
 
   &:hover {
     background-color: #ff7f3b;
     color: #ffffff;
   }
 `;
-const MethodSelectBoxComponent = (props: any) => {
-  const { method, setCurrentProductList, roomId, articleId } = props;
+const DropdownComponent = (props: any) => {
+  const { selected, setSelected, dropdownList } = props;
 
-  const data = [
-    { status: "운반", statusCode: 0 },
-    { status: "폐기", statusCode: 1 },
-    { status: "하역", statusCode: 2 },
-    { status: "경유", statusCode: 3 },
-    { status: "방치", statusCode: 4 },
-  ];
-
-  const [currentValue, setCurrentValue] = useState<string>(
-    data[method ? method : 0].status
-  );
   const [showOptions, setShowOptions] = useState(false);
 
   const handleOnChangeSelectValue = (e: any, statusCode: number) => {
-    setCurrentValue(data[statusCode].status);
-    setCurrentProductList((prev: any) => {
-      const updatedList = [...prev];
-      updatedList[roomId].articleData[articleId].article.carryType = statusCode;
-      return updatedList;
-    });
+    setSelected(statusCode);
   };
 
   return (
@@ -92,20 +78,20 @@ const MethodSelectBoxComponent = (props: any) => {
       onClick={() => setShowOptions((prev) => !prev)}
       $show={showOptions}
     >
-      <Label>
-        {currentValue}
-        <Image
-          src="/icon/triangle.png"
-          alt="삼각형이미지"
-          width={"1.1vw"}
-          height={"0.8vw"}
-        />
-      </Label>
+      <Label>{dropdownList[selected].status}</Label>
+      <Image
+        src="/icon/triangle.png"
+        alt="삼각형이미지"
+        width={"1.1vw"}
+        height={"0.8vw"}
+      />
 
       <SelectOptions $show={showOptions}>
-        {data.map((item, index) => (
+        {dropdownList.map((item: any, index: number) => (
           <Option
+            selected={selected}
             key={index}
+            index={index}
             onClick={(e) => handleOnChangeSelectValue(e, item.statusCode)}
           >
             <li value={item.statusCode}>{item.status}</li>
@@ -115,4 +101,4 @@ const MethodSelectBoxComponent = (props: any) => {
     </SelectBox>
   );
 };
-export default MethodSelectBoxComponent;
+export default DropdownComponent;

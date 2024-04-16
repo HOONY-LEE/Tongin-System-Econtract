@@ -18,6 +18,7 @@ import API from "../API/API";
 import ProductComponent from "../components/detail/productComponent";
 import {
   drawingSampleData,
+  newOptionData,
   sampleProductDataList,
 } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
@@ -26,6 +27,7 @@ import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanel
 import ContractComponent from "../components/detail/contractComponent";
 import PencilIcon from "../components/icon/pencil";
 import DetailDrawView from "../components/detail/dtailDrawView";
+import NewOptionComponent from "../components/detail/newOptionComponent";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -197,12 +199,14 @@ export default function Detail() {
 
   // 옵션정보 호출API
   const getOptionList = async () => {
-    const response = await API.get(`/receipt/option/${reNum}`);
-    if (response.status === 200) {
-      setOptionData(response.data.receiptOptionData);
-    } else {
-      console.log("Fail to getOptionList()");
-    }
+    //임시 샘플데이터 사용
+    setOptionData(newOptionData);
+    // const response = await API.get(`/receipt/option/${reNum}`);
+    // if (response.status === 200) {
+    //   setOptionData(response.data.receiptOptionData);
+    // } else {
+    //   console.log("Fail to getOptionList()");
+    // }
   };
 
   // 가격정보 호출API
@@ -345,10 +349,10 @@ export default function Detail() {
             ) : null}
             {currentTab === 2 ? (
               <OptionTabBox>
-                <OptionComponent
+                <NewOptionComponent
                   optionData={optionData}
                   setOptionData={setOptionData}
-                ></OptionComponent>
+                ></NewOptionComponent>
               </OptionTabBox>
             ) : null}
             {currentTab === 3 ? (

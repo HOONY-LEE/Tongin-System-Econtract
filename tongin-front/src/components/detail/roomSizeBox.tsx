@@ -6,18 +6,18 @@ const InputArea = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 14vw;
-  height: 5vw;
+  width: 16vw;
+  height: 3.4vh;
   margin-right: 3vw;
 `;
 
 const InputCBMBox = styled.div`
   display: flex;
   justify-content: center;
-  width: 10vw;
+  width: 13vw;
   height: 100%;
   /* background-color: #f4f4f4; */
-  border: 0.2vw solid #dbdbdb;
+  border: 0.2vw solid #3a3a3a;
   border-radius: 0.6vw;
   margin-right: 0.8vw;
   &:hover {
