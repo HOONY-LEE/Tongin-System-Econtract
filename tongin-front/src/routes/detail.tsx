@@ -159,7 +159,7 @@ export default function Detail() {
   const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
-
+  const [preventDefault, setPreventDefault] = useState<any>(false);
   const menuArr = [
     { name: "1. 상세정보", content: "견적리스트 영역" },
     { name: "2. 물품정보", content: "미계약 리스트 영역" },
@@ -225,6 +225,7 @@ export default function Detail() {
       const result = response.data;
       disableScrollLock();
       setIsScrolled(false);
+      disableScrollLock();
       // console.log("저장성공", result);
     } else {
       console.log("Fail to postDrawingData()");
@@ -238,13 +239,14 @@ export default function Detail() {
       const result = response.data.receiptMemoData;
       setDrawingData(result);
       setIsScrolled(true);
+      setPreventDefault(true);
       // console.log("불러오기성공", result);
     } else {
       console.log("Fail to getDrawingData()");
     }
   };
 
-  const onClose = async () => {
+  const onClose = () => {
     postDrawingData();
     setDrawingPanel(false);
     disableScrollLock();
@@ -294,7 +296,7 @@ export default function Detail() {
       body.style.removeProperty("bottom");
       body.style.removeProperty("touchAction");
       body.style.removeProperty("scrollBehavior");
-
+      body.style.touchAction = "auto";
       window.scrollTo(0, Number(body.getAttribute("scrollY")));
 
       body.removeAttribute("scrollY");
@@ -389,6 +391,9 @@ export default function Detail() {
               setIsScrolled={setIsScrolled}
               setLines={setLines}
               lines={lines}
+              setPreventDefault={setPreventDefault}
+              preventDefault={preventDefault}
+              disableScrollLock={disableScrollLock}
               onClose={() => {
                 onClose();
               }}
