@@ -10,12 +10,15 @@ export const newOptionData = {
     transportationMethod: 0,
     pyeong: 40,
   },
+  ladderTruck: {
+    id: 3,
+    servicePayment: 120000,
+    selected: true,
+  },
   livingService: {
     movingCleaningService: {
       id: 1,
       serviceName: "입주청소서비스",
-      serviceType: 1,
-      serviceTypeName: "VIP",
       serviceRequestDate: "20240305",
       servicePayment: 1000000,
       selected: true,

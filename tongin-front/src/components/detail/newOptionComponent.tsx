@@ -16,6 +16,9 @@ import OptionProductComponent from "./optionProductComponent";
 import DropdownComponent from "../common/dropdownComponent";
 import { Image } from "../common/image";
 import OptionBoxComponent from "./optionBoxComponent";
+import CleaningOptionBoxComponent from "./cleaningOptionBoxComponent";
+import CommonOptionBoxComponent from "./commonOptionBoxComponent";
+import OptionListBoxComponent from "./optionListBoxComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -48,7 +51,6 @@ const OptionArea = styled.div`
   justify-content: start;
   width: 100%;
   height: 100%;
-  outline: 0.1vw dashed red;
 `;
 
 const WorkConditionArea = styled.div`
@@ -102,17 +104,12 @@ const CheckedOptionBox = styled.div`
   width: 100%;
 `;
 
-const CheckedOptionTitle = styled.div`
+const DropdownBox = styled.div`
   display: flex;
-  width: 100%;
-`;
-
-const Title = styled.div`
-  margin-left: 1vw;
-  display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 2.4vw;
-  font-weight: 500;
+  width: 16vw;
+  height: 3vh;
 `;
 
 export default function NewOptionComponent(props: any) {
@@ -122,11 +119,20 @@ export default function NewOptionComponent(props: any) {
   console.log(optionData);
 
   const transportationMethodList = [
-    { status: "선택안함", statusCode: 0 },
-    { status: "사다리차", statusCode: 1 },
-    { status: "엘리베이터", statusCode: 2 },
-    { status: "계단", statusCode: 3 },
-    { status: "기타", statusCode: 4 },
+    { id: 0, status: "선택안함" },
+    { id: 1, status: "사다리차" },
+    { id: 2, status: "엘리베이터" },
+    { id: 3, status: "계단" },
+    { id: 4, status: "기타" },
+  ];
+
+  const paymentMethodList = [
+    { id: 0, status: "선택안함" },
+    { id: 1, status: "현금" },
+    { id: 2, status: "온라인" },
+    { id: 3, status: "카드" },
+    { id: 4, status: "무빙팀 수금" },
+    { id: 5, status: "리빙팀 수금" },
   ];
 
   const [prevOptionData, setPrevOptionData] = useState(
@@ -135,6 +141,10 @@ export default function NewOptionComponent(props: any) {
   const [afterOptionData, setAfterOptionData] = useState(
     optionData.afterWorkCondition
   );
+  const [ladderTruckData, setLadderTruckData] = useState(
+    optionData.ladderTruck
+  );
+
   const [cleaningService, setCleaningService] = useState(
     optionData.livingService.movingCleaningService
   );
@@ -144,8 +154,9 @@ export default function NewOptionComponent(props: any) {
   const [organizingService, setOrganizingService] = useState(
     optionData.livingService.organizationStorageService
   );
-  const [paymentMethod, setPaymentMethod] = useState(
-    optionData.livingService.paymentMethod
+
+  const [otherService, setOtherService] = useState(
+    optionData.livingService.otherService
   );
 
   const [optionServiceList, setOptionServiceList] = useState(
@@ -159,6 +170,42 @@ export default function NewOptionComponent(props: any) {
     afterOptionData.transportationMethod
   );
 
+  const setLadderTruckSelected = (flag: boolean) => {
+    setLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+  const setCleaningSelected = (flag: boolean) => {
+    setCleaningService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+  const setDeodorizationSelected = (flag: boolean) => {
+    setDeodorizationService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+  const setOrganizationSelected = (flag: boolean) => {
+    setOrganizingService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+  const setOtherServiceSelected = (flag: boolean) => {
+    setOtherService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+
   const saveOptionData = () => {
     alert("옵션정보를 성공적으로 저장했습니다.");
   };
@@ -171,8 +218,9 @@ export default function NewOptionComponent(props: any) {
       updatedData.livingService.movingCleaningService = cleaningService;
       updatedData.livingService.deodorizationService = deodorizationService;
       updatedData.livingService.organizationStorageService = organizingService;
-      updatedData.livingService.paymentMethod = paymentMethod;
+      updatedData.livingService.otherService = otherService;
       updatedData.optionService = optionServiceList;
+      updatedData.ladderTruck = ladderTruckData;
 
       return updatedData;
     });
@@ -182,8 +230,9 @@ export default function NewOptionComponent(props: any) {
     cleaningService,
     deodorizationService,
     organizingService,
-    paymentMethod,
+    otherService,
     optionServiceList,
+    ladderTruckData,
   ]);
 
   useEffect(() => {
@@ -211,11 +260,13 @@ export default function NewOptionComponent(props: any) {
                   inputValue={prevOptionData.pyeong}
                   setInputValue={setPrevOptionData}
                 ></RoomSizeBox>
-                <DropdownComponent
-                  selected={prevTransportaionMethod}
-                  setSelected={setPrevTransportaionMethod}
-                  dropdownList={transportationMethodList}
-                ></DropdownComponent>
+                <DropdownBox>
+                  <DropdownComponent
+                    selected={prevTransportaionMethod}
+                    setSelected={setPrevTransportaionMethod}
+                    dropdownList={transportationMethodList}
+                  ></DropdownComponent>
+                </DropdownBox>
               </CondtionContentsBox>
             </ConditionBox>
             <ConditionBox>
@@ -225,71 +276,74 @@ export default function NewOptionComponent(props: any) {
                   inputValue={afterOptionData.pyeong}
                   setInputValue={setAfterOptionData}
                 ></RoomSizeBox>
-                <DropdownComponent
-                  selected={afterTransportaionMethod}
-                  setSelected={setAfterTransportaionMethod}
-                  dropdownList={transportationMethodList}
-                ></DropdownComponent>
+                <DropdownBox>
+                  <DropdownComponent
+                    selected={afterTransportaionMethod}
+                    setSelected={setAfterTransportaionMethod}
+                    dropdownList={transportationMethodList}
+                  ></DropdownComponent>
+                </DropdownBox>
               </CondtionContentsBox>
             </ConditionBox>
           </WorkConditionArea>
           <CheckedOptionBox>
-            <OptionBoxComponent></OptionBoxComponent>
+            <OptionBoxComponent
+              ladderTruckData={ladderTruckData}
+              setLadderTruckData={setLadderTruckData}
+              title={"사다리차 서비스"}
+              isSelected={ladderTruckData.selected}
+              setIsSelected={setLadderTruckSelected}
+            ></OptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
-            <CheckedOptionTitle>
-              <Image
-                src={"/icon/unchecked.png"}
-                alt="체크박스"
-                width={"3.4vw"}
-                height={"3.4vw"}
-              />
-              <Title>입주청소 서비스</Title>
-            </CheckedOptionTitle>
+            <CleaningOptionBoxComponent
+              optionData={cleaningService}
+              setOptionData={setCleaningService}
+              title={"입주청소 서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={cleaningService.selected}
+              setIsSelected={setCleaningSelected}
+            ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
-            <CheckedOptionTitle>
-              <Image
-                src={"/icon/unchecked.png"}
-                alt="체크박스"
-                width={"3.4vw"}
-                height={"3.4vw"}
-              />
-              <Title>정리수납 서비스</Title>
-            </CheckedOptionTitle>
+            <CommonOptionBoxComponent
+              optionData={organizingService}
+              setOptionData={setOrganizingService}
+              title={"정리수납 서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={organizingService.selected}
+              setIsSelected={setOrganizationSelected}
+            ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
-            <CheckedOptionTitle>
-              <Image
-                src={"/icon/unchecked.png"}
-                alt="체크박스"
-                width={"3.4vw"}
-                height={"3.4vw"}
-              />
-              <Title>탈취살균 서비스</Title>
-            </CheckedOptionTitle>
+            <CommonOptionBoxComponent
+              optionData={deodorizationService}
+              setOptionData={setDeodorizationService}
+              title={"탈취살균 서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={deodorizationService.selected}
+              setIsSelected={setDeodorizationSelected}
+            ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
-            <CheckedOptionTitle>
-              <Image
-                src={"/icon/unchecked.png"}
-                alt="체크박스"
-                width={"3.4vw"}
-                height={"3.4vw"}
-              />
-              <Title>기타 서비스</Title>
-            </CheckedOptionTitle>
+            <CommonOptionBoxComponent
+              optionData={otherService}
+              setOptionData={setOtherService}
+              title={"기타 서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={otherService.selected}
+              setIsSelected={setOtherServiceSelected}
+            ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
-            <CheckedOptionTitle>
-              <Image
-                src={"/icon/unchecked.png"}
-                alt="체크박스"
-                width={"3.4vw"}
-                height={"3.4vw"}
-              />
-              <Title>옵션 품목(분해/설치)</Title>
-            </CheckedOptionTitle>
+            <OptionListBoxComponent
+              optionData={cleaningService}
+              setOptionData={setDeodorizationService}
+              title={"옵션품목(분해/설치)"}
+              paymentMethodList={paymentMethodList}
+              isSelected={optionServiceList.selected}
+              setIsSelected={setDeodorizationSelected}
+            ></OptionListBoxComponent>
           </CheckedOptionBox>
         </OptionArea>
 

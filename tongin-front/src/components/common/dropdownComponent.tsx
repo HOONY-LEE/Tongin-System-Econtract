@@ -7,8 +7,8 @@ const SelectBox = styled.div<{
   $show?: boolean;
 }>`
   position: relative;
-  width: 16vw;
-  height: 3vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +69,8 @@ const DropdownComponent = (props: any) => {
 
   const [showOptions, setShowOptions] = useState(false);
 
-  const handleOnChangeSelectValue = (e: any, statusCode: number) => {
-    setSelected(statusCode);
+  const handleOnChangeSelectValue = (e: any, id: number) => {
+    setSelected(id);
   };
 
   return (
@@ -92,9 +92,9 @@ const DropdownComponent = (props: any) => {
             selected={selected}
             key={index}
             index={index}
-            onClick={(e) => handleOnChangeSelectValue(e, item.statusCode)}
+            onClick={(e) => handleOnChangeSelectValue(e, item.id)}
           >
-            <li value={item.statusCode}>{item.status}</li>
+            <li value={item.id}>{item.status}</li>
           </Option>
         ))}
       </SelectOptions>

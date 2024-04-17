@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { Image } from "../common/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CommonChargePriceInputBox from "./commonChargePriceInputBox";
 
 const Wrapper = styled.div``;
 
 const CheckedOptionTitle = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
+  height: 3vh;
 `;
 
 const Title = styled.div`
@@ -17,12 +20,50 @@ const Title = styled.div`
   font-weight: 500;
 `;
 
+const ActivatedArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  height: 4vh;
+`;
+
+const PriceInputArea = styled.div`
+  display: flex;
+  width: 30vw;
+`;
+
 export default function OptionBoxComponent(props: any) {
-  const [isChecked, setIsChecked] = useState(false);
+  const {
+    ladderTruckData,
+    setLadderTruckData,
+    title,
+    isSelected,
+    setIsSelected,
+  } = props;
+  const [isChecked, setIsChecked] = useState(isSelected);
 
   const onClickCheck = () => {
     setIsChecked(!isChecked);
   };
+
+  const setLadderTruckServicePayment = (newValue: number) => {
+    setLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.servicePayment = newValue;
+      return updatedData;
+    });
+  };
+
+  useEffect(() => {
+    setLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = isChecked;
+      return updatedData;
+    });
+    setIsSelected(isChecked);
+  }, [isChecked]);
 
   return (
     <Wrapper>
@@ -33,8 +74,20 @@ export default function OptionBoxComponent(props: any) {
           width={"3.4vw"}
           height={"3.4vw"}
         />
-        <Title>사다리차 서비스</Title>
+        <Title>{title}</Title>
       </CheckedOptionTitle>
+      {isChecked && (
+        <ActivatedArea>
+          <PriceInputArea>
+            <CommonChargePriceInputBox
+              inputValue={ladderTruckData.servicePayment}
+              setInputValue={setLadderTruckServicePayment}
+              title={title}
+              id={0}
+            ></CommonChargePriceInputBox>
+          </PriceInputArea>
+        </ActivatedArea>
+      )}
     </Wrapper>
   );
 }
