@@ -57,6 +57,7 @@ export default function DetailComponent(props: any) {
           <DetailEditComponent
             getDetailList={getDetailList}
             detailData={detailData}
+            setDetailData={setDetailData}
             detailEditVisible={detailEditVisible}
           ></DetailEditComponent>
         ) : (

@@ -401,16 +401,7 @@ export default function DetailViewComponent(props: any) {
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
-        <MoveBtnContainer>
-          <MoveBtnTitle>이사종류</MoveBtnTitle>
-          <MoveBtnBox>
-            <MoveBtn>가정이사</MoveBtn>
-            <MoveBtnDesabled>보관이사</MoveBtnDesabled>
-            <MoveBtnDesabled>기업이사</MoveBtnDesabled>
-            <MoveBtnDesabled>해외이사</MoveBtnDesabled>
-            <MoveBtnDesabled>미니이사</MoveBtnDesabled>
-          </MoveBtnBox>
-        </MoveBtnContainer>
+
         <BtnBox>
           <CustomButton
             onClick={() => detailEditVisible(true)}
