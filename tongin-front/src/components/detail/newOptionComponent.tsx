@@ -337,8 +337,8 @@ export default function NewOptionComponent(props: any) {
           </CheckedOptionBox>
           <CheckedOptionBox>
             <OptionListBoxComponent
-              optionData={cleaningService}
-              setOptionData={setDeodorizationService}
+              optionData={optionServiceList}
+              setOptionData={setOptionServiceList}
               title={"옵션품목(분해/설치)"}
               paymentMethodList={paymentMethodList}
               isSelected={optionServiceList.selected}

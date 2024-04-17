@@ -10,7 +10,7 @@ const InputArea = styled.div`
   justify-content: end;
   align-items: center;
   width: 28vw;
-  height: 5vw;
+  height: 3vh;
 `;
 
 const InputCBMBox = styled.div`
@@ -19,9 +19,9 @@ const InputCBMBox = styled.div`
   width: 26vw;
   height: 100%;
   background-color: white;
-  border-radius: 0.6vw;
+  border-radius: 0.4vw;
   margin-right: 0.8vw;
-  border: 0.2vw solid #3a3a3a;
+  border: 0.2vw solid #777777;
   &:hover {
     cursor: pointer;
   }

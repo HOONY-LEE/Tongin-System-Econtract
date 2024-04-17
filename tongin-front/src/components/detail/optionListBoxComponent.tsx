@@ -5,6 +5,7 @@ import CommonChargePriceInputBox from "./commonChargePriceInputBox";
 import DropdownComponent from "../common/dropdownComponent";
 import { format } from "date-fns";
 import DateModalComponent from "./dateModalComponent";
+import OptionItemComponent from "./optionItemComponent";
 
 const Wrapper = styled.div``;
 
@@ -25,64 +26,12 @@ const Title = styled.div`
 
 const ActivatedArea = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4vh;
-`;
-
-const PriceInputArea = styled.div`
-  display: flex;
-  width: 30vw;
-`;
-
-const CategoryBox = styled.div`
-  width: 16vw;
-  height: 3vh;
-`;
-
-const DateBox = styled.div`
-  width: 14vw;
-  height: 3vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &&:hover {
-    cursor: pointer;
-  }
-`;
-const MoveDateInput = styled.div`
-  width: 100%;
-  height: 5vw;
-  display: flex;
-  font-size: 1.8vw;
-  font-weight: 500;
-  flex-direction: column;
-  align-items: center;
-  outline: 0.2vw solid #494949;
-  border-radius: 0.6vw;
-  justify-content: center;
-  &&:hover {
-    cursor: pointer;
-  }
-`;
-const InputBox = styled.input.attrs({})<{}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  text-align: center;
-  outline: none;
-  /* margin-left: 1vw; */
-  font-size: 1.8vw;
-  font-weight: 500;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  border: none;
-  width: 90%;
   height: 100%;
+  outline: 0.1vw solid red;
 `;
 
 const CategoryInputBox = styled.input`
@@ -99,81 +48,11 @@ const CategoryInputBox = styled.input`
   padding-left: 2vw;
 `;
 
-const CategoryReadOnlyBox = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 0.4vw;
-  outline: 0.2vw solid #494949;
-  background-color: #e9e9e9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2vw;
-`;
-
-const PayMethodBox = styled.div`
-  width: 14vw;
-  height: 3vh;
-`;
-
 export default function OptionListBoxComponent(props: any) {
-  const {
-    optionData,
-    setOptionData,
-    title,
-    paymentMethodList,
-    isSelected,
-    setIsSelected,
-  } = props;
+  const { optionData, setOptionData, title, isSelected, setIsSelected } = props;
   const [isChecked, setIsChecked] = useState(isSelected);
-  const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
-  const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
-
   const onClickCheck = () => {
     setIsChecked(!isChecked);
-  };
-
-  const setPaymentMethod = (id: number) => {
-    setOptionData((prev: any) => {
-      const updatedData = { ...prev };
-      updatedData.paymentMethod = id;
-      return updatedData;
-    });
-  };
-
-  const setInputValue = (newValue: number) => {
-    setOptionData((prev: any) => {
-      const updatedData = { ...prev };
-      updatedData.servicePayment = newValue;
-      return updatedData;
-    });
-  };
-
-  // 날짜 모달 열기 핸들러
-  const dateHandleOpenModal = () => {
-    setIsDateModalOpen(true);
-  };
-
-  // // 날짜 모달 닫기 핸들러
-  const dateHandleCloseModal = () => {
-    setIsDateModalOpen(false);
-  };
-
-  const dateValueInput = (data: any) => {
-    console.log("dateValueInput", data);
-    const myData = new Date(data);
-    // setDateData(data);
-    console.log(format(myData, "y-MM-dd"));
-    if (!Number.isNaN(new Date(myData).getTime())) {
-      optionData.serviceRequestDate = format(myData, "y-MM-dd");
-    } else {
-      return "";
-    }
-  };
-
-  const deteValueDelete = () => {
-    optionData.serviceRequestDate = "";
-    dateHandleCloseModal();
   };
 
   useEffect(() => {
@@ -196,7 +75,18 @@ export default function OptionListBoxComponent(props: any) {
         />
         <Title>{title}</Title>
       </CheckedOptionTitle>
-      {isChecked && <ActivatedArea></ActivatedArea>}
+      {isChecked && (
+        <ActivatedArea>
+          {optionData.ServiceList.map((item: any, index: number) => {
+            return (
+              <OptionItemComponent
+                key={index}
+                item={item}
+              ></OptionItemComponent>
+            );
+          })}
+        </ActivatedArea>
+      )}
     </Wrapper>
   );
 }

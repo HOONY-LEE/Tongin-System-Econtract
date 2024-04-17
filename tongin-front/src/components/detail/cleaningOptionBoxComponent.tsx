@@ -53,14 +53,14 @@ const DateBox = styled.div`
 `;
 const MoveDateInput = styled.div`
   width: 100%;
-  height: 5vw;
+  height: 100%;
   display: flex;
   font-size: 1.8vw;
   font-weight: 500;
   flex-direction: column;
   align-items: center;
-  outline: 0.2vw solid #494949;
-  border-radius: 0.6vw;
+  border: 0.2vw solid #4b4b4b;
+  border-radius: 0.4vw;
   justify-content: center;
   &&:hover {
     cursor: pointer;
@@ -225,7 +225,6 @@ export default function CleaningOptionBoxComponent(props: any) {
               inputValue={optionData.servicePayment}
               setInputValue={setInputValue}
               title={title}
-              id={0}
             ></CommonChargePriceInputBox>
           </PriceInputArea>
         </ActivatedArea>

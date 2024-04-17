@@ -53,14 +53,14 @@ const DateBox = styled.div`
 `;
 const MoveDateInput = styled.div`
   width: 100%;
-  height: 5vw;
+  height: 100%;
   display: flex;
   font-size: 1.8vw;
   font-weight: 500;
   flex-direction: column;
   align-items: center;
-  outline: 0.2vw solid #494949;
-  border-radius: 0.6vw;
+  border: 0.2vw solid #4b4b4b;
+  border-radius: 0.4vw;
   justify-content: center;
   &&:hover {
     cursor: pointer;
@@ -127,6 +127,9 @@ export default function CommonOptionBoxComponent(props: any) {
   } = props;
   const [isChecked, setIsChecked] = useState(isSelected);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
+  const [description, setDescription] = useState<string>(
+    optionData.description
+  );
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
 
   const onClickCheck = () => {
@@ -147,6 +150,12 @@ export default function CommonOptionBoxComponent(props: any) {
       updatedData.servicePayment = newValue;
       return updatedData;
     });
+  };
+
+  // 인풋이 있는 경우 인풋 변경 함수(기타서비스)
+  const onChangeInput = (e: any) => {
+    console.log(e.target.value);
+    setDescription(e.target.value);
   };
 
   // 날짜 모달 열기 핸들러
@@ -185,6 +194,14 @@ export default function CommonOptionBoxComponent(props: any) {
     setIsSelected(isChecked);
   }, [isChecked]);
 
+  useEffect(() => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.description = description;
+      return updatedData;
+    });
+  }, [description]);
+
   return (
     <Wrapper>
       <CheckedOptionTitle onClick={onClickCheck}>
@@ -202,7 +219,8 @@ export default function CommonOptionBoxComponent(props: any) {
             {optionData.description ? (
               <CategoryInputBox
                 placeholder={"서비스명 입력"}
-                value={optionData.description}
+                value={description}
+                onChange={(e: any) => onChangeInput(e)}
               ></CategoryInputBox>
             ) : (
               <CategoryReadOnlyBox>일반</CategoryReadOnlyBox>
@@ -236,7 +254,6 @@ export default function CommonOptionBoxComponent(props: any) {
               inputValue={optionData.servicePayment}
               setInputValue={setInputValue}
               title={title}
-              id={0}
             ></CommonChargePriceInputBox>
           </PriceInputArea>
         </ActivatedArea>
