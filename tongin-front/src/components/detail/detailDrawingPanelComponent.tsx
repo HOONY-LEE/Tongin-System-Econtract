@@ -12,6 +12,10 @@ const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2); /* 배경을 약간 어둡게 만듭니다. */
@@ -24,6 +28,11 @@ const CalculatorComponentWrapper = styled.div`
   -ms-use-select: none;
   user-select: none;
   user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+
   position: fixed;
   top: 50%;
   left: 50%;
@@ -141,7 +150,7 @@ interface CalculatorComponentProps {
   reNum?: string;
   preventDefault?: any;
   setPreventDefault?: any;
-  disableScrollLock?:any;
+  disableScrollLock?: any;
 }
 
 const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
@@ -274,6 +283,16 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     false
   );
 
+  const backTargetElement = document.querySelector("#BackgroundPanel");
+  backTargetElement?.addEventListener(
+    "dragover",
+    (event) => {
+      console.log("drag", event);
+      // 드롭을 허용하기 위해 기본 동작 취소
+      event.preventDefault();
+    },
+    false
+  );
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
   useEffect(() => {
@@ -295,13 +314,15 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   return (
     <>
       <Backdrop />
-      <CalculatorComponentWrapper style={style}>
+
+      <CalculatorComponentWrapper id={"BackgroundPanel"} style={style}>
         {blankBoxVisible && (
           <DetailDrawBlankModalComponent
             onBlank={onBlankData}
             onClose={BlankClose}
           ></DetailDrawBlankModalComponent>
         )}
+        변경 테스트 V1
         <ToolContainer>
           <ColorCanvasBox>
             <ColorCanvastitle>

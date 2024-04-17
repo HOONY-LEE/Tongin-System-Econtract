@@ -353,7 +353,7 @@ const BtnBox = styled.div`
   justify-content: space-between;
 `;
 export default function DetailEditComponent(props: any) {
-  const { detailData, getDetailList } = props;
+  const { detailData, setDetailData, getDetailList } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
   const [currentBtn, setCurrentBtn] = useState(0);
@@ -394,8 +394,19 @@ export default function DetailEditComponent(props: any) {
   const onChangUserName = (e: any) => {
     console.log(e.target.value);
     setUserName(e.target.value);
-    detailData.name = userName;
   };
+
+  useEffect(() => {
+    setDetailData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.name = userName;
+      updatedData.contact = userContact;
+      updatedData.prevAddressDetail = prevAddressDetail;
+      updatedData.afterAddressDetail = afterAddressDetail;
+      return updatedData;
+    });
+  }, [userName, userContact, prevAddressDetail, afterAddressDetail]);
+
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
     let formattedValue = e.target.value.replace(regExp, "").substring(0, 13);
@@ -706,7 +717,7 @@ export default function DetailEditComponent(props: any) {
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>계약일</MoveDateTitle>
-            <MoveDateInput
+            {/* <MoveDateInput
               onClick={() => {
                 dateHandleOpenModal("contract");
               }}
@@ -719,7 +730,7 @@ export default function DetailEditComponent(props: any) {
                   "$1-$2-$3"
                 )}
               ></InputBox>
-            </MoveDateInput>
+            </MoveDateInput> */}
           </MoveDateBox>
         </MoveDateContainer>
         <MoveDateContainer>
@@ -758,7 +769,7 @@ export default function DetailEditComponent(props: any) {
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
-        <MoveBtnContainer>
+        {/* <MoveBtnContainer>
           <MoveBtnTitle>이사종류</MoveBtnTitle>
           <MoveBtnBox>
             <MoveBtn>
@@ -776,7 +787,7 @@ export default function DetailEditComponent(props: any) {
               ))}
             </MoveBtn>
           </MoveBtnBox>
-        </MoveBtnContainer>
+        </MoveBtnContainer> */}
         <BtnBox>
           <CustomButton
             width={"48%"}
