@@ -139,6 +139,9 @@ interface CalculatorComponentProps {
   lines: any;
   setLines: any;
   reNum?: string;
+  preventDefault?: any;
+  setPreventDefault?: any;
+  disableScrollLock?:any;
 }
 
 const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
@@ -150,6 +153,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   lines,
   setLines,
   reNum,
+  preventDefault,
+  setPreventDefault,
+  disableScrollLock,
 }) => {
   const stageRef = useRef<any>(null);
   const [tool, setTool] = useState<string>("pen");
@@ -163,6 +169,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [pointerType, setPointerType] = useState<any>("없음");
+
   const handlePointerDown = (e: any) => {
     if (pointerType === "mouse" || pointerType === "pen") {
       setIsDrawing(true);
@@ -193,10 +200,8 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   };
 
   const handlePointerUp = () => {
-    if (pointerType === "mouse" || pointerType === "pen") {
-      setIsDrawing(false);
-      setDrawingData(lines);
-    }
+    setIsDrawing(false);
+    setDrawingData(lines);
   };
   const selectPen = () => {
     setPenColorVisible(true);
