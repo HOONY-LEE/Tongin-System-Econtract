@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import ListComponent from "../components/home/listComponent";
+
 import { useState } from "react";
 import react, { useEffect } from "react";
 import axios from "axios";
@@ -18,7 +17,7 @@ import API from "../API/API";
 import ProductComponent from "../components/detail/productComponent";
 import {
   drawingSampleData,
-  newOptionData,
+  realOptionData,
   sampleProductDataList,
 } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
@@ -28,6 +27,7 @@ import ContractComponent from "../components/detail/contractComponent";
 import PencilIcon from "../components/icon/pencil";
 import DetailDrawView from "../components/detail/dtailDrawView";
 import NewOptionComponent from "../components/detail/newOptionComponent";
+import { newOptionData } from "../components/common/sampleData3";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -200,6 +200,7 @@ export default function Detail() {
   // 옵션정보 호출API
   const getOptionList = async () => {
     //임시 샘플데이터 사용
+    // setOptionData(realOptionData);
     setOptionData(newOptionData);
     // const response = await API.get(`/receipt/option/${reNum}`);
     // if (response.status === 200) {

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.div<{ index: number }>`
-  height: 2.2vw;
+  height: 2vw;
   display: flex;
   align-items: center;
   border-bottom: 0.1vw solid gray;

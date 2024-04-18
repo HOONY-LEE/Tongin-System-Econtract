@@ -21,7 +21,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   font-size: 2.4vw;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const ActivatedArea = styled.div`
@@ -31,21 +31,8 @@ const ActivatedArea = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  outline: 0.1vw solid red;
-`;
-
-const CategoryInputBox = styled.input`
-  width: 100%;
-  height: 100%;
-  border-radius: 0.4vw;
-  outline: 0.2vw solid #494949;
-  border: none;
-  border-radius: 0.4vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2vw;
-  padding-left: 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 `;
 
 export default function OptionListBoxComponent(props: any) {
@@ -53,6 +40,22 @@ export default function OptionListBoxComponent(props: any) {
   const [isChecked, setIsChecked] = useState(isSelected);
   const onClickCheck = () => {
     setIsChecked(!isChecked);
+  };
+
+  const setOptionItemSelected = (index: number, flag: boolean) => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.ServiceList[index].selected = flag;
+      return updatedData;
+    });
+  };
+
+  const setOptionItemPrice = (index: number, price: number) => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.ServiceList[index].optionPayment = price;
+      return updatedData;
+    });
   };
 
   useEffect(() => {
@@ -69,7 +72,7 @@ export default function OptionListBoxComponent(props: any) {
       <CheckedOptionTitle onClick={onClickCheck}>
         <Image
           src={`/icon/${isChecked ? "checked" : "unchecked"}.png`}
-          alt="체크박스"
+          alt="checkBox"
           width={"3.4vw"}
           height={"3.4vw"}
         />
@@ -81,7 +84,11 @@ export default function OptionListBoxComponent(props: any) {
             return (
               <OptionItemComponent
                 key={index}
+                index={index}
                 item={item}
+                isSelected={item.selected}
+                setIsSelected={setOptionItemSelected}
+                setOptionData={setOptionData}
               ></OptionItemComponent>
             );
           })}

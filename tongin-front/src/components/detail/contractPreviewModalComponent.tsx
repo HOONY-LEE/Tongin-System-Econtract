@@ -19,8 +19,8 @@ const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.2); /* 배경을 약간 어둡게 만듭니다. */
   z-index: 9998; /* 모달보다 아래에 위치하도록 설정합니다. */
 `;
@@ -35,8 +35,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 94vw;
-  height: 96vh;
+  width: 94%;
+  height: 98%;
   background-color: white;
   border-radius: 0.8vw;
 `;
@@ -50,8 +50,8 @@ const TopArea = styled.div`
 `;
 
 const BottomArea = styled.div`
-  width: 100%;
-  height: 5vh;
+  width: 80vw;
+  height: 8vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -90,8 +90,8 @@ const CloseBox = styled.div`
 
 const ContractArea = styled.div`
   margin-top: 1vh;
-  width: 90vw;
-  height: 127vw;
+  width: 80vw;
+  height: 113vw;
   outline: 0.2vw solid #e4e4e4;
   border-radius: 0.6vw;
   display: flex;
@@ -115,16 +115,16 @@ const ExportBtn = styled.div`
   }
 `;
 
-const PrevBox = styled.div<{ isActivate: boolean }>`
+const PrevBox = styled.div<{ $isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
+  background-color: ${(props) => (props.$isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
   ${(props) =>
-    !props.isActivate &&
+    !props.$isActivate &&
     css`
       pointer-events: none;
     `}
@@ -142,16 +142,16 @@ const NumBox = styled.div`
   font-weight: 600;
 `;
 
-const NextBox = styled.div<{ isActivate: boolean }>`
+const NextBox = styled.div<{ $isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
+  background-color: ${(props) => (props.$isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
   ${(props) =>
-    !props.isActivate &&
+    !props.$isActivate &&
     css`
       pointer-events: none;
     `}
@@ -259,7 +259,7 @@ const ContractPreviewModalComponent = (props: any) => {
         <TopArea>
           <LeftArea></LeftArea>
           <MidArea>
-            <PrevBox isActivate={prevBoxActive}>
+            <PrevBox $isActivate={prevBoxActive}>
               <ArrowLeftIcon
                 onClick={(e: any) => clickPrevPage(e)}
                 width={"4.2vw"}
@@ -268,7 +268,7 @@ const ContractPreviewModalComponent = (props: any) => {
               />
             </PrevBox>
             <NumBox>{currentPage}</NumBox>
-            <NextBox isActivate={nextBoxActive}>
+            <NextBox $isActivate={nextBoxActive}>
               <ArrowRightIcon
                 onClick={(e: any) => clickNextPage(e)}
                 width={"4.2vw"}

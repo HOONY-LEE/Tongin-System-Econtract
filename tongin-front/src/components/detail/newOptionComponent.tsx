@@ -14,7 +14,6 @@ import { format } from "date-fns";
 import ServicePaymentSelectComponent from "./servicePaymentSelectComponent";
 import OptionProductComponent from "./optionProductComponent";
 import DropdownComponent from "../common/dropdownComponent";
-import { Image } from "../common/image";
 import OptionBoxComponent from "./optionBoxComponent";
 import CleaningOptionBoxComponent from "./cleaningOptionBoxComponent";
 import CommonOptionBoxComponent from "./commonOptionBoxComponent";
@@ -75,7 +74,7 @@ const ConditionTitleBox = styled.div`
   justify-content: start;
   align-items: center;
   font-size: 2.2vw;
-  font-weight: 500;
+  font-weight: 700;
   width: 100%;
   height: 3vh;
 `;
@@ -200,6 +199,14 @@ export default function NewOptionComponent(props: any) {
   };
   const setOtherServiceSelected = (flag: boolean) => {
     setOtherService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+
+  const setOptionServiceSelected = (flag: boolean) => {
+    setOptionServiceList((prev: any) => {
       const updatedData = { ...prev };
       updatedData.selected = flag;
       return updatedData;
@@ -342,7 +349,7 @@ export default function NewOptionComponent(props: any) {
               title={"옵션품목(분해/설치)"}
               paymentMethodList={paymentMethodList}
               isSelected={optionServiceList.selected}
-              setIsSelected={setDeodorizationSelected}
+              setIsSelected={setOptionServiceSelected}
             ></OptionListBoxComponent>
           </CheckedOptionBox>
         </OptionArea>

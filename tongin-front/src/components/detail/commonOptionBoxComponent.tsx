@@ -20,7 +20,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   font-size: 2.4vw;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const ActivatedArea = styled.div`
@@ -216,7 +216,7 @@ export default function CommonOptionBoxComponent(props: any) {
       {isChecked && (
         <ActivatedArea>
           <CategoryBox>
-            {optionData.description ? (
+            {optionData.description !== undefined ? (
               <CategoryInputBox
                 placeholder={"서비스명 입력"}
                 value={description}

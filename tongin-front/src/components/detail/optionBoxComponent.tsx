@@ -17,7 +17,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   font-size: 2.4vw;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const ActivatedArea = styled.div`

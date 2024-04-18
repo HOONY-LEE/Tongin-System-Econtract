@@ -44,7 +44,7 @@ const SubText = styled.p`
 `;
 
 export default function OptionPriceInputBox(props: any) {
-  const { inputValue, setInputValue, optionType } = props;
+  const { inputValue, setInputValue, index } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 모달 닫기 핸들러
@@ -67,7 +67,7 @@ export default function OptionPriceInputBox(props: any) {
           title={`[옵션 금액] 입력창`}
           unit={"원"}
           onClose={handleCloseModal}
-          optionType={optionType}
+          index={index}
           inputValue={inputValue}
           setInputValue={setInputValue}
         />

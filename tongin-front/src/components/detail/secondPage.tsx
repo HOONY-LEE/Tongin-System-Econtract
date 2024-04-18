@@ -44,7 +44,7 @@ const LogoImg = styled.div`
   font-size: 3vw;
 `;
 
-const ContentArea = styled.table`
+const ContentArea = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -59,6 +59,7 @@ const TopArea = styled.div`
   justify-content: start;
   border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black;
+  width: 100%;
 `;
 const MidArea = styled.div`
   margin-top: 2vh;
@@ -67,7 +68,7 @@ const MidArea = styled.div`
   justify-content: space-between;
 `;
 const NameArea = styled.div`
-  width: 12vw;
+  width: 10vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,7 +88,7 @@ const ItemNameBox = styled.div`
 `;
 
 const ProductArea = styled.div`
-  width: 13.4vw;
+  width: 12vw;
   font-size: 1.6vw;
   font-weight: 600;
   display: flex;
@@ -98,9 +99,9 @@ const ProductArea = styled.div`
 `;
 
 const ItemArea = styled.div`
-  width: 26vw;
+  width: 22.3vw;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: start;
   border: 0.16vw solid black;
   /* border-top: 0.16vw solid black;
@@ -163,7 +164,7 @@ const FooterItem2 = styled.div`
 `;
 
 const FooterItem3 = styled.div`
-  margin-left: 16vw;
+  margin-left: 2vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -282,7 +283,7 @@ const SecondPage = (props: any) => {
               </NameArea>
               {livingroomDataList.map((item: any, index: number) => {
                 return (
-                  <ProductArea>
+                  <ProductArea key={index}>
                     <ContractProductComponent
                       articleData={item}
                     ></ContractProductComponent>
@@ -307,7 +308,7 @@ const SecondPage = (props: any) => {
               </NameArea>
               {kitchen.map((item: any, index: number) => {
                 return (
-                  <ProductArea>
+                  <ProductArea key={index}>
                     <ContractProductComponent
                       articleData={item}
                     ></ContractProductComponent>
@@ -333,7 +334,7 @@ const SecondPage = (props: any) => {
                 </NameArea>
                 {frontDataList.map((item: any, index: number) => {
                   return (
-                    <ProductArea>
+                    <ProductArea key={index}>
                       <ContractProductComponent
                         articleData={item}
                       ></ContractProductComponent>
@@ -354,7 +355,7 @@ const SecondPage = (props: any) => {
                 </NameArea>
                 {backDataList.map((item: any, index: number) => {
                   return (
-                    <ProductArea>
+                    <ProductArea key={index}>
                       <ContractProductComponent
                         articleData={item}
                       ></ContractProductComponent>
@@ -375,7 +376,7 @@ const SecondPage = (props: any) => {
                 </NameArea>
                 {bathroommDataList.map((item: any, index: number) => {
                   return (
-                    <ProductArea>
+                    <ProductArea key={index}>
                       <ContractProductComponent
                         articleData={item}
                       ></ContractProductComponent>

@@ -42,7 +42,7 @@ const LogoImg = styled.div`
   font-size: 3vw;
 `;
 
-const ContentArea = styled.table`
+const ContentArea = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@ const ContentArea = styled.table`
   height: 130vw;
 `;
 
-const TopTable = styled.table`
+const TopTable = styled.div`
   text-align: center;
   font-size: 2vw;
   width: 100%;
@@ -61,7 +61,7 @@ const TopTable = styled.table`
   height: 4%;
   border-bottom: 0.15vw solid black;
 `;
-const TopTr = styled.tr<{
+const TopTr = styled.div<{
   width?: string;
   borderRight?: string;
   borderLeft?: string;
@@ -71,10 +71,10 @@ const TopTr = styled.tr<{
   align-items: center;
   justify-content: space-between;
 `;
-const TopTdTitle = styled.td<{
+const TopTdTitle = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
 }>`
   font-size: 1.5vw;
   background-color: #f4f4f4;
@@ -85,17 +85,17 @@ const TopTdTitle = styled.td<{
   font-weight: 500;
   justify-content: center;
   border-right: ${(props) =>
-    props.borderRight ? props.borderRight : "0.1vw solid black"};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+    props.$borderRight ? props.$borderRight : "0.1vw solid black"};
+  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
 `;
-const TopTd = styled.td<{
+const TopTd = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
 }>`
   font-size: 1.5vw;
-  border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+  border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
+  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
   width: ${(props) => (props.$width ? props.$width : "10vw")};
   display: flex;
   font-weight: 500;
@@ -109,14 +109,30 @@ const SubTitle = styled.div`
   font-size: 1.7vw;
 `;
 
-const ApplyInfoTable = styled.table`
+const ApplyInfoTable = styled.div`
   text-align: center;
   border-top: 0.15vw solid black;
   font-size: 1.3vw;
   width: 100%;
-  height: 4%;
+  height: 5.2vh;
 `;
-const ApplyInfoTr = styled.tr<{
+
+const ApplyInfoTable2 = styled.div`
+  text-align: center;
+  border-top: 0.15vw solid black;
+  font-size: 1.3vw;
+  width: 100%;
+  height: 3vh;
+`;
+const ApplyInfoTable3 = styled.div`
+  text-align: center;
+  border-top: 0.15vw solid black;
+  font-size: 1.3vw;
+  width: 100%;
+  height: 8vh;
+`;
+
+const ApplyInfoTr = styled.div<{
   $width?: string;
 }>`
   display: flex;
@@ -124,10 +140,10 @@ const ApplyInfoTr = styled.tr<{
   justify-content: space-between;
   border-bottom: 0.15vw solid #e4e4e4;
 `;
-const ApplyInfoTdTitle = styled.td<{
+const ApplyInfoTdTitle = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
 }>`
   background-color: #f4f4f4;
   width: ${(props) => (props.$width ? props.$width : "6vw")};
@@ -138,26 +154,25 @@ const ApplyInfoTdTitle = styled.td<{
   font-size: 1.3vw;
   justify-content: center;
   border-right: ${(props) =>
-    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+    props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
+  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
 `;
-const ApplyInfoTd = styled.td<{
+const ApplyInfoTd = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
 }>`
   width: ${(props) => (props.$width ? props.$width : "10vw")};
   display: flex;
   font-weight: 500;
   align-items: center;
-  border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
+  border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
   font-size: 1.3vw;
   height: 4vw;
 `;
 const MemoBox = styled.div`
   width: 100%;
-  margin-top: 2vh;
   display: flex;
 `;
 const MemoRound = styled.div`
@@ -174,8 +189,9 @@ const MemoRound = styled.div`
 `;
 const BottomComponent = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
-  height: 60vw;
+  height: 35vh;
 `;
 const EstimateContainer = styled.div`
   margin-top: 1vh;
@@ -183,7 +199,7 @@ const EstimateContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const EstimateTable = styled.table`
+const EstimateTable = styled.div`
   text-align: center;
   border-top: 0.15vw solid black;
   /* outline: 1px solid black; */
@@ -191,7 +207,7 @@ const EstimateTable = styled.table`
   width: 100%;
   height: 100%;
 `;
-const EstimateTr = styled.tr<{
+const EstimateTr = styled.div<{
   $width?: string;
   $borderBottom?: string;
 }>`
@@ -201,10 +217,10 @@ const EstimateTr = styled.tr<{
   border-bottom: 0.05vw solid
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
-const EstimateTitle = styled.td<{
+const EstimateTitle = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
   $borderBottom?: string;
   $height?: string;
 }>`
@@ -218,15 +234,15 @@ const EstimateTitle = styled.td<{
   font-size: 1.3vw;
   justify-content: center;
   border-right: ${(props) =>
-    props.borderRight ? props.borderRight : "0.1vw solid #e4e4e4"};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+    props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
+  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
   border-bottom: 0.05vw solid
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
-const EstimateTd = styled.td<{
+const EstimateTd = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
   $borderBottom?: string;
   $height?: string;
 }>`
@@ -239,16 +255,16 @@ const EstimateTd = styled.td<{
   font-weight: 500;
   font-size: 1.3vw;
   justify-content: center;
-  border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+  border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
+  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
   border-bottom: 0.05vw solid
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
   text-align: end;
 `;
-const TotalTitle = styled.td<{
+const TotalTitle = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
   $borderBottom?: string;
   $height?: string;
 }>`
@@ -264,10 +280,10 @@ const TotalTitle = styled.td<{
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 
-const TotalTd = styled.td<{
+const TotalTd = styled.div<{
   $width?: string;
-  borderRight?: string;
-  borderLeft?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
   $borderBottom?: string;
   $height?: string;
 }>`
@@ -280,8 +296,8 @@ const TotalTd = styled.td<{
   font-weight: 500;
   font-size: 1.3vw;
   justify-content: center;
-  border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
-  border-left: ${(props) => (props.borderLeft ? props.borderLeft : "")};
+  border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
+  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
   border-bottom: 0.15vw solid
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
@@ -475,9 +491,13 @@ const FirstPage = (props: any) => {
             <TopTr>
               <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
               <TopTd>{detailData.name}</TopTd>
-              <TopTdTitle borderLeft={"0.1vw solid black"}>이사종류</TopTdTitle>
+              <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                이사종류
+              </TopTdTitle>
               <TopTd>{detailData.movingType}</TopTd>
-              <TopTdTitle borderLeft={"0.1vw solid black"}>전화번호</TopTdTitle>
+              <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                전화번호
+              </TopTdTitle>
               <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
             </TopTr>
           </TopTable>
@@ -490,7 +510,7 @@ const FirstPage = (props: any) => {
                 {detailData.preAddressDetail}
               </ApplyInfoTd>
               <ApplyInfoTdTitle $width={"18%"}>작업조건 (전)</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
+              <ApplyInfoTd $width={"14%"} $borderRight={"0.1vw solid #e4e4e4"}>
                 {optionData.beforeWorkCondition.transportationMethod}
               </ApplyInfoTd>
               <ApplyInfoTd $width={"14%"}>
@@ -504,7 +524,7 @@ const FirstPage = (props: any) => {
                 {detailData.afterAddressDetail}
               </ApplyInfoTd>
               <ApplyInfoTdTitle $width={"18%"}>작업조건 (후)</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"14%"} borderRight={"0.1vw solid #e4e4e4"}>
+              <ApplyInfoTd $width={"14%"} $borderRight={"0.1vw solid #e4e4e4"}>
                 {optionData.afterWorkCondition.transportationMethod}
               </ApplyInfoTd>
               <ApplyInfoTd $width={"14%"}>
@@ -513,7 +533,7 @@ const FirstPage = (props: any) => {
             </ApplyInfoTr>
           </ApplyInfoTable>
           <SubTitle>신청 날짜</SubTitle>
-          <ApplyInfoTable>
+          <ApplyInfoTable2>
             <ApplyInfoTr>
               <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
               <ApplyInfoTd>2024.00.00</ApplyInfoTd>
@@ -530,85 +550,91 @@ const FirstPage = (props: any) => {
             <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
             <ApplyInfoTd>2024.00.00</ApplyInfoTd>
           </ApplyInfoTr> */}
-          </ApplyInfoTable>
+          </ApplyInfoTable2>
 
           <SubTitle>리빙서비스</SubTitle>
-          <ApplyInfoTable>
+          <ApplyInfoTable3>
             {/* 탈취살균서비스 */}
             {optionData.livingService.deodorizationService.selected && (
               <ApplyInfoTr>
-                <ApplyInfoTd width={"26%"}>
+                <ApplyInfoTd $width={"26%"}>
                   {optionData.livingService.deodorizationService.serviceName}
                 </ApplyInfoTd>
-                <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-                <ApplyInfoTd width={"17%"}>
+                <ApplyInfoTdTitle $width={"12%"}>일시</ApplyInfoTdTitle>
+                <ApplyInfoTd $width={"17%"}>
                   {
                     optionData.livingService.deodorizationService
                       .serviceRequestDate
                   }
                 </ApplyInfoTd>
-                <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-                <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
+                <ApplyInfoTdTitle $width={"12%"}>금액</ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"18%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
                   {optionData.livingService.deodorizationService.servicePayment}{" "}
                   ₩
                 </ApplyInfoTd>
-                <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
+                <ApplyInfoTd $width={"14%"}>온라인결제</ApplyInfoTd>
               </ApplyInfoTr>
             )}
 
             {/* "입주청소서비스" */}
             {optionData.livingService.movingCleaningService.selected && (
               <ApplyInfoTr>
-                <ApplyInfoTd width={"26%"}>
+                <ApplyInfoTd $width={"26%"}>
                   {optionData.livingService.movingCleaningService.serviceName}
                 </ApplyInfoTd>
-                <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-                <ApplyInfoTd width={"17%"}>
+                <ApplyInfoTdTitle $width={"12%"}>일시</ApplyInfoTdTitle>
+                <ApplyInfoTd $width={"17%"}>
                   {
                     optionData.livingService.movingCleaningService
                       .serviceRequestDate
                   }
                 </ApplyInfoTd>
-                <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-                <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
+                <ApplyInfoTdTitle $width={"12%"}>금액</ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"18%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
                   {
                     optionData.livingService.movingCleaningService
                       .servicePayment
                   }
                   {"₩"}
                 </ApplyInfoTd>
-                <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
+                <ApplyInfoTd $width={"14%"}>온라인결제</ApplyInfoTd>
               </ApplyInfoTr>
             )}
 
             {/* "정리수납서비스" */}
             {/* {optionData.livingService.organizationStorageService.selected && ( */}
             <ApplyInfoTr>
-              <ApplyInfoTd width={"26%"}>
+              <ApplyInfoTd $width={"26%"}>
                 {
                   optionData.livingService.organizationStorageService
                     .serviceName
                 }
               </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>일시</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"17%"}>
+              <ApplyInfoTdTitle $width={"12%"}>일시</ApplyInfoTdTitle>
+              <ApplyInfoTd $width={"17%"}>
                 {
                   optionData.livingService.organizationStorageService
                     .serviceRequestDate
                 }
               </ApplyInfoTd>
-              <ApplyInfoTdTitle width={"12%"}>금액</ApplyInfoTdTitle>
-              <ApplyInfoTd width={"18%"} borderRight={"0.1vw solid #e4e4e4"}>
+              <ApplyInfoTdTitle $width={"12%"}>금액</ApplyInfoTdTitle>
+              <ApplyInfoTd $width={"18%"} $borderRight={"0.1vw solid #e4e4e4"}>
                 {
                   optionData.livingService.organizationStorageService
                     .servicePayment
                 }
                 {" ₩ "}
               </ApplyInfoTd>
-              <ApplyInfoTd width={"14%"}>온라인결제</ApplyInfoTd>
+              <ApplyInfoTd $width={"14%"}>온라인결제</ApplyInfoTd>
             </ApplyInfoTr>
             {/*  )} */}
-          </ApplyInfoTable>
+          </ApplyInfoTable3>
           <BottomComponent>
             <MemoBox>
               <MemoRound ref={divRef} id={"CanvasPanel"}>
