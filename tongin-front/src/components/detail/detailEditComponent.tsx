@@ -364,6 +364,7 @@ export default function DetailEditComponent(props: any) {
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [movingDate, setMovingDate] = useState(new Date(detailData.movingDate));
+  const [finishContract, setFinishContract] = useState<any>("");
   const reNum = useParams().id;
 
   const [statusCode, setStatusCode] = useState<any>(detailData.statusCode); //상태 번호 value
@@ -405,7 +406,28 @@ export default function DetailEditComponent(props: any) {
       updatedData.afterAddressDetail = afterAddressDetail;
       return updatedData;
     });
-  }, [userName, userContact, prevAddressDetail, afterAddressDetail]);
+  }, [
+    userName,
+    userContact,
+    prevAddressDetail,
+    afterAddressDetail,
+    finishContract,
+  ]);
+
+  useEffect(() => {
+    setDetailData((prev: any) => {
+      let today = new Date();
+      const updatedData = { ...prev };
+      if (finishContract) {
+        updatedData.contractDate = format(today, "yMMdd");
+        console.log("계약일", updatedData.contractDate);
+      } else {
+        updatedData.contractDate = "";
+      }
+      console.log("계약일", updatedData.contractDate);
+      return updatedData;
+    });
+  }, [finishContract]);
 
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
@@ -502,8 +524,6 @@ export default function DetailEditComponent(props: any) {
         detailData.receptionDate = format(myData, "yMMdd");
       } else if (dateType === "moving") {
         detailData.movingDate = format(myData, "yMMdd");
-      } else if (dateType === "contract") {
-        detailData.contractDate = format(myData, "yMMdd");
       } else if (dateType === "consultation") {
         detailData.consultationDate = format(myData, "yMMdd");
       } else {
@@ -521,8 +541,6 @@ export default function DetailEditComponent(props: any) {
       detailData.receptionDate = "";
     } else if (dateType === "moving") {
       detailData.movingDate = "";
-    } else if (dateType === "contract") {
-      detailData.contractDate = "";
     } else if (dateType === "consultation") {
       detailData.consultationDate = "";
     } else {
@@ -637,6 +655,7 @@ export default function DetailEditComponent(props: any) {
                     statusCode={statusCode}
                     setStatusCode={setStatusCode}
                     onSelectStatus={onSelectStatus}
+                    setFinishContract={setFinishContract}
                   />
                   {/* 현재:{statusCode} */}
                   {/* {detailData?.status} */}
@@ -717,20 +736,17 @@ export default function DetailEditComponent(props: any) {
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>계약일</MoveDateTitle>
-            {/* <MoveDateInput
-              onClick={() => {
-                dateHandleOpenModal("contract");
-              }}
-            >
+            <MoveDateInput>
               <InputBox
                 placeholder="--"
                 readOnly
+                disabled
                 value={(detailData?.contractDate).replace(
                   formattedDate,
                   "$1-$2-$3"
                 )}
               ></InputBox>
-            </MoveDateInput> */}
+            </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
         <MoveDateContainer>

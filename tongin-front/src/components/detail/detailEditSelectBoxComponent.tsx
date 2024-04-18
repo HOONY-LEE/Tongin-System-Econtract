@@ -64,7 +64,8 @@ const Option = styled.ul`
   }
 `;
 const DetailEditSelectBoxComponent = (props: any) => {
-  const { setStatusCode, statusCode, onSelectStatus } = props;
+  const { setStatusCode, statusCode, onSelectStatus, setFinishContract } =
+    props;
   const data = [
     { status: "접수완료", statusCode: "11" },
     { status: "상담토스", statusCode: "12" },
@@ -87,6 +88,11 @@ const DetailEditSelectBoxComponent = (props: any) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const handleOnChangeSelectValue = (index: number, item: any) => {
+    if (item.statusCode === "22") {
+      setFinishContract(true);
+    } else {
+      setFinishContract(false);
+    }
     setCurrentValue(item.status);
     // setStatusCode((prev: any) => {
     //   const updatedList = [...prev];
