@@ -353,7 +353,13 @@ const BtnBox = styled.div`
   justify-content: space-between;
 `;
 export default function DetailEditComponent(props: any) {
-  const { detailData, setDetailData, getDetailList } = props;
+  const {
+    detailData,
+    setDetailData,
+    getDetailList,
+    completionContract,
+    setCompletionContract,
+  } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
   const [currentBtn, setCurrentBtn] = useState(0);
@@ -365,6 +371,7 @@ export default function DetailEditComponent(props: any) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [movingDate, setMovingDate] = useState(new Date(detailData.movingDate));
   const [finishContract, setFinishContract] = useState<any>("");
+
   const reNum = useParams().id;
 
   const [statusCode, setStatusCode] = useState<any>(detailData.statusCode); //상태 번호 value
@@ -413,7 +420,7 @@ export default function DetailEditComponent(props: any) {
     afterAddressDetail,
     finishContract,
   ]);
-
+  //계약서 상태 [계약]일시 계약날짜 추가
   useEffect(() => {
     setDetailData((prev: any) => {
       let today = new Date();
@@ -428,7 +435,7 @@ export default function DetailEditComponent(props: any) {
       return updatedData;
     });
   }, [finishContract]);
-
+//////////////////////////////////
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
     let formattedValue = e.target.value.replace(regExp, "").substring(0, 13);
@@ -656,6 +663,7 @@ export default function DetailEditComponent(props: any) {
                     setStatusCode={setStatusCode}
                     onSelectStatus={onSelectStatus}
                     setFinishContract={setFinishContract}
+                    setCompletionContract={setCompletionContract}
                   />
                   {/* 현재:{statusCode} */}
                   {/* {detailData?.status} */}

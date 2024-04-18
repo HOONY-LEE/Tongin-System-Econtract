@@ -20,12 +20,20 @@ const Box: any = styled.div<{
   align-items: center;
   width: ${(props) => (props.width ? props.width : "220px")};
   height: ${(props) => (props.height ? props.height : "50px")};
-  background-color: ${(props) => (props.$bgColor ? props.$bgColor : "#FF7F3B")};
+  background-color: ${(props) =>
+    props.$bgColor
+      ? props.disabled
+        ? "#a1a1a1"
+        : props.$bgColor
+      : props.disabled
+      ? "#dbdbdb"
+      : "#FF7F3B"};
   color: ${(props) => (props.color ? props.color : "white")};
   border-radius: ${(props) => (props.radius ? props.radius : "6px")};
   font-size: ${(props) => (props.size ? props.size : "18px")};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : "600")};
   outline: ${(props) => (props.$outline ? props.$outline : "none")};
+  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
   &:hover {
     /* background: ${(props) =>
       props.$hoverBgColor ? props.$hoverBgColor : "#FF8F53"};
@@ -33,9 +41,9 @@ const Box: any = styled.div<{
     transition: 0.5s; */
     cursor: ${(props) => (props.cursor ? props.cursor : "pointer")};
   }
-  /* :disabled {
+  &:disabled {
     background-color: gray;
-  } */
+  }
 `;
 
 export default function CustomButton(props: any) {
