@@ -266,7 +266,7 @@ const BtnBox = styled.div`
   margin: 5vw 0 4vw 0;
 `;
 export default function DetailViewComponent(props: any) {
-  const { detailData } = props;
+  const { detailData, onEditDisable, setOnEditDisable } = props;
   const { detailEditVisible } = props;
 
   const [currentBtn, setCurrentBtn] = useState(0);
@@ -410,6 +410,7 @@ export default function DetailViewComponent(props: any) {
             text={`상세정보 수정하기`}
             size={"2vw"}
             radius={"0.6vw"}
+            disabled={onEditDisable}
           ></CustomButton>
         </BtnBox>
       </ContentBottom>

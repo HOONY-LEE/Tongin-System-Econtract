@@ -25,7 +25,8 @@ const ContentBox = styled.div`
 export default function DetailComponent(props: any) {
   const { detailData, setDetailData, getDetailList } = props;
   const [isDetailEdit, setIsDetailEdit] = useState(false);
-
+  const [completionContract, setCompletionContract] = useState<any>(false);
+  const [onEditDisable, setOnEditDisable] = useState<any>(false);
   // const fetchData = async () => {
   //   const response: any = await API.get("receipt/detail/12");
   //   if (response.status === 200) {
@@ -49,7 +50,16 @@ export default function DetailComponent(props: any) {
       setIsDetailEdit(false);
     }
   };
-
+  //계약서 상태 [계약]일시 계약날짜 추가
+  useEffect(() => {
+    if (completionContract) {
+      console.log("detail 완료 실행");
+      setOnEditDisable(true);
+    } else {
+      console.log("detail 완료");
+      setOnEditDisable(false);
+    }
+  }, [completionContract]);
   return (
     <>
       <ContentBox>
@@ -59,11 +69,17 @@ export default function DetailComponent(props: any) {
             detailData={detailData}
             setDetailData={setDetailData}
             detailEditVisible={detailEditVisible}
+            completionContract={completionContract}
+            setCompletionContract={setCompletionContract}
           ></DetailEditComponent>
         ) : (
           <DetailViewComponent
+            onEditDisable={onEditDisable}
+            setOnEditDisable={setOnEditDisable}
             detailEditVisible={detailEditVisible}
             detailData={detailData}
+            completionContract={completionContract}
+            setCompletionContract={setCompletionContract}
           ></DetailViewComponent>
         )}
       </ContentBox>
