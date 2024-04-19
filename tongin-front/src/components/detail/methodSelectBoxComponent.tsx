@@ -96,7 +96,7 @@ const MethodSelectBoxComponent = (props: any) => {
         {currentValue}
         <Image
           src="/icon/triangle.png"
-          alt="로고 이미지"
+          alt="삼각형이미지"
           width={"1.1vw"}
           height={"0.8vw"}
         />

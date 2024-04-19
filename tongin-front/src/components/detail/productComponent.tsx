@@ -115,7 +115,7 @@ export default function ProductComponent(props: any) {
   // console.log(currentProductList);
 
   const saveProductList = async () => {
-    // TODO : 물품정보 업데이트 API 호출
+    console.log("저장하기 실행");
     console.log(currentProductList);
 
     try {

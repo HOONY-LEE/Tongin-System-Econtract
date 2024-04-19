@@ -37,7 +37,7 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 2.2vw;
+  height: 2vw;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import QuantityComponent from "../common/quantityComponent";
 import QuantityInputComponent from "../common/quantityInputComponent";
 import MethodSelectBoxComponent from "./methodSelectBoxComponent";
+import { useEffect, useState } from "react";
 
 const ProductItemBox = styled.div`
   display: flex;
@@ -19,6 +20,28 @@ const NameBox = styled.div`
   align-items: center;
   width: 36%;
   height: 6vw;
+`;
+
+const RemarkBox = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 20vw;
+  height: 4.2vw;
+  margin-left: 2vw;
+  border-radius: 0.4vw;
+  background-color: white;
+  outline: 0.1vw solid #353535;
+`;
+
+const RemarkInput = styled.input`
+  border: none;
+  outline: none;
+  background-color: none;
+  width: 100%;
+  height: 100%;
+  margin-left: 1vw;
+  font-size: 2vw;
 `;
 
 const QuantityBox = styled.div`
@@ -72,11 +95,35 @@ export default function ProductItem(props: any) {
     setTotalCBM,
   } = props;
 
+  const [remark, setRemark] = useState(item.article.articleRemark);
+
+  const onChangeInput = (e: any) => {
+    console.log(e.target.value);
+    setRemark(e.target.value);
+  };
+
+  useEffect(() => {
+    setCurrentProductList((prev: any) => {
+      const updatedList = [...prev];
+      updatedList[roomId].articleData[articleId].article.articleRemark = remark;
+      return updatedList;
+    });
+  }, [remark]);
+
   return (
     <ProductItemBox key={item.sortingNumber}>
       <NameBox>
         <Title>{item.article.articleName}</Title>
         <Subtitle>{item.article.articleNameEng}</Subtitle>
+        {item.article.articleName === "기타" && (
+          <RemarkBox>
+            <RemarkInput
+              placeholder={"물품명을 입력하세요."}
+              value={remark}
+              onChange={onChangeInput}
+            ></RemarkInput>
+          </RemarkBox>
+        )}
       </NameBox>
       <QuantityBox>
         <QuantityComponent

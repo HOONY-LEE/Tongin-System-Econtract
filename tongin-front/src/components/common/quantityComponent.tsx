@@ -94,7 +94,11 @@ export default function QuantityComponent(props: any) {
     <>
       <Wrapper>
         <DecreaseBtn onClick={decreaseNum} $isActivate={isActivate}>
-          <Image src="/icon/minus_icon.png" width={"2.6vw"}></Image>
+          <Image
+            src="/icon/minus_icon.png"
+            width={"2.8vw"}
+            height={"0.3vw"}
+          ></Image>
         </DecreaseBtn>
         <InputBtn>
           <InputText>{inputData}</InputText>

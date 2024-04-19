@@ -2,13 +2,15 @@ import styled from "styled-components";
 import { useState } from "react";
 import PriceCalculatorComponent from "../common/priceCalculatorComponent";
 import OptionPriceCalculatorComponent from "../common/optionPriceCalculatorComponent";
+import ChargePriceCalculatorComponent from "../common/chargePriceCalculatorComponent";
+import CommonPriceCalculatorComponent from "../common/commonPriceCalculatorComponent";
 
 const InputArea = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
   width: 28vw;
-  height: 5vw;
+  height: 3vh;
 `;
 
 const InputCBMBox = styled.div`
@@ -17,9 +19,9 @@ const InputCBMBox = styled.div`
   width: 26vw;
   height: 100%;
   background-color: white;
-  border-radius: 0.6vw;
+  border-radius: 0.4vw;
   margin-right: 0.8vw;
-  border: 0.2vw solid #dbdbdb;
+  border: 0.2vw solid #777777;
   &:hover {
     cursor: pointer;
   }
@@ -43,8 +45,8 @@ const SubText = styled.p`
   align-items: end;
 `;
 
-export default function OptionPriceInputBox(props: any) {
-  const { inputValue, setInputValue, index } = props;
+export default function CommonChargePriceInputBox(props: any) {
+  const { inputValue, setInputValue, title, id } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 모달 닫기 핸들러
@@ -63,13 +65,14 @@ export default function OptionPriceInputBox(props: any) {
       </InputCBMBox>
       <SubText>원</SubText>
       {isModalOpen && (
-        <OptionPriceCalculatorComponent
-          title={`[옵션 금액] 입력창`}
+        <CommonPriceCalculatorComponent
+          title={`[${title}] 입력창`}
           unit={"원"}
           onClose={handleCloseModal}
-          index={index}
+          optionType={title}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          id={id}
         />
       )}
     </InputArea>

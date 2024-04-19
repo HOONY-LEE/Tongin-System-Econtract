@@ -339,8 +339,10 @@ export default function ContractComponent(props: any) {
   // 옵션 품목 금액 합계 계산
   const calculateTotalOptionCharge = (optionData: any) => {
     let totalOptionCharge = 0;
-    optionData.optionService.forEach((item: any) => {
-      totalOptionCharge += item.optionPayment;
+    optionData.optionService.ServiceList.forEach((item: any) => {
+      if (item.selected) {
+        totalOptionCharge += item.optionPayment;
+      }
     });
     setOptionTotalCharge(totalOptionCharge);
   };

@@ -74,6 +74,10 @@ const Subtitle = styled.div`
 
 export default function OptionComponent(props: any) {
   const { optionData, setOptionData } = props;
+
+  console.log("옵션데이터");
+  console.log(optionData);
+
   const [prevOptionData, setPrevOptionData] = useState(
     optionData.beforeWorkCondition
   );

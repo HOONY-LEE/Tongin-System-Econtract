@@ -80,7 +80,7 @@ export default function FlashDeleteBoxComponent(props: any) {
   return (
     <>
       <FlashNumBox onClick={onClickHandle} $isFlash={isFlash}>
-        <Image src="/icon/cancle_icon.png" width={"4vw"}></Image>
+        <Image src="/icon/cancle_icon.png" width={"5vw"} height={"5vw"}></Image>
       </FlashNumBox>
     </>
   );

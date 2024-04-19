@@ -145,8 +145,8 @@ const ColBox = styled.div`
   justify-content: space-between;
 `;
 
-const OptionPriceCalculatorComponent = (props: any) => {
-  const { onClose, inputValue, setInputValue, title, unit, index } = props;
+const CommonPriceCalculatorComponent = (props: any) => {
+  const { onClose, inputValue, setInputValue, title, unit, id } = props;
   const [tmpValue, setTmpValue] = useState<string>(inputValue.toString());
   const [validate, setValidate] = useState(true);
   const [error, setError] = useState("");
@@ -165,12 +165,7 @@ const OptionPriceCalculatorComponent = (props: any) => {
           result = 0;
         }
       }
-
-      setInputValue((prev: any) => {
-        const updatedData = { ...prev };
-        updatedData.ServiceList[index].optionPayment = result;
-        return updatedData;
-      });
+      setInputValue(result);
       onClose();
     }
   };
@@ -280,4 +275,4 @@ const OptionPriceCalculatorComponent = (props: any) => {
   );
 };
 
-export default OptionPriceCalculatorComponent;
+export default CommonPriceCalculatorComponent;
