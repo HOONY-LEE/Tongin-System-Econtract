@@ -8,8 +8,8 @@ const SelectBox = styled.div<{
   $show?: boolean;
 }>`
   position: relative;
-  width: 9vw;
-  height: 4.7vw;
+  width: 14vw;
+  height: 5vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@ const SelectOptions = styled.ul<{
   z-index: 9997;
   position: absolute;
   list-style: none;
-  top: 5.1vw;
+  top: 5.3vw;
   left: 0;
   width: 100%;
   overflow: hidden;
@@ -83,7 +83,7 @@ const DetailEditSelectBoxComponent = (props: any) => {
     // { status: "작업승인", statusCode: "32" },
     // { status: "작업반려", statusCode: "39" },
     { status: "취소", statusCode: "CA" },
-    { status: "완료", statusCode: "41" },
+    // { status: "완료", statusCode: "41" },
   ];
 
   const [currentValue, setCurrentValue] = useState<any>(
@@ -93,11 +93,12 @@ const DetailEditSelectBoxComponent = (props: any) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const handleOnChangeSelectValue = (index: number, item: any) => {
-    
     if (item.statusCode === "22") {
       setFinishContract(true);
+      setCompletionContract(true);
     } else {
       setFinishContract(false);
+      setCompletionContract(false);
     }
     if (item.statusCode === "41") {
       setCompletionContract(true);

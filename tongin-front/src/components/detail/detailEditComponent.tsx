@@ -16,6 +16,7 @@ import DetailEditSelectBoxComponent from "./detailEditSelectBoxComponent";
 import { format } from "date-fns";
 import API from "../../API/API";
 import { useParams } from "react-router-dom";
+import DetailEditContractFinishModal from "./detailEditContractFinishModal";
 const ContentTop = styled.div`
   display: flex;
   justify-content: space-between;
@@ -373,7 +374,8 @@ export default function DetailEditComponent(props: any) {
   const [finishContract, setFinishContract] = useState<any>("");
 
   const reNum = useParams().id;
-
+  const [isContractFinishModal, setIsContractFinishModal] =
+    useState<boolean>(false);
   const [statusCode, setStatusCode] = useState<any>(detailData.statusCode); //상태 번호 value
 
   const [prevAddressDetail, setPrevAddressDetail] = useState(
@@ -435,7 +437,7 @@ export default function DetailEditComponent(props: any) {
       return updatedData;
     });
   }, [finishContract]);
-//////////////////////////////////
+  //////////////////////////////////
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
     let formattedValue = e.target.value.replace(regExp, "").substring(0, 13);
@@ -557,8 +559,27 @@ export default function DetailEditComponent(props: any) {
   };
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
 
+  // 계약 상태 안내 모달 닫기 핸들
+  const contractHandleCloseModal = () => {
+    setIsContractFinishModal(false);
+  };
+
+  // 상세정보 저장 시 호출
+  const detailPageSave = () => {
+    if (finishContract) {
+      setIsContractFinishModal(true);
+    } else {
+      putDetailData();
+    }
+  };
+
   // 상세정보 수정API
   const putDetailData = async () => {
+    if (isContractFinishModal) {
+      setIsContractFinishModal(false);
+      setCompletionContract(true);
+    }
+
     console.log("vvvvvv 보내기 전detailData vvvvv");
     console.log(statusCode);
     const requestPram = {
@@ -597,6 +618,13 @@ export default function DetailEditComponent(props: any) {
 
   return (
     <>
+      {isContractFinishModal && (
+        <DetailEditContractFinishModal
+          onClose={contractHandleCloseModal}
+          onFinish={putDetailData}
+        />
+      )}
+
       {isModalOpen && (
         <PostModalComponent
           onClose={postHandleCloseModal}
@@ -830,7 +858,7 @@ export default function DetailEditComponent(props: any) {
             text={`저장`}
             size={"2vw"}
             radius={"0.6vw"}
-            onClick={() => putDetailData()}
+            onClick={() => detailPageSave()}
           ></CustomButton>
         </BtnBox>
       </ContentBottom>
