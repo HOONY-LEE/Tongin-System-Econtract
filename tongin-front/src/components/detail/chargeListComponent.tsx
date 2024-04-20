@@ -9,14 +9,15 @@ const Wrapper = styled.div`
 `;
 
 const ListBox = styled.div`
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   width: 100%;
-  height: 7vw;
+  height: 5vh;
   border-radius: 0.6vw;
+  outline: 0.2vw solid #d8d8d8;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2vw;
+  margin-bottom: 1vw;
 `;
 
 const TitleArea = styled.div`
@@ -49,13 +50,13 @@ const PriceInputArea = styled.div`
 const TotalChargeBox = styled.div`
   background-color: #f4f4f4;
   width: 100%;
-  height: 12vw;
+  height: 7vh;
   border-radius: 0.6vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2vw;
-  border: 0.4vw solid #ff7f3b;
+  margin-bottom: 1vw;
+  outline: 0.4vw solid #ff7f3b;
 `;
 
 export default function ChargeListComponent(props: any) {

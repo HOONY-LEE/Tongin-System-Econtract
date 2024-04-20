@@ -102,6 +102,10 @@ export default function CleaningOptionBoxComponent(props: any) {
   const [isChecked, setIsChecked] = useState(isSelected);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
+  // const dropdownList = [
+  //   { id: 0, status: "일반" },
+  //   { id: 1, status: "VIP" },
+  // ];
   const dropdownList = [
     {
       id: optionData.serviceList[0].serviceType,
