@@ -18,7 +18,7 @@ const NameBox = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 36%;
+  width: 40%;
   height: 6vw;
 `;
 
@@ -28,7 +28,7 @@ const RemarkBox = styled.div`
   align-items: center;
   width: 20vw;
   height: 4.2vw;
-  margin-left: 2vw;
+  margin-left: 3vw;
   border-radius: 0.4vw;
   background-color: white;
   outline: 0.1vw solid #353535;
@@ -48,7 +48,7 @@ const QuantityBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 28%;
+  width: 26%;
   height: 6vw;
 `;
 
@@ -56,7 +56,7 @@ const CBMBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18%;
+  width: 17%;
   height: 6vw;
 `;
 const HandleBox = styled.div`
@@ -96,7 +96,6 @@ export default function ProductItem(props: any) {
   } = props;
 
   const [remark, setRemark] = useState(item.article.articleRemark);
-
   const onChangeInput = (e: any) => {
     console.log(e.target.value);
     setRemark(e.target.value);
@@ -115,7 +114,7 @@ export default function ProductItem(props: any) {
       <NameBox>
         <Title>{item.article.articleName}</Title>
         <Subtitle>{item.article.articleNameEng}</Subtitle>
-        {item.article.articleName === "기타" && (
+        {item.article.articleNameEng === "Etc" && (
           <RemarkBox>
             <RemarkInput
               placeholder={"물품명을 입력하세요."}

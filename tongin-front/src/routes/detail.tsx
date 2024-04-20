@@ -152,7 +152,7 @@ const DrawingBtn = styled.div`
 export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
-  const [articleDataList, setArticleDataList] = useState<any[]>([]);
+  // const [articleDataList, setArticleDataList] = useState<any[]>([]);
   const [optionData, setOptionData] = useState<object>({});
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
   const [priceDataList, setPriceDataList] = useState<any[]>([]);
@@ -190,8 +190,9 @@ export default function Detail() {
     const response = await API.get(`/receipt/article/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptArticleData;
-
-      setArticleDataList(result);
+      console.log("물품정보리스트>>>>>>");
+      console.log(result);
+      setCurrentProductList(result);
     } else {
       console.log("Fail to getProductList()");
     }
@@ -201,13 +202,32 @@ export default function Detail() {
   const getOptionList = async () => {
     //임시 샘플데이터 사용
     // setOptionData(realOptionData);
-    setOptionData(newOptionData);
-    // const response = await API.get(`/receipt/option/${reNum}`);
-    // if (response.status === 200) {
-    //   setOptionData(response.data.receiptOptionData);
-    // } else {
-    //   console.log("Fail to getOptionList()");
-    // }
+    // setOptionData(newOptionData);
+    const response = await API.get(`/receipt/option2/${reNum}`);
+    if (response.status === 200) {
+      console.log("옵션정보호출>>>>");
+      console.log(response.data.receiptOptionData);
+      setOptionData(response.data.receiptOptionData);
+    } else {
+      console.log("Fail to getOptionList()");
+    }
+  };
+
+  // 옵션정보 수정API
+  const postOptionData = async () => {
+    try {
+      const requestParam = { receiptOptionData: optionData };
+
+      const response = await API.post(`receipt/option2/${reNum}`, requestParam);
+
+      if (response.status === 200) {
+        alert("옵션정보를 성공적으로 저장했습니다.");
+      } else {
+        console.log("Fail to saveOptionData()");
+      }
+    } catch (error) {
+      alert("옵션정보를 저장하는데 실패했습니다!");
+    }
   };
 
   // 가격정보 호출API
@@ -264,9 +284,9 @@ export default function Detail() {
     getPriceList();
   }, []);
 
-  useEffect(() => {
-    setCurrentProductList(articleDataList);
-  }, [articleDataList]);
+  // useEffect(() => {
+  //   setCurrentProductList(articleDataList);
+  // }, [articleDataList]);
 
   // 스크롤 잠금
   const scrollRock = () => {
@@ -355,6 +375,8 @@ export default function Detail() {
                 <NewOptionComponent
                   optionData={optionData}
                   setOptionData={setOptionData}
+                  postOptionData={postOptionData}
+                  reNum={reNum}
                 ></NewOptionComponent>
               </OptionTabBox>
             ) : null}
@@ -368,7 +390,7 @@ export default function Detail() {
                   setLines={setLines}
                   lines={lines}
                   detailData={detailData}
-                  articleDataList={articleDataList}
+                  articleDataList={currentProductList}
                   optionData={optionData}
                   priceDataList={priceDataList}
                   setPriceDataList={setPriceDataList}

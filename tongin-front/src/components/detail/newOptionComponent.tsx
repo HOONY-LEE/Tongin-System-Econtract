@@ -18,6 +18,7 @@ import OptionBoxComponent from "./optionBoxComponent";
 import CleaningOptionBoxComponent from "./cleaningOptionBoxComponent";
 import CommonOptionBoxComponent from "./commonOptionBoxComponent";
 import OptionListBoxComponent from "./optionListBoxComponent";
+import API from "../../API/API";
 
 const ContentBox = styled.div`
   display: flex;
@@ -112,9 +113,9 @@ const DropdownBox = styled.div`
 `;
 
 export default function NewOptionComponent(props: any) {
-  const { optionData, setOptionData } = props;
+  const { optionData, setOptionData, reNum, postOptionData } = props;
 
-  console.log("옵션데이터");
+  console.log("옵션데이터>>>>>");
   console.log(optionData);
 
   const transportationMethodList = [
@@ -211,10 +212,6 @@ export default function NewOptionComponent(props: any) {
       updatedData.selected = flag;
       return updatedData;
     });
-  };
-
-  const saveOptionData = () => {
-    alert("옵션정보를 성공적으로 저장했습니다.");
   };
 
   useEffect(() => {
@@ -356,7 +353,7 @@ export default function NewOptionComponent(props: any) {
 
         <ButtonArea>
           <CustomButton
-            onClick={saveOptionData}
+            onClick={postOptionData}
             width={"100%"}
             height={"6vw"}
             text={`옵션정보 저장하기`}

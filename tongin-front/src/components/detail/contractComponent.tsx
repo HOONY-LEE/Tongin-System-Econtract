@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 84vw;
   height: 100%;
-  margin-top: 3vw;
+  margin-top: 2vw;
   margin-bottom: 3vw;
 `;
 
@@ -120,7 +120,7 @@ const PriceBox = styled.div`
 `;
 
 const CalculatedListArea = styled.div`
-  margin-top: 2vw;
+  margin-top: 1vw;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -138,37 +138,15 @@ const PaymentArea = styled.div`
 `;
 
 const ListBox = styled.div`
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   width: 100%;
-  height: 7vw;
+  height: 5vh;
   border-radius: 0.6vw;
+  outline: 0.2vw solid #d8d8d8;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2vw;
-`;
-
-const BalanceBox = styled.div`
-  background-color: #f4f4f4;
-  width: 100%;
-  height: 16vw;
-  border-radius: 0.6vw;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  margin-bottom: 2vw;
-`;
-
-const TotalChargeBox = styled.div`
-  background-color: #f4f4f4;
-  width: 100%;
-  height: 12vw;
-  border-radius: 0.6vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2vw;
-  border: 0.4vw solid #ff7f3b;
+  margin-bottom: 1vw;
 `;
 
 const TitleArea = styled.div`
@@ -188,7 +166,7 @@ const Subtile = styled.div`
 const PriceInputArea = styled.div`
   display: flex;
   flex-direction: row;
-  height: 5vw;
+  height: 3vh;
   width: 30vw;
 `;
 
@@ -197,10 +175,10 @@ const InputCBMBox = styled.div`
   justify-content: center;
   width: 26vw;
   height: 100%;
-  background-color: #dbdbdb;
+  background-color: #f4f4f4;
   border-radius: 0.6vw;
   margin-right: 0.8vw;
-  border: 0.2vw solid #dbdbdb;
+  border: 0.2vw solid #f4f4f4;
 `;
 
 const TotalInputBox = styled.div`
@@ -371,6 +349,20 @@ export default function ContractComponent(props: any) {
           <CalculatedListArea>
             <ListBox>
               <TitleArea>
+                <Title>사다리차 비용</Title>
+                <Subtile>/Ladder Truck Charge</Subtile>
+              </TitleArea>
+              <PriceInputArea>
+                <InputCBMBox>
+                  <InputCBMNumber>
+                    {optionData.ladderTruck.servicePayment}
+                  </InputCBMNumber>
+                </InputCBMBox>
+                <SubText>원</SubText>
+              </PriceInputArea>
+            </ListBox>
+            <ListBox>
+              <TitleArea>
                 <Title>입주청소서비스 비용</Title>
                 <Subtile>/CleaningService Charge</Subtile>
               </TitleArea>
@@ -415,6 +407,20 @@ export default function ContractComponent(props: any) {
                       optionData.livingService.deodorizationService
                         .servicePayment
                     }
+                  </InputCBMNumber>
+                </InputCBMBox>
+                <SubText>원</SubText>
+              </PriceInputArea>
+            </ListBox>
+            <ListBox>
+              <TitleArea>
+                <Title>기타 서비스 비용</Title>
+                <Subtile>/Other Service Charge</Subtile>
+              </TitleArea>
+              <PriceInputArea>
+                <InputCBMBox>
+                  <InputCBMNumber>
+                    {optionData.ladderTruck.servicePayment}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
