@@ -39,7 +39,7 @@ const CalculatorComponentWrapper = styled.div`
   transform: translate(-50%, -50%);
   z-index: 9999;
   width: 90vw;
-  height: 91vh;
+  height: 90vh;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
@@ -107,7 +107,7 @@ const CanvasPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 80vh;
+  height: 54vh;
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -139,6 +139,42 @@ const CloseBox = styled.div`
   justify-content: end;
 `;
 const CanvasPanelMask = styled.div``;
+const TextComponentWrapper = styled.div`
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+
+  position: fixed;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: 90vw;
+  height: 40vh;
+  background-color: #f2f2f2;
+  border-radius: 0.8vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+const TextPanel = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 86vw;
+  height: 24vh;
+  margin-bottom: 2vw;
+  background-color: #ffffff;
+  border-radius: 0.8vw;
+  /* touch-action: none; */
+`;
 interface CalculatorComponentProps {
   onClose: () => void;
   style?: React.CSSProperties;
@@ -152,6 +188,24 @@ interface CalculatorComponentProps {
   setPreventDefault?: any;
   disableScrollLock?: any;
 }
+const InputBox = styled.textarea.attrs({})<{}>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  /* margin-left: 1vw; */
+  font-size: 1.8vw;
+  font-weight: 500;
+  /* outline: 1px solid red; */
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: none;
+  width: 90%;
+  height: 90%;
+`;
 
 const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   onClose,
@@ -322,7 +376,6 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             onClose={BlankClose}
           ></DetailDrawBlankModalComponent>
         )}
-        변경 테스트 V1
         <ToolContainer>
           <ColorCanvasBox>
             <ColorCanvastitle>
@@ -421,6 +474,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
             </Stage>
           </CanvasPanel>
         </div>
+        <TextPanel>
+          <InputBox placeholder="메모할 내용을 입력해 주세요."></InputBox>
+        </TextPanel>
       </CalculatorComponentWrapper>
     </>
   );

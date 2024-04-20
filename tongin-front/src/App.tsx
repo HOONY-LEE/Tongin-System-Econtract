@@ -15,6 +15,7 @@ import AdminLayout from "./components/adminLayout";
 import "./static/fonts/font.css";
 import Detail from "./routes/detail";
 import "react-day-picker/dist/style.css";
+import Signiture from "./routes/signiture";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
         element: <CreateAccount></CreateAccount>,
       },
     ],
+  },
+  {
+    path: "/signiture/:id",
+    element: <Signiture></Signiture>,
   },
 ]);
 

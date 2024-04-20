@@ -42,7 +42,6 @@ export default function DetailComponent(props: any) {
   // }, []);
 
   const detailEditVisible = (mode: any) => {
-    console.log("tlfgd");
     console.log(mode);
     if (mode) {
       setIsDetailEdit(true);
@@ -50,8 +49,9 @@ export default function DetailComponent(props: any) {
       setIsDetailEdit(false);
     }
   };
-  //계약서 상태 [계약]일시 계약날짜 추가
+  //계약서 상태 [계약]일시 disabled
   useEffect(() => {
+    console.log("completionContract", completionContract);
     if (completionContract) {
       console.log("detail 완료 실행");
       setOnEditDisable(true);
