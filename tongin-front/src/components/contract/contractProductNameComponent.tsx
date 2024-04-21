@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.div<{ index: number }>`
-  height: 2vw;
+  height: 1.9vw;
   display: flex;
   align-items: center;
   border-bottom: 0.1vw solid gray;
@@ -13,7 +13,7 @@ const Wrapper = styled.div<{ index: number }>`
 `;
 
 const Wrapper2 = styled.div<{ index: number }>`
-  height: 2.2vw;
+  height: 1.9vw;
   display: flex;
   align-items: center;
   /* border-top: 0.1vw solid red; */
@@ -25,23 +25,23 @@ const Wrapper2 = styled.div<{ index: number }>`
 `;
 
 const KorNameBox = styled.div`
-  width: 54%;
+  width: 60%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1vw;
+  font-size: 0.8vw;
   font-weight: 500;
 `;
 const EngNameBox = styled.div`
-  width: 46%;
+  width: 40%;
   height: 1vw;
   display: flex;
   justify-content: start;
   align-items: end;
   border-left: 0.1vw solid gray;
   padding-left: 0.5vw;
-  font-size: 0.6vw;
+  font-size: 0.5vw;
   font-weight: 100;
 `;
 
@@ -57,7 +57,7 @@ export default function ContractProductNameComponent(props: any) {
           </Wrapper>
         );
       })}
-      {articleDataList.length === 14 ? (
+      {articleDataList.length === 15 ? (
         <>
           <Wrapper index={articleDataList.length}>
             <KorNameBox></KorNameBox>

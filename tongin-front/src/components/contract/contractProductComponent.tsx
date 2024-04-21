@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const RoomNameBox = styled.div`
-  height: 4.6vw;
+  height: 4vw;
   border-bottom: 0.16vw solid black;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 2vw;
+  height: 1.9vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,7 +52,7 @@ const ArticleBox = styled.div<{ index: number }>`
 `;
 
 const TotalBox = styled.div<{ index: number }>`
-  height: 2.1vw;
+  height: 1.9vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,8 +87,6 @@ export default function ContractProductComponent(props: any) {
 
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalCbm, setTotalCbm] = useState(0);
-  console.log("articleData>>>");
-  console.log(articleData);
 
   const carryType = [
     { status: "운반", statusCode: 0 },
@@ -142,7 +140,7 @@ export default function ContractProductComponent(props: any) {
           );
         })}
       </ContentsBox>
-      {articleData.articleData.length === 14 ? (
+      {articleData.articleData.length === 15 ? (
         <>
           <ArticleBox index={articleData.articleData.length}>
             <ColumnName></ColumnName>
