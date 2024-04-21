@@ -17,6 +17,7 @@ import { format } from "date-fns";
 import API from "../../API/API";
 import { useParams } from "react-router-dom";
 import DetailEditContractFinishModal from "./detailEditContractFinishModal";
+import { Toast } from "../common/toastMessegeComponent";
 const ContentTop = styled.div`
   display: flex;
   justify-content: space-between;
@@ -360,6 +361,8 @@ export default function DetailEditComponent(props: any) {
     getDetailList,
     completionContract,
     setCompletionContract,
+    setFetchStatus,
+    setStatus,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -385,6 +388,7 @@ export default function DetailEditComponent(props: any) {
   const [afterAddressDetail, setAfterAddressDetail] = useState(
     detailData.afterAddressDetail
   );
+
   const [userName, setUserName] = useState(detailData.name);
   const [userContact, setUserContact] = useState(detailData.contact);
   const [currentTab, setCurrentTab] = useState(0); //btn
@@ -607,12 +611,14 @@ export default function DetailEditComponent(props: any) {
     );
     if (response.status === 200) {
       console.log(response);
-      alert("수정완료");
+      setStatus("SUCCESS");
+      setFetchStatus(true);
+
       detailEditVisible(false);
       getDetailList();
-    } else {
+    } else if (response.statusCode === 400) {
+      setStatus("FAIL");
       alert("Fail to getDetailList()");
-      console.log("Fail to getDetailList()");
     }
   };
 

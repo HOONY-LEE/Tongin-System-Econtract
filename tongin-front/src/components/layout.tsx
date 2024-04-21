@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import CustomButton from "./common/customButton";
 import { Outlet, useNavigate } from "react-router-dom";
+import UserIcon from "./icon/userIcon";
 
 const Header = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ const Title = styled.div`
   height: 3.4vh;
   font-size: 2vh;
   font-weight: 600;
+  color: #ff7f3b;
 `;
 
 const LeftBox = styled.div`
@@ -44,10 +46,20 @@ const MidBox = styled.div`
 const RightBox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: end;
   width: 10vh;
   height: 4vh;
 `;
+const MyPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2vw;
+  color: #545454;
+`;
 
+const MyPageText = styled.div``;
 const HomeHeader = () => {
   const navigate = useNavigate();
 
@@ -62,6 +74,9 @@ const HomeHeader = () => {
 
   const goHome = () => {
     navigate("/");
+  };
+  const goProfile = () => {
+    navigate("profile");
   };
 
   return (
@@ -79,14 +94,19 @@ const HomeHeader = () => {
           <Title>전자계약시스템</Title>
         </MidBox>
         <RightBox>
-          <CustomButton
+          <MyPage onClick={goProfile}>
+            <UserIcon width={"3vw"} fill={"#545454"} />
+            <MyPageText>{"내 정보"}</MyPageText>
+          </MyPage>
+
+          {/* <CustomButton
             onClick={logout}
             width={"6vh"}
             height={"3.2vh"}
             size={"1.2vh"}
             radius={"0.4vh"}
             text={"로그아웃"}
-          ></CustomButton>
+          ></CustomButton> */}
         </RightBox>
       </Header>
     </>

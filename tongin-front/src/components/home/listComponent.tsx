@@ -167,7 +167,7 @@ export default function ListComponent(props: any) {
 
   const navigate = useNavigate();
   const detailPageShow = (recNum: string) => {
-    navigate(`/detail/${recNum}`);
+    navigate(`/contractlist/detail/${recNum}`);
   };
   return (
     <>

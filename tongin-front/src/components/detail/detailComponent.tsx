@@ -7,6 +7,7 @@ import react, { useEffect } from "react";
 import DetailViewComponent from "./detailViewComponent";
 import API from "../../API/API";
 import DetailEditComponent from "./detailEditComponent";
+import { Toast } from "../common/toastMessegeComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -27,6 +28,9 @@ export default function DetailComponent(props: any) {
   const [isDetailEdit, setIsDetailEdit] = useState(false);
   const [completionContract, setCompletionContract] = useState<any>(false);
   const [onEditDisable, setOnEditDisable] = useState<any>(false);
+
+  const [fetchStatus, setFetchStatus] = useState(false); // toast messege
+  const [status, setStatus] = useState(false); // toast messege
   // const fetchData = async () => {
   //   const response: any = await API.get("receipt/detail/12");
   //   if (response.status === 200) {
@@ -63,6 +67,13 @@ export default function DetailComponent(props: any) {
   return (
     <>
       <ContentBox>
+        {fetchStatus && (
+          <Toast
+            status={status}
+            fetchStatus={fetchStatus}
+            setFetchStatus={setFetchStatus}
+          />
+        )}
         {isDetailEdit ? (
           <DetailEditComponent
             getDetailList={getDetailList}
@@ -71,6 +82,8 @@ export default function DetailComponent(props: any) {
             detailEditVisible={detailEditVisible}
             completionContract={completionContract}
             setCompletionContract={setCompletionContract}
+            setFetchStatus={setFetchStatus}
+            setStatus={setStatus}
           ></DetailEditComponent>
         ) : (
           <DetailViewComponent
