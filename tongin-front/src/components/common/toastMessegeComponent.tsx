@@ -5,10 +5,10 @@ import SuccessIcon from "../icon/successIcon";
 import FilledIcon from "../icon/filledIcon";
 const fadein = keyframes`
   0% { bottom: -10vw; opacity: 0; } 
-  100% { bottom: 10vw; opacity: 1; }
+  100% { bottom: 50vw; opacity: 1; }
 `;
 const fadeout = keyframes`
-  0% { bottom: 11vw; opacity: 1; } 
+  0% { bottom: 50vw; opacity: 1; } 
   100% { bottom: -10vw; opacity: 0; }
 `;
 
@@ -30,14 +30,14 @@ const ToastContainer = styled.div<{
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 10vw;
+  bottom: 50vw;
   z-index: 10000;
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.03),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
   animation: ${(props) =>
     props.show
       ? css`
-          ${fadein} 2.2s, ${fadeout} 3s 2s
+          ${fadein} 1.2s, ${fadeout} 4s 2s
         `
       : css``};
 `;
