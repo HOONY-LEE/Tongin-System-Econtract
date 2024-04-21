@@ -16,6 +16,8 @@ import "./static/fonts/font.css";
 import Detail from "./routes/detail";
 import "react-day-picker/dist/style.css";
 import Signiture from "./routes/signiture";
+import LandingPage from "./routes/landingPage";
+import SiteTabPage from "./components/site/main/siteTabComponent";
 
 const router = createBrowserRouter([
   {
@@ -28,10 +30,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home></Home>,
+        element: <LandingPage></LandingPage>,
       },
       {
-        path: "detail/:id",
+        path: "onsitecontract",
+        element: <SiteTabPage></SiteTabPage>,
+      },
+      {
+        path: "contractlist",
+        element: <Home></Home>,
+      },
+
+      {
+        path: "contractlist/detail/:id",
         element: <Detail></Detail>,
       },
       {

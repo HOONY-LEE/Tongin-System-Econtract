@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import TabComponent from "../components/home/tabComponent";
 import CustomButton from "../components/common/customButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Cookies } from "react-cookie";
+import { Toast } from "../components/common/toastMessegeComponent";
 
 const cookies = new Cookies();
 
@@ -102,18 +103,6 @@ const Inputbox = styled.input`
 //   height: 10vh;
 //   font-size: 20px;
 // `;
-const MemoryLogin = styled.div`
-  width: 100%;
-  margin-top: 4vw;
-  height: 4vw;
-  font-size: 2.2vw;
-  color: #b3b3b3;
-  text-decoration: underline;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 export default function Login() {
   const navigate = useNavigate();
@@ -123,9 +112,11 @@ export default function Login() {
   const [outLinePswd, setoutLinePswd] = useState(tonginDisable);
   const [bgColor, setBgColor] = useState("#B9C1C9");
   const [desabled, setDesabled] = useState(true);
-
+  const [fetchStatus, setFetchStatus] = useState(false); // toast messege
+  const [status, setStatus] = useState(""); // toast messege
   const [id, setId] = useState("");
   const [pswd, setPswd] = useState("");
+  const [loginData, setLoginData] = useState([id, pswd]);
 
   const onFocusHandle = (e: any) => {
     if (e.target.id === "Id") setoutLineId(tonginOrange);
@@ -148,16 +139,26 @@ export default function Login() {
     }
   };
 
-  const onInputText = (e: any) => {
-    if (e.target.id === "Id") setId(e.target.value);
-    if (e.target.id === "Pw") setPswd(e.target.value);
+  const onInputId = (e: any) => {
+    setId(e.target.value);
+  };
+  const onInputPswd = (e: any) => {
+    setPswd(e.target.value);
+  };
+
+  useEffect(() => {
+    setLoginData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.id = id;
+      updatedData.pswd = pswd;
+      return updatedData;
+    });
     if (id.length > 3 && pswd.length > 1) {
       onDisabled(false);
     } else {
       onDisabled(true);
     }
-  };
-
+  }, [id, pswd]);
   const onLogin = async (e: React.KeyboardEvent) => {
     const requestParam = {
       header: {},
@@ -184,7 +185,9 @@ export default function Login() {
       cookies.set("refreshToken", response.data.data.tokens.refreshToken);
       navigate("/");
     } catch (error) {
-      alert(error);
+      setFetchStatus(true);
+      setStatus("FAIL");
+      // alert(error);
     }
   };
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -196,6 +199,14 @@ export default function Login() {
   return (
     <>
       <ContainerLogin>
+        {fetchStatus && (
+          <Toast
+            status={status}
+            fetchStatus={fetchStatus}
+            setFetchStatus={setFetchStatus}
+            text={"아이디 비밀번호를 다시 확인해주세요."}
+          />
+        )}
         <ContainerSub>
           <LoginLogo>
             <Image
@@ -208,20 +219,22 @@ export default function Login() {
           <LogoText>TONGIN LOGIN</LogoText>
           <OutlineInputbox $outLine={outLineId}>
             <Inputbox
-              onInput={onInputText}
+              onInput={onInputId}
               id={"Id"}
               onFocus={onFocusHandle}
               onBlur={onblurHandle}
+              value={id}
               placeholder="아이디를 입력해 주세요"
             ></Inputbox>
           </OutlineInputbox>
           <OutlineInputbox $outLine={outLinePswd}>
             <Inputbox
               id={"Pw"}
-              onInput={onInputText}
+              onInput={onInputPswd}
               onFocus={onFocusHandle}
               onBlur={onblurHandle}
               type="password"
+              value={pswd}
               placeholder="비밀번호를 입력해 주세요"
               onKeyPress={handleKeyDown}
             ></Inputbox>
@@ -231,7 +244,7 @@ export default function Login() {
             <CheckText>아이디/비밀번호 기억하기</CheckText>
           </CheckContainer> */}
           <CustomButton
-            onClick={desabled ? onInputText : onLogin}
+            onClick={desabled ? "" : onLogin}
             width={"100%"}
             height={"8vw"}
             text={`로그인`}
@@ -240,7 +253,7 @@ export default function Login() {
             disabled={desabled}
             $bgColor={bgColor}
           ></CustomButton>
-          <MemoryLogin> 아이디/비밀번호 찾기</MemoryLogin>
+          {/* <MemoryLogin> 아이디/비밀번호 찾기</MemoryLogin> */}
         </ContainerSub>
       </ContainerLogin>
     </>

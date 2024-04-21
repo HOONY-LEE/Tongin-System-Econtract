@@ -79,7 +79,7 @@ export default function TabComponent() {
   const [worklist, setWorklist] = useState<any[]>([]); // work list
   const [searchedText, setSearchedText] = useState("");
   const [searchedList, setSearchedList] = useState<any[]>([]);
-  const [fetchStatus, setFetchStatus] = useState(true);
+
   const menuArr = [
     { name: "견적리스트", content: "견적리스트 영역" },
     { name: "미계약리스트", content: "미계약 리스트 영역" },
@@ -174,13 +174,7 @@ export default function TabComponent() {
           </li>
         ))}
       </TabMenu>
-      {fetchStatus ? (
-        <Toast
-          text={"메세지 뜸"}
-          status={"상태"}
-          setFetchStatus={setFetchStatus}
-        />
-      ) : null}
+
       <ContentBox>
         {currentTab === 0 && (
           <ListBox>
