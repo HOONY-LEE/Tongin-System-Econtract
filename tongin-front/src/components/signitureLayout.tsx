@@ -2,14 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Stage, Layer, Line, Text } from "react-konva";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { Cookies } from "react-cookie";
+
 import API from "../API/API";
 import BlankBoxIcon from "./icon/blankBox";
 import DetailDrawBlankModalComponent from "./detail/detailDrawBlankModal";
 import { Image } from "./common/image";
 import CustomButton from "./common/customButton";
-
+import { Dispatch, SetStateAction } from "react";
 const CalculatorComponentWrapper = styled.div`
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -132,7 +131,7 @@ const FinishBox = styled.div`
   justify-content: space-around;
 `;
 interface CalculatorComponentProps {
-  //   onClose: () => void;
+  setOnContractFinishPage?: (value: boolean) => void;
   //   style?: React.CSSProperties;
   //   setDrawingData: any;
   //   setIsScrolled: any;
@@ -156,11 +155,13 @@ const InputBox = styled.textarea.attrs({})<{}>`
   height: 90%;
 `;
 
-const SignitureLayout: React.FC<CalculatorComponentProps> = ({}) => {
+const SignitureLayout: React.FC<CalculatorComponentProps> = ({
+  setOnContractFinishPage,
+}) => {
   const stageRef = useRef<any>(null);
   const [tool, setTool] = useState<string>("pen");
   const [penColorVisible, setPenColorVisible] = useState<boolean>(false);
-  const [eraserSize, setEraserSize] = useState<number>();
+
   const [penColor, setPenColor] = useState<any>();
   const [penSize, setPenSize] = useState<number>();
   const [blankBoxVisible, setBlankBoxVisible] = useState<boolean>(false);
@@ -171,6 +172,7 @@ const SignitureLayout: React.FC<CalculatorComponentProps> = ({}) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [drawingData, setDrawingData] = useState<any>([]);
   const [lines, setLines] = useState<any[]>([]);
+
   const handlePointerDown = (e: any) => {
     setIsDrawing(true);
     const pos = stageRef.current?.getPointerPosition();
@@ -259,17 +261,27 @@ const SignitureLayout: React.FC<CalculatorComponentProps> = ({}) => {
   const onClickCheck = () => {
     setIsChecked(!isChecked);
   };
+  // 상세정보 수정API
+  const postContractSignData = async () => {
+    const requestPram = {
+      contractSignData: drawingData,
+      privatePushYN: isChecked,
+    };
+    const response: any = await API.post(
+      `/receipt/contract/sign/${reNum}`,
+      requestPram
+    );
+    if (response.status === 200) {
+      console.log(response);
+      alert("전송완료");
+      setOnContractFinishPage && setOnContractFinishPage(true);
+    } else {
+      alert("Fail to getDetailList()");
+      console.log("Fail to getDetailList()");
+      setOnContractFinishPage && setOnContractFinishPage(false);
+    }
+  };
 
-  const backTargetElement = document.querySelector("#BackgroundPanel");
-  backTargetElement?.addEventListener(
-    "dragover",
-    (event) => {
-      console.log("drag", event);
-      // 드롭을 허용하기 위해 기본 동작 취소
-      event.preventDefault();
-    },
-    false
-  );
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
   useEffect(() => {
@@ -377,6 +389,7 @@ const SignitureLayout: React.FC<CalculatorComponentProps> = ({}) => {
           size={"3.4vw"}
           radius={"0.6vw"}
           disabled={btnDisabled}
+          onClick={() => postContractSignData()}
         ></CustomButton>
       </FinishBox>
     </>
