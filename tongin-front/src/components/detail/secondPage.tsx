@@ -18,41 +18,40 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Container = styled.div`
-  width: 88%;
-  height: 97%;
+  padding: 2vw 5vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 const Header = styled.div`
   width: 100%;
-  height: 7%;
+  height: 6vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 const HeaderTitle = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  font-weight: 700;
-  font-size: 3.4vw;
+  font-weight: 800;
+  font-size: 3.2vw;
 `;
 const LogoImg = styled.div`
-  border-radius: 0.4vw;
   width: 20vw;
   height: 5vw;
-  font-size: 3vw;
 `;
 
 const ContentArea = styled.div`
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   font-size: 2vw;
-  width: 100%;
-  height: 130vw;
 `;
 const TopArea = styled.div`
   display: flex;
@@ -62,7 +61,7 @@ const TopArea = styled.div`
   width: 100%;
 `;
 const MidArea = styled.div`
-  margin-top: 2vh;
+  margin-top: 2vw;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -76,7 +75,7 @@ const NameArea = styled.div`
 
 const NameTitleBox = styled.div`
   width: 100%;
-  height: 4.6vw;
+  height: 4vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -129,26 +128,22 @@ const TopItemArea = styled.div`
 const FooterArea = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  height: 6vw;
 `;
 
 const FooterItemBox = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4vh;
 `;
 
 const FooterItem1 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 18%;
-  height: 100%;
   font-size: 1vw;
   font-weight: 500;
 `;
@@ -157,30 +152,29 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 22%;
-  height: 100%;
   font-size: 1vw;
   font-weight: 200;
 `;
 
 const FooterItem3 = styled.div`
-  margin-left: 2vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: end;
-  width: 20%;
-  height: 100%;
+  height: 4vw;
   font-size: 1.6vw;
+  outline: 0.1vw solid #ababab;
+  background-color: #efefef3a;
+  border-radius: 0.2vw;
+  padding: 1vw 2vw;
 `;
 
 const Index = styled.div`
-  margin-top: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 2vh;
+  height: 2vw;
   font-size: 1.4vw;
   font-weight: 300;
 `;
@@ -231,11 +225,7 @@ const SecondPage = (props: any) => {
       <Container>
         <Header>
           <LogoImg>
-            <Image
-              src="/icon/tonginLogo.png"
-              width={"100%"}
-              height={"100%"}
-            ></Image>
+            <Image src="/icon/tonginLogo.png" width={"100%"}></Image>
           </LogoImg>
           <HeaderTitle>이사물량 견적표</HeaderTitle>
         </Header>

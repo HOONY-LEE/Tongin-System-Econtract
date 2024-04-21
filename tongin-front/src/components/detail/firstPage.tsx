@@ -16,50 +16,48 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Container = styled.div`
-  width: 88%;
-  height: 97%;
+  padding: 2vw 5vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 const Header = styled.div`
   width: 100%;
-  height: 7%;
+  height: 6vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 const HeaderTitle = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  font-weight: 700;
-  font-size: 3.4vw;
+  font-weight: 800;
+  font-size: 3.2vw;
 `;
 const LogoImg = styled.div`
-  border-radius: 0.4vw;
   width: 20vw;
   height: 5vw;
-  font-size: 3vw;
 `;
 
 const ContentArea = styled.div`
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  font-size: 2vw;
-  width: 100%;
-  height: 130vw;
 `;
 
 const TopTable = styled.div`
   text-align: center;
-  font-size: 2vw;
   width: 100%;
-  border-top: 0.15vw solid black;
-  height: 4%;
-  border-bottom: 0.15vw solid black;
+  border-top: 0.16vw solid black;
+  border-bottom: 0.1vw solid #939393;
+  height: 3.2vw;
+  margin-bottom: 1vw;
 `;
 const TopTr = styled.div<{
   width?: string;
@@ -69,7 +67,7 @@ const TopTr = styled.div<{
   border-right: ${(props) => (props.borderRight ? props.borderRight : "")};
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
 `;
 const TopTdTitle = styled.div<{
   $width?: string;
@@ -78,58 +76,57 @@ const TopTdTitle = styled.div<{
 }>`
   font-size: 1.5vw;
   background-color: #f4f4f4;
-  width: ${(props) => (props.$width ? props.$width : "10vw")};
-  height: 4vw;
+  width: 10vw;
+  height: 3vw;
   display: flex;
   align-items: center;
   font-weight: 500;
   justify-content: center;
-  border-right: ${(props) =>
-    props.$borderRight ? props.$borderRight : "0.1vw solid black"};
-  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
+  /* border-left: 0.1vw solid black; */
 `;
 const TopTd = styled.div<{
   $width?: string;
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1.5vw;
-  border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
-  border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
-  width: ${(props) => (props.$width ? props.$width : "10vw")};
+  font-size: 1.4vw;
   display: flex;
   font-weight: 500;
   align-items: center;
   justify-content: center;
-  height: 4vw;
+  width: 13.3vw;
+  height: 3vw;
+  /* border-left: 0.1vw solid black; */
+  /* border-right: 0.1vw solid black; */
 `;
 const SubTitle = styled.div`
+  width: 100%;
   font-weight: 600;
-  margin: 1.3vw auto 0.6vw 0vw;
   font-size: 1.7vw;
+  display: flex;
+  justify-content: start;
+  margin-bottom: 1vw;
 `;
 
 const ApplyInfoTable = styled.div`
   text-align: center;
-  border-top: 0.15vw solid black;
   font-size: 1.3vw;
   width: 100%;
-  height: 5.2vh;
+  margin-bottom: 1vw;
 `;
 
 const ApplyInfoTable2 = styled.div`
   text-align: center;
-  border-top: 0.15vw solid black;
+  border-top: 0.16vw solid black;
   font-size: 1.3vw;
   width: 100%;
-  height: 3vh;
 `;
 const ApplyInfoTable3 = styled.div`
   text-align: center;
-  border-top: 0.15vw solid black;
+  border-top: 0.1vw solid black;
+  margin-bottom: 1vw;
   font-size: 1.3vw;
   width: 100%;
-  height: 8vh;
 `;
 
 const ApplyInfoTr = styled.div<{
@@ -138,7 +135,7 @@ const ApplyInfoTr = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 0.15vw solid #e4e4e4;
+  border-bottom: 0.1vw solid #e4e4e4;
 `;
 const ApplyInfoTdTitle = styled.div<{
   $width?: string;
@@ -147,7 +144,7 @@ const ApplyInfoTdTitle = styled.div<{
 }>`
   background-color: #f4f4f4;
   width: ${(props) => (props.$width ? props.$width : "6vw")};
-  height: 4vw;
+  height: 3vw;
   display: flex;
   align-items: center;
   font-weight: 500;
@@ -164,23 +161,39 @@ const ApplyInfoTd = styled.div<{
 }>`
   width: ${(props) => (props.$width ? props.$width : "10vw")};
   display: flex;
-  font-weight: 500;
+  font-weight: 300;
   align-items: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
   font-size: 1.3vw;
-  height: 4vw;
+  height: 3vw;
 `;
 const MemoBox = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
 `;
+
+const TextMemoBox = styled.div`
+  margin-top: 1vw;
+  width: 100%;
+  height: 7vw;
+  border: 0.1vw solid #a1a1a1;
+  background-color: #fafafa;
+  border-radius: 0.4vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2vw;
+  padding-left: 2vw;
+`;
+
 const MemoRound = styled.div`
-  width: 38vw;
-  height: 54vw;
-  border: 0.2vw solid gray;
-  background-color: #f4f4f4;
-  border-radius: 1vw;
+  width: 37vw;
+  height: 52vw;
+  border: 0.1vw solid #a1a1a1;
+  background-color: #fafafa;
+  border-radius: 0.6vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -191,17 +204,17 @@ const BottomComponent = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 35vh;
 `;
 const EstimateContainer = styled.div`
-  margin-top: 1vh;
-  width: 70%;
+  width: 38vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 const EstimateTable = styled.div`
   text-align: center;
-  border-top: 0.15vw solid black;
+  border-top: 0.1vw solid black;
   /* outline: 1px solid black; */
   font-size: 1.3vw;
   width: 100%;
@@ -276,7 +289,7 @@ const TotalTitle = styled.div<{
   font-size: 1.3vw;
   justify-content: center;
 
-  border-bottom: 0.15vw solid
+  border-bottom: 0.1vw solid
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 
@@ -298,17 +311,17 @@ const TotalTd = styled.div<{
   justify-content: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
-  border-bottom: 0.15vw solid
+  border-bottom: 0.1vw solid
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 const BottomLine = styled.div`
   margin-top: 1vw;
   width: 100%;
-  border-top: 0.16vw solid black;
+  border-top: 0.1vw solid black;
 `;
 const AgreeBox = styled.div`
   margin-top: 1vw;
-  height: 6vw;
+  height: 10vw;
   width: 100%;
   display: flex;
   align-items: start;
@@ -327,26 +340,22 @@ const AgreeCheckBox = styled.input`
 const FooterArea = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  height: 6vw;
 `;
 
 const FooterItemBox = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4vh;
 `;
 
 const FooterItem1 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 18%;
-  height: 100%;
   font-size: 1vw;
   font-weight: 500;
 `;
@@ -355,32 +364,98 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 22%;
-  height: 100%;
   font-size: 1vw;
   font-weight: 200;
 `;
 
 const FooterItem3 = styled.div`
-  margin-left: 16vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: end;
-  width: 20%;
-  height: 100%;
+  height: 4vw;
   font-size: 1.6vw;
+  outline: 0.1vw solid #ababab;
+  background-color: #efefef3a;
+  border-radius: 0.2vw;
+  padding: 1vw 2vw;
 `;
 
 const Index = styled.div`
-  margin-top: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 2vh;
+  height: 2vw;
   font-size: 1.4vw;
   font-weight: 300;
+`;
+
+const ServiceArea = styled.div`
+  /* outline: 0.1vw dashed red; */
+  width: 100%;
+  margin-bottom: 1vw;
+  display: flex;
+  border-bottom: 0.04vw solid #e4e4e4;
+  border-top: 0.16vw solid black;
+
+  /* border-right: 0.04vw solid black; */
+`;
+
+const ServiceBox = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ServiceColumnBox = styled.div`
+  width: 100%;
+  height: 3vw;
+  display: flex;
+  font-size: 1.3vw;
+  font-weight: 300;
+`;
+
+const ServiceName = styled.div`
+  width: 10vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  /* border-left: 0.04vw solid black; */
+  border-bottom: 0.04vw solid #e4e4e4;
+`;
+
+const ServiceDate = styled.div`
+  width: 9vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 0.04vw solid #e4e4e4;
+  border-bottom: 0.04vw solid #e4e4e4;
+`;
+
+const ServicePrice = styled.div`
+  width: 9vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 0.04vw solid #e4e4e4;
+  border-bottom: 0.04vw solid #e4e4e4;
+`;
+
+const ServicePaymentMethod = styled.div`
+  width: 7vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 0.04vw solid #e4e4e4;
+  border-bottom: 0.04vw solid #e4e4e4;
 `;
 
 // FirstPage 컴포넌트 정의
@@ -415,6 +490,25 @@ const FirstPage = (props: any) => {
   const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [pointerType, setPointerType] = useState<any>("없음");
+
+  const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
+
+  const transportationMethodList = [
+    { id: 0, status: "선택안함" },
+    { id: 1, status: "사다리차" },
+    { id: 2, status: "엘리베이터" },
+    { id: 3, status: "계단" },
+    { id: 4, status: "기타" },
+  ];
+
+  const paymentMethodList = [
+    { id: 0, status: "선택안함" },
+    { id: 1, status: "현금" },
+    { id: 2, status: "온라인" },
+    { id: 3, status: "카드" },
+    { id: 4, status: "무빙팀 수금" },
+    { id: 5, status: "리빙팀 수금" },
+  ];
 
   const handleMouseDown = (e: any) => {
     const pos = stageRef.current?.getPointerPosition();
@@ -478,11 +572,7 @@ const FirstPage = (props: any) => {
       <Container>
         <Header>
           <LogoImg onClick={data}>
-            <Image
-              src="/icon/tonginLogo.png"
-              width={"100%"}
-              height={"100%"}
-            ></Image>
+            <Image src="/icon/tonginLogo.png" width={"100%"}></Image>
           </LogoImg>
           <HeaderTitle>계약서 • 견적서</HeaderTitle>
         </Header>
@@ -501,140 +591,211 @@ const FirstPage = (props: any) => {
               <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
             </TopTr>
           </TopTable>
-          <SubTitle>신청 정보</SubTitle>
+          {/* <SubTitle>신청 정보</SubTitle> */}
+          <ApplyInfoTable2>
+            <ApplyInfoTr>
+              <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
+              <ApplyInfoTd>
+                {detailData.receptionDate === ""
+                  ? "--"
+                  : detailData.receptionDate.replace(formattedDate, "$1-$2-$3")}
+              </ApplyInfoTd>
+              <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
+              <ApplyInfoTd>
+                {detailData.contractDate === ""
+                  ? "--"
+                  : detailData.contractDate.replace(formattedDate, "$1-$2-$3")}
+              </ApplyInfoTd>
+              <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
+              <ApplyInfoTd>
+                {detailData.consultationDate === ""
+                  ? "--"
+                  : detailData.consultationDate.replace(
+                      formattedDate,
+                      "$1-$2-$3"
+                    )}
+              </ApplyInfoTd>
+              <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
+              <ApplyInfoTd>
+                {detailData.movingDate === ""
+                  ? "--"
+                  : detailData.movingDate.replace(formattedDate, "$1-$2-$3")}
+              </ApplyInfoTd>
+            </ApplyInfoTr>
+          </ApplyInfoTable2>
           <ApplyInfoTable>
             <ApplyInfoTr>
               <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
               <ApplyInfoTd $width={"56%"}>
-                {detailData.preAddress}
-                {detailData.preAddressDetail}
+                {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
               </ApplyInfoTd>
               <ApplyInfoTdTitle $width={"18%"}>작업조건 (전)</ApplyInfoTdTitle>
               <ApplyInfoTd $width={"14%"} $borderRight={"0.1vw solid #e4e4e4"}>
-                {optionData.beforeWorkCondition.transportationMethod}
+                {
+                  transportationMethodList[
+                    optionData.beforeWorkCondition.transportationMethod
+                  ].status
+                }
               </ApplyInfoTd>
               <ApplyInfoTd $width={"14%"}>
-                {optionData.beforeWorkCondition.pyeong}
+                {optionData.beforeWorkCondition.pyeong}(평)
               </ApplyInfoTd>
             </ApplyInfoTr>
             <ApplyInfoTr>
               <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
               <ApplyInfoTd $width={"56%"}>
-                {detailData.afterAddress}
-                {detailData.afterAddressDetail}
+                {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
               </ApplyInfoTd>
               <ApplyInfoTdTitle $width={"18%"}>작업조건 (후)</ApplyInfoTdTitle>
               <ApplyInfoTd $width={"14%"} $borderRight={"0.1vw solid #e4e4e4"}>
-                {optionData.afterWorkCondition.transportationMethod}
+                {
+                  transportationMethodList[
+                    optionData.afterWorkCondition.transportationMethod
+                  ].status
+                }
               </ApplyInfoTd>
               <ApplyInfoTd $width={"14%"}>
-                {optionData.afterWorkCondition.pyeong}
+                {optionData.afterWorkCondition.pyeong}(평)
               </ApplyInfoTd>
             </ApplyInfoTr>
           </ApplyInfoTable>
-          <SubTitle>신청 날짜</SubTitle>
-          <ApplyInfoTable2>
-            <ApplyInfoTr>
-              <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
-              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-              <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
-              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-              <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
-              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-              <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
-              <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            </ApplyInfoTr>
-            {/* <ApplyInfoTr>
-            <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-            <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
-            <ApplyInfoTd>2024.00.00</ApplyInfoTd>
-          </ApplyInfoTr> */}
-          </ApplyInfoTable2>
 
-          <SubTitle>리빙서비스</SubTitle>
-          <ApplyInfoTable3>
-            {/* 탈취살균서비스 */}
-            {optionData.livingService.deodorizationService.selected && (
-              <ApplyInfoTr>
-                <ApplyInfoTd $width={"26%"}>
-                  {optionData.livingService.deodorizationService.serviceName}
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"12%"}>일시</ApplyInfoTdTitle>
-                <ApplyInfoTd $width={"17%"}>
-                  {
-                    optionData.livingService.deodorizationService
-                      .serviceRequestDate
-                  }
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"12%"}>금액</ApplyInfoTdTitle>
-                <ApplyInfoTd
-                  $width={"18%"}
-                  $borderRight={"0.1vw solid #e4e4e4"}
-                >
-                  {optionData.livingService.deodorizationService.servicePayment}{" "}
-                  ₩
-                </ApplyInfoTd>
-                <ApplyInfoTd $width={"14%"}>온라인결제</ApplyInfoTd>
-              </ApplyInfoTr>
-            )}
-
-            {/* "입주청소서비스" */}
-            {optionData.livingService.movingCleaningService.selected && (
-              <ApplyInfoTr>
-                <ApplyInfoTd $width={"26%"}>
+          <ServiceArea>
+            <ServiceBox>
+              <ServiceColumnBox>
+                <ServiceName>서비스</ServiceName>
+                <ServiceDate>날짜</ServiceDate>
+                <ServicePrice>금액</ServicePrice>
+                <ServicePaymentMethod>결제</ServicePaymentMethod>
+              </ServiceColumnBox>
+              {/* 입주청소서비스 */}
+              <ServiceColumnBox>
+                <ServiceName>
                   {optionData.livingService.movingCleaningService.serviceName}
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"12%"}>일시</ApplyInfoTdTitle>
-                <ApplyInfoTd $width={"17%"}>
+                </ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.movingCleaningService.selected
+                    ? optionData.livingService.movingCleaningService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.movingCleaningService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePrice>
+                  {optionData.livingService.movingCleaningService.selected
+                    ? optionData.livingService.movingCleaningService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.movingCleaningService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.movingCleaningService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+              </ServiceColumnBox>
+              {/* 정리수납서비스 */}
+              <ServiceColumnBox>
+                <ServiceName>
                   {
-                    optionData.livingService.movingCleaningService
-                      .serviceRequestDate
+                    optionData.livingService.organizationStorageService
+                      .serviceName
                   }
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"12%"}>금액</ApplyInfoTdTitle>
-                <ApplyInfoTd
-                  $width={"18%"}
-                  $borderRight={"0.1vw solid #e4e4e4"}
-                >
-                  {
-                    optionData.livingService.movingCleaningService
-                      .servicePayment
-                  }
-                  {"₩"}
-                </ApplyInfoTd>
-                <ApplyInfoTd $width={"14%"}>온라인결제</ApplyInfoTd>
-              </ApplyInfoTr>
-            )}
+                </ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.organizationStorageService.selected
+                    ? optionData.livingService.organizationStorageService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.organizationStorageService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePrice>
+                  {optionData.livingService.organizationStorageService.selected
+                    ? optionData.livingService.organizationStorageService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.organizationStorageService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.organizationStorageService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+              </ServiceColumnBox>
+            </ServiceBox>
+            <ServiceBox>
+              <ServiceColumnBox>
+                <ServiceName>서비스</ServiceName>
+                <ServiceDate>날짜</ServiceDate>
+                <ServicePrice>금액</ServicePrice>
+                <ServicePaymentMethod>결제</ServicePaymentMethod>
+              </ServiceColumnBox>
+              {/* 탈취살균서비스 */}
+              <ServiceColumnBox>
+                <ServiceName>
+                  {optionData.livingService.deodorizationService.serviceName}
+                </ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.deodorizationService.selected
+                    ? optionData.livingService.deodorizationService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.deodorizationService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePrice>
+                  {optionData.livingService.deodorizationService.selected
+                    ? optionData.livingService.deodorizationService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.deodorizationService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.deodorizationService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+              </ServiceColumnBox>
+              {/* 기타서비스 */}
+              <ServiceColumnBox>
+                <ServiceName>
+                  {optionData.livingService.otherService.serviceName}
+                </ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.otherService.selected
+                    ? optionData.livingService.otherService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.otherService.serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePrice>
+                  {optionData.livingService.otherService.selected
+                    ? optionData.livingService.otherService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.otherService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.otherService.paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+              </ServiceColumnBox>
+            </ServiceBox>
+          </ServiceArea>
 
-            {/* "정리수납서비스" */}
-            {/* {optionData.livingService.organizationStorageService.selected && ( */}
-            <ApplyInfoTr>
-              <ApplyInfoTd $width={"26%"}>
-                {
-                  optionData.livingService.organizationStorageService
-                    .serviceName
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle $width={"12%"}>일시</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"17%"}>
-                {
-                  optionData.livingService.organizationStorageService
-                    .serviceRequestDate
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle $width={"12%"}>금액</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"18%"} $borderRight={"0.1vw solid #e4e4e4"}>
-                {
-                  optionData.livingService.organizationStorageService
-                    .servicePayment
-                }
-                {" ₩ "}
-              </ApplyInfoTd>
-              <ApplyInfoTd $width={"14%"}>온라인결제</ApplyInfoTd>
-            </ApplyInfoTr>
-            {/*  )} */}
-          </ApplyInfoTable3>
           <BottomComponent>
             <MemoBox>
               <MemoRound ref={divRef} id={"CanvasPanel"}>
@@ -667,7 +828,7 @@ const FirstPage = (props: any) => {
               </MemoRound>
             </MemoBox>
             <EstimateContainer>
-              <SubTitle>견적 금액 확인</SubTitle>
+              {/* <SubTitle>견적 금액 확인</SubTitle> */}
               <EstimateTable>
                 <EstimateTr>
                   <EstimateTitle $width="18vw">이사 물량</EstimateTitle>
@@ -745,16 +906,9 @@ const FirstPage = (props: any) => {
               </EstimateTable>
             </EstimateContainer>
           </BottomComponent>
-          <AgreeBox>
-            개인정보 수집 • 이용에 동의합니까?
-            <AgreeCheckBox
-              id={"agree"}
-              type={"checkbox"}
-              checked={true}
-              readOnly
-            />
-          </AgreeBox>
-          <BottomLine></BottomLine>
+          <TextMemoBox></TextMemoBox>
+          <TextMemoBox></TextMemoBox>
+          {/* <BottomLine></BottomLine> */}
         </ContentArea>
         <FooterArea>
           <FooterItemBox>
