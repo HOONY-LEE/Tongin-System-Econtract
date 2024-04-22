@@ -155,6 +155,7 @@ export default function SiteTabPage() {
   const [priceDataList, setPriceDataList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
   const [drawingData, setDrawingData] = useState<any[]>([]);
+  const [textMemoData, setTextMemoData] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
@@ -259,9 +260,11 @@ export default function SiteTabPage() {
     if (response.status === 200) {
       console.log(response);
       const result = response.data.receiptMemoData;
+      const rusult2 = response.data.textMemo;
       setDrawingData(result);
       setIsScrolled(true);
       setPreventDefault(true);
+      setTextMemoData(rusult2);
       // console.log("불러오기성공", result);
     } else {
       console.log("Fail to getDrawingData()");
@@ -273,6 +276,13 @@ export default function SiteTabPage() {
     setDrawingPanel(false);
     disableScrollLock();
   };
+
+  // useEffect(() => {
+  //   getDetailList();
+  //   getProductList();
+  //   getOptionList();
+  //   getPriceList();
+  // }, []);
 
   // useEffect(() => {
   //   setCurrentProductList(articleDataList);
@@ -401,6 +411,8 @@ export default function SiteTabPage() {
               reNum={reNum}
               setDrawingData={setDrawingData}
               drawingData={drawingData}
+              textMemoData={textMemoData}
+              setTextMemoData={setTextMemoData}
               setIsScrolled={setIsScrolled}
               setLines={setLines}
               lines={lines}
