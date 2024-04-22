@@ -163,7 +163,7 @@ const FooterItem3 = styled.div`
   align-items: end;
   height: 4vw;
   font-size: 1.6vw;
-  outline: 0.1vw solid #ababab;
+  border: 0.1vw solid #ababab;
   background-color: #efefef3a;
   border-radius: 0.2vw;
   padding: 1vw 2vw;
@@ -385,7 +385,7 @@ const SecondPage = (props: any) => {
             <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
             <FooterItem3>
               <div>SERIAL NO.</div>
-              <div>R-20240203929</div>
+              <div>{reNum}</div>
             </FooterItem3>
           </FooterItemBox>
           <Index>- 2 -</Index>
