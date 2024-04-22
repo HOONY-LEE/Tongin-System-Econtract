@@ -169,6 +169,7 @@ const ContractPreviewModalComponent = (props: any) => {
     lines,
     drawingData,
     movingCBM,
+    discardCBM,
     setLines,
     optionTotalCharge,
   } = props;
@@ -292,6 +293,7 @@ const ContractPreviewModalComponent = (props: any) => {
               detailData={detailData}
               lines={lines}
               movingCBM={movingCBM}
+              discardCBM={discardCBM}
               priceDataList={priceDataList}
               articleDataList={articleDataList}
               optionData={optionData}

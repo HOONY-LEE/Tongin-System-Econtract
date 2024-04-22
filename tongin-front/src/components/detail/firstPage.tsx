@@ -74,7 +74,7 @@ const TopTdTitle = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1.5vw;
+  font-size: 1.4vw;
   background-color: #f4f4f4;
   width: 10vw;
   height: 3vw;
@@ -98,14 +98,6 @@ const TopTd = styled.div<{
   height: 3vw;
   /* border-left: 0.1vw solid black; */
   /* border-right: 0.1vw solid black; */
-`;
-const SubTitle = styled.div`
-  width: 100%;
-  font-weight: 600;
-  font-size: 1.7vw;
-  display: flex;
-  justify-content: start;
-  margin-bottom: 1vw;
 `;
 
 const ApplyInfoTable = styled.div`
@@ -205,13 +197,76 @@ const BottomComponent = styled.div`
   align-items: center;
   width: 100%;
 `;
-const EstimateContainer = styled.div`
-  width: 38vw;
+const PriceListArea = styled.div`
+  width: 48vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
+
+const PriceListBox = styled.div`
+  width: 100%;
+  border-top: 0.16vw solid black;
+  border-left: 0.1vw solid black;
+`;
+
+const TotalPriceBox = styled.div`
+  width: 100%;
+  height: 4vw;
+  outline: 0.1vw dashed green;
+`;
+
+const AgreementBox = styled.div`
+  width: 100%;
+  height: 6vw;
+  background-color: gray;
+`;
+
+const SignatureBox = styled.div`
+  width: 100%;
+  height: 6vw;
+  background-color: blue;
+`;
+
+const PriceItemBox = styled.div`
+  width: 100%;
+  height: 2.6vw;
+  display: flex;
+`;
+
+const PriceItemName = styled.div`
+  width: 46%;
+  height: 100%;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  font-size: 1.2vw;
+  padding-left: 1vw;
+  border-bottom: 0.1vw solid #d3d3d3;
+`;
+
+const PriceItemPrice = styled.div`
+  width: 54%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 1vw;
+  border-bottom: 0.04vw solid #d3d3d3;
+`;
+
+const Price = styled.p`
+  font-size: 1.2vw;
+  font-weight: 400;
+  margin-right: 0.4vw;
+`;
+const Unit = styled.p`
+  font-size: 0.8vw;
+  font-weight: 100;
+  padding-top: 0.3vw;
+`;
+
 const EstimateTable = styled.div`
   text-align: center;
   border-top: 0.1vw solid black;
@@ -375,7 +430,7 @@ const FooterItem3 = styled.div`
   align-items: end;
   height: 4vw;
   font-size: 1.6vw;
-  outline: 0.1vw solid #ababab;
+  border: 0.1vw solid #ababab;
   background-color: #efefef3a;
   border-radius: 0.2vw;
   padding: 1vw 2vw;
@@ -469,10 +524,14 @@ const FirstPage = (props: any) => {
     drawingData,
     detailData,
     movingCBM,
+    discardCBM,
     setLines,
     setDrawingData,
     optionTotalCharge,
   } = props;
+
+  console.log("articleDataList>>>>>>");
+  console.log(articleDataList);
   const divRef = useRef<any>(null);
   const stageRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState<any>({
@@ -827,8 +886,111 @@ const FirstPage = (props: any) => {
                 </Stage>
               </MemoRound>
             </MemoBox>
-            <EstimateContainer>
-              {/* <SubTitle>견적 금액 확인</SubTitle> */}
+            <PriceListArea>
+              <PriceListBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>이사물량(폐기/운반)</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>{`${discardCBM}  /  ${movingCBM}`}</Price>
+                    <Unit>cbm</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>사다리차 비용</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>입주청소서비스</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>정리수납서비스</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>탈취살균서비스</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>기타서비스</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>옵션비용(분해/설치)</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>이사비용</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>보관비용</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>부가세(VAT)</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>계약금</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                {/* 이사물량 */}
+                <PriceItemBox>
+                  <PriceItemName>잔금</PriceItemName>
+                  <PriceItemPrice>
+                    <Price>30,000</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+              </PriceListBox>
+              <TotalPriceBox>totalPrice</TotalPriceBox>
+              <AgreementBox>agreementBox</AgreementBox>
+              <SignatureBox>signature</SignatureBox>
+            </PriceListArea>
+            {/* <EstimateContainer>
+              <SubTitle>견적 금액 확인</SubTitle>
               <EstimateTable>
                 <EstimateTr>
                   <EstimateTitle $width="18vw">이사 물량</EstimateTitle>
@@ -885,12 +1047,6 @@ const FirstPage = (props: any) => {
                   <EstimateTitle $width="18vw">잔금</EstimateTitle>
                   <EstimateTd>{priceDataList[5].amount}</EstimateTd>
                 </EstimateTr>
-                {/* <EstimateTr>
-                <EstimateTitle $width="12vw" $borderBottom={"#000000"}>
-                부가세
-                </EstimateTitle>
-                <EstimateTd $borderBottom={"#000000"}>200,000</EstimateTd>
-              </EstimateTr> */}
                 <EstimateTr>
                   <TotalTitle $width={"20vw"} $height={"6vw"}>
                     총 비용 (VAT별도)
@@ -904,7 +1060,7 @@ const FirstPage = (props: any) => {
                   <TotalTd $borderBottom={"none"} $height={"9vw"}></TotalTd>
                 </EstimateTr>
               </EstimateTable>
-            </EstimateContainer>
+            </EstimateContainer> */}
           </BottomComponent>
           <TextMemoBox></TextMemoBox>
           <TextMemoBox></TextMemoBox>
@@ -918,7 +1074,7 @@ const FirstPage = (props: any) => {
             <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
             <FooterItem3>
               <div>SERIAL NO.</div>
-              <div>R-20240203929</div>
+              <div>{reNum}</div>
             </FooterItem3>
           </FooterItemBox>
           <Index>- 1 -</Index>
