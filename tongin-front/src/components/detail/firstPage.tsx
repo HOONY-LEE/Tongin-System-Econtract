@@ -1122,7 +1122,7 @@ const FirstPage = (props: any) => {
                           <Line
                             key={i}
                             points={line.points.map(
-                              (point: number) => point * 0.1
+                              (point: number) => point * 0.23
                             )}
                             stroke={line.stroke}
                             strokeWidth={1}
