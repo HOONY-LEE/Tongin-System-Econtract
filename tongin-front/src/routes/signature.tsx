@@ -1,8 +1,8 @@
 import { useState } from "react";
-import SignitureLayout from "../components/signitureLayout";
 import ContractFinish from "../components/contractFinish";
+import SignatureLayout from "../components/signatureLayout";
 
-export default function Signiture() {
+export default function Signature() {
   const [onContractFinishPage, setOnContractFinishPage] =
     useState<boolean>(false);
   return (
@@ -10,7 +10,7 @@ export default function Signiture() {
       {onContractFinishPage ? (
         <ContractFinish></ContractFinish>
       ) : (
-        <SignitureLayout setOnContractFinishPage={setOnContractFinishPage} />
+        <SignatureLayout setOnContractFinishPage={setOnContractFinishPage} />
       )}
     </>
   );

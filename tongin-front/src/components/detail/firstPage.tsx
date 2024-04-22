@@ -192,6 +192,15 @@ const MemoRound = styled.div`
   padding-top: 2vw;
   padding-left: 2vw;
 `;
+
+const MemoRound2 = styled.div`
+  width: 20vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const BottomComponent = styled.div`
   display: flex;
   align-items: center;
@@ -202,7 +211,7 @@ const PriceListArea = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
 `;
 
 const PriceListBox = styled.div`
@@ -214,19 +223,80 @@ const PriceListBox = styled.div`
 const TotalPriceBox = styled.div`
   width: 100%;
   height: 4vw;
-  outline: 0.1vw dashed green;
+  display: flex;
+  border-bottom: 0.16vw solid black;
+`;
+
+const TotalPriceName = styled.div`
+  width: 46%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+`;
+const TotalPriceInput = styled.div`
+  width: 54%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+`;
+
+const PriceNameInput = styled.p`
+  font-size: 1.8vw;
+  font-weight: 600;
+`;
+const PriceNameInputEng = styled.p`
+  font-size: 1vw;
+  font-weight: 300;
+  padding-left: 0.4vw;
+  padding-right: 0.8vw;
+  padding-top: 0.6vw;
 `;
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 6vw;
-  background-color: gray;
+  height: 7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 0.16vw solid black;
+  /* background-color: gray; */
+`;
+const ImageBox = styled.div`
+  margin-right: 1vw;
+`;
+
+const AgreementTextLine = styled.div`
+  height: 2vw;
+  font-size: 1vw;
+  font-weight: 300;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 6vw;
-  background-color: blue;
+  height: 8.4vw;
+
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.16vw solid black;
+`;
+
+const SignatureTitle = styled.div`
+  width: 30%;
+  height: 100%;
+  margin-top: 1vw;
+`;
+
+const SignatureArea = styled.div`
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const PriceItemBox = styled.div`
@@ -522,33 +592,37 @@ const FirstPage = (props: any) => {
     lines,
     reNum,
     drawingData,
+    drawingData2,
     detailData,
     movingCBM,
     discardCBM,
     setLines,
+    setLines2,
+    lines2,
     setDrawingData,
+    setDrawingData2,
     optionTotalCharge,
   } = props;
+  console.log("lines>>>>");
+  console.log(lines);
+  console.log("lines2>>>>");
+  console.log(lines2);
 
-  console.log("articleDataList>>>>>>");
-  console.log(articleDataList);
   const divRef = useRef<any>(null);
   const stageRef = useRef<any>(null);
+  const divRef2 = useRef<any>(null);
+  const stageRef2 = useRef<any>(null);
   const [dimensions, setDimensions] = useState<any>({
+    width: 0,
+    height: 0,
+  });
+  const [dimensions2, setDimensions2] = useState<any>({
     width: 0,
     height: 0,
   });
   const [tool, setTool] = useState<string>("pen");
   const [penColorVisible, setPenColorVisible] = useState<boolean>(false);
-  const [eraserSizeVisible, setEraserSizeVisible] = useState<boolean>(false);
-  const [eraserSize, setEraserSize] = useState<number>();
   const [penColor, setPenColor] = useState<any>();
-  const [penSize, setPenSize] = useState<number>();
-  const [blankBoxVisible, setBlankBoxVisible] = useState<boolean>(false);
-  const [eraserCurrentOutLine, setEraserCurrentOutLine] = useState(0);
-  const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
-  const [isDrawing, setIsDrawing] = useState<boolean>(false);
-  const [pointerType, setPointerType] = useState<any>("없음");
 
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
 
@@ -569,27 +643,16 @@ const FirstPage = (props: any) => {
     { id: 5, status: "리빙팀 수금" },
   ];
 
-  const handleMouseDown = (e: any) => {
-    const pos = stageRef.current?.getPointerPosition();
-    if (pos) {
-      setLines([
-        ...lines,
-        {
-          points: [pos.x, pos.y],
-        },
-      ]);
-    }
-  };
-  const data = () => {
-    // console.log("detailData", detailData);
-    // console.log("priceDataList", priceDataList);
-    // console.log("articleDataList", articleDataList);
-    // console.log("optionData", optionData);
-    // console.log("lines", lines);
-    // console.log("drawingData", drawingData);
-    // console.log("optionTotalCharge", optionTotalCharge);
-    // console.log("movingCBM", movingCBM);
-  };
+  // const data = () => {
+  //   console.log("detailData", detailData);
+  //   console.log("priceDataList", priceDataList);
+  //   console.log("articleDataList", articleDataList);
+  //   console.log("optionData", optionData);
+  //   console.log("lines", lines);
+  //   console.log("drawingData", drawingData);
+  //   console.log("optionTotalCharge", optionTotalCharge);
+  //   console.log("movingCBM", movingCBM);
+  // };
   const getDrawingData = async () => {
     const response = await API.get(`receipt/memo/${reNum}`);
     if (response.status === 200) {
@@ -601,20 +664,35 @@ const FirstPage = (props: any) => {
       console.log("Fail to getDrawingData()");
     }
   };
+
+  const getDrawingData2 = async () => {
+    const response: any = await API.get(`/receipt/detail/${reNum}`);
+    if (response.status === 200) {
+      const result = response.data.contractSignData;
+      setDrawingData2(result);
+    } else {
+      console.log("Fail to getDetailList()");
+    }
+  };
+
   useEffect(() => {
-    data();
     getDrawingData();
+    getDrawingData2();
     setDrawingData([...lines]);
-    console.log("wd", drawingData);
+    setDrawingData2([...lines2]);
   }, []);
 
   useEffect(() => {
-    console.log("divRef.current====");
-    console.log(divRef.current.offsetHeight);
     if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
       setDimensions({
         width: divRef.current.offsetWidth - 2,
         height: divRef.current.offsetHeight - 2,
+      });
+    }
+    if (divRef2.current?.offsetHeight && divRef2.current?.offsetWidth) {
+      setDimensions2({
+        width: divRef2.current.offsetWidth - 1,
+        height: divRef2.current.offsetHeight - 1,
       });
     }
   }, []);
@@ -630,7 +708,7 @@ const FirstPage = (props: any) => {
     <Wrapper className="firstPageBox">
       <Container>
         <Header>
-          <LogoImg onClick={data}>
+          <LogoImg>
             <Image src="/icon/tonginLogo.png" width={"100%"}></Image>
           </LogoImg>
           <HeaderTitle>계약서 • 견적서</HeaderTitle>
@@ -900,7 +978,9 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>사다리차 비용</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>
+                      {optionData.ladderTruck.servicePayment.toLocaleString()}
+                    </Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -908,7 +988,9 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>입주청소서비스</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>
+                      {optionData.livingService.movingCleaningService.servicePayment.toLocaleString()}
+                    </Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -916,7 +998,9 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>정리수납서비스</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>
+                      {optionData.livingService.organizationStorageService.servicePayment.toLocaleString()}
+                    </Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -924,7 +1008,9 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>탈취살균서비스</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>
+                      {optionData.livingService.deodorizationService.servicePayment.toLocaleString()}
+                    </Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -932,7 +1018,9 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>기타서비스</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>
+                      {optionData.livingService.otherService.servicePayment.toLocaleString()}
+                    </Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -940,7 +1028,7 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>옵션비용(분해/설치)</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price> {optionTotalCharge.toLocaleString()}</Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -948,7 +1036,7 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>이사비용</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>{priceDataList[0].amount.toLocaleString()}</Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -956,7 +1044,7 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>보관비용</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>{priceDataList[1].amount.toLocaleString()}</Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -964,7 +1052,7 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>부가세(VAT)</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>{priceDataList[2].amount.toLocaleString()}</Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -972,7 +1060,7 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>계약금</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>{priceDataList[4].amount.toLocaleString()}</Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
@@ -980,87 +1068,79 @@ const FirstPage = (props: any) => {
                 <PriceItemBox>
                   <PriceItemName>잔금</PriceItemName>
                   <PriceItemPrice>
-                    <Price>30,000</Price>
+                    <Price>{priceDataList[5].amount.toLocaleString()}</Price>
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
               </PriceListBox>
-              <TotalPriceBox>totalPrice</TotalPriceBox>
-              <AgreementBox>agreementBox</AgreementBox>
-              <SignatureBox>signature</SignatureBox>
+              <TotalPriceBox>
+                <TotalPriceName>
+                  <PriceNameInput>총 비용</PriceNameInput>
+                  <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
+                </TotalPriceName>
+                <TotalPriceInput>
+                  <PriceNameInput>32,100,000</PriceNameInput>
+                  <PriceNameInputEng>₩</PriceNameInputEng>
+                </TotalPriceInput>
+              </TotalPriceBox>
+              <AgreementBox>
+                <AgreementTextLine>
+                  본인은 (주)통인익스프레스 견적•계약 진행에 따른 약관 및 이용
+                  안내에
+                </AgreementTextLine>
+                <AgreementTextLine>
+                  대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신총하고
+                  개인정보
+                </AgreementTextLine>
+                <AgreementTextLine>
+                  수집 및 활용에 동의합니다.
+                  <ImageBox>
+                    <Image
+                      src={`/icon/${
+                        detailData.pushYN ? "checked" : "unchecked"
+                      }.png`}
+                      width={"1.6vw"}
+                      height={"1.6vw"}
+                    ></Image>
+                  </ImageBox>
+                </AgreementTextLine>
+              </AgreementBox>
+              <SignatureBox>
+                <SignatureTitle>
+                  <PriceNameInput>고객서명</PriceNameInput>
+                </SignatureTitle>
+                <SignatureArea>
+                  <MemoRound2 ref={divRef2} id={"CanvasPanel2"}>
+                    <Stage
+                      width={dimensions2.width}
+                      height={dimensions2.height}
+                      ref={stageRef2}
+                      stroke={""}
+                    >
+                      <Layer>
+                        {lines2.map((line: any, i: any) => (
+                          <Line
+                            key={i}
+                            points={line.points.map(
+                              (point: number) => point * 0.24
+                            )}
+                            stroke={line.stroke}
+                            strokeWidth={1}
+                            tension={0.8}
+                            lineCap="round"
+                            globalCompositeOperation={
+                              line.tool === "eraser"
+                                ? "destination-out"
+                                : "source-over"
+                            }
+                          />
+                        ))}
+                      </Layer>
+                    </Stage>
+                  </MemoRound2>
+                </SignatureArea>
+              </SignatureBox>
             </PriceListArea>
-            {/* <EstimateContainer>
-              <SubTitle>견적 금액 확인</SubTitle>
-              <EstimateTable>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">이사 물량</EstimateTitle>
-                  <EstimateTd>{movingCBM}</EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">이사 비용</EstimateTitle>
-                  <EstimateTd> {priceDataList[1].amount}</EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">보관 비용</EstimateTitle>
-                  <EstimateTd>{priceDataList[2].amount}</EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">계약금</EstimateTitle>
-                  <EstimateTd>{priceDataList[4].amount}</EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">탈취살균 서비스 </EstimateTitle>
-                  <EstimateTd>
-                    {
-                      optionData.livingService.deodorizationService
-                        .servicePayment
-                    }
-                  </EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">입주청소 서비스 </EstimateTitle>
-                  <EstimateTd>
-                    {
-                      optionData.livingService.movingCleaningService
-                        .servicePayment
-                    }
-                  </EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">정리수납 서비스 </EstimateTitle>
-                  <EstimateTd>
-                    {
-                      optionData.livingService.organizationStorageService
-                        .servicePayment
-                    }
-                  </EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">옵션 비용</EstimateTitle>
-                  <EstimateTd>{optionTotalCharge}</EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">부가세</EstimateTitle>
-                  <EstimateTd>{priceDataList[2].amount}</EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <EstimateTitle $width="18vw">잔금</EstimateTitle>
-                  <EstimateTd>{priceDataList[5].amount}</EstimateTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <TotalTitle $width={"20vw"} $height={"6vw"}>
-                    총 비용 (VAT별도)
-                  </TotalTitle>
-                  <TotalTd $height={"6vw"}>{priceDataList[2].amount}</TotalTd>
-                </EstimateTr>
-                <EstimateTr>
-                  <TotalTitle $borderBottom={"none"} $height={"9 vw"}>
-                    고객 서명
-                  </TotalTitle>
-                  <TotalTd $borderBottom={"none"} $height={"9vw"}></TotalTd>
-                </EstimateTr>
-              </EstimateTable>
-            </EstimateContainer> */}
           </BottomComponent>
           <TextMemoBox></TextMemoBox>
           <TextMemoBox></TextMemoBox>

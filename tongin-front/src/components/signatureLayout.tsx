@@ -155,7 +155,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
   height: 90%;
 `;
 
-const SignitureLayout: React.FC<CalculatorComponentProps> = ({
+const SignatureLayout: React.FC<CalculatorComponentProps> = ({
   setOnContractFinishPage,
 }) => {
   const stageRef = useRef<any>(null);
@@ -395,4 +395,4 @@ const SignitureLayout: React.FC<CalculatorComponentProps> = ({
     </>
   );
 };
-export default SignitureLayout;
+export default SignatureLayout;
