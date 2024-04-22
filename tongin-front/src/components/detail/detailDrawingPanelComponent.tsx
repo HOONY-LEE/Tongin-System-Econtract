@@ -7,6 +7,7 @@ import EraserIcon from "../icon/eraserIcon";
 import DrawingPen from "../icon/drawingPen";
 import API from "../../API/API";
 import DetailDrawBlankModalComponent from "./detailDrawBlankModal";
+import { AnyRecordWithTtl } from "dns";
 const TopArea = styled.div``;
 const Backdrop = styled.div`
   position: fixed;
@@ -180,6 +181,8 @@ interface CalculatorComponentProps {
   style?: React.CSSProperties;
   setDrawingData: any;
   setIsScrolled: any;
+  textMemoData: any;
+  setTextMemoData: any;
   drawingData: any;
   lines: any;
   setLines: any;
@@ -212,6 +215,8 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   style,
   setDrawingData,
   drawingData,
+  textMemoData,
+  setTextMemoData,
   setIsScrolled,
   lines,
   setLines,
@@ -232,7 +237,6 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   const [penCurrentOutLine, setPenCurrentOutLine] = useState(0);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [pointerType, setPointerType] = useState<any>("없음");
-
   const handlePointerDown = (e: any) => {
     if (pointerType === "mouse" || pointerType === "pen") {
       setIsDrawing(true);
@@ -337,6 +341,10 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     false
   );
 
+  const textMemoInput = (e: any) => {
+    console.log(e.target.value);
+    setTextMemoData(e.target.value);
+  };
   const backTargetElement = document.querySelector("#BackgroundPanel");
   backTargetElement?.addEventListener(
     "dragover",
@@ -365,6 +373,14 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     setDrawingData([]);
   }, []);
 
+  // useEffect(() => {
+  //   setTextMemo((prev: any) => {
+  //     const updatedData = { ...prev };
+  //     updatedData.textMemo = textMemo;
+
+  //     return updatedData;
+  //   });
+  // }, [textMemo]);
   return (
     <>
       <Backdrop />
@@ -475,7 +491,11 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
           </CanvasPanel>
         </div>
         <TextPanel>
-          <InputBox placeholder="메모할 내용을 입력해 주세요."></InputBox>
+          <InputBox
+            placeholder="메모할 내용을 입력해 주세요."
+            value={textMemoData}
+            onChange={textMemoInput}
+          ></InputBox>
         </TextPanel>
       </CalculatorComponentWrapper>
     </>
