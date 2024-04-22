@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ChargeListComponent from "./chargeListComponent";
 import ContractPreviewModalComponent from "./contractPreviewModalComponent";
 import ContractListModalComponent from "./contractListModalComponent";
+import API from "../../API/API";
 
 const ContentBox = styled.div`
   display: flex;
@@ -228,11 +229,15 @@ export default function ContractComponent(props: any) {
     priceDataList,
     setPriceDataList,
     lines,
+    lines2,
     drawingData,
+    drawingData2,
     reNum,
     detailData,
     setDrawingData,
+    setDrawingData2,
     setLines,
+    setLines2,
   } = props;
 
   const [movingCBM, setMovingCBM] = useState<number>(0);
@@ -267,17 +272,16 @@ export default function ContractComponent(props: any) {
     // TODO: 미리보기 기능
     // TMP: 가격 정보 수정 API
 
-    // const requestParam = {
-    //   receiptPriceData: priceDataList,
-    // };
-    // const response = await API.post(`/receipt/price/${reNum}`, requestParam);
-    // if (response.status === 200) {
-    //   alert("가격정보 수정 성공!");
-    // } else {
-    //   alert("가격정보 수정 실패!");
-    // }
-
-    handleOpenModal();
+    const requestParam = {
+      receiptPriceData: priceDataList,
+    };
+    const response = await API.post(`/receipt/price/${reNum}`, requestParam);
+    if (response.status === 200) {
+      handleOpenModal();
+    } else {
+      alert("가격 정보를 저장하는데 실패했습니다.");
+      return;
+    }
   };
 
   const openContractList = async () => {
@@ -473,7 +477,10 @@ export default function ContractComponent(props: any) {
           detailData={detailData}
           drawingData={drawingData}
           setDrawingData={setDrawingData}
+          drawingData2={drawingData2}
+          setDrawingData2={setDrawingData2}
           lines={lines}
+          lines2={lines2}
           optionTotalCharge={optionTotalCharge}
           articleDataList={articleDataList}
           optionData={optionData}

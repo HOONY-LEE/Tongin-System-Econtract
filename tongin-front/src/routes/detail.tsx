@@ -158,8 +158,10 @@ export default function Detail() {
   const [priceDataList, setPriceDataList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
   const [drawingData, setDrawingData] = useState<any[]>([]);
+  const [drawingData2, setDrawingData2] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
+  const [lines2, setLines2] = useState<any[]>([]);
   const reNum = useParams().id;
   const [preventDefault, setPreventDefault] = useState<any>(false);
   const menuArr = [
@@ -178,8 +180,10 @@ export default function Detail() {
     const response: any = await API.get(`/receipt/detail/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptDetail;
+      const result2 = response.data.contractSignData;
       console.log("detailData>>", result);
       setDetailData(result);
+      setLines2(result2);
     } else {
       console.log("Fail to getDetailList()");
     }
@@ -330,11 +334,18 @@ export default function Detail() {
   useEffect(() => {
     if (drawingData?.length >= 0) {
       setLines(drawingData);
-      // setLines(drawingData);
     } else {
       setDrawingData([]);
     }
   }, [drawingData]);
+
+  useEffect(() => {
+    if (drawingData2?.length >= 0) {
+      setLines2(drawingData2);
+    } else {
+      setDrawingData([]);
+    }
+  }, [drawingData2]);
   return (
     <>
       <FlexXY>
@@ -384,11 +395,14 @@ export default function Detail() {
               <ContractTabBox>
                 <ContractComponent
                   reNum={reNum}
-                  setDrawingData={setDrawingData}
                   drawingData={drawingData}
+                  setDrawingData={setDrawingData}
+                  drawingData2={drawingData2}
+                  setDrawingData2={setDrawingData2}
                   setIsScrolled={setIsScrolled}
                   setLines={setLines}
                   lines={lines}
+                  lines2={lines2}
                   detailData={detailData}
                   articleDataList={currentProductList}
                   optionData={optionData}

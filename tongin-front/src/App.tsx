@@ -15,9 +15,9 @@ import AdminLayout from "./components/adminLayout";
 import "./static/fonts/font.css";
 import Detail from "./routes/detail";
 import "react-day-picker/dist/style.css";
-import Signiture from "./routes/signiture";
 import LandingPage from "./routes/landingPage";
 import SiteTabPage from "./components/site/main/siteTabComponent";
+import Signature from "./routes/signature";
 
 const router = createBrowserRouter([
   {
@@ -74,8 +74,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/signiture/:id",
-    element: <Signiture></Signiture>,
+    path: "/signature/:id",
+    element: <Signature></Signature>,
   },
 ]);
 
