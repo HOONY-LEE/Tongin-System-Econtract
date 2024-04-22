@@ -159,6 +159,7 @@ export default function Detail() {
   const [drawingPanel, setDrawingPanel] = useState(false);
   const [drawingData, setDrawingData] = useState<any[]>([]);
   const [drawingData2, setDrawingData2] = useState<any[]>([]);
+  const [textMemoData, setTextMemoData] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
   const [lines2, setLines2] = useState<any[]>([]);
@@ -248,6 +249,7 @@ export default function Detail() {
   const postDrawingData = async () => {
     const requestParam = {
       receiptMemoData: drawingData,
+      textMemo: textMemoData,
     };
     const response = await API.post(`receipt/memo/${reNum}`, requestParam);
     if (response.status === 200) {
@@ -266,7 +268,9 @@ export default function Detail() {
     if (response.status === 200) {
       console.log(response);
       const result = response.data.receiptMemoData;
+      const textMemo = response.data.textMemo;
       setDrawingData(result);
+      setTextMemoData(textMemo);
       setIsScrolled(true);
       setPreventDefault(true);
       // console.log("불러오기성공", result);
@@ -429,6 +433,8 @@ export default function Detail() {
               reNum={reNum}
               setDrawingData={setDrawingData}
               drawingData={drawingData}
+              textMemoData={textMemoData}
+              setTextMemoData={setTextMemoData}
               setIsScrolled={setIsScrolled}
               setLines={setLines}
               lines={lines}

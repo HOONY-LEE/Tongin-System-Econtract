@@ -5,10 +5,10 @@ import SuccessIcon from "../icon/successIcon";
 import FilledIcon from "../icon/filledIcon";
 const fadein = keyframes`
   0% { bottom: -10vw; opacity: 0; } 
-  100% { bottom: 50vw; opacity: 1; }
+  100% { bottom: 20vw; opacity: 1; }
 `;
 const fadeout = keyframes`
-  0% { bottom: 50vw; opacity: 1; } 
+  0% { bottom: 20vw; opacity: 1; } 
   100% { bottom: -10vw; opacity: 0; }
 `;
 
@@ -30,14 +30,14 @@ const ToastContainer = styled.div<{
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 50vw;
+  bottom: 20vw;
   z-index: 10000;
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.03),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
   animation: ${(props) =>
     props.show
       ? css`
-          ${fadein} 1.2s, ${fadeout} 4s 2s
+          ${fadein} 1.2s, ${fadeout} 1.3s 1s
         `
       : css``};
 `;
@@ -73,7 +73,7 @@ export const Toast = (props: any) => {
 
     const timer = setTimeout(() => {
       setFetchStatus(false);
-    }, 3000);
+    }, 2000);
     return () => {
       clearTimeout(timer);
     };

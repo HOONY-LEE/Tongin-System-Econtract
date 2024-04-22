@@ -28,7 +28,7 @@ const Content = styled.div<{
   flex-direction: column;
   align-items: center;
   width: 25vw;
-  height: 20vh;
+  height: 32vw;
   border-radius: 0.8vw;
   background-color: white;
   justify-content: center;

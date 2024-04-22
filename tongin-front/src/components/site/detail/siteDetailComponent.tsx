@@ -390,6 +390,26 @@ export default function SiteDetailComponent(props: any) {
   // useEffect(() => {
   //   fetchData();
   // }, []);
+
+  ////////////////////Data////////////////////
+  const siteDetailData = {
+    receiptDetail: {
+      name: "",
+      contact: "",
+      statusCode: "",
+      preZipCode: "",
+      preAddress: "",
+      preAddressDetail: "",
+      afterZipCode: "",
+      afterAddress: "",
+      afterAddressDetail: "",
+      receptionDate: "", // 접수일
+      consultationScheduledDate: "", // 상담 예정일
+      consultationDate: "", // 상담일
+      contractDate: "", // 계약일
+      movingDate: "", //이사일
+    },
+  };
   ////////////////////주소 모달 시작////////////////////
   //주소 모달 열기 핸들러
   const postHandleOpenModal = (type: any) => {
@@ -451,10 +471,12 @@ export default function SiteDetailComponent(props: any) {
                   ></InputBox>
                 </InfoLfEditContent>
               </InfoLfBox>
-              <InfoLfBox>
+              {/* <InfoLfBox>
                 <InfoLfTitle>계약번호</InfoLfTitle>
-                <InfoLfContent>{detailData?.recNum}</InfoLfContent>
-              </InfoLfBox>
+                <InfoLfContent>
+                  {siteDetailData?.receiptDetail?.preAddress}
+                </InfoLfContent>
+              </InfoLfBox> */}
             </ContentTopLF>
             <ContentTopLF>
               <InfoLfBox>
@@ -640,7 +662,7 @@ export default function SiteDetailComponent(props: any) {
           </MoveBtnBox>
         </MoveBtnContainer> */}
           <BtnBox>
-            <CustomButton
+            {/* <CustomButton
               width={"48%"}
               height={"6vw"}
               text={`닫기`}
@@ -650,11 +672,11 @@ export default function SiteDetailComponent(props: any) {
               $outline={"0.15vw solid #dcdcdc"}
               color={"black"}
               onClick={() => detailEditVisible(false)}
-            ></CustomButton>
+            ></CustomButton> */}
             <CustomButton
-              width={"48%"}
+              width={"100%"}
               height={"6vw"}
-              text={`저장`}
+              text={`다음으로`}
               size={"2vw"}
               radius={"0.6vw"}
               // onClick={() => detailPageSave()}
