@@ -261,7 +261,7 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
   const onClickCheck = () => {
     setIsChecked(!isChecked);
   };
-  // 상세정보 수정API
+  // 서명정보 전송API
   const postContractSignData = async () => {
     const requestPram = {
       contractSignData: drawingData,
@@ -277,11 +277,49 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
       setOnContractFinishPage && setOnContractFinishPage(true);
     } else {
       alert("Fail to getDetailList()");
-      console.log("Fail to getDetailList()");
+      disableScrollLock();
       setOnContractFinishPage && setOnContractFinishPage(false);
     }
   };
+  // 스크롤 잠금
+  const scrollRock = () => {
+    const { body } = document;
 
+    if (!body.getAttribute("scrollY")) {
+      const pageY = window.pageYOffset;
+
+      body.setAttribute("scrollY", pageY.toString());
+
+      body.style.overflow = "hidden";
+      body.style.touchAction = "none";
+      body.style.position = "fixed";
+      body.style.left = "0px";
+      body.style.right = "0px";
+      body.style.bottom = "0px";
+      body.style.top = `-${pageY}px`;
+      body.style.scrollBehavior = "contain";
+    }
+  };
+
+  // 스크롤 잠금 해제
+  const disableScrollLock = () => {
+    const { body } = document;
+
+    if (body.getAttribute("scrollY")) {
+      body.style.removeProperty("overflow");
+      body.style.removeProperty("position");
+      body.style.removeProperty("top");
+      body.style.removeProperty("left");
+      body.style.removeProperty("right");
+      body.style.removeProperty("bottom");
+      body.style.removeProperty("touchAction");
+      body.style.removeProperty("scrollBehavior");
+      body.style.touchAction = "auto";
+      window.scrollTo(0, Number(body.getAttribute("scrollY")));
+
+      body.removeAttribute("scrollY");
+    }
+  };
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
   useEffect(() => {
@@ -298,6 +336,7 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
     setTool("pen");
     setPenColor("#000000");
     setDrawingData([]);
+    scrollRock();
   }, []);
 
   useEffect(() => {
