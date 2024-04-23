@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 const ListBox = styled.div`
   background-color: #ffffff;
   width: 100%;
-  height: 5vh;
+  height: 8vw;
   border-radius: 0.6vw;
   outline: 0.2vw solid #d8d8d8;
   display: flex;
@@ -50,7 +50,7 @@ const PriceInputArea = styled.div`
 const TotalChargeBox = styled.div`
   background-color: #f4f4f4;
   width: 100%;
-  height: 7vh;
+  height: 12vw;
   border-radius: 0.6vw;
   display: flex;
   align-items: center;

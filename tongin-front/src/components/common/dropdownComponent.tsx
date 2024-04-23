@@ -16,7 +16,7 @@ const SelectBox = styled.div<{
   background-color: #ffffff;
   align-self: center;
   border: ${(props) =>
-    props.$show ? "0.3vw solid #ff7f3b" : "0.2vw solid #5f5f5f"};
+    props.$show ? "0.3vw solid #ff7f3b" : "0.2vw solid #aaaaaa"};
   cursor: pointer;
 `;
 const Label = styled.label`

@@ -197,6 +197,9 @@ const SecondPage = (props: any) => {
     }
   };
 
+  console.log("reNum>>>>");
+  console.log(reNum);
+
   const roomDataList: any = [];
   const livingroomDataList: any = [];
   const kitchen: any = [];

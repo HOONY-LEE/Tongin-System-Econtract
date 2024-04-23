@@ -21,7 +21,7 @@ const InputCBMBox = styled.div`
   background-color: white;
   border-radius: 0.4vw;
   margin-right: 0.8vw;
-  border: 0.2vw solid #777777;
+  border: 0.2vw solid #aaaaaa;
   &:hover {
     cursor: pointer;
   }

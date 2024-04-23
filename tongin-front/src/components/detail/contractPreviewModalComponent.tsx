@@ -42,8 +42,8 @@ const Wrapper = styled.div`
 `;
 
 const TopArea = styled.div`
-  width: 100%;
-  height: 7vh;
+  width: 80vw;
+  height: 8vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -59,13 +59,13 @@ const BottomArea = styled.div`
 
 const LeftArea = styled.div`
   height: 100%;
-  width: 20%;
+  width: 36%;
   display: flex;
   align-items: center;
 `;
 
 const MidArea = styled.div`
-  width: 26%;
+  width: 28%;
   height: 100%;
   display: flex;
   justify-content: space-around;
@@ -73,7 +73,7 @@ const MidArea = styled.div`
 `;
 const RightArea = styled.div`
   height: 100%;
-  width: 20%;
+  width: 36%;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -89,7 +89,6 @@ const CloseBox = styled.div`
 `;
 
 const ContractArea = styled.div`
-  margin-top: 1vh;
   width: 80vw;
   height: 113vw;
   outline: 0.2vw solid #e4e4e4;
@@ -309,6 +308,7 @@ const ContractPreviewModalComponent = (props: any) => {
           )}
           {currentPage === 2 && (
             <SecondPage
+              reNum={reNum}
               setLines={setLines}
               drawingData={drawingData}
               lines={lines}
