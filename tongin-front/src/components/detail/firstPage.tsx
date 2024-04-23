@@ -6,6 +6,7 @@ import DrawingViewPanel from "./detailDrawingPanelComponent";
 import DetailDrawView from "./dtailDrawView";
 import API from "../../API/API";
 import { Image } from "../common/image";
+import { text } from "stream/consumers";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -167,22 +168,35 @@ const MemoBox = styled.div`
 `;
 
 const TextMemoBox = styled.div`
-  margin-top: 1vw;
+  margin-top: 2vw;
   width: 100%;
   height: 7vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.4vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2vw;
-  padding-left: 2vw;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  padding: 1vw;
+`;
+
+const TextLine = styled.div`
+  font-size: 1.2vw;
+`;
+const TextSpan1 = styled.span`
+  color: black;
+  font-size: 1.2vw;
+`;
+const TextSpan2 = styled.span`
+  color: #ff7f3b;
+  text-decoration: underline;
+  font-size: 1.2vw;
 `;
 
 const MemoRound = styled.div`
   width: 37vw;
-  height: 52vw;
+  height: 42vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -191,6 +205,26 @@ const MemoRound = styled.div`
   align-items: center;
   padding-top: 2vw;
   padding-left: 2vw;
+`;
+
+const TextMemoRound = styled.div`
+  width: 37vw;
+  height: 12vw;
+  border: 0.1vw solid #a1a1a1;
+  background-color: #fafafa;
+  border-radius: 0.6vw;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  text-align: start;
+  line-height: 1.6vw;
+  padding: 1.8vw;
+  margin-top: 1vw;
+  font-size: 1.2vw;
+  font-weight: 300;
+  color: #6d6d6d;
+  outline: none;
+  resize: none;
 `;
 
 const MemoRound2 = styled.div`
@@ -205,6 +239,7 @@ const BottomComponent = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  margin-top: 1vw;
 `;
 const PriceListArea = styled.div`
   width: 48vw;
@@ -222,9 +257,10 @@ const PriceListBox = styled.div`
 
 const TotalPriceBox = styled.div`
   width: 100%;
-  height: 4vw;
+  height: 5vw;
   display: flex;
   border-bottom: 0.16vw solid black;
+  margin-top: 0.1vw;
 `;
 
 const TotalPriceName = styled.div`
@@ -256,7 +292,7 @@ const PriceNameInputEng = styled.p`
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 7vw;
+  height: 8vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -278,7 +314,7 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 8.4vw;
+  height: 10vw;
 
   display: flex;
   justify-content: space-between;
@@ -297,6 +333,7 @@ const SignatureArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0.4vw;
 `;
 
 const PriceItemBox = styled.div`
@@ -440,7 +477,7 @@ const TotalTd = styled.div<{
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 const BottomLine = styled.div`
-  margin-top: 1vw;
+  margin-top: 2vw;
   width: 100%;
   border-top: 0.1vw solid black;
 `;
@@ -623,6 +660,7 @@ const FirstPage = (props: any) => {
   const [tool, setTool] = useState<string>("pen");
   const [penColorVisible, setPenColorVisible] = useState<boolean>(false);
   const [penColor, setPenColor] = useState<any>();
+  const [textMemo, setTextMemo] = useState<string>("");
 
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
 
@@ -658,8 +696,10 @@ const FirstPage = (props: any) => {
     if (response.status === 200) {
       console.log(response);
       const result = response.data.receiptMemoData;
+      const result2 = response.data.textMemo;
       setDrawingData(result);
-      console.log("불러오기성공", result);
+      setTextMemo(result2);
+      console.log("텍스트메모", result2);
     } else {
       console.log("Fail to getDrawingData()");
     }
@@ -963,10 +1003,10 @@ const FirstPage = (props: any) => {
                   </Layer>
                 </Stage>
               </MemoRound>
+              <TextMemoRound>{textMemo}</TextMemoRound>
             </MemoBox>
             <PriceListArea>
               <PriceListBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>이사물량(폐기/운반)</PriceItemName>
                   <PriceItemPrice>
@@ -974,7 +1014,6 @@ const FirstPage = (props: any) => {
                     <Unit>cbm</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>사다리차 비용</PriceItemName>
                   <PriceItemPrice>
@@ -984,7 +1023,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>입주청소서비스</PriceItemName>
                   <PriceItemPrice>
@@ -994,7 +1032,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>정리수납서비스</PriceItemName>
                   <PriceItemPrice>
@@ -1004,7 +1041,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>탈취살균서비스</PriceItemName>
                   <PriceItemPrice>
@@ -1014,7 +1050,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>기타서비스</PriceItemName>
                   <PriceItemPrice>
@@ -1024,7 +1059,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>옵션비용(분해/설치)</PriceItemName>
                   <PriceItemPrice>
@@ -1032,7 +1066,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>이사비용</PriceItemName>
                   <PriceItemPrice>
@@ -1040,7 +1073,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>보관비용</PriceItemName>
                   <PriceItemPrice>
@@ -1048,7 +1080,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>부가세(VAT)</PriceItemName>
                   <PriceItemPrice>
@@ -1056,7 +1087,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>계약금</PriceItemName>
                   <PriceItemPrice>
@@ -1064,7 +1094,6 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                {/* 이사물량 */}
                 <PriceItemBox>
                   <PriceItemName>잔금</PriceItemName>
                   <PriceItemPrice>
@@ -1122,7 +1151,7 @@ const FirstPage = (props: any) => {
                           <Line
                             key={i}
                             points={line.points.map(
-                              (point: number) => point * 0.23
+                              (point: number) => point * 0.2
                             )}
                             stroke={line.stroke}
                             strokeWidth={1}
@@ -1142,9 +1171,22 @@ const FirstPage = (props: any) => {
               </SignatureBox>
             </PriceListArea>
           </BottomComponent>
-          <TextMemoBox></TextMemoBox>
-          <TextMemoBox></TextMemoBox>
-          {/* <BottomLine></BottomLine> */}
+          <TextMemoBox>
+            <TextLine>
+              <TextSpan1>(주)통인익스프레스는&nbsp;</TextSpan1>
+              <TextSpan2>
+                이사잔금을 현장에서 수금하지 않습니다.&nbsp;
+              </TextSpan2>
+              <TextSpan1>
+                아래의 계좌로 입금 또는 본사 카드승인으로 결제해주세요.
+              </TextSpan1>
+            </TextLine>
+            <TextLine>
+              온라인 입금 : 우리은행 (주)통인익스프레스 1005-080-767801 / 카드
+              승인 : 02) 3678-0123
+            </TextLine>
+          </TextMemoBox>
+          <BottomLine></BottomLine>
         </ContentArea>
         <FooterArea>
           <FooterItemBox>

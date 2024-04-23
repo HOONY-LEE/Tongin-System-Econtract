@@ -78,7 +78,7 @@ const MoveDateInput = styled.div`
   font-weight: 500;
   flex-direction: column;
   align-items: center;
-  outline: 0.2vw solid #dbdbdb;
+  border: 0.2vw solid #777777;
   border-radius: 0.6vw;
   justify-content: center;
   &&:hover {

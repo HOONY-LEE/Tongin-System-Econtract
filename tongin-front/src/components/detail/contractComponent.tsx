@@ -77,7 +77,8 @@ const ExportBtn = styled.div`
 const CBMArea = styled.div`
   background-color: #f4f4f4;
   width: 100%;
-  height: 7vw;
+  height: 8vw;
+  border: 0.2vw solid #f4f4f4;
   border-radius: 0.6vw;
   display: flex;
   justify-content: space-around;
@@ -141,9 +142,9 @@ const PaymentArea = styled.div`
 const ListBox = styled.div`
   background-color: #ffffff;
   width: 100%;
-  height: 5vh;
+  height: 8vw;
   border-radius: 0.6vw;
-  outline: 0.2vw solid #d8d8d8;
+  border: 0.2vw solid #d8d8d8;
   display: flex;
   align-items: center;
   justify-content: space-between;

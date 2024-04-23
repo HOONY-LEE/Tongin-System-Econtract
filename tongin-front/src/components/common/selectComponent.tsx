@@ -23,6 +23,7 @@ const SelectBox = styled.div<{
   font-size: 2.2vw;
   font-weight: 400;
   border-radius: 0.4vw;
+  border: 0.2vw solid #a3a3a3;
   &:hover {
     cursor: pointer;
   }
