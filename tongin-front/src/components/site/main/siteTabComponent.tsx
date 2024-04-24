@@ -61,7 +61,7 @@ const TabMenu = styled.ul`
     padding: 10px;
     font-size: 2vw;
     transition: 0.2s;
-    border-radius: 0.4vw 0.4vw 0px 0px;
+    border-radius: 0.5vw 0.5vw 0px 0px;
     background-color: #ebebeb;
     color: black;
   }
@@ -78,7 +78,7 @@ const ContentBox = styled.div`
   text-align: center;
   width: 100%;
   height: 100%;
-  border-radius: 0px 0px 0.6vw 0.6vw;
+  border-radius: 0px 0.6vw 0.6vw 0.6vw;
 `;
 
 //  상세정보 탭
@@ -160,83 +160,11 @@ export default function SiteTabPage() {
   const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
   const [preventDefault, setPreventDefault] = useState<any>(false);
-  const menuArr = [
-    { name: "1. 상세정보", content: "견적리스트 영역" },
-    { name: "2. 물품정보", content: "미계약 리스트 영역" },
-    { name: "3. 옵션선택", content: "계약 리스트 영역" },
-    { name: "4. 견적•계약서", content: "작업리스트 영역" },
-  ];
+  const menuArr = [{ name: "자체견적 상세정보", content: "견적리스트 영역" }];
 
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
-
-  // // 상세정보 호출API
-  // const getDetailList = async () => {
-  //   const response: any = await API.get(`/receipt/detail/${reNum}`);
-  //   if (response.status === 200) {
-  //     const result = response.data.receiptDetail;
-  //     console.log("detailData>>", result);
-  //     setDetailData(result);
-  //   } else {
-  //     console.log("Fail to getDetailList()");
-  //   }
-  // };
-
-  // // 물품정보 호출API
-  // const getProductList = async () => {
-  //   const response = await API.get(`/receipt/article/${reNum}`);
-  //   if (response.status === 200) {
-  //     const result = response.data.receiptArticleData;
-  //     console.log("물품정보리스트>>>>>>");
-  //     console.log(result);
-  //     setCurrentProductList(result);
-  //   } else {
-  //     console.log("Fail to getProductList()");
-  //   }
-  // };
-
-  // // 옵션정보 호출API
-  // const getOptionList = async () => {
-  //   //임시 샘플데이터 사용
-  //   // setOptionData(realOptionData);
-  //   // setOptionData(newOptionData);
-  //   const response = await API.get(`/receipt/option2/${reNum}`);
-  //   if (response.status === 200) {
-  //     console.log("옵션정보호출>>>>");
-  //     console.log(response.data.receiptOptionData);
-  //     setOptionData(response.data.receiptOptionData);
-  //   } else {
-  //     console.log("Fail to getOptionList()");
-  //   }
-  // };
-
-  // // 옵션정보 수정API
-  // const postOptionData = async () => {
-  //   try {
-  //     const requestParam = { receiptOptionData: optionData };
-
-  //     const response = await API.post(`receipt/option2/${reNum}`, requestParam);
-
-  //     if (response.status === 200) {
-  //       alert("옵션정보를 성공적으로 저장했습니다.");
-  //     } else {
-  //       console.log("Fail to saveOptionData()");
-  //     }
-  //   } catch (error) {
-  //     alert("옵션정보를 저장하는데 실패했습니다!");
-  //   }
-  // };
-
-  // // 가격정보 호출API
-  // const getPriceList = async () => {
-  //   const response = await API.get(`/receipt/price/${reNum}`);
-  //   if (response.status === 200) {
-  //     setPriceDataList(response.data.receiptPriceData);
-  //   } else {
-  //     console.log("Fail to getPriceList()");
-  //   }
-  // };
 
   // 메모장 전송 API
   const postDrawingData = async () => {
@@ -356,74 +284,7 @@ export default function SiteTabPage() {
                 <SiteDetailComponent></SiteDetailComponent>
               </DetialTabBox>
             ) : null}
-            {currentTab === 1 ? (
-              <ProductTabBox>
-                {/* <ProductComponent
-                  reNum={reNum}
-                  getProductList={getProductList}
-                  currentProductList={currentProductList}
-                  setCurrentProductList={setCurrentProductList}
-                ></ProductComponent> */}
-              </ProductTabBox>
-            ) : null}
-            {currentTab === 2 ? (
-              <OptionTabBox>
-                {/* <NewOptionComponent
-                  optionData={optionData}
-                  setOptionData={setOptionData}
-                  postOptionData={postOptionData}
-                  reNum={reNum}
-                ></NewOptionComponent> */}
-              </OptionTabBox>
-            ) : null}
-            {currentTab === 3 ? (
-              <ContractTabBox>
-                {/* <ContractComponent
-                  reNum={reNum}
-                  setDrawingData={setDrawingData}
-                  drawingData={drawingData}
-                  setIsScrolled={setIsScrolled}
-                  setLines={setLines}
-                  lines={lines}
-                  detailData={detailData}
-                  articleDataList={currentProductList}
-                  optionData={optionData}
-                  priceDataList={priceDataList}
-                  setPriceDataList={setPriceDataList}
-                ></ContractComponent> */}
-              </ContractTabBox>
-            ) : null}
           </ContentBox>
-
-          <DrawingBtn>
-            <PencilIcon
-              onClick={() => {
-                setDrawingPanel(true);
-                scrollRock();
-                getDrawingData();
-              }}
-              height={"4vw"}
-              fill={"#ffffff"}
-            />
-          </DrawingBtn>
-          {drawingPanel && (
-            <DetailDrawingPanelComponent
-              reNum={reNum}
-              setDrawingData={setDrawingData}
-              drawingData={drawingData}
-              textMemoData={textMemoData}
-              setTextMemoData={setTextMemoData}
-              setIsScrolled={setIsScrolled}
-              setLines={setLines}
-              lines={lines}
-              setPreventDefault={setPreventDefault}
-              preventDefault={preventDefault}
-              disableScrollLock={disableScrollLock}
-              onClose={() => {
-                onClose();
-              }}
-            />
-          )}
         </HomeContainer>
       </FlexXY>
     </>

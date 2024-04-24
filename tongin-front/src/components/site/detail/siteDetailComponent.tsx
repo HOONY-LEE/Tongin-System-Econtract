@@ -7,6 +7,7 @@ import CustomButton from "../../common/customButton";
 import PostModalComponent from "../../detail/postModalComponent";
 import DateModalComponent from "../../detail/dateModalComponent";
 import { format } from "date-fns";
+import { getByPlaceholderText } from "@testing-library/react";
 // import DetailViewComponent from "./detailViewComponent";
 // import DetailEditComponent from "./detailEditComponent";
 // import { Toast } from "../common/toastMessegeComponent";
@@ -17,7 +18,7 @@ const ContentBox = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  border-radius: 0 0 0.7vw 0.7vw;
+  border-radius: 0 0.7vw 0.7vw 0.7vw;
   background-color: white;
   /* outline: 0.2vw solid gray; */
   /* margin: 0.7vh 0vh 0.7vh 0vh; */
@@ -390,48 +391,56 @@ export default function SiteDetailComponent(props: any) {
       consultationDate: "", // 상담일
       contractDate: "", // 계약일
       movingDate: "", //이사일
+      visiteDate: "", // 견적 희망일
+      requestMoveDate: "", //이사요청일
     },
   };
   ////////////////////Data state////////////////////
-  const [name, setName] = useState<any>(siteDetailData.receiptDetail.name);
+  const [name, setName] = useState<any>(siteDetailData.receiptDetail.name); // 이름
   const [contact, setContact] = useState<any>(
     siteDetailData.receiptDetail.contact
-  );
+  ); //전화번호
   const [statusCode, setStatusCode] = useState<any>(
     siteDetailData.receiptDetail.statusCode
-  );
+  ); // 계약상태
   const [preZipCode, setPreZipCode] = useState<any>(
     siteDetailData.receiptDetail.preZipCode
-  );
+  ); // 전 주소 우편번호
   const [preAddress, setPreAddress] = useState<any>(
     siteDetailData.receiptDetail.preAddress
-  );
+  ); // 전 주소
   const [preAddressDetail, setPreAddressDetail] = useState<any>(
     siteDetailData.receiptDetail.preAddressDetail
-  );
+  ); // 전 상세 주소
   const [afterZipCode, setAfterZipCode] = useState<any>(
     siteDetailData.receiptDetail.afterZipCode
-  );
+  ); // 후 주소 우편번호
   const [afterAddress, setAfterAddress] = useState<any>(
     siteDetailData.receiptDetail.afterAddress
-  );
+  ); //후 주소
   const [afterAddressDetail, setAfterAddressDetail] = useState<any>(
-    siteDetailData.receiptDetail.receptionDate
-  );
-  const [receptionDate, setReceptionDate] = useState<any>(
     siteDetailData.receiptDetail.afterAddressDetail
-  );
+  ); // 후 상세주소
+  const [receptionDate, setReceptionDate] = useState<any>(
+    siteDetailData.receiptDetail.receptionDate
+  ); //접수일
   const [consultationScheduledDate, setConsultationScheduledDate] =
-    useState<any>(siteDetailData.receiptDetail.consultationScheduledDate);
+    useState<any>(siteDetailData.receiptDetail.consultationScheduledDate); //상담예정일
   const [consultationDate, setConsultationDate] = useState<any>(
     siteDetailData.receiptDetail.consultationDate
-  );
+  ); //상담일
   const [contractDate, setContractDate] = useState<any>(
     siteDetailData.receiptDetail.contractDate
-  );
+  ); //계약일
   const [movingDate, setMovingDate] = useState<any>(
     siteDetailData.receiptDetail.movingDate
-  );
+  ); //이사일
+  const [visiteDate, setVisiteDate] = useState<any>(
+    siteDetailData.receiptDetail.visiteDate
+  ); //견적희망일
+  const [requestMoveDate, setRequestMoveDate] = useState<any>(
+    siteDetailData.receiptDetail.requestMoveDate
+  ); //이사요청일
   /////////////////////////////////////////////////////
   ////////////////////주소 모달 시작////////////////////
   //주소 모달 열기 핸들러
@@ -489,6 +498,10 @@ export default function SiteDetailComponent(props: any) {
         setConsultationDate(format(myData, "yMMdd"));
       } else if (dateType === "contract") {
         setContractDate(format(myData, "yMMdd"));
+      } else if (dateType === "visite") {
+        setVisiteDate(format(myData, "yMMdd"));
+      } else if (dateType === "request") {
+        setRequestMoveDate(format(myData, "yMMdd"));
       } else {
         return "";
       }
@@ -680,7 +693,7 @@ export default function SiteDetailComponent(props: any) {
               <InputBox
                 readOnly
                 placeholder="전 주소를 입력해 주세요."
-                value={`${preAddress} ${preZipCode ? `( ${preZipCode} )` : ""}`}
+                value={`${preAddress}${preZipCode ? ` ( ${preZipCode} )` : ""}`}
               ></InputBox>
             </UserAddressEditInput>
             <UserAddressEditInput>
@@ -701,8 +714,8 @@ export default function SiteDetailComponent(props: any) {
                   postHandleOpenModal("after");
                 }}
                 placeholder="후 주소를 입력해 주세요"
-                value={`${afterAddress} ${
-                  afterZipCode ? `( ${afterZipCode} )` : ""
+                value={`${afterAddress}${
+                  afterZipCode ? ` ( ${afterZipCode} )` : ""
                 }`}
                 // onChange={onChangeHandle}
               ></InputBox>
@@ -731,24 +744,7 @@ export default function SiteDetailComponent(props: any) {
                   value={receptionDate.replace(formattedDate, "$1-$2-$3")}
                 ></InputBox>
               </MoveDateInput>
-            </MoveDateBox>
-            <MoveDateBox>
-              <MoveDateTitle>계약일</MoveDateTitle>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal("contract");
-                }}
-              >
-                <InputBox
-                  placeholder="--"
-                  readOnly
-                  disabled
-                  value={contractDate.replace(formattedDate, "$1-$2-$3")}
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox>
-          </MoveDateContainer>
-          <MoveDateContainer>
+            </MoveDateBox>{" "}
             <MoveDateBox>
               <MoveDateTitle>상담일</MoveDateTitle>
               <MoveDateInput
@@ -763,6 +759,44 @@ export default function SiteDetailComponent(props: any) {
                 ></InputBox>
               </MoveDateInput>
             </MoveDateBox>
+            {/* <MoveDateBox>
+              <MoveDateTitle>계약일</MoveDateTitle>
+              <MoveDateInput>
+                <InputBox placeholder="--" readOnly disabled></InputBox>
+              </MoveDateInput>
+            </MoveDateBox> */}
+          </MoveDateContainer>
+          <MoveDateContainer>
+            <MoveDateBox>
+              <MoveDateTitle>이사요청일</MoveDateTitle>
+              <MoveDateInput
+                onClick={() => {
+                  dateHandleOpenModal("request");
+                }}
+              >
+                <InputBox
+                  placeholder="--"
+                  readOnly
+                  value={requestMoveDate.replace(formattedDate, "$1-$2-$3")}
+                ></InputBox>
+              </MoveDateInput>
+            </MoveDateBox>
+            <MoveDateBox>
+              <MoveDateTitle>견적 희망일</MoveDateTitle>
+              <MoveDateInput
+                onClick={() => {
+                  dateHandleOpenModal("visite");
+                }}
+              >
+                <InputBox
+                  placeholder="--"
+                  readOnly
+                  value={visiteDate.replace(formattedDate, "$1-$2-$3")}
+                ></InputBox>
+              </MoveDateInput>
+            </MoveDateBox>
+          </MoveDateContainer>
+          <MoveDateContainer>
             <MoveDateBox>
               <MoveDateTitle>이사일</MoveDateTitle>
               <MoveDateInput
@@ -778,6 +812,7 @@ export default function SiteDetailComponent(props: any) {
               </MoveDateInput>
             </MoveDateBox>
           </MoveDateContainer>
+
           {/* <MoveBtnContainer>
           <MoveBtnTitle>이사종류</MoveBtnTitle>
           <MoveBtnBox>
