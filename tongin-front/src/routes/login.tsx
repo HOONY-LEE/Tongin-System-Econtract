@@ -44,7 +44,7 @@ const LogoText = styled.div`
   text-align: center;
   font-weight: 500;
   font-size: 2.2vw;
-  color: #ea5404;
+  color: #ff7f3b;
 `;
 const OutlineInputbox = styled.div<{
   $outLine?: string;
@@ -106,6 +106,10 @@ export default function Login() {
 
   const rememberAccount =
     rememberAccountString !== null ? JSON.parse(rememberAccountString) : false;
+
+  const loginUserString = localStorage.getItem("loginUser");
+
+  const loginUser = loginUserString && JSON.parse(loginUserString);
 
   const tonginOrange = "0.3vw solid #FF7F3B";
   const tonginDisable = "0.2vw solid #E7E7E7";
