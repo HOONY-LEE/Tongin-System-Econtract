@@ -71,6 +71,7 @@ const ListBox = styled.div`
 `;
 
 export default function TabComponent() {
+  const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
   const [receiptList, setReceiptList] = useState<any[]>([]); // receipt list
   const [currentTab, setCurrentTab] = useState(0); // current tab
   const [invoiceList, setInvoiceList] = useState<any[]>([]); // quotation list
@@ -91,7 +92,6 @@ export default function TabComponent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
         const requestParam = {
           headers: {
             empCod: loginUser.empCod,
