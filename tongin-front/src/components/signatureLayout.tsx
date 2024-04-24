@@ -9,6 +9,7 @@ import DetailDrawBlankModalComponent from "./detail/detailDrawBlankModal";
 import { Image } from "./common/image";
 import CustomButton from "./common/customButton";
 import { Dispatch, SetStateAction } from "react";
+import BackIcon from "./icon/backIcon";
 const CalculatorComponentWrapper = styled.div`
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -26,7 +27,7 @@ const CalculatorComponentWrapper = styled.div`
   transform: translate(-50%, -50%);
   z-index: 8000;
   width: 90vw;
-  height: 42vh;
+  height: 60vw;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
@@ -35,7 +36,7 @@ const CalculatorComponentWrapper = styled.div`
   justify-content: center;
 `;
 const Title = styled.div`
-  width: 100%;
+  width: 50vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +57,7 @@ const CanvasPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 29vh;
+  height: 50vw;
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -66,43 +67,53 @@ const CnavasToolText = styled.div`
   color: #bebebe;
   font-weight: 900;
   font-size: 2vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  /* line-height: 1vw; */
 `;
 const CanvasToolBox = styled.div`
   width: 18vw;
-  height: 6vh;
+  height: 6vw;
   display: flex;
+
   align-items: center;
-  justify-content: center;
 `;
 const CanvasTool = styled.div`
-  border-radius: 50% 50% 50% 50%;
-  width: 12vw;
-  height: 12vw;
+  border-radius: 0.4vw;
+  width: 15vw;
+  padding: 0 1vw;
+
+  height: 4vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction: column; */
   background-color: #ffffff;
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.03),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
+  /* outline: 1px solid red; */
 `;
 const ToolContainer = styled.div`
-  padding-left: 4vw;
-  width: 90vw;
-  height: 7vh;
-  /* outline: 1px solid red; */
+  padding-right: 2vw;
+  margin-left: auto;
   justify-content: center;
   display: flex;
+  align-items: center;
+  height: 100%;
+  /* outline: 1px solid red; */
 `;
 
 const UserAgreeBox = styled.div`
   position: fixed;
-  top: 58%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8000;
   width: 90vw;
-  height: 10vh;
+  height: 15vw;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
@@ -118,12 +129,11 @@ const UserAgreeText = styled.div`
 const UserAgreeCheckBox = styled.div``;
 const FinishBox = styled.div`
   position: fixed;
-  top: 67%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8000;
   width: 90vw;
-  /* height: 10vh; */
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
@@ -354,7 +364,15 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
         ></DetailDrawBlankModalComponent>
       )}
       <CalculatorComponentWrapper id={"BackgroundPanel"}>
-        <Title>서명을 완료해 주세요</Title>
+        <ToolContainer>
+          <Title>서명을 완료해 주세요</Title>
+          <CanvasToolBox>
+            <CanvasTool onClick={() => isBlank()}>
+              <BackIcon height={"2.3vw"} fill={"#bebebe"} />
+              <CnavasToolText>{"다시 서명"}</CnavasToolText>
+            </CanvasTool>
+          </CanvasToolBox>
+        </ToolContainer>
         <div
           onContextMenu={(e) => {
             e.preventDefault();
@@ -393,14 +411,6 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
                 </Layer>
               </Stage>
             </CanvasPanel>
-            <ToolContainer>
-              <CanvasToolBox>
-                <CanvasTool onClick={() => isBlank()}>
-                  <BlankBoxIcon height={"4vw"} fill={"#AEAEAE"} />
-                  <CnavasToolText>{"다시 서명"}</CnavasToolText>
-                </CanvasTool>
-              </CanvasToolBox>
-            </ToolContainer>
           </CanvasBox>
         </div>
       </CalculatorComponentWrapper>
