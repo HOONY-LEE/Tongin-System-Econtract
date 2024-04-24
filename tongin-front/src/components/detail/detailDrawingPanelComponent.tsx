@@ -21,6 +21,8 @@ const Backdrop = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2); /* 배경을 약간 어둡게 만듭니다. */
   z-index: 9998; /* 모달보다 아래에 위치하도록 설정합니다. */
+  user-select: none;
+  pointer-events: none;
 `;
 
 const CalculatorComponentWrapper = styled.div`
@@ -112,6 +114,8 @@ const CanvasPanel = styled.div`
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
+  user-select: none;
+  /* pointer-events: none; */
   /* touch-action: none; */
 `;
 const CanvasToolBox = styled.div`
