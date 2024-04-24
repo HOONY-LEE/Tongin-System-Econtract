@@ -7,7 +7,9 @@ import CustomButton from "../../common/customButton";
 import PostModalComponent from "../../detail/postModalComponent";
 import DateModalComponent from "../../detail/dateModalComponent";
 import { format } from "date-fns";
-
+import API from "../../../API/API";
+import { Toast } from "../../common/toastMessegeComponent";
+import { useNavigate } from "react-router-dom";
 // import DetailViewComponent from "./detailViewComponent";
 // import DetailEditComponent from "./detailEditComponent";
 // import { Toast } from "../common/toastMessegeComponent";
@@ -372,75 +374,67 @@ export default function SiteDetailComponent(props: any) {
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
 
   const [fetchStatus, setFetchStatus] = useState(false); // toast messege
-  const [status, setStatus] = useState(false); // toast messege
+  const [status, setStatus] = useState(""); // toast messege
+  const [text, setText] = useState(""); // toast messege
 
   ////////////////////Data////////////////////
-  const siteDetailData = {
-    receiptDetail: {
-      name: "ㅇㅇㅇ",
-      contact: "",
+  const siteDetailData: any = {
+    visitDate: "",
+    selfReceiptData: {
+      memNm: "",
+      hPhone: "",
       statusCode: "",
-      preZipCode: "",
-      preAddress: "",
-      preAddressDetail: "",
-      afterZipCode: "",
-      afterAddress: "",
-      afterAddressDetail: "",
-      receptionDate: "", // 접수일
-      consultationScheduledDate: "", // 상담 예정일
-      consultationDate: "", // 상담일
-      contractDate: "", // 계약일
-      movingDate: "", //이사일
-      visiteDate: "", // 견적 희망일
-      requestMoveDate: "", //이사요청일
+      fromZipCd: "",
+      FromAddr1: "",
+      FromAddr2: "",
+      toZipCd: "",
+      toAddr1: "",
+      toAddr2: "",
+      serReqDt: "", //이사일
     },
   };
   ////////////////////Data state////////////////////
-  const [name, setName] = useState<any>(siteDetailData.receiptDetail.name); // 이름
-  const [contact, setContact] = useState<any>(
-    siteDetailData.receiptDetail.contact
+  const [memNm, setMemNm] = useState<any>(siteDetailData.selfReceiptData.memNm); // 이름
+  const [hPhone, setHPhone] = useState<any>(
+    siteDetailData.selfReceiptData.hPhone
   ); //전화번호
+
   const [statusCode, setStatusCode] = useState<any>(
-    siteDetailData.receiptDetail.statusCode
+    siteDetailData.selfReceiptData.statusCode
   ); // 계약상태
-  const [preZipCode, setPreZipCode] = useState<any>(
-    siteDetailData.receiptDetail.preZipCode
+
+  const [fromZipCd, setFromZipCd] = useState<any>(
+    siteDetailData.selfReceiptData.fromZipCd
   ); // 전 주소 우편번호
-  const [preAddress, setPreAddress] = useState<any>(
-    siteDetailData.receiptDetail.preAddress
+
+  const [FromAddr1, setFromAddr1] = useState<any>(
+    siteDetailData.selfReceiptData.FromAddr1
   ); // 전 주소
-  const [preAddressDetail, setPreAddressDetail] = useState<any>(
-    siteDetailData.receiptDetail.preAddressDetail
+
+  const [FromAddr2, setFromAddr2] = useState<any>(
+    siteDetailData.selfReceiptData.FromAddr2
   ); // 전 상세 주소
-  const [afterZipCode, setAfterZipCode] = useState<any>(
-    siteDetailData.receiptDetail.afterZipCode
+
+  const [toZipCd, setToZipCd] = useState<any>(
+    siteDetailData.selfReceiptData.toZipCd
   ); // 후 주소 우편번호
-  const [afterAddress, setAfterAddress] = useState<any>(
-    siteDetailData.receiptDetail.afterAddress
+
+  const [toAddr1, setToAddr1] = useState<any>(
+    siteDetailData.selfReceiptData.toAddr1
   ); //후 주소
-  const [afterAddressDetail, setAfterAddressDetail] = useState<any>(
-    siteDetailData.receiptDetail.afterAddressDetail
+
+  const [toAddr2, setToAddr2] = useState<any>(
+    siteDetailData.selfReceiptData.toAddr2
   ); // 후 상세주소
-  const [receptionDate, setReceptionDate] = useState<any>(
-    siteDetailData.receiptDetail.receptionDate
-  ); //접수일
-  const [consultationScheduledDate, setConsultationScheduledDate] =
-    useState<any>(siteDetailData.receiptDetail.consultationScheduledDate); //상담예정일
-  const [consultationDate, setConsultationDate] = useState<any>(
-    siteDetailData.receiptDetail.consultationDate
-  ); //상담일
-  const [contractDate, setContractDate] = useState<any>(
-    siteDetailData.receiptDetail.contractDate
-  ); //계약일
-  const [movingDate, setMovingDate] = useState<any>(
-    siteDetailData.receiptDetail.movingDate
+
+  const [receptionDate, setReceptionDate] = useState<any>(""); //접수일
+
+  const [visitDate, setVisitDate] = useState<any>(siteDetailData.visitDate); //상담일
+
+  const [serReqDt, setSerReqDt] = useState<any>(
+    siteDetailData.selfReceiptData.serReqDt
   ); //이사일
-  const [visiteDate, setVisiteDate] = useState<any>(
-    siteDetailData.receiptDetail.visiteDate
-  ); //견적희망일
-  const [requestMoveDate, setRequestMoveDate] = useState<any>(
-    siteDetailData.receiptDetail.requestMoveDate
-  ); //이사요청일
+
   /////////////////////////////////////////////////////
   ////////////////////주소 모달 시작////////////////////
   //주소 모달 열기 핸들러
@@ -458,15 +452,15 @@ export default function SiteDetailComponent(props: any) {
     setPostData(data);
 
     if (addressType === "prev") {
-      setPreAddress(
+      setFromAddr1(
         `${data.address}${data.buildingName ? " " + data.buildingName : ""}`
       );
-      setPreZipCode(data.zonecode);
+      setFromZipCd(data.zonecode);
     } else if (addressType === "after") {
-      setAfterAddress(
+      setToAddr1(
         `${data.address}${data.buildingName ? " " + data.buildingName : ""}`
       );
-      setAfterZipCode(data.zonecode);
+      setToZipCd(data.zonecode);
     }
   };
   ////////////////////////////////////////////////////
@@ -493,15 +487,11 @@ export default function SiteDetailComponent(props: any) {
       if (dateType === "reception") {
         setReceptionDate(format(myData, "yMMdd"));
       } else if (dateType === "moving") {
-        setMovingDate(format(myData, "yMMdd"));
+        setSerReqDt(format(myData, "yMMdd"));
       } else if (dateType === "consultation") {
-        setConsultationDate(format(myData, "yMMdd"));
-      } else if (dateType === "contract") {
-        setContractDate(format(myData, "yMMdd"));
+        setVisitDate(format(myData, "yMMdd"));
       } else if (dateType === "visite") {
-        setVisiteDate(format(myData, "yMMdd"));
-      } else if (dateType === "request") {
-        setRequestMoveDate(format(myData, "yMMdd"));
+        setVisitDate(format(myData, "yMMdd"));
       } else {
         return "";
       }
@@ -514,37 +504,48 @@ export default function SiteDetailComponent(props: any) {
     if (dateType === "reception") {
       setReceptionDate("");
     } else if (dateType === "moving") {
-      setMovingDate("");
+      setSerReqDt("");
     } else if (dateType === "consultation") {
-      setConsultationDate("");
+      setVisitDate("");
     } else {
       return "";
     }
     dateHandleCloseModal();
   };
   ////////////////////////////////////////////////////
-  const detailEditVisible = (mode: any) => {
-    console.log(mode);
-    if (mode) {
-      setIsDetailEdit(true);
-    } else if (mode === false) {
-      setIsDetailEdit(false);
+
+  //로컬에서 꺼내온 담당자 정보
+  const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
+  const navigate = useNavigate();
+
+  //완료 후 전송
+  const fetchData = async () => {
+    const requestPram: any = {
+      visitDate: visitDate,
+      selfReceiptData: {
+        memNm: memNm,
+        hPhone: hPhone,
+        fromZipCd: fromZipCd,
+        FromAddr1: FromAddr1,
+        FromAddr2: FromAddr2,
+        toZipCd: toZipCd,
+        toAddr1: toAddr1,
+        toAddr2: toAddr2,
+        serReqDt: serReqDt, //이사일
+      },
+    };
+    const response: any = await API.post("/receipt/self", requestPram);
+    if (response.status === 200) {
+      setStatus("SUCCESS");
+      setText("현장접수가 완료되었습니다.");
+      setFetchStatus(true);
+      navigate(`/contractlist`);
+    } else {
+      setText("완료가 되지 않았습니다. 정보를 확인해 주세요.");
+      setStatus("FAIL");
+      setFetchStatus(true);
     }
   };
-  const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
-  // const fetchData = async () => {
-  //   const response: any = await API.get("receipt/detail/12");
-  //   if (response.status === 200) {
-  //     console.log(response.data.receiptDetail);
-  //     setDetailData(response.data.receiptDetail);
-  //   } else {
-  //     console.log("에러");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   //전화번호 정규식 수정
   const onChangUserContact = (e: any) => {
@@ -569,29 +570,13 @@ export default function SiteDetailComponent(props: any) {
     }
 
     e.target.value = formattedValue;
-    setContact(e.target.value);
+    setHPhone(e.target.value);
   };
-
-  // const response: any = await API.put(
-  //   `/receipt/detail/${reNum}`,
-  //   requestPram
-  // );
-  // if (response.status === 200) {
-  //   console.log(response);
-  //   setStatus("SUCCESS");
-  //   setFetchStatus(true);
-
-  //   detailEditVisible(false);
-  //   getDetailList();
-  // } else if (response.statusCode === 400) {
-  //   setStatus("FAIL");
-  //   alert("Fail to getDetailList()");
-  // }
 
   // 에러방지를 위한 onChangeHandle
   const onChangeHandle = () => {};
   let today = new Date();
-  console.log(today);
+  // console.log(today);
   useEffect(() => {
     const myData = new Date(today);
     setReceptionDate(format(myData, "yMMdd"));
@@ -600,6 +585,14 @@ export default function SiteDetailComponent(props: any) {
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
   return (
     <>
+      {fetchStatus && (
+        <Toast
+          text={text}
+          setFetchStatus={setFetchStatus}
+          fetchStatus={fetchStatus}
+          status={status}
+        />
+      )}
       {isModalOpen && (
         <PostModalComponent
           onClose={postHandleCloseModal}
@@ -624,9 +617,9 @@ export default function SiteDetailComponent(props: any) {
                 <InfoLfEditContent>
                   <InputBox
                     placeholder="고객명을 입력해 주세요"
-                    defaultValue={name}
+                    defaultValue={memNm}
                     onChange={(e) => {
-                      setName(e.target.value);
+                      setMemNm(e.target.value);
                     }}
                   ></InputBox>
                 </InfoLfEditContent>
@@ -644,7 +637,7 @@ export default function SiteDetailComponent(props: any) {
                 <InfoLfEditContent>
                   <InputBox
                     placeholder="전화번호를 입력해 주세요"
-                    defaultValue={contact}
+                    defaultValue={hPhone}
                     onChange={onChangUserContact}
                   ></InputBox>
                 </InfoLfEditContent>
@@ -683,16 +676,16 @@ export default function SiteDetailComponent(props: any) {
               <InputBox
                 readOnly
                 placeholder="전 주소를 입력해 주세요."
-                value={`${preAddress}${preZipCode ? ` ( ${preZipCode} )` : ""}`}
+                value={`${FromAddr1}${fromZipCd ? ` ( ${fromZipCd} )` : ""}`}
                 onChange={onChangeHandle}
               ></InputBox>
             </UserAddressEditInput>
             <UserAddressEditInput>
               <InputBox
                 placeholder="전 상세주소를 입력해 주세요"
-                defaultValue={preAddressDetail}
+                defaultValue={FromAddr2}
                 onChange={(e) => {
-                  setPreAddressDetail(e.target.value);
+                  setFromAddr2(e.target.value);
                 }}
               ></InputBox>
             </UserAddressEditInput>
@@ -705,18 +698,16 @@ export default function SiteDetailComponent(props: any) {
                   postHandleOpenModal("after");
                 }}
                 placeholder="후 주소를 입력해 주세요"
-                value={`${afterAddress}${
-                  afterZipCode ? ` ( ${afterZipCode} )` : ""
-                }`}
+                value={`${toAddr1}${toZipCd ? ` ( ${toZipCd} )` : ""}`}
                 onChange={onChangeHandle}
               ></InputBox>
             </UserAddressEditInput>
             <UserAddressEditInput>
               <InputBox
                 placeholder="후 상세주소를 입력해 주세요"
-                defaultValue={afterAddressDetail}
+                defaultValue={toAddr2}
                 onChange={(e) => {
-                  setAfterAddressDetail(e.target.value);
+                  setToAddr2(e.target.value);
                 }}
               ></InputBox>
             </UserAddressEditInput>
@@ -745,49 +736,11 @@ export default function SiteDetailComponent(props: any) {
                 <InputBox
                   placeholder="--"
                   readOnly
-                  value={consultationDate.replace(formattedDate, "$1-$2-$3")}
+                  value={visitDate.replace(formattedDate, "$1-$2-$3")}
                   onChange={onChangeHandle}
                 ></InputBox>
               </MoveDateInput>
             </MoveDateBox>
-            {/* <MoveDateBox>
-              <MoveDateTitle>계약일</MoveDateTitle>
-              <MoveDateInput>
-                <InputBox placeholder="--" readOnly disabled></InputBox>
-              </MoveDateInput>
-            </MoveDateBox> */}
-          </MoveDateContainer>
-          <MoveDateContainer>
-            {/* <MoveDateBox>
-              <MoveDateTitle>견적 희망일</MoveDateTitle>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal("visite");
-                }}
-              >
-                <InputBox
-                  placeholder="--"
-                  readOnly
-                  value={visiteDate.replace(formattedDate, "$1-$2-$3")}
-                  onChange={onChangeHandle}
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox> */}
-            {/* <MoveDateBox>
-              <MoveDateTitle>이사요청일</MoveDateTitle>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal("request");
-                }}
-              >
-                <InputBox
-                  placeholder="--"
-                  readOnly
-                  value={requestMoveDate.replace(formattedDate, "$1-$2-$3")}
-                  onChange={onChangeHandle}
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox> */}
           </MoveDateContainer>
           <MoveDateContainer>
             <MoveDateBox>
@@ -800,7 +753,7 @@ export default function SiteDetailComponent(props: any) {
                 <InputBox
                   placeholder="--"
                   readOnly
-                  value={movingDate.replace(formattedDate, "$1-$2-$3")}
+                  value={serReqDt.replace(formattedDate, "$1-$2-$3")}
                   onChange={onChangeHandle}
                 ></InputBox>
               </MoveDateInput>
@@ -814,7 +767,7 @@ export default function SiteDetailComponent(props: any) {
               text={`완료하기`}
               size={"2vw"}
               radius={"0.6vw"}
-              // onClick={() => detailPageSave()}
+              onClick={() => fetchData()}
             ></CustomButton>
           </BtnBox>
         </ContentBottom>
