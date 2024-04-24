@@ -617,8 +617,9 @@ export default function DetailEditComponent(props: any) {
       detailEditVisible(false);
       getDetailList();
     } else if (response.statusCode === 400) {
+      setFetchStatus(true);
       setStatus("FAIL");
-      alert("Fail to getDetailList()");
+      // alert("Fail to getDetailList()");
     }
   };
 

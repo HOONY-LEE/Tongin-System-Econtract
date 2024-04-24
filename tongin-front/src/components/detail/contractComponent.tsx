@@ -4,6 +4,7 @@ import ChargeListComponent from "./chargeListComponent";
 import ContractPreviewModalComponent from "./contractPreviewModalComponent";
 import ContractListModalComponent from "./contractListModalComponent";
 import API from "../../API/API";
+import { Toast } from "../common/toastMessegeComponent";
 
 const ContentBox = styled.div`
   display: flex;
@@ -245,6 +246,8 @@ export default function ContractComponent(props: any) {
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState<boolean>(false);
+  const [fetchStatus, setFetchStatus] = useState(false); // toast messege
+  const [status, setStatus] = useState(""); // toast messege
   const [isContractListModalOpen, setIsContractListModalOpen] =
     useState<boolean>(false);
 
@@ -280,6 +283,8 @@ export default function ContractComponent(props: any) {
     if (response.status === 200) {
       handleOpenModal();
     } else {
+      setFetchStatus(true);
+      setStatus("FAIL");
       alert("가격 정보를 저장하는데 실패했습니다.");
       return;
     }
@@ -335,6 +340,13 @@ export default function ContractComponent(props: any) {
   }, [articleDataList, optionData]);
   return (
     <ContentBox>
+      {fetchStatus && (
+        <Toast
+          status={status}
+          fetchStatus={fetchStatus}
+          setFetchStatus={setFetchStatus}
+        />
+      )}
       <Wrapper>
         <InputArea>
           <CBMArea>

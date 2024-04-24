@@ -28,6 +28,7 @@ import PencilIcon from "../components/icon/pencil";
 import DetailDrawView from "../components/detail/dtailDrawView";
 import NewOptionComponent from "../components/detail/newOptionComponent";
 import { newOptionData } from "../components/common/sampleData3";
+import { Toast } from "../components/common/toastMessegeComponent";
 const HomeContainer = styled.div`
   width: 90vw;
   height: 100%;
@@ -165,6 +166,8 @@ export default function Detail() {
   const [lines2, setLines2] = useState<any[]>([]);
   const reNum = useParams().id;
   const [preventDefault, setPreventDefault] = useState<any>(false);
+  const [fetchStatus, setFetchStatus] = useState(false); // toast messege
+  const [status, setStatus] = useState(""); // toast messege
   const menuArr = [
     { name: "1. 상세정보", content: "견적리스트 영역" },
     { name: "2. 물품정보", content: "미계약 리스트 영역" },
@@ -226,12 +229,18 @@ export default function Detail() {
       const response = await API.post(`receipt/option2/${reNum}`, requestParam);
 
       if (response.status === 200) {
-        alert("옵션정보를 성공적으로 저장했습니다.");
+        setFetchStatus(true);
+        setStatus("SUCCESS");
+        // alert("옵션정보를 성공적으로 저장했습니다.");
       } else {
+        setFetchStatus(true);
+        setStatus("FAIL");
         console.log("Fail to saveOptionData()");
       }
     } catch (error) {
-      alert("옵션정보를 저장하는데 실패했습니다!");
+      setFetchStatus(true);
+      setStatus("FAIL");
+      // alert("옵션정보를 저장하는데 실패했습니다!");
     }
   };
 
@@ -352,6 +361,13 @@ export default function Detail() {
   }, [drawingData2]);
   return (
     <>
+      {fetchStatus && (
+        <Toast
+          status={status}
+          fetchStatus={fetchStatus}
+          setFetchStatus={setFetchStatus}
+        />
+      )}
       <FlexXY>
         <HomeContainer>
           <TabMenu>

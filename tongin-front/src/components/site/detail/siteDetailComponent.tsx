@@ -7,7 +7,7 @@ import CustomButton from "../../common/customButton";
 import PostModalComponent from "../../detail/postModalComponent";
 import DateModalComponent from "../../detail/dateModalComponent";
 import { format } from "date-fns";
-import { getByPlaceholderText } from "@testing-library/react";
+
 // import DetailViewComponent from "./detailViewComponent";
 // import DetailEditComponent from "./detailEditComponent";
 // import { Toast } from "../common/toastMessegeComponent";
@@ -531,7 +531,7 @@ export default function SiteDetailComponent(props: any) {
       setIsDetailEdit(false);
     }
   };
-
+  const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
   // const fetchData = async () => {
   //   const response: any = await API.get("receipt/detail/12");
   //   if (response.status === 200) {
@@ -590,7 +590,12 @@ export default function SiteDetailComponent(props: any) {
 
   // 에러방지를 위한 onChangeHandle
   const onChangeHandle = () => {};
-
+  let today = new Date();
+  console.log(today);
+  useEffect(() => {
+    const myData = new Date(today);
+    setReceptionDate(format(myData, "yMMdd"));
+  }, [today]);
   //날짜 정규식 [ 0000-00-00 ] 형태
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
   return (
@@ -648,34 +653,18 @@ export default function SiteDetailComponent(props: any) {
           <ContentTopRhBox>
             <ContentTopRh>
               <InfoRhBox>
-                <InfoRhTitle>계약담당자</InfoRhTitle>
-                <InfoRhContent>{""}</InfoRhContent>
-              </InfoRhBox>
-              <InfoRhBox>
                 <InfoRhTitle>담당자연락처</InfoRhTitle>
-                <InfoRhContent>{""}</InfoRhContent>
+                <InfoRhContent>{loginUser?.contact}</InfoRhContent>
               </InfoRhBox>
             </ContentTopRh>
             <ContentTopRh>
               <InfoRhBox>
-                {/* <InfoRhTitle>진행상태</InfoRhTitle>
-                <InfoRhContent>
-                  <UserStatus>
-                    <DetailEditSelectBoxComponent
-                      // statusCode={statusCode}
-                      // setStatusCode={setStatusCode}
-                      // onSelectStatus={onSelectStatus}
-                      setFinishContract={setFinishContract}
-                      setCompletionContract={setCompletionContract}
-                    /> */}
-                {/* 현재:{statusCode} */}
-                {/* {detailData?.status} */}
-                {/* </UserStatus>
-                </InfoRhContent> */}
+                <InfoRhTitle>계약담당자</InfoRhTitle>
+                <InfoRhContent>{loginUser?.name}</InfoRhContent>
               </InfoRhBox>
               <InfoRhBox>
                 <InfoRhTitle>지점명</InfoRhTitle>
-                {/* <InfoRhContent>{detailData?.branch?.region}</InfoRhContent> */}
+                <InfoRhContent>{loginUser?.branch?.region}</InfoRhContent>
               </InfoRhBox>
             </ContentTopRh>
           </ContentTopRhBox>
@@ -694,6 +683,7 @@ export default function SiteDetailComponent(props: any) {
                 readOnly
                 placeholder="전 주소를 입력해 주세요."
                 value={`${preAddress}${preZipCode ? ` ( ${preZipCode} )` : ""}`}
+                onChange={onChangeHandle}
               ></InputBox>
             </UserAddressEditInput>
             <UserAddressEditInput>
@@ -717,7 +707,7 @@ export default function SiteDetailComponent(props: any) {
                 value={`${afterAddress}${
                   afterZipCode ? ` ( ${afterZipCode} )` : ""
                 }`}
-                // onChange={onChangeHandle}
+                onChange={onChangeHandle}
               ></InputBox>
             </UserAddressEditInput>
             <UserAddressEditInput>
@@ -733,18 +723,17 @@ export default function SiteDetailComponent(props: any) {
           <MoveDateContainer>
             <MoveDateBox>
               <MoveDateTitle>접수일</MoveDateTitle>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal("reception");
-                }}
-              >
+              <MoveDateInput>
                 <InputBox
                   readOnly
                   placeholder="--"
                   value={receptionDate.replace(formattedDate, "$1-$2-$3")}
+                  onChange={onChangeHandle}
+                  disabled
                 ></InputBox>
               </MoveDateInput>
-            </MoveDateBox>{" "}
+            </MoveDateBox>
+
             <MoveDateBox>
               <MoveDateTitle>상담일</MoveDateTitle>
               <MoveDateInput
@@ -756,6 +745,7 @@ export default function SiteDetailComponent(props: any) {
                   placeholder="--"
                   readOnly
                   value={consultationDate.replace(formattedDate, "$1-$2-$3")}
+                  onChange={onChangeHandle}
                 ></InputBox>
               </MoveDateInput>
             </MoveDateBox>
@@ -767,21 +757,7 @@ export default function SiteDetailComponent(props: any) {
             </MoveDateBox> */}
           </MoveDateContainer>
           <MoveDateContainer>
-            <MoveDateBox>
-              <MoveDateTitle>이사요청일</MoveDateTitle>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal("request");
-                }}
-              >
-                <InputBox
-                  placeholder="--"
-                  readOnly
-                  value={requestMoveDate.replace(formattedDate, "$1-$2-$3")}
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox>
-            <MoveDateBox>
+            {/* <MoveDateBox>
               <MoveDateTitle>견적 희망일</MoveDateTitle>
               <MoveDateInput
                 onClick={() => {
@@ -792,9 +768,25 @@ export default function SiteDetailComponent(props: any) {
                   placeholder="--"
                   readOnly
                   value={visiteDate.replace(formattedDate, "$1-$2-$3")}
+                  onChange={onChangeHandle}
                 ></InputBox>
               </MoveDateInput>
-            </MoveDateBox>
+            </MoveDateBox> */}
+            {/* <MoveDateBox>
+              <MoveDateTitle>이사요청일</MoveDateTitle>
+              <MoveDateInput
+                onClick={() => {
+                  dateHandleOpenModal("request");
+                }}
+              >
+                <InputBox
+                  placeholder="--"
+                  readOnly
+                  value={requestMoveDate.replace(formattedDate, "$1-$2-$3")}
+                  onChange={onChangeHandle}
+                ></InputBox>
+              </MoveDateInput>
+            </MoveDateBox> */}
           </MoveDateContainer>
           <MoveDateContainer>
             <MoveDateBox>
@@ -808,30 +800,12 @@ export default function SiteDetailComponent(props: any) {
                   placeholder="--"
                   readOnly
                   value={movingDate.replace(formattedDate, "$1-$2-$3")}
+                  onChange={onChangeHandle}
                 ></InputBox>
               </MoveDateInput>
             </MoveDateBox>
           </MoveDateContainer>
 
-          {/* <MoveBtnContainer>
-          <MoveBtnTitle>이사종류</MoveBtnTitle>
-          <MoveBtnBox>
-            <MoveBtn>
-              {BtnArr.map((item, index) => (
-                <li
-                  key={index}
-                  className={
-                    detailData?.movingType === item.name
-                      ? "focused"
-                      : "desabled"
-                  }
-                >
-                  {item.name}
-                </li>
-              ))}
-            </MoveBtn>
-          </MoveBtnBox>
-        </MoveBtnContainer> */}
           <BtnBox>
             <CustomButton
               width={"100%"}
