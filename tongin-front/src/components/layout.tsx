@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import CustomButton from "./common/customButton";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import UserIcon from "./icon/userIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { URLSearchParams } from "url";
 
 const Header = styled.div`
   display: flex;
@@ -152,14 +153,29 @@ const Backdrop = styled.div`
 
 const MyPageText = styled.div``;
 const HomeHeader = () => {
+  const url = window.location.href;
+
   const navigate = useNavigate();
+
   const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<number>(1);
 
+  useEffect(() => {
+    if (url.includes("/contractlist")) {
+      setSelectedTab(2);
+      return;
+    } else if (url.includes("/onsitecontract")) {
+      setSelectedTab(3);
+      return;
+    } else {
+      setSelectedTab(1);
+      return;
+    }
+  }, [url]);
+
   const logout = () => {
-    // eslint-disable-next-line no-restricted-globals
-    if (confirm("로그아웃 하시겠습니까?")) {
+    if (window.confirm("로그아웃 하시겠습니까?")) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("loginUser");
       navigate("/login");
@@ -201,7 +217,7 @@ const HomeHeader = () => {
         <MidBox>
           <MenuTabItem
             onClick={() => {
-              setSelectedTab(1);
+              // setSelectedTab(1);
               goHome();
             }}
           >
@@ -212,7 +228,7 @@ const HomeHeader = () => {
           </MenuTabItem>
           <MenuTabItem
             onClick={() => {
-              setSelectedTab(2);
+              // setSelectedTab(2);
               goContractList();
             }}
           >
@@ -223,7 +239,7 @@ const HomeHeader = () => {
           </MenuTabItem>
           <MenuTabItem
             onClick={() => {
-              setSelectedTab(3);
+              // setSelectedTab(3);
               goOnsitecontract();
             }}
           >
