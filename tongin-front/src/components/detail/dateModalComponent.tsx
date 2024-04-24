@@ -5,6 +5,8 @@ import { ko } from "date-fns/locale";
 import { format } from "date-fns";
 import styles from "react-day-picker/dist/style.module.css";
 import CustomButton from "../common/customButton";
+import CloseIcon from "../icon/closeIcon";
+import Admin from "./../../routes/admin";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -27,30 +29,51 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 50vw;
-  height: 60vw;
+  height: 68vw;
   background-color: white;
   border-radius: 0.8vw;
 `;
 
 const ModalWrapper = styled.div`
-  width: 76%;
+  width: 84%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
+const ModalTopArea = styled.div`
+  margin-top: 1vw;
+  width: 100%;
+  height: 5vw;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+`;
+
 const DateWrapper = styled.div`
   width: 100%;
-  height: 50vw;
+  height: 51vw;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
 `;
 
+const CloseBtnBox = styled.div`
+  width: 5vw;
+  height: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1vw;
+  background-color: #8080802f;
+`;
+
 const BtnBox = styled.div`
-  margin-bottom: 2vw;
+  margin-top: 1vw;
+  margin-bottom: 3vw;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -58,7 +81,7 @@ const BtnBox = styled.div`
 `;
 const ReactDayPick = styled(DayPicker)`
   * {
-    --rdp-cell-size: 5.4vw;
+    --rdp-cell-size: 6vw;
     --rdp-caption-font-size: 3vw;
     --rdp-accent-color: #ff7f3b;
     --rdp-background-color: #ff7f3b;
@@ -72,15 +95,15 @@ const ReactDayPick = styled(DayPicker)`
   }
   /* 조정되는 부분 */
   .rdp-caption {
-    font-size: 2.2vw; /* 월 폰트 크기 */
+    font-size: 2.6vw; /* 월 폰트 크기 */
   }
 
   .rdp-head_cell {
-    font-size: 2.2vw; /* 요일 폰트 크기 */
+    font-size: 2.6vw; /* 요일 폰트 크기 */
   }
 
   .rdp-day {
-    font-size: 2.2vw; /* 날짜 폰트 크기 */
+    font-size: 2.6vw; /* 날짜 폰트 크기 */
   }
 
   /* 선택된 날짜 스타일 조정 */
@@ -91,7 +114,7 @@ const ReactDayPick = styled(DayPicker)`
   }
 `;
 const DateModalComponent = (props: any) => {
-  const { dateValueInput, onClose, deteValueDelete, value } = props;
+  const { onClose, deleteValue, value, setValue } = props;
 
   console.log("value>>>");
   console.log(value);
@@ -116,13 +139,17 @@ const DateModalComponent = (props: any) => {
     setSelectedDay(getDateFromValue(value));
   }, [value]);
 
-  const handleComplete = (data: any) => {
-    if (data) {
-      //더블 클릭 시 데이터 없음으로 에러나기때문에 분기처리
-      console.log("data>>>>>");
-      console.log(data);
-      dateValueInput(data);
-      setSelectedDay(data);
+  const handleComplete = (date: any) => {
+    if (date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0"); // 월은 0부터 시작하므로 1을 더합니다.
+      const day = date.getDate().toString().padStart(2, "0");
+
+      // 3. "YYYYMMDD" 형식으로 변환
+      const formattedDate = `${year}${month}${day}`;
+
+      setValue(formattedDate);
+      setSelectedDay(date);
     }
   };
   useEffect(() => {
@@ -139,6 +166,11 @@ const DateModalComponent = (props: any) => {
       <Backdrop />
       <Wrapper ref={divRef} style={{ transform: "translate(1.2)" }}>
         <ModalWrapper>
+          <ModalTopArea>
+            <CloseBtnBox>
+              <CloseIcon onClick={onClose} height={"3vw"} fill={"#969696"} />
+            </CloseBtnBox>
+          </ModalTopArea>
           <DateWrapper>
             <ReactDayPick
               mode="single"
@@ -160,19 +192,19 @@ const DateModalComponent = (props: any) => {
 
           <BtnBox>
             <CustomButton
-              width={"16vw"}
-              height={"4vw"}
+              width={"18vw"}
+              height={"5vw"}
               text={`날짜 삭제`}
               size={"1.8vw"}
               radius={"0.4vw"}
               $bgColor={"#ffffff"}
               $border={"0.15vw solid #dcdcdc"}
               color={"#333333"}
-              onClick={deteValueDelete}
+              onClick={deleteValue}
             ></CustomButton>
             <CustomButton
-              width={"18vw"}
-              height={"4vw"}
+              width={"20vw"}
+              height={"5vw"}
               text={`확인`}
               size={"1.8vw"}
               radius={"0.4vw"}

@@ -31,22 +31,8 @@ export default function DetailComponent(props: any) {
 
   const [fetchStatus, setFetchStatus] = useState(false); // toast messege
   const [status, setStatus] = useState(false); // toast messege
-  // const fetchData = async () => {
-  //   const response: any = await API.get("receipt/detail/12");
-  //   if (response.status === 200) {
-  //     console.log(response.data.receiptDetail);
-  //     setDetailData(response.data.receiptDetail);
-  //   } else {
-  //     console.log("에러");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   const detailEditVisible = (mode: any) => {
-    console.log(mode);
     if (mode) {
       setIsDetailEdit(true);
     } else if (mode === false) {
