@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { HtmlHTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
 import TabComponent from "../components/home/tabComponent";
 import CustomButton from "../components/common/customButton";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Cookies } from "react-cookie";
 import { Toast } from "../components/common/toastMessegeComponent";
-
+import { Image } from "../components/common/image";
 const cookies = new Cookies();
 
 const ContainerLogin = styled.div`
@@ -34,8 +34,6 @@ const LoginLogo = styled.div`
   width: 12vw;
   height: 12vw;
 `;
-
-const Image = styled.img.attrs({})``;
 
 const LogoText = styled.div`
   width: 100%;
@@ -78,34 +76,37 @@ const Inputbox = styled.input`
   height: 6vw;
 `;
 
-// const CheckContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-//   width: 100%;
-//   height: 5%;
-// `;
-// const CheckBox = styled.input`
-//   width: 20px;
-//   height: 20px;
-//   display: flex;
-//   align-items: start;
-//   /* outline: 1px dashed blue; */
-// `;
-// const CheckText = styled.div`
-//   font-size: 20px;
-// `;
-// const LoginBtn = styled.button`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   height: 10vh;
-//   font-size: 20px;
-// `;
+const BottomArea = styled.div`
+  margin-top: 3vw;
+  width: 100%;
+  height: 3vw;
+  display: flex;
+`;
+
+const RememberAccountBox = styled.div<{
+  // onClick?: MouseEventHandler<HTMLDivElement>;
+}>`
+  height: 100%;
+  display: flex;
+`;
+
+const TextLine = styled.p`
+  margin-left: 1vw;
+  display: flex;
+  align-items: center;
+  font-size: 2.6vw;
+  font-weight: 300;
+  border-bottom: 0.1vw solid black;
+  /* text-decoration: underline; */
+`;
 
 export default function Login() {
   const navigate = useNavigate();
+  const rememberAccountString = localStorage.getItem("rememberAccount");
+
+  const rememberAccount =
+    rememberAccountString !== null ? JSON.parse(rememberAccountString) : false;
+
   const tonginOrange = "0.3vw solid #FF7F3B";
   const tonginDisable = "0.2vw solid #E7E7E7";
   const [outLineId, setoutLineId] = useState(tonginDisable);
@@ -116,7 +117,17 @@ export default function Login() {
   const [status, setStatus] = useState(""); // toast messege
   const [id, setId] = useState("");
   const [pswd, setPswd] = useState("");
-  const [loginData, setLoginData] = useState([id, pswd]);
+  const [loginData, setLoginData] = useState({ id, pswd });
+  const [isChecked, setIsChekced] = useState<boolean>(rememberAccount);
+
+  useEffect(() => {
+    if (rememberAccount) {
+      const accountString = localStorage.getItem("account");
+      const account = accountString && JSON.parse(accountString);
+      setId(account.id);
+      setPswd(account.pswd);
+    }
+  }, []);
 
   const onFocusHandle = (e: any) => {
     if (e.target.id === "Id") setoutLineId(tonginOrange);
@@ -153,7 +164,7 @@ export default function Login() {
       updatedData.pswd = pswd;
       return updatedData;
     });
-    if (id.length > 3 && pswd.length > 1) {
+    if (id.length > 1 && pswd.length > 1) {
       onDisabled(false);
     } else {
       onDisabled(true);
@@ -181,6 +192,12 @@ export default function Login() {
         "loginUser",
         JSON.stringify(response.data.data.user)
       );
+      localStorage.setItem("rememberAccount", JSON.stringify(isChecked));
+      if (isChecked) {
+        localStorage.setItem("account", JSON.stringify(loginData));
+      } else {
+        localStorage.setItem("account", "");
+      }
 
       cookies.set("refreshToken", response.data.data.tokens.refreshToken);
       navigate("/");
@@ -213,7 +230,7 @@ export default function Login() {
               src="img/tongin_logo.png"
               alt="로고 이미지"
               width={"100%"}
-              height={""}
+              height={"100%"}
             />
           </LoginLogo>
           <LogoText>TONGIN LOGIN</LogoText>
@@ -239,10 +256,6 @@ export default function Login() {
               onKeyPress={handleKeyDown}
             ></Inputbox>
           </OutlineInputbox>
-          {/* <CheckContainer>
-            <CheckBox type="checkbox"></CheckBox>
-            <CheckText>아이디/비밀번호 기억하기</CheckText>
-          </CheckContainer> */}
           <CustomButton
             onClick={desabled ? "" : onLogin}
             width={"100%"}
@@ -253,7 +266,21 @@ export default function Login() {
             disabled={desabled}
             $bgColor={bgColor}
           ></CustomButton>
-          {/* <MemoryLogin> 아이디/비밀번호 찾기</MemoryLogin> */}
+          <BottomArea>
+            <RememberAccountBox
+              onClick={() => {
+                setIsChekced(!isChecked);
+              }}
+            >
+              <Image
+                src={`icon/${isChecked ? "checked" : "unchecked"}.png`}
+                alt="checkbox"
+                width={"3vw"}
+                height={"3vw"}
+              />
+              <TextLine>아이디/비밀번호 기억하기</TextLine>
+            </RememberAccountBox>
+          </BottomArea>
         </ContainerSub>
       </ContainerLogin>
     </>
