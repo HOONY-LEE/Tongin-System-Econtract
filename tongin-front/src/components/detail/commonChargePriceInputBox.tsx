@@ -48,7 +48,6 @@ const SubText = styled.p`
 export default function CommonChargePriceInputBox(props: any) {
   const { inputValue, setInputValue, title, id } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   // 모달 닫기 핸들러
   const handleCloseModal = () => {
     setIsModalOpen(false);

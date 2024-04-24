@@ -235,6 +235,7 @@ export default function CleaningOptionBoxComponent(props: any) {
       )}
       {isDateModalOpen && (
         <DateModalComponent
+          value={optionData.serviceRequestDate}
           dateValueInput={dateValueInput}
           onClose={dateHandleCloseModal}
           deteValueDelete={deteValueDelete}

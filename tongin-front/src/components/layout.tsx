@@ -45,12 +45,15 @@ const MidBox = styled.div`
 `;
 
 const MenuTabItem = styled.div`
-  width: 18vw;
+  width: 16vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  &&:hover {
+    cursor: pointer;
+  }
 `;
 
 const MenuTabTitle = styled.div<{ $selectedTab?: number; index?: number }>`
@@ -68,7 +71,7 @@ const MenuTabTitle = styled.div<{ $selectedTab?: number; index?: number }>`
 `;
 const MenuTabLine = styled.div<{ $selectedTab?: number; index?: number }>`
   width: 100%;
-  height: 1vw;
+  height: 0.8vw;
   background-color: ${(props) =>
     props.$selectedTab === props.index ? "#ff7f3b" : "white"};
   border-radius: 2vw;
@@ -91,6 +94,9 @@ const MyPage = styled.div`
   border-radius: 2vw;
   width: 6vw;
   height: 6vw;
+  &&:hover {
+    cursor: pointer;
+  }
 `;
 
 const MyMenuArea = styled.div`

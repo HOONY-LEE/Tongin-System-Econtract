@@ -196,6 +196,7 @@ export default function ServiceSelectComponent(props: any) {
       )}
       {isDateModalOpen && (
         <DateModalComponent
+          value={"20240426"}
           dateValueInput={dateValueInput}
           onClose={dateHandleCloseModal}
           deteValueDelete={deteValueDelete}

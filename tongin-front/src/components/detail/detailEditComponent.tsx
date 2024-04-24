@@ -640,6 +640,7 @@ export default function DetailEditComponent(props: any) {
       )}
       {isDateModalOpen && (
         <DateModalComponent
+          value={"20240425"}
           dateValueInput={dateValueInput}
           onClose={dateHandleCloseModal}
           deteValueDelete={deteValueDelete}
