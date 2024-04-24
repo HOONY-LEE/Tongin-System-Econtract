@@ -131,7 +131,8 @@ export default function CommonOptionBoxComponent(props: any) {
     optionData.description
   );
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
-
+  console.log("optionData.serviceRequestDate>>>");
+  console.log(optionData.serviceRequestDate);
   const onClickCheck = () => {
     setIsChecked(!isChecked);
   };
@@ -152,6 +153,14 @@ export default function CommonOptionBoxComponent(props: any) {
     });
   };
 
+  const setDateValue = (newValue: string) => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.serviceRequestDate = newValue;
+      return updatedData;
+    });
+  };
+
   // 인풋이 있는 경우 인풋 변경 함수(기타서비스)
   const onChangeInput = (e: any) => {
     console.log(e.target.value);
@@ -168,20 +177,12 @@ export default function CommonOptionBoxComponent(props: any) {
     setIsDateModalOpen(false);
   };
 
-  const dateValueInput = (data: any) => {
-    console.log("dateValueInput", data);
-    const myData = new Date(data);
-    // setDateData(data);
-    console.log(format(myData, "y-MM-dd"));
-    if (!Number.isNaN(new Date(myData).getTime())) {
-      optionData.serviceRequestDate = format(myData, "y-MM-dd");
-    } else {
-      return "";
-    }
-  };
-
-  const deteValueDelete = () => {
-    optionData.serviceRequestDate = "";
+  const deleteValue = () => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.serviceRequestDate = "";
+      return updatedData;
+    });
     dateHandleCloseModal();
   };
 
@@ -260,10 +261,10 @@ export default function CommonOptionBoxComponent(props: any) {
       )}
       {isDateModalOpen && (
         <DateModalComponent
-          value={"20240418"}
-          dateValueInput={dateValueInput}
+          value={optionData.serviceRequestDate}
+          setValue={setDateValue}
           onClose={dateHandleCloseModal}
-          deteValueDelete={deteValueDelete}
+          deleteValue={deleteValue}
         />
       )}
     </Wrapper>

@@ -6,7 +6,6 @@ import CalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 import SelectComponent from "../common/selectComponent";
 import RoomSizeCalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 import RoomSizeBox from "./roomSizeBox";
-import CleaningSelectComponent from "./cleaningSelectComponent";
 import QuantityInputComponent from "../common/quantityInputComponent";
 import ServiceSelectComponent from "./serviceSelectComponent";
 import DateModalComponent from "./dateModalComponent";

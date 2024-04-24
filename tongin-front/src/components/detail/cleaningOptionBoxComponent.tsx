@@ -102,10 +102,6 @@ export default function CleaningOptionBoxComponent(props: any) {
   const [isChecked, setIsChecked] = useState(isSelected);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
-  // const dropdownList = [
-  //   { id: 0, status: "일반" },
-  //   { id: 1, status: "VIP" },
-  // ];
   const dropdownList = [
     {
       id: optionData.serviceList[0].serviceType,
@@ -145,6 +141,14 @@ export default function CleaningOptionBoxComponent(props: any) {
     });
   };
 
+  const setDateValue = (newValue: string) => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.serviceRequestDate = newValue;
+      return updatedData;
+    });
+  };
+
   // 날짜 모달 열기 핸들러
   const dateHandleOpenModal = () => {
     setIsDateModalOpen(true);
@@ -155,20 +159,12 @@ export default function CleaningOptionBoxComponent(props: any) {
     setIsDateModalOpen(false);
   };
 
-  const dateValueInput = (data: any) => {
-    console.log("dateValueInput", data);
-    const myData = new Date(data);
-    // setDateData(data);
-    console.log(format(myData, "y-MM-dd"));
-    if (!Number.isNaN(new Date(myData).getTime())) {
-      optionData.serviceRequestDate = format(myData, "y-MM-dd");
-    } else {
-      return "";
-    }
-  };
-
-  const deteValueDelete = () => {
-    optionData.serviceRequestDate = "";
+  const deleteValue = () => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.serviceRequestDate = "";
+      return updatedData;
+    });
     dateHandleCloseModal();
   };
 
@@ -236,9 +232,9 @@ export default function CleaningOptionBoxComponent(props: any) {
       {isDateModalOpen && (
         <DateModalComponent
           value={optionData.serviceRequestDate}
-          dateValueInput={dateValueInput}
+          setValue={setDateValue}
           onClose={dateHandleCloseModal}
-          deteValueDelete={deteValueDelete}
+          deleteValue={deleteValue}
         />
       )}
     </Wrapper>

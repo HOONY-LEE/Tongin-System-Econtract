@@ -18,6 +18,7 @@ import API from "../../API/API";
 import { useParams } from "react-router-dom";
 import DetailEditContractFinishModal from "./detailEditContractFinishModal";
 import { Toast } from "../common/toastMessegeComponent";
+import MoveDateInputComponent from "./MoveDateInputComponent";
 const ContentTop = styled.div`
   display: flex;
   justify-content: space-between;
@@ -373,8 +374,13 @@ export default function DetailEditComponent(props: any) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [movingDate, setMovingDate] = useState(new Date(detailData.movingDate));
   const [finishContract, setFinishContract] = useState<any>("");
+  const [receptionDate, setReceptionDate] = useState(detailData.receptionDate);
+  const [consultationDate, setConsultationDate] = useState(
+    detailData.consultationDate
+  );
+  const [contractDate, setContractDate] = useState(detailData.contractDate);
+  const [movingDate, setMovingDate] = useState(detailData.movingDate);
 
   const reNum = useParams().id;
   const [isContractFinishModal, setIsContractFinishModal] =
@@ -415,16 +421,24 @@ export default function DetailEditComponent(props: any) {
       const updatedData = { ...prev };
       updatedData.name = userName;
       updatedData.contact = userContact;
-      updatedData.prevAddressDetail = prevAddressDetail;
+      updatedData.preAddressDetail = prevAddressDetail;
       updatedData.afterAddressDetail = afterAddressDetail;
+      updatedData.receptionDate = receptionDate;
+      updatedData.consultationDate = consultationDate;
+      updatedData.contractDate = contractDate;
+      updatedData.movingDate = movingDate;
       return updatedData;
     });
   }, [
+    finishContract,
     userName,
     userContact,
     prevAddressDetail,
     afterAddressDetail,
-    finishContract,
+    receptionDate,
+    consultationDate,
+    contractDate,
+    movingDate,
   ]);
   //계약서 상태 [계약]일시 계약날짜 추가
   useEffect(() => {
@@ -549,19 +563,51 @@ export default function DetailEditComponent(props: any) {
   // 에러방지를 위한 onChangeHandle
   const onChangeHandle = () => {};
 
-  const deteValueDelete = () => {
-    if (dateType === "reception") {
-      detailData.receptionDate = "";
-    } else if (dateType === "moving") {
-      detailData.movingDate = "";
-    } else if (dateType === "consultation") {
-      detailData.consultationDate = "";
-    } else {
-      return "";
-    }
-    dateHandleCloseModal();
-  };
+  // const deteValueDelete = () => {
+  //   if (dateType === "reception") {
+  //     detailData.receptionDate = "";
+  //   } else if (dateType === "moving") {
+  //     detailData.movingDate = "";
+  //   } else if (dateType === "consultation") {
+  //     detailData.consultationDate = "";
+  //   } else {
+  //     return "";
+  //   }
+  //   dateHandleCloseModal();
+  // };
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
+
+  // const setReceptionDate = (newDate: string) => {
+  //   setDetailData((prev: any) => {
+  //     const updatedData = { ...prev };
+  //     updatedData.receptionDate = newDate;
+  //     return updatedData;
+  //   });
+  // };
+
+  // const setConsultationDate = (newDate: string) => {
+  //   setDetailData((prev: any) => {
+  //     const updatedData = { ...prev };
+  //     updatedData.consultationDate = newDate;
+  //     return updatedData;
+  //   });
+  // };
+
+  // const setContractDate = (newDate: string) => {
+  //   setDetailData((prev: any) => {
+  //     const updatedData = { ...prev };
+  //     updatedData.contractDate = newDate;
+  //     return updatedData;
+  //   });
+  // };
+
+  // const setMovingDate = (newDate: string) => {
+  //   setDetailData((prev: any) => {
+  //     const updatedData = { ...prev };
+  //     updatedData.movingDate = newDate;
+  //     return updatedData;
+  //   });
+  // };
 
   // 계약 상태 안내 모달 닫기 핸들
   const contractHandleCloseModal = () => {
@@ -585,24 +631,24 @@ export default function DetailEditComponent(props: any) {
     }
 
     console.log("vvvvvv 보내기 전detailData vvvvv");
-    console.log(statusCode);
+    console.log(detailData);
+    // console.log(statusCode);
     const requestPram = {
-      receiptDetail: {
-        name: detailData.name,
-        contact: detailData.contact,
-        statusCode: statusCode,
-        preZipCode: detailData.address,
-        preAddress: detailData.preAddress,
-        preAddressDetail: detailData.prevAddressDetail,
-        afterZipCode: detailData.address,
-        afterAddress: detailData.afterAddress,
-        afterAddressDetail: detailData.afterAddressDetail,
-        receptionDate: detailData.receptionDate, // 접수일
-        consultationScheduledDate: detailData.consultationDate, // 상담 예정일
-        consultationDate: detailData.consultationDate, // 상담일
-        contractDate: detailData.contractDate, // 계약일
-        movingDate: detailData.movingDate, //이사일
-      },
+      receiptDetail: detailData,
+      // name: detailData.name,
+      // contact: detailData.contact,
+      // statusCode: statusCode,
+      // preZipCode: detailData.address,
+      // preAddress: detailData.preAddress,
+      // preAddressDetail: detailData.prevAddressDetail,
+      // afterZipCode: detailData.address,
+      // afterAddress: detailData.afterAddress,
+      // afterAddressDetail: detailData.afterAddressDetail,
+      // receptionDate: detailData.receptionDate, // 접수일
+      // consultationScheduledDate: detailData.consultationDate, // 상담 예정일
+      // consultationDate: detailData.consultationDate, // 상담일
+      // contractDate: detailData.contractDate, // 계약일
+      // movingDate: detailData.movingDate, //이사일
     };
 
     const response: any = await API.put(
@@ -638,14 +684,14 @@ export default function DetailEditComponent(props: any) {
           addressType={addressType}
         />
       )}
-      {isDateModalOpen && (
+      {/* {isDateModalOpen && (
         <DateModalComponent
-          value={"20240425"}
+          value={"202404250"}
           dateValueInput={dateValueInput}
           onClose={dateHandleCloseModal}
           deteValueDelete={deteValueDelete}
         />
-      )}
+      )} */}
       <ContentTop>
         <ContentTopLFBox>
           <ContentTopLF>
@@ -757,7 +803,17 @@ export default function DetailEditComponent(props: any) {
           </UserAddressEditInput>
         </UserAddressBox>
         <MoveDateContainer>
-          <MoveDateBox>
+          <MoveDateInputComponent
+            title={"접수일"}
+            dateData={receptionDate}
+            setDateData={setReceptionDate}
+          ></MoveDateInputComponent>
+          <MoveDateInputComponent
+            title={"계약일"}
+            dateData={contractDate}
+            setDateData={setContractDate}
+          ></MoveDateInputComponent>
+          {/* <MoveDateBox>
             <MoveDateTitle>접수일</MoveDateTitle>
             <MoveDateInput
               onClick={() => {
@@ -772,12 +828,9 @@ export default function DetailEditComponent(props: any) {
                   "$1-$2-$3"
                 )}
               ></InputBox>
-              {/* <InputBox
-                value={format(movingDate, "y-MM-dd").toString()}
-              ></InputBox> */}
             </MoveDateInput>
-          </MoveDateBox>
-          <MoveDateBox>
+          </MoveDateBox> */}
+          {/* <MoveDateBox>
             <MoveDateTitle>계약일</MoveDateTitle>
             <MoveDateInput>
               <InputBox
@@ -790,10 +843,20 @@ export default function DetailEditComponent(props: any) {
                 )}
               ></InputBox>
             </MoveDateInput>
-          </MoveDateBox>
+          </MoveDateBox> */}
         </MoveDateContainer>
         <MoveDateContainer>
-          <MoveDateBox>
+          <MoveDateInputComponent
+            title={"상담일"}
+            dateData={consultationDate}
+            setDateData={setConsultationDate}
+          ></MoveDateInputComponent>
+          <MoveDateInputComponent
+            title={"이사일"}
+            dateData={movingDate}
+            setDateData={setMovingDate}
+          ></MoveDateInputComponent>
+          {/* <MoveDateBox>
             <MoveDateTitle>상담일</MoveDateTitle>
             <MoveDateInput
               onClick={() => {
@@ -826,7 +889,7 @@ export default function DetailEditComponent(props: any) {
                 )}
               ></InputBox>
             </MoveDateInput>
-          </MoveDateBox>
+          </MoveDateBox> */}
         </MoveDateContainer>
         {/* <MoveBtnContainer>
           <MoveBtnTitle>이사종류</MoveBtnTitle>
