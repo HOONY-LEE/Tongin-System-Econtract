@@ -10,6 +10,7 @@ const Box: any = styled.div<{
   size?: string;
   fontWeight?: string;
   $outline?: string;
+  $border?: string;
   $hoverBgColor?: string;
   $hoverColor?: string;
   disabled?: string;
@@ -33,6 +34,7 @@ const Box: any = styled.div<{
   font-size: ${(props) => (props.size ? props.size : "18px")};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : "600")};
   outline: ${(props) => (props.$outline ? props.$outline : "none")};
+  border: ${(props) => (props.$border ? props.$border : "none")};
   pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
   &:hover {
     /* background: ${(props) =>
@@ -52,6 +54,7 @@ export default function CustomButton(props: any) {
     height,
     text,
     $bgColor,
+    $border,
     color,
     radius,
     size,
@@ -76,6 +79,7 @@ export default function CustomButton(props: any) {
         size={size}
         fontWeight={fontWeight}
         $outline={$outline}
+        $border={$border}
         $hoverBgColor={$hoverBgColor}
         $hoverColor={$hoverColor}
         disabled={disabled}

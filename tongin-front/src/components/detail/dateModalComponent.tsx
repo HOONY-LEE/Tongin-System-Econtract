@@ -26,25 +26,40 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 35vw;
-  height: 42vw;
+  width: 50vw;
+  height: 60vw;
   background-color: white;
   border-radius: 0.8vw;
 `;
-const Today = styled.div`
-  background-color: #ff7f3b;
+
+const ModalWrapper = styled.div`
+  width: 76%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
+
+const DateWrapper = styled.div`
+  width: 100%;
+  height: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+`;
+
 const BtnBox = styled.div`
   margin-bottom: 2vw;
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   /* outline: 1px solid red; */
 `;
 const ReactDayPick = styled(DayPicker)`
   * {
-    --rdp-cell-size: 4vw;
-    --rdp-caption-font-size: 2vw;
+    --rdp-cell-size: 5.4vw;
+    --rdp-caption-font-size: 3vw;
     --rdp-accent-color: #ff7f3b;
     --rdp-background-color: #ff7f3b;
     /* Switch to dark colors for dark themes */
@@ -55,19 +70,57 @@ const ReactDayPick = styled(DayPicker)`
     /* Outline border for focused and selected elements */
     --rdp-outline-selected: 0.2vw solid #dbdbdb;
   }
+  /* 조정되는 부분 */
+  .rdp-caption {
+    font-size: 2.2vw; /* 월 폰트 크기 */
+  }
+
+  .rdp-head_cell {
+    font-size: 2.2vw; /* 요일 폰트 크기 */
+  }
+
+  .rdp-day {
+    font-size: 2.2vw; /* 날짜 폰트 크기 */
+  }
+
+  /* 선택된 날짜 스타일 조정 */
+  .rdp-day_selected {
+    background-color: #ff7f3b;
+    color: white;
+    font-size: 2vw;
+  }
 `;
 const DateModalComponent = (props: any) => {
-  const today = new Date();
-  const { dateValueInput, onClose, deteValueDelete, style } = props;
-  const [selectedDay, setSelectedDay] = useState<Date | undefined>();
+  const { dateValueInput, onClose, deteValueDelete, value } = props;
+
+  console.log("value>>>");
+  console.log(value);
+  // 날짜 문자열에서 `Date` 객체로 변환
+  const getDateFromValue = (value: string): Date => {
+    const year = parseInt(value.slice(0, 4), 10);
+    const month = parseInt(value.slice(4, 6), 10) - 1; // 월은 0부터 시작
+    const day = parseInt(value.slice(6, 8), 10);
+    return new Date(year, month, day);
+  };
+  const initialDate = getDateFromValue(value); // 초기 날짜
+
+  const [selectedDay, setSelectedDay] = useState<Date | undefined>(initialDate);
   const divRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState<any>({
     width: 0,
     height: 0,
   });
+
+  // `value`가 변경될 때마다 `selectedDay` 업데이트
+  useEffect(() => {
+    setSelectedDay(getDateFromValue(value));
+  }, [value]);
+
   const handleComplete = (data: any) => {
     if (data) {
       //더블 클릭 시 데이터 없음으로 에러나기때문에 분기처리
+      console.log("data>>>>>");
+      console.log(data);
       dateValueInput(data);
       setSelectedDay(data);
     }
@@ -85,44 +138,48 @@ const DateModalComponent = (props: any) => {
     <>
       <Backdrop />
       <Wrapper ref={divRef} style={{ transform: "translate(1.2)" }}>
-        <ReactDayPick
-          mode="single"
-          styles={{
-            caption: { color: "#ff7f3b" },
-            head_cell: {
-              width: "100vw",
-            },
-          }}
-          modifiersStyles={{
-            width: dimensions.width,
-            day_selected: { color: "#e30000" },
-          }}
-          onSelect={handleComplete}
-          selected={selectedDay}
-          locale={ko}
-        ></ReactDayPick>
+        <ModalWrapper>
+          <DateWrapper>
+            <ReactDayPick
+              mode="single"
+              styles={{
+                caption: { color: "#ff7f3b" },
+                head_cell: {
+                  width: "100vw",
+                },
+              }}
+              modifiersStyles={{
+                width: dimensions.width,
+                day_selected: { color: "#e30000" },
+              }}
+              onSelect={handleComplete} // 선택 핸들러
+              selected={selectedDay} // 선택된 날짜 표시
+              locale={ko}
+            ></ReactDayPick>
+          </DateWrapper>
 
-        <BtnBox>
-          <CustomButton
-            width={"13vw"}
-            height={"3.5vw"}
-            text={`날짜 삭제`}
-            size={"1.8vw"}
-            radius={"0.4vw"}
-            $bgColor={"#ffffff"}
-            $outline={"0.15vw solid #dcdcdc"}
-            color={"#333333"}
-            onClick={deteValueDelete}
-          ></CustomButton>
-          <CustomButton
-            width={"13vw"}
-            height={"3.5vw"}
-            text={`확인`}
-            size={"1.8vw"}
-            radius={"0.4vw"}
-            onClick={onClose}
-          ></CustomButton>
-        </BtnBox>
+          <BtnBox>
+            <CustomButton
+              width={"16vw"}
+              height={"4vw"}
+              text={`날짜 삭제`}
+              size={"1.8vw"}
+              radius={"0.4vw"}
+              $bgColor={"#ffffff"}
+              $border={"0.15vw solid #dcdcdc"}
+              color={"#333333"}
+              onClick={deteValueDelete}
+            ></CustomButton>
+            <CustomButton
+              width={"18vw"}
+              height={"4vw"}
+              text={`확인`}
+              size={"1.8vw"}
+              radius={"0.4vw"}
+              onClick={onClose}
+            ></CustomButton>
+          </BtnBox>
+        </ModalWrapper>
       </Wrapper>
     </>
   );

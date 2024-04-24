@@ -260,6 +260,7 @@ export default function CommonOptionBoxComponent(props: any) {
       )}
       {isDateModalOpen && (
         <DateModalComponent
+          value={"20240418"}
           dateValueInput={dateValueInput}
           onClose={dateHandleCloseModal}
           deteValueDelete={deteValueDelete}

@@ -609,6 +609,7 @@ export default function SiteDetailComponent(props: any) {
       )}
       {isDateModalOpen && (
         <DateModalComponent
+          value={"20240408"}
           dateValueInput={dateValueInput}
           onClose={dateHandleCloseModal}
           deteValueDelete={deteValueDelete}
