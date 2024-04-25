@@ -206,6 +206,7 @@ const ContractPreviewModalComponent = (props: any) => {
     // 두 이미지를 합쳐서 서버로 전송
     const imageFiles = [firstPageImage, secondPageImage];
     await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
+    onClose();
   };
 
   const getContractImage = async () => {
