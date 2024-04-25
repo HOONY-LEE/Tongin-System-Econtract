@@ -361,13 +361,6 @@ export default function Detail() {
   }, [drawingData2]);
   return (
     <>
-      {fetchStatus && (
-        <Toast
-          status={status}
-          fetchStatus={fetchStatus}
-          setFetchStatus={setFetchStatus}
-        />
-      )}
       <FlexXY>
         <HomeContainer>
           <TabMenu>
@@ -385,6 +378,10 @@ export default function Detail() {
             {currentTab === 0 ? (
               <DetialTabBox>
                 <DetailComponent
+                  setStatus={setStatus}
+                  status={status}
+                  fetchStatus={fetchStatus}
+                  setFetchStatus={setFetchStatus}
                   getDetailList={getDetailList}
                   detailData={detailData}
                   setDetailData={setDetailData}

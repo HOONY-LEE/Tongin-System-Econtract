@@ -24,13 +24,21 @@ const ContentBox = styled.div`
 `;
 
 export default function DetailComponent(props: any) {
-  const { detailData, setDetailData, getDetailList } = props;
+  const {
+    detailData,
+    setDetailData,
+    getDetailList,
+    status,
+    setStatus,
+    fetchStatus,
+    setFetchStatus,
+  } = props;
   const [isDetailEdit, setIsDetailEdit] = useState(false);
   const [completionContract, setCompletionContract] = useState<any>(false);
   const [onEditDisable, setOnEditDisable] = useState<any>(false);
 
-  const [fetchStatus, setFetchStatus] = useState(false); // toast messege
-  const [status, setStatus] = useState(false); // toast messege
+  // const [fetchStatus, setFetchStatus] = useState(false); // toast messege
+  // const [status, setStatus] = useState(false); // toast messege
 
   const detailEditVisible = (mode: any) => {
     if (mode) {

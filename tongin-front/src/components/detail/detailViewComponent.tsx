@@ -365,12 +365,16 @@ export default function DetailViewComponent(props: any) {
       <ContentBottom>
         <UserAddressBox>
           <UserAddressTitle>전 주소</UserAddressTitle>
-          <UserAddressInput>{detailData?.preAddress}</UserAddressInput>
+          <UserAddressInput>
+            {detailData?.preAddress} ({detailData?.preZoneCode})
+          </UserAddressInput>
           <UserAddressInput>{detailData?.preAddressDetail}</UserAddressInput>
         </UserAddressBox>
         <UserAddressBox>
           <UserAddressTitle>후 주소</UserAddressTitle>
-          <UserAddressInput>{detailData?.afterAddress}</UserAddressInput>
+          <UserAddressInput>
+            {detailData?.afterAddress}({detailData?.afterZoneCode})
+          </UserAddressInput>
           <UserAddressInput>{detailData?.afterAddressDetail}</UserAddressInput>
         </UserAddressBox>
         <MoveDateContainer>
