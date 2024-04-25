@@ -808,43 +808,13 @@ export default function DetailEditComponent(props: any) {
             title={"접수일"}
             dateData={receptionDate}
             setDateData={setReceptionDate}
+            readOnly={true}
           ></MoveDateInputComponent>
           <MoveDateInputComponent
             title={"계약일"}
             dateData={contractDate}
             setDateData={setContractDate}
           ></MoveDateInputComponent>
-          {/* <MoveDateBox>
-            <MoveDateTitle>접수일</MoveDateTitle>
-            <MoveDateInput
-              onClick={() => {
-                dateHandleOpenModal("reception");
-              }}
-            >
-              <InputBox
-                readOnly
-                placeholder="--"
-                value={(detailData?.receptionDate).replace(
-                  formattedDate,
-                  "$1-$2-$3"
-                )}
-              ></InputBox>
-            </MoveDateInput>
-          </MoveDateBox> */}
-          {/* <MoveDateBox>
-            <MoveDateTitle>계약일</MoveDateTitle>
-            <MoveDateInput>
-              <InputBox
-                placeholder="--"
-                readOnly
-                disabled
-                value={(detailData?.contractDate).replace(
-                  formattedDate,
-                  "$1-$2-$3"
-                )}
-              ></InputBox>
-            </MoveDateInput>
-          </MoveDateBox> */}
         </MoveDateContainer>
         <MoveDateContainer>
           <MoveDateInputComponent
@@ -857,40 +827,6 @@ export default function DetailEditComponent(props: any) {
             dateData={movingDate}
             setDateData={setMovingDate}
           ></MoveDateInputComponent>
-          {/* <MoveDateBox>
-            <MoveDateTitle>상담일</MoveDateTitle>
-            <MoveDateInput
-              onClick={() => {
-                dateHandleOpenModal("consultation");
-              }}
-            >
-              <InputBox
-                placeholder="--"
-                readOnly
-                value={(detailData?.consultationDate).replace(
-                  formattedDate,
-                  "$1-$2-$3"
-                )}
-              ></InputBox>
-            </MoveDateInput>
-          </MoveDateBox>
-          <MoveDateBox>
-            <MoveDateTitle>이사일</MoveDateTitle>
-            <MoveDateInput
-              onClick={() => {
-                dateHandleOpenModal("moving");
-              }}
-            >
-              <InputBox
-                placeholder="--"
-                readOnly
-                value={(detailData?.movingDate).replace(
-                  formattedDate,
-                  "$1-$2-$3"
-                )}
-              ></InputBox>
-            </MoveDateInput>
-          </MoveDateBox> */}
         </MoveDateContainer>
         {/* <MoveBtnContainer>
           <MoveBtnTitle>이사종류</MoveBtnTitle>
