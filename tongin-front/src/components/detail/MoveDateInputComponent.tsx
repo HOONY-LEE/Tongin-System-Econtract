@@ -4,7 +4,7 @@ import DateModalComponent from "./dateModalComponent";
 
 const Wrapper = styled.div``;
 
-const MoveDateInput = styled.div`
+const MoveDateInput = styled.div<{ readOnly: boolean }>`
   width: 31.6vw;
   height: 5vw;
   display: flex;
@@ -18,6 +18,7 @@ const MoveDateInput = styled.div`
   /* outline: 0.2vw solid red; */
   padding-left: 0.8vw;
   margin-bottom: 1vw;
+  background-color: ${(props) => (props.readOnly ? "#F4F4F4" : "transparent")};
 `;
 
 const MoveDateBox = styled.div`
@@ -37,7 +38,7 @@ const MoveDateTitle = styled.div`
   /* outline: 0.2vw solid red; */
 `;
 
-const InputBox = styled.input.attrs({})<{}>`
+const InputBox = styled.input.attrs({})`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,15 +57,13 @@ const InputBox = styled.input.attrs({})<{}>`
 `;
 
 export default function MoveDateInputComponent(props: any) {
-  const { title, dateData, setDateData } = props;
+  const { title, dateData, setDateData, readOnly } = props;
 
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
-  const [dateType, setDateType] = useState();
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
   // 날짜 모달 열기 핸들러
-  const dateHandleOpenModal = (type: any) => {
+  const dateHandleOpenModal = () => {
     setIsDateModalOpen(true);
-    setDateType(type);
   };
 
   // // 날짜 모달 닫기 핸들러
@@ -82,18 +81,18 @@ export default function MoveDateInputComponent(props: any) {
       <MoveDateBox>
         <MoveDateTitle>{title}</MoveDateTitle>
         <MoveDateInput
+          readOnly={readOnly}
           onClick={() => {
-            dateHandleOpenModal("reception");
+            dateHandleOpenModal();
           }}
         >
           <InputBox
-            readOnly
             placeholder="--"
             value={dateData.replace(formattedDate, "$1-$2-$3")}
           ></InputBox>
         </MoveDateInput>
       </MoveDateBox>
-      {isDateModalOpen && (
+      {isDateModalOpen && !readOnly && (
         <DateModalComponent
           value={dateData}
           setValue={setDateData}

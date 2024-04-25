@@ -10,6 +10,7 @@ import { format } from "date-fns";
 import API from "../../../API/API";
 import { Toast } from "../../common/toastMessegeComponent";
 import { useNavigate } from "react-router-dom";
+import MoveDateInputComponent from "../../detail/MoveDateInputComponent";
 // import DetailViewComponent from "./detailViewComponent";
 // import DetailEditComponent from "./detailEditComponent";
 // import { Toast } from "../common/toastMessegeComponent";
@@ -477,28 +478,28 @@ export default function SiteDetailComponent(props: any) {
     setIsDateModalOpen(false);
   };
   // 날짜 입력
-  const dateValueInput = (data: any) => {
-    console.log("dateValueInput", data);
-    const myData = new Date(data);
-    // setDateData(data);
-    console.log("myData", myData);
-    console.log(format(myData, "yMMdd"));
-    if (!Number.isNaN(new Date(myData).getTime())) {
-      if (dateType === "reception") {
-        setReceptionDate(format(myData, "yMMdd"));
-      } else if (dateType === "moving") {
-        setSerReqDt(format(myData, "yMMdd"));
-      } else if (dateType === "consultation") {
-        setVisitDate(format(myData, "yMMdd"));
-      } else if (dateType === "visite") {
-        setVisitDate(format(myData, "yMMdd"));
-      } else {
-        return "";
-      }
-    } else {
-      return "";
-    }
-  };
+  // const dateValueInput = (data: any) => {
+  //   console.log("dateValueInput", data);
+  //   const myData = new Date(data);
+  //   // setDateData(data);
+  //   console.log("myData", myData);
+  //   console.log(format(myData, "yMMdd"));
+  //   if (!Number.isNaN(new Date(myData).getTime())) {
+  //     if (dateType === "reception") {
+  //       setReceptionDate(format(myData, "yMMdd"));
+  //     } else if (dateType === "moving") {
+  //       setSerReqDt(format(myData, "yMMdd"));
+  //     } else if (dateType === "consultation") {
+  //       setVisitDate(format(myData, "yMMdd"));
+  //     } else if (dateType === "visite") {
+  //       setVisitDate(format(myData, "yMMdd"));
+  //     } else {
+  //       return "";
+  //     }
+  //   } else {
+  //     return "";
+  //   }
+  // };
   // 날짜 삭제
   const deteValueDelete = () => {
     if (dateType === "reception") {
@@ -575,8 +576,8 @@ export default function SiteDetailComponent(props: any) {
 
   // 에러방지를 위한 onChangeHandle
   const onChangeHandle = () => {};
+
   let today = new Date();
-  // console.log(today);
   useEffect(() => {
     const myData = new Date(today);
     setReceptionDate(format(myData, "yMMdd"));
@@ -598,14 +599,6 @@ export default function SiteDetailComponent(props: any) {
           onClose={postHandleCloseModal}
           postValueInput={postValueInput}
           addressType={addressType}
-        />
-      )}
-      {isDateModalOpen && (
-        <DateModalComponent
-          value={"20240408"}
-          dateValueInput={dateValueInput}
-          onClose={dateHandleCloseModal}
-          deteValueDelete={deteValueDelete}
         />
       )}
       <ContentBox>
@@ -713,51 +706,24 @@ export default function SiteDetailComponent(props: any) {
             </UserAddressEditInput>
           </UserAddressBox>
           <MoveDateContainer>
-            <MoveDateBox>
-              <MoveDateTitle>접수일</MoveDateTitle>
-              <MoveDateInput>
-                <InputBox
-                  readOnly
-                  placeholder="--"
-                  value={receptionDate.replace(formattedDate, "$1-$2-$3")}
-                  onChange={onChangeHandle}
-                  disabled
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox>
-
-            <MoveDateBox>
-              <MoveDateTitle>상담일</MoveDateTitle>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal("consultation");
-                }}
-              >
-                <InputBox
-                  placeholder="--"
-                  readOnly
-                  value={visitDate.replace(formattedDate, "$1-$2-$3")}
-                  onChange={onChangeHandle}
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox>
+            <MoveDateInputComponent
+              title={"접수일"}
+              dateData={receptionDate}
+              setDateData={setReceptionDate}
+              readOnly={true}
+            ></MoveDateInputComponent>
+            <MoveDateInputComponent
+              title={"상담일"}
+              dateData={visitDate}
+              setDateData={setVisitDate}
+            ></MoveDateInputComponent>
           </MoveDateContainer>
           <MoveDateContainer>
-            <MoveDateBox>
-              <MoveDateTitle>이사일</MoveDateTitle>
-              <MoveDateInput
-                onClick={() => {
-                  dateHandleOpenModal("moving");
-                }}
-              >
-                <InputBox
-                  placeholder="--"
-                  readOnly
-                  value={serReqDt.replace(formattedDate, "$1-$2-$3")}
-                  onChange={onChangeHandle}
-                ></InputBox>
-              </MoveDateInput>
-            </MoveDateBox>
+            <MoveDateInputComponent
+              title={"이사일"}
+              dateData={serReqDt}
+              setDateData={setSerReqDt}
+            ></MoveDateInputComponent>
           </MoveDateContainer>
 
           <BtnBox>
