@@ -160,7 +160,7 @@ export default function SiteTabPage() {
   const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
   const [preventDefault, setPreventDefault] = useState<any>(false);
-  const menuArr = [{ name: "자체견적 상세정보", content: "견적리스트 영역" }];
+  const menuArr = [{ name: "자체견적 현장접수", content: "현장접수 영역" }];
 
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);

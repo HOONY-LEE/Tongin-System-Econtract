@@ -540,7 +540,13 @@ export default function SiteDetailComponent(props: any) {
       // setStatus("SUCCESS");
       // setText("현장접수가 완료되었습니다.");
       // setFetchStatus(true);
-      navigate(`/contractlist` , {state:{status:"SUCCESS",text:"현장접수가 완료되었습니다.",fetchStatus:true}});
+      navigate(`/contractlist`, {
+        state: {
+          status: "SUCCESS",
+          text: "현장접수가 완료되었습니다.",
+          fetchStatus: true,
+        },
+      });
     } else {
       setText("완료가 되지 않았습니다. 정보를 확인해 주세요.");
       setStatus("FAIL");
@@ -730,7 +736,7 @@ export default function SiteDetailComponent(props: any) {
             <CustomButton
               width={"100%"}
               height={"6vw"}
-              text={`완료하기`}
+              text={`현장접수 등록하기`}
               size={"2vw"}
               radius={"0.6vw"}
               onClick={() => fetchData()}

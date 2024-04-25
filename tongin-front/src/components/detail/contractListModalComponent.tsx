@@ -167,32 +167,12 @@ const ThumbnailBox = styled.div<{ index: number; currentPage: number }>`
 `;
 
 const ContractListModalComponent = (props: any) => {
-  const {
-    onClose,
-    reNum,
-    priceDataList,
-    articleDataList,
-    setDrawingData,
-    optionData,
-    lines,
-    drawingData,
-    setLines,
-  } = props;
+  const { onClose, contractImageList, setContractImageList } = props;
 
-  const [contractImageList, setContractImageList] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [prevBoxActive, setPrevBoxActive] = useState<boolean>(false);
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
-  const [maxIndex, setMaxIndex] = useState<number>(2);
-
-  const getContractImage = async () => {
-    const response = await API.get(`/receipt/contract-image/${reNum}`);
-    if (response.status === 200) {
-      console.log("contractImageList>>>");
-      console.log(response.data.contractImageList);
-      setContractImageList(response.data.contractImageList);
-    }
-  };
+  const [maxIndex, setMaxIndex] = useState<number>(contractImageList.length);
 
   const clickPrevPage = (e: any) => {
     if (currentPage <= 1) {
@@ -228,12 +208,6 @@ const ContractListModalComponent = (props: any) => {
   }, [currentPage]);
 
   useEffect(() => {
-    getContractImage();
-  }, []);
-
-  useEffect(() => {
-    console.log("contractImageList>>");
-    console.log(contractImageList);
     setMaxIndex(contractImageList.length);
   }, [contractImageList]);
 
@@ -272,7 +246,7 @@ const ContractListModalComponent = (props: any) => {
         </TopArea>
         <ContractWrapper>
           <ContractArea>
-            {contractImageList.map((item, index) => {
+            {contractImageList.map((item: any, index: number) => {
               if (index + 1 === currentPage) {
                 return (
                   <Image
@@ -286,7 +260,7 @@ const ContractListModalComponent = (props: any) => {
           </ContractArea>
         </ContractWrapper>
         <BottomArea>
-          {contractImageList.map((item: any, index) => {
+          {contractImageList.map((item: any, index: number) => {
             return (
               <ThumbnailBox
                 key={index}

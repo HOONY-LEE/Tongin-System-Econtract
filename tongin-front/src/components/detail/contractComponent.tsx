@@ -250,6 +250,20 @@ export default function ContractComponent(props: any) {
   const [status, setStatus] = useState(""); // toast messege
   const [isContractListModalOpen, setIsContractListModalOpen] =
     useState<boolean>(false);
+  const [contractImageList, setContractImageList] = useState<any[]>([]);
+
+  // 계약서 이미지 리스트 API
+  const getContractImageList = async () => {
+    const response = await API.get(`/receipt/contract-image/${reNum}`);
+    if (response.status === 200) {
+      console.log("contractImageList>>>");
+      console.log(response.data.contractImageList);
+      setContractImageList(response.data.contractImageList);
+    }
+  };
+  useEffect(() => {
+    getContractImageList();
+  }, []);
 
   // 계약서 생성하기 모달 열기
   const handleOpenModal = () => {
@@ -263,7 +277,12 @@ export default function ContractComponent(props: any) {
 
   // 계약서 불러오기 모달 열기
   const handleOpenContractListModal = () => {
-    setIsContractListModalOpen(true);
+    if (contractImageList.length === 0) {
+      alert("생성된 견적서가 없습니다.");
+      return;
+    } else {
+      setIsContractListModalOpen(true);
+    }
   };
 
   // 계약서 불러오기 모달 닫기
@@ -473,14 +492,9 @@ export default function ContractComponent(props: any) {
       {isContractListModalOpen && (
         <ContractListModalComponent
           reNum={reNum}
-          setLines={setLines}
-          drawingData={drawingData}
-          setDrawingData={setDrawingData}
-          lines={lines}
-          articleDataList={articleDataList}
-          optionData={optionData}
-          priceDataList={priceDataList}
           onClose={handleCloseContractListModal}
+          contractImageList={contractImageList}
+          setContractimageList={setContractImageList}
         />
       )}
       {isPreviewModalOpen && (

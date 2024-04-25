@@ -76,6 +76,8 @@ export default function MoveDateInputComponent(props: any) {
     dateHandleCloseModal();
   };
 
+  const onChangeHandle = () => {};
+
   return (
     <Wrapper>
       <MoveDateBox>
@@ -89,6 +91,7 @@ export default function MoveDateInputComponent(props: any) {
           <InputBox
             placeholder="--"
             value={dateData.replace(formattedDate, "$1-$2-$3")}
+            onChange={onChangeHandle}
           ></InputBox>
         </MoveDateInput>
       </MoveDateBox>
