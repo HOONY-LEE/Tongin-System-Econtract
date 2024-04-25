@@ -4,6 +4,7 @@ import ListComponent from "./listComponent";
 import API from "../../API/API";
 import HomeSearchComponent from "../common/homeSearchComponent";
 import { Toast } from "../common/toastMessegeComponent";
+import { useLocation } from "react-router-dom";
 
 const SearchContainer = styled.div`
   width: 90vw;
@@ -80,7 +81,9 @@ export default function TabComponent() {
   const [worklist, setWorklist] = useState<any[]>([]); // work list
   const [searchedText, setSearchedText] = useState("");
   const [searchedList, setSearchedList] = useState<any[]>([]);
-
+  const [fetchStatus, setFetchStatus] = useState(false); // toast messege
+  const [status, setStatus] = useState(""); // toast messege
+  const [text, setText] = useState(""); // toast messege
   const menuArr = [
     { name: "견적리스트", content: "견적리스트 영역" },
     { name: "미계약리스트", content: "미계약 리스트 영역" },
@@ -88,6 +91,7 @@ export default function TabComponent() {
     { name: "작업리스트", content: "작업리스트 영역" },
     { name: "전체보기", content: "전체리스트 영역" },
   ];
+  const toastMessage = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -108,6 +112,14 @@ export default function TabComponent() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (toastMessage.state) {
+      setFetchStatus(toastMessage.state.fetchStatus);
+      setStatus(toastMessage.state.status);
+      setText(toastMessage.state.text);
+    }
+  }, [toastMessage]);
 
   useEffect(() => {
     const updateLists = () => {
@@ -155,6 +167,14 @@ export default function TabComponent() {
 
   return (
     <>
+      {fetchStatus && (
+        <Toast
+          text={text}
+          setFetchStatus={setFetchStatus}
+          fetchStatus={fetchStatus}
+          status={status}
+        />
+      )}
       <SearchContainer>
         <HomeSearchComponent
           onChange={onChangeSearch}

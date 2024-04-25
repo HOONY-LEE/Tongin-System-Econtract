@@ -537,10 +537,10 @@ export default function SiteDetailComponent(props: any) {
     };
     const response: any = await API.post("/receipt/self", requestPram);
     if (response.status === 200) {
-      setStatus("SUCCESS");
-      setText("현장접수가 완료되었습니다.");
-      setFetchStatus(true);
-      navigate(`/contractlist`);
+      // setStatus("SUCCESS");
+      // setText("현장접수가 완료되었습니다.");
+      // setFetchStatus(true);
+      navigate(`/contractlist` , {state:{status:"SUCCESS",text:"현장접수가 완료되었습니다.",fetchStatus:true}});
     } else {
       setText("완료가 되지 않았습니다. 정보를 확인해 주세요.");
       setStatus("FAIL");
