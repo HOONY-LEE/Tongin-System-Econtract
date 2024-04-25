@@ -381,6 +381,8 @@ export default function DetailEditComponent(props: any) {
   );
   const [contractDate, setContractDate] = useState(detailData.contractDate);
   const [movingDate, setMovingDate] = useState(detailData.movingDate);
+  const [preZipCode, setPreZipCode] = useState(detailData.preZoneCode);
+  const [afterZipCode, setAfterZipCode] = useState(detailData.afterZoneCode);
 
   const reNum = useParams().id;
   const [isContractFinishModal, setIsContractFinishModal] =
@@ -394,7 +396,8 @@ export default function DetailEditComponent(props: any) {
   const [afterAddressDetail, setAfterAddressDetail] = useState(
     detailData.afterAddressDetail
   );
-
+  const [preAddress, setPreAddress] = useState(detailData.preAddress);
+  const [afterAddress, setAfterAddress] = useState(detailData.afterAddress);
   const [userName, setUserName] = useState(detailData.name);
   const [userContact, setUserContact] = useState(detailData.contact);
   const [currentTab, setCurrentTab] = useState(0); //btn
@@ -427,6 +430,10 @@ export default function DetailEditComponent(props: any) {
       updatedData.consultationDate = consultationDate;
       updatedData.contractDate = contractDate;
       updatedData.movingDate = movingDate;
+      updatedData.afterAddress = afterAddress;
+      updatedData.preAddress = preAddress;
+      updatedData.preZipCode = preZipCode;
+      updatedData.afterZipCode = afterZipCode;
       return updatedData;
     });
   }, [
@@ -439,6 +446,10 @@ export default function DetailEditComponent(props: any) {
     consultationDate,
     contractDate,
     movingDate,
+    preAddress,
+    afterAddress,
+    preZipCode,
+    afterZipCode,
   ]);
   //계약서 상태 [계약]일시 계약날짜 추가
   useEffect(() => {
@@ -496,19 +507,16 @@ export default function DetailEditComponent(props: any) {
 
   const postValueInput = (data: any) => {
     setPostData(data);
-
     if (addressType === "prev") {
-      detailData.preAddress = `${data.address}${
-        data.buildingName
-          ? " (" + data.buildingName + ") (" + data.zonecode + ")"
-          : ""
-      }`;
+      setPreZipCode(data.zonecode);
+      setPreAddress(
+        `${data.address}${data.buildingName ? " " + data.buildingName : ""}  `
+      );
     } else if (addressType === "after") {
-      detailData.afterAddress = `${data.address}${
-        data.buildingName
-          ? " (" + data.buildingName + ") (" + data.zonecode + ")"
-          : ""
-      }`;
+      setAfterZipCode(data.zonecode);
+      setAfterAddress(
+        `${data.address}${data.buildingName ? " " + data.buildingName : ""} `
+      );
     }
   };
 
@@ -632,23 +640,9 @@ export default function DetailEditComponent(props: any) {
 
     console.log("vvvvvv 보내기 전detailData vvvvv");
     console.log(detailData);
-    // console.log(statusCode);
     const requestPram = {
       receiptDetail: detailData,
-      // name: detailData.name,
-      // contact: detailData.contact,
-      // statusCode: statusCode,
-      // preZipCode: detailData.address,
-      // preAddress: detailData.preAddress,
-      // preAddressDetail: detailData.prevAddressDetail,
-      // afterZipCode: detailData.address,
-      // afterAddress: detailData.afterAddress,
-      // afterAddressDetail: detailData.afterAddressDetail,
-      // receptionDate: detailData.receptionDate, // 접수일
-      // consultationScheduledDate: detailData.consultationDate, // 상담 예정일
-      // consultationDate: detailData.consultationDate, // 상담일
-      // contractDate: detailData.contractDate, // 계약일
-      // movingDate: detailData.movingDate, //이사일
+      
     };
 
     const response: any = await API.put(
@@ -665,7 +659,6 @@ export default function DetailEditComponent(props: any) {
     } else if (response.statusCode === 400) {
       setFetchStatus(true);
       setStatus("FAIL");
-      // alert("Fail to getDetailList()");
     }
   };
 
@@ -772,7 +765,7 @@ export default function DetailEditComponent(props: any) {
             <InputBox
               readOnly
               placeholder="전 주소를 입력해 주세요."
-              value={detailData?.preAddress}
+              value={`${preAddress}${preZipCode ? ` ( ${preZipCode} )` : ""}`}
             ></InputBox>
           </UserAddressEditInput>
           <UserAddressEditInput>
@@ -791,7 +784,9 @@ export default function DetailEditComponent(props: any) {
                 postHandleOpenModal("after");
               }}
               placeholder="후 주소를 입력해 주세요"
-              value={detailData?.afterAddress}
+              value={`${afterAddress}${
+                afterZipCode ? ` ( ${afterZipCode} )` : ""
+              }`}
               onChange={onChangeHandle}
             ></InputBox>
           </UserAddressEditInput>
