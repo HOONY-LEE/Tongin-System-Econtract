@@ -199,10 +199,10 @@ export default function ListComponent(props: any) {
         </ContentText>
       </TitleBox>
       {currentList.length > 0 ? (
-        currentList?.map((user: any) => {
+        currentList?.map((user: any, index: number) => {
           return (
             <ContentBox
-              key={user.no}
+              key={index}
               onClick={() => detailPageShow("R20240203929")}
             >
               <ContentText>

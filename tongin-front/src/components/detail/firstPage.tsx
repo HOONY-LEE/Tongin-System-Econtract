@@ -1108,7 +1108,9 @@ const FirstPage = (props: any) => {
                   <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
                 </TotalPriceName>
                 <TotalPriceInput>
-                  <PriceNameInput>32,100,000</PriceNameInput>
+                  <PriceNameInput>
+                    {priceDataList[3].amount.toLocaleString()}
+                  </PriceNameInput>
                   <PriceNameInputEng>₩</PriceNameInputEng>
                 </TotalPriceInput>
               </TotalPriceBox>

@@ -42,9 +42,9 @@ const Wrapper = styled.div`
 `;
 
 const TopArea = styled.div`
-  margin-top: 1vh;
-  width: 90vw;
-  height: 4vh;
+  margin-top: 2vw;
+  width: 80vw;
+  height: 6vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,6 +55,17 @@ const LeftArea = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+`;
+
+const TextBox = styled.div`
+  width: 20vw;
+  height: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4vw;
+  font-size: 1.8vw;
+  background-color: #f0f0f0ab;
 `;
 
 const MidArea = styled.div`
@@ -83,8 +94,8 @@ const CloseBox = styled.div`
 
 const ContractWrapper = styled.div`
   margin-top: 1vh;
-  width: 90vw;
-  height: 127vw;
+  width: 80vw;
+  height: 113vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,15 +154,15 @@ const NextBox = styled.div<{ isActivate: boolean }>`
 `;
 
 const BottomArea = styled.div`
-  margin-top: 1vh;
-  width: 90vw;
+  margin-top: 1vw;
+  width: 80vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
 `;
 
 const ThumbnailBox = styled.div<{ index: number; currentPage: number }>`
-  width: 8vw;
+  width: 7vw;
   outline: 0.1vw solid gray;
   margin-right: 1vw;
   margin-bottom: 1.2vw;
@@ -216,7 +227,12 @@ const ContractListModalComponent = (props: any) => {
       <Backdrop />
       <Wrapper>
         <TopArea>
-          <LeftArea></LeftArea>
+          <LeftArea>
+            <TextBox>
+              생성일 :{" "}
+              {contractImageList[currentPage - 1].createdAt.substring(0, 10)}
+            </TextBox>
+          </LeftArea>
           <MidArea>
             <PrevBox isActivate={prevBoxActive}>
               <ArrowLeftIcon

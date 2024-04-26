@@ -391,7 +391,7 @@ export default function ContractComponent(props: any) {
               <PriceInputArea>
                 <InputCBMBox>
                   <InputCBMNumber>
-                    {optionData.ladderTruck.servicePayment}
+                    {optionData.ladderTruck.servicePayment.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
@@ -405,10 +405,7 @@ export default function ContractComponent(props: any) {
               <PriceInputArea>
                 <InputCBMBox>
                   <InputCBMNumber>
-                    {
-                      optionData.livingService.movingCleaningService
-                        .servicePayment
-                    }
+                    {optionData.livingService.movingCleaningService.servicePayment.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
@@ -422,10 +419,7 @@ export default function ContractComponent(props: any) {
               <PriceInputArea>
                 <InputCBMBox>
                   <InputCBMNumber>
-                    {
-                      optionData.livingService.organizationStorageService
-                        .servicePayment
-                    }
+                    {optionData.livingService.organizationStorageService.servicePayment.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
@@ -439,10 +433,7 @@ export default function ContractComponent(props: any) {
               <PriceInputArea>
                 <InputCBMBox>
                   <InputCBMNumber>
-                    {
-                      optionData.livingService.deodorizationService
-                        .servicePayment
-                    }
+                    {optionData.livingService.deodorizationService.servicePayment.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
@@ -456,7 +447,7 @@ export default function ContractComponent(props: any) {
               <PriceInputArea>
                 <InputCBMBox>
                   <InputCBMNumber>
-                    {optionData.ladderTruck.servicePayment}
+                    {optionData.ladderTruck.servicePayment.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
@@ -469,7 +460,9 @@ export default function ContractComponent(props: any) {
               </TitleArea>
               <PriceInputArea>
                 <InputCBMBox>
-                  <InputCBMNumber>{optionTotalCharge}</InputCBMNumber>
+                  <InputCBMNumber>
+                    {optionTotalCharge.toLocaleString()}
+                  </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
               </PriceInputArea>
