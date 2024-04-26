@@ -114,9 +114,6 @@ const DropdownBox = styled.div`
 export default function NewOptionComponent(props: any) {
   const { optionData, setOptionData, reNum, postOptionData } = props;
 
-  console.log("옵션데이터>>>>>");
-  console.log(optionData);
-
   const transportationMethodList = [
     { id: 0, status: "선택안함" },
     { id: 1, status: "사다리차" },

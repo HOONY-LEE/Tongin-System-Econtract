@@ -477,29 +477,7 @@ export default function SiteDetailComponent(props: any) {
   const dateHandleCloseModal = () => {
     setIsDateModalOpen(false);
   };
-  // 날짜 입력
-  // const dateValueInput = (data: any) => {
-  //   console.log("dateValueInput", data);
-  //   const myData = new Date(data);
-  //   // setDateData(data);
-  //   console.log("myData", myData);
-  //   console.log(format(myData, "yMMdd"));
-  //   if (!Number.isNaN(new Date(myData).getTime())) {
-  //     if (dateType === "reception") {
-  //       setReceptionDate(format(myData, "yMMdd"));
-  //     } else if (dateType === "moving") {
-  //       setSerReqDt(format(myData, "yMMdd"));
-  //     } else if (dateType === "consultation") {
-  //       setVisitDate(format(myData, "yMMdd"));
-  //     } else if (dateType === "visite") {
-  //       setVisitDate(format(myData, "yMMdd"));
-  //     } else {
-  //       return "";
-  //     }
-  //   } else {
-  //     return "";
-  //   }
-  // };
+
   // 날짜 삭제
   const deteValueDelete = () => {
     if (dateType === "reception") {
@@ -513,7 +491,6 @@ export default function SiteDetailComponent(props: any) {
     }
     dateHandleCloseModal();
   };
-  ////////////////////////////////////////////////////
 
   //로컬에서 꺼내온 담당자 정보
   const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");

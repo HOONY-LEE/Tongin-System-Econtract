@@ -158,7 +158,6 @@ export default function TabComponent() {
   const onChangeSearch = (e: any) => {
     const keyword = e.target.value;
     setSearchedText(keyword);
-    console.log(receiptList[0].name.includes(keyword));
     const filterdList = receiptList.filter(
       (item) => item.name.includes(keyword) || item.contact.includes(keyword)
     );

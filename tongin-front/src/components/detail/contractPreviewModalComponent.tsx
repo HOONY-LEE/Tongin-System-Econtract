@@ -212,8 +212,6 @@ const ContractPreviewModalComponent = (props: any) => {
   const getContractImage = async () => {
     const response = await API.get(`/receipt/contract-image/${reNum}`);
     if (response.status === 200) {
-      console.log("response>>>");
-      console.log(response.data.contractImageList);
       setContractImageList(response.data.contractImageList);
     }
   };
@@ -250,11 +248,6 @@ const ContractPreviewModalComponent = (props: any) => {
   useEffect(() => {
     getContractImage();
   }, []);
-
-  useEffect(() => {
-    console.log("contractImageList>>");
-    console.log(contractImageList);
-  }, [contractImageList]);
 
   return (
     <>

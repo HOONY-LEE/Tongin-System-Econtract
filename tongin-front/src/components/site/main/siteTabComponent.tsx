@@ -148,117 +148,18 @@ const DrawingBtn = styled.div`
 
 export default function SiteTabPage() {
   const [currentTab, setCurrentTab] = useState(0); //tab
-  const [detailData, setDetailData] = useState<any[]>([]);
-  // const [articleDataList, setArticleDataList] = useState<any[]>([]);
-  const [optionData, setOptionData] = useState<object>({});
-  const [currentProductList, setCurrentProductList] = useState<any[]>([]);
-  const [priceDataList, setPriceDataList] = useState<any[]>([]);
-  const [drawingPanel, setDrawingPanel] = useState(false);
   const [drawingData, setDrawingData] = useState<any[]>([]);
-  const [textMemoData, setTextMemoData] = useState<any[]>([]);
-  const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
   const reNum = useParams().id;
-  const [preventDefault, setPreventDefault] = useState<any>(false);
   const menuArr = [{ name: "자체견적 현장접수", content: "현장접수 영역" }];
 
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
 
-  // 메모장 전송 API
-  const postDrawingData = async () => {
-    const requestParam = {
-      receiptMemoData: drawingData,
-    };
-    const response = await API.post(`receipt/memo/${reNum}`, requestParam);
-    if (response.status === 200) {
-      const result = response.data;
-      disableScrollLock();
-      setIsScrolled(false);
-      disableScrollLock();
-      // console.log("저장성공", result);
-    } else {
-      console.log("Fail to postDrawingData()");
-    }
-  };
-  // 메모장 호출 API
-  const getDrawingData = async () => {
-    const response = await API.get(`receipt/memo/${reNum}`);
-    if (response.status === 200) {
-      console.log(response);
-      const result = response.data.receiptMemoData;
-      const rusult2 = response.data.textMemo;
-      setDrawingData(result);
-      setIsScrolled(true);
-      setPreventDefault(true);
-      setTextMemoData(rusult2);
-      // console.log("불러오기성공", result);
-    } else {
-      console.log("Fail to getDrawingData()");
-    }
-  };
-
-  const onClose = () => {
-    postDrawingData();
-    setDrawingPanel(false);
-    disableScrollLock();
-  };
-
-  // useEffect(() => {
-  //   getDetailList();
-  //   getProductList();
-  //   getOptionList();
-  //   getPriceList();
-  // }, []);
-
-  // useEffect(() => {
-  //   setCurrentProductList(articleDataList);
-  // }, [articleDataList]);
-
-  // 스크롤 잠금
-  const scrollRock = () => {
-    const { body } = document;
-
-    if (!body.getAttribute("scrollY")) {
-      const pageY = window.pageYOffset;
-
-      body.setAttribute("scrollY", pageY.toString());
-
-      body.style.overflow = "hidden";
-      body.style.touchAction = "none";
-      body.style.position = "fixed";
-      body.style.left = "0px";
-      body.style.right = "0px";
-      body.style.bottom = "0px";
-      body.style.top = `-${pageY}px`;
-      body.style.scrollBehavior = "contain";
-    }
-  };
-
-  // 스크롤 잠금 해제
-  const disableScrollLock = () => {
-    const { body } = document;
-
-    if (body.getAttribute("scrollY")) {
-      body.style.removeProperty("overflow");
-      body.style.removeProperty("position");
-      body.style.removeProperty("top");
-      body.style.removeProperty("left");
-      body.style.removeProperty("right");
-      body.style.removeProperty("bottom");
-      body.style.removeProperty("touchAction");
-      body.style.removeProperty("scrollBehavior");
-      body.style.touchAction = "auto";
-      window.scrollTo(0, Number(body.getAttribute("scrollY")));
-
-      body.removeAttribute("scrollY");
-    }
-  };
   useEffect(() => {
     if (drawingData?.length >= 0) {
       setLines(drawingData);
-      // setLines(drawingData);
     } else {
       setDrawingData([]);
     }

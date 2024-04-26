@@ -137,6 +137,9 @@ const TitleText = styled.h3`
 
 export default function ListComponent(props: any) {
   const { currentList } = props;
+
+  console.log("currentList>>>");
+  console.log(currentList);
   const userStatusColor = (status: string) => {
     switch (status) {
       case "CA":
@@ -166,8 +169,10 @@ export default function ListComponent(props: any) {
   const date = /^(\d{4})(\d{2})(\d{2})$/;
 
   const navigate = useNavigate();
-  const detailPageShow = (recNum: string) => {
-    navigate(`/contractlist/detail/${recNum}`);
+  const detailPageShow = (reNum: string) => {
+    console.log("reNum>>>");
+    console.log(reNum);
+    navigate(`/contractlist/detail/${reNum}`);
   };
   return (
     <>
@@ -203,7 +208,8 @@ export default function ListComponent(props: any) {
           return (
             <ContentBox
               key={index}
-              onClick={() => detailPageShow("R20240203929")}
+              onClick={() => detailPageShow(user.recNum)}
+              // onClick={() => detailPageShow("R20240203929")}
             >
               <ContentText>
                 <UserName>{user.name.replace(str, "")}</UserName>

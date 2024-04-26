@@ -97,7 +97,6 @@ export default function ProductItem(props: any) {
 
   const [remark, setRemark] = useState(item.article.articleRemark);
   const onChangeInput = (e: any) => {
-    console.log(e.target.value);
     setRemark(e.target.value);
   };
 

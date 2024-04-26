@@ -111,16 +111,16 @@ const ContractArea = styled.div`
   align-items: center;
 `;
 
-const PrevBox = styled.div<{ isActivate: boolean }>`
+const PrevBox = styled.div<{ $isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
+  background-color: ${(props) => (props.$isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
   ${(props) =>
-    !props.isActivate &&
+    !props.$isActivate &&
     css`
       pointer-events: none;
     `}
@@ -138,16 +138,16 @@ const NumBox = styled.div`
   font-weight: 600;
 `;
 
-const NextBox = styled.div<{ isActivate: boolean }>`
+const NextBox = styled.div<{ $isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
+  background-color: ${(props) => (props.$isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
   ${(props) =>
-    !props.isActivate &&
+    !props.$isActivate &&
     css`
       pointer-events: none;
     `}
@@ -161,14 +161,14 @@ const BottomArea = styled.div`
   justify-content: start;
 `;
 
-const ThumbnailBox = styled.div<{ index: number; currentPage: number }>`
+const ThumbnailBox = styled.div<{ index: number; $currentPage: number }>`
   width: 7vw;
   outline: 0.1vw solid gray;
   margin-right: 1vw;
   margin-bottom: 1.2vw;
   border-radius: 0.1vw;
   ${(props) =>
-    props.index === props.currentPage - 1 &&
+    props.index === props.$currentPage - 1 &&
     css`
       outline: 0.3vw solid #ff7f3b;
     `}
@@ -234,7 +234,7 @@ const ContractListModalComponent = (props: any) => {
             </TextBox>
           </LeftArea>
           <MidArea>
-            <PrevBox isActivate={prevBoxActive}>
+            <PrevBox $isActivate={prevBoxActive}>
               <ArrowLeftIcon
                 onClick={(e: any) => clickPrevPage(e)}
                 width={"4.2vw"}
@@ -245,7 +245,7 @@ const ContractListModalComponent = (props: any) => {
             <NumBox>
               {currentPage} / {maxIndex}
             </NumBox>
-            <NextBox isActivate={nextBoxActive}>
+            <NextBox $isActivate={nextBoxActive}>
               <ArrowRightIcon
                 onClick={(e: any) => clickNextPage(e)}
                 width={"4.2vw"}
@@ -269,6 +269,7 @@ const ContractListModalComponent = (props: any) => {
                     src={`https://homenmove.net/${item.path}`}
                     width={"100%"}
                     height={"100%"}
+                    key={index}
                   ></Image>
                 );
               }
@@ -281,7 +282,7 @@ const ContractListModalComponent = (props: any) => {
               <ThumbnailBox
                 key={index}
                 index={index}
-                currentPage={currentPage}
+                $currentPage={currentPage}
                 onClick={(e: any) => onclickThumbnail(index)}
               >
                 <Image

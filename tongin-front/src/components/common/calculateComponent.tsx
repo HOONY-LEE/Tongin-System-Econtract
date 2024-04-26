@@ -183,7 +183,6 @@ const CalculatorComponent = (props: any) => {
       } else {
         result = Number(tmpValue);
         setInputValue(result);
-        console.log(result);
         setCurrentProductList((prev: any) => {
           const updatedList = [...prev];
           updatedList[roomId].articleData[articleId].article.cbm = result;

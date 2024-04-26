@@ -148,10 +148,7 @@ export default function CleaningSelectComponent(props: any) {
   };
 
   const dateValueInput = (data: any) => {
-    console.log("dateValueInput", data);
     const myData = new Date(data);
-    // setDateData(data);
-    console.log(format(myData, "y-MM-dd"));
     if (!Number.isNaN(new Date(myData).getTime())) {
       selectedValue.serviceRequestDate = format(myData, "y-MM-dd");
     } else {

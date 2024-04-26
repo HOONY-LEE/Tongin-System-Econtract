@@ -346,15 +346,12 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   );
 
   const textMemoInput = (e: any) => {
-    console.log(e.target.value);
     setTextMemoData(e.target.value);
   };
   const backTargetElement = document.querySelector("#BackgroundPanel");
   backTargetElement?.addEventListener(
     "dragover",
     (event) => {
-      console.log("drag", event);
-      // 드롭을 허용하기 위해 기본 동작 취소
       event.preventDefault();
     },
     false

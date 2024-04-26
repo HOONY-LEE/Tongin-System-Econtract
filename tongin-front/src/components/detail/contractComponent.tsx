@@ -256,8 +256,6 @@ export default function ContractComponent(props: any) {
   const getContractImageList = async () => {
     const response = await API.get(`/receipt/contract-image/${reNum}`);
     if (response.status === 200) {
-      console.log("contractImageList>>>");
-      console.log(response.data.contractImageList);
       setContractImageList(response.data.contractImageList);
     }
   };
@@ -310,7 +308,12 @@ export default function ContractComponent(props: any) {
   };
 
   const openContractList = async () => {
-    handleOpenContractListModal();
+    if (contractImageList.length === 0) {
+      alert("아직 생성된 계약서가 없습니다.");
+      return;
+    } else {
+      handleOpenContractListModal();
+    }
   };
 
   // CBM계산을 위한 함수

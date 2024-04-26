@@ -116,8 +116,6 @@ const ReactDayPick = styled(DayPicker)`
 const DateModalComponent = (props: any) => {
   const { onClose, deleteValue, value, setValue } = props;
 
-  console.log("value>>>");
-  console.log(value);
   // 날짜 문자열에서 `Date` 객체로 변환
   const getDateFromValue = (value: string): Date => {
     const year = parseInt(value.slice(0, 4), 10);
@@ -153,7 +151,6 @@ const DateModalComponent = (props: any) => {
     }
   };
   useEffect(() => {
-    console.log(divRef);
     if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
       setDimensions({
         width: divRef.current.offsetWidth,

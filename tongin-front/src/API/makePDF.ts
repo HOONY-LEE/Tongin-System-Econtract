@@ -31,7 +31,6 @@ const makeHtmltoImage = {
     formData.append("imageData", blob2, "Page2.png");
     formData.append("type", "png");
     const accessToken = localStorage.getItem("accessToken");
-    console.log(formData);
     const config = {
       headers: {
         Authorization: `Bearer ${accessToken}`, // 토큰 넣어주기
