@@ -131,8 +131,6 @@ export default function CommonOptionBoxComponent(props: any) {
     optionData.description
   );
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
-  console.log("optionData.serviceRequestDate>>>");
-  console.log(optionData.serviceRequestDate);
   const onClickCheck = () => {
     setIsChecked(!isChecked);
   };
@@ -163,7 +161,6 @@ export default function CommonOptionBoxComponent(props: any) {
 
   // 인풋이 있는 경우 인풋 변경 함수(기타서비스)
   const onChangeInput = (e: any) => {
-    console.log(e.target.value);
     setDescription(e.target.value);
   };
 

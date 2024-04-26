@@ -42,9 +42,9 @@ const Wrapper = styled.div`
 `;
 
 const TopArea = styled.div`
-  margin-top: 1vh;
-  width: 90vw;
-  height: 4vh;
+  margin-top: 2vw;
+  width: 80vw;
+  height: 6vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,6 +55,17 @@ const LeftArea = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+`;
+
+const TextBox = styled.div`
+  width: 20vw;
+  height: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4vw;
+  font-size: 1.8vw;
+  background-color: #f0f0f0ab;
 `;
 
 const MidArea = styled.div`
@@ -83,8 +94,8 @@ const CloseBox = styled.div`
 
 const ContractWrapper = styled.div`
   margin-top: 1vh;
-  width: 90vw;
-  height: 127vw;
+  width: 80vw;
+  height: 113vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,16 +111,16 @@ const ContractArea = styled.div`
   align-items: center;
 `;
 
-const PrevBox = styled.div<{ isActivate: boolean }>`
+const PrevBox = styled.div<{ $isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
+  background-color: ${(props) => (props.$isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
   ${(props) =>
-    !props.isActivate &&
+    !props.$isActivate &&
     css`
       pointer-events: none;
     `}
@@ -127,37 +138,37 @@ const NumBox = styled.div`
   font-weight: 600;
 `;
 
-const NextBox = styled.div<{ isActivate: boolean }>`
+const NextBox = styled.div<{ $isActivate: boolean }>`
   width: 5vw;
   height: 5vw;
-  background-color: ${(props) => (props.isActivate ? "#ff7f3b" : "#e7e7e7")};
+  background-color: ${(props) => (props.$isActivate ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   display: flex;
   justify-content: center;
   align-items: center;
   ${(props) =>
-    !props.isActivate &&
+    !props.$isActivate &&
     css`
       pointer-events: none;
     `}
 `;
 
 const BottomArea = styled.div`
-  margin-top: 1vh;
-  width: 90vw;
+  margin-top: 1vw;
+  width: 80vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
 `;
 
-const ThumbnailBox = styled.div<{ index: number; currentPage: number }>`
-  width: 8vw;
+const ThumbnailBox = styled.div<{ index: number; $currentPage: number }>`
+  width: 7vw;
   outline: 0.1vw solid gray;
   margin-right: 1vw;
   margin-bottom: 1.2vw;
   border-radius: 0.1vw;
   ${(props) =>
-    props.index === props.currentPage - 1 &&
+    props.index === props.$currentPage - 1 &&
     css`
       outline: 0.3vw solid #ff7f3b;
     `}
@@ -167,32 +178,12 @@ const ThumbnailBox = styled.div<{ index: number; currentPage: number }>`
 `;
 
 const ContractListModalComponent = (props: any) => {
-  const {
-    onClose,
-    reNum,
-    priceDataList,
-    articleDataList,
-    setDrawingData,
-    optionData,
-    lines,
-    drawingData,
-    setLines,
-  } = props;
+  const { onClose, contractImageList, setContractImageList } = props;
 
-  const [contractImageList, setContractImageList] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [prevBoxActive, setPrevBoxActive] = useState<boolean>(false);
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
-  const [maxIndex, setMaxIndex] = useState<number>(2);
-
-  const getContractImage = async () => {
-    const response = await API.get(`/receipt/contract-image/${reNum}`);
-    if (response.status === 200) {
-      console.log("contractImageList>>>");
-      console.log(response.data.contractImageList);
-      setContractImageList(response.data.contractImageList);
-    }
-  };
+  const [maxIndex, setMaxIndex] = useState<number>(contractImageList.length);
 
   const clickPrevPage = (e: any) => {
     if (currentPage <= 1) {
@@ -228,12 +219,6 @@ const ContractListModalComponent = (props: any) => {
   }, [currentPage]);
 
   useEffect(() => {
-    getContractImage();
-  }, []);
-
-  useEffect(() => {
-    console.log("contractImageList>>");
-    console.log(contractImageList);
     setMaxIndex(contractImageList.length);
   }, [contractImageList]);
 
@@ -242,9 +227,14 @@ const ContractListModalComponent = (props: any) => {
       <Backdrop />
       <Wrapper>
         <TopArea>
-          <LeftArea></LeftArea>
+          <LeftArea>
+            <TextBox>
+              생성일 :{" "}
+              {contractImageList[currentPage - 1].createdAt.substring(0, 10)}
+            </TextBox>
+          </LeftArea>
           <MidArea>
-            <PrevBox isActivate={prevBoxActive}>
+            <PrevBox $isActivate={prevBoxActive}>
               <ArrowLeftIcon
                 onClick={(e: any) => clickPrevPage(e)}
                 width={"4.2vw"}
@@ -255,7 +245,7 @@ const ContractListModalComponent = (props: any) => {
             <NumBox>
               {currentPage} / {maxIndex}
             </NumBox>
-            <NextBox isActivate={nextBoxActive}>
+            <NextBox $isActivate={nextBoxActive}>
               <ArrowRightIcon
                 onClick={(e: any) => clickNextPage(e)}
                 width={"4.2vw"}
@@ -272,13 +262,14 @@ const ContractListModalComponent = (props: any) => {
         </TopArea>
         <ContractWrapper>
           <ContractArea>
-            {contractImageList.map((item, index) => {
+            {contractImageList.map((item: any, index: number) => {
               if (index + 1 === currentPage) {
                 return (
                   <Image
                     src={`https://homenmove.net/${item.path}`}
                     width={"100%"}
                     height={"100%"}
+                    key={index}
                   ></Image>
                 );
               }
@@ -286,12 +277,12 @@ const ContractListModalComponent = (props: any) => {
           </ContractArea>
         </ContractWrapper>
         <BottomArea>
-          {contractImageList.map((item: any, index) => {
+          {contractImageList.map((item: any, index: number) => {
             return (
               <ThumbnailBox
                 key={index}
                 index={index}
-                currentPage={currentPage}
+                $currentPage={currentPage}
                 onClick={(e: any) => onclickThumbnail(index)}
               >
                 <Image

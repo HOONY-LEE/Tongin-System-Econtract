@@ -49,12 +49,9 @@ export default function DetailComponent(props: any) {
   };
   //계약서 상태 [계약]일시 disabled
   useEffect(() => {
-    console.log("completionContract", completionContract);
     if (completionContract) {
-      console.log("detail 완료 실행");
       setOnEditDisable(true);
     } else {
-      console.log("detail 완료");
       setOnEditDisable(false);
     }
   }, [completionContract]);

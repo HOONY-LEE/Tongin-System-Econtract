@@ -35,7 +35,6 @@ const PostModalComponent = (props: any) => {
   const { postValueInput, onClose, style } = props;
 
   const handleComplete = (data: any) => {
-    console.log(data);
     postValueInput(data);
   };
   const theme = {

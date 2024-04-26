@@ -410,12 +410,10 @@ export default function DetailEditComponent(props: any) {
   ];
 
   const selectMenuHandler = (index: number) => {
-    console.log(index);
     setCurrentTab(index);
   };
 
   const onChangUserName = (e: any) => {
-    console.log(e.target.value);
     setUserName(e.target.value);
   };
 
@@ -458,15 +456,13 @@ export default function DetailEditComponent(props: any) {
       const updatedData = { ...prev };
       if (finishContract) {
         updatedData.contractDate = format(today, "yMMdd");
-        console.log("계약일", updatedData.contractDate);
       } else {
         updatedData.contractDate = "";
       }
-      console.log("계약일", updatedData.contractDate);
       return updatedData;
     });
   }, [finishContract]);
-  //////////////////////////////////
+
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
     let formattedValue = e.target.value.replace(regExp, "").substring(0, 13);
@@ -522,100 +518,19 @@ export default function DetailEditComponent(props: any) {
 
   const onSelectStatus = () => {
     detailData.statusCode = statusCode;
-    console.log("onSelectStatus", detailData.statusCode);
   };
 
   //전 상세주소
   const onChangePrevAddressDetail = (e: any) => {
-    console.log(e.target.value);
     setPrevAddressDetail(e.target.value);
   };
   //후 상세주소
   const onChangAfterAddressDetail = (e: any) => {
-    console.log(e.target.value);
     setAfterAddressDetail(e.target.value);
   };
 
-  ////////////////////날짜 모달 시작////////////////////
-  // 날짜 모달 열기 핸들러
-  const dateHandleOpenModal = (type: any) => {
-    setIsDateModalOpen(true);
-    setDateType(type);
-  };
-
-  // // 날짜 모달 닫기 핸들러
-  const dateHandleCloseModal = () => {
-    setIsDateModalOpen(false);
-  };
-
-  const dateValueInput = (data: any) => {
-    console.log("dateValueInput", data);
-    const myData = new Date(data);
-    // setDateData(data);
-    console.log("myData", myData);
-    console.log(format(myData, "yMMdd"));
-    if (!Number.isNaN(new Date(myData).getTime())) {
-      if (dateType === "reception") {
-        detailData.receptionDate = format(myData, "yMMdd");
-      } else if (dateType === "moving") {
-        detailData.movingDate = format(myData, "yMMdd");
-      } else if (dateType === "consultation") {
-        detailData.consultationDate = format(myData, "yMMdd");
-      } else {
-        return "";
-      }
-    } else {
-      return "";
-    }
-  };
   // 에러방지를 위한 onChangeHandle
   const onChangeHandle = () => {};
-
-  // const deteValueDelete = () => {
-  //   if (dateType === "reception") {
-  //     detailData.receptionDate = "";
-  //   } else if (dateType === "moving") {
-  //     detailData.movingDate = "";
-  //   } else if (dateType === "consultation") {
-  //     detailData.consultationDate = "";
-  //   } else {
-  //     return "";
-  //   }
-  //   dateHandleCloseModal();
-  // };
-  const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
-
-  // const setReceptionDate = (newDate: string) => {
-  //   setDetailData((prev: any) => {
-  //     const updatedData = { ...prev };
-  //     updatedData.receptionDate = newDate;
-  //     return updatedData;
-  //   });
-  // };
-
-  // const setConsultationDate = (newDate: string) => {
-  //   setDetailData((prev: any) => {
-  //     const updatedData = { ...prev };
-  //     updatedData.consultationDate = newDate;
-  //     return updatedData;
-  //   });
-  // };
-
-  // const setContractDate = (newDate: string) => {
-  //   setDetailData((prev: any) => {
-  //     const updatedData = { ...prev };
-  //     updatedData.contractDate = newDate;
-  //     return updatedData;
-  //   });
-  // };
-
-  // const setMovingDate = (newDate: string) => {
-  //   setDetailData((prev: any) => {
-  //     const updatedData = { ...prev };
-  //     updatedData.movingDate = newDate;
-  //     return updatedData;
-  //   });
-  // };
 
   // 계약 상태 안내 모달 닫기 핸들
   const contractHandleCloseModal = () => {
@@ -638,11 +553,8 @@ export default function DetailEditComponent(props: any) {
       setCompletionContract(true);
     }
 
-    console.log("vvvvvv 보내기 전detailData vvvvv");
-    console.log(detailData);
     const requestPram = {
       receiptDetail: detailData,
-      
     };
 
     const response: any = await API.put(
@@ -650,7 +562,6 @@ export default function DetailEditComponent(props: any) {
       requestPram
     );
     if (response.status === 200) {
-      console.log(response);
       setStatus("SUCCESS");
       setFetchStatus(true);
 
@@ -678,14 +589,6 @@ export default function DetailEditComponent(props: any) {
           addressType={addressType}
         />
       )}
-      {/* {isDateModalOpen && (
-        <DateModalComponent
-          value={"202404250"}
-          dateValueInput={dateValueInput}
-          onClose={dateHandleCloseModal}
-          deteValueDelete={deteValueDelete}
-        />
-      )} */}
       <ContentTop>
         <ContentTopLFBox>
           <ContentTopLF>
@@ -740,8 +643,6 @@ export default function DetailEditComponent(props: any) {
                     setFinishContract={setFinishContract}
                     setCompletionContract={setCompletionContract}
                   />
-                  {/* 현재:{statusCode} */}
-                  {/* {detailData?.status} */}
                 </UserStatus>
               </InfoRhContent>
             </InfoRhBox>
@@ -823,25 +724,7 @@ export default function DetailEditComponent(props: any) {
             setDateData={setMovingDate}
           ></MoveDateInputComponent>
         </MoveDateContainer>
-        {/* <MoveBtnContainer>
-          <MoveBtnTitle>이사종류</MoveBtnTitle>
-          <MoveBtnBox>
-            <MoveBtn>
-              {BtnArr.map((item, index) => (
-                <li
-                  key={index}
-                  className={
-                    detailData?.movingType === item.name
-                      ? "focused"
-                      : "desabled"
-                  }
-                >
-                  {item.name}
-                </li>
-              ))}
-            </MoveBtn>
-          </MoveBtnBox>
-        </MoveBtnContainer> */}
+
         <BtnBox>
           <CustomButton
             width={"48%"}

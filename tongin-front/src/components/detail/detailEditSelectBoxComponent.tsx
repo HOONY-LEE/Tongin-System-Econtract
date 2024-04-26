@@ -112,7 +112,6 @@ const DetailEditSelectBoxComponent = (props: any) => {
     //   // return updatedList;
     // });
     setStatusCode(item.statusCode);
-    console.log("statusCode", statusCode);
     onSelectStatus();
   };
 

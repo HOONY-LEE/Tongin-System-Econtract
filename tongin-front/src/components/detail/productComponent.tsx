@@ -111,13 +111,7 @@ export default function ProductComponent(props: any) {
   const [totalCBM, setTotalCBM] = useState<number>(0);
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
-  // console.log("currentProductList>>>");
-  // console.log(currentProductList);
-
   const saveProductList = async () => {
-    console.log("저장하기 실행");
-    console.log(currentProductList);
-
     try {
       const requestParam = {
         receiptArticleData: currentProductList,
@@ -129,7 +123,6 @@ export default function ProductComponent(props: any) {
       if (response.status === 200) {
         alert("성공적으로 저장되었습니다.");
         await getProductList();
-        console.log(currentProductList);
         calculateTotalCBM(currentProductList);
       } else {
         alert("물품정보 저장에 실패하였습니다.");

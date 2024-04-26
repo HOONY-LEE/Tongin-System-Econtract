@@ -640,10 +640,6 @@ const FirstPage = (props: any) => {
     setDrawingData2,
     optionTotalCharge,
   } = props;
-  console.log("lines>>>>");
-  console.log(lines);
-  console.log("lines2>>>>");
-  console.log(lines2);
 
   const divRef = useRef<any>(null);
   const stageRef = useRef<any>(null);
@@ -681,27 +677,15 @@ const FirstPage = (props: any) => {
     { id: 5, status: "리빙팀 수금" },
   ];
 
-  // const data = () => {
-  //   console.log("detailData", detailData);
-  //   console.log("priceDataList", priceDataList);
-  //   console.log("articleDataList", articleDataList);
-  //   console.log("optionData", optionData);
-  //   console.log("lines", lines);
-  //   console.log("drawingData", drawingData);
-  //   console.log("optionTotalCharge", optionTotalCharge);
-  //   console.log("movingCBM", movingCBM);
-  // };
   const getDrawingData = async () => {
     const response = await API.get(`receipt/memo/${reNum}`);
     if (response.status === 200) {
-      console.log(response);
       const result = response.data.receiptMemoData;
       const result2 = response.data.textMemo;
       setDrawingData(result);
       setTextMemo(result2);
-      console.log("텍스트메모", result2);
     } else {
-      console.log("Fail to getDrawingData()");
+      alert("Fail to getDrawingData()");
     }
   };
 
@@ -711,7 +695,7 @@ const FirstPage = (props: any) => {
       const result = response.data.contractSignData;
       setDrawingData2(result);
     } else {
-      console.log("Fail to getDetailList()");
+      alert("Fail to getDrawingData2()");
     }
   };
 
@@ -1108,7 +1092,9 @@ const FirstPage = (props: any) => {
                   <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
                 </TotalPriceName>
                 <TotalPriceInput>
-                  <PriceNameInput>32,100,000</PriceNameInput>
+                  <PriceNameInput>
+                    {priceDataList[3].amount.toLocaleString()}
+                  </PriceNameInput>
                   <PriceNameInputEng>₩</PriceNameInputEng>
                 </TotalPriceInput>
               </TotalPriceBox>

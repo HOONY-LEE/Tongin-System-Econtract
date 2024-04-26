@@ -185,11 +185,10 @@ export default function Detail() {
     if (response.status === 200) {
       const result = response.data.receiptDetail;
       const result2 = response.data.contractSignData;
-      console.log("detailData>>", result);
       setDetailData(result);
       setLines2(result2);
     } else {
-      console.log("Fail to getDetailList()");
+      alert("Fail to getDetailList()");
     }
   };
 
@@ -198,26 +197,20 @@ export default function Detail() {
     const response = await API.get(`/receipt/article/${reNum}`);
     if (response.status === 200) {
       const result = response.data.receiptArticleData;
-      console.log("물품정보리스트>>>>>>");
-      console.log(result);
+
       setCurrentProductList(result);
     } else {
-      console.log("Fail to getProductList()");
+      alert("Fail to getProductList()");
     }
   };
 
   // 옵션정보 호출API
   const getOptionList = async () => {
-    //임시 샘플데이터 사용
-    // setOptionData(realOptionData);
-    // setOptionData(newOptionData);
     const response = await API.get(`/receipt/option2/${reNum}`);
     if (response.status === 200) {
-      console.log("옵션정보호출>>>>");
-      console.log(response.data.receiptOptionData);
       setOptionData(response.data.receiptOptionData);
     } else {
-      console.log("Fail to getOptionList()");
+      alert("Fail to getOptionList()");
     }
   };
 
@@ -231,16 +224,15 @@ export default function Detail() {
       if (response.status === 200) {
         setFetchStatus(true);
         setStatus("SUCCESS");
-        // alert("옵션정보를 성공적으로 저장했습니다.");
       } else {
         setFetchStatus(true);
         setStatus("FAIL");
-        console.log("Fail to saveOptionData()");
+        alert("Fail to saveOptionData()");
       }
     } catch (error) {
       setFetchStatus(true);
       setStatus("FAIL");
-      // alert("옵션정보를 저장하는데 실패했습니다!");
+      alert("옵션정보를 저장하는데 실패했습니다!");
     }
   };
 
@@ -250,7 +242,7 @@ export default function Detail() {
     if (response.status === 200) {
       setPriceDataList(response.data.receiptPriceData);
     } else {
-      console.log("Fail to getPriceList()");
+      alert("Fail to getPriceList()");
     }
   };
 
@@ -266,25 +258,22 @@ export default function Detail() {
       disableScrollLock();
       setIsScrolled(false);
       disableScrollLock();
-      // console.log("저장성공", result);
     } else {
-      console.log("Fail to postDrawingData()");
+      alert("Fail to postDrawingData()");
     }
   };
   // 메모장 호출 API
   const getDrawingData = async () => {
     const response = await API.get(`receipt/memo/${reNum}`);
     if (response.status === 200) {
-      console.log(response);
       const result = response.data.receiptMemoData;
       const textMemo = response.data.textMemo;
       setDrawingData(result);
       setTextMemoData(textMemo);
       setIsScrolled(true);
       setPreventDefault(true);
-      // console.log("불러오기성공", result);
     } else {
-      console.log("Fail to getDrawingData()");
+      alert("Fail to getDrawingData()");
     }
   };
 
@@ -300,10 +289,6 @@ export default function Detail() {
     getOptionList();
     getPriceList();
   }, []);
-
-  // useEffect(() => {
-  //   setCurrentProductList(articleDataList);
-  // }, [articleDataList]);
 
   // 스크롤 잠금
   const scrollRock = () => {

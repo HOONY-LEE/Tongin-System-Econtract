@@ -120,7 +120,6 @@ const DetailDrawView: React.FC<CalculatorComponentProps> = ({
 
   useEffect(() => {
     setDrawingData([...lines]);
-    console.log("wd", drawingData);
   }, []);
 
   return (

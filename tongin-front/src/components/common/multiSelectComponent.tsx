@@ -38,16 +38,12 @@ export default function MultiSelectComponent(props: any) {
   const { optionList, setOptionList, optionType } = props;
 
   const selectOptionHandle = (index: number, optionType: number) => {
-    console.log("index>>>");
-    console.log(index);
     setOptionList((prev: any) => {
       const updatedList = [...prev];
       if (index === 0) {
-        console.log("분해");
         updatedList[optionType].decomposition =
           !updatedList[optionType].decomposition;
       } else if (index === 1) {
-        console.log("조립");
         updatedList[optionType].installation =
           !updatedList[optionType].installation;
       }

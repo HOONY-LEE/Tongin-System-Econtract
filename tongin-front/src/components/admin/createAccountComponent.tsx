@@ -150,7 +150,6 @@ export default function CreateAccountComponent() {
     비밀번호 : ${requestParam.body.password}`;
     if (window.confirm(message)) {
       const response = await API.post("auth/sign-up", requestParam);
-      console.log(response);
       if (response.status == 200) {
         alert(
           `"${response.data.data.user.name}"님이 정상적으로 가입되었습니다.`

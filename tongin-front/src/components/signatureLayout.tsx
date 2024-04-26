@@ -218,7 +218,6 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
       setLines([...lines]);
       setDrawingData([...lines]);
     }
-    console.log(drawingData);
   };
 
   const handlePointerUp = () => {
@@ -282,7 +281,6 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
       requestPram
     );
     if (response.status === 200) {
-      console.log(response);
       alert("전송완료");
       setOnContractFinishPage && setOnContractFinishPage(true);
     } else {
