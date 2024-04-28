@@ -67,6 +67,7 @@ const DetailEditSelectBoxComponent = (props: any) => {
   const {
     setStatusCode,
     statusCode,
+    setStatus,
     onSelectStatus,
     setFinishContract,
     setCompletionContract,
@@ -94,15 +95,13 @@ const DetailEditSelectBoxComponent = (props: any) => {
 
   const handleOnChangeSelectValue = (index: number, item: any) => {
     if (item.statusCode === "22") {
+      // 계약상태
       setFinishContract(true);
+      setCompletionContract(true);
+    } else if (item.statusCode === "41") {
       setCompletionContract(true);
     } else {
       setFinishContract(false);
-      setCompletionContract(false);
-    }
-    if (item.statusCode === "41") {
-      setCompletionContract(true);
-    } else {
       setCompletionContract(false);
     }
     setCurrentValue(item.status);

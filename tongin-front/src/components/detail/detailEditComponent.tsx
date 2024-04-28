@@ -363,7 +363,6 @@ export default function DetailEditComponent(props: any) {
     completionContract,
     setCompletionContract,
     setFetchStatus,
-    setStatus,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -388,6 +387,7 @@ export default function DetailEditComponent(props: any) {
   const [isContractFinishModal, setIsContractFinishModal] =
     useState<boolean>(false);
   const [statusCode, setStatusCode] = useState<any>(detailData.statusCode); //상태 번호 value
+  const [status, setStatus] = useState<any>(detailData.status); //상태 이름 value
 
   const [prevAddressDetail, setPrevAddressDetail] = useState(
     detailData.preAddressDetail
@@ -418,6 +418,8 @@ export default function DetailEditComponent(props: any) {
   };
 
   useEffect(() => {
+    console.log("detailData 값 변경");
+
     setDetailData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.name = userName;
@@ -432,8 +434,11 @@ export default function DetailEditComponent(props: any) {
       updatedData.preAddress = preAddress;
       updatedData.preZipCode = preZipCode;
       updatedData.afterZipCode = afterZipCode;
+      updatedData.statusCode = statusCode;
+      updatedData.status = status;
       return updatedData;
     });
+    console.log(detailData);
   }, [
     finishContract,
     userName,
@@ -448,6 +453,7 @@ export default function DetailEditComponent(props: any) {
     afterAddress,
     preZipCode,
     afterZipCode,
+    statusCode,
   ]);
   //계약서 상태 [계약]일시 계약날짜 추가
   useEffect(() => {
@@ -548,7 +554,9 @@ export default function DetailEditComponent(props: any) {
 
   // 상세정보 저장 시 호출
   const detailPageSave = () => {
+    console.log("detailPageSave()");
     if (finishContract) {
+      console.log("finishContractModal(true)");
       setIsContractFinishModal(true);
     } else {
       putDetailData();
@@ -557,6 +565,7 @@ export default function DetailEditComponent(props: any) {
 
   // 상세정보 수정API
   const putDetailData = async () => {
+    console.log("putDetailData 실행");
     if (isContractFinishModal) {
       setIsContractFinishModal(false);
       setCompletionContract(true);
@@ -566,19 +575,28 @@ export default function DetailEditComponent(props: any) {
       receiptDetail: detailData,
     };
 
-    const response: any = await API.put(
-      `/receipt/detail/${reNum}`,
-      requestPram
-    );
-    if (response.status === 200) {
-      setStatus("SUCCESS");
-      setFetchStatus(true);
+    console.log("requestPram>>>");
+    console.log(requestPram);
 
-      detailEditVisible(false);
-      getDetailList();
-    } else if (response.statusCode === 400) {
-      setFetchStatus(true);
-      setStatus("FAIL");
+    try {
+      const response: any = await API.put(
+        `/receipt/detail/${reNum}`,
+        requestPram
+      );
+      if (response.status === 200) {
+        setStatus("SUCCESS");
+        setFetchStatus(true);
+
+        detailEditVisible(false);
+        getDetailList();
+      } else {
+        setFetchStatus(true);
+        setStatus("FAIL");
+        alert("상세정보 수정 실패");
+        console.log(response);
+      }
+    } catch (error) {
+      alert("상세정보 수정 실패");
     }
   };
 
@@ -648,6 +666,7 @@ export default function DetailEditComponent(props: any) {
                   <DetailEditSelectBoxComponent
                     statusCode={statusCode}
                     setStatusCode={setStatusCode}
+                    setStatus={setStatus}
                     onSelectStatus={onSelectStatus}
                     setFinishContract={setFinishContract}
                     setCompletionContract={setCompletionContract}

@@ -495,6 +495,7 @@ export default function ContractComponent(props: any) {
       )}
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
+          getContractImageList={getContractImageList}
           reNum={reNum}
           setLines={setLines}
           detailData={detailData}
