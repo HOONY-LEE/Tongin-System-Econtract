@@ -195,8 +195,6 @@ export default function ListComponent(props: any) {
 
   const navigate = useNavigate();
   const detailPageShow = (reNum: string) => {
-    console.log("reNum>>>");
-    console.log(reNum);
     navigate(`/contractlist/detail/${reNum}`);
   };
   return (
@@ -262,8 +260,12 @@ export default function ListComponent(props: any) {
                     {user.status}
                   </UserStatusColor>
                 </UserStatus>
-                <BorderLeft />
-                <UserSelfContractColor>현장</UserSelfContractColor>
+                {user.selfReceipt === true ? (
+                  <>
+                    <BorderLeft />
+                    <UserSelfContractColor>현장</UserSelfContractColor>
+                  </>
+                ) : null}
               </ContentText>
             </ContentBox>
           );
