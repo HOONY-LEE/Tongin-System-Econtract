@@ -67,7 +67,7 @@ const TabMenu = styled.ul`
   }
 
   .focused {
-    background-color: #ff7f3b;
+    background-color: #6ad959;
     color: white;
   }
 `;
@@ -88,62 +88,6 @@ const DetialTabBox = styled.div`
   align-items: center;
   justify-content: start;
   height: 100%;
-`;
-
-//  물품추가 탭
-const ProductTabBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  height: 100%;
-  /* outline: 1px solid green; */
-`;
-
-//  옵션선택 탭
-const OptionTabBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  height: 100%;
-`;
-
-//  견적계약서 탭
-const ContractTabBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  height: 100%;
-  /* outline: 1px solid green; */
-`;
-
-//  스크롤 LOCK
-const ScrollLock = styled.div`
-  .isScroll {
-    overflow: hidden !important;
-    position: fixed;
-    touch-action: none;
-  }
-`;
-const DrawingBtn = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 7vw;
-  height: 7vw;
-  border-radius: 50%;
-  background-color: #ff7f3b;
-  position: fixed;
-  bottom: 5vh;
-  right: 5vw;
-  box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.073),
-    0 0.5vh 0.5vh rgba(0, 0, 0, 0.023);
-  &:hover {
-    cursor: pointer;
-    background-color: rgb(255, 144, 85);
-  }
 `;
 
 export default function SiteTabPage() {

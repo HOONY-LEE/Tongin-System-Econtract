@@ -377,6 +377,7 @@ export default function SiteDetailComponent(props: any) {
   const [fetchStatus, setFetchStatus] = useState(false); // toast messege
   const [status, setStatus] = useState(""); // toast messege
   const [text, setText] = useState(""); // toast messege
+  const [validation, setValidation] = useState<boolean>(false);
 
   ////////////////////Data////////////////////
   const siteDetailData: any = {
@@ -399,10 +400,6 @@ export default function SiteDetailComponent(props: any) {
   const [hPhone, setHPhone] = useState<any>(
     siteDetailData.selfReceiptData.hPhone
   ); //전화번호
-
-  const [statusCode, setStatusCode] = useState<any>(
-    siteDetailData.selfReceiptData.statusCode
-  ); // 계약상태
 
   const [fromZipCd, setFromZipCd] = useState<any>(
     siteDetailData.selfReceiptData.fromZipCd
@@ -497,26 +494,16 @@ export default function SiteDetailComponent(props: any) {
   const navigate = useNavigate();
 
   //완료 후 전송
-  const fetchData = async () => {
-    const requestPram: any = {
-      visitDate: visitDate,
-      selfReceiptData: {
-        memNm: memNm,
-        hPhone: hPhone,
-        fromZipCd: fromZipCd,
-        FromAddr1: FromAddr1,
-        FromAddr2: FromAddr2,
-        toZipCd: toZipCd,
-        toAddr1: toAddr1,
-        toAddr2: toAddr2,
-        serReqDt: serReqDt, //이사일
-      },
-    };
+  const sendData = async () => {
+    const requestPram: any = siteDetailData;
+
+    // 조건체크
+    if (!validation) {
+      return;
+    }
+
     const response: any = await API.post("/receipt/self", requestPram);
     if (response.status === 200) {
-      // setStatus("SUCCESS");
-      // setText("현장접수가 완료되었습니다.");
-      // setFetchStatus(true);
       navigate(`/contractlist`, {
         state: {
           status: "SUCCESS",
@@ -556,6 +543,49 @@ export default function SiteDetailComponent(props: any) {
     e.target.value = formattedValue;
     setHPhone(e.target.value);
   };
+
+  useEffect(() => {
+    siteDetailData.visitDate = visitDate;
+    siteDetailData.selfReceiptData.memNm = memNm;
+    siteDetailData.selfReceiptData.hPhone = hPhone;
+    siteDetailData.selfReceiptData.fromZipCd = fromZipCd;
+    siteDetailData.selfReceiptData.FromAddr1 = FromAddr1;
+    siteDetailData.selfReceiptData.FromAddr2 = FromAddr2;
+    siteDetailData.selfReceiptData.toZipCd = toZipCd;
+    siteDetailData.selfReceiptData.toAddr1 = toAddr1;
+    siteDetailData.selfReceiptData.toAddr2 = toAddr2;
+    siteDetailData.selfReceiptData.receptionDate = receptionDate;
+    siteDetailData.selfReceiptData.serReqDt = serReqDt;
+    if (
+      memNm.length &&
+      hPhone.length &&
+      fromZipCd.length &&
+      FromAddr1.length &&
+      FromAddr2.length &&
+      toZipCd.length &&
+      toAddr1.length &&
+      toAddr2.length &&
+      receptionDate.length &&
+      visitDate.length &&
+      serReqDt.length
+    ) {
+      setValidation(true);
+    } else {
+      setValidation(false);
+    }
+  }, [
+    memNm,
+    hPhone,
+    fromZipCd,
+    FromAddr1,
+    FromAddr2,
+    toZipCd,
+    toAddr1,
+    toAddr2,
+    receptionDate,
+    visitDate,
+    serReqDt,
+  ]);
 
   // 에러방지를 위한 onChangeHandle
   const onChangeHandle = () => {};
@@ -715,8 +745,10 @@ export default function SiteDetailComponent(props: any) {
               height={"6vw"}
               text={`현장접수 등록하기`}
               size={"2vw"}
+              $bgColor={"#6AD959"}
               radius={"0.6vw"}
-              onClick={() => fetchData()}
+              onClick={() => sendData()}
+              disabled={!validation}
             ></CustomButton>
           </BtnBox>
         </ContentBottom>
