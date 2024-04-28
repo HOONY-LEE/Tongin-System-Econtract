@@ -224,6 +224,7 @@ export default function Detail() {
       if (response.status === 200) {
         setFetchStatus(true);
         setStatus("SUCCESS");
+        alert("옵션정보를 저장하는데 성공하였습니다.");
       } else {
         setFetchStatus(true);
         setStatus("FAIL");

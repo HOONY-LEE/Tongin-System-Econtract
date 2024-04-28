@@ -463,6 +463,15 @@ export default function DetailEditComponent(props: any) {
     });
   }, [finishContract]);
 
+  useEffect(() => {
+    if (statusCode === "22") {
+      const today = new Date();
+      setContractDate(format(today, "yMMdd"));
+    } else {
+      setContractDate("");
+    }
+  }, [statusCode]);
+
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
     let formattedValue = e.target.value.replace(regExp, "").substring(0, 13);
@@ -710,6 +719,7 @@ export default function DetailEditComponent(props: any) {
             title={"계약일"}
             dateData={contractDate}
             setDateData={setContractDate}
+            readOnly={true}
           ></MoveDateInputComponent>
         </MoveDateContainer>
         <MoveDateContainer>

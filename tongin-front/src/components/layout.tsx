@@ -61,7 +61,11 @@ const MenuTabTitle = styled.div<{ $selectedTab?: number; index?: number }>`
   width: 100%;
   height: 7vw;
   color: ${(props) =>
-    props.$selectedTab === props.index ? "#ff7f3b" : "#505050"};
+    props.$selectedTab === props.index
+      ? props.index === 3
+        ? "#6AD959"
+        : "#ff7f3b"
+      : "#505050"};
   font-size: 2.6vw;
   font-weight: ${(props) =>
     props.$selectedTab === props.index ? "700" : "400"};
@@ -74,7 +78,11 @@ const MenuTabLine = styled.div<{ $selectedTab?: number; index?: number }>`
   width: 100%;
   height: 0.8vw;
   background-color: ${(props) =>
-    props.$selectedTab === props.index ? "#ff7f3b" : "white"};
+    props.$selectedTab === props.index
+      ? props.index === 3
+        ? "#6AD959"
+        : "#ff7f3b"
+      : "white"};
   border-radius: 2vw;
 `;
 
