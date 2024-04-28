@@ -34,7 +34,7 @@ const Container = styled.div`
   height: 24vw;
 `;
 const Title = styled.div`
-  width: 70%;
+  width: 30%;
   height: 20%;
   font-size: 2.6vw;
   text-align: center;
@@ -97,7 +97,7 @@ const DetailEditContractFinishModal = ({
       <CalculatorComponentWrapper style={style}>
         <Container>
           <Title>
-            <BlankBoxIcon height={"3vw"} fill={"#F27935"} /> 진행상태 계약어쩌구
+            <BlankBoxIcon height={"3vw"} fill={"#F27935"} /> 계약 확정
           </Title>
           <Info>
             진행상태를 계약으로 변경하시면 더 이상 수정이 불가합니다.
