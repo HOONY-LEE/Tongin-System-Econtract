@@ -75,6 +75,20 @@ const InfoLfContent = styled.div`
   align-items: start;
   /* outline: 0.2vw solid blue; */
   justify-content: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+const InfoLfNameContent = styled.div`
+  height: 5vw;
+  width: 16vw;
+  font-size: 2.3vw;
+  font-weight: 600;
+  /* outline: 0.2vw solid blue; */
+  overflow: hidden;
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const InfoRhBox = styled.div`
   height: 10vw;
@@ -314,7 +328,7 @@ export default function DetailViewComponent(props: any) {
           <ContentTopLF>
             <InfoLfBox>
               <InfoLfTitle>고객명</InfoLfTitle>
-              <InfoLfContent>{detailData?.name}</InfoLfContent>
+              <InfoLfNameContent>{detailData?.name}</InfoLfNameContent>
             </InfoLfBox>
             <InfoLfBox>
               <InfoLfTitle>계약번호</InfoLfTitle>
