@@ -55,7 +55,7 @@ const UserName = styled.div`
 const UserPhone = styled.div`
   font-weight: 600;
   display: flex;
-  width: 14vw;
+  width: 12.5vw;
   font-size: 1.6vw;
   align-items: center;
   justify-content: center;
@@ -63,7 +63,7 @@ const UserPhone = styled.div`
 `;
 
 const UserAcceptDate = styled.div`
-  width: 10vw;
+  width: 9vw;
   font-weight: 400;
   display: flex;
   font-size: 1.4vw;
@@ -72,7 +72,7 @@ const UserAcceptDate = styled.div`
   /* outline: 1px dashed green; */
 `;
 const UserConsulDate = styled.div`
-  width: 10vw;
+  width: 9vw;
   font-weight: 400;
   display: flex;
   font-size: 1.4vw;
@@ -81,7 +81,7 @@ const UserConsulDate = styled.div`
   /* outline: 1px dashed green; */
 `;
 const UserMoveDate = styled.div`
-  width: 10vw;
+  width: 9vw;
   font-weight: 400;
   display: flex;
   font-size: 1.4vw;
@@ -96,8 +96,9 @@ const UserStatus = styled.div`
   align-items: center;
   justify-content: center;
   /* outline: 1px dashed green; */
-  margin-right: 1vw;
+  /* margin-right: 1vw; */
 `;
+
 const UserStatusColor = styled.div<{
   $bgColor?: string;
 }>`
@@ -134,7 +135,31 @@ const TitleText = styled.h3`
   font-size: 1.2vw;
   font-weight: 300;
 `;
-
+const UserSelfContract = styled.div`
+  width: 5vw;
+  display: flex;
+  font-size: 1.6vw;
+  align-items: center;
+  justify-content: center;
+  /* outline: 1px dashed green; */
+  /* margin-right: 1vw; */
+  margin-right: 1vw;
+`;
+const UserSelfContractColor = styled.div<{
+  $bgColor?: string;
+}>`
+  background-color: #2fd04b;
+  width: 5vw;
+  height: 3vw;
+  font-weight: 400;
+  display: flex;
+  color: white;
+  font-size: 1.4vw;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4vw;
+  margin-right: 1vw;
+`;
 export default function ListComponent(props: any) {
   const { currentList } = props;
 
@@ -151,7 +176,7 @@ export default function ListComponent(props: any) {
       case "31":
         return "#0C8CE9";
       case "22":
-        return "#2FD04B";
+        return "#3a2fd0";
       case "21":
         return "#FF7F3B";
       case "14":
@@ -201,6 +226,10 @@ export default function ListComponent(props: any) {
           <UserStatus>
             <TitleText>상태</TitleText>
           </UserStatus>
+          <TitleBorderLeft />
+          <UserSelfContract>
+            <TitleText>현장접수</TitleText>
+          </UserSelfContract>
         </ContentText>
       </TitleBox>
       {currentList.length > 0 ? (
@@ -221,7 +250,7 @@ export default function ListComponent(props: any) {
                 </UserAcceptDate>
                 <BorderLeft />
                 <UserConsulDate>
-                  {user.contractDate.replace(date, "$1-$2-$3")}
+                  {user.consultationDate.replace(date, "$1-$2-$3")}
                 </UserConsulDate>
                 <BorderLeft />
                 <UserMoveDate>
@@ -233,6 +262,8 @@ export default function ListComponent(props: any) {
                     {user.status}
                   </UserStatusColor>
                 </UserStatus>
+                <BorderLeft />
+                <UserSelfContractColor>현장</UserSelfContractColor>
               </ContentText>
             </ContentBox>
           );
