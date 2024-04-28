@@ -366,8 +366,6 @@ const BtnBox = styled.div`
   justify-content: space-between;
 `;
 export default function SiteDetailComponent(props: any) {
-  const { detailData, setDetailData, getDetailList } = props;
-  const [isDetailEdit, setIsDetailEdit] = useState(false);
   const [postData, setPostData] = useState<any>([]);
   const [addressType, setAddressType] = useState();
   const [dateType, setDateType] = useState();
@@ -378,56 +376,40 @@ export default function SiteDetailComponent(props: any) {
   const [status, setStatus] = useState(""); // toast messege
   const [text, setText] = useState(""); // toast messege
   const [validation, setValidation] = useState<boolean>(false);
-
-  ////////////////////Data////////////////////
-  const siteDetailData: any = {
-    visitDate: "",
+  const [siteDetailData, setSiteDetailData] = useState({
+    visitDate: "", // 상담일
     selfReceiptData: {
+      serReqDt: "", // 이사일
       memNm: "",
       hPhone: "",
-      statusCode: "",
       fromZipCd: "",
       FromAddr1: "",
       FromAddr2: "",
       toZipCd: "",
       toAddr1: "",
       toAddr2: "",
-      serReqDt: "", //이사일
     },
-  };
+  });
+
   ////////////////////Data state////////////////////
-  const [memNm, setMemNm] = useState<any>(siteDetailData.selfReceiptData.memNm); // 이름
-  const [hPhone, setHPhone] = useState<any>(
-    siteDetailData.selfReceiptData.hPhone
-  ); //전화번호
+  const [memNm, setMemNm] = useState<any>(""); // 이름
+  const [hPhone, setHPhone] = useState<any>(""); //전화번호
 
-  const [fromZipCd, setFromZipCd] = useState<any>(
-    siteDetailData.selfReceiptData.fromZipCd
-  ); // 전 주소 우편번호
+  const [fromZipCd, setFromZipCd] = useState<any>(""); // 전 주소 우편번호
 
-  const [FromAddr1, setFromAddr1] = useState<any>(
-    siteDetailData.selfReceiptData.FromAddr1
-  ); // 전 주소
+  const [FromAddr1, setFromAddr1] = useState<any>(""); // 전 주소
 
-  const [FromAddr2, setFromAddr2] = useState<any>(
-    siteDetailData.selfReceiptData.FromAddr2
-  ); // 전 상세 주소
+  const [FromAddr2, setFromAddr2] = useState<any>(""); // 전 상세 주소
 
-  const [toZipCd, setToZipCd] = useState<any>(
-    siteDetailData.selfReceiptData.toZipCd
-  ); // 후 주소 우편번호
+  const [toZipCd, setToZipCd] = useState<any>(""); // 후 주소 우편번호
 
-  const [toAddr1, setToAddr1] = useState<any>(
-    siteDetailData.selfReceiptData.toAddr1
-  ); //후 주소
+  const [toAddr1, setToAddr1] = useState<any>(""); //후 주소
 
-  const [toAddr2, setToAddr2] = useState<any>(
-    siteDetailData.selfReceiptData.toAddr2
-  ); // 후 상세주소
+  const [toAddr2, setToAddr2] = useState<any>(""); // 후 상세주소
 
   const [receptionDate, setReceptionDate] = useState<any>(""); //접수일
 
-  const [visitDate, setVisitDate] = useState<any>(siteDetailData.visitDate); //상담일
+  const [visitDate, setVisitDate] = useState<any>(""); //상담일
 
   const [serReqDt, setSerReqDt] = useState<any>(
     siteDetailData.selfReceiptData.serReqDt
@@ -495,8 +477,9 @@ export default function SiteDetailComponent(props: any) {
 
   //완료 후 전송
   const sendData = async () => {
+    console.log(siteDetailData);
     const requestPram: any = siteDetailData;
-
+    console.log(requestPram);
     // 조건체크
     if (!validation) {
       return;
@@ -545,17 +528,22 @@ export default function SiteDetailComponent(props: any) {
   };
 
   useEffect(() => {
-    siteDetailData.visitDate = visitDate;
-    siteDetailData.selfReceiptData.memNm = memNm;
-    siteDetailData.selfReceiptData.hPhone = hPhone;
-    siteDetailData.selfReceiptData.fromZipCd = fromZipCd;
-    siteDetailData.selfReceiptData.FromAddr1 = FromAddr1;
-    siteDetailData.selfReceiptData.FromAddr2 = FromAddr2;
-    siteDetailData.selfReceiptData.toZipCd = toZipCd;
-    siteDetailData.selfReceiptData.toAddr1 = toAddr1;
-    siteDetailData.selfReceiptData.toAddr2 = toAddr2;
-    siteDetailData.selfReceiptData.receptionDate = receptionDate;
-    siteDetailData.selfReceiptData.serReqDt = serReqDt;
+    setSiteDetailData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.visitDate = visitDate;
+      updatedData.selfReceiptData.memNm = memNm;
+      updatedData.selfReceiptData.hPhone = hPhone;
+      updatedData.selfReceiptData.fromZipCd = fromZipCd;
+      updatedData.selfReceiptData.FromAddr1 = FromAddr1;
+      updatedData.selfReceiptData.FromAddr2 = FromAddr2;
+      updatedData.selfReceiptData.toZipCd = toZipCd;
+      updatedData.selfReceiptData.toAddr1 = toAddr1;
+      updatedData.selfReceiptData.toAddr2 = toAddr2;
+      updatedData.selfReceiptData.serReqDt = serReqDt;
+
+      return updatedData;
+    });
+
     if (
       memNm.length &&
       hPhone.length &&
@@ -565,7 +553,6 @@ export default function SiteDetailComponent(props: any) {
       toZipCd.length &&
       toAddr1.length &&
       toAddr2.length &&
-      receptionDate.length &&
       visitDate.length &&
       serReqDt.length
     ) {

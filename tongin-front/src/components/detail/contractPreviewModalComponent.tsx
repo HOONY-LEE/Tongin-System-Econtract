@@ -158,6 +158,7 @@ const NextBox = styled.div<{ $isActivate: boolean }>`
 
 const ContractPreviewModalComponent = (props: any) => {
   const {
+    getContractImageList,
     onClose,
     reNum,
     priceDataList,
@@ -206,6 +207,7 @@ const ContractPreviewModalComponent = (props: any) => {
     // 두 이미지를 합쳐서 서버로 전송
     const imageFiles = [firstPageImage, secondPageImage];
     await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
+    getContractImageList(); // 이미지 전송후 계약서 이미지 리스트 다시 받아오기
     onClose();
   };
 
