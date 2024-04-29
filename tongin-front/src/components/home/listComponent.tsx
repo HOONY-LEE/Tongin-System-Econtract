@@ -148,7 +148,7 @@ const UserSelfContract = styled.div`
 const UserSelfContractColor = styled.div<{
   $bgColor?: string;
 }>`
-  background-color: #2fd04b;
+  background-color: ${(props) => props.$bgColor};
   width: 5vw;
   height: 3vw;
   font-weight: 400;
@@ -260,12 +260,17 @@ export default function ListComponent(props: any) {
                     {user.status}
                   </UserStatusColor>
                 </UserStatus>
-                {user.selfReceipt === true ? (
-                  <>
-                    <BorderLeft />
-                    <UserSelfContractColor>현장</UserSelfContractColor>
-                  </>
-                ) : null}
+                <BorderLeft />
+
+                <>
+                  {user.selfReceipt === true ? (
+                    <UserSelfContractColor $bgColor={"#2fd04b"}>
+                      {"현장 "}
+                    </UserSelfContractColor>
+                  ) : (
+                    <UserSelfContractColor></UserSelfContractColor>
+                  )}
+                </>
               </ContentText>
             </ContentBox>
           );
