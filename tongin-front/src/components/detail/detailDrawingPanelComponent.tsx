@@ -27,8 +27,6 @@ const Backdrop = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2); /* 배경을 약간 어둡게 만듭니다. */
   z-index: 9998; /* 모달보다 아래에 위치하도록 설정합니다. */
-  user-select: none;
-  pointer-events: none;
 `;
 
 const CalculatorComponentWrapper = styled.div`
@@ -41,7 +39,8 @@ const CalculatorComponentWrapper = styled.div`
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-
+  user-select: none;
+  pointer-events: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -421,6 +420,27 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   //     return updatedData;
   //   });
   // }, [textMemo]);
+  // 더블 탭 시간 간격을 체크하기 위한 변수
+  let lastTouchTime = 0;
+
+  // Backdrop에서 더블 탭 이벤트 핸들러
+  const handleBackdropTouchStart = () => {
+    const currentTime = new Date().getTime();
+    const timeSinceLastTouch = currentTime - lastTouchTime;
+
+    if (timeSinceLastTouch <= 300) {
+      // 이전 터치 이벤트와의 간격이 300ms 이내일 경우 더블 탭으로 판단
+      return false; // 더블 탭 이벤트를 막음
+    }
+
+    lastTouchTime = currentTime; // 현재 터치 이벤트 시간으로 업데이트
+  };
+
+  // CalculatorComponentWrapper에서 드래그 이벤트 핸들러
+  const handleCalculatorTouchMove = (e: any) => {
+    e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
+  };
+
   const handleBackdropTouchMove = (e: any) => {
     e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
   };
@@ -431,9 +451,14 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
         onContextMenu={(e) => e.preventDefault()}
         onDragStart={(e) => e.preventDefault()}
         onTouchMove={handleBackdropTouchMove}
+        onTouchStart={handleBackdropTouchStart}
       />
 
-      <CalculatorComponentWrapper id={"BackgroundPanel"} style={style}>
+      <CalculatorComponentWrapper
+        onTouchMove={handleCalculatorTouchMove}
+        id={"BackgroundPanel"}
+        style={style}
+      >
         {blankBoxVisible && (
           <DetailDrawBlankModalComponent
             onBlank={onBlankData}
@@ -446,7 +471,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               {penColorVisible && <div>펜 색상 선택</div>}
               {eraserSizeVisible && <div>지우개 두께 선택</div>}
             </ColorCanvastitle>
-
+            메모 수정 중 ver 1
             {penColorVisible && (
               <ColorCanvas>
                 {colorArr.map((colorArr, i) => (
