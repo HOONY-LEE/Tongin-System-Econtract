@@ -241,7 +241,7 @@ export default function ContractComponent(props: any) {
     setLines,
     setLines2,
   } = props;
-
+  console.log(optionData);
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
@@ -251,6 +251,40 @@ export default function ContractComponent(props: any) {
   const [isContractListModalOpen, setIsContractListModalOpen] =
     useState<boolean>(false);
   const [contractImageList, setContractImageList] = useState<any[]>([]);
+  const [totalCharge, setTotalCharge] = useState<number>(
+    priceDataList[3].amount
+  );
+  const [optionTotal, setOptionTotal] = useState<number>(
+    optionData.ladderTruck.servicePayment +
+      optionData.ladderTruck.servicePayment +
+      optionData.livingService.movingCleaningService.servicePayment +
+      optionData.livingService.organizationStorageService.servicePayment +
+      optionData.livingService.deodorizationService.servicePayment +
+      optionData.livingService.otherService.servicePayment +
+      optionTotalCharge
+  );
+  const [downCharge, setDownCharge] = useState<number>(priceDataList[4].amount);
+  const [balanceCharge, setBalanceCharge] = useState<number>(
+    priceDataList[5].amount
+  );
+  useEffect(() => {
+    setTotalCharge(
+      optionTotal + priceDataList[0].amount + priceDataList[1].amount
+    );
+  }, [downCharge, balanceCharge, optionTotal, priceDataList]);
+
+  useEffect(() => {
+    setBalanceCharge(totalCharge - priceDataList[4].amount);
+  }, [downCharge, balanceCharge, optionTotal, priceDataList]);
+
+  useEffect(() => {
+    setPriceDataList((prev: any[]) => {
+      const updatedData = [...prev];
+
+      updatedData[3].amount = totalCharge;
+      return updatedData;
+    });
+  }, [totalCharge]);
 
   // 계약서 이미지 리스트 API
   const getContractImageList = async () => {
@@ -450,7 +484,7 @@ export default function ContractComponent(props: any) {
               <PriceInputArea>
                 <InputCBMBox>
                   <InputCBMNumber>
-                    {optionData.ladderTruck.servicePayment.toLocaleString()}
+                    {optionData.livingService.otherService.servicePayment.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
@@ -473,6 +507,8 @@ export default function ContractComponent(props: any) {
           </CalculatedListArea>
           <ChargeListArea>
             <ChargeListComponent
+              totalCharge={totalCharge}
+              balanceCharge={balanceCharge}
               inputChargeList={priceDataList}
               setInputChargeList={setPriceDataList}
             ></ChargeListComponent>
