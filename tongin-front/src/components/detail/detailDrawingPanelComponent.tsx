@@ -438,7 +438,9 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
 
   // CalculatorComponentWrapper에서 드래그 이벤트 핸들러
   const handleCalculatorTouchMove = (e: any) => {
-    e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
+    if (!isDrawing) {
+      e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
+    }
   };
 
   const handleBackdropTouchMove = (e: any) => {
@@ -471,7 +473,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               {penColorVisible && <div>펜 색상 선택</div>}
               {eraserSizeVisible && <div>지우개 두께 선택</div>}
             </ColorCanvastitle>
-            메모 수정 중 ver 1
+            메모 수정 중 ver2!
             {penColorVisible && (
               <ColorCanvas>
                 {colorArr.map((colorArr, i) => (
