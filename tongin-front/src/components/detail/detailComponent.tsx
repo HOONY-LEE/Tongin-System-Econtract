@@ -32,6 +32,7 @@ export default function DetailComponent(props: any) {
     setStatus,
     fetchStatus,
     setFetchStatus,
+    contractImageList,
   } = props;
   const [isDetailEdit, setIsDetailEdit] = useState(false);
   const [completionContract, setCompletionContract] = useState<any>(false);
@@ -75,6 +76,7 @@ export default function DetailComponent(props: any) {
             setCompletionContract={setCompletionContract}
             setFetchStatus={setFetchStatus}
             setStatus={setStatus}
+            contractImageList={contractImageList}
           ></DetailEditComponent>
         ) : (
           <DetailViewComponent

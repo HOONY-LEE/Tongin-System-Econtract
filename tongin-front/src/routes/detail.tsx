@@ -30,6 +30,7 @@ import NewOptionComponent from "../components/detail/newOptionComponent";
 import { newOptionData } from "../components/common/sampleData3";
 import { Toast } from "../components/common/toastMessegeComponent";
 const HomeContainer = styled.div`
+  margin-top: 2vw;
   width: 90vw;
   height: 100%;
   display: flex;
@@ -161,6 +162,7 @@ export default function Detail() {
   const [drawingData, setDrawingData] = useState<any[]>([]);
   const [drawingData2, setDrawingData2] = useState<any[]>([]);
   const [textMemoData, setTextMemoData] = useState<any[]>([]);
+  const [contractImageList, setContractImageList] = useState<any[]>();
   const [isScrolled, setIsScrolled] = useState<any>(true);
   const [lines, setLines] = useState<any[]>([]);
   const [lines2, setLines2] = useState<any[]>([]);
@@ -177,6 +179,14 @@ export default function Detail() {
 
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
+  };
+
+  // 계약서 이미지 리스트 API
+  const getContractImageList = async () => {
+    const response = await API.get(`/receipt/contract-image/${reNum}`);
+    if (response.status === 200) {
+      setContractImageList(response.data.contractImageList);
+    }
   };
 
   // 상세정보 호출API
@@ -289,6 +299,7 @@ export default function Detail() {
     getProductList();
     getOptionList();
     getPriceList();
+    getContractImageList();
   }, []);
 
   // 스크롤 잠금
@@ -371,6 +382,7 @@ export default function Detail() {
                   getDetailList={getDetailList}
                   detailData={detailData}
                   setDetailData={setDetailData}
+                  contractImageList={contractImageList}
                 ></DetailComponent>
               </DetialTabBox>
             ) : null}
@@ -411,6 +423,8 @@ export default function Detail() {
                   optionData={optionData}
                   priceDataList={priceDataList}
                   setPriceDataList={setPriceDataList}
+                  contractImageList={contractImageList}
+                  getContractImageList={getContractImageList}
                 ></ContractComponent>
               </ContractTabBox>
             ) : null}

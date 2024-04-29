@@ -18,6 +18,7 @@ import "react-day-picker/dist/style.css";
 import LandingPage from "./routes/landingPage";
 import SiteTabPage from "./components/site/main/siteTabComponent";
 import Signature from "./routes/signature";
+import ContractImage from "./components/home/contractImage";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
   {
     path: "/signature/:id",
     element: <Signature></Signature>,
+  },
+  {
+    path: "/contractImage/:id",
+    element: <ContractImage></ContractImage>,
   },
 ]);
 

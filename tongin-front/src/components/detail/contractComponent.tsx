@@ -240,6 +240,8 @@ export default function ContractComponent(props: any) {
     setDrawingData2,
     setLines,
     setLines2,
+    contractImageList,
+    getContractImageList,
   } = props;
 
   const [movingCBM, setMovingCBM] = useState<number>(0);
@@ -250,18 +252,6 @@ export default function ContractComponent(props: any) {
   const [status, setStatus] = useState(""); // toast messege
   const [isContractListModalOpen, setIsContractListModalOpen] =
     useState<boolean>(false);
-  const [contractImageList, setContractImageList] = useState<any[]>([]);
-
-  // 계약서 이미지 리스트 API
-  const getContractImageList = async () => {
-    const response = await API.get(`/receipt/contract-image/${reNum}`);
-    if (response.status === 200) {
-      setContractImageList(response.data.contractImageList);
-    }
-  };
-  useEffect(() => {
-    getContractImageList();
-  }, []);
 
   // 계약서 생성하기 모달 열기
   const handleOpenModal = () => {
@@ -490,7 +480,6 @@ export default function ContractComponent(props: any) {
           reNum={reNum}
           onClose={handleCloseContractListModal}
           contractImageList={contractImageList}
-          setContractimageList={setContractImageList}
         />
       )}
       {isPreviewModalOpen && (

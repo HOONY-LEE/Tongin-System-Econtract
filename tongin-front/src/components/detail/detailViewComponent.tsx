@@ -305,7 +305,7 @@ export default function DetailViewComponent(props: any) {
       case "31":
         return "#0C8CE9";
       case "22":
-        return "#2FD04B";
+        return "#3a2fd0";
       case "21":
         return "#FF7F3B";
       case "14":
