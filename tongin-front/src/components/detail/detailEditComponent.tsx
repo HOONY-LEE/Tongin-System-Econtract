@@ -363,6 +363,7 @@ export default function DetailEditComponent(props: any) {
     completionContract,
     setCompletionContract,
     setFetchStatus,
+    contractImageList,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -555,6 +556,11 @@ export default function DetailEditComponent(props: any) {
   // 상세정보 저장 시 호출
   const detailPageSave = () => {
     console.log("detailPageSave()");
+    if (contractImageList.length === 0) {
+      alert("아직 생성된 계약서가 없습니다.");
+      return;
+    }
+
     if (finishContract) {
       console.log("finishContractModal(true)");
       setIsContractFinishModal(true);
@@ -566,6 +572,7 @@ export default function DetailEditComponent(props: any) {
   // 상세정보 수정API
   const putDetailData = async () => {
     console.log("putDetailData 실행");
+
     if (isContractFinishModal) {
       setIsContractFinishModal(false);
       setCompletionContract(true);

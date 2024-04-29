@@ -162,9 +162,23 @@ const UserSelfContractColor = styled.div<{
 `;
 export default function ListComponent(props: any) {
   const { currentList } = props;
+  const navigate = useNavigate();
 
   console.log("currentList>>>");
   console.log(currentList);
+
+  const onClickListItemHandle = (item: any) => {
+    if (
+      item.statusCode === "22" || // 계약
+      item.statusCode === "31" || // 작업토스
+      item.statusCode === "32" // 작업승인
+    ) {
+      contractImageShow(item.recNum);
+    } else {
+      detailPageShow(item.recNum);
+    }
+  };
+
   const userStatusColor = (status: string) => {
     switch (status) {
       case "CA":
@@ -193,7 +207,10 @@ export default function ListComponent(props: any) {
   const str = /[^A-Za-z가-힣]/g;
   const date = /^(\d{4})(\d{2})(\d{2})$/;
 
-  const navigate = useNavigate();
+  const contractImageShow = (reNum: string) => {
+    navigate(`/contractImage/${reNum}`);
+  };
+
   const detailPageShow = (reNum: string) => {
     navigate(`/contractlist/detail/${reNum}`);
   };
@@ -235,7 +252,7 @@ export default function ListComponent(props: any) {
           return (
             <ContentBox
               key={index}
-              onClick={() => detailPageShow(user.recNum)}
+              onClick={() => onClickListItemHandle(user)}
               // onClick={() => detailPageShow("R20240203929")}
             >
               <ContentText>
