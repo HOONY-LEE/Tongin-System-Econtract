@@ -14,6 +14,7 @@ import makePdf from "../../API/makePDF";
 import makeHtmltoImage from "../../API/makePDF";
 import SecondPage from "./secondPage";
 import CloseIcon from "../icon/closeIcon";
+import { useNavigate } from "react-router-dom";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -53,7 +54,7 @@ const BottomArea = styled.div`
   width: 80vw;
   height: 8vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -99,9 +100,25 @@ const ContractArea = styled.div`
 `;
 
 const ExportBtn = styled.div`
-  width: 90vw;
+  width: 39vw;
   height: 6vw;
   background-color: #ff7f3b;
+  border-radius: 0.4vw;
+  font-size: 2.4vw;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &&:hover {
+    cursor: pointer;
+  }
+`;
+
+const SignatureBtn = styled.div<{ $disabled: boolean }>`
+  width: 39vw;
+  height: 6vw;
+  background-color: ${(props) => (props.$disabled ? "#e7e7e7" : "#ff7f3b")};
   border-radius: 0.4vw;
   font-size: 2.4vw;
   font-weight: 600;
@@ -245,8 +262,13 @@ const ContractPreviewModalComponent = (props: any) => {
         setNextBoxActive(true);
       }
     }
+    console.log();
   }, [currentPage]);
+  const navigate = useNavigate();
 
+  const onSignaturePage = () => {
+    navigate(`/signature/${reNum}`);
+  };
   useEffect(() => {
     getContractImage();
   }, []);
@@ -316,6 +338,12 @@ const ContractPreviewModalComponent = (props: any) => {
         </ContractArea>
         <BottomArea>
           <ExportBtn onClick={onClickMakePDF}>견적서 내보내기</ExportBtn>
+          <SignatureBtn
+            $disabled={detailData.pushYN}
+            onClick={() => (detailData.pushYN ? "none" : onSignaturePage())}
+          >
+            서명하기
+          </SignatureBtn>
         </BottomArea>
       </Wrapper>
     </>
