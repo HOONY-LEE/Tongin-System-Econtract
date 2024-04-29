@@ -282,11 +282,12 @@ export default function ContractComponent(props: any) {
   useEffect(() => {
     setPriceDataList((prev: any[]) => {
       const updatedData = [...prev];
+      console.log(updatedData);
       updatedData[3].amount = totalCharge;
       updatedData[5].amount = balanceCharge;
       return updatedData;
     });
-  }, [totalCharge]);
+  }, [totalCharge, balanceCharge]);
 
   // 계약서 생성하기 모달 열기
   const handleOpenModal = () => {
