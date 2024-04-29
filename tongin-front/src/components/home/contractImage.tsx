@@ -1,48 +1,31 @@
 import styled, { css } from "styled-components";
-import { ClassNames, DayPicker } from "react-day-picker";
-import { useEffect, useRef, useState } from "react";
-import { ko } from "date-fns/locale";
-import { format } from "date-fns";
-import styles from "react-day-picker/dist/style.module.css";
-import CustomButton from "../common/customButton";
-import EraserIcon from "../icon/eraserIcon";
 import ArrowLeftIcon from "../icon/arrowLeftIcon";
 import ArrowRightIcon from "../icon/arrowRightIcon";
-import API from "../../API/API";
-import FirstPage from "./firstPage";
-import makePdf from "../../API/makePDF";
-import makeHtmltoImage from "../../API/makePDF";
-import SecondPage from "./secondPage";
-import { Image } from "../common/image";
 import CloseIcon from "../icon/closeIcon";
-
-const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2); /* 배경을 약간 어둡게 만듭니다. */
-  z-index: 9998; /* 모달보다 아래에 위치하도록 설정합니다. */
-`;
+import { Image } from "../common/image";
+import { useEffect, useState } from "react";
+import API from "../../API/API";
+import { useParams } from "react-router-dom";
 
 const Wrapper = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+`;
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
-  width: 100vw;
-  height: 100vh;
-  background-color: white;
+  width: 84vw;
+  height: 96%;
+  margin-top: 2vw;
 `;
 
 const TopArea = styled.div`
-  margin-top: 2vw;
   width: 80vw;
   height: 6vw;
   display: flex;
@@ -176,14 +159,27 @@ const ThumbnailBox = styled.div<{ index: number; $currentPage: number }>`
     cursor: pointer;
   }
 `;
-
-const ContractListModalComponent = (props: any) => {
-  const { onClose, contractImageList } = props;
-
+export default function ContractImage(props: any) {
+  const reNum = useParams().id;
+  const [contractImageList, setContractImageList] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [prevBoxActive, setPrevBoxActive] = useState<boolean>(false);
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
-  const [maxIndex, setMaxIndex] = useState<number>(contractImageList.length);
+  const [maxIndex, setMaxIndex] = useState<number>(1);
+
+  // 계약서 이미지 리스트 API
+  const getContractImageList = async () => {
+    const response = await API.get(`/receipt/contract-image/${reNum}`);
+    if (response.status === 200) {
+      setContractImageList(response.data.contractImageList);
+      setMaxIndex(response.data.contractImageList.length);
+    } else {
+      alert("getContractImageList() 실패");
+    }
+  };
+  useEffect(() => {
+    getContractImageList();
+  }, []);
 
   const clickPrevPage = (e: any) => {
     if (currentPage <= 1) {
@@ -204,6 +200,14 @@ const ContractListModalComponent = (props: any) => {
     setCurrentPage(index + 1);
   };
 
+  const openContractImage = (path: string) => {
+    window.open(`https://homenmove.net/${path}`);
+  };
+
+  const onClickClose = () => {
+    console.log("뒤로가기 실행");
+    window.history.back();
+  };
   useEffect(() => {
     if (currentPage <= 1) {
       setPrevBoxActive(false);
@@ -218,19 +222,17 @@ const ContractListModalComponent = (props: any) => {
     }
   }, [currentPage]);
 
-  useEffect(() => {
-    setMaxIndex(contractImageList.length);
-  }, [contractImageList]);
+  useEffect(() => {}, [contractImageList]);
 
   return (
-    <>
-      <Backdrop />
-      <Wrapper>
+    <Wrapper>
+      <Container>
         <TopArea>
           <LeftArea>
             <TextBox>
-              생성일 :{" "}
-              {contractImageList[currentPage - 1].createdAt.substring(0, 10)}
+              생성일 :
+              {contractImageList.length > 1 &&
+                contractImageList[currentPage - 1].createdAt.substring(0, 10)}
             </TextBox>
           </LeftArea>
           <MidArea>
@@ -255,8 +257,8 @@ const ContractListModalComponent = (props: any) => {
             </NextBox>
           </MidArea>
           <RightArea>
-            <CloseBox>
-              <CloseIcon onClick={onClose} height={"3vw"} fill={"#AEAEAE"} />
+            <CloseBox onClick={() => onClickClose()}>
+              <CloseIcon height={"3vw"} fill={"#AEAEAE"} />
             </CloseBox>
           </RightArea>
         </TopArea>
@@ -266,6 +268,7 @@ const ContractListModalComponent = (props: any) => {
               if (index + 1 === currentPage) {
                 return (
                   <Image
+                    onClick={() => openContractImage(item.path)}
                     src={`https://homenmove.net/${item.path}`}
                     width={"100%"}
                     height={"100%"}
@@ -294,9 +297,7 @@ const ContractListModalComponent = (props: any) => {
             );
           })}
         </BottomArea>
-      </Wrapper>
-    </>
+      </Container>
+    </Wrapper>
   );
-};
-
-export default ContractListModalComponent;
+}
