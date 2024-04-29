@@ -283,6 +283,7 @@ export default function ContractComponent(props: any) {
     setPriceDataList((prev: any[]) => {
       const updatedData = [...prev];
       updatedData[3].amount = totalCharge;
+      updatedData[5].amount = balanceCharge;
       return updatedData;
     });
   }, [totalCharge]);

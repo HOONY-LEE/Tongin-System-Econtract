@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Stage, Layer, Line, Text } from "react-konva";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import API from "../API/API";
 import BlankBoxIcon from "./icon/blankBox";
@@ -194,6 +194,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
 const SignatureLayout: React.FC<CalculatorComponentProps> = ({
   setOnContractFinishPage,
 }) => {
+  const navigate = useNavigate();
   const stageRef = useRef<any>(null);
   const [tool, setTool] = useState<string>("pen");
   const [penColorVisible, setPenColorVisible] = useState<boolean>(false);
@@ -309,6 +310,7 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
     if (response.status === 200) {
       alert("전송완료");
       setOnContractFinishPage && setOnContractFinishPage(true);
+      navigate(`/contractlist/detail/${reNum}`, { state: { isSigned: true } });
     } else {
       alert("Fail to getDetailList()");
       disableScrollLock();
