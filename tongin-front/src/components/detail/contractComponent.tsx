@@ -479,7 +479,7 @@ export default function ContractComponent(props: any) {
             <ListBox>
               <TitleArea>
                 <Title>기타 서비스 비용</Title>
-                <Subtile>/Other Service Charge</Subtile>
+                <Subtile>/Other Service Charge </Subtile>
               </TitleArea>
               <PriceInputArea>
                 <InputCBMBox>
