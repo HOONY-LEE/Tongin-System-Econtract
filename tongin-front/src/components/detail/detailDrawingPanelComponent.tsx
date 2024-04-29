@@ -39,8 +39,8 @@ const CalculatorComponentWrapper = styled.div`
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  user-select: none;
-  pointer-events: none;
+  /* /* user-select: none; */
+  /* pointer-events: none; */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -473,7 +473,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               {penColorVisible && <div>펜 색상 선택</div>}
               {eraserSizeVisible && <div>지우개 두께 선택</div>}
             </ColorCanvastitle>
-            메모 수정 중 ver2!
+            메모 수정 중 ver 2
             {penColorVisible && (
               <ColorCanvas>
                 {colorArr.map((colorArr, i) => (
