@@ -556,12 +556,12 @@ export default function DetailEditComponent(props: any) {
   // 상세정보 저장 시 호출
   const detailPageSave = () => {
     console.log("detailPageSave()");
-    if (contractImageList.length === 0) {
-      alert("아직 생성된 계약서가 없습니다.");
-      return;
-    }
 
     if (finishContract) {
+      if (contractImageList.length === 0) {
+        alert("아직 생성된 계약서가 없습니다.");
+        return;
+      }
       console.log("finishContractModal(true)");
       setIsContractFinishModal(true);
     } else {

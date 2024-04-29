@@ -21,7 +21,7 @@ import {
   sampleProductDataList,
 } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
 import ContractComponent from "../components/detail/contractComponent";
 import PencilIcon from "../components/icon/pencil";
@@ -152,6 +152,8 @@ const DrawingBtn = styled.div`
 `;
 
 export default function Detail() {
+  const signed = useLocation();
+
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
   // const [articleDataList, setArticleDataList] = useState<any[]>([]);
@@ -180,6 +182,12 @@ export default function Detail() {
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
+
+  // useEffect(() => {
+  //   if (signed.state) {
+  //     setCurrentTab(3);
+  //   }
+  // }, [signed]);
 
   // 계약서 이미지 리스트 API
   const getContractImageList = async () => {

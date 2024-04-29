@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Stage, Layer, Line, Text } from "react-konva";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import API from "../API/API";
 import BlankBoxIcon from "./icon/blankBox";
@@ -22,7 +22,7 @@ const CalculatorComponentWrapper = styled.div`
   -o-user-drag: none;
 
   position: fixed;
-  top: 30%;
+  top: 68%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8000;
@@ -108,28 +108,54 @@ const ToolContainer = styled.div`
 
 const UserAgreeBox = styled.div`
   position: fixed;
-  top: 60%;
+  top: 24%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8000;
   width: 90vw;
-  height: 15vw;
+  height: 56vw;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
-const UserAgreeText = styled.div`
-  font-size: 2.2vw;
+const UserAgreeTextBox = styled.div`
+  font-size: 2vw;
   line-height: 4vw;
   font-weight: 500;
-  width: 82%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
 `;
-const UserAgreeCheckBox = styled.div``;
+const UserAgreeText = styled.div`
+  font-size: 1.7vw;
+  line-height: 3vw;
+  font-weight: 500;
+  margin-bottom: 1.2vw;
+`;
+const UserAgreeTextFinal = styled.div`
+  font-size: 2vw;
+  line-height: 3vw;
+  font-weight: 700;
+  margin-bottom: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+const UserAgreeTextEmphasis = styled.div`
+  font-size: 1.7vw;
+  line-height: 3vw;
+  font-weight: 700;
+  margin-bottom: 1.2vw;
+  color: #ff7f3b;
+`;
+const UserAgreeCheckBox = styled.div`
+  margin-left: 2vw;
+`;
 const FinishBox = styled.div`
   position: fixed;
-  top: 70%;
+  top: 94%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8000;
@@ -168,6 +194,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
 const SignatureLayout: React.FC<CalculatorComponentProps> = ({
   setOnContractFinishPage,
 }) => {
+  const navigate = useNavigate();
   const stageRef = useRef<any>(null);
   const [tool, setTool] = useState<string>("pen");
   const [penColorVisible, setPenColorVisible] = useState<boolean>(false);
@@ -235,26 +262,26 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
 
   const targetElement = document.querySelector("#CanvasPanel");
 
-  targetElement?.addEventListener(
-    "pointerdown",
-    (event: any) => {
-      // Call the appropriate pointer type handler
-      switch (event.pointerType) {
-        case "mouse":
-          setPointerType("mouse");
-          break;
-        case "pen":
-          setPointerType("pen");
-          break;
-        case "touch":
-          setPointerType("touch");
-          break;
-        default:
-          console.log(`pointerType ${event.pointerType} is not supported`);
-      }
-    },
-    false
-  );
+  // targetElement?.addEventListener(
+  //   "pointerdown",
+  //   (event: any) => {
+  //     // Call the appropriate pointer type handler
+  //     switch (event.pointerType) {
+  //       case "mouse":
+  //         setPointerType("mouse");
+  //         break;
+  //       case "pen":
+  //         setPointerType("pen");
+  //         break;
+  //       case "touch":
+  //         setPointerType("touch");
+  //         break;
+  //       default:
+  //         console.log(`pointerType ${event.pointerType} is not supported`);
+  //     }
+  //   },
+  //   false
+  // );
   const isBlank = () => {
     setBlankBoxVisible(true);
   };
@@ -283,6 +310,7 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
     if (response.status === 200) {
       alert("전송완료");
       setOnContractFinishPage && setOnContractFinishPage(true);
+      navigate(`/contractlist/detail/${reNum}`, { state: { isSigned: true } });
     } else {
       alert("Fail to getDetailList()");
       disableScrollLock();
@@ -299,7 +327,6 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
       body.setAttribute("scrollY", pageY.toString());
 
       body.style.overflow = "hidden";
-      body.style.touchAction = "none";
       body.style.position = "fixed";
       body.style.left = "0px";
       body.style.right = "0px";
@@ -312,7 +339,6 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
   // 스크롤 잠금 해제
   const disableScrollLock = () => {
     const { body } = document;
-
     if (body.getAttribute("scrollY")) {
       body.style.removeProperty("overflow");
       body.style.removeProperty("position");
@@ -320,7 +346,7 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
       body.style.removeProperty("left");
       body.style.removeProperty("right");
       body.style.removeProperty("bottom");
-      body.style.removeProperty("touchAction");
+
       body.style.removeProperty("scrollBehavior");
       body.style.touchAction = "auto";
       window.scrollTo(0, Number(body.getAttribute("scrollY")));
@@ -361,6 +387,56 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
           onClose={BlankClose}
         ></DetailDrawBlankModalComponent>
       )}
+      <UserAgreeBox>
+        <UserAgreeTextBox>
+          <UserAgreeTextEmphasis>
+            고객은 계약서를 작성하기 전 이사 계약 약관을 반드시 확인하셔야 하며,
+            의문사항이 있을 경우 견적 상당 직원에게 문의하시어 확인한 후
+            계약서에 서명하시기 바랍니다.
+          </UserAgreeTextEmphasis>
+
+          <UserAgreeText>
+            계약이 체결된 후 고객의 위책사항에 대해 발생하는 불이익은 당사가
+            책임지지 않습니다.
+          </UserAgreeText>
+          <UserAgreeText>
+            최근 “통인”을 사칭한 불법계약으로 인한 피해가 빈번하게 발생함에 따라
+            모든 통인의 계약건에 대해서 전산의 정보 관리를 하고 있습니다.
+          </UserAgreeText>
+          <UserAgreeText>
+            계약 내용은 당사 홈페이지(https://www.tonginexp.com) 의 “내 이사
+            진행상태 보기” 메뉴에서 확인하실 수 있습니다. 조회가 되지 않는
+            계약건에 대해서는 정식 계약상태가 아니며, 당사가 책임지지 않습니다.
+          </UserAgreeText>
+          <UserAgreeText>
+            계약(견적) 담당자, 연락처가 미 기재된 경우 계약서로서의 효력이
+            없습니다.
+          </UserAgreeText>
+          <UserAgreeText>
+            본인은 위와 같이 신청서의 약관 및 각종 이용안내에 대한 설명을 듣고
+            이에 동의하며 개인정보 활용 동의 및 계약 확인에 따라 이사 및 부대
+            서비스를 신청합니다.
+          </UserAgreeText>
+
+          <UserAgreeTextEmphasis>
+            본 서명은 고객의 계약금 입금 이후 계약 효력이 발생합니다.
+          </UserAgreeTextEmphasis>
+          <br />
+          <UserAgreeTextFinal>
+            본인은 (주)통인익스프레스 견적•계약 진행에 따른 약관 및 이용안내에
+            대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신총하고 개인정보
+            수집 및 활용에 동의합니다.
+            <UserAgreeCheckBox onClick={onClickCheck}>
+              <Image
+                src={`/icon/${isChecked ? "checked" : "unchecked"}.png`}
+                alt="체크박스"
+                width={"4vw"}
+                height={"4vw"}
+              />
+            </UserAgreeCheckBox>
+          </UserAgreeTextFinal>
+        </UserAgreeTextBox>
+      </UserAgreeBox>
       <CalculatorComponentWrapper id={"BackgroundPanel"}>
         <ToolContainer>
           <Title>서명을 완료해 주세요</Title>
@@ -412,22 +488,7 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
           </CanvasBox>
         </div>
       </CalculatorComponentWrapper>
-      <UserAgreeBox>
-        <UserAgreeText>
-          {" "}
-          본인은 (주)통인익스프레스 견적•계약 진행에 따른 약관 및 <br></br>
-          이용안내에 대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신총하고
-          <br></br> 개인정보 수집 및 활용에 동의합니다.
-        </UserAgreeText>
-        <UserAgreeCheckBox onClick={onClickCheck}>
-          <Image
-            src={`/icon/${isChecked ? "checked" : "unchecked"}.png`}
-            alt="체크박스"
-            width={"3.4vw"}
-            height={"3.4vw"}
-          />
-        </UserAgreeCheckBox>
-      </UserAgreeBox>
+
       <FinishBox>
         <CustomButton
           width={"100%"}

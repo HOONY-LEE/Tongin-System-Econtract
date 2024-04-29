@@ -102,7 +102,9 @@ const InputNumber = styled.p`
   font-weight: 400;
   width: 70%;
 `;
-
+const SaveBox = styled.div`
+  margin-top: 2vw;
+`;
 export default function ProductComponent(props: any) {
   const { currentProductList, setCurrentProductList, reNum, getProductList } =
     props;
@@ -226,6 +228,16 @@ export default function ProductComponent(props: any) {
             );
           })}
         </RoomListBox>
+        <SaveBox>
+          <CustomButton
+            onClick={saveProductList}
+            text={"물품정보 저장하기"}
+            width={"100%"}
+            height={"6.4vw"}
+            size={"2.6vw"}
+            radius={"0.4vw"}
+          ></CustomButton>
+        </SaveBox>
       </Wrapper>
     </>
   );
