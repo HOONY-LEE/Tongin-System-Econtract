@@ -178,6 +178,7 @@ const TextPanel = styled.div`
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
+
   /* touch-action: none; */
 `;
 interface CalculatorComponentProps {
@@ -211,6 +212,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
   appearance: none;
   border: none;
   width: 90%;
+
   height: 90%;
 `;
 
@@ -356,6 +358,11 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
     },
     false
   );
+  // 도큐먼트에 이벤트를 추가하고 contextmenu타입을 사용한다
+  window.addEventListener("contextmenu", (event) => {
+    // event의 기본동작을 실행하지 못하게 한다
+    event.preventDefault();
+  });
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
   useEffect(() => {
