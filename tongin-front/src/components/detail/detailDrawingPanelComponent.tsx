@@ -421,20 +421,6 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   //   });
   // }, [textMemo]);
   // 더블 탭 시간 간격을 체크하기 위한 변수
-  let lastTouchTime = 0;
-
-  // Backdrop에서 더블 탭 이벤트 핸들러
-  const handleBackdropTouchStart = () => {
-    const currentTime = new Date().getTime();
-    const timeSinceLastTouch = currentTime - lastTouchTime;
-
-    if (timeSinceLastTouch <= 300) {
-      // 이전 터치 이벤트와의 간격이 300ms 이내일 경우 더블 탭으로 판단
-      return false; // 더블 탭 이벤트를 막음
-    }
-
-    lastTouchTime = currentTime; // 현재 터치 이벤트 시간으로 업데이트
-  };
 
   // CalculatorComponentWrapper에서 드래그 이벤트 핸들러
   const handleCalculatorTouchMove = (e: any) => {
@@ -453,7 +439,6 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
         onContextMenu={(e) => e.preventDefault()}
         onDragStart={(e) => e.preventDefault()}
         onTouchMove={handleBackdropTouchMove}
-        onTouchStart={handleBackdropTouchStart}
       />
 
       <CalculatorComponentWrapper
@@ -473,7 +458,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               {penColorVisible && <div>펜 색상 선택</div>}
               {eraserSizeVisible && <div>지우개 두께 선택</div>}
             </ColorCanvastitle>
-            메모 수정 중 ver 2
+            메모 수정 중 ver 3
             {penColorVisible && (
               <ColorCanvas>
                 {colorArr.map((colorArr, i) => (
