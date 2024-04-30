@@ -369,25 +369,25 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   };
   const backTargetElement = document.querySelector("#BackgroundPanel");
   const allTargetElement = document.querySelector("#Back");
-  backTargetElement?.addEventListener(
-    "dragover",
-    (event) => {
-      event.preventDefault();
-    },
-    false
-  );
+  // backTargetElement?.addEventListener(
+  //   "dragover",
+  //   (event) => {
+  //     event.preventDefault();
+  //   },
+  //   false
+  // );
   // 도큐먼트에 이벤트를 추가하고 contextmenu타입을 사용한다
-  backTargetElement?.addEventListener("contextmenu", (event) => {
-    // event의 기본동작을 실행하지 못하게 한다
-    event.preventDefault();
-  });
-  allTargetElement?.addEventListener(
-    "dragover",
-    (event) => {
-      event.preventDefault();
-    },
-    false
-  );
+  // backTargetElement?.addEventListener("contextmenu", (event) => {
+  //   // event의 기본동작을 실행하지 못하게 한다
+  //   event.preventDefault();
+  // });
+  // allTargetElement?.addEventListener(
+  //   "dragover",
+  //   (event) => {
+  //     event.preventDefault();
+  //   },
+  //   false
+  // );
   // 도큐먼트에 이벤트를 추가하고 contextmenu타입을 사용한다
   allTargetElement?.addEventListener("contextmenu", (event) => {
     // event의 기본동작을 실행하지 못하게 한다
@@ -441,7 +441,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
         onTouchMove={handleBackdropTouchMove}
       />
 
-      <CalculatorComponentWrapper id={"BackgroundPanel"} style={style}>
+      <CalculatorComponentWrapper style={style}>
         {blankBoxVisible && (
           <DetailDrawBlankModalComponent
             onBlank={onBlankData}
