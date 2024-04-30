@@ -150,7 +150,17 @@ export default function NewOptionComponent(props: any) {
   const [organizingService, setOrganizingService] = useState(
     optionData.livingService.organizationStorageService
   );
+  const [electronicCleaningService, setElectronicCleaningService] = useState(
+    optionData.livingService.electronicCleaningService
+  );
 
+  const [movjetService, setMovjetService] = useState(
+    optionData.livingService.movjetService
+  );
+
+  const [apronService, setApronService] = useState(
+    optionData.livingService.apronService
+  );
   const [otherService, setOtherService] = useState(
     optionData.livingService.otherService
   );
@@ -194,6 +204,31 @@ export default function NewOptionComponent(props: any) {
       return updatedData;
     });
   };
+
+  const setElectronicCleaningServiceSelected = (flag: boolean) => {
+    setElectronicCleaningService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+
+  const setApronServiceSelected = (flag: boolean) => {
+    setApronService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+
+  const setMovjetServiceSelected = (flag: boolean) => {
+    setMovjetService((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+
   const setOtherServiceSelected = (flag: boolean) => {
     setOtherService((prev: any) => {
       const updatedData = { ...prev };
@@ -218,6 +253,10 @@ export default function NewOptionComponent(props: any) {
       updatedData.livingService.movingCleaningService = cleaningService;
       updatedData.livingService.deodorizationService = deodorizationService;
       updatedData.livingService.organizationStorageService = organizingService;
+      updatedData.livingService.electronicCleaningService =
+        electronicCleaningService;
+      updatedData.livingService.apronService = apronService;
+      updatedData.livingService.movjetService = movjetService;
       updatedData.livingService.otherService = otherService;
       updatedData.optionService = optionServiceList;
       updatedData.ladderTruck = ladderTruckData;
@@ -230,6 +269,9 @@ export default function NewOptionComponent(props: any) {
     cleaningService,
     deodorizationService,
     organizingService,
+    electronicCleaningService,
+    apronService,
+    movjetService,
     otherService,
     optionServiceList,
     ladderTruckData,
@@ -306,6 +348,37 @@ export default function NewOptionComponent(props: any) {
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
+            <CleaningOptionBoxComponent
+              optionData={organizingService}
+              setOptionData={setOrganizingService}
+              title={"정리수납 서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={organizingService.selected}
+              setIsSelected={setOrganizationSelected}
+            ></CleaningOptionBoxComponent>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CleaningOptionBoxComponent
+              optionData={electronicCleaningService}
+              setOptionData={setElectronicCleaningService}
+              title={"가전청소 서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={electronicCleaningService.selected}
+              setIsSelected={setElectronicCleaningServiceSelected}
+            ></CleaningOptionBoxComponent>
+          </CheckedOptionBox>
+          {/* <CheckedOptionBox>
+            <CleaningOptionBoxComponent
+              optionData={deodorizationService}
+              setOptionData={setDeodorizationService}
+              title={"탈취살균 서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={deodorizationService.selected}
+              setIsSelected={setDeodorizationSelected}
+            ></CleaningOptionBoxComponent>
+          </CheckedOptionBox> */}
+          {/* 임시 */}
+          {/* <CheckedOptionBox>
             <CommonOptionBoxComponent
               optionData={organizingService}
               setOptionData={setOrganizingService}
@@ -314,15 +387,35 @@ export default function NewOptionComponent(props: any) {
               isSelected={organizingService.selected}
               setIsSelected={setOrganizationSelected}
             ></CommonOptionBoxComponent>
-          </CheckedOptionBox>
+          </CheckedOptionBox> */}
           <CheckedOptionBox>
             <CommonOptionBoxComponent
               optionData={deodorizationService}
               setOptionData={setDeodorizationService}
-              title={"탈취살균 서비스"}
+              title={"탈취살균(새집증후군) 서비스"}
               paymentMethodList={paymentMethodList}
               isSelected={deodorizationService.selected}
               setIsSelected={setDeodorizationSelected}
+            ></CommonOptionBoxComponent>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CommonOptionBoxComponent
+              optionData={apronService}
+              setOptionData={setApronService}
+              title={"에이프런서비스"}
+              paymentMethodList={paymentMethodList}
+              isSelected={apronService.selected}
+              setIsSelected={setApronServiceSelected}
+            ></CommonOptionBoxComponent>
+          </CheckedOptionBox>
+          <CheckedOptionBox>
+            <CommonOptionBoxComponent
+              optionData={movjetService}
+              setOptionData={setMovjetService}
+              title={"무브제 디렉터 상담"}
+              paymentMethodList={paymentMethodList}
+              isSelected={movjetService.selected}
+              setIsSelected={setMovjetServiceSelected}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>

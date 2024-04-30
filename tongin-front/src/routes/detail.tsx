@@ -281,18 +281,22 @@ export default function Detail() {
       alert("Fail to postDrawingData()");
     }
   };
-  // 메모장 호출 API
+  // 메모장 데이터 가져오기 API
   const getDrawingData = async () => {
-    const response = await API.get(`receipt/memo/${reNum}`);
-    if (response.status === 200) {
-      const result = response.data.receiptMemoData;
-      const textMemo = response.data.textMemo;
-      setDrawingData(result);
-      setTextMemoData(textMemo);
-      setIsScrolled(true);
-      setPreventDefault(true);
-    } else {
-      alert("Fail to getDrawingData()");
+    try {
+      const response = await API.get(`receipt/memo/${reNum}`);
+      if (response.status === 200) {
+        const result = response.data.receiptMemoData;
+        const textMemo = response.data.textMemo;
+        setDrawingData(result);
+        setTextMemoData(textMemo);
+        setIsScrolled(true);
+        setPreventDefault(true);
+      } else {
+        alert("Fail to getDrawingData()");
+      }
+    } catch (error) {
+      // alert("메모 정보를 불러오는데 실패했습니다.");
     }
   };
 
