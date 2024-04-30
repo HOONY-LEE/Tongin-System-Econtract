@@ -280,7 +280,7 @@ export default function ListComponent(props: any) {
                 <BorderLeft />
 
                 <>
-                  {user.selfReceipt === true ? (
+                  {JSON.parse(user.selfReceipt) ? (
                     <UserSelfContractColor $bgColor={"#2fd04b"}>
                       {"현장 "}
                     </UserSelfContractColor>
