@@ -343,6 +343,7 @@ const SignatureModalComponent: React.FC<CalculatorComponentProps> = ({
         setIsPreviewModalOpen(true);
       }, 500);
       setOnSignatureModal(false); //모달끔
+      disableScrollLock();
       // navigate(`/contractlist/detail/${reNum}`, { state: { isSigned: true } });
     } else {
       // setOnContractFinishPage && setOnContractFinishPage(false);

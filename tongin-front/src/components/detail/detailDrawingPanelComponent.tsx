@@ -423,11 +423,11 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
   // 더블 탭 시간 간격을 체크하기 위한 변수
 
   // CalculatorComponentWrapper에서 드래그 이벤트 핸들러
-  const handleCalculatorTouchMove = (e: any) => {
-    if (!isDrawing) {
-      e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
-    }
-  };
+  // const handleCalculatorTouchMove = (e: any) => {
+  //   if (!isDrawing) {
+  //     e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
+  //   }
+  // };
 
   const handleBackdropTouchMove = (e: any) => {
     e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
@@ -441,11 +441,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
         onTouchMove={handleBackdropTouchMove}
       />
 
-      <CalculatorComponentWrapper
-        onTouchMove={handleCalculatorTouchMove}
-        id={"BackgroundPanel"}
-        style={style}
-      >
+      <CalculatorComponentWrapper id={"BackgroundPanel"} style={style}>
         {blankBoxVisible && (
           <DetailDrawBlankModalComponent
             onBlank={onBlankData}
