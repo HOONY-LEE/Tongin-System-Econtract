@@ -238,6 +238,8 @@ export default function ContractComponent(props: any) {
     detailData,
     setDrawingData,
     setDrawingData2,
+    getDrawingData,
+    getDetailList,
     setLines,
     setLines2,
     contractImageList,
@@ -525,7 +527,10 @@ export default function ContractComponent(props: any) {
           getContractImageList={getContractImageList}
           reNum={reNum}
           setLines={setLines}
+          setLines2={setLines2}
+          getDrawingData={getDrawingData}
           detailData={detailData}
+          getDetailList={getDetailList}
           drawingData={drawingData}
           setDrawingData={setDrawingData}
           drawingData2={drawingData2}
@@ -537,6 +542,7 @@ export default function ContractComponent(props: any) {
           optionData={optionData}
           priceDataList={priceDataList}
           onClose={handleCloseModal}
+          setIsPreviewModalOpen={setIsPreviewModalOpen}
           movingCBM={movingCBM}
           discardCBM={discardCBM}
         />
