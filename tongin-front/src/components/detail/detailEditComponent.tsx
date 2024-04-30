@@ -582,9 +582,6 @@ export default function DetailEditComponent(props: any) {
       receiptDetail: detailData,
     };
 
-    console.log("requestPram>>>");
-    console.log(requestPram);
-
     try {
       const response: any = await API.put(
         `/receipt/detail/${reNum}`,

@@ -367,27 +367,6 @@ export default function NewOptionComponent(props: any) {
               setIsSelected={setElectronicCleaningServiceSelected}
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
-          {/* <CheckedOptionBox>
-            <CleaningOptionBoxComponent
-              optionData={deodorizationService}
-              setOptionData={setDeodorizationService}
-              title={"탈취살균 서비스"}
-              paymentMethodList={paymentMethodList}
-              isSelected={deodorizationService.selected}
-              setIsSelected={setDeodorizationSelected}
-            ></CleaningOptionBoxComponent>
-          </CheckedOptionBox> */}
-          {/* 임시 */}
-          {/* <CheckedOptionBox>
-            <CommonOptionBoxComponent
-              optionData={organizingService}
-              setOptionData={setOrganizingService}
-              title={"정리수납 서비스"}
-              paymentMethodList={paymentMethodList}
-              isSelected={organizingService.selected}
-              setIsSelected={setOrganizationSelected}
-            ></CommonOptionBoxComponent>
-          </CheckedOptionBox> */}
           <CheckedOptionBox>
             <CommonOptionBoxComponent
               optionData={deodorizationService}
