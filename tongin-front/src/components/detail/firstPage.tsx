@@ -356,6 +356,7 @@ const OptionItemName = styled.div`
   align-items: center;
   background-color: #f4f4f4;
   font-size: 1vw;
+  border-bottom: 0.1vw solid #b4b4b4;
   /* border-right: 0.1vw solid gray; */
 `;
 
@@ -366,6 +367,7 @@ const OptionItem = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1vw;
+  border-bottom: 0.1vw solid #b4b4b4;
   /* border-right: 0.1vw solid gray; */
 `;
 
@@ -383,7 +385,7 @@ const PriceItemName = styled.div`
   align-items: center;
   font-size: 1.2vw;
   padding-left: 1vw;
-  border-bottom: 0.1vw solid #d3d3d3;
+  border-bottom: 0.1vw solid #dbdbdb;
 `;
 
 const PriceItemPrice = styled.div`
