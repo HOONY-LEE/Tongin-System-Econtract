@@ -14,7 +14,7 @@ const fadeout = keyframes`
 
 const ToastContainer = styled.div<{
   $backgroundColor?: string;
-  show?: boolean;
+  $show?: boolean;
 }>`
   background-color: ${(props) =>
     props.$backgroundColor ? props.$backgroundColor : "white"};
@@ -35,7 +35,7 @@ const ToastContainer = styled.div<{
   box-shadow: 0 0.5vh 0.5vh rgba(0, 0, 0, 0.03),
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
   animation: ${(props) =>
-    props.show
+    props.$show
       ? css`
           ${fadein} 1.2s, ${fadeout} 1.3s 1s
         `
@@ -82,7 +82,7 @@ export const Toast = (props: any) => {
   return (
     <>
       {status === "SUCCESS" && (
-        <ToastContainer show={fetchStatus} $backgroundColor={"#f8fff9"}>
+        <ToastContainer $show={fetchStatus} $backgroundColor={"#f8fff9"}>
           <ToastBox>
             <ToastIcon>
               <SuccessIcon width={"2vw"} fill={"#00c932"} />
@@ -95,7 +95,7 @@ export const Toast = (props: any) => {
         </ToastContainer>
       )}
       {status === "FAIL" && (
-        <ToastContainer show={fetchStatus} $backgroundColor={"#fff8f7"}>
+        <ToastContainer $show={fetchStatus} $backgroundColor={"#fff8f7"}>
           <ToastBox>
             <ToastIcon>
               <FilledIcon width={"2vw"} fill={"#ff4242"} />

@@ -250,13 +250,9 @@ export default function ListComponent(props: any) {
       {currentList.length > 0 ? (
         currentList?.map((user: any, index: number) => {
           return (
-            <ContentBox
-              key={index}
-              onClick={() => onClickListItemHandle(user)}
-              // onClick={() => detailPageShow("R20240203929")}
-            >
+            <ContentBox key={index} onClick={() => onClickListItemHandle(user)}>
               <ContentText>
-                <UserName>{user.name.replace(str, "")}</UserName>
+                <UserName>{user.name.substring(0, 7)}</UserName>
                 <BorderLeft />
                 <UserPhone>{user.contact}</UserPhone>
                 <BorderLeft />

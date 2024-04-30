@@ -89,6 +89,7 @@ export default function OptionListBoxComponent(props: any) {
                 isSelected={item.selected}
                 setIsSelected={setOptionItemSelected}
                 setOptionData={setOptionData}
+                optionData={optionData}
               ></OptionItemComponent>
             );
           })}
