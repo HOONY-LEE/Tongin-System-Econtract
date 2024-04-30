@@ -168,9 +168,9 @@ const MemoBox = styled.div`
 `;
 
 const TextMemoBox = styled.div`
-  margin-top: 2vw;
+  margin-top: 1vw;
   width: 100%;
-  height: 7vw;
+  height: 5vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.4vw;
@@ -209,7 +209,7 @@ const MemoRound = styled.div`
 
 const TextMemoRound = styled.div`
   width: 37vw;
-  height: 12vw;
+  height: 16vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -239,7 +239,6 @@ const BottomComponent = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: 1vw;
 `;
 const PriceListArea = styled.div`
   width: 48vw;
@@ -253,14 +252,14 @@ const PriceListBox = styled.div`
   width: 100%;
   border-top: 0.16vw solid black;
   border-left: 0.1vw solid black;
+  margin-bottom: 1vw;
 `;
 
 const TotalPriceBox = styled.div`
   width: 100%;
-  height: 5vw;
+  height: 4vw;
   display: flex;
   border-bottom: 0.16vw solid black;
-  margin-top: 0.1vw;
 `;
 
 const TotalPriceName = styled.div`
@@ -292,7 +291,7 @@ const PriceNameInputEng = styled.p`
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 8vw;
+  height: 7vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -314,7 +313,7 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 10vw;
+  height: 9vw;
 
   display: flex;
   justify-content: space-between;
@@ -340,6 +339,39 @@ const PriceItemBox = styled.div`
   width: 100%;
   height: 2.6vw;
   display: flex;
+`;
+
+const PriceItemBox2 = styled.div`
+  width: 14.2vw;
+  height: 2.6vw;
+  display: flex;
+`;
+
+const OptionItemName = styled.div`
+  width: 8.2vw;
+  height: 2.6vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  font-size: 1vw;
+  /* border-right: 0.1vw solid gray; */
+`;
+
+const OptionItem = styled.div`
+  width: 6vw;
+  height: 2.6vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1vw;
+  /* border-right: 0.1vw solid gray; */
+`;
+
+const OptionItemListBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const PriceItemName = styled.div`
@@ -477,7 +509,7 @@ const TotalTd = styled.div<{
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 const BottomLine = styled.div`
-  margin-top: 2vw;
+  margin-top: 1vw;
   width: 100%;
   border-top: 0.1vw solid black;
 `;
@@ -823,17 +855,15 @@ const FirstPage = (props: any) => {
 
           <ServiceArea>
             <ServiceBox>
-              <ServiceColumnBox>
+              {/* <ServiceColumnBox>
                 <ServiceName>서비스</ServiceName>
                 <ServiceDate>날짜</ServiceDate>
                 <ServicePrice>금액</ServicePrice>
                 <ServicePaymentMethod>결제</ServicePaymentMethod>
-              </ServiceColumnBox>
+              </ServiceColumnBox> */}
               {/* 입주청소서비스 */}
               <ServiceColumnBox>
-                <ServiceName>
-                  {optionData.livingService.movingCleaningService.serviceName}
-                </ServiceName>
+                <ServiceName>입주청소서비스</ServiceName>
                 <ServiceDate>
                   {optionData.livingService.movingCleaningService.selected
                     ? optionData.livingService.movingCleaningService
@@ -843,11 +873,6 @@ const FirstPage = (props: any) => {
                           .serviceRequestDate
                     : "-"}
                 </ServiceDate>
-                <ServicePrice>
-                  {optionData.livingService.movingCleaningService.selected
-                    ? optionData.livingService.movingCleaningService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
                 <ServicePaymentMethod>
                   {" "}
                   {optionData.livingService.movingCleaningService.selected
@@ -857,15 +882,15 @@ const FirstPage = (props: any) => {
                       ].status
                     : "-"}
                 </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.movingCleaningService.selected
+                    ? optionData.livingService.movingCleaningService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
               </ServiceColumnBox>
               {/* 정리수납서비스 */}
               <ServiceColumnBox>
-                <ServiceName>
-                  {
-                    optionData.livingService.organizationStorageService
-                      .serviceName
-                  }
-                </ServiceName>
+                <ServiceName>정리수납서비스</ServiceName>
                 <ServiceDate>
                   {optionData.livingService.organizationStorageService.selected
                     ? optionData.livingService.organizationStorageService
@@ -875,11 +900,6 @@ const FirstPage = (props: any) => {
                           .serviceRequestDate
                     : "-"}
                 </ServiceDate>
-                <ServicePrice>
-                  {optionData.livingService.organizationStorageService.selected
-                    ? optionData.livingService.organizationStorageService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
                 <ServicePaymentMethod>
                   {" "}
                   {optionData.livingService.organizationStorageService.selected
@@ -889,20 +909,50 @@ const FirstPage = (props: any) => {
                       ].status
                     : "-"}
                 </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.organizationStorageService.selected
+                    ? optionData.livingService.organizationStorageService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox>
+              {/* 정리수납서비스 */}
+              <ServiceColumnBox>
+                <ServiceName>가전청소서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.electronicCleaningService.selected
+                    ? optionData.livingService.electronicCleaningService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.electronicCleaningService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.electronicCleaningService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.electronicCleaningService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.electronicCleaningService.selected
+                    ? optionData.livingService.electronicCleaningService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
               </ServiceColumnBox>
             </ServiceBox>
             <ServiceBox>
-              <ServiceColumnBox>
+              {/* <ServiceColumnBox>
                 <ServiceName>서비스</ServiceName>
                 <ServiceDate>날짜</ServiceDate>
                 <ServicePrice>금액</ServicePrice>
                 <ServicePaymentMethod>결제</ServicePaymentMethod>
-              </ServiceColumnBox>
+              </ServiceColumnBox> */}
               {/* 탈취살균서비스 */}
               <ServiceColumnBox>
-                <ServiceName>
-                  {optionData.livingService.deodorizationService.serviceName}
-                </ServiceName>
+                <ServiceName>탈취살균서비스</ServiceName>
                 <ServiceDate>
                   {optionData.livingService.deodorizationService.selected
                     ? optionData.livingService.deodorizationService
@@ -912,11 +962,6 @@ const FirstPage = (props: any) => {
                           .serviceRequestDate
                     : "-"}
                 </ServiceDate>
-                <ServicePrice>
-                  {optionData.livingService.deodorizationService.selected
-                    ? optionData.livingService.deodorizationService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
                 <ServicePaymentMethod>
                   {" "}
                   {optionData.livingService.deodorizationService.selected
@@ -926,33 +971,62 @@ const FirstPage = (props: any) => {
                       ].status
                     : "-"}
                 </ServicePaymentMethod>
-              </ServiceColumnBox>
-              {/* 기타서비스 */}
-              <ServiceColumnBox>
-                <ServiceName>
-                  {optionData.livingService.otherService.serviceName}
-                </ServiceName>
-                <ServiceDate>
-                  {optionData.livingService.otherService.selected
-                    ? optionData.livingService.otherService
-                        .serviceRequestDate === ""
-                      ? "--"
-                      : optionData.livingService.otherService.serviceRequestDate
-                    : "-"}
-                </ServiceDate>
                 <ServicePrice>
-                  {optionData.livingService.otherService.selected
-                    ? optionData.livingService.otherService.servicePayment.toLocaleString()
+                  {optionData.livingService.deodorizationService.selected
+                    ? optionData.livingService.deodorizationService.servicePayment.toLocaleString()
                     : "-"}
                 </ServicePrice>
+              </ServiceColumnBox>
+              {/* 에이프런서비스 */}
+              <ServiceColumnBox>
+                <ServiceName>에이프런서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.apronService.selected
+                    ? optionData.livingService.apronService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.apronService.serviceRequestDate
+                    : "-"}
+                </ServiceDate>
                 <ServicePaymentMethod>
                   {" "}
-                  {optionData.livingService.otherService.selected
+                  {optionData.livingService.apronService.selected
                     ? paymentMethodList[
-                        optionData.livingService.otherService.paymentMethod
+                        optionData.livingService.apronService.paymentMethod
                       ].status
                     : "-"}
                 </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.apronService.selected
+                    ? optionData.livingService.apronService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox>
+              {/* 기타서비스 */}
+              <ServiceColumnBox>
+                <ServiceName>무브제서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.movjetService.selected
+                    ? optionData.livingService.movjetService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.movjetService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.movjetService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.movjetService.paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.movjetService.selected
+                    ? optionData.livingService.movjetService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
               </ServiceColumnBox>
             </ServiceBox>
           </ServiceArea>
@@ -992,6 +1066,74 @@ const FirstPage = (props: any) => {
             <PriceListArea>
               <PriceListBox>
                 <PriceItemBox>
+                  <PriceItemName>옵션품목(분해/설치)</PriceItemName>
+                  <PriceItemPrice>
+                    <Price> {optionTotalCharge.toLocaleString()}</Price>
+                    <Unit>₩</Unit>
+                  </PriceItemPrice>
+                </PriceItemBox>
+                <OptionItemListBox>
+                  {optionData.optionService.ServiceList.map(
+                    (item: any, index: number) => {
+                      return (
+                        <PriceItemBox2 key={index}>
+                          <OptionItemName>{item.optionName}</OptionItemName>
+                          <OptionItem>
+                            {item.decomposition && item.installation
+                              ? "분해 / 설치"
+                              : ""}
+                            {item.decomposition && !item.installation
+                              ? "설치"
+                              : ""}
+                            {!item.decomposition && item.installation
+                              ? "분해"
+                              : ""}
+                            {!item.decomposition && !item.installation
+                              ? "-"
+                              : ""}
+                          </OptionItem>
+                        </PriceItemBox2>
+                      );
+                    }
+                  )}
+                  <PriceItemBox2>
+                    <OptionItemName>-</OptionItemName>
+                    <OptionItem>-</OptionItem>
+                  </PriceItemBox2>
+                  {/* <PriceItemBox>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                    <OptionItemName>옵션이름</OptionItemName>
+                    <OptionItem>분해 / 설치</OptionItem>
+                  </PriceItemBox> */}
+                </OptionItemListBox>
+              </PriceListBox>
+              <PriceListBox>
+                <PriceItemBox>
                   <PriceItemName>이사물량(폐기/운반)</PriceItemName>
                   <PriceItemPrice>
                     <Price>{`${discardCBM}  /  ${movingCBM}`}</Price>
@@ -1007,33 +1149,7 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>입주청소서비스</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>
-                      {optionData.livingService.movingCleaningService.servicePayment.toLocaleString()}
-                    </Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>정리수납서비스</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>
-                      {optionData.livingService.organizationStorageService.servicePayment.toLocaleString()}
-                    </Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>탈취살균서비스</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>
-                      {optionData.livingService.deodorizationService.servicePayment.toLocaleString()}
-                    </Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
+
                 <PriceItemBox>
                   <PriceItemName>기타서비스</PriceItemName>
                   <PriceItemPrice>
@@ -1043,13 +1159,7 @@ const FirstPage = (props: any) => {
                     <Unit>₩</Unit>
                   </PriceItemPrice>
                 </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>옵션비용(분해/설치)</PriceItemName>
-                  <PriceItemPrice>
-                    <Price> {optionTotalCharge.toLocaleString()}</Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
+
                 <PriceItemBox>
                   <PriceItemName>이사비용</PriceItemName>
                   <PriceItemPrice>

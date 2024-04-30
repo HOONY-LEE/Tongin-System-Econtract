@@ -12,7 +12,7 @@ const CheckedOptionTitle = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 3vh;
+  height: 5vw;
 `;
 
 const Title = styled.div`
@@ -28,22 +28,23 @@ const ActivatedArea = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4vh;
+  height: 6vw;
 `;
 
 const PriceInputArea = styled.div`
   display: flex;
+  height: 5vw;
   width: 30vw;
 `;
 
 const CategoryBox = styled.div`
-  width: 16vw;
-  height: 3vh;
+  width: 20vw;
+  height: 5vw;
 `;
 
 const DateBox = styled.div`
-  width: 14vw;
-  height: 3vh;
+  width: 12vw;
+  height: 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,8 +87,8 @@ const InputBox = styled.input.attrs({})<{}>`
 `;
 
 const PayMethodBox = styled.div`
-  width: 14vw;
-  height: 3vh;
+  width: 12vw;
+  height: 5vw;
 `;
 
 export default function CleaningOptionBoxComponent(props: any) {
@@ -169,12 +170,21 @@ export default function CleaningOptionBoxComponent(props: any) {
   };
 
   useEffect(() => {
+    if (!isChecked) {
+      setOptionData((prev: any) => {
+        const updatedData = { ...prev };
+        updatedData.serviceRequestDate = "";
+        updatedData.servicePayment = 0;
+        updatedData.paymentMethod = 0;
+        updatedData.selectedType = 0;
+        return updatedData;
+      });
+    }
     setOptionData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.selected = isChecked;
       return updatedData;
     });
-    setIsSelected(isChecked);
   }, [isChecked]);
 
   return (

@@ -10,7 +10,7 @@ const InputArea = styled.div`
   justify-content: end;
   align-items: center;
   width: 28vw;
-  height: 3vh;
+  height: 5vw;
 `;
 
 const InputCBMBox = styled.div`

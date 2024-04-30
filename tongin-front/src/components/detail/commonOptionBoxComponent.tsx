@@ -12,7 +12,7 @@ const CheckedOptionTitle = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 3vh;
+  height: 5vw;
 `;
 
 const Title = styled.div`
@@ -28,7 +28,7 @@ const ActivatedArea = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4vh;
+  height: 6vw;
 `;
 
 const PriceInputArea = styled.div`
@@ -37,13 +37,13 @@ const PriceInputArea = styled.div`
 `;
 
 const CategoryBox = styled.div`
-  width: 16vw;
-  height: 3vh;
+  width: 20vw;
+  height: 5vw;
 `;
 
 const DateBox = styled.div`
-  width: 14vw;
-  height: 3vh;
+  width: 12vw;
+  height: 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@ const MoveDateInput = styled.div`
   font-weight: 500;
   flex-direction: column;
   align-items: center;
-  border: 0.2vw solid #4b4b4b;
+  border: 0.2vw solid #aaaaaa;
   border-radius: 0.4vw;
   justify-content: center;
   &&:hover {
@@ -89,7 +89,7 @@ const CategoryInputBox = styled.input`
   width: 100%;
   height: 100%;
   border-radius: 0.4vw;
-  outline: 0.2vw solid #494949;
+  outline: 0.2vw solid #aaaaaa;
   border: none;
   border-radius: 0.4vw;
   display: flex;
@@ -103,7 +103,7 @@ const CategoryReadOnlyBox = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 0.4vw;
-  outline: 0.2vw solid #494949;
+  outline: 0.2vw solid #aaaaaa;
   background-color: #e9e9e9;
   display: flex;
   justify-content: center;
@@ -112,8 +112,8 @@ const CategoryReadOnlyBox = styled.div`
 `;
 
 const PayMethodBox = styled.div`
-  width: 14vw;
-  height: 3vh;
+  width: 12vw;
+  height: 5vw;
 `;
 
 export default function CommonOptionBoxComponent(props: any) {
@@ -184,12 +184,24 @@ export default function CommonOptionBoxComponent(props: any) {
   };
 
   useEffect(() => {
+    if (!isChecked) {
+      setOptionData((prev: any) => {
+        const updatedData = { ...prev };
+        updatedData.serviceRequestDate = "";
+        updatedData.servicePayment = 0;
+        updatedData.paymentMethod = 0;
+        if (updatedData.id === 7) {
+          updatedData.description = "";
+        }
+        return updatedData;
+      });
+    }
+
     setOptionData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.selected = isChecked;
       return updatedData;
     });
-    setIsSelected(isChecked);
   }, [isChecked]);
 
   useEffect(() => {

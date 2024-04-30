@@ -458,7 +458,6 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
               {penColorVisible && <div>펜 색상 선택</div>}
               {eraserSizeVisible && <div>지우개 두께 선택</div>}
             </ColorCanvastitle>
-            메모 수정 중 ver 3
             {penColorVisible && (
               <ColorCanvas>
                 {colorArr.map((colorArr, i) => (

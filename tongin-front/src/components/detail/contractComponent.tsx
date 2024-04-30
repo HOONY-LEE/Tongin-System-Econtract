@@ -258,26 +258,54 @@ export default function ContractComponent(props: any) {
   );
   const [optionTotal, setOptionTotal] = useState<number>(
     optionData.ladderTruck.servicePayment +
-      optionData.ladderTruck.servicePayment +
       optionData.livingService.movingCleaningService.servicePayment +
       optionData.livingService.organizationStorageService.servicePayment +
       optionData.livingService.deodorizationService.servicePayment +
-      optionData.livingService.otherService.servicePayment +
-      optionTotalCharge
+      optionData.livingService.electronicCleaningService.servicePayment +
+      optionData.livingService.apronService.servicePayment +
+      optionData.livingService.movjetService.servicePayment +
+      optionData.livingService.otherService.servicePayment
   );
+
   const [downCharge, setDownCharge] = useState<number>(priceDataList[4].amount);
   const [balanceCharge, setBalanceCharge] = useState<number>(
     priceDataList[5].amount
   );
   useEffect(() => {
     setTotalCharge(
-      optionTotal + priceDataList[0].amount + priceDataList[1].amount
+      optionTotal +
+        priceDataList[0].amount +
+        priceDataList[1].amount +
+        optionTotalCharge
     );
-  }, [downCharge, balanceCharge, optionTotal, priceDataList]);
+  }, [
+    downCharge,
+    balanceCharge,
+    optionTotal,
+    priceDataList,
+    optionTotalCharge,
+  ]);
 
   useEffect(() => {
     setBalanceCharge(totalCharge - priceDataList[4].amount);
   }, [downCharge, balanceCharge, optionTotal, priceDataList]);
+
+  // 옵션 품목 금액 합계 계산
+  const calculateTotalOptionCharge = () => {
+    let totalOptionCharge = 0;
+    if (optionData.optionService.selected) {
+      optionData.optionService.ServiceList.forEach((item: any) => {
+        if (item.selected) {
+          totalOptionCharge += item.optionPayment;
+        }
+      });
+    }
+    setOptionTotalCharge(totalOptionCharge);
+  };
+  useEffect(() => {
+    calculateTotalCBM(articleDataList);
+    calculateTotalOptionCharge();
+  }, []);
 
   useEffect(() => {
     setPriceDataList((prev: any[]) => {
@@ -372,20 +400,6 @@ export default function ContractComponent(props: any) {
     setDiscardCBM(discardSum);
   };
 
-  // 옵션 품목 금액 합계 계산
-  const calculateTotalOptionCharge = (optionData: any) => {
-    let totalOptionCharge = 0;
-    optionData.optionService.ServiceList.forEach((item: any) => {
-      if (item.selected) {
-        totalOptionCharge += item.optionPayment;
-      }
-    });
-    setOptionTotalCharge(totalOptionCharge);
-  };
-  useEffect(() => {
-    calculateTotalCBM(articleDataList);
-    calculateTotalOptionCharge(optionData);
-  }, [articleDataList, optionData]);
   return (
     <ContentBox>
       {fetchStatus && (
@@ -463,6 +477,48 @@ export default function ContractComponent(props: any) {
                 <InputCBMBox>
                   <InputCBMNumber>
                     {optionData.livingService.deodorizationService.servicePayment.toLocaleString()}
+                  </InputCBMNumber>
+                </InputCBMBox>
+                <SubText>원</SubText>
+              </PriceInputArea>
+            </ListBox>
+            <ListBox>
+              <TitleArea>
+                <Title>가전청소서비스 비용</Title>
+                <Subtile>/ElectronicCleaningService Charge</Subtile>
+              </TitleArea>
+              <PriceInputArea>
+                <InputCBMBox>
+                  <InputCBMNumber>
+                    {optionData.livingService.electronicCleaningService.servicePayment.toLocaleString()}
+                  </InputCBMNumber>
+                </InputCBMBox>
+                <SubText>원</SubText>
+              </PriceInputArea>
+            </ListBox>
+            <ListBox>
+              <TitleArea>
+                <Title>에이프런서비스 비용</Title>
+                <Subtile>/ApronService Charge</Subtile>
+              </TitleArea>
+              <PriceInputArea>
+                <InputCBMBox>
+                  <InputCBMNumber>
+                    {optionData.livingService.apronService.servicePayment.toLocaleString()}
+                  </InputCBMNumber>
+                </InputCBMBox>
+                <SubText>원</SubText>
+              </PriceInputArea>
+            </ListBox>
+            <ListBox>
+              <TitleArea>
+                <Title>무브제 디렉터 상담 비용</Title>
+                <Subtile>/MovjetService Charge</Subtile>
+              </TitleArea>
+              <PriceInputArea>
+                <InputCBMBox>
+                  <InputCBMNumber>
+                    {optionData.livingService.movjetService.servicePayment.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>

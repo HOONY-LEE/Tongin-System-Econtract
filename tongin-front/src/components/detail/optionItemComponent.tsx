@@ -75,7 +75,7 @@ const SelectItem = styled.div<{ $isSelected?: boolean }>`
   border-radius: 0.4vw;
   color: white;
   font-size: 2vw;
-  font-weight: 100;
+  font-weight: 300;
   &:hover {
     cursor: pointer;
   }
@@ -86,8 +86,6 @@ export default function OptionItemComponent(props: any) {
     props;
   const [isChecked, setIsChecked] = useState(isSelected);
 
-  console.log("optionData");
-  console.log(optionData);
   const onClickCheck = () => {
     setIsChecked(!isChecked);
   };

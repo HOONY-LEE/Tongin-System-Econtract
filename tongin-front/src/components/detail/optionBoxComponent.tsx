@@ -57,12 +57,19 @@ export default function OptionBoxComponent(props: any) {
   };
 
   useEffect(() => {
+    if (!isChecked) {
+      setLadderTruckData((prev: any) => {
+        const updatedData = { ...prev };
+        updatedData.servicePayment = 0;
+        return updatedData;
+      });
+    }
+
     setLadderTruckData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.selected = isChecked;
       return updatedData;
     });
-    setIsSelected(isChecked);
   }, [isChecked]);
 
   return (
