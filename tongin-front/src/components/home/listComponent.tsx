@@ -278,7 +278,7 @@ export default function ListComponent(props: any) {
                 <>
                   {JSON.parse(user.selfReceipt) ? (
                     <UserSelfContractColor $bgColor={"#2fd04b"}>
-                      {"현장 "}
+                      {"현장"}
                     </UserSelfContractColor>
                   ) : (
                     <UserSelfContractColor></UserSelfContractColor>

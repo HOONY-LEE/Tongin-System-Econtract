@@ -99,10 +99,10 @@ const ContractArea = styled.div`
   align-items: center;
 `;
 
-const ExportBtn = styled.div`
-  width: 39vw;
+const ExportBtn = styled.div<{ $disabled: boolean }>`
+  width: 80vw;
   height: 6vw;
-  background-color: #ff7f3b;
+  background-color: ${(props) => (props.$disabled ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   font-size: 2.4vw;
   font-weight: 600;
@@ -118,7 +118,7 @@ const ExportBtn = styled.div`
 const SignatureBtn = styled.div<{ $disabled: boolean }>`
   width: 39vw;
   height: 6vw;
-  background-color: ${(props) => (props.$disabled ? "#e7e7e7" : "#ff7f3b")};
+  background-color: ${(props) => (props.$disabled ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;
   font-size: 2.4vw;
   font-weight: 600;
@@ -179,11 +179,13 @@ const ContractPreviewModalComponent = (props: any) => {
     onClose,
     reNum,
     priceDataList,
+    getDrawingData,
     articleDataList,
     setDrawingData,
     setDrawingData2,
     optionData,
     detailData,
+    getDetailList,
     lines,
     lines2,
     drawingData,
@@ -191,7 +193,9 @@ const ContractPreviewModalComponent = (props: any) => {
     movingCBM,
     discardCBM,
     setLines,
+    setLines2,
     optionTotalCharge,
+    setIsPreviewModalOpen,
   } = props;
 
   const [contractImageList, setContractImageList] = useState<any[]>([]);
@@ -266,9 +270,9 @@ const ContractPreviewModalComponent = (props: any) => {
   }, [currentPage]);
   const navigate = useNavigate();
 
-  const onSignaturePage = () => {
-    navigate(`/signature/${reNum}`);
-  };
+  // const onSignaturePage = () => {
+  //   navigate(`/signature/${reNum}`);
+  // };
   useEffect(() => {
     getContractImage();
   }, []);
@@ -316,12 +320,16 @@ const ContractPreviewModalComponent = (props: any) => {
               setDrawingData2={setDrawingData2}
               lines={lines}
               lines2={lines2}
+              setIsPreviewModalOpen={setIsPreviewModalOpen}
+              setLines2={setLines2}
               movingCBM={movingCBM}
               discardCBM={discardCBM}
               priceDataList={priceDataList}
               articleDataList={articleDataList}
+              getDrawingData={getDrawingData}
               optionData={optionData}
               optionTotalCharge={optionTotalCharge}
+              getDetailList={getDetailList}
             ></FirstPage>
           )}
           {currentPage === 2 && (
@@ -337,13 +345,18 @@ const ContractPreviewModalComponent = (props: any) => {
           )}
         </ContractArea>
         <BottomArea>
-          <ExportBtn onClick={onClickMakePDF}>견적서 내보내기</ExportBtn>
-          <SignatureBtn
+          <ExportBtn
             $disabled={detailData.pushYN}
-            onClick={() => (detailData.pushYN ? "none" : onSignaturePage())}
+            onClick={(e) => (detailData.pushYN ? onClickMakePDF(e) : "none")}
+          >
+            견적서 내보내기
+          </ExportBtn>
+          {/* <SignatureBtn
+            $disabled={detailData.pushYN}
+            // onClick={() => (detailData.pushYN ? "none" : onSignaturePage())}
           >
             서명하기
-          </SignatureBtn>
+          </SignatureBtn> */}
         </BottomArea>
       </Wrapper>
     </>

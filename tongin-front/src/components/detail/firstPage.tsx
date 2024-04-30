@@ -7,6 +7,7 @@ import DetailDrawView from "./dtailDrawView";
 import API from "../../API/API";
 import { Image } from "../common/image";
 import { text } from "stream/consumers";
+import SignatureModalComponent from "./signatureModalComponent";
 
 const Wrapper = styled.div`
   background-color: white;
@@ -651,7 +652,20 @@ const ServicePaymentMethod = styled.div`
   border-left: 0.04vw solid #e4e4e4;
   border-bottom: 0.04vw solid #e4e4e4;
 `;
-
+const SignatureNoneBox = styled.div`
+  width: 18vw;
+  height: 80%;
+  outline: 0.3vw dashed #d0d0d0;
+  border-radius: 0.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const SignatureNoneBoxText = styled.div`
+  color: #d0d0d0;
+  font-weight: 500;
+  font-size: 2.4vw;
+`;
 // FirstPage 컴포넌트 정의
 const FirstPage = (props: any) => {
   const {
@@ -663,6 +677,7 @@ const FirstPage = (props: any) => {
     drawingData,
     drawingData2,
     detailData,
+    getDetailList,
     movingCBM,
     discardCBM,
     setLines,
@@ -671,6 +686,7 @@ const FirstPage = (props: any) => {
     setDrawingData,
     setDrawingData2,
     optionTotalCharge,
+    setIsPreviewModalOpen,
   } = props;
 
   const divRef = useRef<any>(null);
@@ -689,9 +705,11 @@ const FirstPage = (props: any) => {
   const [penColorVisible, setPenColorVisible] = useState<boolean>(false);
   const [penColor, setPenColor] = useState<any>();
   const [textMemo, setTextMemo] = useState<string>("");
-
+  const [onSignatureModal, setOnSignatureModal] = useState<boolean>(false);
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
-
+  const signatureModalVisible = () => {
+    setOnSignatureModal(true);
+  };
   const transportationMethodList = [
     { id: 0, status: "선택안함" },
     { id: 1, status: "사다리차" },
@@ -721,22 +739,15 @@ const FirstPage = (props: any) => {
     }
   };
 
-  const getDrawingData2 = async () => {
-    const response: any = await API.get(`/receipt/detail/${reNum}`);
-    if (response.status === 200) {
-      const result = response.data.contractSignData;
-      setDrawingData2(result);
-    } else {
-      alert("Fail to getDrawingData2()");
-    }
-  };
-
-  useEffect(() => {
-    getDrawingData();
-    getDrawingData2();
-    setDrawingData([...lines]);
-    setDrawingData2([...lines2]);
-  }, []);
+  // const getDrawingData2 = async () => {
+  //   const response: any = await API.get(`/receipt/detail/${reNum}`);
+  //   if (response.status === 200) {
+  //     const result = response.data.contractSignData;
+  //     setDrawingData2(result);
+  //   } else {
+  //     alert("Fail to getDrawingData2()");
+  //   }
+  // };
 
   useEffect(() => {
     if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
@@ -754,353 +765,390 @@ const FirstPage = (props: any) => {
   }, []);
 
   useEffect(() => {
+    getDrawingData();
+    // getDrawingData2();
+    // setDrawingData([...lines]);
+    // setDrawingData2([...lines2]);
     setPenColorVisible(true);
     setTool("pen");
     setPenColor("#000000");
-    setDrawingData([]);
   }, []);
 
+  useEffect(() => {
+    getDetailList();
+    // getDrawingData2();
+  }, [onSignatureModal]);
+
   return (
-    <Wrapper className="firstPageBox">
-      <Container>
-        <Header>
-          <LogoImg>
-            <Image src="/icon/tonginLogo.png" width={"100%"}></Image>
-          </LogoImg>
-          <HeaderTitle>계약서 • 견적서</HeaderTitle>
-        </Header>
-        <ContentArea>
-          <TopTable>
-            <TopTr>
-              <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
-              <TopTd>{detailData.name}</TopTd>
-              <TopTdTitle $borderLeft={"0.1vw solid black"}>
-                이사종류
-              </TopTdTitle>
-              <TopTd>{detailData.movingType}</TopTd>
-              <TopTdTitle $borderLeft={"0.1vw solid black"}>
-                전화번호
-              </TopTdTitle>
-              <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
-            </TopTr>
-          </TopTable>
-          {/* <SubTitle>신청 정보</SubTitle> */}
-          <ApplyInfoTable2>
-            <ApplyInfoTr>
-              <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
-              <ApplyInfoTd>
-                {detailData.receptionDate === ""
-                  ? "--"
-                  : detailData.receptionDate.replace(formattedDate, "$1-$2-$3")}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
-              <ApplyInfoTd>
-                {detailData.contractDate === ""
-                  ? "--"
-                  : detailData.contractDate.replace(formattedDate, "$1-$2-$3")}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
-              <ApplyInfoTd>
-                {detailData.consultationDate === ""
-                  ? "--"
-                  : detailData.consultationDate.replace(
-                      formattedDate,
-                      "$1-$2-$3"
-                    )}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
-              <ApplyInfoTd>
-                {detailData.movingDate === ""
-                  ? "--"
-                  : detailData.movingDate.replace(formattedDate, "$1-$2-$3")}
-              </ApplyInfoTd>
-            </ApplyInfoTr>
-          </ApplyInfoTable2>
-          <ApplyInfoTable>
-            <ApplyInfoTr>
-              <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"56%"}>
-                {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle $width={"18%"}>작업조건 (전)</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"14%"} $borderRight={"0.1vw solid #e4e4e4"}>
-                {
-                  transportationMethodList[
-                    optionData.beforeWorkCondition.transportationMethod
-                  ].status
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTd $width={"14%"}>
-                {optionData.beforeWorkCondition.pyeong}(평)
-              </ApplyInfoTd>
-            </ApplyInfoTr>
-            <ApplyInfoTr>
-              <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"56%"}>
-                {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
-              </ApplyInfoTd>
-              <ApplyInfoTdTitle $width={"18%"}>작업조건 (후)</ApplyInfoTdTitle>
-              <ApplyInfoTd $width={"14%"} $borderRight={"0.1vw solid #e4e4e4"}>
-                {
-                  transportationMethodList[
-                    optionData.afterWorkCondition.transportationMethod
-                  ].status
-                }
-              </ApplyInfoTd>
-              <ApplyInfoTd $width={"14%"}>
-                {optionData.afterWorkCondition.pyeong}(평)
-              </ApplyInfoTd>
-            </ApplyInfoTr>
-          </ApplyInfoTable>
-
-          <ServiceArea>
-            <ServiceBox>
-              {/* <ServiceColumnBox>
-                <ServiceName>서비스</ServiceName>
-                <ServiceDate>날짜</ServiceDate>
-                <ServicePrice>금액</ServicePrice>
-                <ServicePaymentMethod>결제</ServicePaymentMethod>
-              </ServiceColumnBox> */}
-              {/* 입주청소서비스 */}
-              <ServiceColumnBox>
-                <ServiceName>입주청소서비스</ServiceName>
-                <ServiceDate>
-                  {optionData.livingService.movingCleaningService.selected
-                    ? optionData.livingService.movingCleaningService
-                        .serviceRequestDate === ""
-                      ? "--"
-                      : optionData.livingService.movingCleaningService
-                          .serviceRequestDate
-                    : "-"}
-                </ServiceDate>
-                <ServicePaymentMethod>
-                  {" "}
-                  {optionData.livingService.movingCleaningService.selected
-                    ? paymentMethodList[
-                        optionData.livingService.movingCleaningService
-                          .paymentMethod
-                      ].status
-                    : "-"}
-                </ServicePaymentMethod>
-                <ServicePrice>
-                  {optionData.livingService.movingCleaningService.selected
-                    ? optionData.livingService.movingCleaningService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
-              </ServiceColumnBox>
-              {/* 정리수납서비스 */}
-              <ServiceColumnBox>
-                <ServiceName>정리수납서비스</ServiceName>
-                <ServiceDate>
-                  {optionData.livingService.organizationStorageService.selected
-                    ? optionData.livingService.organizationStorageService
-                        .serviceRequestDate === ""
-                      ? "--"
-                      : optionData.livingService.organizationStorageService
-                          .serviceRequestDate
-                    : "-"}
-                </ServiceDate>
-                <ServicePaymentMethod>
-                  {" "}
-                  {optionData.livingService.organizationStorageService.selected
-                    ? paymentMethodList[
-                        optionData.livingService.organizationStorageService
-                          .paymentMethod
-                      ].status
-                    : "-"}
-                </ServicePaymentMethod>
-                <ServicePrice>
-                  {optionData.livingService.organizationStorageService.selected
-                    ? optionData.livingService.organizationStorageService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
-              </ServiceColumnBox>
-              {/* 정리수납서비스 */}
-              <ServiceColumnBox>
-                <ServiceName>가전청소서비스</ServiceName>
-                <ServiceDate>
-                  {optionData.livingService.electronicCleaningService.selected
-                    ? optionData.livingService.electronicCleaningService
-                        .serviceRequestDate === ""
-                      ? "--"
-                      : optionData.livingService.electronicCleaningService
-                          .serviceRequestDate
-                    : "-"}
-                </ServiceDate>
-                <ServicePaymentMethod>
-                  {" "}
-                  {optionData.livingService.electronicCleaningService.selected
-                    ? paymentMethodList[
-                        optionData.livingService.electronicCleaningService
-                          .paymentMethod
-                      ].status
-                    : "-"}
-                </ServicePaymentMethod>
-                <ServicePrice>
-                  {optionData.livingService.electronicCleaningService.selected
-                    ? optionData.livingService.electronicCleaningService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
-              </ServiceColumnBox>
-            </ServiceBox>
-            <ServiceBox>
-              {/* <ServiceColumnBox>
-                <ServiceName>서비스</ServiceName>
-                <ServiceDate>날짜</ServiceDate>
-                <ServicePrice>금액</ServicePrice>
-                <ServicePaymentMethod>결제</ServicePaymentMethod>
-              </ServiceColumnBox> */}
-              {/* 탈취살균서비스 */}
-              <ServiceColumnBox>
-                <ServiceName>탈취살균서비스</ServiceName>
-                <ServiceDate>
-                  {optionData.livingService.deodorizationService.selected
-                    ? optionData.livingService.deodorizationService
-                        .serviceRequestDate === ""
-                      ? "--"
-                      : optionData.livingService.deodorizationService
-                          .serviceRequestDate
-                    : "-"}
-                </ServiceDate>
-                <ServicePaymentMethod>
-                  {" "}
-                  {optionData.livingService.deodorizationService.selected
-                    ? paymentMethodList[
-                        optionData.livingService.deodorizationService
-                          .paymentMethod
-                      ].status
-                    : "-"}
-                </ServicePaymentMethod>
-                <ServicePrice>
-                  {optionData.livingService.deodorizationService.selected
-                    ? optionData.livingService.deodorizationService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
-              </ServiceColumnBox>
-              {/* 에이프런서비스 */}
-              <ServiceColumnBox>
-                <ServiceName>에이프런서비스</ServiceName>
-                <ServiceDate>
-                  {optionData.livingService.apronService.selected
-                    ? optionData.livingService.apronService
-                        .serviceRequestDate === ""
-                      ? "--"
-                      : optionData.livingService.apronService.serviceRequestDate
-                    : "-"}
-                </ServiceDate>
-                <ServicePaymentMethod>
-                  {" "}
-                  {optionData.livingService.apronService.selected
-                    ? paymentMethodList[
-                        optionData.livingService.apronService.paymentMethod
-                      ].status
-                    : "-"}
-                </ServicePaymentMethod>
-                <ServicePrice>
-                  {optionData.livingService.apronService.selected
-                    ? optionData.livingService.apronService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
-              </ServiceColumnBox>
-              {/* 기타서비스 */}
-              <ServiceColumnBox>
-                <ServiceName>무브제서비스</ServiceName>
-                <ServiceDate>
-                  {optionData.livingService.movjetService.selected
-                    ? optionData.livingService.movjetService
-                        .serviceRequestDate === ""
-                      ? "--"
-                      : optionData.livingService.movjetService
-                          .serviceRequestDate
-                    : "-"}
-                </ServiceDate>
-                <ServicePaymentMethod>
-                  {" "}
-                  {optionData.livingService.movjetService.selected
-                    ? paymentMethodList[
-                        optionData.livingService.movjetService.paymentMethod
-                      ].status
-                    : "-"}
-                </ServicePaymentMethod>
-                <ServicePrice>
-                  {optionData.livingService.movjetService.selected
-                    ? optionData.livingService.movjetService.servicePayment.toLocaleString()
-                    : "-"}
-                </ServicePrice>
-              </ServiceColumnBox>
-            </ServiceBox>
-          </ServiceArea>
-
-          <BottomComponent>
-            <MemoBox>
-              <MemoRound ref={divRef} id={"CanvasPanel"}>
-                <Stage
-                  width={dimensions.width}
-                  height={dimensions.height}
-                  ref={stageRef}
-                  stroke={""}
+    <>
+      {onSignatureModal && (
+        <SignatureModalComponent
+          setOnSignatureModal={setOnSignatureModal}
+          setIsPreviewModalOpen={setIsPreviewModalOpen}
+          // getDrawingData2={getDrawingData2}
+          getDetailList={getDetailList}
+        />
+      )}
+      <Wrapper className="firstPageBox">
+        <Container>
+          <Header>
+            <LogoImg>
+              <Image src="/icon/tonginLogo.png" width={"100%"}></Image>
+            </LogoImg>
+            <HeaderTitle>계약서 • 견적서</HeaderTitle>
+          </Header>
+          <ContentArea>
+            <TopTable>
+              <TopTr>
+                <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
+                <TopTd>{detailData.name}</TopTd>
+                <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                  이사종류
+                </TopTdTitle>
+                <TopTd>{detailData.movingType}</TopTd>
+                <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                  전화번호
+                </TopTdTitle>
+                <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
+              </TopTr>
+            </TopTable>
+            {/* <SubTitle>신청 정보</SubTitle> */}
+            <ApplyInfoTable2>
+              <ApplyInfoTr>
+                <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.receptionDate === ""
+                    ? "--"
+                    : detailData.receptionDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.contractDate === ""
+                    ? "--"
+                    : detailData.contractDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.consultationDate === ""
+                    ? "--"
+                    : detailData.consultationDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.movingDate === ""
+                    ? "--"
+                    : detailData.movingDate.replace(formattedDate, "$1-$2-$3")}
+                </ApplyInfoTd>
+              </ApplyInfoTr>
+            </ApplyInfoTable2>
+            <ApplyInfoTable>
+              <ApplyInfoTr>
+                <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
+                <ApplyInfoTd $width={"56%"}>
+                  {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle $width={"18%"}>
+                  작업조건 (전)
+                </ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"14%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
                 >
-                  <Layer>
-                    {lines.map((line: any, i: any) => (
-                      <Line
-                        key={i}
-                        points={line.points.map(
-                          (point: number) => point * 0.44
-                        )}
-                        stroke={line.stroke}
-                        strokeWidth={1}
-                        tension={0.8}
-                        lineCap="round"
-                        globalCompositeOperation={
-                          line.tool === "eraser"
-                            ? "destination-out"
-                            : "source-over"
-                        }
-                      />
-                    ))}
-                  </Layer>
-                </Stage>
-              </MemoRound>
-              <TextMemoRound>{textMemo}</TextMemoRound>
-            </MemoBox>
-            <PriceListArea>
-              <PriceListBox>
-                <PriceItemBox>
-                  <PriceItemName>옵션품목(분해/설치)</PriceItemName>
-                  <PriceItemPrice>
-                    <Price> {optionTotalCharge.toLocaleString()}</Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <OptionItemListBox>
-                  {optionData.optionService.ServiceList.map(
-                    (item: any, index: number) => {
-                      return (
-                        <PriceItemBox2 key={index}>
-                          <OptionItemName>{item.optionName}</OptionItemName>
-                          <OptionItem>
-                            {item.decomposition && item.installation
-                              ? "분해 / 설치"
-                              : ""}
-                            {item.decomposition && !item.installation
-                              ? "설치"
-                              : ""}
-                            {!item.decomposition && item.installation
-                              ? "분해"
-                              : ""}
-                            {!item.decomposition && !item.installation
-                              ? "-"
-                              : ""}
-                          </OptionItem>
-                        </PriceItemBox2>
-                      );
-                    }
-                  )}
-                  <PriceItemBox2>
-                    <OptionItemName>-</OptionItemName>
-                    <OptionItem>-</OptionItem>
-                  </PriceItemBox2>
-                  {/* <PriceItemBox>
+                  {
+                    transportationMethodList[
+                      optionData.beforeWorkCondition.transportationMethod
+                    ].status
+                  }
+                </ApplyInfoTd>
+                <ApplyInfoTd $width={"14%"}>
+                  {optionData.beforeWorkCondition.pyeong}(평)
+                </ApplyInfoTd>
+              </ApplyInfoTr>
+              <ApplyInfoTr>
+                <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
+                <ApplyInfoTd $width={"56%"}>
+                  {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle $width={"18%"}>
+                  작업조건 (후)
+                </ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"14%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {
+                    transportationMethodList[
+                      optionData.afterWorkCondition.transportationMethod
+                    ].status
+                  }
+                </ApplyInfoTd>
+                <ApplyInfoTd $width={"14%"}>
+                  {optionData.afterWorkCondition.pyeong}(평)
+                </ApplyInfoTd>
+              </ApplyInfoTr>
+            </ApplyInfoTable>
+
+            <ServiceArea>
+              <ServiceBox>
+                {/* <ServiceColumnBox>
+                <ServiceName>서비스</ServiceName>
+                <ServiceDate>날짜</ServiceDate>
+                <ServicePrice>금액</ServicePrice>
+                <ServicePaymentMethod>결제</ServicePaymentMethod>
+              </ServiceColumnBox> */}
+                {/* 입주청소서비스 */}
+                <ServiceColumnBox>
+                  <ServiceName>입주청소서비스</ServiceName>
+                  <ServiceDate>
+                    {optionData.livingService.movingCleaningService.selected
+                      ? optionData.livingService.movingCleaningService
+                          .serviceRequestDate === ""
+                        ? "--"
+                        : optionData.livingService.movingCleaningService
+                            .serviceRequestDate
+                      : "-"}
+                  </ServiceDate>
+                  <ServicePaymentMethod>
+                    {" "}
+                    {optionData.livingService.movingCleaningService.selected
+                      ? paymentMethodList[
+                          optionData.livingService.movingCleaningService
+                            .paymentMethod
+                        ].status
+                      : "-"}
+                  </ServicePaymentMethod>
+                  <ServicePrice>
+                    {optionData.livingService.movingCleaningService.selected
+                      ? optionData.livingService.movingCleaningService.servicePayment.toLocaleString()
+                      : "-"}
+                  </ServicePrice>
+                </ServiceColumnBox>
+                {/* 정리수납서비스 */}
+                <ServiceColumnBox>
+                  <ServiceName>정리수납서비스</ServiceName>
+                  <ServiceDate>
+                    {optionData.livingService.organizationStorageService
+                      .selected
+                      ? optionData.livingService.organizationStorageService
+                          .serviceRequestDate === ""
+                        ? "--"
+                        : optionData.livingService.organizationStorageService
+                            .serviceRequestDate
+                      : "-"}
+                  </ServiceDate>
+                  <ServicePaymentMethod>
+                    {" "}
+                    {optionData.livingService.organizationStorageService
+                      .selected
+                      ? paymentMethodList[
+                          optionData.livingService.organizationStorageService
+                            .paymentMethod
+                        ].status
+                      : "-"}
+                  </ServicePaymentMethod>
+                  <ServicePrice>
+                    {optionData.livingService.organizationStorageService
+                      .selected
+                      ? optionData.livingService.organizationStorageService.servicePayment.toLocaleString()
+                      : "-"}
+                  </ServicePrice>
+                </ServiceColumnBox>
+                {/* 정리수납서비스 */}
+                <ServiceColumnBox>
+                  <ServiceName>가전청소서비스</ServiceName>
+                  <ServiceDate>
+                    {optionData.livingService.electronicCleaningService.selected
+                      ? optionData.livingService.electronicCleaningService
+                          .serviceRequestDate === ""
+                        ? "--"
+                        : optionData.livingService.electronicCleaningService
+                            .serviceRequestDate
+                      : "-"}
+                  </ServiceDate>
+                  <ServicePaymentMethod>
+                    {" "}
+                    {optionData.livingService.electronicCleaningService.selected
+                      ? paymentMethodList[
+                          optionData.livingService.electronicCleaningService
+                            .paymentMethod
+                        ].status
+                      : "-"}
+                  </ServicePaymentMethod>
+                  <ServicePrice>
+                    {optionData.livingService.electronicCleaningService.selected
+                      ? optionData.livingService.electronicCleaningService.servicePayment.toLocaleString()
+                      : "-"}
+                  </ServicePrice>
+                </ServiceColumnBox>
+              </ServiceBox>
+              <ServiceBox>
+                {/* <ServiceColumnBox>
+                <ServiceName>서비스</ServiceName>
+                <ServiceDate>날짜</ServiceDate>
+                <ServicePrice>금액</ServicePrice>
+                <ServicePaymentMethod>결제</ServicePaymentMethod>
+              </ServiceColumnBox> */}
+                {/* 탈취살균서비스 */}
+                <ServiceColumnBox>
+                  <ServiceName>탈취살균서비스</ServiceName>
+                  <ServiceDate>
+                    {optionData.livingService.deodorizationService.selected
+                      ? optionData.livingService.deodorizationService
+                          .serviceRequestDate === ""
+                        ? "--"
+                        : optionData.livingService.deodorizationService
+                            .serviceRequestDate
+                      : "-"}
+                  </ServiceDate>
+                  <ServicePaymentMethod>
+                    {" "}
+                    {optionData.livingService.deodorizationService.selected
+                      ? paymentMethodList[
+                          optionData.livingService.deodorizationService
+                            .paymentMethod
+                        ].status
+                      : "-"}
+                  </ServicePaymentMethod>
+                  <ServicePrice>
+                    {optionData.livingService.deodorizationService.selected
+                      ? optionData.livingService.deodorizationService.servicePayment.toLocaleString()
+                      : "-"}
+                  </ServicePrice>
+                </ServiceColumnBox>
+                {/* 에이프런서비스 */}
+                <ServiceColumnBox>
+                  <ServiceName>에이프런서비스</ServiceName>
+                  <ServiceDate>
+                    {optionData.livingService.apronService.selected
+                      ? optionData.livingService.apronService
+                          .serviceRequestDate === ""
+                        ? "--"
+                        : optionData.livingService.apronService
+                            .serviceRequestDate
+                      : "-"}
+                  </ServiceDate>
+                  <ServicePaymentMethod>
+                    {" "}
+                    {optionData.livingService.apronService.selected
+                      ? paymentMethodList[
+                          optionData.livingService.apronService.paymentMethod
+                        ].status
+                      : "-"}
+                  </ServicePaymentMethod>
+                  <ServicePrice>
+                    {optionData.livingService.apronService.selected
+                      ? optionData.livingService.apronService.servicePayment.toLocaleString()
+                      : "-"}
+                  </ServicePrice>
+                </ServiceColumnBox>
+                {/* 기타서비스 */}
+                <ServiceColumnBox>
+                  <ServiceName>무브제서비스</ServiceName>
+                  <ServiceDate>
+                    {optionData.livingService.movjetService.selected
+                      ? optionData.livingService.movjetService
+                          .serviceRequestDate === ""
+                        ? "--"
+                        : optionData.livingService.movjetService
+                            .serviceRequestDate
+                      : "-"}
+                  </ServiceDate>
+                  <ServicePaymentMethod>
+                    {" "}
+                    {optionData.livingService.movjetService.selected
+                      ? paymentMethodList[
+                          optionData.livingService.movjetService.paymentMethod
+                        ].status
+                      : "-"}
+                  </ServicePaymentMethod>
+                  <ServicePrice>
+                    {optionData.livingService.movjetService.selected
+                      ? optionData.livingService.movjetService.servicePayment.toLocaleString()
+                      : "-"}
+                  </ServicePrice>
+                </ServiceColumnBox>
+              </ServiceBox>
+            </ServiceArea>
+
+            <BottomComponent>
+              <MemoBox>
+                <MemoRound ref={divRef} id={"CanvasPanel"}>
+                  <Stage
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    ref={stageRef}
+                    stroke={""}
+                  >
+                    <Layer>
+                      {lines.map((line: any, i: any) => (
+                        <Line
+                          key={i}
+                          points={line.points.map(
+                            (point: number) => point * 0.44
+                          )}
+                          stroke={line.stroke}
+                          strokeWidth={1}
+                          tension={0.8}
+                          lineCap="round"
+                          globalCompositeOperation={
+                            line.tool === "eraser"
+                              ? "destination-out"
+                              : "source-over"
+                          }
+                        />
+                      ))}
+                    </Layer>
+                  </Stage>
+                </MemoRound>
+                <TextMemoRound>{textMemo}</TextMemoRound>
+              </MemoBox>
+              <PriceListArea>
+                <PriceListBox>
+                  <PriceItemBox>
+                    <PriceItemName>옵션품목(분해/설치)</PriceItemName>
+                    <PriceItemPrice>
+                      <Price> {optionTotalCharge.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+                  <OptionItemListBox>
+                    {optionData.optionService.ServiceList.map(
+                      (item: any, index: number) => {
+                        return (
+                          <PriceItemBox2 key={index}>
+                            <OptionItemName>{item.optionName}</OptionItemName>
+                            <OptionItem>
+                              {item.decomposition && item.installation
+                                ? "분해 / 설치"
+                                : ""}
+                              {item.decomposition && !item.installation
+                                ? "설치"
+                                : ""}
+                              {!item.decomposition && item.installation
+                                ? "분해"
+                                : ""}
+                              {!item.decomposition && !item.installation
+                                ? "-"
+                                : ""}
+                            </OptionItem>
+                          </PriceItemBox2>
+                        );
+                      }
+                    )}
+                    <PriceItemBox2>
+                      <OptionItemName>-</OptionItemName>
+                      <OptionItem>-</OptionItem>
+                    </PriceItemBox2>
+                    {/* <PriceItemBox>
                     <OptionItemName>옵션이름</OptionItemName>
                     <OptionItem>분해 / 설치</OptionItem>
                     <OptionItemName>옵션이름</OptionItemName>
@@ -1130,175 +1178,184 @@ const FirstPage = (props: any) => {
                     <OptionItemName>옵션이름</OptionItemName>
                     <OptionItem>분해 / 설치</OptionItem>
                   </PriceItemBox> */}
-                </OptionItemListBox>
-              </PriceListBox>
-              <PriceListBox>
-                <PriceItemBox>
-                  <PriceItemName>이사물량(폐기/운반)</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>{`${discardCBM}  /  ${movingCBM}`}</Price>
-                    <Unit>cbm</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>사다리차 비용</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>
-                      {optionData.ladderTruck.servicePayment.toLocaleString()}
-                    </Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
+                  </OptionItemListBox>
+                </PriceListBox>
+                <PriceListBox>
+                  <PriceItemBox>
+                    <PriceItemName>이사물량(폐기/운반)</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>{`${discardCBM}  /  ${movingCBM}`}</Price>
+                      <Unit>cbm</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <PriceItemName>사다리차 비용</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.ladderTruck.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
 
-                <PriceItemBox>
-                  <PriceItemName>기타서비스</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>
-                      {optionData.livingService.otherService.servicePayment.toLocaleString()}
-                    </Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
+                  <PriceItemBox>
+                    <PriceItemName>기타서비스</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.otherService.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
 
-                <PriceItemBox>
-                  <PriceItemName>이사비용</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>{priceDataList[0].amount.toLocaleString()}</Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>보관비용</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>{priceDataList[1].amount.toLocaleString()}</Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>부가세(VAT)</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>{priceDataList[2].amount.toLocaleString()}</Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>계약금</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>{priceDataList[4].amount.toLocaleString()}</Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-                <PriceItemBox>
-                  <PriceItemName>잔금</PriceItemName>
-                  <PriceItemPrice>
-                    <Price>{priceDataList[5].amount.toLocaleString()}</Price>
-                    <Unit>₩</Unit>
-                  </PriceItemPrice>
-                </PriceItemBox>
-              </PriceListBox>
-              <TotalPriceBox>
-                <TotalPriceName>
-                  <PriceNameInput>총 비용</PriceNameInput>
-                  <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
-                </TotalPriceName>
-                <TotalPriceInput>
-                  <PriceNameInput>
-                    {priceDataList[3].amount.toLocaleString()}
-                  </PriceNameInput>
-                  <PriceNameInputEng>₩</PriceNameInputEng>
-                </TotalPriceInput>
-              </TotalPriceBox>
-              <AgreementBox>
-                <AgreementTextLine>
-                  본인은 (주)통인익스프레스 견적•계약 진행에 따른 약관 및 이용
-                  안내에
-                </AgreementTextLine>
-                <AgreementTextLine>
-                  대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신총하고
-                  개인정보
-                </AgreementTextLine>
-                <AgreementTextLine>
-                  수집 및 활용에 동의합니다.
-                  <ImageBox>
-                    <Image
-                      src={`/icon/${
-                        detailData.pushYN ? "checked" : "unchecked"
-                      }.png`}
-                      width={"1.6vw"}
-                      height={"1.6vw"}
-                    ></Image>
-                  </ImageBox>
-                </AgreementTextLine>
-              </AgreementBox>
-              <SignatureBox>
-                <SignatureTitle>
-                  <PriceNameInput>고객서명</PriceNameInput>
-                </SignatureTitle>
-                <SignatureArea>
-                  <MemoRound2 ref={divRef2} id={"CanvasPanel2"}>
-                    <Stage
-                      width={dimensions2.width}
-                      height={dimensions2.height}
-                      ref={stageRef2}
-                      stroke={""}
-                    >
-                      <Layer>
-                        {lines2.map((line: any, i: any) => (
-                          <Line
-                            key={i}
-                            points={line.points.map(
-                              (point: number) => point * 0.2
-                            )}
-                            stroke={line.stroke}
-                            strokeWidth={1}
-                            tension={0.8}
-                            lineCap="round"
-                            globalCompositeOperation={
-                              line.tool === "eraser"
-                                ? "destination-out"
-                                : "source-over"
-                            }
-                          />
-                        ))}
-                      </Layer>
-                    </Stage>
-                  </MemoRound2>
-                </SignatureArea>
-              </SignatureBox>
-            </PriceListArea>
-          </BottomComponent>
-          <TextMemoBox>
-            <TextLine>
-              <TextSpan1>(주)통인익스프레스는&nbsp;</TextSpan1>
-              <TextSpan2>
-                이사잔금을 현장에서 수금하지 않습니다.&nbsp;
-              </TextSpan2>
-              <TextSpan1>
-                아래의 계좌로 입금 또는 본사 카드승인으로 결제해주세요.
-              </TextSpan1>
-            </TextLine>
-            <TextLine>
-              온라인 입금 : 우리은행 (주)통인익스프레스 1005-080-767801 / 카드
-              승인 : 02) 3678-0123
-            </TextLine>
-          </TextMemoBox>
-          <BottomLine></BottomLine>
-        </ContentArea>
-        <FooterArea>
-          <FooterItemBox>
-            <FooterItem1>www.tonginexp.com</FooterItem1>
-            <FooterItem2>고객센터: 1988-0123</FooterItem2>
-            <FooterItem2>본사: 02-3678-0123</FooterItem2>
-            <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
-            <FooterItem3>
-              <div>SERIAL NO.</div>
-              <div>{reNum}</div>
-            </FooterItem3>
-          </FooterItemBox>
-          <Index>- 1 -</Index>
-        </FooterArea>
-      </Container>
-    </Wrapper>
+                  <PriceItemBox>
+                    <PriceItemName>이사비용</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>{priceDataList[0].amount.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <PriceItemName>보관비용</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>{priceDataList[1].amount.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <PriceItemName>부가세(VAT)</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>{priceDataList[2].amount.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <PriceItemName>계약금</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>{priceDataList[4].amount.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+                  <PriceItemBox>
+                    <PriceItemName>잔금</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>{priceDataList[5].amount.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+                </PriceListBox>
+                <TotalPriceBox>
+                  <TotalPriceName>
+                    <PriceNameInput>총 비용</PriceNameInput>
+                    <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
+                  </TotalPriceName>
+                  <TotalPriceInput>
+                    <PriceNameInput>
+                      {priceDataList[3].amount.toLocaleString()}
+                    </PriceNameInput>
+                    <PriceNameInputEng>₩</PriceNameInputEng>
+                  </TotalPriceInput>
+                </TotalPriceBox>
+                <AgreementBox>
+                  <AgreementTextLine>
+                    본인은 (주)통인익스프레스 견적•계약 진행에 따른 약관 및 이용
+                    안내에
+                  </AgreementTextLine>
+                  <AgreementTextLine>
+                    대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신총하고
+                    개인정보
+                  </AgreementTextLine>
+                  <AgreementTextLine>
+                    수집 및 활용에 동의합니다.
+                    <ImageBox>
+                      <Image
+                        src={`/icon/${
+                          detailData.pushYN ? "checked" : "unchecked"
+                        }.png`}
+                        width={"1.6vw"}
+                        height={"1.6vw"}
+                      ></Image>
+                    </ImageBox>
+                  </AgreementTextLine>
+                </AgreementBox>
+                <SignatureBox>
+                  <SignatureTitle>
+                    <PriceNameInput>고객서명</PriceNameInput>
+                  </SignatureTitle>
+                  <SignatureArea>
+                    {!detailData.pushYN ? (
+                      <SignatureNoneBox onClick={() => signatureModalVisible()}>
+                        <SignatureNoneBoxText>서명하기</SignatureNoneBoxText>
+                      </SignatureNoneBox>
+                    ) : (
+                      <>
+                        <MemoRound2 ref={divRef2} id={"CanvasPanel2"}>
+                          <Stage
+                            width={dimensions2.width}
+                            height={dimensions2.height}
+                            ref={stageRef2}
+                            stroke={""}
+                          >
+                            <Layer>
+                              {lines2.map((line: any, i: any) => (
+                                <Line
+                                  key={i}
+                                  points={line.points.map(
+                                    (point: number) => point * 0.2
+                                  )}
+                                  stroke={line.stroke}
+                                  strokeWidth={1}
+                                  tension={0.8}
+                                  lineCap="round"
+                                  globalCompositeOperation={
+                                    line.tool === "eraser"
+                                      ? "destination-out"
+                                      : "source-over"
+                                  }
+                                />
+                              ))}
+                            </Layer>
+                          </Stage>
+                        </MemoRound2>
+                      </>
+                    )}
+                  </SignatureArea>
+                </SignatureBox>
+              </PriceListArea>
+            </BottomComponent>
+            <TextMemoBox>
+              <TextLine>
+                <TextSpan1>(주)통인익스프레스는&nbsp;</TextSpan1>
+                <TextSpan2>
+                  이사잔금을 현장에서 수금하지 않습니다.&nbsp;
+                </TextSpan2>
+                <TextSpan1>
+                  아래의 계좌로 입금 또는 본사 카드승인으로 결제해주세요.
+                </TextSpan1>
+              </TextLine>
+              <TextLine>
+                온라인 입금 : 우리은행 (주)통인익스프레스 1005-080-767801 / 카드
+                승인 : 02) 3678-0123
+              </TextLine>
+            </TextMemoBox>
+            <BottomLine></BottomLine>
+          </ContentArea>
+          <FooterArea>
+            <FooterItemBox>
+              <FooterItem1>www.tonginexp.com</FooterItem1>
+              <FooterItem2>고객센터: 1988-0123</FooterItem2>
+              <FooterItem2>본사: 02-3678-0123</FooterItem2>
+              <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
+              <FooterItem3>
+                <div>SERIAL NO.</div>
+                <div>{reNum}</div>
+              </FooterItem3>
+            </FooterItemBox>
+            <Index>- 1 -</Index>
+          </FooterArea>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
 export default FirstPage;

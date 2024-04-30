@@ -422,14 +422,17 @@ export default function Detail() {
               <ContractTabBox>
                 <ContractComponent
                   reNum={reNum}
+                  getDetailList={getDetailList}
                   drawingData={drawingData}
                   setDrawingData={setDrawingData}
                   drawingData2={drawingData2}
                   setDrawingData2={setDrawingData2}
                   setIsScrolled={setIsScrolled}
                   setLines={setLines}
+                  setLines2={setLines2}
                   lines={lines}
                   lines2={lines2}
+                  getDrawingData={getDrawingData}
                   detailData={detailData}
                   articleDataList={currentProductList}
                   optionData={optionData}
