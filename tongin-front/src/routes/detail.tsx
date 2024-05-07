@@ -472,7 +472,7 @@ export default function Detail() {
           <DrawingBtn
             onClick={() => {
               setDrawingPanel(true);
-              scrollRock();
+
               onDrawingPanel();
             }}
           >
