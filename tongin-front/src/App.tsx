@@ -19,6 +19,8 @@ import LandingPage from "./routes/landingPage";
 import SiteTabPage from "./components/site/main/siteTabComponent";
 import Signature from "./routes/signature";
 import ContractImage from "./components/home/contractImage";
+import DrawingComponent from "./components/detail/drawingComponent";
+import DrawPanelComponent from "./components/detail/drawPanelComponent";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,12 @@ const router = createBrowserRouter([
       {
         path: "contractlist/detail/:id",
         element: <Detail></Detail>,
+        // children: [
+        //   {
+        //     path: "drawingpanel",
+        //     element: <DrawingComponent></DrawingComponent>,
+        //   },
+        // ],
       },
       {
         path: "profile",
@@ -77,6 +85,10 @@ const router = createBrowserRouter([
   {
     path: "/signature/:id",
     element: <Signature></Signature>,
+  },
+  {
+    path: "/drawing/:id",
+    element: <DrawingComponent></DrawingComponent>,
   },
   {
     path: "/contractImage/:id",

@@ -21,7 +21,7 @@ import {
   sampleProductDataList,
 } from "../components/common/sampleData";
 import OptionComponent from "../components/detail/optionComponent";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import DetailDrawingPanelComponent from "../components/detail/detailDrawingPanelComponent";
 import ContractComponent from "../components/detail/contractComponent";
 import PencilIcon from "../components/icon/pencil";
@@ -29,6 +29,8 @@ import DetailDrawView from "../components/detail/dtailDrawView";
 import NewOptionComponent from "../components/detail/newOptionComponent";
 import { newOptionData } from "../components/common/sampleData3";
 import { Toast } from "../components/common/toastMessegeComponent";
+import DrawingComponent from "../components/detail/drawingComponent";
+
 const HomeContainer = styled.div`
   margin-top: 2vw;
   width: 90vw;
@@ -265,43 +267,43 @@ export default function Detail() {
     }
   };
 
-  // 메모장 전송 API
-  const postDrawingData = async () => {
-    const requestParam = {
-      receiptMemoData: drawingData,
-      textMemo: textMemoData,
-    };
-    const response = await API.post(`receipt/memo/${reNum}`, requestParam);
-    if (response.status === 200) {
-      const result = response.data;
-      disableScrollLock();
-      setIsScrolled(false);
-      disableScrollLock();
-    } else {
-      alert("Fail to postDrawingData()");
-    }
-  };
-  // 메모장 데이터 가져오기 API
-  const getDrawingData = async () => {
-    try {
-      const response = await API.get(`receipt/memo/${reNum}`);
-      if (response.status === 200) {
-        const result = response.data.receiptMemoData;
-        const textMemo = response.data.textMemo;
-        setDrawingData(result);
-        setTextMemoData(textMemo);
-        setIsScrolled(true);
-        setPreventDefault(true);
-      } else {
-        alert("Fail to getDrawingData()");
-      }
-    } catch (error) {
-      // alert("메모 정보를 불러오는데 실패했습니다.");
-    }
-  };
+  // // 메모장 전송 API
+  // const postDrawingData = async () => {
+  //   const requestParam = {
+  //     receiptMemoData: drawingData,
+  //     textMemo: textMemoData,
+  //   };
+  //   const response = await API.post(`receipt/memo/${reNum}`, requestParam);
+  //   if (response.status === 200) {
+  //     const result = response.data;
+  //     disableScrollLock();
+  //     setIsScrolled(false);
+  //     disableScrollLock();
+  //   } else {
+  //     alert("Fail to postDrawingData()");
+  //   }
+  // };
+  // // 메모장 데이터 가져오기 API
+  // const getDrawingData = async () => {
+  //   try {
+  //     const response = await API.get(`receipt/memo/${reNum}`);
+  //     if (response.status === 200) {
+  //       const result = response.data.receiptMemoData;
+  //       const textMemo = response.data.textMemo;
+  //       setDrawingData(result);
+  //       setTextMemoData(textMemo);
+  //       setIsScrolled(true);
+  //       setPreventDefault(true);
+  //     } else {
+  //       alert("Fail to getDrawingData()");
+  //     }
+  //   } catch (error) {
+  //     // alert("메모 정보를 불러오는데 실패했습니다.");
+  //   }
+  // };
 
-  const onClose = () => {
-    postDrawingData();
+  const onPanelClose = () => {
+    // postDrawingData();
     setDrawingPanel(false);
     disableScrollLock();
   };
@@ -368,6 +370,29 @@ export default function Detail() {
       setDrawingData([]);
     }
   }, [drawingData2]);
+  const navigate = useNavigate();
+  const onDrawingPanel = () => {
+    navigate(
+      `/drawing/${reNum}`,
+      JSON.parse(
+        JSON.stringify({
+          state: {
+            setDrawingPanel: setDrawingPanel,
+            setDrawingData: setDrawingData,
+            drawingData: drawingData,
+            textMemoData: textMemoData,
+            setTextMemoData: setTextMemoData,
+            setIsScrolled: setIsScrolled,
+            setLines: setLines,
+            lines: lines,
+            setPreventDefault: setPreventDefault,
+            preventDefault: preventDefault,
+            disableScrollLock: disableScrollLock,
+          },
+        })
+      )
+    );
+  };
   return (
     <>
       <FlexXY>
@@ -432,7 +457,6 @@ export default function Detail() {
                   setLines2={setLines2}
                   lines={lines}
                   lines2={lines2}
-                  getDrawingData={getDrawingData}
                   detailData={detailData}
                   articleDataList={currentProductList}
                   optionData={optionData}
@@ -445,35 +469,15 @@ export default function Detail() {
             ) : null}
           </ContentBox>
 
-          <DrawingBtn>
-            <PencilIcon
-              onClick={() => {
-                setDrawingPanel(true);
-                scrollRock();
-                getDrawingData();
-              }}
-              height={"4vw"}
-              fill={"#ffffff"}
-            />
+          <DrawingBtn
+            onClick={() => {
+              setDrawingPanel(true);
+              scrollRock();
+              onDrawingPanel();
+            }}
+          >
+            <PencilIcon height={"4vw"} fill={"#ffffff"} />
           </DrawingBtn>
-          {drawingPanel && (
-            <DetailDrawingPanelComponent
-              reNum={reNum}
-              setDrawingData={setDrawingData}
-              drawingData={drawingData}
-              textMemoData={textMemoData}
-              setTextMemoData={setTextMemoData}
-              setIsScrolled={setIsScrolled}
-              setLines={setLines}
-              lines={lines}
-              setPreventDefault={setPreventDefault}
-              preventDefault={preventDefault}
-              disableScrollLock={disableScrollLock}
-              onClose={() => {
-                onClose();
-              }}
-            />
-          )}
         </HomeContainer>
       </FlexXY>
     </>
