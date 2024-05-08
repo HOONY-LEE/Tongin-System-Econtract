@@ -371,6 +371,7 @@ export default function Detail() {
     }
   }, [drawingData2]);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const onDrawingPanel = () => {
     navigate(
       `/drawing/${reNum}`,
@@ -393,6 +394,12 @@ export default function Detail() {
       )
     );
   };
+  useEffect(() => {
+    console.log("작동");
+    disableScrollLock();
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <>
       <FlexXY>
@@ -472,7 +479,6 @@ export default function Detail() {
           <DrawingBtn
             onClick={() => {
               setDrawingPanel(true);
-
               onDrawingPanel();
             }}
           >
