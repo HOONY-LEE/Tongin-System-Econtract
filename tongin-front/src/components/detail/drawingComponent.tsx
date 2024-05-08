@@ -85,6 +85,7 @@ export default function DrawingComponent(props: any) {
         setTextMemoData(textMemo);
         setLines(result);
 
+        scrollRock();
         // setIsScrolled(true);
         // setPreventDefault(true);
       } else {
@@ -95,6 +96,7 @@ export default function DrawingComponent(props: any) {
     }
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     getDrawingData();
   }, []);
 

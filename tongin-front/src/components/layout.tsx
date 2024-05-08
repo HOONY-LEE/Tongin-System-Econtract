@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import UserIcon from "./icon/userIcon";
 import { useEffect, useState } from "react";
 import { URLSearchParams } from "url";
+import TonginLogoIcon from "./icon/tonginLogo";
 
 const Header = styled.div`
   display: flex;
@@ -36,6 +37,7 @@ const LeftBox = styled.div`
   align-items: center;
   width: 20%;
   height: 100%;
+  margin-left: 3vw;
 `;
 const MidBox = styled.div`
   display: flex;
@@ -215,12 +217,13 @@ const HomeHeader = () => {
       {openMenu && <Backdrop onClick={closeMenu}></Backdrop>}
       <Header>
         <LeftBox onClick={goHome}>
-          <Image
+          <TonginLogoIcon height={"12vw"} />
+          {/* <Image
             src="../img/tongin_logo.png"
             alt="로고 이미지"
             width={"10vw"}
             height={"10vw"}
-          />
+          /> */}
         </LeftBox>
         <MidBox>
           <MenuTabItem
