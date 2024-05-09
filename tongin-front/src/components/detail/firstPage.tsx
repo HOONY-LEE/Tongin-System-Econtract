@@ -164,12 +164,13 @@ const ApplyInfoTd = styled.div<{
 `;
 const MemoBox = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
 const TextMemoBox = styled.div`
-  margin-top: 1vw;
   width: 100%;
   height: 5vw;
   border: 0.1vw solid #a1a1a1;
@@ -197,7 +198,7 @@ const TextSpan2 = styled.span`
 
 const MemoRound = styled.div`
   width: 37vw;
-  height: 42vw;
+  height: 40vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -206,11 +207,12 @@ const MemoRound = styled.div`
   align-items: center;
   padding-top: 2vw;
   padding-left: 2vw;
+  margin-bottom: 1vw;
 `;
 
 const TextMemoRound = styled.div`
   width: 37vw;
-  height: 16vw;
+  height: 20vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -220,7 +222,6 @@ const TextMemoRound = styled.div`
   text-align: start;
   line-height: 1.6vw;
   padding: 1.8vw;
-  margin-top: 1vw;
   font-size: 1.2vw;
   font-weight: 300;
   color: #6d6d6d;
@@ -240,6 +241,8 @@ const BottomComponent = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  height: 62vw;
+  /* background-color: red; */
 `;
 const PriceListArea = styled.div`
   width: 48vw;
@@ -314,7 +317,7 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 9vw;
+  height: 8.2vw;
 
   display: flex;
   justify-content: space-between;
@@ -343,7 +346,7 @@ const PriceItemBox = styled.div`
 `;
 
 const PriceItemBox2 = styled.div`
-  width: 14.2vw;
+  width: 14.1vw;
   height: 2.6vw;
   display: flex;
 `;
@@ -456,7 +459,6 @@ const EstimateTd = styled.div<{
   $borderBottom?: string;
   $height?: string;
 }>`
-  /* outline: 1px solid red; */
   background-color: #ffffff;
   width: ${(props) => (props.$width ? props.$width : "100%")};
   height: ${(props) => (props.$height ? props.$height : "3.4vw")};
@@ -497,7 +499,6 @@ const TotalTd = styled.div<{
   $borderBottom?: string;
   $height?: string;
 }>`
-  /* outline: 1px solid red; */
   background-color: #ffffff;
   width: ${(props) => (props.$width ? props.$width : "100%")};
   height: ${(props) => (props.$height ? props.$height : "4vw")};
@@ -589,14 +590,11 @@ const Index = styled.div`
 `;
 
 const ServiceArea = styled.div`
-  /* outline: 0.1vw dashed red; */
   width: 100%;
   margin-bottom: 1vw;
   display: flex;
   border-bottom: 0.04vw solid #e4e4e4;
   border-top: 0.16vw solid black;
-
-  /* border-right: 0.04vw solid black; */
 `;
 
 const ServiceBox = styled.div`
@@ -778,7 +776,6 @@ const FirstPage = (props: any) => {
 
   useEffect(() => {
     getDetailList();
-    // getDrawingData2();
   }, [onSignatureModal]);
 
   return (
@@ -1083,6 +1080,7 @@ const FirstPage = (props: any) => {
 
             <BottomComponent>
               <MemoBox>
+                <TextMemoRound>{textMemo}</TextMemoRound>
                 <MemoRound ref={divRef} id={"CanvasPanel"}>
                   <Stage
                     width={dimensions.width}
@@ -1111,7 +1109,6 @@ const FirstPage = (props: any) => {
                     </Layer>
                   </Stage>
                 </MemoRound>
-                <TextMemoRound>{textMemo}</TextMemoRound>
               </MemoBox>
               <PriceListArea>
                 <PriceListBox>
@@ -1150,36 +1147,6 @@ const FirstPage = (props: any) => {
                       <OptionItemName>-</OptionItemName>
                       <OptionItem>-</OptionItem>
                     </PriceItemBox2>
-                    {/* <PriceItemBox>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                  </PriceItemBox>
-                  <PriceItemBox>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                  </PriceItemBox>
-                  <PriceItemBox>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                  </PriceItemBox>
-                  <PriceItemBox>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                  </PriceItemBox>
-                  <PriceItemBox>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                    <OptionItemName>옵션이름</OptionItemName>
-                    <OptionItem>분해 / 설치</OptionItem>
-                  </PriceItemBox> */}
                   </OptionItemListBox>
                 </PriceListBox>
                 <PriceListBox>
