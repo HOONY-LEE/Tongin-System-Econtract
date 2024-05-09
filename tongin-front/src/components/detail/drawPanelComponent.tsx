@@ -441,6 +441,13 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
               onClose={BlankClose}
             ></DetailDrawBlankModalComponent>
           )}
+          <TextPanel>
+            <InputBox
+              placeholder="메모할 내용을 입력해 주세요."
+              value={textMemoData}
+              onChange={textMemoInput}
+            ></InputBox>
+          </TextPanel>
           <ToolContainer>
             <ColorCanvasBox>
               <ColorCanvastitle>
@@ -540,13 +547,6 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
               </Stage>
             </CanvasPanel>
           </div>
-          <TextPanel>
-            <InputBox
-              placeholder="메모할 내용을 입력해 주세요."
-              value={textMemoData}
-              onChange={textMemoInput}
-            ></InputBox>
-          </TextPanel>
         </CalculatorComponentWrapper>
         <BtnBox>
           <CustomButton
