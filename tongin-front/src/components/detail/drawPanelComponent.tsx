@@ -145,6 +145,7 @@ const CanvasTool = styled.div`
 `;
 const BtnBox = styled.div`
   margin-top: 2vw;
+  user-select: none;
 `;
 const CanvasPanelMask = styled.div``;
 const TextComponentWrapper = styled.div`
@@ -197,8 +198,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
-  user-select: none;
-  user-select: none;
+
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;

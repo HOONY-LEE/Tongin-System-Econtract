@@ -17,6 +17,7 @@ const Box: any = styled.div<{
   cursor?: string;
 }>`
   display: flex;
+  user-select: none;
   justify-content: center;
   align-items: center;
   width: ${(props) => (props.width ? props.width : "220px")};
