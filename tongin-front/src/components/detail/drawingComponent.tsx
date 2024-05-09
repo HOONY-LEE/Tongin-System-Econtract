@@ -63,7 +63,7 @@ export default function DrawingComponent(props: any) {
   const postDrawingData = async () => {
     const requestParam = {
       receiptMemoData: drawingData ? drawingData : [],
-      textMemo: textMemoData ? textMemoData : [],
+      textMemo: textMemoData ? textMemoData : "",
     };
     const response = await API.post(`receipt/memo/${reNum}`, requestParam);
     if (response.status === 200) {
