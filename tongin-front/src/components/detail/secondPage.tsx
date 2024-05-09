@@ -51,7 +51,7 @@ const ContentArea = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  font-size: 2vw;
+  background-color: #e6e6e649;
 `;
 const TopArea = styled.div`
   display: flex;
@@ -61,7 +61,7 @@ const TopArea = styled.div`
   width: 100%;
 `;
 const MidArea = styled.div`
-  margin-top: 2vw;
+  margin-top: 1vw;
   width: 100%;
   display: flex;
   justify-content: space-between;

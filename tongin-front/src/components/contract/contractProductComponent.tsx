@@ -22,7 +22,7 @@ const RoomName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2vw;
+  font-size: 1vw;
   border-bottom: 0.1vw solid black;
 `;
 
@@ -37,7 +37,7 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 1.9vw;
+  height: 1.8vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
