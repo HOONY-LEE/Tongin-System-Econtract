@@ -1,4 +1,4 @@
-export const postmanData = {
+export const newOptionData = {
   receiptOptionData: {
     isEditable: true,
     beforeWorkCondition: {

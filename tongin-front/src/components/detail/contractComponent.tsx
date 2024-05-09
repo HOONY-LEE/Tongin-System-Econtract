@@ -292,6 +292,24 @@ export default function ContractComponent(props: any) {
     setBalanceCharge(totalCharge - priceDataList[4].amount);
   }, [downCharge, balanceCharge, optionTotal, priceDataList]);
 
+  // 견적완료 API
+  const completeReceipt = async () => {
+    const requestParam = {
+      receiptOptionData: optionData,
+    };
+
+    console.log("requestParam>>>");
+    console.log(requestParam);
+
+    try {
+      const result = await API.post(`/receipt/complete/${reNum}`, requestParam);
+
+      console.log(result);
+    } catch (error) {
+      alert("completeRecipt() 실패");
+    }
+  };
+
   // 옵션 품목 금액 합계 계산
   const calculateTotalOptionCharge = () => {
     let totalOptionCharge = 0;
@@ -601,6 +619,7 @@ export default function ContractComponent(props: any) {
           setIsPreviewModalOpen={setIsPreviewModalOpen}
           movingCBM={movingCBM}
           discardCBM={discardCBM}
+          completeReceipt={completeReceipt}
         />
       )}
     </ContentBox>
