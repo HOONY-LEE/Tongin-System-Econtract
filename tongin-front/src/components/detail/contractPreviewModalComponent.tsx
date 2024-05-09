@@ -196,6 +196,7 @@ const ContractPreviewModalComponent = (props: any) => {
     setLines2,
     optionTotalCharge,
     setIsPreviewModalOpen,
+    completeReceipt,
   } = props;
 
   const [contractImageList, setContractImageList] = useState<any[]>([]);
@@ -227,8 +228,13 @@ const ContractPreviewModalComponent = (props: any) => {
 
     // 두 이미지를 합쳐서 서버로 전송
     const imageFiles = [firstPageImage, secondPageImage];
-    await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
-    getContractImageList(); // 이미지 전송후 계약서 이미지 리스트 다시 받아오기
+    try {
+      await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
+      completeReceipt();
+      getContractImageList(); // 이미지 전송후 계약서 이미지 리스트 다시 받아오기
+    } catch (error) {
+      alert(error);
+    }
     onClose();
   };
 

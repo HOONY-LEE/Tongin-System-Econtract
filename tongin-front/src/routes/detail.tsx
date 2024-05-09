@@ -159,7 +159,7 @@ export default function Detail() {
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
   // const [articleDataList, setArticleDataList] = useState<any[]>([]);
-  const [optionData, setOptionData] = useState<object>({});
+  const [optionData, setOptionData] = useState<any>({});
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
   const [priceDataList, setPriceDataList] = useState<any[]>([]);
   const [drawingPanel, setDrawingPanel] = useState(false);
@@ -236,6 +236,11 @@ export default function Detail() {
 
   // 옵션정보 수정API
   const postOptionData = async () => {
+    if (optionData.isEditable === false) {
+      alert("이미 내보내기한 계약서는 수정할 수 없습니다.");
+      return;
+    }
+
     try {
       const requestParam = { receiptOptionData: optionData };
 
