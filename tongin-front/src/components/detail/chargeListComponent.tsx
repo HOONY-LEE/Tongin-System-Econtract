@@ -115,24 +115,26 @@ export default function ChargeListComponent(props: any) {
               </PriceInput>
             </TotalChargeBox>
           );
-        } else if (index === 5) {
-          return (
-            <ListBox key={index}>
-              <TitleArea>
-                <Title>{item.chargeName}</Title>
-                <Subtile>/{item.chargeNameEng}</Subtile>
-              </TitleArea>
-              <PriceInputArea>
-                <ChargePriceInputBox
-                  inputValue={balanceCharge}
-                  setInputValue={balanceCharge}
-                  optionType={item.chargeName}
-                  id={index}
-                ></ChargePriceInputBox>
-              </PriceInputArea>
-            </ListBox>
-          );
-        } else {
+        }
+        // else if (index === 5) {
+        //   return (
+        //     <ListBox key={index}>
+        //       <TitleArea>
+        //         <Title>{item.chargeName}</Title>
+        //         <Subtile>/{item.chargeNameEng}</Subtile>
+        //       </TitleArea>
+        //       <PriceInputArea>
+        //         <ChargePriceInputBox
+        //           inputValue={balanceCharge}
+        //           setInputValue={balanceCharge}
+        //           optionType={item.chargeName}
+        //           id={index}
+        //         ></ChargePriceInputBox>
+        //       </PriceInputArea>
+        //     </ListBox>
+        //   );
+        // }
+        else {
           return (
             <ListBox key={index}>
               <TitleArea>

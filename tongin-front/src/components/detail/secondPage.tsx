@@ -75,7 +75,7 @@ const NameArea = styled.div`
 
 const NameTitleBox = styled.div`
   width: 100%;
-  height: 4vw;
+  height: 3vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -98,17 +98,17 @@ const ProductArea = styled.div`
 `;
 
 const ItemArea = styled.div`
-  width: 22.3vw;
+  /* width: 22.3vw; */
   display: flex;
   justify-content: start;
   align-items: start;
-  border: 0.16vw solid black;
+  border: 0.1vw solid black;
   /* border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black; */
 `;
 
 const ItemArea2 = styled.div`
-  width: 22.8vw;
+  /* width: 22.8vw; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -233,11 +233,7 @@ const SecondPage = (props: any) => {
           <TopArea>
             <NameArea>
               <NameTitleBox>
-                <Image
-                  src="/icon/titleBox.png"
-                  width={"100%"}
-                  height={"100%"}
-                ></Image>
+                <Image src="/icon/titleBox.png" width={"100%"}></Image>
               </NameTitleBox>
               <ItemNameBox>
                 <ContractProductNameComponent
@@ -259,11 +255,7 @@ const SecondPage = (props: any) => {
             <ItemArea>
               <NameArea>
                 <NameTitleBox>
-                  <Image
-                    src="/icon/titleBox.png"
-                    width={"100%"}
-                    height={"100%"}
-                  ></Image>
+                  <Image src="/icon/titleBox.png" width={"100%"}></Image>
                 </NameTitleBox>
                 <ItemNameBox>
                   <ContractProductNameComponent
@@ -284,11 +276,7 @@ const SecondPage = (props: any) => {
             <ItemArea>
               <NameArea>
                 <NameTitleBox>
-                  <Image
-                    src="/icon/titleBox.png"
-                    width={"100%"}
-                    height={"100%"}
-                  ></Image>
+                  <Image src="/icon/titleBox.png" width={"100%"}></Image>
                 </NameTitleBox>
                 <ItemNameBox>
                   <ContractProductNameComponent
@@ -310,11 +298,7 @@ const SecondPage = (props: any) => {
               <TopItemArea>
                 <NameArea>
                   <NameTitleBox>
-                    <Image
-                      src="/icon/titleBox.png"
-                      width={"100%"}
-                      height={"100%"}
-                    ></Image>
+                    <Image src="/icon/titleBox.png" width={"100%"}></Image>
                   </NameTitleBox>
                   <ItemNameBox>
                     <ContractProductNameComponent
