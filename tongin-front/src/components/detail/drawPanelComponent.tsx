@@ -34,7 +34,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  padding-top: 2vw;
 `;
 const CalculatorComponentWrapper = styled.div`
   -webkit-user-select: none;
@@ -184,6 +185,16 @@ const TextPanel = styled.div`
 
   /* touch-action: none; */
 `;
+
+const CloseBox = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 85vw;
+  height: 5vw;
+  /* background-color: red; */
+`;
+
 const InputBox = styled.textarea.attrs({})<{}>`
   display: flex;
   justify-content: center;
@@ -437,12 +448,20 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
       /> */}
       <Container id={"Back"} onContextMenu={(e) => e.preventDefault()}>
         <CalculatorComponentWrapper>
-          <Image
+          {/* <Image
             src="/icon/save_close.png"
             width={"88vw"}
             height={"9vw"}
             onClick={() => onSave()}
-          ></Image>
+          ></Image> */}
+          <CloseBox>
+            <CloseIcon
+              onClick={() => onSave()}
+              height={"2.3vw"}
+              fill={"#AEAEAE"}
+            />
+          </CloseBox>
+
           {blankBoxVisible && (
             <DetailDrawBlankModalComponent
               onBlank={onBlankData}
