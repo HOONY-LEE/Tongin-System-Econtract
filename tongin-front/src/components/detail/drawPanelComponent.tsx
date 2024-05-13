@@ -435,7 +435,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
         onDragStart={(e) => e.preventDefault()}
         onTouchMove={handleBackdropTouchMove}
       /> */}
-      <Container onContextMenu={(e) => e.preventDefault()}>
+      <Container id={"Back"} onContextMenu={(e) => e.preventDefault()}>
         <CalculatorComponentWrapper>
           <Image
             src="/icon/save_close.png"
