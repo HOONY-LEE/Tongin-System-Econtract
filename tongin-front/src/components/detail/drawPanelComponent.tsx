@@ -426,6 +426,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
   const handleBackdropTouchMove = (e: any) => {
     e.preventDefault(); // 터치 이벤트의 기본 동작을 막음
   };
+
   return (
     <>
       {/* <Backdrop
@@ -434,7 +435,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
         onDragStart={(e) => e.preventDefault()}
         onTouchMove={handleBackdropTouchMove}
       /> */}
-      <Container>
+      <Container onContextMenu={(e) => e.preventDefault()}>
         <CalculatorComponentWrapper>
           <Image
             src="/icon/save_close.png"
