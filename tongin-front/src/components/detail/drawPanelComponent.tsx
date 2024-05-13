@@ -59,17 +59,17 @@ const CalculatorComponentWrapper = styled.div`
   justify-content: center;
 `;
 const ToolContainer = styled.div`
-  padding-left: 4vw;
+  /* padding-left: 4vw; */
   width: 90vw;
-  height: 7vh;
+  height: 8vw;
   /* outline: 1px solid red; */
-  justify-content: center;
+  justify-content: space-around;
   display: flex;
 `;
 const ColorCanvasBox = styled.div`
   width: 24vw;
   /* outline: 1px solid red; */
-  height: 6vh;
+  height: 7vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -128,7 +128,7 @@ const CanvasPanel = styled.div`
 `;
 const CanvasToolBox = styled.div`
   width: 34vw;
-  height: 6vh;
+  height: 7vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,8 +178,8 @@ const TextPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 24vh;
-  margin-bottom: 2vw;
+  height: 30vw;
+  margin-bottom: 1vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
 
@@ -436,6 +436,12 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
       /> */}
       <Container>
         <CalculatorComponentWrapper>
+          <Image
+            src="/icon/save_close.png"
+            width={"88vw"}
+            height={"9vw"}
+            onClick={() => onSave()}
+          ></Image>
           {blankBoxVisible && (
             <DetailDrawBlankModalComponent
               onBlank={onBlankData}
@@ -558,12 +564,12 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
             radius={"0.6vw"}
             onClick={() => onSave()}
           ></CustomButton> */}
-          <Image
+          {/* <Image
             src="/icon/save_close.png"
             width={"92vw"}
             height={"9vw"}
             onClick={() => onSave()}
-          ></Image>
+          ></Image> */}
         </BtnBox>
       </Container>
     </>
