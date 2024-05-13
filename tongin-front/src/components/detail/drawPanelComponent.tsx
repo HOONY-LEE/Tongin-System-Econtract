@@ -9,6 +9,7 @@ import API from "../../API/API";
 import DetailDrawBlankModalComponent from "./detailDrawBlankModal";
 import { AnyRecordWithTtl } from "dns";
 import CustomButton from "../common/customButton";
+import { Image } from "../common/image";
 const TopArea = styled.div``;
 // const Backdrop = styled.div`
 
@@ -144,7 +145,6 @@ const CanvasTool = styled.div`
     0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
 const BtnBox = styled.div`
-  margin-top: 2vw;
   user-select: none;
 `;
 const CanvasPanelMask = styled.div``;
@@ -193,6 +193,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
   /* margin-left: 1vw; */
   font-size: 1.8vw;
   font-weight: 500;
+  resize: none;
   /* outline: 1px solid red; */
   outline: none;
   -webkit-user-select: none;
@@ -549,14 +550,20 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
           </div>
         </CalculatorComponentWrapper>
         <BtnBox>
-          <CustomButton
+          {/* <CustomButton
             width={"90vw"}
             height={"8vw"}
             text={`저장 및 닫기`}
             size={"3.4vw"}
             radius={"0.6vw"}
             onClick={() => onSave()}
-          ></CustomButton>
+          ></CustomButton> */}
+          <Image
+            src="/icon/save_close.png"
+            width={"92vw"}
+            height={"9vw"}
+            onClick={() => onSave()}
+          ></Image>
         </BtnBox>
       </Container>
     </>

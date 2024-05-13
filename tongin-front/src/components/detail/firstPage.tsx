@@ -229,6 +229,8 @@ const TextMemoRound = styled.div`
   resize: none;
 `;
 
+const TextMemoText = styled.pre``;
+
 const MemoRound2 = styled.div`
   width: 20vw;
   height: 100%;
@@ -734,6 +736,8 @@ const FirstPage = (props: any) => {
       const result2 = response.data.textMemo;
       setDrawingData(result);
       setTextMemo(result2);
+      console.log("텍스트메모>>");
+      console.log(result2);
     } else {
       alert("Fail to getDrawingData()");
     }
@@ -1080,7 +1084,9 @@ const FirstPage = (props: any) => {
 
             <BottomComponent>
               <MemoBox>
-                <TextMemoRound>{textMemo}</TextMemoRound>
+                <TextMemoRound>
+                  <TextMemoText>{textMemo}</TextMemoText>
+                </TextMemoRound>
                 <MemoRound ref={divRef} id={"CanvasPanel"}>
                   <Stage
                     width={dimensions.width}

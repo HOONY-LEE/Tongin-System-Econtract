@@ -269,10 +269,10 @@ export default function ContractComponent(props: any) {
       optionData.livingService.otherService.servicePayment
   );
 
-  const [downCharge, setDownCharge] = useState<number>(priceDataList[4].amount);
-  const [balanceCharge, setBalanceCharge] = useState<number>(
-    priceDataList[5].amount
-  );
+  // const [downCharge, setDownCharge] = useState<number>(priceDataList[4].amount);
+  // const [balanceCharge, setBalanceCharge] = useState<number>(
+  //   priceDataList[5].amount
+  // );
   useEffect(() => {
     setTotalCharge(
       optionTotal +
@@ -281,16 +281,16 @@ export default function ContractComponent(props: any) {
         optionTotalCharge
     );
   }, [
-    downCharge,
-    balanceCharge,
+    // downCharge,
+    // balanceCharge,
     optionTotal,
     priceDataList,
     optionTotalCharge,
   ]);
 
-  useEffect(() => {
-    setBalanceCharge(totalCharge - priceDataList[4].amount);
-  }, [downCharge, balanceCharge, optionTotal, priceDataList]);
+  // useEffect(() => {
+  //   setBalanceCharge(totalCharge - priceDataList[4].amount);
+  // }, [downCharge, balanceCharge, optionTotal, priceDataList]);
 
   // 견적완료 API
   const completeReceipt = async () => {
@@ -332,10 +332,10 @@ export default function ContractComponent(props: any) {
       const updatedData = [...prev];
       console.log(updatedData);
       updatedData[3].amount = totalCharge;
-      updatedData[5].amount = balanceCharge;
+      // updatedData[5].amount = balanceCharge;
       return updatedData;
     });
-  }, [totalCharge, balanceCharge]);
+  }, [totalCharge]);
 
   // 계약서 생성하기 모달 열기
   const handleOpenModal = () => {
@@ -576,7 +576,6 @@ export default function ContractComponent(props: any) {
           <ChargeListArea>
             <ChargeListComponent
               totalCharge={totalCharge}
-              balanceCharge={balanceCharge}
               inputChargeList={priceDataList}
               setInputChargeList={setPriceDataList}
             ></ChargeListComponent>

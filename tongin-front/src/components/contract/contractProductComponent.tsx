@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const RoomNameBox = styled.div`
-  height: 4vw;
+  height: 3.1vw;
   border-bottom: 0.16vw solid black;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@ const ContentsBox = styled.div`
 `;
 
 const RoomName = styled.div`
-  height: 3vw;
+  height: 1.8vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@ const RoomName = styled.div`
 `;
 
 const ColumnNameBox = styled.div`
-  height: 1.6vw;
+  height: 1.2vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,6 +82,15 @@ const ColumnName2 = styled.div`
   align-items: center;
 `;
 
+const ColumnName3 = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.6vw;
+`;
+
 export default function ContractProductComponent(props: any) {
   const { articleData } = props;
 
@@ -131,11 +140,19 @@ export default function ContractProductComponent(props: any) {
                   ? ""
                   : item.article.cbm}
               </ColumnName>
-              <ColumnName2>
-                {item.article.cbm === 0 && item.article.amount === 0
-                  ? ""
-                  : carryType[item.article.carryType].status}
-              </ColumnName2>
+              {item.article.articleNameEng === "Etc" ? (
+                <ColumnName3>
+                  {item.article.cbm === 0 && item.article.amount === 0
+                    ? ""
+                    : item.article.articleRemark.substring(0, 16)}
+                </ColumnName3>
+              ) : (
+                <ColumnName2>
+                  {item.article.cbm === 0 && item.article.amount === 0
+                    ? ""
+                    : carryType[item.article.carryType].status}
+                </ColumnName2>
+              )}
             </ArticleBox>
           );
         })}
