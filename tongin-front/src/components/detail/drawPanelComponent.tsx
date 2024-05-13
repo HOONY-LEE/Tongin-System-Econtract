@@ -332,10 +332,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
     { size: 60, width: "2.3vh", height: "2.3vh" },
     { size: 110, width: "3vh", height: "3vh" },
   ];
-  document.body.addEventListener("contextmenu", function (event) {
-    // 기본 동작 막기
-    event.preventDefault();
-  });
+
   const targetElement = document.querySelector("#CanvasPanel");
 
   targetElement?.addEventListener(
