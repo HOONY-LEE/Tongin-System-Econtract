@@ -35,12 +35,12 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  user-select: none;
 `;
 const CalculatorComponentWrapper = styled.div`
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
-  user-select: none;
   user-select: none;
   -webkit-user-drag: none;
   -khtml-user-drag: none;
@@ -332,7 +332,10 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
     { size: 60, width: "2.3vh", height: "2.3vh" },
     { size: 110, width: "3vh", height: "3vh" },
   ];
-
+  document.body.addEventListener("contextmenu", function (event) {
+    // 기본 동작 막기
+    event.preventDefault();
+  });
   const targetElement = document.querySelector("#CanvasPanel");
 
   targetElement?.addEventListener(
@@ -360,7 +363,8 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
     setTextMemoData(e.target.value);
   };
   const backTargetElement = document.querySelector("#BackgroundPanel");
-  const allTargetElement = document.querySelector("#Back");
+  // const allTargetElement = document.querySelector("#Back");
+  const allTargetElement = document.getElementById("Back");
   // backTargetElement?.addEventListener(
   //   "dragover",
   //   (event) => {
