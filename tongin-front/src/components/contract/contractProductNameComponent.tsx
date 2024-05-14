@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.div<{ index: number }>`
-  height: 1.8vw;
+  height: 2vw;
   display: flex;
   align-items: center;
   border-bottom: 0.1vw solid gray;
@@ -57,23 +57,11 @@ export default function ContractProductNameComponent(props: any) {
           </Wrapper>
         );
       })}
-      {articleDataList.length === 15 ? (
-        <>
-          <Wrapper index={articleDataList.length}>
-            <KorNameBox></KorNameBox>
-            <EngNameBox></EngNameBox>
-          </Wrapper>
-          <Wrapper2 index={articleDataList.length + 1}>
-            <KorNameBox>소계</KorNameBox>
-            <EngNameBox>Total</EngNameBox>
-          </Wrapper2>
-        </>
-      ) : (
-        <Wrapper2 index={articleDataList.length}>
-          <KorNameBox>소계</KorNameBox>
-          <EngNameBox>Total</EngNameBox>
-        </Wrapper2>
-      )}
+
+      <Wrapper2 index={articleDataList.length}>
+        <KorNameBox>소계</KorNameBox>
+        <EngNameBox>Total</EngNameBox>
+      </Wrapper2>
     </>
   );
 }

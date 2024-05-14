@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Container = styled.div`
-  padding: 2vw 5vw;
+  padding: 2vw 4vw;
   width: 100%;
   height: 100%;
   display: flex;
@@ -27,21 +27,22 @@ const Container = styled.div`
 `;
 const Header = styled.div`
   width: 100%;
-  height: 6vw;
+  height: 5vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* background-color: red; */
 `;
 const HeaderTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 800;
-  font-size: 3.2vw;
+  font-size: 3vw;
+  height: 4vw;
 `;
 const LogoImg = styled.div`
-  width: 20vw;
-  height: 5vw;
+  padding-left: 1vw;
 `;
 
 const ContentArea = styled.div`
@@ -222,14 +223,13 @@ const TextMemoRound = styled.div`
   text-align: start;
   line-height: 1.6vw;
   padding: 1.8vw;
-  font-size: 1.2vw;
-  font-weight: 300;
-  color: #6d6d6d;
-  outline: none;
-  resize: none;
 `;
 
-const TextMemoText = styled.pre``;
+const TextMemoText = styled.pre`
+  font-size: 1.2vw;
+  font-weight: 300;
+  color: #383838;
+`;
 
 const MemoRound2 = styled.div`
   width: 20vw;

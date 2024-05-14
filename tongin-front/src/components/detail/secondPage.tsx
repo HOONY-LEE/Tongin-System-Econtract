@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Container = styled.div`
-  padding: 2vw 5vw;
+  padding: 2vw 4vw;
   width: 100%;
   height: 100%;
   display: flex;
@@ -27,21 +27,22 @@ const Container = styled.div`
 `;
 const Header = styled.div`
   width: 100%;
-  height: 6vw;
+  height: 5vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* background-color: red; */
 `;
 const HeaderTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 800;
-  font-size: 3.2vw;
+  font-size: 3vw;
+  height: 4vw;
 `;
 const LogoImg = styled.div`
-  width: 20vw;
-  height: 5vw;
+  padding-left: 1vw;
 `;
 
 const ContentArea = styled.div`
@@ -51,7 +52,6 @@ const ContentArea = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background-color: #e6e6e649;
 `;
 const TopArea = styled.div`
   display: flex;
@@ -62,6 +62,7 @@ const TopArea = styled.div`
 `;
 const MidArea = styled.div`
   margin-top: 1vw;
+  /* height: 36vw; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -99,10 +100,11 @@ const ProductArea = styled.div`
 
 const ItemArea = styled.div`
   /* width: 22.3vw; */
+  /* height: 36vw; */
   display: flex;
   justify-content: start;
   align-items: start;
-  border: 0.1vw solid black;
+  border: 0.16vw solid black;
   /* border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black; */
 `;
