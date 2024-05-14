@@ -200,30 +200,31 @@ const InputBox = styled.textarea.attrs({})<{}>`
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  line-height: 3.2vw;
   /* margin-left: 1vw; */
-  font-size: 1.8vw;
-  font-weight: 500;
+  font-family: "pretendard";
+  font-size: 2.4vw;
+  font-weight: 400;
   resize: none;
   /* outline: 1px solid red; */
   outline: none;
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-use-select: none;
+  -ms-use-select: none; */
 
-  -webkit-user-drag: none;
+  /* -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
-  -o-user-drag: none;
+  -o-user-drag: none; */
 
   appearance: none;
-  -ms-user-select: none;
+  /* -ms-user-select: none;
   -moz-user-select: -moz-none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
+  -khtml-user-select: none; */
+  /* user-select: none; */
   border: none;
-  width: 90%;
-
+  width: 94%;
   height: 90%;
 `;
 

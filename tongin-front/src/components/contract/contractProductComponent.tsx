@@ -37,7 +37,7 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 1.8vw;
+  height: 2vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,7 +52,7 @@ const ArticleBox = styled.div<{ index: number }>`
 `;
 
 const TotalBox = styled.div<{ index: number }>`
-  height: 1.9vw;
+  height: 2vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -157,26 +157,11 @@ export default function ContractProductComponent(props: any) {
           );
         })}
       </ContentsBox>
-      {articleData.articleData.length === 15 ? (
-        <>
-          <ArticleBox index={articleData.articleData.length}>
-            <ColumnName></ColumnName>
-            <ColumnName></ColumnName>
-            <ColumnName2></ColumnName2>
-          </ArticleBox>
-          <TotalBox index={articleData.articleData.length + 1}>
-            <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
-            <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-            <ColumnName2></ColumnName2>
-          </TotalBox>
-        </>
-      ) : (
-        <TotalBox index={articleData.articleData.length}>
-          <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
-          <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-          <ColumnName2></ColumnName2>
-        </TotalBox>
-      )}
+      <TotalBox index={articleData.articleData.length}>
+        <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
+        <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
+        <ColumnName2></ColumnName2>
+      </TotalBox>
     </Wrapper>
   );
 }
