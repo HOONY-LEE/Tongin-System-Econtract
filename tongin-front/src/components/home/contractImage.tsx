@@ -205,7 +205,6 @@ export default function ContractImage(props: any) {
   };
 
   const onClickClose = () => {
-    console.log("뒤로가기 실행");
     window.history.back();
   };
   useEffect(() => {

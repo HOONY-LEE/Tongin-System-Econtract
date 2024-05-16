@@ -336,8 +336,8 @@ const SignatureModalComponent: React.FC<CalculatorComponentProps> = ({
         `/receipt/contract/sign/${reNum}`,
         requestPram
       );
-      console.log("서명하기 response>>");
-      console.log(response);
+      // console.log("서명하기 response>>");
+      // console.log(response);
       if (response.status === 200) {
         getDetailList();
         setIsPreviewModalOpen(false);

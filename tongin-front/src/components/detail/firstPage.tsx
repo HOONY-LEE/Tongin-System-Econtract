@@ -736,8 +736,6 @@ const FirstPage = (props: any) => {
       const result2 = response.data.textMemo;
       setDrawingData(result);
       setTextMemo(result2);
-      console.log("텍스트메모>>");
-      console.log(result2);
     } else {
       alert("Fail to getDrawingData()");
     }

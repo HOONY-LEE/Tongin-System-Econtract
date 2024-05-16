@@ -25,23 +25,23 @@ const Wrapper2 = styled.div<{ index: number }>`
 `;
 
 const KorNameBox = styled.div`
-  width: 60%;
+  width: 70%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.8vw;
+  font-size: 1.2vw;
   font-weight: 500;
 `;
 const EngNameBox = styled.div`
-  width: 40%;
+  width: 30%;
   height: 1vw;
   display: flex;
   justify-content: start;
   align-items: end;
   border-left: 0.1vw solid gray;
-  padding-left: 0.5vw;
-  font-size: 0.5vw;
+  padding-left: 0.3vw;
+  font-size: 0.6vw;
   font-weight: 100;
 `;
 
@@ -53,7 +53,9 @@ export default function ContractProductNameComponent(props: any) {
         return (
           <Wrapper key={index} index={index}>
             <KorNameBox>{item.article.articleName}</KorNameBox>
-            <EngNameBox>{item.article.articleNameEng}</EngNameBox>
+            <EngNameBox>
+              {item.article.articleNameEng.substring(0, 7)}
+            </EngNameBox>
           </Wrapper>
         );
       })}

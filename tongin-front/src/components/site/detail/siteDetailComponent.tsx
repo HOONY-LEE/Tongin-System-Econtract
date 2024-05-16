@@ -477,9 +477,9 @@ export default function SiteDetailComponent(props: any) {
 
   //완료 후 전송
   const sendData = async () => {
-    console.log(siteDetailData);
+    // console.log(siteDetailData);
     const requestPram: any = siteDetailData;
-    console.log(requestPram);
+    // console.log(requestPram);
     // 조건체크
     if (!validation) {
       return;

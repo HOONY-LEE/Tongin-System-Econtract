@@ -245,7 +245,7 @@ export default function ContractComponent(props: any) {
     contractImageList,
     getContractImageList,
   } = props;
-  console.log(optionData);
+
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
@@ -298,15 +298,9 @@ export default function ContractComponent(props: any) {
       receiptOptionData: optionData,
     };
 
-    console.log("requestParam>>>");
-    console.log(requestParam);
-    console.log("requestParam.receiptOptionData>>>");
-    console.log(requestParam.receiptOptionData);
-
     try {
       const result = await API.post(`/receipt/complete/${reNum}`, requestParam);
-
-      console.log("result>>");
+      console.log("completeReceipt() 성공");
       console.log(result);
     } catch (error) {
       alert("completeRecipt() 실패");
@@ -333,7 +327,6 @@ export default function ContractComponent(props: any) {
   useEffect(() => {
     setPriceDataList((prev: any[]) => {
       const updatedData = [...prev];
-      console.log(updatedData);
       updatedData[3].amount = totalCharge;
       // updatedData[5].amount = balanceCharge;
       return updatedData;
@@ -373,14 +366,21 @@ export default function ContractComponent(props: any) {
     const requestParam = {
       receiptPriceData: priceDataList,
     };
-    const response = await API.post(`/receipt/price/${reNum}`, requestParam);
-    if (response.status === 200) {
-      handleOpenModal();
-    } else {
-      setFetchStatus(true);
-      setStatus("FAIL");
+
+    try {
+      const response = await API.post(`/receipt/price/${reNum}`, requestParam);
+      if (response.status === 200) {
+        // console.log("가격정보 response>>");
+        // console.log(response);
+        handleOpenModal();
+      } else {
+        setFetchStatus(true);
+        setStatus("FAIL");
+        alert("가격 정보를 저장하는데 실패했습니다.");
+        return;
+      }
+    } catch (error) {
       alert("가격 정보를 저장하는데 실패했습니다.");
-      return;
     }
   };
 

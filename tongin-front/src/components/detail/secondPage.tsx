@@ -88,7 +88,7 @@ const ItemNameBox = styled.div`
 `;
 
 const ProductArea = styled.div`
-  width: 12vw;
+  width: 12.4vw;
   font-size: 1.6vw;
   font-weight: 600;
   display: flex;
