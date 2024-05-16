@@ -12,40 +12,61 @@ const cookies = new Cookies();
 const ContainerLogin = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   height: 100vh;
 `;
 
 const ContainerSub = styled.div`
-  width: 66%;
+  width: 60vw;
   height: 70vw;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  /* background-color: red; */
   /* outline: 1px solid red; */
+`;
+
+const LogoTextBox = styled.div`
+  width: 100%;
+  margin-top: 5vw;
+  margin-bottom: 4vw;
 `;
 
 const LoginLogo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 12vw;
-  height: 12vw;
+  width: 100%;
 `;
 
 const LogoText = styled.div`
   width: 100%;
   height: 6vw;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   text-align: center;
   font-weight: 500;
   font-size: 2.2vw;
-  color: #ff7f3b;
+  color: #0f0f0f;
+  letter-spacing: 0.4vw;
 `;
+const LogoText2 = styled.div`
+  margin-bottom: 3vw;
+  width: 100%;
+  height: 6vw;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  font-weight: 900;
+  font-size: 7vw;
+  color: #0f0f0f;
+  letter-spacing: 0.3vw;
+`;
+
 const OutlineInputbox = styled.div<{
   $outLine?: string;
 }>`
@@ -53,7 +74,7 @@ const OutlineInputbox = styled.div<{
   display: flex;
   align-items: center;
   width: 100%;
-  height: 8vw;
+  height: 10vw;
   border-radius: 0.7vw;
   background-color: white;
   outline: ${(props) => props.$outLine};
@@ -72,12 +93,12 @@ const Inputbox = styled.input`
   -o-appearance: none;
   appearance: none;
   border: none;
-  width: 58vw;
-  height: 6vw;
+  /* width: 58vw; */
+  /* height: 10vw; */
 `;
 
 const BottomArea = styled.div`
-  margin-top: 3vw;
+  margin-bottom: 3vw;
   width: 100%;
   height: 3vw;
   display: flex;
@@ -228,16 +249,20 @@ export default function Login() {
             text={"아이디 비밀번호를 다시 확인해주세요."}
           />
         )}
+        <LoginLogo>
+          <Image
+            src="icon/login_background.png"
+            alt="로고 이미지"
+            width={"100%"}
+            height={"100%"}
+          />
+        </LoginLogo>
         <ContainerSub>
-          <LoginLogo>
-            <Image
-              src="img/tongin_logo.png"
-              alt="로고 이미지"
-              width={"100%"}
-              height={"100%"}
-            />
-          </LoginLogo>
-          <LogoText>TONGIN LOGIN</LogoText>
+          <LogoTextBox>
+            <LogoText>마음까지 통하는 사람들</LogoText>
+            <LogoText2>통인익스프레스</LogoText2>
+            <LogoText2>전자계약시스템</LogoText2>
+          </LogoTextBox>
           <OutlineInputbox $outLine={outLineId}>
             <Inputbox
               onInput={onInputId}
@@ -260,16 +285,6 @@ export default function Login() {
               onKeyPress={handleKeyDown}
             ></Inputbox>
           </OutlineInputbox>
-          <CustomButton
-            onClick={desabled ? "" : onLogin}
-            width={"100%"}
-            height={"8vw"}
-            text={`로그인`}
-            size={"2.5vw"}
-            radius={"0.7vw"}
-            disabled={desabled}
-            $bgColor={bgColor}
-          ></CustomButton>
           <BottomArea>
             <RememberAccountBox
               onClick={() => {
@@ -285,6 +300,16 @@ export default function Login() {
               <TextLine>아이디/비밀번호 기억하기</TextLine>
             </RememberAccountBox>
           </BottomArea>
+          <CustomButton
+            onClick={desabled ? "" : onLogin}
+            width={"100%"}
+            height={"10vw"}
+            text={`로그인`}
+            size={"3.2vw"}
+            radius={"0.7vw"}
+            disabled={desabled}
+            $bgColor={bgColor}
+          ></CustomButton>
         </ContainerSub>
       </ContainerLogin>
     </>

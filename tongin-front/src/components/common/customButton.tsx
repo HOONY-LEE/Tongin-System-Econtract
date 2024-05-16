@@ -25,7 +25,7 @@ const Box: any = styled.div<{
   background-color: ${(props) =>
     props.$bgColor
       ? props.disabled
-        ? "#dbdbdb"
+        ? "#B9C1C9"
         : props.$bgColor
       : props.disabled
       ? "#dbdbdb"
