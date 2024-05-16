@@ -300,10 +300,13 @@ export default function ContractComponent(props: any) {
 
     console.log("requestParam>>>");
     console.log(requestParam);
+    console.log("requestParam.receiptOptionData>>>");
+    console.log(requestParam.receiptOptionData);
 
     try {
       const result = await API.post(`/receipt/complete/${reNum}`, requestParam);
 
+      console.log("result>>");
       console.log(result);
     } catch (error) {
       alert("completeRecipt() 실패");

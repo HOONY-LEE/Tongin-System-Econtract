@@ -330,24 +330,28 @@ const SignatureModalComponent: React.FC<CalculatorComponentProps> = ({
       contractSignData: drawingData,
       privatePushYN: isChecked,
     };
-    const response: any = await API.post(
-      `/receipt/contract/sign/${reNum}`,
-      requestPram
-    );
-    if (response.status === 200) {
-      getDetailList();
 
-      setIsPreviewModalOpen(false);
-
-      setTimeout(() => {
-        setIsPreviewModalOpen(true);
-      }, 500);
-      setOnSignatureModal(false); //모달끔
-      disableScrollLock();
-      // navigate(`/contractlist/detail/${reNum}`, { state: { isSigned: true } });
-    } else {
-      // setOnContractFinishPage && setOnContractFinishPage(false);
-      disableScrollLock();
+    try {
+      const response: any = await API.post(
+        `/receipt/contract/sign/${reNum}`,
+        requestPram
+      );
+      console.log("서명하기 response>>");
+      console.log(response);
+      if (response.status === 200) {
+        getDetailList();
+        setIsPreviewModalOpen(false);
+        setTimeout(() => {
+          setIsPreviewModalOpen(true);
+        }, 500);
+        setOnSignatureModal(false); //모달끔
+        disableScrollLock();
+      } else {
+        // setOnContractFinishPage && setOnContractFinishPage(false);
+        disableScrollLock();
+      }
+    } catch (error) {
+      alert("서명저장하기에 실패했습니다.");
     }
   };
   // 스크롤 잠금
