@@ -42,6 +42,8 @@ const HeaderTitle = styled.div`
   height: 4vw;
 `;
 const LogoImg = styled.div`
+  width: 20vw;
+  height: 6vw;
   padding-left: 1vw;
 `;
 
@@ -227,7 +229,11 @@ const SecondPage = (props: any) => {
       <Container>
         <Header>
           <LogoImg>
-            <Image src="/icon/tonginLogo.png" width={"100%"}></Image>
+            <Image
+              src="/icon/tonginLogo.png"
+              width={"100%"}
+              height={"100%"}
+            ></Image>
           </LogoImg>
           <HeaderTitle>이사물량 견적표</HeaderTitle>
         </Header>
