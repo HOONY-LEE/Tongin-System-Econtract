@@ -19,18 +19,27 @@ const Title = styled.div`
   font-size: 2.4vw;
   font-weight: 700;
 `;
-
+const SubTitle = styled.div`
+  margin-left: 1vw;
+  display: flex;
+  align-items: center;
+  font-size: 2.2vw;
+  font-weight: 700;
+  margin: 0vw 0vw 1vw 0vw;
+`;
 const ActivatedArea = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  /* flex-direction: column; */
+  justify-content: start;
   align-items: start;
   width: 100%;
   height: 4vh;
+  margin: 1vw 0;
 `;
 
 const PriceInputArea = styled.div`
   display: flex;
+  flex-direction: column;
   width: 30vw;
 `;
 
@@ -40,6 +49,10 @@ export default function OptionBoxComponent(props: any) {
     setLadderTruckData,
     title,
     isSelected,
+    beforeLadderTruckData,
+    setBeforeLadderTruckData,
+    afterLadderTruckData,
+    setAfterLadderTruckData,
     setIsSelected,
   } = props;
   const [isChecked, setIsChecked] = useState(isSelected);
@@ -50,6 +63,20 @@ export default function OptionBoxComponent(props: any) {
 
   const setLadderTruckServicePayment = (newValue: number) => {
     setLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.servicePayment = newValue;
+      return updatedData;
+    });
+  };
+  const setBeforeLadderTruckServicePayment = (newValue: number) => {
+    setBeforeLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.servicePayment = newValue;
+      return updatedData;
+    });
+  };
+  const setAfterLadderTruckServicePayment = (newValue: number) => {
+    setAfterLadderTruckData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.servicePayment = newValue;
       return updatedData;
@@ -70,6 +97,18 @@ export default function OptionBoxComponent(props: any) {
       updatedData.selected = isChecked;
       return updatedData;
     });
+
+    setBeforeLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = isChecked;
+      return updatedData;
+    });
+
+    setAfterLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = isChecked;
+      return updatedData;
+    });
   }, [isChecked]);
 
   return (
@@ -86,11 +125,21 @@ export default function OptionBoxComponent(props: any) {
       {isChecked && (
         <ActivatedArea>
           <PriceInputArea>
+            <SubTitle>사다리차 비용(전)</SubTitle>
             <CommonChargePriceInputBox
-              inputValue={ladderTruckData.servicePayment}
-              setInputValue={setLadderTruckServicePayment}
+              inputValue={beforeLadderTruckData.servicePayment}
+              setInputValue={setBeforeLadderTruckServicePayment}
               title={title}
               id={0}
+            ></CommonChargePriceInputBox>
+          </PriceInputArea>
+          <PriceInputArea>
+            <SubTitle>사다리차 비용(후)</SubTitle>
+            <CommonChargePriceInputBox
+              inputValue={afterLadderTruckData.servicePayment}
+              setInputValue={setAfterLadderTruckServicePayment}
+              title={title}
+              id={1}
             ></CommonChargePriceInputBox>
           </PriceInputArea>
         </ActivatedArea>

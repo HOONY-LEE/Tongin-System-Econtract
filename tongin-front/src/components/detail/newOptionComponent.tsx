@@ -140,7 +140,12 @@ export default function NewOptionComponent(props: any) {
   const [ladderTruckData, setLadderTruckData] = useState(
     optionData.ladderTruck
   );
-
+  const [beforeLadderTruckData, setBeforeLLadderTruckData] = useState(
+    optionData.beforeLadderTruck
+  ); // before 사다리차 서비스 ( 수정예정 )
+  const [afterLadderTruckData, setAfterLadderTruckData] = useState(
+    optionData.afterLadderTruck
+  ); // after 사다리차 서비스 ( 수정예정 )
   const [cleaningService, setCleaningService] = useState(
     optionData.livingService.movingCleaningService
   );
@@ -260,6 +265,8 @@ export default function NewOptionComponent(props: any) {
       updatedData.livingService.otherService = otherService;
       updatedData.optionService = optionServiceList;
       updatedData.ladderTruck = ladderTruckData;
+      updatedData.beforeLadderTruck = beforeLadderTruckData;
+      updatedData.afertLadderTruck = afterLadderTruckData;
 
       return updatedData;
     });
@@ -275,6 +282,8 @@ export default function NewOptionComponent(props: any) {
     otherService,
     optionServiceList,
     ladderTruckData,
+    beforeLadderTruckData,
+    afterLadderTruckData,
   ]);
 
   useEffect(() => {
@@ -332,6 +341,10 @@ export default function NewOptionComponent(props: any) {
             <OptionBoxComponent
               ladderTruckData={ladderTruckData}
               setLadderTruckData={setLadderTruckData}
+              beforeLadderTruckData={beforeLadderTruckData}
+              setBeforeLLadderTruckData={setBeforeLLadderTruckData}
+              afterLadderTruckData={afterLadderTruckData}
+              setAfterLadderTruckData={setAfterLadderTruckData}
               title={"사다리차 서비스"}
               isSelected={ladderTruckData.selected}
               setIsSelected={setLadderTruckSelected}
