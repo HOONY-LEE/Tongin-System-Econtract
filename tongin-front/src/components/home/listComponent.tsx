@@ -164,9 +164,6 @@ export default function ListComponent(props: any) {
   const { currentList } = props;
   const navigate = useNavigate();
 
-  console.log("currentList>>>");
-  console.log(currentList);
-
   const onClickListItemHandle = (item: any) => {
     if (
       item.statusCode === "22" || // 계약

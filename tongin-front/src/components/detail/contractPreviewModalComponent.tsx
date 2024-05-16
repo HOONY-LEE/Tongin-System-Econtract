@@ -272,13 +272,8 @@ const ContractPreviewModalComponent = (props: any) => {
         setNextBoxActive(true);
       }
     }
-    console.log();
   }, [currentPage]);
-  const navigate = useNavigate();
 
-  // const onSignaturePage = () => {
-  //   navigate(`/signature/${reNum}`);
-  // };
   useEffect(() => {
     getContractImage();
   }, []);

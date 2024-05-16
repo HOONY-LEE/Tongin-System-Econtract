@@ -419,8 +419,6 @@ export default function DetailEditComponent(props: any) {
   };
 
   useEffect(() => {
-    console.log("detailData 값 변경");
-
     setDetailData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.name = userName;
@@ -439,7 +437,6 @@ export default function DetailEditComponent(props: any) {
       updatedData.status = status;
       return updatedData;
     });
-    console.log(detailData);
   }, [
     finishContract,
     userName,
@@ -562,7 +559,6 @@ export default function DetailEditComponent(props: any) {
         alert("아직 생성된 계약서가 없습니다.");
         return;
       }
-      console.log("finishContractModal(true)");
       setIsContractFinishModal(true);
     } else {
       putDetailData();
@@ -571,8 +567,6 @@ export default function DetailEditComponent(props: any) {
 
   // 상세정보 수정API
   const putDetailData = async () => {
-    console.log("putDetailData 실행");
-
     if (isContractFinishModal) {
       setIsContractFinishModal(false);
       setCompletionContract(true);
@@ -597,7 +591,6 @@ export default function DetailEditComponent(props: any) {
         setFetchStatus(true);
         setStatus("FAIL");
         alert("상세정보 수정 실패");
-        console.log(response);
       }
     } catch (error) {
       alert("상세정보 수정 실패");

@@ -309,7 +309,6 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
     setBlankBoxVisible(true);
   };
   const onBlankData = () => {
-    console.log("작동하니");
     setBlankBoxVisible(false);
     // setDrawingData((e: any) => drawingData.splice[0]);
     setDrawingData([]);

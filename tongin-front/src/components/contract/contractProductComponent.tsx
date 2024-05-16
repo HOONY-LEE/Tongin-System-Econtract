@@ -41,7 +41,7 @@ const ArticleBox = styled.div<{ index: number }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1vw;
+  font-size: 1.2vw;
   font-weight: 400;
   border-bottom: 0.1vw solid gray;
   ${(props) =>
@@ -66,7 +66,7 @@ const TotalBox = styled.div<{ index: number }>`
 `;
 
 const ColumnName = styled.div`
-  width: 100%;
+  width: 10vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -74,21 +74,30 @@ const ColumnName = styled.div`
   border-right: 0.1vw solid black;
 `;
 
-const ColumnName2 = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const ColumnName2 = styled.div`
+//   width: 10vw;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 const ColumnName3 = styled.div`
-  width: 100%;
+  width: 12vw;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.6vw;
+  font-size: 1vw;
+`;
+
+const ColumnName2 = styled.div`
+  width: 12vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7vw;
 `;
 
 export default function ContractProductComponent(props: any) {
@@ -123,7 +132,7 @@ export default function ContractProductComponent(props: any) {
         <ColumnNameBox>
           <ColumnName>수량</ColumnName>
           <ColumnName>CBM</ColumnName>
-          <ColumnName2>처리방법</ColumnName2>
+          <ColumnName3>처리방법</ColumnName3>
         </ColumnNameBox>
       </RoomNameBox>
       <ContentsBox>
@@ -141,17 +150,17 @@ export default function ContractProductComponent(props: any) {
                   : item.article.cbm}
               </ColumnName>
               {item.article.articleNameEng === "Etc" ? (
-                <ColumnName3>
-                  {item.article.cbm === 0 && item.article.amount === 0
-                    ? ""
-                    : item.article.articleRemark.substring(0, 16)}
-                </ColumnName3>
-              ) : (
                 <ColumnName2>
                   {item.article.cbm === 0 && item.article.amount === 0
                     ? ""
-                    : carryType[item.article.carryType].status}
+                    : item.article.articleRemark.substring(0, 14)}
                 </ColumnName2>
+              ) : (
+                <ColumnName3>
+                  {item.article.cbm === 0 && item.article.amount === 0
+                    ? ""
+                    : carryType[item.article.carryType].status}
+                </ColumnName3>
               )}
             </ArticleBox>
           );
@@ -160,7 +169,7 @@ export default function ContractProductComponent(props: any) {
       <TotalBox index={articleData.articleData.length}>
         <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
         <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-        <ColumnName2></ColumnName2>
+        <ColumnName3></ColumnName3>
       </TotalBox>
     </Wrapper>
   );
