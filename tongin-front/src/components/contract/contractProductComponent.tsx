@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const RoomNameBox = styled.div`
-  height: 3.1vw;
+  height: 3.2vw;
   border-bottom: 0.16vw solid black;
   display: flex;
   flex-direction: column;

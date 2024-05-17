@@ -64,7 +64,6 @@ const TopArea = styled.div`
 `;
 const MidArea = styled.div`
   margin-top: 1vw;
-  /* height: 36vw; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -105,11 +104,18 @@ const ItemArea = styled.div`
   /* height: 36vw; */
   display: flex;
   justify-content: start;
-  align-items: start;
-  border: 0.16vw solid black;
-  /* border-top: 0.16vw solid black;
-  border-bottom: 0.16vw solid black; */
+  /* background-color: red; */
+  /* width: 100%; */
+  /* border: 0.16vw solid black; */
+  /* background-color: red; */
+  border-top: 0.16vw solid black;
+  border-bottom: 0.16vw solid black;
 `;
+
+// const ItemBox = styled.div`
+//   display: flex;
+//   justify-content: ;
+// `
 
 const ItemArea2 = styled.div`
   /* width: 22.8vw; */
@@ -117,6 +123,7 @@ const ItemArea2 = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  /* background-color: red; */
   /* border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black; */
 `;

@@ -60,7 +60,7 @@ const TopTable = styled.div`
   text-align: center;
   width: 100%;
   border-top: 0.16vw solid black;
-  border-bottom: 0.1vw solid #939393;
+  border-bottom: 0.16vw solid black;
   height: 3.2vw;
   margin-bottom: 1vw;
 `;
@@ -79,7 +79,7 @@ const TopTdTitle = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   background-color: #f4f4f4;
   width: 10vw;
   height: 3vw;
@@ -94,7 +94,7 @@ const TopTd = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -107,7 +107,7 @@ const TopTd = styled.div<{
 
 const ApplyInfoTable = styled.div`
   text-align: center;
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   width: 100%;
   margin-bottom: 1vw;
 `;
@@ -115,14 +115,7 @@ const ApplyInfoTable = styled.div`
 const ApplyInfoTable2 = styled.div`
   text-align: center;
   border-top: 0.16vw solid black;
-  font-size: 1.3vw;
-  width: 100%;
-`;
-const ApplyInfoTable3 = styled.div`
-  text-align: center;
-  border-top: 0.1vw solid black;
-  margin-bottom: 1vw;
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   width: 100%;
 `;
 
@@ -145,7 +138,7 @@ const ApplyInfoTdTitle = styled.div<{
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   justify-content: center;
   border-right: ${(props) =>
     props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
@@ -162,7 +155,7 @@ const ApplyInfoTd = styled.div<{
   align-items: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   height: 3vw;
 `;
 const MemoBox = styled.div`
@@ -201,7 +194,7 @@ const TextSpan2 = styled.span`
 
 const MemoRound = styled.div`
   width: 37vw;
-  height: 40vw;
+  height: 36vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -215,7 +208,7 @@ const MemoRound = styled.div`
 
 const TextMemoRound = styled.div`
   width: 37vw;
-  height: 20vw;
+  height: 24vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -612,7 +605,7 @@ const ServiceColumnBox = styled.div`
   width: 100%;
   height: 3vw;
   display: flex;
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   font-weight: 300;
 `;
 
@@ -743,16 +736,6 @@ const FirstPage = (props: any) => {
     }
   };
 
-  // const getDrawingData2 = async () => {
-  //   const response: any = await API.get(`/receipt/detail/${reNum}`);
-  //   if (response.status === 200) {
-  //     const result = response.data.contractSignData;
-  //     setDrawingData2(result);
-  //   } else {
-  //     alert("Fail to getDrawingData2()");
-  //   }
-  // };
-
   useEffect(() => {
     if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
       setDimensions({
@@ -770,9 +753,6 @@ const FirstPage = (props: any) => {
 
   useEffect(() => {
     getDrawingData();
-    // getDrawingData2();
-    // setDrawingData([...lines]);
-    // setDrawingData2([...lines2]);
     setPenColorVisible(true);
     setTool("pen");
     setPenColor("#000000");
@@ -807,7 +787,7 @@ const FirstPage = (props: any) => {
           <ContentArea>
             <TopTable>
               <TopTr>
-                <TopTdTitle $width={"8vw"}>고객명</TopTdTitle>
+                <TopTdTitle>고객명</TopTdTitle>
                 <TopTd>{detailData.name}</TopTd>
                 <TopTdTitle $borderLeft={"0.1vw solid black"}>
                   이사종류
@@ -816,10 +796,9 @@ const FirstPage = (props: any) => {
                 <TopTdTitle $borderLeft={"0.1vw solid black"}>
                   전화번호
                 </TopTdTitle>
-                <TopTd $width={"15vw"}>{detailData.contact}</TopTd>
+                <TopTd>{detailData.contact}</TopTd>
               </TopTr>
             </TopTable>
-            {/* <SubTitle>신청 정보</SubTitle> */}
             <ApplyInfoTable2>
               <ApplyInfoTr>
                 <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
@@ -850,6 +829,41 @@ const FirstPage = (props: any) => {
                       )}
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>이사일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.movingDate === ""
+                    ? "--"
+                    : detailData.movingDate.replace(formattedDate, "$1-$2-$3")}
+                </ApplyInfoTd>
+              </ApplyInfoTr>
+              <ApplyInfoTr>
+                <ApplyInfoTdTitle>포장일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.receptionDate === ""
+                    ? "--"
+                    : detailData.receptionDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle>운반일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.contractDate === ""
+                    ? "--"
+                    : detailData.contractDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle>정리일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.consultationDate === ""
+                    ? "--"
+                    : detailData.consultationDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle></ApplyInfoTdTitle>
                 <ApplyInfoTd>
                   {detailData.movingDate === ""
                     ? "--"
