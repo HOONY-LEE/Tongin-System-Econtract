@@ -46,13 +46,11 @@ const CalculatorComponentWrapper = styled.div`
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  /* /* user-select: none; */
-  /* pointer-events: none; */
-
   width: 90vw;
-  height: 90vh;
+  height: 94vh;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
+  margin-top: 2vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,7 +116,7 @@ const CanvasPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 54vh;
+  height: 64vw;
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -178,7 +176,7 @@ const TextPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 30vw;
+  height: 44vw;
   margin-bottom: 1vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
