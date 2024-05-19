@@ -682,6 +682,7 @@ const FirstPage = (props: any) => {
     lines2,
     setDrawingData,
     setDrawingData2,
+    ladderTruckTotal,
     optionTotalCharge,
     setIsPreviewModalOpen,
   } = props;
@@ -1184,9 +1185,7 @@ const FirstPage = (props: any) => {
                   <PriceItemBox>
                     <PriceItemName>사다리차 비용</PriceItemName>
                     <PriceItemPrice>
-                      <Price>
-                        {optionData.ladderTruck.servicePayment.toLocaleString()}
-                      </Price>
+                      <Price>{ladderTruckTotal.toLocaleString()}</Price>
                       <Unit>₩</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>

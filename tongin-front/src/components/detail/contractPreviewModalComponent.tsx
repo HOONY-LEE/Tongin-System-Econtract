@@ -194,6 +194,7 @@ const ContractPreviewModalComponent = (props: any) => {
     discardCBM,
     setLines,
     setLines2,
+    ladderTruckTotal,
     optionTotalCharge,
     setIsPreviewModalOpen,
     completeReceipt,
@@ -329,6 +330,7 @@ const ContractPreviewModalComponent = (props: any) => {
               articleDataList={articleDataList}
               getDrawingData={getDrawingData}
               optionData={optionData}
+              ladderTruckTotal={ladderTruckTotal}
               optionTotalCharge={optionTotalCharge}
               getDetailList={getDetailList}
             ></FirstPage>
