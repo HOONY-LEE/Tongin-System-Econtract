@@ -254,12 +254,16 @@ export default function ContractComponent(props: any) {
   const [status, setStatus] = useState(""); // toast messege
   const [isContractListModalOpen, setIsContractListModalOpen] =
     useState<boolean>(false);
-
+  const [ladderTruckTotal, setLadderTruckTotal] = useState<number>(
+    optionData.beforeLadderTruck.servicePayment +
+      optionData.afterLadderTruck.servicePayment
+  );
   const [totalCharge, setTotalCharge] = useState<number>(
     priceDataList[3].amount
   );
   const [optionTotal, setOptionTotal] = useState<number>(
-    optionData.ladderTruck.servicePayment +
+    optionData.beforeLadderTruck.servicePayment +
+      optionData.afterLadderTruck.servicePayment +
       optionData.livingService.movingCleaningService.servicePayment +
       optionData.livingService.organizationStorageService.servicePayment +
       optionData.livingService.deodorizationService.servicePayment +
@@ -457,7 +461,7 @@ export default function ContractComponent(props: any) {
               <PriceInputArea>
                 <InputCBMBox>
                   <InputCBMNumber>
-                    {optionData.ladderTruck.servicePayment.toLocaleString()}
+                    {ladderTruckTotal.toLocaleString()}
                   </InputCBMNumber>
                 </InputCBMBox>
                 <SubText>원</SubText>
@@ -613,6 +617,7 @@ export default function ContractComponent(props: any) {
           setDrawingData2={setDrawingData2}
           lines={lines}
           lines2={lines2}
+          ladderTruckTotal={ladderTruckTotal}
           optionTotalCharge={optionTotalCharge}
           articleDataList={articleDataList}
           optionData={optionData}

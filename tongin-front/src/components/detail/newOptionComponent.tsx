@@ -1,23 +1,12 @@
 import styled from "styled-components";
 import CustomButton from "../common/customButton";
 import { useEffect, useState } from "react";
-import RooomsizeInputComoponent from "../common/roomsizeInputComponent";
-import CalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
-import SelectComponent from "../common/selectComponent";
-import RoomSizeCalculatorComponent from "../common/roomSizeCalculatorComponent.tsx";
 import RoomSizeBox from "./roomSizeBox";
-import QuantityInputComponent from "../common/quantityInputComponent";
-import ServiceSelectComponent from "./serviceSelectComponent";
-import DateModalComponent from "./dateModalComponent";
-import { format } from "date-fns";
-import ServicePaymentSelectComponent from "./servicePaymentSelectComponent";
-import OptionProductComponent from "./optionProductComponent";
 import DropdownComponent from "../common/dropdownComponent";
 import OptionBoxComponent from "./optionBoxComponent";
 import CleaningOptionBoxComponent from "./cleaningOptionBoxComponent";
 import CommonOptionBoxComponent from "./commonOptionBoxComponent";
 import OptionListBoxComponent from "./optionListBoxComponent";
-import API from "../../API/API";
 
 const ContentBox = styled.div`
   display: flex;
@@ -58,6 +47,13 @@ const WorkConditionArea = styled.div`
   align-items: center;
   width: 100%;
   height: 8vh;
+`;
+
+const WorkConditionArea2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 100%;
 `;
 
 const ConditionBox = styled.div`
@@ -137,8 +133,12 @@ export default function NewOptionComponent(props: any) {
   const [afterOptionData, setAfterOptionData] = useState(
     optionData.afterWorkCondition
   );
-  const [ladderTruckData, setLadderTruckData] = useState(
-    optionData.ladderTruck
+  const [beforeLadderTruckData, setBeforeLadderTruckData] = useState(
+    optionData.beforeLadderTruck
+  );
+
+  const [afterLadderTruckData, setAfterLadderTruckData] = useState(
+    optionData.afterLadderTruck
   );
 
   const [cleaningService, setCleaningService] = useState(
@@ -176,13 +176,22 @@ export default function NewOptionComponent(props: any) {
     afterOptionData.transportationMethod
   );
 
-  const setLadderTruckSelected = (flag: boolean) => {
-    setLadderTruckData((prev: any) => {
+  const setBeforeLadderTruckSelected = (flag: boolean) => {
+    setBeforeLadderTruckData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.selected = flag;
       return updatedData;
     });
   };
+
+  const setAfterLadderTruckSelected = (flag: boolean) => {
+    setAfterLadderTruckData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.selected = flag;
+      return updatedData;
+    });
+  };
+
   const setCleaningSelected = (flag: boolean) => {
     setCleaningService((prev: any) => {
       const updatedData = { ...prev };
@@ -259,7 +268,8 @@ export default function NewOptionComponent(props: any) {
       updatedData.livingService.movjetService = movjetService;
       updatedData.livingService.otherService = otherService;
       updatedData.optionService = optionServiceList;
-      updatedData.ladderTruck = ladderTruckData;
+      updatedData.beforeLadderTruck = beforeLadderTruckData;
+      updatedData.afterLadderTruck = afterLadderTruckData;
 
       return updatedData;
     });
@@ -274,7 +284,8 @@ export default function NewOptionComponent(props: any) {
     movjetService,
     otherService,
     optionServiceList,
-    ladderTruckData,
+    beforeLadderTruckData,
+    afterLadderTruckData,
   ]);
 
   useEffect(() => {
@@ -328,15 +339,26 @@ export default function NewOptionComponent(props: any) {
               </CondtionContentsBox>
             </ConditionBox>
           </WorkConditionArea>
-          <CheckedOptionBox>
-            <OptionBoxComponent
-              ladderTruckData={ladderTruckData}
-              setLadderTruckData={setLadderTruckData}
-              title={"사다리차 서비스"}
-              isSelected={ladderTruckData.selected}
-              setIsSelected={setLadderTruckSelected}
-            ></OptionBoxComponent>
-          </CheckedOptionBox>
+          <WorkConditionArea2>
+            <CheckedOptionBox>
+              <OptionBoxComponent
+                ladderTruckData={beforeLadderTruckData}
+                setLadderTruckData={setBeforeLadderTruckData}
+                title={"사다리차 서비스(전)"}
+                isSelected={beforeLadderTruckData.selected}
+                setIsSelected={setBeforeLadderTruckSelected}
+              ></OptionBoxComponent>
+            </CheckedOptionBox>
+            <CheckedOptionBox>
+              <OptionBoxComponent
+                ladderTruckData={afterLadderTruckData}
+                setLadderTruckData={setAfterLadderTruckData}
+                title={"사다리차 서비스(후)"}
+                isSelected={afterLadderTruckData.selected}
+                setIsSelected={setAfterLadderTruckSelected}
+              ></OptionBoxComponent>
+            </CheckedOptionBox>
+          </WorkConditionArea2>
           <CheckedOptionBox>
             <CleaningOptionBoxComponent
               optionData={cleaningService}

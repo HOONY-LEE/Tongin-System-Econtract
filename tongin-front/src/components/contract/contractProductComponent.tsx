@@ -97,7 +97,7 @@ const ColumnName2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.7vw;
+  font-size: 0.8vw;
 `;
 
 export default function ContractProductComponent(props: any) {
@@ -153,7 +153,7 @@ export default function ContractProductComponent(props: any) {
                 <ColumnName2>
                   {item.article.cbm === 0 && item.article.amount === 0
                     ? ""
-                    : item.article.articleRemark.substring(0, 14)}
+                    : item.article.articleRemark.substring(0, 12)}
                 </ColumnName2>
               ) : (
                 <ColumnName3>
