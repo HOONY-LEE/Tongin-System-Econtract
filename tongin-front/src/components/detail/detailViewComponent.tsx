@@ -380,14 +380,14 @@ export default function DetailViewComponent(props: any) {
         <UserAddressBox>
           <UserAddressTitle>전 주소</UserAddressTitle>
           <UserAddressInput>
-            {detailData?.preAddress} ({detailData?.preZoneCode})
+            {detailData?.preAddress} ( {detailData?.preZoneCode})
           </UserAddressInput>
           <UserAddressInput>{detailData?.preAddressDetail}</UserAddressInput>
         </UserAddressBox>
         <UserAddressBox>
           <UserAddressTitle>후 주소</UserAddressTitle>
           <UserAddressInput>
-            {detailData?.afterAddress}({detailData?.afterZoneCode})
+            {detailData?.afterAddress} ( {detailData?.afterZoneCode})
           </UserAddressInput>
           <UserAddressInput>{detailData?.afterAddressDetail}</UserAddressInput>
         </UserAddressBox>
@@ -416,6 +416,29 @@ export default function DetailViewComponent(props: any) {
             <MoveDateTitle>이사일</MoveDateTitle>
             <MoveDateInput>
               {detailData?.movingDate?.replace(formattedDate, "$1-$2-$3")}
+            </MoveDateInput>
+          </MoveDateBox>
+        </MoveDateContainer>
+        {/* 새로 추가한 항목/ 수정예정 */}
+        <MoveDateContainer>
+          <MoveDateBox>
+            <MoveDateTitle>포장일</MoveDateTitle>
+            <MoveDateInput>
+              {detailData?.consultationDate?.replace(formattedDate, "$1-$2-$3")}
+            </MoveDateInput>
+          </MoveDateBox>
+          <MoveDateBox>
+            <MoveDateTitle>운반일</MoveDateTitle>
+            <MoveDateInput>
+              {detailData?.movingDate?.replace(formattedDate, "$1-$2-$3")}
+            </MoveDateInput>
+          </MoveDateBox>
+        </MoveDateContainer>
+        <MoveDateContainer>
+          <MoveDateBox>
+            <MoveDateTitle>정리일</MoveDateTitle>
+            <MoveDateInput>
+              {detailData?.consultationDate?.replace(formattedDate, "$1-$2-$3")}
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
