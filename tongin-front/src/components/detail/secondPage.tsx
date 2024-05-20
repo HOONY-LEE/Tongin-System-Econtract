@@ -31,7 +31,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background-color: red; */
 `;
 const HeaderTitle = styled.div`
   display: flex;
@@ -132,8 +131,9 @@ const TopItemArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  border: 0.16vw solid black;
+  /* border: 0.16vw solid black; */
   width: 100%;
+  /* background-color: red; */
 `;
 
 const FooterArea = styled.div`
