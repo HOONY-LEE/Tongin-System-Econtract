@@ -519,12 +519,12 @@ export default function DetailEditComponent(props: any) {
     if (addressType === "prev") {
       setPreZipCode(data.zonecode);
       setPreAddress(
-        `${data.address}${data.buildingName ? " " + data.buildingName : ""}  `
+        `${data.address}${data.buildingName ? "" + data.buildingName : ""}  `
       );
     } else if (addressType === "after") {
       setAfterZipCode(data.zonecode);
       setAfterAddress(
-        `${data.address}${data.buildingName ? " " + data.buildingName : ""} `
+        `${data.address}${data.buildingName ? "" + data.buildingName : ""} `
       );
     }
   };
@@ -691,7 +691,7 @@ export default function DetailEditComponent(props: any) {
             <InputBox
               readOnly
               placeholder="전 주소를 입력해 주세요."
-              value={`${preAddress}${preZipCode ? ` ( ${preZipCode} )` : ""}`}
+              value={`${preAddress}${preZipCode ? ` ( ${preZipCode})` : ""}`}
             ></InputBox>
           </UserAddressEditInput>
           <UserAddressEditInput>
@@ -711,7 +711,7 @@ export default function DetailEditComponent(props: any) {
               }}
               placeholder="후 주소를 입력해 주세요"
               value={`${afterAddress}${
-                afterZipCode ? ` ( ${afterZipCode} )` : ""
+                afterZipCode ? ` ( ${afterZipCode})` : ""
               }`}
               onChange={onChangeHandle}
             ></InputBox>
@@ -750,7 +750,26 @@ export default function DetailEditComponent(props: any) {
             setDateData={setMovingDate}
           ></MoveDateInputComponent>
         </MoveDateContainer>
-
+        <MoveDateContainer>
+          {/* 새로 추가한 항목/ 수정예정 */}
+          <MoveDateInputComponent
+            title={"포장일"}
+            dateData={consultationDate}
+            setDateData={setConsultationDate}
+          ></MoveDateInputComponent>
+          <MoveDateInputComponent
+            title={"운반일"}
+            dateData={movingDate}
+            setDateData={setMovingDate}
+          ></MoveDateInputComponent>
+        </MoveDateContainer>
+        <MoveDateContainer>
+          <MoveDateInputComponent
+            title={"정리일"}
+            dateData={consultationDate}
+            setDateData={setConsultationDate}
+          ></MoveDateInputComponent>
+        </MoveDateContainer>
         <BtnBox>
           <CustomButton
             width={"48%"}
