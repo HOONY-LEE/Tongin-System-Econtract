@@ -29,7 +29,7 @@ const RoomName = styled.div`
 const ColumnNameBox = styled.div`
   height: 1.2vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   font-size: 0.8vw;
   font-weight: 300;
@@ -37,11 +37,11 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 2vw;
+  height: 1.9vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
-  font-size: 1.2vw;
+  font-size: 1vw;
   font-weight: 400;
   border-bottom: 0.1vw solid gray;
   ${(props) =>
@@ -54,7 +54,7 @@ const ArticleBox = styled.div<{ index: number }>`
 const TotalBox = styled.div<{ index: number }>`
   height: 2vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   font-size: 1vw;
   font-weight: 600;
@@ -66,7 +66,7 @@ const TotalBox = styled.div<{ index: number }>`
 `;
 
 const ColumnName = styled.div`
-  width: 10vw;
+  width: 30%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -83,21 +83,22 @@ const ColumnName = styled.div`
 // `;
 
 const ColumnName3 = styled.div`
-  width: 12vw;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1vw;
-`;
-
-const ColumnName2 = styled.div`
-  width: 12vw;
+  width: 40%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.8vw;
+  text-align: center;
+`;
+
+const ColumnName2 = styled.div`
+  width: 3vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7vw;
 `;
 
 export default function ContractProductComponent(props: any) {

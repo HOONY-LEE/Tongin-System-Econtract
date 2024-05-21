@@ -68,7 +68,7 @@ const MidArea = styled.div`
   justify-content: space-between;
 `;
 const NameArea = styled.div`
-  width: 10vw;
+  width: 9vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,10 +105,10 @@ const ItemArea = styled.div`
   justify-content: start;
   /* background-color: red; */
   /* width: 100%; */
-  /* border: 0.16vw solid black; */
+  border: 0.16vw solid black;
   /* background-color: red; */
-  border-top: 0.16vw solid black;
-  border-bottom: 0.16vw solid black;
+  /* border-top: 0.16vw solid black; */
+  /* border-bottom: 0.16vw solid black; */
 `;
 
 // const ItemBox = styled.div`
@@ -123,15 +123,17 @@ const ItemArea2 = styled.div`
   justify-content: space-between;
   align-items: center;
   /* background-color: red; */
-  /* border-top: 0.16vw solid black;
-  border-bottom: 0.16vw solid black; */
+  /* border-top: 0.16vw solid black; */
+  /* border-bottom: 0.16vw solid black; */
 `;
 
 const TopItemArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  /* border: 0.16vw solid black; */
+  border: 0.16vw solid black;
+  /* border-top: 0.16vw solid black;
+  border-bottom: 0.16vw solid black; */
   width: 100%;
   /* background-color: red; */
 `;
@@ -172,8 +174,8 @@ const FooterItem3 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: end;
-  height: 4vw;
-  font-size: 1.6vw;
+  height: 3vw;
+  font-size: 1.2vw;
   border: 0.1vw solid #ababab;
   background-color: #efefef3a;
   border-radius: 0.2vw;
