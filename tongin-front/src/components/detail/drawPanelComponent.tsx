@@ -116,7 +116,7 @@ const CanvasPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 64vw;
+  height: 50vw;
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -176,7 +176,7 @@ const TextPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 44vw;
+  height: 60vw;
   margin-bottom: 1vw;
   background-color: #ffffff;
   border-radius: 0.8vw;

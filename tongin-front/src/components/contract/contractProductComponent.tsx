@@ -22,7 +22,7 @@ const RoomName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1vw;
+  font-size: 10px;
   border-bottom: 0.1vw solid black;
 `;
 
@@ -31,7 +31,7 @@ const ColumnNameBox = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 0.8vw;
+  font-size: 8px;
   font-weight: 300;
   background-color: #f4f4f4;
 `;
@@ -41,7 +41,7 @@ const ArticleBox = styled.div<{ index: number }>`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 400;
   border-bottom: 0.1vw solid gray;
   ${(props) =>
@@ -56,7 +56,7 @@ const TotalBox = styled.div<{ index: number }>`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 600;
   ${(props) =>
     props.index % 2 &&
@@ -88,7 +88,7 @@ const ColumnName3 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.8vw;
+  font-size: 8px;
   text-align: center;
 `;
 
@@ -98,7 +98,7 @@ const ColumnName2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.7vw;
+  font-size: 7px;
 `;
 
 export default function ContractProductComponent(props: any) {

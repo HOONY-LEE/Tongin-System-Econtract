@@ -135,22 +135,10 @@ export default function NewOptionComponent(props: any) {
   );
   const [beforeLadderTruckData, setBeforeLadderTruckData] = useState(
     optionData.beforeLadderTruck
-      ? optionData.beforeLadderTruck
-      : {
-          id: 3,
-          servicePayment: 0,
-          selected: false,
-        }
   );
 
   const [afterLadderTruckData, setAfterLadderTruckData] = useState(
-    optionData.afterLadderTruck !== undefined
-      ? optionData.afterLadderTruck
-      : {
-          id: 3,
-          servicePayment: 0,
-          selected: false,
-        }
+    optionData.afterLadderTruck
   );
 
   const [cleaningService, setCleaningService] = useState(
