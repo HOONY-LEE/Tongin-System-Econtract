@@ -842,30 +842,21 @@ const FirstPage = (props: any) => {
               <ApplyInfoTr>
                 <ApplyInfoTdTitle>포장일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {/* {detailData.receptionDate === ""
+                  {detailData.packageDate === ""
                     ? "--"
-                    : detailData.receptionDate.replace(
-                        formattedDate,
-                        "$1-$2-$3"
-                      )} */}
+                    : detailData.packageDate.replace(formattedDate, "$1-$2-$3")}
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>운반일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {/* {detailData.contractDate === ""
+                  {detailData.carryDate === ""
                     ? "--"
-                    : detailData.contractDate.replace(
-                        formattedDate,
-                        "$1-$2-$3"
-                      )} */}
+                    : detailData.carryDate.replace(formattedDate, "$1-$2-$3")}
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>정리일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {/* {detailData.consultationDate === ""
+                  {detailData.cleanDate === ""
                     ? "--"
-                    : detailData.consultationDate.replace(
-                        formattedDate,
-                        "$1-$2-$3"
-                      )} */}
+                    : detailData.cleanDate.replace(formattedDate, "$1-$2-$3")}
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle></ApplyInfoTdTitle>
                 <ApplyInfoTd>
