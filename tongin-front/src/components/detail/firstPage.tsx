@@ -83,7 +83,7 @@ const TopTdTitle = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1vw;
+  font-size: 12px;
   background-color: #f4f4f4;
   /* background-color: green; */
   width: 10vw;
@@ -99,7 +99,7 @@ const TopTd = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1.2vw;
+  font-size: 12px;
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -112,7 +112,7 @@ const TopTd = styled.div<{
 
 const ApplyInfoTable = styled.div`
   text-align: center;
-  font-size: 1vw;
+  font-size: 10px;
   width: 100%;
   margin-bottom: 1vw;
 `;
@@ -120,7 +120,7 @@ const ApplyInfoTable = styled.div`
 const ApplyInfoTable2 = styled.div`
   text-align: center;
   border-top: 0.16vw solid black;
-  font-size: 1vw;
+  font-size: 10px;
   width: 100%;
 `;
 
@@ -143,7 +143,7 @@ const ApplyInfoTdTitle = styled.div<{
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1vw;
+  font-size: 10px;
   justify-content: center;
   border-right: ${(props) =>
     props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
@@ -160,7 +160,7 @@ const ApplyInfoTd = styled.div<{
   align-items: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
-  font-size: 1vw;
+  font-size: 10px;
   height: 2.6vw;
 `;
 const MemoBox = styled.div`
@@ -185,21 +185,21 @@ const TextMemoBox = styled.div`
 `;
 
 const TextLine = styled.div`
-  font-size: 1.2vw;
+  font-size: 12px;
 `;
 const TextSpan1 = styled.span`
   color: black;
-  font-size: 1.2vw;
+  font-size: 12px;
 `;
 const TextSpan2 = styled.span`
   color: #ff7f3b;
   text-decoration: underline;
-  font-size: 1.2vw;
+  font-size: 12px;
 `;
 
 const MemoRound = styled.div`
   width: 37vw;
-  height: 36vw;
+  height: 24vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -213,7 +213,7 @@ const MemoRound = styled.div`
 
 const TextMemoRound = styled.div`
   width: 37vw;
-  height: 24vw;
+  height: 36vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -226,7 +226,7 @@ const TextMemoRound = styled.div`
 `;
 
 const TextMemoText = styled.pre`
-  font-size: 1.2vw;
+  font-size: 12px;
   font-weight: 300;
   color: #383838;
 `;
@@ -284,11 +284,11 @@ const TotalPriceInput = styled.div`
 `;
 
 const PriceNameInput = styled.p`
-  font-size: 1.8vw;
+  font-size: 18px;
   font-weight: 600;
 `;
 const PriceNameInputEng = styled.p`
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 300;
   padding-left: 0.4vw;
   padding-right: 0.8vw;
@@ -310,7 +310,7 @@ const ImageBox = styled.div`
 
 const AgreementTextLine = styled.div`
   height: 2vw;
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 300;
   display: flex;
   justify-content: space-between;
@@ -360,7 +360,7 @@ const OptionItemName = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f4f4f4;
-  font-size: 1vw;
+  font-size: 10px;
   border-bottom: 0.1vw solid #b4b4b4;
   /* border-right: 0.1vw solid gray; */
 `;
@@ -371,7 +371,7 @@ const OptionItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1vw;
+  font-size: 10px;
   border-bottom: 0.1vw solid #b4b4b4;
   /* border-right: 0.1vw solid gray; */
 `;
@@ -404,12 +404,12 @@ const PriceItemPrice = styled.div`
 `;
 
 const Price = styled.p`
-  font-size: 1.2vw;
+  font-size: 12px;
   font-weight: 400;
   margin-right: 0.4vw;
 `;
 const Unit = styled.p`
-  font-size: 0.8vw;
+  font-size: 8px;
   font-weight: 100;
   padding-top: 0.3vw;
 `;
@@ -418,7 +418,7 @@ const EstimateTable = styled.div`
   text-align: center;
   border-top: 0.1vw solid black;
   /* outline: 1px solid black; */
-  font-size: 1.3vw;
+  font-size: 1.3px;
   width: 100%;
   height: 100%;
 `;
@@ -446,7 +446,7 @@ const EstimateTitle = styled.div<{
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.3vw;
+  font-size: 1.3px;
   justify-content: center;
   border-right: ${(props) =>
     props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
@@ -467,7 +467,7 @@ const EstimateTd = styled.div<{
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.3vw;
+  font-size: 1.3px;
   justify-content: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
@@ -487,7 +487,7 @@ const TotalTitle = styled.div<{
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.3vw;
+  font-size: 1.3px;
   justify-content: center;
 
   border-bottom: 0.1vw solid
@@ -507,7 +507,7 @@ const TotalTd = styled.div<{
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.3vw;
+  font-size: 13px;
   justify-content: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   border-left: ${(props) => (props.$borderLeft ? props.$borderLeft : "")};
@@ -556,7 +556,7 @@ const FooterItem1 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1vw;
+  font-size: 1px;
   font-weight: 500;
 `;
 
@@ -564,7 +564,7 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 200;
 `;
 
@@ -574,7 +574,7 @@ const FooterItem3 = styled.div`
   justify-content: center;
   align-items: end;
   height: 3vw;
-  font-size: 1.2vw;
+  font-size: 12px;
   border: 0.1vw solid #ababab;
   background-color: #efefef3a;
   border-radius: 0.2vw;
@@ -587,7 +587,7 @@ const Index = styled.div`
   align-items: center;
   width: 100%;
   height: 2vw;
-  font-size: 1.4vw;
+  font-size: 14px;
   font-weight: 300;
 `;
 
@@ -610,7 +610,7 @@ const ServiceColumnBox = styled.div`
   width: 100%;
   height: 2.6vw;
   display: flex;
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 300;
 `;
 
@@ -666,7 +666,7 @@ const SignatureNoneBox = styled.div`
 const SignatureNoneBoxText = styled.div`
   color: #d0d0d0;
   font-weight: 500;
-  font-size: 2.4vw;
+  font-size: 24px;
 `;
 // FirstPage 컴포넌트 정의
 const FirstPage = (props: any) => {
@@ -1112,7 +1112,7 @@ const FirstPage = (props: any) => {
                         <Line
                           key={i}
                           points={line.points.map(
-                            (point: number) => point * 0.44
+                            (point: number) => point * 0.41
                           )}
                           stroke={line.stroke}
                           strokeWidth={1}

@@ -83,13 +83,23 @@ const NameTitleBox = styled.div`
   align-items: start;
   border-bottom: 0.16vw solid black;
 `;
+const NameTitleBox2 = styled.div`
+  width: 100%;
+  height: 3.2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  border-bottom: 0.16vw solid black;
+  /* background-color: red; */
+`;
+
 const ItemNameBox = styled.div`
   width: 100%;
 `;
 
 const ProductArea = styled.div`
   width: 12.4vw;
-  font-size: 1.6vw;
   font-weight: 600;
   display: flex;
   flex-direction: column;
@@ -99,25 +109,11 @@ const ProductArea = styled.div`
 `;
 
 const ItemArea = styled.div`
-  /* width: 22.3vw; */
-  /* height: 36vw; */
   display: flex;
   justify-content: start;
-  /* background-color: red; */
-  /* width: 100%; */
   border: 0.16vw solid black;
-  /* background-color: red; */
-  /* border-top: 0.16vw solid black; */
-  /* border-bottom: 0.16vw solid black; */
 `;
-
-// const ItemBox = styled.div`
-//   display: flex;
-//   justify-content: ;
-// `
-
 const ItemArea2 = styled.div`
-  /* width: 22.8vw; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -157,7 +153,7 @@ const FooterItem1 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 500;
 `;
 
@@ -165,7 +161,7 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1vw;
+  font-size: 10px;
   font-weight: 200;
 `;
 
@@ -175,7 +171,7 @@ const FooterItem3 = styled.div`
   justify-content: center;
   align-items: end;
   height: 3vw;
-  font-size: 1.2vw;
+  font-size: 12px;
   border: 0.1vw solid #ababab;
   background-color: #efefef3a;
   border-radius: 0.2vw;
@@ -188,7 +184,7 @@ const Index = styled.div`
   align-items: center;
   width: 100%;
   height: 2vw;
-  font-size: 1.4vw;
+  font-size: 14px;
   font-weight: 300;
 `;
 
@@ -314,9 +310,9 @@ const SecondPage = (props: any) => {
             <ItemArea2>
               <TopItemArea>
                 <NameArea>
-                  <NameTitleBox>
+                  <NameTitleBox2>
                     <Image src="/icon/titleBox.png" width={"100%"}></Image>
-                  </NameTitleBox>
+                  </NameTitleBox2>
                   <ItemNameBox>
                     <ContractProductNameComponent
                       articleDataList={frontDataList[0].articleData}
@@ -335,9 +331,9 @@ const SecondPage = (props: any) => {
               </TopItemArea>
               <TopItemArea>
                 <NameArea>
-                  <NameTitleBox>
+                  <NameTitleBox2>
                     <Image src="/icon/titleBox.png" width={"100%"}></Image>
-                  </NameTitleBox>
+                  </NameTitleBox2>
                   <ItemNameBox>
                     <ContractProductNameComponent
                       articleDataList={backDataList[0].articleData}
@@ -356,9 +352,9 @@ const SecondPage = (props: any) => {
               </TopItemArea>
               <TopItemArea>
                 <NameArea>
-                  <NameTitleBox>
+                  <NameTitleBox2>
                     <Image src="/icon/titleBox.png" width={"100%"}></Image>
-                  </NameTitleBox>
+                  </NameTitleBox2>
                   <ItemNameBox>
                     <ContractProductNameComponent
                       articleDataList={bathroommDataList[0].articleData}
