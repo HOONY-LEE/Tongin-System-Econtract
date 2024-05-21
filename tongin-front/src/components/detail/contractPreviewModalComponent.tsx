@@ -36,22 +36,22 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 94%;
+  width: 86vw;
   height: 98%;
   background-color: white;
   border-radius: 0.8vw;
 `;
 
 const TopArea = styled.div`
-  width: 80vw;
-  height: 8vw;
+  width: 76vw;
+  height: 6vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
 `;
 
 const BottomArea = styled.div`
-  width: 80vw;
+  width: 76vw;
   height: 8vw;
   display: flex;
   justify-content: space-between;
@@ -90,8 +90,8 @@ const CloseBox = styled.div`
 `;
 
 const ContractArea = styled.div`
-  width: 80vw;
-  height: 113vw;
+  width: 76vw;
+  height: 107.4vw;
   outline: 0.2vw solid #e4e4e4;
   border-radius: 0.6vw;
   display: flex;
@@ -100,7 +100,7 @@ const ContractArea = styled.div`
 `;
 
 const ExportBtn = styled.div<{ $disabled: boolean }>`
-  width: 80vw;
+  width: 76vw;
   height: 6vw;
   background-color: ${(props) => (props.$disabled ? "#ff7f3b" : "#e7e7e7")};
   border-radius: 0.4vw;

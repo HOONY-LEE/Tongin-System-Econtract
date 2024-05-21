@@ -61,8 +61,12 @@ const TopTable = styled.div`
   width: 100%;
   border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black;
-  height: 3.2vw;
+  height: 2.8vw;
   margin-bottom: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  /* background-color: red; */
 `;
 const TopTr = styled.div<{
   width?: string;
@@ -79,10 +83,11 @@ const TopTdTitle = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1.2vw;
+  font-size: 1vw;
   background-color: #f4f4f4;
+  /* background-color: green; */
   width: 10vw;
-  height: 3vw;
+  height: 100%;
   display: flex;
   align-items: center;
   font-weight: 500;
@@ -107,7 +112,7 @@ const TopTd = styled.div<{
 
 const ApplyInfoTable = styled.div`
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 1vw;
   width: 100%;
   margin-bottom: 1vw;
 `;
@@ -115,7 +120,7 @@ const ApplyInfoTable = styled.div`
 const ApplyInfoTable2 = styled.div`
   text-align: center;
   border-top: 0.16vw solid black;
-  font-size: 1.2vw;
+  font-size: 1vw;
   width: 100%;
 `;
 
@@ -134,11 +139,11 @@ const ApplyInfoTdTitle = styled.div<{
 }>`
   background-color: #f4f4f4;
   width: ${(props) => (props.$width ? props.$width : "6vw")};
-  height: 3vw;
+  height: 2.6vw;
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.2vw;
+  font-size: 1vw;
   justify-content: center;
   border-right: ${(props) =>
     props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
@@ -155,8 +160,8 @@ const ApplyInfoTd = styled.div<{
   align-items: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
-  font-size: 1.2vw;
-  height: 3vw;
+  font-size: 1vw;
+  height: 2.6vw;
 `;
 const MemoBox = styled.div`
   width: 100%;
@@ -343,7 +348,7 @@ const PriceItemBox = styled.div`
 `;
 
 const PriceItemBox2 = styled.div`
-  width: 14.1vw;
+  width: 13.8vw;
   height: 2.6vw;
   display: flex;
 `;
@@ -383,7 +388,7 @@ const PriceItemName = styled.div`
   background-color: #f4f4f4;
   display: flex;
   align-items: center;
-  font-size: 1.2vw;
+  font-size: 1vw;
   padding-left: 1vw;
   border-bottom: 0.1vw solid #dbdbdb;
 `;
@@ -568,8 +573,8 @@ const FooterItem3 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: end;
-  height: 4vw;
-  font-size: 1.6vw;
+  height: 3vw;
+  font-size: 1.2vw;
   border: 0.1vw solid #ababab;
   background-color: #efefef3a;
   border-radius: 0.2vw;
@@ -603,9 +608,9 @@ const ServiceBox = styled.div`
 
 const ServiceColumnBox = styled.div`
   width: 100%;
-  height: 3vw;
+  height: 2.6vw;
   display: flex;
-  font-size: 1.2vw;
+  font-size: 1vw;
   font-weight: 300;
 `;
 
@@ -787,18 +792,16 @@ const FirstPage = (props: any) => {
           </Header>
           <ContentArea>
             <TopTable>
-              <TopTr>
-                <TopTdTitle>고객명</TopTdTitle>
-                <TopTd>{detailData.name}</TopTd>
-                <TopTdTitle $borderLeft={"0.1vw solid black"}>
-                  이사종류
-                </TopTdTitle>
-                <TopTd>{detailData.movingType}</TopTd>
-                <TopTdTitle $borderLeft={"0.1vw solid black"}>
-                  전화번호
-                </TopTdTitle>
-                <TopTd>{detailData.contact}</TopTd>
-              </TopTr>
+              <TopTdTitle>고객명</TopTdTitle>
+              <TopTd>{detailData.name}</TopTd>
+              <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                이사종류
+              </TopTdTitle>
+              <TopTd>{detailData.movingType}</TopTd>
+              <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                전화번호
+              </TopTdTitle>
+              <TopTd>{detailData.contact}</TopTd>
             </TopTable>
             <ApplyInfoTable2>
               <ApplyInfoTr>
