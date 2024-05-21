@@ -381,6 +381,9 @@ export default function DetailEditComponent(props: any) {
   );
   const [contractDate, setContractDate] = useState(detailData.contractDate);
   const [movingDate, setMovingDate] = useState(detailData.movingDate);
+  const [packageDate, setPackageDate] = useState(detailData.packageDate);
+  const [carryDate, setCarryDate] = useState(detailData.movingDate);
+  const [cleanDate, setCleanDate] = useState(detailData.cleanDate);
   const [preZipCode, setPreZipCode] = useState(detailData.preZoneCode);
   const [afterZipCode, setAfterZipCode] = useState(detailData.afterZoneCode);
 
@@ -754,20 +757,20 @@ export default function DetailEditComponent(props: any) {
           {/* 새로 추가한 항목/ 수정예정 */}
           <MoveDateInputComponent
             title={"포장일"}
-            dateData={consultationDate}
-            setDateData={setConsultationDate}
+            dateData={packageDate}
+            setDateData={setPackageDate}
           ></MoveDateInputComponent>
           <MoveDateInputComponent
             title={"운반일"}
-            dateData={movingDate}
-            setDateData={setMovingDate}
+            dateData={carryDate}
+            setDateData={setCarryDate}
           ></MoveDateInputComponent>
         </MoveDateContainer>
         <MoveDateContainer>
           <MoveDateInputComponent
             title={"정리일"}
-            dateData={consultationDate}
-            setDateData={setConsultationDate}
+            dateData={cleanDate}
+            setDateData={setCleanDate}
           ></MoveDateInputComponent>
         </MoveDateContainer>
         <BtnBox>
