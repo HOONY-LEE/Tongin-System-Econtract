@@ -424,13 +424,13 @@ export default function DetailViewComponent(props: any) {
           <MoveDateBox>
             <MoveDateTitle>포장일</MoveDateTitle>
             <MoveDateInput>
-              {detailData?.consultationDate?.replace(formattedDate, "$1-$2-$3")}
+              {detailData?.packageDate?.replace(formattedDate, "$1-$2-$3")}
             </MoveDateInput>
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>운반일</MoveDateTitle>
             <MoveDateInput>
-              {detailData?.movingDate?.replace(formattedDate, "$1-$2-$3")}
+              {detailData?.carryDate?.replace(formattedDate, "$1-$2-$3")}
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
@@ -438,7 +438,7 @@ export default function DetailViewComponent(props: any) {
           <MoveDateBox>
             <MoveDateTitle>정리일</MoveDateTitle>
             <MoveDateInput>
-              {detailData?.consultationDate?.replace(formattedDate, "$1-$2-$3")}
+              {detailData?.cleanDate?.replace(formattedDate, "$1-$2-$3")}
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
