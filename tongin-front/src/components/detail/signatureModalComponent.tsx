@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   width: 90vw;
-  height: 140vw;
+  height: 94vh;
   transform: translate(-50%, -50%);
 `;
 const CalculatorComponentWrapper = styled.div`
@@ -46,8 +46,9 @@ const CalculatorComponentWrapper = styled.div`
   -o-user-drag: none;
 
   width: 86vw;
-  height: 60vw;
+  height: 54vw;
   background-color: #f2f2f2;
+  /* background-color: red; */
   border-radius: 0.8vw;
   display: flex;
   flex-direction: column;
@@ -75,8 +76,8 @@ const CanvasPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 82vw;
-  height: 50vw;
+  width: 78vw;
+  height: 44vw;
   margin-bottom: 2vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -128,7 +129,7 @@ const ToolContainer = styled.div`
 const UserAgreeBox = styled.div`
   /* z-index: 8000; */
   width: 86vw;
-  height: 62vw;
+  height: 46vw;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
   display: flex;
@@ -137,7 +138,7 @@ const UserAgreeBox = styled.div`
 `;
 const UserAgreeTextBox = styled.div`
   font-size: 2vw;
-  line-height: 4vw;
+  line-height: 2vw;
   font-weight: 500;
   width: 90%;
   display: flex;
@@ -146,7 +147,7 @@ const UserAgreeTextBox = styled.div`
 const UserAgreeText = styled.div`
   font-size: 1.7vw;
   text-align: start;
-  line-height: 3vw;
+  line-height: 2vw;
   font-weight: 500;
   margin-bottom: 1.2vw;
 `;
@@ -154,7 +155,6 @@ const UserAgreeTextFinal = styled.div`
   font-size: 2vw;
   line-height: 3vw;
   font-weight: 700;
-  margin-bottom: 1.2vw;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -162,7 +162,7 @@ const UserAgreeTextFinal = styled.div`
 `;
 const UserAgreeTextEmphasis = styled.div`
   font-size: 1.7vw;
-  line-height: 3vw;
+  line-height: 2vw;
   font-weight: 700;
   margin-bottom: 1.2vw;
   color: #ff7f3b;
@@ -519,9 +519,9 @@ const SignatureModalComponent: React.FC<CalculatorComponentProps> = ({
         <FinishBox>
           <CustomButton
             width={"100%"}
-            height={"8vw"}
+            height={"7vw"}
             text={`완료하기`}
-            size={"3.4vw"}
+            size={"3vw"}
             radius={"0.6vw"}
             disabled={btnDisabled}
             onClick={() => postContractSignData()}
