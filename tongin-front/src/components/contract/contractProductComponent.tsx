@@ -18,7 +18,7 @@ const ContentsBox = styled.div`
 `;
 
 const RoomName = styled.div`
-  height: 1.8vw;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@ const RoomName = styled.div`
 `;
 
 const ColumnNameBox = styled.div`
-  height: 1.2vw;
+  height: 1vw;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -93,7 +93,7 @@ const ColumnName3 = styled.div`
 `;
 
 const ColumnName2 = styled.div`
-  width: 3vw;
+  width: 40%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -129,7 +129,7 @@ export default function ContractProductComponent(props: any) {
   return (
     <Wrapper>
       <RoomNameBox>
-        <RoomName>{articleData.locationName}</RoomName>
+        <RoomName>{articleData.locationName.substring(0, 13)}</RoomName>
         <ColumnNameBox>
           <ColumnName>수량</ColumnName>
           <ColumnName>CBM</ColumnName>

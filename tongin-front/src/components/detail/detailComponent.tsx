@@ -33,6 +33,8 @@ export default function DetailComponent(props: any) {
     fetchStatus,
     setFetchStatus,
     contractImageList,
+    otherDateData,
+    setOtherDateData,
   } = props;
   const [isDetailEdit, setIsDetailEdit] = useState(false);
   const [completionContract, setCompletionContract] = useState<any>(false);
@@ -77,6 +79,8 @@ export default function DetailComponent(props: any) {
             setFetchStatus={setFetchStatus}
             setStatus={setStatus}
             contractImageList={contractImageList}
+            otherDateData={otherDateData}
+            setOtherDateData={setOtherDateData}
           ></DetailEditComponent>
         ) : (
           <DetailViewComponent
@@ -86,6 +90,7 @@ export default function DetailComponent(props: any) {
             detailData={detailData}
             completionContract={completionContract}
             setCompletionContract={setCompletionContract}
+            otherDateData={otherDateData}
           ></DetailViewComponent>
         )}
       </ContentBox>

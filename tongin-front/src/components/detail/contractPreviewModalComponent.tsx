@@ -198,6 +198,7 @@ const ContractPreviewModalComponent = (props: any) => {
     optionTotalCharge,
     setIsPreviewModalOpen,
     completeReceipt,
+    otherDateData,
   } = props;
 
   const [contractImageList, setContractImageList] = useState<any[]>([]);
@@ -333,6 +334,7 @@ const ContractPreviewModalComponent = (props: any) => {
               ladderTruckTotal={ladderTruckTotal}
               optionTotalCharge={optionTotalCharge}
               getDetailList={getDetailList}
+              otherDateData={otherDateData}
             ></FirstPage>
           )}
           {currentPage === 2 && (

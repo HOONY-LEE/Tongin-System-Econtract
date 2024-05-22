@@ -244,6 +244,7 @@ export default function ContractComponent(props: any) {
     setLines2,
     contractImageList,
     getContractImageList,
+    otherDateData,
   } = props;
 
   const [movingCBM, setMovingCBM] = useState<number>(0);
@@ -627,6 +628,7 @@ export default function ContractComponent(props: any) {
           movingCBM={movingCBM}
           discardCBM={discardCBM}
           completeReceipt={completeReceipt}
+          otherDateData={otherDateData}
         />
       )}
     </ContentBox>

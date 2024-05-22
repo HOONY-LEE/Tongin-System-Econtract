@@ -59,6 +59,7 @@ const TopArea = styled.div`
   justify-content: start;
   border-top: 0.16vw solid black;
   border-bottom: 0.16vw solid black;
+  border: 0.16vw solid black;
   width: 100%;
 `;
 const MidArea = styled.div`
@@ -68,7 +69,7 @@ const MidArea = styled.div`
   justify-content: space-between;
 `;
 const NameArea = styled.div`
-  width: 9vw;
+  width: 8.8vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,7 +100,7 @@ const ItemNameBox = styled.div`
 `;
 
 const ProductArea = styled.div`
-  width: 12.4vw;
+  width: 12vw;
   font-weight: 600;
   display: flex;
   flex-direction: column;

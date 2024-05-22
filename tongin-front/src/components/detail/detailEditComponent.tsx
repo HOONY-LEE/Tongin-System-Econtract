@@ -19,6 +19,7 @@ import { useParams } from "react-router-dom";
 import DetailEditContractFinishModal from "./detailEditContractFinishModal";
 import { Toast } from "../common/toastMessegeComponent";
 import MoveDateInputComponent from "./MoveDateInputComponent";
+import { pack } from "html2canvas/dist/types/css/types/color";
 const ContentTop = styled.div`
   display: flex;
   justify-content: space-between;
@@ -360,7 +361,8 @@ export default function DetailEditComponent(props: any) {
     detailData,
     setDetailData,
     getDetailList,
-    completionContract,
+    otherDateData,
+    setOtherDateData,
     setCompletionContract,
     setFetchStatus,
     contractImageList,
@@ -381,9 +383,9 @@ export default function DetailEditComponent(props: any) {
   );
   const [contractDate, setContractDate] = useState(detailData.contractDate);
   const [movingDate, setMovingDate] = useState(detailData.movingDate);
-  const [packageDate, setPackageDate] = useState(detailData.packageDate);
-  const [carryDate, setCarryDate] = useState(detailData.movingDate);
-  const [cleanDate, setCleanDate] = useState(detailData.cleanDate);
+  const [packageDate, setPackageDate] = useState(otherDateData.packageDate);
+  const [carryDate, setCarryDate] = useState(otherDateData.carryDate);
+  const [cleanDate, setCleanDate] = useState(otherDateData.cleanDate);
   const [preZipCode, setPreZipCode] = useState(detailData.preZoneCode);
   const [afterZipCode, setAfterZipCode] = useState(detailData.afterZoneCode);
 
@@ -456,6 +458,17 @@ export default function DetailEditComponent(props: any) {
     afterZipCode,
     statusCode,
   ]);
+
+  useEffect(() => {
+    setOtherDateData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.packageDate = packageDate;
+      updatedData.carryDate = carryDate;
+      updatedData.cleanDate = cleanDate;
+      return updatedData;
+    });
+  }, [packageDate, carryDate, cleanDate]);
+
   //계약서 상태 [계약]일시 계약날짜 추가
   useEffect(() => {
     setDetailData((prev: any) => {
@@ -577,6 +590,7 @@ export default function DetailEditComponent(props: any) {
 
     const requestPram = {
       receiptDetail: detailData,
+      otherDateData: otherDateData,
     };
 
     try {

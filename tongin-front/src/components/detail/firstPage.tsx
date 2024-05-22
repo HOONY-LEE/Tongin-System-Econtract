@@ -284,7 +284,7 @@ const TotalPriceInput = styled.div`
 `;
 
 const PriceNameInput = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 `;
 const PriceNameInputEng = styled.p`
@@ -690,6 +690,7 @@ const FirstPage = (props: any) => {
     ladderTruckTotal,
     optionTotalCharge,
     setIsPreviewModalOpen,
+    otherDateData,
   } = props;
 
   const divRef = useRef<any>(null);
@@ -842,28 +843,33 @@ const FirstPage = (props: any) => {
               <ApplyInfoTr>
                 <ApplyInfoTdTitle>포장일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {detailData.packageDate === ""
+                  {otherDateData.packageDate === ""
                     ? "--"
-                    : detailData.packageDate.replace(formattedDate, "$1-$2-$3")}
+                    : otherDateData.packageDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>운반일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {detailData.carryDate === ""
+                  {otherDateData.carryDate === ""
                     ? "--"
-                    : detailData.carryDate.replace(formattedDate, "$1-$2-$3")}
+                    : otherDateData.carryDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>정리일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {detailData.cleanDate === ""
+                  {otherDateData.cleanDate === ""
                     ? "--"
-                    : detailData.cleanDate.replace(formattedDate, "$1-$2-$3")}
+                    : otherDateData.cleanDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle></ApplyInfoTdTitle>
-                <ApplyInfoTd>
-                  {/* {detailData.movingDate === ""
-                    ? "--"
-                    : detailData.movingDate.replace(formattedDate, "$1-$2-$3")} */}
-                </ApplyInfoTd>
+                <ApplyInfoTd></ApplyInfoTd>
               </ApplyInfoTr>
             </ApplyInfoTable2>
             <ApplyInfoTable>
