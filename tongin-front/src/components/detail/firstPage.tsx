@@ -199,7 +199,7 @@ const TextSpan2 = styled.span`
 
 const MemoRound = styled.div`
   width: 37vw;
-  height: 24vw;
+  height: 20vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -213,7 +213,7 @@ const MemoRound = styled.div`
 
 const TextMemoRound = styled.div`
   width: 37vw;
-  height: 36vw;
+  height: 40vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -235,7 +235,7 @@ const TextMemoText = styled.textarea`
   font-size: 12px;
   font-weight: 300;
   text-align: start;
-  line-height: 1.2vw;
+  line-height: 16px;
   color: #383838;
   border: none;
   width: 100%; /* 원하는 너비 */
