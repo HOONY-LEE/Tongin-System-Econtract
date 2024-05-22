@@ -280,7 +280,7 @@ const BtnBox = styled.div`
   margin: 5vw 0 4vw 0;
 `;
 export default function DetailViewComponent(props: any) {
-  const { detailData, onEditDisable, setOnEditDisable } = props;
+  const { detailData, onEditDisable, otherDateData } = props;
   const { detailEditVisible } = props;
 
   const [currentBtn, setCurrentBtn] = useState(0);
@@ -424,13 +424,13 @@ export default function DetailViewComponent(props: any) {
           <MoveDateBox>
             <MoveDateTitle>포장일</MoveDateTitle>
             <MoveDateInput>
-              {detailData?.packageDate?.replace(formattedDate, "$1-$2-$3")}
+              {otherDateData?.packageDate?.replace(formattedDate, "$1-$2-$3")}
             </MoveDateInput>
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>운반일</MoveDateTitle>
             <MoveDateInput>
-              {detailData?.carryDate?.replace(formattedDate, "$1-$2-$3")}
+              {otherDateData?.carryDate?.replace(formattedDate, "$1-$2-$3")}
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
@@ -438,7 +438,7 @@ export default function DetailViewComponent(props: any) {
           <MoveDateBox>
             <MoveDateTitle>정리일</MoveDateTitle>
             <MoveDateInput>
-              {detailData?.cleanDate?.replace(formattedDate, "$1-$2-$3")}
+              {otherDateData?.cleanDate?.replace(formattedDate, "$1-$2-$3")}
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>

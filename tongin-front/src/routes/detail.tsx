@@ -158,7 +158,7 @@ export default function Detail() {
 
   const [currentTab, setCurrentTab] = useState(0); //tab
   const [detailData, setDetailData] = useState<any[]>([]);
-  // const [articleDataList, setArticleDataList] = useState<any[]>([]);
+  const [otherDateData, setOtherDateData] = useState<any>({});
   const [optionData, setOptionData] = useState<any>({});
   const [currentProductList, setCurrentProductList] = useState<any[]>([]);
   const [priceDataList, setPriceDataList] = useState<any[]>([]);
@@ -205,8 +205,10 @@ export default function Detail() {
     if (response.status === 200) {
       const result = response.data.receiptDetail;
       const result2 = response.data.contractSignData;
+      const result3 = response.data.otherDateData;
       setDetailData(result);
       setLines2(result2);
+      setOtherDateData(result3);
     } else {
       alert("Fail to getDetailList()");
     }
@@ -433,6 +435,8 @@ export default function Detail() {
                   detailData={detailData}
                   setDetailData={setDetailData}
                   contractImageList={contractImageList}
+                  otherDateData={otherDateData}
+                  setOtherDateData={setOtherDateData}
                 ></DetailComponent>
               </DetialTabBox>
             ) : null}
@@ -477,6 +481,7 @@ export default function Detail() {
                   setPriceDataList={setPriceDataList}
                   contractImageList={contractImageList}
                   getContractImageList={getContractImageList}
+                  otherDateData={otherDateData}
                 ></ContractComponent>
               </ContractTabBox>
             ) : null}
