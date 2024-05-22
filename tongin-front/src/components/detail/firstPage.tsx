@@ -220,15 +220,33 @@ const TextMemoRound = styled.div`
   display: flex;
   justify-content: start;
   align-items: start;
-  text-align: start;
-  line-height: 1.6vw;
-  padding: 1.8vw;
+
+  padding: 1vw;
 `;
 
-const TextMemoText = styled.pre`
+// const TextMemoText = styled.pre`
+//   font-size: 12px;
+//   font-weight: 300;
+//   text-align: start;
+//   line-height: 1.2vw;
+//   color: #383838;
+// `;
+const TextMemoText = styled.textarea`
   font-size: 12px;
   font-weight: 300;
+  text-align: start;
+  line-height: 1.2vw;
   color: #383838;
+  border: none;
+  width: 100%; /* 원하는 너비 */
+  height: 100%; /* 원하는 높이 */
+  resize: none; /* 크기 조절 비활성화 */
+  background-color: #fafafa;
+  outline: none; /* 포커스 아웃라인 제거 */
+  :read-only {
+    background-color: #fafafa; /* 읽기 전용일 때 배경색 (선택 사항) */
+  }
+  overflow: hidden;
 `;
 
 const MemoRound2 = styled.div`
@@ -1104,7 +1122,7 @@ const FirstPage = (props: any) => {
             <BottomComponent>
               <MemoBox>
                 <TextMemoRound>
-                  <TextMemoText>{textMemo}</TextMemoText>
+                  <TextMemoText readOnly={true} value={textMemo}></TextMemoText>
                 </TextMemoRound>
                 <MemoRound ref={divRef} id={"CanvasPanel"}>
                   <Stage

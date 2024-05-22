@@ -196,6 +196,9 @@ export default function Login() {
     }
   }, [id, pswd]);
   const onLogin = async (e: React.KeyboardEvent) => {
+    if (desabled) {
+      return;
+    }
     const requestParam = {
       header: {},
       body: {
@@ -301,7 +304,7 @@ export default function Login() {
             </RememberAccountBox>
           </BottomArea>
           <CustomButton
-            onClick={desabled ? "" : onLogin}
+            onClick={(e: React.KeyboardEvent) => onLogin(e)}
             width={"100%"}
             height={"10vw"}
             text={`로그인`}

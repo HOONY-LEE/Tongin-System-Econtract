@@ -230,8 +230,6 @@ export default function Detail() {
   const getOptionList = async () => {
     const response = await API.get(`/receipt/option2/${reNum}`);
     if (response.status === 200) {
-      console.log("response.data.receiptOptionData>>>");
-      console.log(response.data.receiptOptionData);
       setOptionData(response.data.receiptOptionData);
     } else {
       alert("Fail to getOptionList()");

@@ -471,6 +471,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
               placeholder="메모할 내용을 입력해 주세요."
               value={textMemoData}
               onChange={textMemoInput}
+              maxLength={1000}
             ></InputBox>
           </TextPanel>
           <ToolContainer>

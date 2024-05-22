@@ -130,7 +130,7 @@ export default function LandingPage() {
             </Content>
             <Content
               // onClick={disabledSite}
-              onClick={sitePageShow}
+              onClick={() => sitePageShow()}
               $bgColor={"#6AD958"}
               $hoverBgColor={"#93e187"}
             >
@@ -151,7 +151,7 @@ export default function LandingPage() {
             <Content
               $bgColor={"#DBDBDB"}
               $hoverBgColor={"##ffffff"}
-              onClick={disabledSite}
+              onClick={() => disabledSite()}
             >
               <Icon>
                 <LockIcon height={"6vw"} fill={"#ffffff"} />
