@@ -260,28 +260,6 @@ const SignatureLayout: React.FC<CalculatorComponentProps> = ({
     height: 0,
   });
 
-  const targetElement = document.querySelector("#CanvasPanel");
-
-  // targetElement?.addEventListener(
-  //   "pointerdown",
-  //   (event: any) => {
-  //     // Call the appropriate pointer type handler
-  //     switch (event.pointerType) {
-  //       case "mouse":
-  //         setPointerType("mouse");
-  //         break;
-  //       case "pen":
-  //         setPointerType("pen");
-  //         break;
-  //       case "touch":
-  //         setPointerType("touch");
-  //         break;
-  //       default:
-  //         console.log(`pointerType ${event.pointerType} is not supported`);
-  //     }
-  //   },
-  //   false
-  // );
   const isBlank = () => {
     setBlankBoxVisible(true);
   };

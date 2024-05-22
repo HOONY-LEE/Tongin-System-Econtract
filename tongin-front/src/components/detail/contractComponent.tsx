@@ -305,8 +305,8 @@ export default function ContractComponent(props: any) {
 
     try {
       const result = await API.post(`/receipt/complete/${reNum}`, requestParam);
-      console.log("completeReceipt() 성공");
-      console.log(result);
+      alert("계약서 통인CS 업로드 성공");
+      // console.log(result);
     } catch (error) {
       alert("completeRecipt() 실패");
     }
@@ -375,8 +375,6 @@ export default function ContractComponent(props: any) {
     try {
       const response = await API.post(`/receipt/price/${reNum}`, requestParam);
       if (response.status === 200) {
-        // console.log("가격정보 response>>");
-        // console.log(response);
         handleOpenModal();
       } else {
         setFetchStatus(true);
