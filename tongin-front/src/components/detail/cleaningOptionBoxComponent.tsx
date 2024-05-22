@@ -3,7 +3,6 @@ import { Image } from "../common/image";
 import { useEffect, useState } from "react";
 import CommonChargePriceInputBox from "./commonChargePriceInputBox";
 import DropdownComponent from "../common/dropdownComponent";
-import { format } from "date-fns";
 import DateModalComponent from "./dateModalComponent";
 
 const Wrapper = styled.div``;
