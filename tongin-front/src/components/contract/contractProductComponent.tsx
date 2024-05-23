@@ -66,7 +66,7 @@ const TotalBox = styled.div<{ index: number }>`
 `;
 
 const ColumnName = styled.div`
-  width: 30%;
+  width: 32%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -83,7 +83,7 @@ const ColumnName = styled.div`
 // `;
 
 const ColumnName3 = styled.div`
-  width: 40%;
+  width: 36%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -93,7 +93,7 @@ const ColumnName3 = styled.div`
 `;
 
 const ColumnName2 = styled.div`
-  width: 40%;
+  width: 36%;
   height: 100%;
   display: flex;
   justify-content: center;

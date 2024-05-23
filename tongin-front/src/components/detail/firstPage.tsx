@@ -31,7 +31,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background-color: red; */
 `;
 const HeaderTitle = styled.div`
   display: flex;
@@ -66,7 +65,6 @@ const TopTable = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
-  /* background-color: red; */
 `;
 const TopTr = styled.div<{
   width?: string;
@@ -85,14 +83,13 @@ const TopTdTitle = styled.div<{
 }>`
   font-size: 12px;
   background-color: #f4f4f4;
-  /* background-color: green; */
+
   width: 10vw;
   height: 100%;
   display: flex;
   align-items: center;
   font-weight: 500;
   justify-content: center;
-  /* border-left: 0.1vw solid black; */
 `;
 const TopTd = styled.div<{
   $width?: string;
@@ -164,7 +161,7 @@ const ApplyInfoTd = styled.div<{
   height: 2.6vw;
 `;
 const MemoBox = styled.div`
-  width: 100%;
+  width: 38vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -198,7 +195,7 @@ const TextSpan2 = styled.span`
 `;
 
 const MemoRound = styled.div`
-  width: 37vw;
+  width: 38vw;
   height: 20vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
@@ -212,7 +209,7 @@ const MemoRound = styled.div`
 `;
 
 const TextMemoRound = styled.div`
-  width: 37vw;
+  width: 100%;
   height: 40vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
@@ -260,16 +257,17 @@ const MemoRound2 = styled.div`
 const BottomComponent = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 62vw;
-  /* background-color: red; */
 `;
 const PriceListArea = styled.div`
-  width: 48vw;
+  width: 28vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  align-items: end;
 `;
 
 const PriceListBox = styled.div`
@@ -302,11 +300,20 @@ const TotalPriceInput = styled.div`
 `;
 
 const PriceNameInput = styled.p`
-  font-size: 16px;
+  text-align: start;
+  font-size: 14px;
   font-weight: 600;
 `;
+
+const PriceInput = styled.p`
+  text-align: end;
+  font-size: 14px;
+  font-weight: 600;
+  width: 10vw;
+`;
+
 const PriceNameInputEng = styled.p`
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 300;
   padding-left: 0.4vw;
   padding-right: 0.8vw;
@@ -1194,9 +1201,9 @@ const FirstPage = (props: any) => {
                 </PriceListBox>
                 <PriceListBox>
                   <PriceItemBox>
-                    <PriceItemName>이사물량(폐기/운반)</PriceItemName>
+                    <PriceItemName>이사물량(운반/폐기)</PriceItemName>
                     <PriceItemPrice>
-                      <Price>{`${discardCBM}  /  ${movingCBM}`}</Price>
+                      <Price>{`${movingCBM}  /  ${discardCBM}`}</Price>
                       <Unit>cbm</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>
@@ -1260,9 +1267,9 @@ const FirstPage = (props: any) => {
                     <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
                   </TotalPriceName>
                   <TotalPriceInput>
-                    <PriceNameInput>
+                    <PriceInput>
                       {priceDataList[3].amount.toLocaleString()}
-                    </PriceNameInput>
+                    </PriceInput>
                     <PriceNameInputEng>₩</PriceNameInputEng>
                   </TotalPriceInput>
                 </TotalPriceBox>
