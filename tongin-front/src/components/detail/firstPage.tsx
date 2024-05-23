@@ -161,7 +161,7 @@ const ApplyInfoTd = styled.div<{
   height: 2.6vw;
 `;
 const MemoBox = styled.div`
-  width: 38vw;
+  width: 41vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -195,7 +195,7 @@ const TextSpan2 = styled.span`
 `;
 
 const MemoRound = styled.div`
-  width: 38vw;
+  width: 41vw;
   height: 20vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
@@ -262,12 +262,13 @@ const BottomComponent = styled.div`
   height: 62vw;
 `;
 const PriceListArea = styled.div`
-  width: 28vw;
+  width: 24vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: end;
+  /* background-color: red; */
 `;
 
 const PriceListBox = styled.div`
@@ -373,7 +374,7 @@ const PriceItemBox = styled.div`
 `;
 
 const PriceItemBox2 = styled.div`
-  width: 13.8vw;
+  width: 11.8vw;
   height: 2.6vw;
   display: flex;
 `;
