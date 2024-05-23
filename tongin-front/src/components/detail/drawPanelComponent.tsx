@@ -201,7 +201,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
   line-height: 3.2vw;
   /* margin-left: 1vw; */
   font-family: "pretendard";
-  font-size: 2.4vw;
+  font-size: 3vw;
   font-weight: 400;
   resize: none;
   /* outline: 1px solid red; */
