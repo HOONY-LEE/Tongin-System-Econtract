@@ -1388,7 +1388,7 @@ const FirstPage = (props: any) => {
               <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
               <FooterItem3>
                 <div>SERIAL NO.</div>
-                <div>{reNum}</div>
+                <div>{reNum} </div>
               </FooterItem3>
             </FooterItemBox>
             <Index>- 1 -</Index>
