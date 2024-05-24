@@ -259,10 +259,9 @@ const MoveDateInput = styled.div`
 `;
 const MoveBtnContainer = styled.div`
   display: flex;
-
   flex-direction: column;
   width: 100%;
-  margin: 1vw 0 1vw 0;
+  margin: 1vw 0 2vw 0;
 `;
 const MoveBtnBox = styled.div`
   display: flex;
@@ -356,6 +355,42 @@ const BtnBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+const MoveTypeMenu = styled.ul`
+  // 탭 메뉴들 포함하고 있는 영역
+  color: rgb(232, 234, 237);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+
+  width: 100%;
+  height: 5vw;
+  :hover {
+    cursor: pointer;
+  }
+  .submenu {
+    // 각 탭하나당 CSS
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24vw;
+    height: 4.6vw;
+    /* margin-right: 2vw; */
+    font-size: 2vw;
+    transition: 0.2s;
+    border-radius: 0.5vw;
+    background-color: #ebebeb;
+    color: black;
+  }
+
+  .focused {
+    background-color: #ff7f3b;
+    color: white;
+  }
+`;
+
 export default function DetailEditComponent(props: any) {
   const {
     detailData,
@@ -366,6 +401,8 @@ export default function DetailEditComponent(props: any) {
     setCompletionContract,
     setFetchStatus,
     contractImageList,
+    homeMove,
+    storageMove,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -406,19 +443,12 @@ export default function DetailEditComponent(props: any) {
   const [afterAddress, setAfterAddress] = useState(detailData.afterAddress);
   const [userName, setUserName] = useState(detailData.name);
   const [userContact, setUserContact] = useState(detailData.contact);
-  const [currentTab, setCurrentTab] = useState(0); //btn
-  const BtnArr = [
-    { name: "가정이사" },
-    { name: "보관이사" },
-    { name: "기업이사" },
-    { name: "해외이사" },
-    { name: "미니이사" },
-  ];
-
-  const selectMenuHandler = (index: number) => {
-    setCurrentTab(index);
-  };
-
+  const [homeMovingTypeCode, setHomeMovingTypeCode] = useState(
+    detailData.homeMovingTypeCode
+  ); //가정 이사 타입
+  const [storageMoveTypeCode, setStorageMoveTypeCode] = useState(
+    detailData.storageMoveTypeCode
+  ); // 보관 이사 타입
   const onChangUserName = (e: any) => {
     setUserName(e.target.value);
   };
@@ -440,8 +470,11 @@ export default function DetailEditComponent(props: any) {
       updatedData.afterZipCode = afterZipCode;
       updatedData.statusCode = statusCode;
       updatedData.status = status;
+      updatedData.homeMovingTypeCode = homeMovingTypeCode;
+      updatedData.storageMoveTypeCode = storageMoveTypeCode;
       return updatedData;
     });
+    console.log(detailData);
   }, [
     finishContract,
     userName,
@@ -457,6 +490,8 @@ export default function DetailEditComponent(props: any) {
     preZipCode,
     afterZipCode,
     statusCode,
+    homeMovingTypeCode,
+    storageMoveTypeCode,
   ]);
 
   useEffect(() => {
@@ -612,6 +647,17 @@ export default function DetailEditComponent(props: any) {
     }
   };
 
+  const [homeMovecurrentTab, setHomeMoveCurrentTab] = useState(0); //btn
+  const [storageMovecurrentTab, setStorageMoveCurrentTab] = useState(0); //btn
+
+  const selectHomeMoveHandler = (item: any, index: number) => {
+    setHomeMoveCurrentTab(index);
+    setHomeMovingTypeCode(item.content);
+  };
+  const selectStorageMoveHandler = (item: any, index: number) => {
+    setStorageMoveCurrentTab(index);
+    setStorageMoveTypeCode(item.content);
+  };
   return (
     <>
       {isContractFinishModal && (
@@ -739,6 +785,7 @@ export default function DetailEditComponent(props: any) {
             ></InputBox>
           </UserAddressEditInput>
         </UserAddressBox>
+
         <MoveDateContainer>
           <MoveDateInputComponent
             title={"접수일"}
@@ -785,6 +832,44 @@ export default function DetailEditComponent(props: any) {
             setDateData={setCleanDate}
           ></MoveDateInputComponent>
         </MoveDateContainer>
+        <MoveBtnContainer>
+          <MoveBtnTitle>{"가정이사"}</MoveBtnTitle>
+          <MoveBtnBox>
+            <MoveTypeMenu>
+              {homeMove.map((item: any, index: number) => (
+                <li
+                  key={index}
+                  className={
+                    index === homeMovecurrentTab ? "submenu focused" : "submenu"
+                  }
+                  onClick={() => selectHomeMoveHandler(item, index)}
+                >
+                  {item.name}
+                </li>
+              ))}
+            </MoveTypeMenu>
+          </MoveBtnBox>
+        </MoveBtnContainer>
+        <MoveBtnContainer>
+          <MoveBtnTitle>{"보관이사"}</MoveBtnTitle>
+          <MoveBtnBox>
+            <MoveTypeMenu>
+              {storageMove.map((item: any, index: number) => (
+                <li
+                  key={index}
+                  className={
+                    index === storageMovecurrentTab
+                      ? "submenu focused"
+                      : "submenu"
+                  }
+                  onClick={() => selectStorageMoveHandler(item, index)}
+                >
+                  {item.name}
+                </li>
+              ))}
+            </MoveTypeMenu>
+          </MoveBtnBox>
+        </MoveBtnContainer>
         <BtnBox>
           <CustomButton
             width={"48%"}

@@ -233,7 +233,7 @@ const MoveBtnContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 1vw 0 1vw 0;
+  margin: 1vw 0 2vw 0;
 `;
 const MoveBtnBox = styled.div`
   display: flex;
@@ -250,49 +250,51 @@ const MoveBtnTitle = styled.div`
   justify-content: start;
   /* outline: 0.2vw solid red; */
 `;
-const MoveBtn = styled.div`
+const MoveTypeMenu = styled.ul`
+  // 탭 메뉴들 포함하고 있는 영역
+  color: rgb(232, 234, 237);
+  font-weight: bold;
   display: flex;
   align-items: center;
-  font-size: 1.8vw;
-  font-weight: 600;
-  color: #ffffff;
-  width: 15vw;
+  justify-content: space-between;
+  list-style: none;
+
+  width: 100%;
   height: 5vw;
-  background-color: #ff7f3b;
-  justify-content: center;
-  border-radius: 0.6vw;
-  /* margin: 1vw 0 1vw 0; */
+  :hover {
+    cursor: pointer;
+  }
+  .submenu {
+    // 각 탭하나당 CSS
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24vw;
+    height: 4.6vw;
+    /* margin-right: 2vw; */
+    font-size: 2vw;
+    transition: 0.2s;
+    border-radius: 0.5vw;
+    background-color: #ebebeb;
+    color: black;
+  }
+
+  .focused {
+    background-color: #ff7f3b;
+    color: white;
+  }
 `;
-const MoveBtnDesabled = styled.div`
-  width: 15vw;
-  display: flex;
-  align-items: center;
-  font-size: 1.8vw;
-  font-weight: 600;
-  /* color: #ffffff; */
-  height: 5vw;
-  background-color: #f4f4f4;
-  justify-content: center;
-  border-radius: 0.6vw;
-  /* margin: 1vw 0 1vw 0; */
-`;
+
 const BtnBox = styled.div`
   margin: 5vw 0 4vw 0;
 `;
 export default function DetailViewComponent(props: any) {
-  const { detailData, onEditDisable, otherDateData } = props;
+  const { detailData, onEditDisable, otherDateData, homeMove, storageMove } =
+    props;
   const { detailEditVisible } = props;
 
   const [currentBtn, setCurrentBtn] = useState(0);
   const [detailUserData, setDetailUserData] = useState<any[]>([]);
-
-  const BtnArr = [
-    { name: "가정이사" },
-    { name: "보관이사" },
-    { name: "기업이사" },
-    { name: "해외이사" },
-    { name: "미니이사" },
-  ];
 
   const userStatusColor = (status: string) => {
     switch (status) {
@@ -318,6 +320,31 @@ export default function DetailViewComponent(props: any) {
         return "#9BAABB";
       default:
         return "#ff2aa3";
+    }
+  };
+
+  const homeMoveType = (code: string) => {
+    switch (code) {
+      case "P01225":
+        return 0;
+      case "P01226":
+        return 1;
+      case "P01224":
+        return 2;
+      default:
+        return false;
+    }
+  };
+  const storageMoveType = (code: string) => {
+    switch (code) {
+      case "P01228":
+        return 0;
+      case "P01229":
+        return 1;
+      case "P01230":
+        return 2;
+      default:
+        return false;
     }
   };
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
@@ -346,7 +373,7 @@ export default function DetailViewComponent(props: any) {
           <ContentTopRh>
             <InfoRhBox>
               <InfoRhTitle>계약담당자</InfoRhTitle>
-              <InfoRhContent>{detailData?.branch?.branchBoss}</InfoRhContent>
+              <InfoRhContent>{detailData?.planner?.name}</InfoRhContent>
             </InfoRhBox>
             <InfoRhBox>
               <InfoRhTitle>담당자연락처</InfoRhTitle>
@@ -442,7 +469,45 @@ export default function DetailViewComponent(props: any) {
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
-
+        <MoveBtnContainer>
+          <MoveBtnTitle>{"가정이사"}</MoveBtnTitle>
+          <MoveBtnBox>
+            <MoveTypeMenu>
+              {homeMove.map((item: any, index: number) => (
+                <li
+                  key={index}
+                  className={
+                    index === homeMoveType(detailData?.homeMovingTypeCode)
+                      ? "submenu focused"
+                      : "submenu"
+                  }
+                >
+                  {item.name}
+                </li>
+              ))}
+            </MoveTypeMenu>
+          </MoveBtnBox>
+        </MoveBtnContainer>
+        <MoveBtnContainer>
+          <MoveBtnTitle>{"보관이사"}</MoveBtnTitle>
+          <MoveBtnBox>
+            <MoveTypeMenu>
+              {storageMove.map((item: any, index: number) => (
+                <li
+                  key={index}
+                  className={
+                    index === storageMoveType(detailData?.storageMovingTypeCode)
+                      ? "submenu focused"
+                      : "submenu"
+                  }
+                >
+                  {item.name}
+                  {item.index}
+                </li>
+              ))}
+            </MoveTypeMenu>
+          </MoveBtnBox>
+        </MoveBtnContainer>
         <BtnBox>
           <CustomButton
             onClick={() => detailEditVisible(true)}

@@ -42,7 +42,17 @@ export default function DetailComponent(props: any) {
 
   // const [fetchStatus, setFetchStatus] = useState(false); // toast messege
   // const [status, setStatus] = useState(false); // toast messege
+  const homeMove = [
+    { name: "스탠다드", content: "P01225" },
+    { name: "프리미엄", content: "P01226" },
+    { name: "VIP", content: "P01224" },
+  ];
 
+  const storageMove = [
+    { name: "스탠다드 보관", content: "P01228" },
+    { name: "프리미엄 보관", content: "P01229" },
+    { name: "VIP 보관", content: "P01230" },
+  ];
   const detailEditVisible = (mode: any) => {
     if (mode) {
       setIsDetailEdit(true);
@@ -70,6 +80,8 @@ export default function DetailComponent(props: any) {
         )}
         {isDetailEdit ? (
           <DetailEditComponent
+            homeMove={homeMove}
+            storageMove={storageMove}
             getDetailList={getDetailList}
             detailData={detailData}
             setDetailData={setDetailData}
@@ -84,6 +96,8 @@ export default function DetailComponent(props: any) {
           ></DetailEditComponent>
         ) : (
           <DetailViewComponent
+            homeMove={homeMove}
+            storageMove={storageMove}
             onEditDisable={onEditDisable}
             setOnEditDisable={setOnEditDisable}
             detailEditVisible={detailEditVisible}
