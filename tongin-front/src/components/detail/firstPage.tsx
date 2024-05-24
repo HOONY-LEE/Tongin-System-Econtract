@@ -59,6 +59,16 @@ const TopTable = styled.div`
   text-align: center;
   width: 100%;
   border-top: 0.16vw solid black;
+  /* border-bottom: 0.16vw solid black; */
+  height: 2.8vw;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+`;
+const TopTableTd = styled.div`
+  text-align: center;
+  width: 100%;
+  /* border-top: 0.16vw solid black; */
   border-bottom: 0.16vw solid black;
   height: 2.8vw;
   margin-bottom: 1vw;
@@ -103,7 +113,7 @@ const TopTd = styled.div<{
   justify-content: center;
   width: 13.3vw;
   height: 3vw;
-  /* border-left: 0.1vw solid black; */
+  border-bottom: 0.1vw solid #e4e4e4;
   /* border-right: 0.1vw solid black; */
 `;
 
@@ -339,6 +349,7 @@ const AgreementTextLine = styled.div`
   font-size: 10px;
   font-weight: 300;
   display: flex;
+  text-align: start;
   justify-content: space-between;
   align-items: center;
 `;
@@ -541,7 +552,7 @@ const TotalTd = styled.div<{
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 const BottomLine = styled.div`
-  margin-top: 1vw;
+  margin-top: 0.4vw;
   width: 100%;
   border-top: 0.1vw solid black;
 `;
@@ -612,7 +623,7 @@ const Index = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 2vw;
+  height: 0.5vw;
   font-size: 14px;
   font-weight: 300;
 `;
@@ -811,8 +822,8 @@ const FirstPage = (props: any) => {
             <LogoImg>
               <Image
                 src="/icon/tonginLogo.png"
-                width={"100%"}
-                height={"100%"}
+                width={"70%"}
+                height={"70%"}
               ></Image>
             </LogoImg>
             <HeaderTitle>계약서 • 견적서</HeaderTitle>
@@ -830,6 +841,17 @@ const FirstPage = (props: any) => {
               </TopTdTitle>
               <TopTd>{detailData.contact}</TopTd>
             </TopTable>
+            <TopTableTd>
+              <TopTdTitle>담당자</TopTdTitle>
+              <TopTd>{detailData.planner.name}</TopTd>
+              <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                담당자연락처
+              </TopTdTitle>
+              <TopTd>{detailData.planner.contact}</TopTd>
+              <TopTdTitle $borderLeft={"0.1vw solid black"}>지점명</TopTdTitle>
+              <TopTd>{detailData.branch.region}</TopTd>
+            </TopTableTd>
+
             <ApplyInfoTable2>
               <ApplyInfoTr>
                 <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
@@ -1366,7 +1388,7 @@ const FirstPage = (props: any) => {
               <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
               <FooterItem3>
                 <div>SERIAL NO.</div>
-                <div>{reNum}</div>
+                <div>{reNum} </div>
               </FooterItem3>
             </FooterItemBox>
             <Index>- 1 -</Index>
