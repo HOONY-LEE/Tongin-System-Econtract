@@ -566,8 +566,8 @@ export default function SiteDetailComponent(props: any) {
       toAddr1.length &&
       toAddr2.length &&
       visitDate.length &&
-      serReqDt.length &&
-      movingTypeCode.lenth
+      serReqDt.length
+      // movingTypeCode.lenth
     ) {
       setValidation(true);
     } else {
