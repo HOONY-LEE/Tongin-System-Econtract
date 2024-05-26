@@ -545,6 +545,27 @@ export default function DetailEditComponent(props: any) {
     }
   }, [statusCode]);
 
+  useEffect(() => {
+    const index = findSelectedIndex(movingTypeCode);
+    setSelectedMovingType(index);
+  }, []);
+
+  // 아이템 코드로 index를 반환하는 함수
+  const findSelectedIndex = (movingTypeCode: string) => {
+    const selectedIndex = movingTypeList.filter(
+      (item: any) => item.moveType === movingTypeCode
+    );
+    return selectedIndex[0].id;
+    // let result = 0;
+    // movingTypeList.forEach((item: any) => {
+    //   if (item.moveType === movingTypeCode) {
+    //     // console.log(item.id);
+    //     result = item.id;
+    //   }
+    // });
+    // return result;
+  };
+
   const onChangUserContact = (e: any) => {
     const regExp = /[^0-9]/g;
     let formattedValue = e.target.value.replace(regExp, "").substring(0, 13);
