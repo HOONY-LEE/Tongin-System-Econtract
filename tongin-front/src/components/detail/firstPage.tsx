@@ -245,7 +245,7 @@ const TextMemoRound = styled.div`
 //   line-height: 1.2vw;
 //   color: #383838;
 // `;
-const TextMemoText = styled.textarea`
+const TextMemoText = styled.pre`
   font-size: 12px;
   font-weight: 300;
   text-align: start;
@@ -1184,7 +1184,7 @@ const FirstPage = (props: any) => {
             <BottomComponent>
               <MemoBox>
                 <TextMemoRound>
-                  <TextMemoText readOnly={true} value={textMemo}></TextMemoText>
+                  <TextMemoText>{textMemo}</TextMemoText>
                 </TextMemoRound>
                 <MemoRound ref={divRef} id={"CanvasPanel"}>
                   <Stage
