@@ -91,14 +91,13 @@ const TopTdTitle = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 12px;
+  font-size: 10px;
   background-color: #f4f4f4;
-
   width: 10vw;
   height: 100%;
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 400;
   justify-content: center;
 `;
 const TopTd = styled.div<{
@@ -106,7 +105,7 @@ const TopTd = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 12px;
+  font-size: 10px;
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -118,6 +117,7 @@ const TopTd = styled.div<{
 `;
 
 const ApplyInfoTable = styled.div`
+  display: flex;
   text-align: center;
   font-size: 10px;
   width: 100%;
@@ -139,17 +139,25 @@ const ApplyInfoTr = styled.div<{
   justify-content: space-between;
   border-bottom: 0.1vw solid #e4e4e4;
 `;
+
+const WorkConditionBox = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+`;
+
 const ApplyInfoTdTitle = styled.div<{
   $width?: string;
   $borderRight?: string;
   $borderLeft?: string;
 }>`
   background-color: #f4f4f4;
-  width: ${(props) => (props.$width ? props.$width : "6vw")};
+  width: ${(props) => (props.$width ? props.$width : "6.12vw")};
   height: 2.6vw;
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 10px;
   justify-content: center;
   border-right: ${(props) =>
@@ -175,7 +183,7 @@ const MemoBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
 `;
 
 const TextMemoBox = styled.div`
@@ -206,7 +214,7 @@ const TextSpan2 = styled.span`
 
 const MemoRound = styled.div`
   width: 41vw;
-  height: 20vw;
+  height: 18vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -215,19 +223,18 @@ const MemoRound = styled.div`
   align-items: center;
   padding-top: 2vw;
   padding-left: 2vw;
-  margin-bottom: 1vw;
+  margin-top: 1vw;
 `;
 
 const TextMemoRound = styled.div`
   width: 100%;
-  height: 40vw;
+  height: 38vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
   display: flex;
   justify-content: start;
   align-items: start;
-
   padding: 1vw;
 `;
 
@@ -269,7 +276,7 @@ const BottomComponent = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 62vw;
+  height: 60vw;
 `;
 const PriceListArea = styled.div`
   width: 24vw;
@@ -278,7 +285,6 @@ const PriceListArea = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: end;
-  /* background-color: red; */
 `;
 
 const PriceListBox = styled.div`
@@ -290,7 +296,7 @@ const PriceListBox = styled.div`
 
 const TotalPriceBox = styled.div`
   width: 100%;
-  height: 4vw;
+  height: 24px;
   display: flex;
   border-bottom: 0.16vw solid black;
 `;
@@ -300,7 +306,6 @@ const TotalPriceName = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 1vw;
 `;
 const TotalPriceInput = styled.div`
   width: 54%;
@@ -312,13 +317,13 @@ const TotalPriceInput = styled.div`
 
 const PriceNameInput = styled.p`
   text-align: start;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
 `;
 
 const PriceInput = styled.p`
   text-align: end;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   width: 10vw;
 `;
@@ -333,10 +338,10 @@ const PriceNameInputEng = styled.p`
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 7vw;
+  height: 70px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   border-bottom: 0.16vw solid black;
   /* background-color: gray; */
 `;
@@ -345,8 +350,10 @@ const ImageBox = styled.div`
 `;
 
 const AgreementTextLine = styled.div`
-  height: 2vw;
-  font-size: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  height: 20px;
+  font-size: 9px;
   font-weight: 300;
   display: flex;
   text-align: start;
@@ -356,8 +363,7 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 8.2vw;
-
+  height: 8vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 0.16vw solid black;
@@ -921,16 +927,18 @@ const FirstPage = (props: any) => {
               </ApplyInfoTr>
             </ApplyInfoTable2>
             <ApplyInfoTable>
-              <ApplyInfoTr>
-                <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
-                <ApplyInfoTd $width={"56%"}>
-                  {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
-                </ApplyInfoTd>
+              <WorkConditionBox>
                 <ApplyInfoTdTitle $width={"18%"}>
                   작업조건 (전)
                 </ApplyInfoTdTitle>
                 <ApplyInfoTd
-                  $width={"14%"}
+                  $width={"52%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
+                </ApplyInfoTd>
+                <ApplyInfoTd
+                  $width={"15%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {
@@ -939,11 +947,35 @@ const FirstPage = (props: any) => {
                     ].status
                   }
                 </ApplyInfoTd>
-                <ApplyInfoTd $width={"14%"}>
+                <ApplyInfoTd $width={"15%"}>
                   {optionData.beforeWorkCondition.pyeong}(평)
                 </ApplyInfoTd>
-              </ApplyInfoTr>
-              <ApplyInfoTr>
+              </WorkConditionBox>
+              <WorkConditionBox>
+                <ApplyInfoTdTitle $width={"18%"}>
+                  작업조건 (전)
+                </ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"52%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
+                </ApplyInfoTd>
+                <ApplyInfoTd
+                  $width={"15%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {
+                    transportationMethodList[
+                      optionData.beforeWorkCondition.transportationMethod
+                    ].status
+                  }
+                </ApplyInfoTd>
+                <ApplyInfoTd $width={"15%"}>
+                  {optionData.beforeWorkCondition.pyeong}(평)
+                </ApplyInfoTd>
+              </WorkConditionBox>
+              {/* <ApplyInfoTr>
                 <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
                 <ApplyInfoTd $width={"56%"}>
                   {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
@@ -964,7 +996,7 @@ const FirstPage = (props: any) => {
                 <ApplyInfoTd $width={"14%"}>
                   {optionData.afterWorkCondition.pyeong}(평)
                 </ApplyInfoTd>
-              </ApplyInfoTr>
+              </ApplyInfoTr> */}
             </ApplyInfoTable>
 
             <ServiceArea>
@@ -1298,15 +1330,14 @@ const FirstPage = (props: any) => {
                 </TotalPriceBox>
                 <AgreementBox>
                   <AgreementTextLine>
-                    본인은 (주)통인익스프레스 견적•계약 진행에 따른 약관 및 이용
+                    본인은 (주)통인익스프레스 견적•계약에 따른 약관 및 이용
                     안내에
                   </AgreementTextLine>
                   <AgreementTextLine>
-                    대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신총하고
-                    개인정보
+                    대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신청하고
                   </AgreementTextLine>
                   <AgreementTextLine>
-                    수집 및 활용에 동의합니다.
+                    개인정보 수집 및 활용에 동의합니다.
                     <ImageBox>
                       <Image
                         src={`/icon/${
@@ -1341,7 +1372,7 @@ const FirstPage = (props: any) => {
                                 <Line
                                   key={i}
                                   points={line.points.map(
-                                    (point: number) => point * 0.2
+                                    (point: number) => point * 0.16
                                   )}
                                   stroke={line.stroke}
                                   strokeWidth={1}
