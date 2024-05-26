@@ -497,7 +497,11 @@ export default function SiteDetailComponent(props: any) {
       return;
     }
 
+    console.log("자체견적 요청");
+    console.log(requestPram);
+
     const response: any = await API.post("/receipt/self", requestPram);
+
     if (response.status === 200) {
       navigate(`/contractlist`, {
         state: {
