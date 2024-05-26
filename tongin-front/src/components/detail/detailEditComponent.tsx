@@ -20,6 +20,7 @@ import DetailEditContractFinishModal from "./detailEditContractFinishModal";
 import { Toast } from "../common/toastMessegeComponent";
 import MoveDateInputComponent from "./MoveDateInputComponent";
 import { pack } from "html2canvas/dist/types/css/types/color";
+import DropdownComponent from "../common/dropdownComponent";
 const ContentTop = styled.div`
   display: flex;
   justify-content: space-between;
@@ -34,18 +35,28 @@ const ContentTopLFBox = styled.div`
   justify-content: space-between;
   height: 20vw;
   flex-direction: column;
-  /* outline: 0.2vw solid red; */
   margin: 0.7vh 0vh 0.7vh 0vh;
 `;
 const ContentTopLF = styled.div`
   display: flex;
   align-items: start;
+`;
+
+const ContentTopLF2Box = styled.div`
+  display: flex;
+  justify-content: start;
+`;
+
+const ContentTopLF2 = styled.div`
+  display: flex;
+  align-items: start;
+  width: 22vw;
   /* outline: 0.2vw solid red; */
 `;
+
 const ContentTopRhBox = styled.div`
   display: flex;
   height: 20vw;
-  /* outline: 0.2vw solid red; */
 `;
 const ContentTopRh = styled.div`
   display: flex;
@@ -96,9 +107,8 @@ const InfoLfEditContent = styled.div`
   font-weight: 600;
   flex-direction: column;
   align-items: start;
-  /* outline: 0.2vw solid blue; */
   background-color: white;
-  outline: 0.2vw solid #dbdbdb;
+  border: 0.2vw solid #dbdbdb;
   border-radius: 0.5vw;
   justify-content: start;
   padding-left: 2vw;
@@ -391,6 +401,14 @@ const MoveTypeMenu = styled.ul`
   }
 `;
 
+const DropdownBox = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  width: 21vw;
+  height: 5vw;
+`;
+
 export default function DetailEditComponent(props: any) {
   const {
     detailData,
@@ -401,8 +419,7 @@ export default function DetailEditComponent(props: any) {
     setCompletionContract,
     setFetchStatus,
     contractImageList,
-    homeMove,
-    storageMove,
+    movingTypeList,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -443,17 +460,17 @@ export default function DetailEditComponent(props: any) {
   const [afterAddress, setAfterAddress] = useState(detailData.afterAddress);
   const [userName, setUserName] = useState(detailData.name);
   const [userContact, setUserContact] = useState(detailData.contact);
-  const [homeMovingTypeCode, setHomeMovingTypeCode] = useState(
-    detailData.homeMovingTypeCode
-  ); //가정 이사 타입
-  const [storageMoveTypeCode, setStorageMoveTypeCode] = useState(
-    detailData.storageMoveTypeCode
-  ); // 보관 이사 타입
+  const [movingTypeCode, setMovingTypeCode] = useState(
+    detailData.movingTypeCode
+  );
+  const [selectedMovingType, setSelectedMovingType] = useState<number>(0);
+
   const onChangUserName = (e: any) => {
     setUserName(e.target.value);
   };
 
   useEffect(() => {
+    console.log("detalData변경");
     setDetailData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.name = userName;
@@ -470,11 +487,9 @@ export default function DetailEditComponent(props: any) {
       updatedData.afterZipCode = afterZipCode;
       updatedData.statusCode = statusCode;
       updatedData.status = status;
-      updatedData.homeMovingTypeCode = homeMovingTypeCode;
-      updatedData.storageMoveTypeCode = storageMoveTypeCode;
+      updatedData.movingTypeCode = movingTypeCode;
       return updatedData;
     });
-    console.log(detailData);
   }, [
     finishContract,
     userName,
@@ -490,9 +505,12 @@ export default function DetailEditComponent(props: any) {
     preZipCode,
     afterZipCode,
     statusCode,
-    homeMovingTypeCode,
-    storageMoveTypeCode,
+    movingTypeCode,
   ]);
+
+  useEffect(() => {
+    setMovingTypeCode(movingTypeList[selectedMovingType].moveType);
+  }, [selectedMovingType]);
 
   useEffect(() => {
     setOtherDateData((prev: any) => {
@@ -626,6 +644,8 @@ export default function DetailEditComponent(props: any) {
       otherDateData: otherDateData,
     };
 
+    console.log("상세정보 수정 실행");
+    console.log(requestPram);
     try {
       const response: any = await API.put(
         `/receipt/detail/${reNum}`,
@@ -647,17 +667,6 @@ export default function DetailEditComponent(props: any) {
     }
   };
 
-  const [homeMovecurrentTab, setHomeMoveCurrentTab] = useState(0); //btn
-  const [storageMovecurrentTab, setStorageMoveCurrentTab] = useState(0); //btn
-
-  const selectHomeMoveHandler = (item: any, index: number) => {
-    setHomeMoveCurrentTab(index);
-    setHomeMovingTypeCode(item.content);
-  };
-  const selectStorageMoveHandler = (item: any, index: number) => {
-    setStorageMoveCurrentTab(index);
-    setStorageMoveTypeCode(item.content);
-  };
   return (
     <>
       {isContractFinishModal && (
@@ -681,7 +690,7 @@ export default function DetailEditComponent(props: any) {
               <InfoLfTitle>고객명</InfoLfTitle>
               <InfoLfEditContent>
                 <InputBox
-                  placeholder="고객명을 입력해 주세요"
+                  placeholder="고객명"
                   defaultValue={userName}
                   onChange={onChangUserName}
                 ></InputBox>
@@ -692,18 +701,33 @@ export default function DetailEditComponent(props: any) {
               <InfoLfContent>{detailData?.recNum}</InfoLfContent>
             </InfoLfBox>
           </ContentTopLF>
-          <ContentTopLF>
-            <InfoLfBox>
-              <InfoLfTitle>전화번호</InfoLfTitle>
-              <InfoLfEditContent>
-                <InputBox
-                  placeholder="전화번호를 입력해 주세요"
-                  defaultValue={userContact}
-                  onChange={onChangUserContact}
-                ></InputBox>
-              </InfoLfEditContent>
-            </InfoLfBox>
-          </ContentTopLF>
+          <ContentTopLF2Box>
+            <ContentTopLF2>
+              <InfoLfBox>
+                <InfoLfTitle>전화번호</InfoLfTitle>
+                <InfoLfEditContent>
+                  <InputBox
+                    placeholder="전화번호"
+                    defaultValue={userContact}
+                    onChange={onChangUserContact}
+                  ></InputBox>
+                </InfoLfEditContent>
+              </InfoLfBox>
+            </ContentTopLF2>
+            <ContentTopLF2>
+              <InfoLfBox>
+                <InfoLfTitle>이사종류</InfoLfTitle>
+                <DropdownBox>
+                  <DropdownComponent
+                    selected={selectedMovingType}
+                    setSelected={setSelectedMovingType}
+                    dropdownList={movingTypeList}
+                    border={`0.2vw solid #dbdbdb;`}
+                  ></DropdownComponent>
+                </DropdownBox>
+              </InfoLfBox>
+            </ContentTopLF2>
+          </ContentTopLF2Box>
         </ContentTopLFBox>
         <ContentTopRhBox>
           <ContentTopRh>
@@ -832,7 +856,7 @@ export default function DetailEditComponent(props: any) {
             setDateData={setCleanDate}
           ></MoveDateInputComponent>
         </MoveDateContainer>
-        <MoveBtnContainer>
+        {/* <MoveBtnContainer>
           <MoveBtnTitle>{"가정이사"}</MoveBtnTitle>
           <MoveBtnBox>
             <MoveTypeMenu>
@@ -869,7 +893,7 @@ export default function DetailEditComponent(props: any) {
               ))}
             </MoveTypeMenu>
           </MoveBtnBox>
-        </MoveBtnContainer>
+        </MoveBtnContainer> */}
         <BtnBox>
           <CustomButton
             width={"48%"}

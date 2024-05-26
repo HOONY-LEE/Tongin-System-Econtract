@@ -289,8 +289,7 @@ const BtnBox = styled.div`
   margin: 5vw 0 4vw 0;
 `;
 export default function DetailViewComponent(props: any) {
-  const { detailData, onEditDisable, otherDateData, homeMove, storageMove } =
-    props;
+  const { detailData, onEditDisable, otherDateData, movingTypeList } = props;
   const { detailEditVisible } = props;
 
   const [currentBtn, setCurrentBtn] = useState(0);
@@ -469,7 +468,7 @@ export default function DetailViewComponent(props: any) {
             </MoveDateInput>
           </MoveDateBox>
         </MoveDateContainer>
-        <MoveBtnContainer>
+        {/* <MoveBtnContainer>
           <MoveBtnTitle>{"가정이사"}</MoveBtnTitle>
           <MoveBtnBox>
             <MoveTypeMenu>
@@ -507,7 +506,7 @@ export default function DetailViewComponent(props: any) {
               ))}
             </MoveTypeMenu>
           </MoveBtnBox>
-        </MoveBtnContainer>
+        </MoveBtnContainer> */}
         <BtnBox>
           <CustomButton
             onClick={() => detailEditVisible(true)}

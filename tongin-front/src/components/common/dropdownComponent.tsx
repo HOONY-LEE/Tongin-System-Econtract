@@ -5,6 +5,7 @@ import { Image } from "./image";
 
 const SelectBox = styled.div<{
   $show?: boolean;
+  $border?: string;
 }>`
   position: relative;
   width: 100%;
@@ -16,7 +17,11 @@ const SelectBox = styled.div<{
   background-color: #ffffff;
   align-self: center;
   border: ${(props) =>
-    props.$show ? "0.3vw solid #ff7f3b" : "0.2vw solid #aaaaaa"};
+    props.$show
+      ? "0.3vw solid #ff7f3b"
+      : props.$border
+      ? props.$border
+      : "0.2vw solid #aaaaaa"};
   cursor: pointer;
 `;
 const Label = styled.label`
@@ -65,7 +70,7 @@ const Option = styled.ul<{ index: number; selected: number }>`
   }
 `;
 const DropdownComponent = (props: any) => {
-  const { selected, setSelected, dropdownList } = props;
+  const { selected, setSelected, dropdownList, border } = props;
 
   const [showOptions, setShowOptions] = useState(false);
 
@@ -77,6 +82,7 @@ const DropdownComponent = (props: any) => {
     <SelectBox
       onClick={() => setShowOptions((prev) => !prev)}
       $show={showOptions}
+      $border={border}
     >
       <Label>{dropdownList[selected].status}</Label>
       <Image
