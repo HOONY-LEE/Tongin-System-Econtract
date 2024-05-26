@@ -54,6 +54,7 @@ const InfoLfBox = styled.div`
   justify-content: start;
   /* outline: 0.2vw solid green; */
   margin-right: 5vw;
+  width: 16vw;
 `;
 const InfoLfTitle = styled.div`
   height: 3vw;
@@ -70,6 +71,7 @@ const InfoLfContent = styled.div`
   height: 5vw;
   display: flex;
   font-size: 2.3vw;
+
   font-weight: 600;
   flex-direction: column;
   align-items: start;
@@ -365,6 +367,10 @@ export default function DetailViewComponent(props: any) {
             <InfoLfBox>
               <InfoLfTitle>전화번호</InfoLfTitle>
               <InfoLfContent>{detailData?.contact}</InfoLfContent>
+            </InfoLfBox>
+            <InfoLfBox>
+              <InfoLfTitle>이사 종류</InfoLfTitle>
+              <InfoLfContent>{detailData?.movingType}</InfoLfContent>
             </InfoLfBox>
           </ContentTopLF>
         </ContentTopLFBox>

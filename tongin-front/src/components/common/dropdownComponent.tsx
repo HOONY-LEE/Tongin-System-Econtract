@@ -6,6 +6,7 @@ import { Image } from "./image";
 const SelectBox = styled.div<{
   $show?: boolean;
   $border?: string;
+  selectedColor?: string;
 }>`
   position: relative;
   width: 100%;
@@ -18,7 +19,9 @@ const SelectBox = styled.div<{
   align-self: center;
   border: ${(props) =>
     props.$show
-      ? "0.3vw solid #ff7f3b"
+      ? props.selectedColor
+        ? `0.3vw solid ${props.selectedColor}`
+        : "0.3vw solid #ff7f3b"
       : props.$border
       ? props.$border
       : "0.2vw solid #aaaaaa"};
@@ -34,6 +37,7 @@ const Label = styled.label`
 `;
 const SelectOptions = styled.ul<{
   $show?: boolean;
+  selectedColor?: string;
 }>`
   z-index: 9997;
   position: absolute;
@@ -46,7 +50,12 @@ const SelectOptions = styled.ul<{
   /* height: 4vw; */
   max-height: ${(props) => (props.$show ? "none" : "0")};
   padding: 0;
-  outline: ${(props) => (props.$show ? "0.3vw solid #ff7f3b" : "none")};
+  outline: ${(props) =>
+    props.$show
+      ? props.selectedColor
+        ? `0.3vw solid ${props.selectedColor}`
+        : "0.3vw solid #ff7f3b"
+      : "none"};
   border-radius: 0.2vw;
   background-color: #fdfdfd;
   color: #222222;
@@ -56,21 +65,29 @@ const SelectOptions = styled.ul<{
   } */
   box-shadow: 0 1vw 1vw rgba(0, 0, 0, 0.2), 0 0.5vh 0.5vh rgba(0, 0, 0, 0.003);
 `;
-const Option = styled.ul<{ index: number; selected: number }>`
+const Option = styled.ul<{
+  index: number;
+  selected: number;
+  selectedColor: string;
+}>`
   font-size: 2vw;
   padding: 1vw 0.5vw;
   height: 3vh;
   background-color: ${(props) =>
-    props.index === props.selected ? "#ff7f3b" : "#ffffff"};
+    props.index === props.selected
+      ? props.selectedColor
+        ? props.selectedColor
+        : "#ff7f3b"
+      : "#ffffff"};
   color: ${(props) => (props.index === props.selected ? "#ffffff" : "#000000")};
-
   &:hover {
-    background-color: #ff7f3b;
+    background-color: ${(props) =>
+      props.selectedColor ? props.selectedColor : "#ff7f3b"};
     color: #ffffff;
   }
 `;
 const DropdownComponent = (props: any) => {
-  const { selected, setSelected, dropdownList, border } = props;
+  const { selected, setSelected, dropdownList, border, selectedColor } = props;
 
   const [showOptions, setShowOptions] = useState(false);
 
@@ -83,6 +100,7 @@ const DropdownComponent = (props: any) => {
       onClick={() => setShowOptions((prev) => !prev)}
       $show={showOptions}
       $border={border}
+      selectedColor={selectedColor}
     >
       <Label>{dropdownList[selected].status}</Label>
       <Image
@@ -92,11 +110,12 @@ const DropdownComponent = (props: any) => {
         height={"0.8vw"}
       />
 
-      <SelectOptions $show={showOptions}>
+      <SelectOptions $show={showOptions} selectedColor={selectedColor}>
         {dropdownList.map((item: any, index: number) => (
           <Option
             selected={selected}
             key={index}
+            selectedColor={selectedColor}
             index={index}
             onClick={(e) => handleOnChangeSelectValue(e, item.id)}
           >
