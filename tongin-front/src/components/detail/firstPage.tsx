@@ -251,6 +251,7 @@ const TextMemoText = styled.pre`
   text-align: start;
   line-height: 16px;
   color: #383838;
+  white-space: pre-line; /* width 안에서 받아온 엔터 그대로 적용 될 수 있도록 처리 / 넘치면 아래로 내려감 */
   border: none;
   width: 100%; /* 원하는 너비 */
   height: 100%; /* 원하는 높이 */
