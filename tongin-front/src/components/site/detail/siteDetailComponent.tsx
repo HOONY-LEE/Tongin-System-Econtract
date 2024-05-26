@@ -11,6 +11,7 @@ import API from "../../../API/API";
 import { Toast } from "../../common/toastMessegeComponent";
 import { useNavigate } from "react-router-dom";
 import MoveDateInputComponent from "../../detail/MoveDateInputComponent";
+import DropdownComponent from "../../common/dropdownComponent";
 // import DetailViewComponent from "./detailViewComponent";
 // import DetailEditComponent from "./detailEditComponent";
 // import { Toast } from "../common/toastMessegeComponent";
@@ -58,9 +59,10 @@ const ContentTopRhBox = styled.div`
 `;
 const ContentTopRh = styled.div`
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: end;
   height: 20vw;
+  width: 16vw;
   flex-direction: column;
   /* outline: 0.2vw solid blue; */
   margin: 0.7vh 0vh 0.7vh 0vh;
@@ -68,6 +70,7 @@ const ContentTopRh = styled.div`
 
 const InfoLfBox = styled.div`
   height: 10vw;
+
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -115,13 +118,13 @@ const InfoLfEditContent = styled.div`
 const InfoRhBox = styled.div`
   height: 10vw;
   display: flex;
+  width: 18vw;
   flex-direction: column;
-  align-items: start;
+  align-items: end;
   justify-content: start;
   /* outline: 0.2vw solid blue; */
 `;
 const InfoRhTitle = styled.div`
-  width: 18vw;
   height: 3vw;
   display: flex;
   font-size: 1.8vw;
@@ -134,7 +137,6 @@ const InfoRhTitle = styled.div`
   /* outline: 0.2vw solid red; */
 `;
 const InfoRhContent = styled.div`
-  width: 18vw;
   height: 5vw;
   display: flex;
   color: #808080;
@@ -360,6 +362,14 @@ const InputBox = styled.input.attrs({})<{}>`
   width: 90%;
   height: 100%;
 `;
+const DropdownBox = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  width: 21vw;
+  height: 5vw;
+`;
+
 const BtnBox = styled.div`
   margin: 5vw 0 4vw 0;
   display: flex;
@@ -376,6 +386,8 @@ export default function SiteDetailComponent(props: any) {
   const [status, setStatus] = useState(""); // toast messege
   const [text, setText] = useState(""); // toast messege
   const [validation, setValidation] = useState<boolean>(false);
+  const [selectedMovingType, setSelectedMovingType] = useState<number>(0);
+  const [movingTypeCode, setMovingTypeCode] = useState<any>();
   const [siteDetailData, setSiteDetailData] = useState({
     visitDate: "", // 상담일
     selfReceiptData: {
@@ -388,6 +400,7 @@ export default function SiteDetailComponent(props: any) {
       toZipCd: "",
       toAddr1: "",
       toAddr2: "",
+      movingTypeCode: "", // 이사타입코드
     },
   });
 
@@ -539,10 +552,10 @@ export default function SiteDetailComponent(props: any) {
       updatedData.selfReceiptData.toAddr1 = toAddr1;
       updatedData.selfReceiptData.toAddr2 = toAddr2;
       updatedData.selfReceiptData.serReqDt = serReqDt;
+      updatedData.selfReceiptData.movingTypeCode = movingTypeCode;
 
       return updatedData;
     });
-
     if (
       memNm.length &&
       hPhone.length &&
@@ -553,7 +566,8 @@ export default function SiteDetailComponent(props: any) {
       toAddr1.length &&
       toAddr2.length &&
       visitDate.length &&
-      serReqDt.length
+      serReqDt.length &&
+      movingTypeCode.lenth
     ) {
       setValidation(true);
     } else {
@@ -571,8 +585,22 @@ export default function SiteDetailComponent(props: any) {
     receptionDate,
     visitDate,
     serReqDt,
+    movingTypeCode,
   ]);
-
+  const movingTypeList = [
+    { id: 0, status: "가정이사(스탠다드)", moveType: "P01225" },
+    { id: 1, status: "가정이사(프리미엄)", moveType: "P01226" },
+    { id: 2, status: "가정이사(VIP)", moveType: "P01224" },
+    { id: 3, status: "보관이사(스탠다드)", moveType: "P01228" },
+    { id: 4, status: "보관이사(프리미엄)", moveType: "P01229" },
+    { id: 5, status: "보관이사(VIP)", moveType: "P01230" },
+    { id: 6, status: "지방이사(스탠다드)", moveType: "P01017" },
+    { id: 7, status: "지방이사(프리미엄)", moveType: "P01480" },
+    { id: 8, status: "지방이사(VIP)", moveType: "P01481" },
+  ];
+  useEffect(() => {
+    setMovingTypeCode(movingTypeList[selectedMovingType].moveType);
+  }, [selectedMovingType]);
   // 에러방지를 위한 onChangeHandle
   const onChangeHandle = () => {};
 
@@ -615,6 +643,18 @@ export default function SiteDetailComponent(props: any) {
                     }}
                   ></InputBox>
                 </InfoLfEditContent>
+              </InfoLfBox>
+              <InfoLfBox>
+                <InfoLfTitle>이사 타입 </InfoLfTitle>
+                <DropdownBox>
+                  <DropdownComponent
+                    selectedColor={"#6ad959"}
+                    selected={selectedMovingType}
+                    setSelected={setSelectedMovingType}
+                    dropdownList={movingTypeList}
+                    border={`0.2vw solid #dbdbdb;`}
+                  ></DropdownComponent>
+                </DropdownBox>
               </InfoLfBox>
               {/* <InfoLfBox>
                 <InfoLfTitle>계약번호</InfoLfTitle>
