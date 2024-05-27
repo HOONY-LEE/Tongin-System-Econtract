@@ -31,7 +31,7 @@ const KorNameBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10px;
+  font-size: 1vw;
   font-weight: 500;
 `;
 const EngNameBox = styled.div`
@@ -42,7 +42,7 @@ const EngNameBox = styled.div`
   align-items: end;
   border-left: 0.1vw solid gray;
   padding-left: 0.3vw;
-  font-size: 6px;
+  font-size: 1vw;
   font-weight: 100;
 `;
 
