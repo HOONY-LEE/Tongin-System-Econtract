@@ -154,7 +154,7 @@ const FooterItem1 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 10px;
+  font-size: 1vw;
   font-weight: 500;
 `;
 
@@ -162,7 +162,7 @@ const FooterItem2 = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 10px;
+  font-size: 1vw;
   font-weight: 200;
 `;
 
@@ -172,7 +172,7 @@ const FooterItem3 = styled.div`
   justify-content: center;
   align-items: end;
   height: 3vw;
-  font-size: 12px;
+  font-size: 1.2vw;
   border: 0.1vw solid #ababab;
   background-color: #efefef3a;
   border-radius: 0.2vw;
@@ -185,7 +185,7 @@ const Index = styled.div`
   align-items: center;
   width: 100%;
   height: 2vw;
-  font-size: 14px;
+  font-size: 1.2vw;
   font-weight: 300;
 `;
 
@@ -206,7 +206,7 @@ const SecondPage = (props: any) => {
       ]);
     }
   };
-
+  const isMobile = window.innerWidth <= 768 || window.outerWidth <= 768;
   const roomDataList: any = [];
   const livingroomDataList: any = [];
   const kitchen: any = [];
@@ -237,8 +237,8 @@ const SecondPage = (props: any) => {
           <LogoImg>
             <Image
               src="/icon/tonginLogo.png"
-              width={"100%"}
-              height={"100%"}
+              width={"70%"}
+              height={"70%"}
             ></Image>
           </LogoImg>
           <HeaderTitle>이사물량 견적표</HeaderTitle>

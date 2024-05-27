@@ -102,7 +102,7 @@ const DropdownComponent = (props: any) => {
       $border={border}
       selectedColor={selectedColor}
     >
-      <Label>{dropdownList[selected].status}</Label>
+      <Label>{dropdownList[selected]?.status}</Label>
       <Image
         src="/icon/triangle.png"
         alt="삼각형이미지"
@@ -119,7 +119,7 @@ const DropdownComponent = (props: any) => {
             index={index}
             onClick={(e) => handleOnChangeSelectValue(e, item.id)}
           >
-            <li value={item.id}>{item.status}</li>
+            <li value={item?.id}>{item?.status}</li>
           </Option>
         ))}
       </SelectOptions>
