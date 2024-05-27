@@ -735,19 +735,23 @@ export default function DetailEditComponent(props: any) {
                 </InfoLfEditContent>
               </InfoLfBox>
             </ContentTopLF2>
-            <ContentTopLF2>
-              <InfoLfBox>
-                <InfoLfTitle>이사종류</InfoLfTitle>
-                <DropdownBox>
-                  <DropdownComponent
-                    selected={selectedMovingType}
-                    setSelected={setSelectedMovingType}
-                    dropdownList={movingTypeList}
-                    border={`0.2vw solid #dbdbdb;`}
-                  ></DropdownComponent>
-                </DropdownBox>
-              </InfoLfBox>
-            </ContentTopLF2>
+            {detailData?.selfReceipt ? (
+              ""
+            ) : (
+              <ContentTopLF2>
+                <InfoLfBox>
+                  <InfoLfTitle>이사종류</InfoLfTitle>
+                  <DropdownBox>
+                    <DropdownComponent
+                      selected={selectedMovingType}
+                      setSelected={setSelectedMovingType}
+                      dropdownList={movingTypeList}
+                      border={`0.2vw solid #dbdbdb;`}
+                    ></DropdownComponent>
+                  </DropdownBox>
+                </InfoLfBox>
+              </ContentTopLF2>
+            )}
           </ContentTopLF2Box>
         </ContentTopLFBox>
         <ContentTopRhBox>
