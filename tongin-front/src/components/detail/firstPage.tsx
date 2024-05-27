@@ -249,7 +249,7 @@ const TextMemoText = styled.pre`
   font-size: 1.2vw;
   font-weight: 300;
   text-align: start;
-  line-height: 16px;
+  line-height: 1.2vw;
   color: #383838;
   white-space: pre-line; /* width 안에서 받아온 엔터 그대로 적용 될 수 있도록 처리 / 넘치면 아래로 내려감 */
   border: none;
@@ -297,7 +297,7 @@ const PriceListBox = styled.div`
 
 const TotalPriceBox = styled.div`
   width: 100%;
-  height: 24px;
+  height: 2vw;
   display: flex;
   border-bottom: 0.16vw solid black;
 `;
@@ -339,7 +339,7 @@ const PriceNameInputEng = styled.p`
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 70px;
+  height: 7vw;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -351,9 +351,8 @@ const ImageBox = styled.div`
 `;
 
 const AgreementTextLine = styled.div`
-  margin-top: 2px;
-  margin-bottom: 2px;
-  height: 20px;
+  margin-top: 1vw;
+  height: 1vw;
   font-size: 1vw;
   font-weight: 300;
   display: flex;
@@ -462,7 +461,7 @@ const EstimateTable = styled.div`
   text-align: center;
   border-top: 0.1vw solid black;
   /* outline: 1px solid black; */
-  font-size: 1.3px;
+  font-size: 1vw;
   width: 100%;
   height: 100%;
 `;
@@ -490,7 +489,7 @@ const EstimateTitle = styled.div<{
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.3px;
+  font-size: 1vw;
   justify-content: center;
   border-right: ${(props) =>
     props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
@@ -631,7 +630,7 @@ const Index = styled.div`
   align-items: center;
   width: 100%;
   height: 0.5vw;
-  font-size: 1.4px;
+  font-size: 1vw;
   font-weight: 300;
 `;
 
