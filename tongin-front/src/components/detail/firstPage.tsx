@@ -330,7 +330,7 @@ const PriceInput = styled.p`
 `;
 
 const PriceNameInputEng = styled.p`
-  font-size: 8px;
+  font-size: 1vw;
   font-weight: 300;
   padding-left: 0.4vw;
   padding-right: 0.8vw;
