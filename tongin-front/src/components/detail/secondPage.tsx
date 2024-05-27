@@ -325,7 +325,7 @@ const SecondPage = (props: any) => {
                     <ProductArea key={index}>
                       <ContractProductComponent
                         articleData={item}
-                      ></ContractProductComponent>
+                      >d</ContractProductComponent>
                     </ProductArea>
                   );
                 })}
