@@ -22,7 +22,7 @@ const RoomName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10px;
+  font-size: 1vw;
   border-bottom: 0.1vw solid black;
 `;
 
@@ -31,7 +31,7 @@ const ColumnNameBox = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 8px;
+  font-size: 1vw;
   font-weight: 300;
   background-color: #f4f4f4;
 `;
@@ -41,7 +41,7 @@ const ArticleBox = styled.div<{ index: number }>`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 10px;
+  font-size: 1vw;
   font-weight: 400;
   border-bottom: 0.1vw solid gray;
   ${(props) =>
@@ -56,7 +56,7 @@ const TotalBox = styled.div<{ index: number }>`
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 10px;
+  font-size: 1vw;
   font-weight: 600;
   ${(props) =>
     props.index % 2 &&
@@ -69,6 +69,7 @@ const ColumnName = styled.div`
   width: 32%;
   height: 100%;
   display: flex;
+  font-size: 1vw;
   justify-content: center;
   align-items: center;
   border-right: 0.1vw solid black;
@@ -88,7 +89,7 @@ const ColumnName3 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 8px;
+  font-size: 1vw;
   text-align: center;
 `;
 
@@ -98,7 +99,7 @@ const ColumnName2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 7px;
+  font-size: 1vw;
 `;
 
 export default function ContractProductComponent(props: any) {
@@ -145,6 +146,7 @@ export default function ContractProductComponent(props: any) {
                   ? ""
                   : item.article.amount}
               </ColumnName>
+
               <ColumnName>
                 {item.article.cbm === 0 && item.article.amount === 0
                   ? ""
