@@ -509,7 +509,7 @@ export default function DetailEditComponent(props: any) {
   ]);
 
   useEffect(() => {
-    setMovingTypeCode(movingTypeList[selectedMovingType].moveType);
+    setMovingTypeCode(movingTypeList[selectedMovingType]?.moveType);
   }, [selectedMovingType]);
 
   useEffect(() => {
@@ -551,11 +551,11 @@ export default function DetailEditComponent(props: any) {
   }, []);
 
   // 아이템 코드로 index를 반환하는 함수
-  const findSelectedIndex = (movingTypeCode: string) => {
-    const selectedIndex = movingTypeList.filter(
-      (item: any) => item.moveType === movingTypeCode
+  const findSelectedIndex = (movingTypeCode?: string) => {
+    const selectedIndex = movingTypeList?.filter(
+      (item: any) => item?.moveType === movingTypeCode
     );
-    return selectedIndex[0].id;
+    return selectedIndex[0]?.id;
     // let result = 0;
     // movingTypeList.forEach((item: any) => {
     //   if (item.moveType === movingTypeCode) {
