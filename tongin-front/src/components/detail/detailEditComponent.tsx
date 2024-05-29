@@ -505,6 +505,7 @@ export default function DetailEditComponent(props: any) {
     preZipCode,
     afterZipCode,
     statusCode,
+    status,
     movingTypeCode,
   ]);
 
@@ -523,27 +524,27 @@ export default function DetailEditComponent(props: any) {
   }, [packageDate, carryDate, cleanDate]);
 
   //계약서 상태 [계약]일시 계약날짜 추가
-  useEffect(() => {
-    setDetailData((prev: any) => {
-      let today = new Date();
-      const updatedData = { ...prev };
-      if (finishContract) {
-        updatedData.contractDate = format(today, "yMMdd");
-      } else {
-        updatedData.contractDate = "";
-      }
-      return updatedData;
-    });
-  }, [finishContract]);
+  // useEffect(() => {
+  //   setDetailData((prev: any) => {
+  //     let today = new Date();
+  //     const updatedData = { ...prev };
+  //     if (finishContract) {
+  //       updatedData.contractDate = format(today, "yMMdd");
+  //     } else {
+  //       updatedData.contractDate = "";
+  //     }
+  //     return updatedData;
+  //   });
+  // }, [finishContract]);
 
-  useEffect(() => {
-    if (statusCode === "22") {
-      const today = new Date();
-      setContractDate(format(today, "yMMdd"));
-    } else {
-      setContractDate("");
-    }
-  }, [statusCode]);
+  // useEffect(() => {
+  //   if (statusCode === "22") {
+  //     const today = new Date();
+  //     setContractDate(format(today, "yMMdd"));
+  //   } else {
+  //     setContractDate("");
+  //   }
+  // }, [statusCode]);
 
   useEffect(() => {
     const index = findSelectedIndex(movingTypeCode);
@@ -846,7 +847,7 @@ export default function DetailEditComponent(props: any) {
             title={"계약일"}
             dateData={contractDate}
             setDateData={setContractDate}
-            readOnly={true}
+            // readOnly={true}
           ></MoveDateInputComponent>
         </MoveDateContainer>
         <MoveDateContainer>

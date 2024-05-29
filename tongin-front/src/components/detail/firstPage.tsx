@@ -201,15 +201,18 @@ const TextMemoBox = styled.div`
 
 const TextLine = styled.div`
   font-size: 1.2vw;
+  margin-bottom: 0.2vw;
 `;
 const TextSpan1 = styled.span`
   color: black;
   font-size: 1.2vw;
+  margin-bottom: 0.2vw;
 `;
 const TextSpan2 = styled.span`
   color: #ff7f3b;
   text-decoration: underline;
   font-size: 1.2vw;
+  margin-bottom: 0.4vw;
 `;
 
 const MemoRound = styled.div`
@@ -249,7 +252,7 @@ const TextMemoText = styled.pre`
   font-size: 1.2vw;
   font-weight: 300;
   text-align: start;
-  line-height: 1.2vw;
+  line-height: 2vw;
   color: #383838;
   white-space: pre-line; /* width 안에서 받아온 엔터 그대로 적용 될 수 있도록 처리 / 넘치면 아래로 내려감 */
   border: none;
@@ -292,7 +295,6 @@ const PriceListBox = styled.div`
   width: 100%;
   border-top: 0.16vw solid black;
   border-left: 0.1vw solid black;
-  margin-bottom: 1vw;
 `;
 
 const TotalPriceBox = styled.div`
@@ -300,6 +302,7 @@ const TotalPriceBox = styled.div`
   height: 2vw;
   display: flex;
   border-bottom: 0.16vw solid black;
+  margin-bottom: 1vw;
 `;
 
 const TotalPriceName = styled.div`
@@ -339,10 +342,10 @@ const PriceNameInputEng = styled.p`
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 7vw;
+  height: 4vw;
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
   border-bottom: 0.16vw solid black;
   /* background-color: gray; */
 `;
@@ -353,7 +356,10 @@ const ImageBox = styled.div`
 const AgreementTextLine = styled.div`
   margin-top: 1vw;
   height: 1vw;
-  font-size: 1vw;
+  margin-top: 0.3vw;
+  height: 2vw;
+  font-size: 0.7vw;
+  line-height: 1vw;
   font-weight: 300;
   display: flex;
   text-align: start;
@@ -1331,13 +1337,12 @@ const FirstPage = (props: any) => {
                 <AgreementBox>
                   <AgreementTextLine>
                     본인은 (주)통인익스프레스 견적•계약에 따른 약관 및 이용
-                    안내에
-                  </AgreementTextLine>
-                  <AgreementTextLine>
-                    대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신청하고
-                  </AgreementTextLine>
-                  <AgreementTextLine>
+                    안내에<br></br>
+                    대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신청하고{" "}
+                    <br></br>
                     개인정보 수집 및 활용에 동의합니다.
+                  </AgreementTextLine>
+                  <AgreementTextLine>
                     <ImageBox>
                       <Image
                         src={`/icon/${

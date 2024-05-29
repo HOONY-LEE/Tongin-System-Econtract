@@ -105,6 +105,7 @@ const DetailEditSelectBoxComponent = (props: any) => {
       setCompletionContract(false);
     }
     setCurrentValue(item.status);
+    setStatus(item.status);
     // setStatusCode((prev: any) => {
     //   const updatedList = [...prev];
     //   // updatedList[roomId].articleData[articleId].article.carryType = statusCode;
