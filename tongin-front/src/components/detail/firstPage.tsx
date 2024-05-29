@@ -308,6 +308,7 @@ const TotalPriceBox = styled.div`
 const TotalPriceName = styled.div`
   width: 46%;
   height: 100%;
+  margin-bottom: 1vw;
   display: flex;
   align-items: center;
 `;
@@ -356,8 +357,8 @@ const ImageBox = styled.div`
 const AgreementTextLine = styled.div`
   margin-top: 0.3vw;
   height: 2vw;
-  font-size: 0.7vw;
-  line-height: 1vw;
+  font-size: 0.8vw;
+  line-height: 1.4vw;
   font-weight: 300;
   display: flex;
   text-align: start;
@@ -816,6 +817,53 @@ const FirstPage = (props: any) => {
     getDetailList();
   }, [onSignatureModal]);
 
+  const [width, setWidth] = useState<any>(window.innerWidth);
+  const [drawNum, setDrawNum] = useState<number>(0.1);
+  const [signatureNum, setSignatureNum] = useState<number>(0.41);
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+    if (width < 300) {
+      setSignatureNum(0.07);
+      setDrawNum(0.1);
+    } else if (width < 400) {
+      setSignatureNum(0.06);
+      setDrawNum(0.14);
+    } else if (width < 400) {
+      setSignatureNum(0.08);
+      setDrawNum(0.16);
+    } else if (width < 600) {
+      setSignatureNum(0.08);
+      setDrawNum(0.18);
+    } else if (width < 700) {
+      setSignatureNum(0.1);
+      setDrawNum(0.26);
+    } else if (width < 830) {
+      setSignatureNum(0.12);
+      setDrawNum(0.3);
+    } else if (width < 915) {
+      setSignatureNum(0.13);
+      setDrawNum(0.3);
+    } else if (width < 1050) {
+      setSignatureNum(0.16);
+      setDrawNum(0.41);
+    } else {
+      setSignatureNum(0.18);
+      setDrawNum(0.43);
+    }
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      window.addEventListener("resize", handleResize);
+      handleResize();
+    }, 500);
+    return () => {
+      // cleanup
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    handleResize();
+  }, [width]);
   return (
     <>
       {onSignatureModal && (
@@ -1202,7 +1250,7 @@ const FirstPage = (props: any) => {
                         <Line
                           key={i}
                           points={line.points.map(
-                            (point: number) => point * 0.41
+                            (point: number) => point * drawNum
                           )}
                           stroke={line.stroke}
                           strokeWidth={1}
@@ -1375,7 +1423,7 @@ const FirstPage = (props: any) => {
                                 <Line
                                   key={i}
                                   points={line.points.map(
-                                    (point: number) => point * 0.16
+                                    (point: number) => point * signatureNum
                                   )}
                                   stroke={line.stroke}
                                   strokeWidth={1}
