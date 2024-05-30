@@ -852,6 +852,7 @@ const FirstPage = (props: any) => {
     }
   };
   useEffect(() => {
+    console.log(optionData.optionService.ServiceList);
     setTimeout(() => {
       window.addEventListener("resize", handleResize);
       handleResize();
@@ -1281,7 +1282,13 @@ const FirstPage = (props: any) => {
                       (item: any, index: number) => {
                         return (
                           <PriceItemBox2 key={index}>
-                            <OptionItemName>{item.optionName}</OptionItemName>
+                            <OptionItemName>
+                              {item.optionNameEng === "ETC"
+                                ? item.remark
+                                  ? item.remark
+                                  : item.optionName
+                                : item.optionName}
+                            </OptionItemName>
                             <OptionItem>
                               {item.decomposition && item.installation
                                 ? "분해 / 설치"

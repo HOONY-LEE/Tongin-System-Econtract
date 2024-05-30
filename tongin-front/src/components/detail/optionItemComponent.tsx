@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Image } from "../common/image";
 import { useEffect, useState } from "react";
 import OptionPriceInputBox from "./optionPriceInputBox";
+import { InputComponent } from "../common/InputComponent";
 
 const Wrapper = styled.div<{ $isChecked: boolean }>`
   margin-top: 1vw;
@@ -25,6 +26,7 @@ const TitleArea = styled.div`
 
 const Title = styled.div`
   display: flex;
+  width: 130%;
   justify-content: start;
   align-items: center;
   margin-left: 2vw;
@@ -80,16 +82,24 @@ const SelectItem = styled.div<{ $isSelected?: boolean }>`
     cursor: pointer;
   }
 `;
-
+const InputCotainer = styled.div`
+  width: 13vw;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+`;
 export default function OptionItemComponent(props: any) {
   const { item, index, isSelected, setIsSelected, setOptionData, optionData } =
     props;
   const [isChecked, setIsChecked] = useState(isSelected);
-
+  const [remark, setRemark] = useState(item.remark);
   const onClickCheck = () => {
     setIsChecked(!isChecked);
   };
 
+  const onInputNameItem = (e: any) => {
+    setRemark(e.target.value);
+  };
   const onClickSelectItem = (type: number) => {
     if (type === 0) {
       setOptionData((prev: any) => {
@@ -111,17 +121,40 @@ export default function OptionItemComponent(props: any) {
   useEffect(() => {
     setIsSelected(index, isChecked);
   }, [isChecked]);
+  useEffect(() => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.remark = remark;
+      return updatedData;
+    });
+  }, [remark]);
 
   return (
     <Wrapper $isChecked={isChecked}>
-      <TitleArea onClick={onClickCheck}>
+      <TitleArea>
         <Image
+          onClick={onClickCheck}
           src={`/icon/${isChecked ? "checked" : "unchecked"}.png`}
           alt="checkBox"
           width={"3.4vw"}
           height={"3.4vw"}
         />
-        <Title>{item.optionName}</Title>
+        <Title onClick={onClickCheck}>{item.optionName}</Title>
+        {item.optionNameEng === "ETC" ? (
+          isChecked && (
+            <InputCotainer>
+              <InputComponent
+                value={remark}
+                onChange={onInputNameItem}
+                fontSize="2vw"
+                inputType="text"
+                width={"10vw"}
+              ></InputComponent>
+            </InputCotainer>
+          )
+        ) : (
+          <></>
+        )}
         {/* <Subtitle>/{item.optionNameEng}</Subtitle> */}
       </TitleArea>
       {isChecked ? (
