@@ -440,6 +440,9 @@ export default function DetailEditComponent(props: any) {
   const [packageDate, setPackageDate] = useState(otherDateData.packageDate);
   const [carryDate, setCarryDate] = useState(otherDateData.carryDate);
   const [cleanDate, setCleanDate] = useState(otherDateData.cleanDate);
+  const [fakeContractDate, setFakeContractDate] = useState(
+    otherDateData.fakeContractDate
+  );
   const [preZipCode, setPreZipCode] = useState(detailData.preZoneCode);
   const [afterZipCode, setAfterZipCode] = useState(detailData.afterZoneCode);
 
@@ -519,9 +522,10 @@ export default function DetailEditComponent(props: any) {
       updatedData.packageDate = packageDate;
       updatedData.carryDate = carryDate;
       updatedData.cleanDate = cleanDate;
+      updatedData.fakeContractDate = fakeContractDate;
       return updatedData;
     });
-  }, [packageDate, carryDate, cleanDate]);
+  }, [packageDate, carryDate, cleanDate, fakeContractDate]);
 
   //계약서 상태 [계약]일시 계약날짜 추가
   // useEffect(() => {
@@ -843,12 +847,22 @@ export default function DetailEditComponent(props: any) {
             setDateData={setReceptionDate}
             readOnly={true}
           ></MoveDateInputComponent>
-          <MoveDateInputComponent
-            title={"계약일"}
-            dateData={contractDate}
-            setDateData={setContractDate}
-            // readOnly={true}
-          ></MoveDateInputComponent>
+          {/* 계약 확정 시 input */}
+          {statusCode === 22 ? (
+            <MoveDateInputComponent
+              title={"계약일"}
+              dateData={contractDate}
+              setDateData={setContractDate}
+              readOnly={true}
+            ></MoveDateInputComponent>
+          ) : (
+            <MoveDateInputComponent
+              title={"계약일"} // 가계약 Input
+              dateData={fakeContractDate}
+              setDateData={setFakeContractDate}
+              // readOnly={true}
+            ></MoveDateInputComponent>
+          )}
         </MoveDateContainer>
         <MoveDateContainer>
           <MoveDateInputComponent
