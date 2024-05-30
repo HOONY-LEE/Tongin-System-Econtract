@@ -68,7 +68,7 @@ export const Toast = (props: any) => {
         setStatusClass("FAIL");
         break;
       default:
-        console.log(`stauts ${status} is not supported`);
+      // console.log(`stauts ${status} is not supported`);
     }
 
     const timer = setTimeout(() => {

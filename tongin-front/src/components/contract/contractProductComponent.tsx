@@ -169,11 +169,26 @@ export default function ContractProductComponent(props: any) {
           );
         })}
       </ContentsBox>
-      <TotalBox index={articleData.articleData.length}>
-        <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
-        <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-        <ColumnName3></ColumnName3>
-      </TotalBox>
+      {articleData.articleData.length === 17 ? (
+        <>
+          <ArticleBox index={articleData.articleData.length}>
+            <ColumnName></ColumnName>
+            <ColumnName></ColumnName>
+            <ColumnName3></ColumnName3>
+          </ArticleBox>
+          <TotalBox index={articleData.articleData.length + 1}>
+            <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
+            <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
+            <ColumnName3></ColumnName3>
+          </TotalBox>
+        </>
+      ) : (
+        <TotalBox index={articleData.articleData.length}>
+          <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
+          <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
+          <ColumnName3></ColumnName3>
+        </TotalBox>
+      )}
     </Wrapper>
   );
 }

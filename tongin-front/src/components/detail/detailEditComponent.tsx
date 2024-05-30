@@ -561,14 +561,6 @@ export default function DetailEditComponent(props: any) {
       (item: any) => item?.moveType === movingTypeCode
     );
     return selectedIndex[0]?.id;
-    // let result = 0;
-    // movingTypeList.forEach((item: any) => {
-    //   if (item.moveType === movingTypeCode) {
-    //     // console.log(item.id);
-    //     result = item.id;
-    //   }
-    // });
-    // return result;
   };
 
   const onChangUserContact = (e: any) => {
@@ -669,9 +661,6 @@ export default function DetailEditComponent(props: any) {
       receiptDetail: detailData,
       otherDateData: otherDateData,
     };
-
-    console.log("상세정보 수정 실행");
-    console.log(requestPram);
     try {
       const response: any = await API.put(
         `/receipt/detail/${reNum}`,

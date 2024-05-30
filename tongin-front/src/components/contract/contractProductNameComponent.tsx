@@ -60,11 +60,22 @@ export default function ContractProductNameComponent(props: any) {
           </Wrapper>
         );
       })}
-
-      <Wrapper2 index={articleDataList.length}>
-        <KorNameBox>소계</KorNameBox>
-        <EngNameBox>Total</EngNameBox>
-      </Wrapper2>
+      {articleDataList.length === 17 ? (
+        <>
+          <Wrapper2 index={articleDataList.length}>
+            <KorNameBox></KorNameBox>
+          </Wrapper2>
+          <Wrapper2 index={articleDataList.length + 1}>
+            <KorNameBox>소계</KorNameBox>
+            <EngNameBox>Total</EngNameBox>
+          </Wrapper2>
+        </>
+      ) : (
+        <Wrapper2 index={articleDataList.length}>
+          <KorNameBox>소계</KorNameBox>
+          <EngNameBox>Total</EngNameBox>
+        </Wrapper2>
+      )}
     </>
   );
 }

@@ -358,7 +358,7 @@ const DetailDrawingPanelComponent: React.FC<CalculatorComponentProps> = ({
           setPointerType("touch");
           break;
         default:
-          console.log(`pointerType ${event.pointerType} is not supported`);
+        // console.log(`pointerType ${event.pointerType} is not supported`);
       }
     },
     false
