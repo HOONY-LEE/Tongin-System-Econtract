@@ -432,9 +432,18 @@ export default function DetailViewComponent(props: any) {
           </MoveDateBox>
           <MoveDateBox>
             <MoveDateTitle>계약일</MoveDateTitle>
-            <MoveDateInput>
-              {detailData?.contractDate?.replace(formattedDate, "$1-$2-$3")}
-            </MoveDateInput>
+            {detailData?.status === 22 ? (
+              <MoveDateInput>
+                {detailData?.contractDate?.replace(formattedDate, "$1-$2-$3")}
+              </MoveDateInput>
+            ) : (
+              <MoveDateInput>
+                {otherDateData?.fakeContractDate?.replace(
+                  formattedDate,
+                  "$1-$2-$3"
+                )}
+              </MoveDateInput>
+            )}
           </MoveDateBox>
         </MoveDateContainer>
         <MoveDateContainer>
