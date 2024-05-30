@@ -306,7 +306,6 @@ export default function ContractComponent(props: any) {
     try {
       const result = await API.post(`/receipt/complete/${reNum}`, requestParam);
       alert("계약서 통인CS 업로드 성공");
-      // console.log(result);
     } catch (error) {
       alert("completeRecipt() 실패");
     }

@@ -49,7 +49,7 @@ API.interceptors.response.use(
         cookies.set("refreshToken", newRefreshToken);
 
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        console.log("Access token refreshed");
+        // console.log("Access token refreshed");
 
         return axios(originalRequest);
       } catch (refreshError: any) {

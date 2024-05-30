@@ -20,28 +20,19 @@ const TitleArea = styled.div`
   display: flex;
   align-items: center;
   margin-left: 2vw;
-  width: 20vw;
+  width: 25vw;
   height: 100%;
 `;
 
 const Title = styled.div`
   display: flex;
-  width: 130%;
+  width: 100%;
+  height: 100%;
   justify-content: start;
   align-items: center;
-  margin-left: 2vw;
+  margin-left: 1vw;
   font-size: 2.2vw;
   font-weight: 600;
-`;
-
-const Subtitle = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: end;
-  margin-left: 1vw;
-  font-size: 1.8vw;
-  font-weight: 300;
-  height: 2vh;
 `;
 
 const InputArea = styled.div`
@@ -83,10 +74,11 @@ const SelectItem = styled.div<{ $isSelected?: boolean }>`
   }
 `;
 const InputCotainer = styled.div`
-  width: 13vw;
+  width: 14vw;
   display: flex;
   align-items: center;
   justify-content: end;
+  margin-right: 1vw;
 `;
 export default function OptionItemComponent(props: any) {
   const { item, index, isSelected, setIsSelected, setOptionData, optionData } =
@@ -124,7 +116,7 @@ export default function OptionItemComponent(props: any) {
   useEffect(() => {
     setOptionData((prev: any) => {
       const updatedData = { ...prev };
-      updatedData.remark = remark;
+      updatedData.ServiceList[index].remark = remark;
       return updatedData;
     });
   }, [remark]);
@@ -148,7 +140,7 @@ export default function OptionItemComponent(props: any) {
                 onChange={onInputNameItem}
                 fontSize="2vw"
                 inputType="text"
-                width={"10vw"}
+                width={"14vw"}
               ></InputComponent>
             </InputCotainer>
           )

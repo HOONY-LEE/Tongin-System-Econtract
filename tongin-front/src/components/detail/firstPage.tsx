@@ -852,7 +852,7 @@ const FirstPage = (props: any) => {
     }
   };
   useEffect(() => {
-    console.log(optionData.optionService.ServiceList);
+    // console.log(optionData.optionService.ServiceList);
     setTimeout(() => {
       window.addEventListener("resize", handleResize);
       handleResize();
