@@ -178,6 +178,22 @@ const ApplyInfoTd = styled.div<{
   font-size: 1vw;
   height: 2.6vw;
 `;
+
+const ApplyInfoTd2 = styled.div<{
+  $width?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
+}>`
+  width: ${(props) => (props.$width ? props.$width : "10vw")};
+  display: flex;
+  font-weight: 200;
+  align-items: center;
+  border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
+  justify-content: center;
+  font-size: 0.8vw;
+  height: 2.6vw;
+`;
+
 const MemoBox = styled.div`
   width: 41vw;
   height: 100%;
@@ -984,12 +1000,12 @@ const FirstPage = (props: any) => {
                 <ApplyInfoTdTitle $width={"18%"}>
                   작업조건 (전)
                 </ApplyInfoTdTitle>
-                <ApplyInfoTd
+                <ApplyInfoTd2
                   $width={"52%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
-                </ApplyInfoTd>
+                </ApplyInfoTd2>
                 <ApplyInfoTd
                   $width={"15%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
@@ -1006,26 +1022,26 @@ const FirstPage = (props: any) => {
               </WorkConditionBox>
               <WorkConditionBox>
                 <ApplyInfoTdTitle $width={"18%"}>
-                  작업조건 (전)
+                  작업조건 (후)
                 </ApplyInfoTdTitle>
-                <ApplyInfoTd
+                <ApplyInfoTd2
                   $width={"52%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
-                  {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
-                </ApplyInfoTd>
+                  {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
+                </ApplyInfoTd2>
                 <ApplyInfoTd
                   $width={"15%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {
                     transportationMethodList[
-                      optionData.beforeWorkCondition.transportationMethod
+                      optionData.afterWorkCondition.transportationMethod
                     ].status
                   }
                 </ApplyInfoTd>
                 <ApplyInfoTd $width={"15%"}>
-                  {optionData.beforeWorkCondition.pyeong}(평)
+                  {optionData.afterWorkCondition.pyeong}(평)
                 </ApplyInfoTd>
               </WorkConditionBox>
               {/* <ApplyInfoTr>
@@ -1378,7 +1394,7 @@ const FirstPage = (props: any) => {
                 <TotalPriceBox>
                   <TotalPriceName>
                     <PriceNameInput>총 비용</PriceNameInput>
-                    <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
+                    <PriceNameInputEng>Total Charge</PriceNameInputEng>
                   </TotalPriceName>
                   <TotalPriceInput>
                     <PriceInput>

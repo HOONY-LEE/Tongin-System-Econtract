@@ -283,6 +283,7 @@ export default function ContractComponent(props: any) {
       optionTotal +
         priceDataList[0].amount +
         priceDataList[1].amount +
+        priceDataList[2].amount +
         optionTotalCharge
     );
   }, [
