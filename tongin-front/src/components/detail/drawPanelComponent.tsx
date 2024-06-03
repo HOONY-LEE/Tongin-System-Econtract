@@ -389,12 +389,15 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
   //   },
   //   false
   // );
-  // 도큐먼트에 이벤트를 추가하고 contextmenu타입을 사용한다
-  allTargetElement?.addEventListener("contextmenu", (event) => {
-    // event의 기본동작을 실행하지 못하게 한다
-    event.preventDefault();
-    return false;
-  });
+
+  //2024.06.03 주석처리
+  // // 도큐먼트에 이벤트를 추가하고 contextmenu타입을 사용한다
+  // allTargetElement?.addEventListener("contextmenu", (event) => {
+  //   // event의 기본동작을 실행하지 못하게 한다
+  //   event.preventDefault();
+  //   return false;
+  // });
+
   // We cant set the h & w on Stage to 100% it only takes px values so we have to
   // find the parent container's w and h and then manually set those !
   useEffect(() => {
@@ -444,7 +447,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
         onDragStart={(e) => e.preventDefault()}
         onTouchMove={handleBackdropTouchMove}
       /> */}
-      <Container id={"Back"} onContextMenu={(e) => e.preventDefault()}>
+      <Container>
         <CalculatorComponentWrapper>
           {/* <Image
             src="/icon/save_close.png"
