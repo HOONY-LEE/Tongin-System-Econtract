@@ -103,7 +103,7 @@ export default function ChargeListComponent(props: any) {
             <TotalChargeBox key={index}>
               <TitleArea>
                 <Title>{item.chargeName}</Title>
-                <Subtile>{"/(부가세 별도)"}</Subtile>
+                <Subtile>{"/Total Price"}</Subtile>
               </TitleArea>
               <PriceInput>
                 <ChargePriceInput>
