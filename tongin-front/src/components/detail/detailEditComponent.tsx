@@ -683,17 +683,17 @@ export default function DetailEditComponent(props: any) {
     }
   };
   // 드로잉판넬 오픈 시 호출
-  const detailDrawPageSave = () => {
-    if (finishContract) {
-      if (contractImageList.length === 0) {
-        alert("아직 생성된 계약서가 없습니다.");
-        return;
-      }
-      setIsContractFinishModal(true);
-    } else {
-      putDrawSave();
-    }
-  };
+  // const detailDrawPageSave = () => {
+  //   if (finishContract) {
+  //     if (contractImageList.length === 0) {
+  //       alert("아직 생성된 계약서가 없습니다.");
+  //       return;
+  //     }
+  //     setIsContractFinishModal(true);
+  //   } else {
+  //     putDrawSave();
+  //   }
+  // };
   // 상세정보 수정API
   const putDrawSave = async () => {
     if (isContractFinishModal) {
@@ -722,11 +722,11 @@ export default function DetailEditComponent(props: any) {
       alert("상세정보 수정 실패");
     }
   };
-  useEffect(() => {
-    if (allSave) {
-      detailDrawPageSave();
-    }
-  }, [allSave]);
+  // useEffect(() => {
+  //   if (allSave) {
+  //     detailDrawPageSave();
+  //   }
+  // }, [allSave]);
   return (
     <>
       {isContractFinishModal && (
