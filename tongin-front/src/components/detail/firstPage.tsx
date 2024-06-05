@@ -946,8 +946,11 @@ const FirstPage = (props: any) => {
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {detailData.contractDate === ""
-                    ? "--"
+                  {detailData.contractDate === "        "
+                    ? otherDateData.fakeContractDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )
                     : detailData.contractDate.replace(
                         formattedDate,
                         "$1-$2-$3"
