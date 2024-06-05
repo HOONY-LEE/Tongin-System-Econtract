@@ -528,10 +528,6 @@ export default function DetailEditComponent(props: any) {
     });
   }, [packageDate, carryDate, cleanDate, fakeContractDate]);
 
-  useEffect(() => {
-    detailPageSave();
-  }, [allSave]);
-
   //계약서 상태 [계약]일시 계약날짜 추가
   // useEffect(() => {
   //   setDetailData((prev: any) => {
@@ -686,7 +682,51 @@ export default function DetailEditComponent(props: any) {
       alert("상세정보 수정 실패");
     }
   };
+  // 드로잉판넬 오픈 시 호출
+  const detailDrawPageSave = () => {
+    if (finishContract) {
+      if (contractImageList.length === 0) {
+        alert("아직 생성된 계약서가 없습니다.");
+        return;
+      }
+      setIsContractFinishModal(true);
+    } else {
+      putDrawSave();
+    }
+  };
+  // 상세정보 수정API
+  const putDrawSave = async () => {
+    if (isContractFinishModal) {
+      setIsContractFinishModal(false);
+      setCompletionContract(true);
+    }
 
+    const requestPram = {
+      receiptDetail: detailData,
+      otherDateData: otherDateData,
+    };
+    try {
+      const response: any = await API.put(
+        `/receipt/detail/${reNum}`,
+        requestPram
+      );
+      if (response.status === 200) {
+        setStatus("SUCCESS");
+        setFetchStatus(true);
+      } else {
+        setFetchStatus(true);
+        setStatus("FAIL");
+        alert("상세정보 수정 실패");
+      }
+    } catch (error) {
+      alert("상세정보 수정 실패");
+    }
+  };
+  useEffect(() => {
+    if (allSave) {
+      detailDrawPageSave();
+    }
+  }, [allSave]);
   return (
     <>
       {isContractFinishModal && (

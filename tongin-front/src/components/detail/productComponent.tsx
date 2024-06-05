@@ -128,11 +128,11 @@ export default function ProductComponent(props: any) {
         requestParam
       );
       if (response.status === 200) {
-        alert("성공적으로 저장되었습니다.");
+        // alert("성공적으로 저장되었습니다.");
         await getProductList();
         calculateTotalCBM(currentProductList);
       } else {
-        alert("물품정보 저장에 실패하였습니다.");
+        // alert("물품정보 저장에 실패하였습니다.");
       }
     } catch (error) {
       alert(error);
@@ -173,7 +173,9 @@ export default function ProductComponent(props: any) {
   }, [currentProductList, getProductList]);
 
   useEffect(() => {
-    saveProductList();
+    if (allSave) {
+      saveProductList();
+    }
   }, [allSave]);
   return (
     <>
