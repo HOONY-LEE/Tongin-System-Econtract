@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import OptionPriceInputBox from "./optionPriceInputBox";
 import ChargePriceInputBox from "./chargePriceInputBox";
+import DropdownComponent from "../common/dropdownComponent";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -23,6 +24,12 @@ const ListBox = styled.div`
 const TitleArea = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const TitleArea2 = styled.div`
+  display: flex;
+  align-items: center;
+  width: 25vw;
 `;
 
 const Title = styled.div`
@@ -91,9 +98,30 @@ const InputTotalNumber = styled.p`
   font-weight: 400;
   width: 80%;
 `;
+
+const DropdowArea = styled.div`
+  display: flex;
+  width: 14vw;
+  height: 4vw;
+`;
+
 export default function ChargeListComponent(props: any) {
-  const { inputChargeList, setInputChargeList, totalCharge, balanceCharge } =
-    props;
+  const { inputChargeList, setInputChargeList, totalCharge } = props;
+
+  const paymentMethodList = [
+    { id: 0, status: "온라인 결제" },
+    { id: 1, status: "현금 결제" },
+    { id: 2, status: "카드 결제" },
+  ];
+
+  const setPaymentMethod = (id: number, index: number) => {
+    setInputChargeList((prev: any) => {
+      const updatedData = [...prev];
+      updatedData[index].paymentMethod = id;
+      return updatedData;
+    });
+  };
+
   return (
     <Wrapper>
       {inputChargeList.map((item: any, index: number) => {
@@ -116,25 +144,34 @@ export default function ChargeListComponent(props: any) {
             </TotalChargeBox>
           );
         }
-        // else if (index === 5) {
-        //   return (
-        //     <ListBox key={index}>
-        //       <TitleArea>
-        //         <Title>{item.chargeName}</Title>
-        //         <Subtile>/{item.chargeNameEng}</Subtile>
-        //       </TitleArea>
-        //       <PriceInputArea>
-        //         <ChargePriceInputBox
-        //           inputValue={balanceCharge}
-        //           setInputValue={balanceCharge}
-        //           optionType={item.chargeName}
-        //           id={index}
-        //         ></ChargePriceInputBox>
-        //       </PriceInputArea>
-        //     </ListBox>
-        //   );
-        // }
-        else {
+        // 계약금과 잔금의 경우 UI
+        else if (index === 4 || index === 5) {
+          return (
+            <ListBox key={index}>
+              <TitleArea2>
+                <Title>{item.chargeName}</Title>
+                <Subtile>/{item.chargeNameEng}</Subtile>
+              </TitleArea2>
+              <DropdowArea>
+                <DropdownComponent
+                  itemIndex={index}
+                  selected={item.paymentMethod}
+                  setSelected={setPaymentMethod}
+                  dropdownList={paymentMethodList}
+                ></DropdownComponent>
+              </DropdowArea>
+              <PriceInputArea>
+                <ChargePriceInputBox
+                  inputValue={item.amount}
+                  setInputValue={setInputChargeList}
+                  optionType={item.chargeName}
+                  id={index}
+                ></ChargePriceInputBox>
+              </PriceInputArea>
+            </ListBox>
+          );
+          // 나머지 UI
+        } else {
           return (
             <ListBox key={index}>
               <TitleArea>
