@@ -106,8 +106,13 @@ const SaveBox = styled.div`
   margin-top: 2vw;
 `;
 export default function ProductComponent(props: any) {
-  const { currentProductList, setCurrentProductList, reNum, getProductList } =
-    props;
+  const {
+    currentProductList,
+    setCurrentProductList,
+    reNum,
+    getProductList,
+    allSave,
+  } = props;
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [totalCBM, setTotalCBM] = useState<number>(0);
@@ -167,6 +172,9 @@ export default function ProductComponent(props: any) {
     calculateTotalCBM(currentProductList);
   }, [currentProductList, getProductList]);
 
+  useEffect(() => {
+    saveProductList();
+  }, [allSave]);
   return (
     <>
       <Wrapper>
