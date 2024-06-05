@@ -420,6 +420,7 @@ export default function DetailEditComponent(props: any) {
     setFetchStatus,
     contractImageList,
     movingTypeList,
+    allSave,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -526,6 +527,10 @@ export default function DetailEditComponent(props: any) {
       return updatedData;
     });
   }, [packageDate, carryDate, cleanDate, fakeContractDate]);
+
+  useEffect(() => {
+    detailPageSave();
+  }, [allSave]);
 
   //계약서 상태 [계약]일시 계약날짜 추가
   // useEffect(() => {

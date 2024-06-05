@@ -35,6 +35,7 @@ export default function DetailComponent(props: any) {
     contractImageList,
     otherDateData,
     setOtherDateData,
+    allSave,
   } = props;
   const [isDetailEdit, setIsDetailEdit] = useState(false);
   const [completionContract, setCompletionContract] = useState<any>(false);
@@ -82,6 +83,7 @@ export default function DetailComponent(props: any) {
         )}
         {isDetailEdit ? (
           <DetailEditComponent
+            allSave={allSave}
             movingTypeList={movingTypeList}
             getDetailList={getDetailList}
             detailData={detailData}

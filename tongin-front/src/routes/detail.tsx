@@ -184,7 +184,7 @@ export default function Detail() {
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
-
+  const [allSave, setAllSave] = useState<any>(false);
   // useEffect(() => {
   //   if (signed.state) {
   //     setCurrentTab(3);
@@ -379,7 +379,11 @@ export default function Detail() {
   }, [drawingData2]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
   const onDrawingPanel = () => {
+    setAllSave(true);
+    postOptionData();
+
     navigate(
       `/drawing/${reNum}`,
       JSON.parse(
@@ -400,6 +404,7 @@ export default function Detail() {
         })
       )
     );
+    setAllSave(false);
   };
   useEffect(() => {
     disableScrollLock();
@@ -425,6 +430,7 @@ export default function Detail() {
             {currentTab === 0 ? (
               <DetialTabBox>
                 <DetailComponent
+                  allSave={allSave}
                   setStatus={setStatus}
                   status={status}
                   fetchStatus={fetchStatus}
@@ -441,6 +447,7 @@ export default function Detail() {
             {currentTab === 1 ? (
               <ProductTabBox>
                 <ProductComponent
+                  allSave={allSave}
                   reNum={reNum}
                   getProductList={getProductList}
                   currentProductList={currentProductList}
