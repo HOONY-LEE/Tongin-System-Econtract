@@ -87,12 +87,24 @@ const Option = styled.ul<{
   }
 `;
 const DropdownComponent = (props: any) => {
-  const { selected, setSelected, dropdownList, border, selectedColor } = props;
+  const {
+    selected,
+    setSelected,
+    dropdownList,
+    border,
+    selectedColor,
+    itemIndex,
+  } = props;
 
   const [showOptions, setShowOptions] = useState(false);
 
   const handleOnChangeSelectValue = (e: any, id: number) => {
-    setSelected(id);
+    if (itemIndex) {
+      setSelected(id, itemIndex);
+    } else {
+      alert("인덱스 없음");
+      setSelected(id);
+    }
   };
 
   return (
