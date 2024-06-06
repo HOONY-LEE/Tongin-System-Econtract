@@ -79,11 +79,11 @@ const DetailEditSelectBoxComponent = (props: any) => {
     { status: "상담완료", statusCode: "14" },
     { status: "상담반려", statusCode: "19" },
     { status: "계약미승인", statusCode: "21" },
-    { status: "계약", statusCode: "22" },
+    // { status: "계약승인신청", statusCode: "--" },
     // { status: "작업토스", statusCode: "31" },
     // { status: "작업승인", statusCode: "32" },
     // { status: "작업반려", statusCode: "39" },
-    { status: "취소", statusCode: "CA" },
+    // { status: "취소", statusCode: "CA" },
     // { status: "완료", statusCode: "41" },
   ];
 
