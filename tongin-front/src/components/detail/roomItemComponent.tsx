@@ -340,7 +340,7 @@ export default function RoomItemComponent(props: any) {
         <OpenedBox>
           <TitleBox>
             <NameBox>물품명</NameBox>
-            <QuantityBox>수량</QuantityBox>
+            <QuantityBox>메모</QuantityBox>
             <CBMBox>부피(CBM)</CBMBox>
             <MethodBox>처리방법</MethodBox>
           </TitleBox>

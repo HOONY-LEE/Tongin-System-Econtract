@@ -420,8 +420,6 @@ export default function DetailEditComponent(props: any) {
     setFetchStatus,
     contractImageList,
     movingTypeList,
-    allSave,
-    setAllSave,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -722,17 +720,7 @@ export default function DetailEditComponent(props: any) {
       alert("상세정보 수정 실패");
     }
   };
-  // useEffect(() => {
-  //   if (allSave) {
-  //     detailDrawPageSave();
-  //   }
-  // }, [allSave]);
-  useEffect(() => {
-    if (allSave) {
-      putDrawSave();
-    }
-    setAllSave(false);
-  }, [allSave]);
+
   return (
     <>
       {isContractFinishModal && (
