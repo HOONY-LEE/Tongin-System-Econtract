@@ -18,16 +18,17 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Container = styled.div`
-  padding: 2vw 4vw;
+  padding: 2vw 1vw 1vw 1vw;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
 `;
 const Header = styled.div`
   width: 100%;
-  height: 5vw;
+  height: 4vw;
+  margin-bottom: 2vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,7 +36,7 @@ const Header = styled.div`
 const HeaderTitle = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   font-weight: 800;
   font-size: 3vw;
   height: 4vw;
@@ -44,6 +45,9 @@ const LogoImg = styled.div`
   width: 20vw;
   height: 6vw;
   padding-left: 1vw;
+  display: flex;
+  justify-content: start;
+  align-items: end;
 `;
 
 const ContentArea = styled.div`
@@ -60,7 +64,7 @@ const TopTable = styled.div`
   width: 100%;
   border-top: 0.16vw solid black;
   /* border-bottom: 0.16vw solid black; */
-  height: 2.8vw;
+  height: 3.4vw;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -70,7 +74,7 @@ const TopTableTd = styled.div`
   width: 100%;
   /* border-top: 0.16vw solid black; */
   border-bottom: 0.16vw solid black;
-  height: 2.8vw;
+  height: 3.4vw;
   margin-bottom: 1vw;
   display: flex;
   align-items: center;
@@ -91,7 +95,7 @@ const TopTdTitle = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1vw;
+  font-size: 1.3vw;
   background-color: #f4f4f4;
   width: 10vw;
   height: 100%;
@@ -105,13 +109,13 @@ const TopTd = styled.div<{
   $borderRight?: string;
   $borderLeft?: string;
 }>`
-  font-size: 1vw;
+  font-size: 1.3vw;
   display: flex;
   font-weight: 500;
   align-items: center;
   justify-content: center;
   width: 13.3vw;
-  height: 3vw;
+  height: 3.4vw;
   border-bottom: 0.1vw solid #e4e4e4;
   /* border-right: 0.1vw solid black; */
 `;
@@ -127,8 +131,9 @@ const ApplyInfoTable = styled.div`
 const ApplyInfoTable2 = styled.div`
   text-align: center;
   border-top: 0.16vw solid black;
-  font-size: 1vw;
+  font-size: 1.3vw;
   width: 100%;
+  margin-bottom: 1vw;
 `;
 
 const ApplyInfoTr = styled.div<{
@@ -141,10 +146,11 @@ const ApplyInfoTr = styled.div<{
 `;
 
 const WorkConditionBox = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: start;
   align-items: center;
+  border-bottom: 0.1vw solid #e4e4e4;
 `;
 
 const ApplyInfoTdTitle = styled.div<{
@@ -154,11 +160,11 @@ const ApplyInfoTdTitle = styled.div<{
 }>`
   background-color: #f4f4f4;
   width: ${(props) => (props.$width ? props.$width : "6.12vw")};
-  height: 2.6vw;
+  height: 3.4vw;
   display: flex;
   align-items: center;
   font-weight: 400;
-  font-size: 1vw;
+  font-size: 1.3vw;
   justify-content: center;
   border-right: ${(props) =>
     props.$borderRight ? props.$borderRight : "0.1vw solid #e4e4e4"};
@@ -175,25 +181,9 @@ const ApplyInfoTd = styled.div<{
   align-items: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
-  font-size: 1vw;
-  height: 2.6vw;
+  font-size: 1.3vw;
+  height: 3.4vw;
 `;
-
-const ApplyInfoTd2 = styled.div<{
-  $width?: string;
-  $borderRight?: string;
-  $borderLeft?: string;
-}>`
-  width: ${(props) => (props.$width ? props.$width : "10vw")};
-  display: flex;
-  font-weight: 200;
-  align-items: center;
-  border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
-  justify-content: center;
-  font-size: 0.8vw;
-  height: 2.6vw;
-`;
-
 const MemoBox = styled.div`
   width: 41vw;
   height: 100%;
@@ -216,18 +206,18 @@ const TextMemoBox = styled.div`
 `;
 
 const TextLine = styled.div`
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   margin-bottom: 0.2vw;
 `;
 const TextSpan1 = styled.span`
   color: black;
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   margin-bottom: 0.2vw;
 `;
 const TextSpan2 = styled.span`
   color: #ff7f3b;
   text-decoration: underline;
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   margin-bottom: 0.4vw;
 `;
 
@@ -299,7 +289,7 @@ const BottomComponent = styled.div`
   height: 60vw;
 `;
 const PriceListArea = styled.div`
-  width: 24vw;
+  width: 28vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -314,6 +304,7 @@ const PriceListBox = styled.div`
 `;
 
 const TotalPriceBox = styled.div`
+  margin-top: 1vw;
   width: 100%;
   height: 2vw;
   display: flex;
@@ -334,23 +325,24 @@ const TotalPriceInput = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
+  margin-bottom: 1vw;
 `;
 
 const PriceNameInput = styled.p`
   text-align: start;
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   font-weight: 600;
 `;
 
 const PriceInput = styled.p`
   text-align: end;
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   font-weight: 600;
   width: 10vw;
 `;
 
 const PriceNameInputEng = styled.p`
-  font-size: 1vw;
+  font-size: 1.3vw;
   font-weight: 300;
   padding-left: 0.4vw;
   padding-right: 0.8vw;
@@ -359,7 +351,7 @@ const PriceNameInputEng = styled.p`
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 4vw;
+  height: 6.2vw;
   display: flex;
   /* flex-direction: column; */
   justify-content: space-evenly;
@@ -374,7 +366,7 @@ const AgreementTextLine = styled.div`
   margin-top: 0.3vw;
   height: 2vw;
   font-size: 0.8vw;
-  line-height: 1.4vw;
+  line-height: 1.1vw;
   font-weight: 300;
   display: flex;
   text-align: start;
@@ -384,7 +376,7 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 8vw;
+  height: 14vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 0.16vw solid black;
@@ -407,35 +399,35 @@ const SignatureArea = styled.div`
 
 const PriceItemBox = styled.div`
   width: 100%;
-  height: 2.6vw;
+  height: 3vw;
   display: flex;
 `;
 
 const PriceItemBox2 = styled.div`
-  width: 11.8vw;
-  height: 2.6vw;
+  width: 13.8vw;
+  height: 3vw;
   display: flex;
 `;
 
 const OptionItemName = styled.div`
   width: 8.2vw;
-  height: 2.6vw;
+  height: 3vw;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f4f4f4;
-  font-size: 1vw;
+  font-size: 1.3vw;
   border-bottom: 0.1vw solid #b4b4b4;
   /* border-right: 0.1vw solid gray; */
 `;
 
 const OptionItem = styled.div`
   width: 6vw;
-  height: 2.6vw;
+  height: 3vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1vw;
+  font-size: 1.3vw;
   border-bottom: 0.1vw solid #b4b4b4;
   /* border-right: 0.1vw solid gray; */
 `;
@@ -447,18 +439,18 @@ const OptionItemListBox = styled.div`
 `;
 
 const PriceItemName = styled.div`
-  width: 46%;
+  width: 48%;
   height: 100%;
   background-color: #f4f4f4;
   display: flex;
   align-items: center;
-  font-size: 1vw;
+  font-size: 1.3vw;
   padding-left: 1vw;
   border-bottom: 0.1vw solid #dbdbdb;
 `;
 
 const PriceItemPrice = styled.div`
-  width: 54%;
+  width: 52%;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -468,12 +460,12 @@ const PriceItemPrice = styled.div`
 `;
 
 const Price = styled.p`
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   font-weight: 400;
   margin-right: 0.4vw;
 `;
 const Unit = styled.p`
-  font-size: 1vw;
+  font-size: 1.3vw;
   font-weight: 100;
   padding-top: 0.3vw;
 `;
@@ -582,6 +574,7 @@ const BottomLine = styled.div`
   margin-top: 0.4vw;
   width: 100%;
   border-top: 0.1vw solid black;
+  margin-bottom: 0.4vw;
 `;
 const AgreeBox = styled.div`
   margin-top: 1vw;
@@ -607,6 +600,7 @@ const FooterArea = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 5vw;
 `;
 
 const FooterItemBox = styled.div`
@@ -651,7 +645,7 @@ const Index = styled.div`
   align-items: center;
   width: 100%;
   height: 0.5vw;
-  font-size: 0.2vw;
+  font-size: 1.2vw;
   font-weight: 300;
 `;
 
@@ -674,7 +668,7 @@ const ServiceColumnBox = styled.div`
   width: 100%;
   height: 2.6vw;
   display: flex;
-  font-size: 1vw;
+  font-size: 1.3vw;
   font-weight: 300;
 `;
 
@@ -793,12 +787,6 @@ const FirstPage = (props: any) => {
     { id: 3, status: "카드" },
     { id: 4, status: "무빙팀 수금" },
     { id: 5, status: "리빙팀 수금" },
-  ];
-
-  const paymentMethodList2 = [
-    { id: 0, status: "온라인" },
-    { id: 1, status: "현금" },
-    { id: 2, status: "카드" },
   ];
 
   const getDrawingData = async () => {
@@ -946,11 +934,8 @@ const FirstPage = (props: any) => {
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {detailData.contractDate === "        "
-                    ? otherDateData.fakeContractDate.replace(
-                        formattedDate,
-                        "$1-$2-$3"
-                      )
+                  {detailData.contractDate === ""
+                    ? "--"
                     : detailData.contractDate.replace(
                         formattedDate,
                         "$1-$2-$3"
@@ -1004,17 +989,18 @@ const FirstPage = (props: any) => {
                 <ApplyInfoTd></ApplyInfoTd>
               </ApplyInfoTr>
             </ApplyInfoTable2>
-            <ApplyInfoTable>
+            <ApplyInfoTable2>
               <WorkConditionBox>
-                <ApplyInfoTdTitle $width={"18%"}>
-                  작업조건 (전)
-                </ApplyInfoTdTitle>
-                <ApplyInfoTd2
+                <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
+                <ApplyInfoTd
                   $width={"52%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
-                </ApplyInfoTd2>
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle $width={"18%"}>
+                  작업조건 (전)
+                </ApplyInfoTdTitle>
                 <ApplyInfoTd
                   $width={"15%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
@@ -1030,15 +1016,16 @@ const FirstPage = (props: any) => {
                 </ApplyInfoTd>
               </WorkConditionBox>
               <WorkConditionBox>
-                <ApplyInfoTdTitle $width={"18%"}>
-                  작업조건 (후)
-                </ApplyInfoTdTitle>
-                <ApplyInfoTd2
+                <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
+                <ApplyInfoTd
                   $width={"52%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
-                </ApplyInfoTd2>
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle $width={"18%"}>
+                  작업조건 (후)
+                </ApplyInfoTdTitle>
                 <ApplyInfoTd
                   $width={"15%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
@@ -1075,7 +1062,7 @@ const FirstPage = (props: any) => {
                   {optionData.afterWorkCondition.pyeong}(평)
                 </ApplyInfoTd>
               </ApplyInfoTr> */}
-            </ApplyInfoTable>
+            </ApplyInfoTable2>
 
             <ServiceArea>
               <ServiceBox>
@@ -1386,28 +1373,14 @@ const FirstPage = (props: any) => {
                     </PriceItemPrice>
                   </PriceItemBox>
                   <PriceItemBox>
-                    <PriceItemName>
-                      계약금(
-                      {
-                        paymentMethodList2[priceDataList[4].paymentMethod]
-                          .status
-                      }
-                      )
-                    </PriceItemName>
+                    <PriceItemName>계약금</PriceItemName>
                     <PriceItemPrice>
                       <Price>{priceDataList[4].amount.toLocaleString()}</Price>
                       <Unit>₩</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>
                   <PriceItemBox>
-                    <PriceItemName>
-                      잔금({" "}
-                      {
-                        paymentMethodList2[priceDataList[5].paymentMethod]
-                          .status
-                      }
-                      )
-                    </PriceItemName>
+                    <PriceItemName>잔금</PriceItemName>
                     <PriceItemPrice>
                       <Price>{priceDataList[5].amount.toLocaleString()}</Price>
                       <Unit>₩</Unit>
@@ -1417,7 +1390,7 @@ const FirstPage = (props: any) => {
                 <TotalPriceBox>
                   <TotalPriceName>
                     <PriceNameInput>총 비용</PriceNameInput>
-                    <PriceNameInputEng>Total Charge</PriceNameInputEng>
+                    <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
                   </TotalPriceName>
                   <TotalPriceInput>
                     <PriceInput>
@@ -1491,24 +1464,9 @@ const FirstPage = (props: any) => {
                 </SignatureBox>
               </PriceListArea>
             </BottomComponent>
-            <TextMemoBox>
-              <TextLine>
-                <TextSpan1>(주)통인익스프레스는&nbsp;</TextSpan1>
-                <TextSpan2>
-                  이사잔금을 현장에서 수금하지 않습니다.&nbsp;
-                </TextSpan2>
-                <TextSpan1>
-                  아래의 계좌로 입금 또는 본사 카드승인으로 결제해주세요.
-                </TextSpan1>
-              </TextLine>
-              <TextLine>
-                온라인 입금 : 우리은행 (주)통인익스프레스 1005-080-767801 / 카드
-                승인 : 02) 3678-0123
-              </TextLine>
-            </TextMemoBox>
-            <BottomLine></BottomLine>
           </ContentArea>
           <FooterArea>
+            <BottomLine></BottomLine>
             <FooterItemBox>
               <FooterItem1>www.tonginexp.com</FooterItem1>
               <FooterItem2>고객센터: 1988-0123</FooterItem2>

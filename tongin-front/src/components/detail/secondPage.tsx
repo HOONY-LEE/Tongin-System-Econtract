@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Container = styled.div`
-  padding: 2vw 4vw;
+  padding: 2vw 1vw 1vw 1vw;
   width: 100%;
   height: 100%;
   display: flex;
@@ -27,20 +27,24 @@ const Container = styled.div`
 `;
 const Header = styled.div`
   width: 100%;
-  height: 5vw;
+  height: 4vw;
+  margin-bottom: 2vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 const HeaderTitle = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: end;
   font-weight: 800;
   font-size: 3vw;
   height: 4vw;
 `;
 const LogoImg = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: end;
   width: 20vw;
   height: 6vw;
   padding-left: 1vw;
@@ -100,7 +104,7 @@ const ItemNameBox = styled.div`
 `;
 
 const ProductArea = styled.div`
-  width: 11.8vw;
+  width: 13vw;
   font-weight: 600;
   display: flex;
   flex-direction: column;
