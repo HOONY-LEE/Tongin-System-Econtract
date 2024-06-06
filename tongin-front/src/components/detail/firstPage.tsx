@@ -306,7 +306,7 @@ const PriceListBox = styled.div`
 const TotalPriceBox = styled.div`
   margin-top: 1vw;
   width: 100%;
-  height: 2vw;
+  height: 3vw;
   display: flex;
   border-bottom: 0.16vw solid black;
   margin-bottom: 1vw;
@@ -330,13 +330,13 @@ const TotalPriceInput = styled.div`
 
 const PriceNameInput = styled.p`
   text-align: start;
-  font-size: 1.3vw;
+  font-size: 1.7vw;
   font-weight: 600;
 `;
 
 const PriceInput = styled.p`
   text-align: end;
-  font-size: 1.3vw;
+  font-size: 1.8vw;
   font-weight: 600;
   width: 10vw;
 `;
@@ -376,7 +376,7 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 14vw;
+  height: 7vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 0.16vw solid black;
@@ -385,7 +385,7 @@ const SignatureBox = styled.div`
 const SignatureTitle = styled.div`
   width: 30%;
   height: 100%;
-  margin-top: 1vw;
+  margin-top: 0.1vw;
 `;
 
 const SignatureArea = styled.div`
@@ -458,10 +458,37 @@ const PriceItemPrice = styled.div`
   padding-right: 1vw;
   border-bottom: 0.04vw solid #d3d3d3;
 `;
+const PriceItemName2 = styled.div`
+  width: 48%;
+  height: 100%;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.6vw;
 
+  padding-left: 1vw;
+  border-bottom: 0.1vw solid #dbdbdb;
+`;
+
+const PriceItemPrice2 = styled.div`
+  width: 52%;
+  height: 100%;
+  display: flex;
+  font-weight: 600;
+  justify-content: end;
+  align-items: center;
+  padding-right: 1vw;
+  border-bottom: 0.04vw solid #d3d3d3;
+`;
 const Price = styled.p`
   font-size: 1.3vw;
   font-weight: 400;
+  margin-right: 0.4vw;
+`;
+const Price2 = styled.p`
+  font-size: 1.6vw;
+  font-weight: 600;
   margin-right: 0.4vw;
 `;
 const Unit = styled.p`
@@ -940,8 +967,11 @@ const FirstPage = (props: any) => {
                 </ApplyInfoTd>
                 <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
-                  {detailData.contractDate === ""
-                    ? "--"
+                  {detailData.contractDate === "        "
+                    ? otherDateData.fakeContractDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )
                     : detailData.contractDate.replace(
                         formattedDate,
                         "$1-$2-$3"
@@ -1390,7 +1420,7 @@ const FirstPage = (props: any) => {
                     <PriceItemPrice>
                       <Price>{priceDataList[4].amount.toLocaleString()}</Price>
                       <Unit>₩</Unit>
-                    </PriceItemPrice>
+                    </PriceItemPrice2>
                   </PriceItemBox>
                   <PriceItemBox>
                     <PriceItemName>
@@ -1404,7 +1434,7 @@ const FirstPage = (props: any) => {
                     <PriceItemPrice>
                       <Price>{priceDataList[5].amount.toLocaleString()}</Price>
                       <Unit>₩</Unit>
-                    </PriceItemPrice>
+                    </PriceItemPrice2>
                   </PriceItemBox>
                 </PriceListBox>
                 <TotalPriceBox>
@@ -1419,7 +1449,7 @@ const FirstPage = (props: any) => {
                     <PriceNameInputEng>₩</PriceNameInputEng>
                   </TotalPriceInput>
                 </TotalPriceBox>
-                <AgreementBox>
+                {/* <AgreementBox>
                   <AgreementTextLine>
                     본인은 (주)통인익스프레스 견적•계약에 따른 약관 및 이용
                     안내에<br></br>
@@ -1438,7 +1468,7 @@ const FirstPage = (props: any) => {
                       ></Image>
                     </ImageBox>
                   </AgreementTextLine>
-                </AgreementBox>
+                </AgreementBox> */}
                 <SignatureBox>
                   <SignatureTitle>
                     <PriceNameInput>고객서명</PriceNameInput>
