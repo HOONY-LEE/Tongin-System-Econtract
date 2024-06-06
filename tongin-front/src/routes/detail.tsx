@@ -379,9 +379,13 @@ export default function Detail() {
   }, [drawingData2]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
   const onDrawingPanel = () => {
     setAllSave(true);
+    setTimeout(() => {
+      drawingPanelShow();
+    }, 500);
+  };
+  const drawingPanelShow = () => {
     postOptionData();
 
     navigate(
@@ -404,7 +408,7 @@ export default function Detail() {
         })
       )
     );
-    setAllSave(false);
+    // setAllSave(false);
   };
   useEffect(() => {
     disableScrollLock();
@@ -431,6 +435,7 @@ export default function Detail() {
               <DetialTabBox>
                 <DetailComponent
                   allSave={allSave}
+                  setAllSave={setAllSave}
                   setStatus={setStatus}
                   status={status}
                   fetchStatus={fetchStatus}
@@ -448,6 +453,7 @@ export default function Detail() {
               <ProductTabBox>
                 <ProductComponent
                   allSave={allSave}
+                  setAllSave={setAllSave}
                   reNum={reNum}
                   getProductList={getProductList}
                   currentProductList={currentProductList}

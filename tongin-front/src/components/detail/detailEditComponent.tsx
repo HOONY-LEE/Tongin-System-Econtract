@@ -421,6 +421,7 @@ export default function DetailEditComponent(props: any) {
     contractImageList,
     movingTypeList,
     allSave,
+    setAllSave,
   } = props;
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
@@ -474,7 +475,6 @@ export default function DetailEditComponent(props: any) {
   };
 
   useEffect(() => {
-    console.log("detalData변경");
     setDetailData((prev: any) => {
       const updatedData = { ...prev };
       updatedData.name = userName;
@@ -727,6 +727,12 @@ export default function DetailEditComponent(props: any) {
   //     detailDrawPageSave();
   //   }
   // }, [allSave]);
+  useEffect(() => {
+    if (allSave) {
+      putDrawSave();
+    }
+    setAllSave(false);
+  }, [allSave]);
   return (
     <>
       {isContractFinishModal && (

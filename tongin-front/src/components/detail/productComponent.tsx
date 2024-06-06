@@ -112,6 +112,7 @@ export default function ProductComponent(props: any) {
     reNum,
     getProductList,
     allSave,
+    setAllSave,
   } = props;
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
@@ -176,6 +177,7 @@ export default function ProductComponent(props: any) {
     if (allSave) {
       saveProductList();
     }
+    setAllSave(false);
   }, [allSave]);
   return (
     <>
