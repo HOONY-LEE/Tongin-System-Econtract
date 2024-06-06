@@ -184,12 +184,6 @@ export default function Detail() {
   const selectMenuHandler = (index: any) => {
     setCurrentTab(index);
   };
-  const [allSave, setAllSave] = useState<any>(false);
-  // useEffect(() => {
-  //   if (signed.state) {
-  //     setCurrentTab(3);
-  //   }
-  // }, [signed]);
 
   // 계약서 이미지 리스트 API
   const getContractImageList = async () => {
@@ -251,7 +245,7 @@ export default function Detail() {
       if (response.status === 200) {
         setFetchStatus(true);
         setStatus("SUCCESS");
-        // alert("옵션정보를 저장하는데 성공하였습니다.");
+        alert("옵션정보를 저장하는데 성공하였습니다.");
       } else {
         setFetchStatus(true);
         setStatus("FAIL");
@@ -260,7 +254,28 @@ export default function Detail() {
     } catch (error) {
       setFetchStatus(true);
       setStatus("FAIL");
-      // alert("옵션정보를 저장하는데 실패했습니다!");
+      alert("옵션정보를 저장하는데 실패했습니다!");
+    }
+  };
+
+  //물품정보 저장
+  const saveProductList = async () => {
+    try {
+      const requestParam = {
+        receiptArticleData: currentProductList,
+      };
+      const response = await API.post(
+        `/receipt/article/${reNum}`,
+        requestParam
+      );
+      if (response.status === 200) {
+        alert("성공적으로 저장되었습니다.");
+        await getProductList();
+      } else {
+        alert("물품정보 저장에 실패하였습니다.");
+      }
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -379,14 +394,14 @@ export default function Detail() {
   }, [drawingData2]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const onDrawingPanel = () => {
-    setAllSave(true);
-    setTimeout(() => {
+  const onDrawingPanel = async () => {
+    await setTimeout(() => {
       drawingPanelShow();
     }, 500);
   };
   const drawingPanelShow = () => {
     postOptionData();
+    saveProductList();
 
     navigate(
       `/drawing/${reNum}`,
@@ -408,7 +423,6 @@ export default function Detail() {
         })
       )
     );
-    // setAllSave(false);
   };
   useEffect(() => {
     disableScrollLock();
@@ -434,8 +448,6 @@ export default function Detail() {
             {currentTab === 0 ? (
               <DetialTabBox>
                 <DetailComponent
-                  allSave={allSave}
-                  setAllSave={setAllSave}
                   setStatus={setStatus}
                   status={status}
                   fetchStatus={fetchStatus}
@@ -452,8 +464,6 @@ export default function Detail() {
             {currentTab === 1 ? (
               <ProductTabBox>
                 <ProductComponent
-                  allSave={allSave}
-                  setAllSave={setAllSave}
                   reNum={reNum}
                   getProductList={getProductList}
                   currentProductList={currentProductList}

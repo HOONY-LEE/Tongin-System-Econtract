@@ -18,7 +18,7 @@ const NameBox = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 40%;
+  width: 30vw;
   height: 6vw;
 `;
 
@@ -29,6 +29,7 @@ const RemarkBox = styled.div`
   width: 20vw;
   height: 4.2vw;
   margin-left: 3vw;
+  margin-right: 3vw;
   border-radius: 0.4vw;
   background-color: white;
   outline: 0.1vw solid #353535;
@@ -113,17 +114,17 @@ export default function ProductItem(props: any) {
       <NameBox>
         <Title>{item.article.articleName}</Title>
         <Subtitle>{item.article.articleNameEng}</Subtitle>
-        {item.article.articleNameEng === "Etc" && (
-          <RemarkBox>
-            <RemarkInput
-              placeholder={"물품명을 입력하세요."}
-              value={remark}
-              onChange={onChangeInput}
-            ></RemarkInput>
-          </RemarkBox>
-        )}
       </NameBox>
-      <QuantityBox>
+      {/* {item.article.articleNameEng === "Etc" && ( */}
+      <RemarkBox>
+        <RemarkInput
+          placeholder={"특이사항"}
+          value={remark}
+          onChange={onChangeInput}
+        ></RemarkInput>
+      </RemarkBox>
+      {/* )} */}
+      {/* <QuantityBox>
         <QuantityComponent
           roomId={roomId}
           articleId={articleId}
@@ -134,7 +135,7 @@ export default function ProductItem(props: any) {
           setTotalQuantity={setTotalQuantity}
           setTotalCBM={setTotalCBM}
         ></QuantityComponent>
-      </QuantityBox>
+      </QuantityBox> */}
       <CBMBox>
         <QuantityInputComponent
           setCurrentProductList={setCurrentProductList}

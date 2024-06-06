@@ -102,7 +102,6 @@ const DropdownComponent = (props: any) => {
     if (itemIndex) {
       setSelected(id, itemIndex);
     } else {
-      alert("인덱스 없음");
       setSelected(id);
     }
   };

@@ -789,6 +789,12 @@ const FirstPage = (props: any) => {
     { id: 5, status: "리빙팀 수금" },
   ];
 
+  const paymentMethodList2 = [
+    { id: 0, status: "온라인" },
+    { id: 1, status: "현금" },
+    { id: 2, status: "카드" },
+  ];
+
   const getDrawingData = async () => {
     const response = await API.get(`receipt/memo/${reNum}`);
     if (response.status === 200) {
@@ -1373,14 +1379,28 @@ const FirstPage = (props: any) => {
                     </PriceItemPrice>
                   </PriceItemBox>
                   <PriceItemBox>
-                    <PriceItemName>계약금</PriceItemName>
+                    <PriceItemName>
+                      계약금(
+                      {
+                        paymentMethodList2[priceDataList[4].paymentMethod]
+                          .status
+                      }
+                      )
+                    </PriceItemName>
                     <PriceItemPrice>
                       <Price>{priceDataList[4].amount.toLocaleString()}</Price>
                       <Unit>₩</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>
                   <PriceItemBox>
-                    <PriceItemName>잔금</PriceItemName>
+                    <PriceItemName>
+                      잔금(
+                      {
+                        paymentMethodList2[priceDataList[5].paymentMethod]
+                          .status
+                      }
+                      )
+                    </PriceItemName>
                     <PriceItemPrice>
                       <Price>{priceDataList[5].amount.toLocaleString()}</Price>
                       <Unit>₩</Unit>
