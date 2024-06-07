@@ -213,7 +213,7 @@ const ApplyInfoTd = styled.div<{
   align-items: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
-  font-size: 1.3vw;
+  font-size: 1.4vw;
   height: 3.4vw;
 `;
 const MemoBox = styled.div`
@@ -287,11 +287,11 @@ const TextMemoRound = styled.div`
 //   color: #383838;
 // `;
 const TextMemoText = styled.pre`
-  font-size: 1.2vw;
-  font-weight: 300;
+  font-size: 1.6vw;
+  font-weight: 400;
   text-align: start;
   line-height: 2vw;
-  color: #383838;
+  color: #000000;
   white-space: pre-line; /* width 안에서 받아온 엔터 그대로 적용 될 수 있도록 처리 / 넘치면 아래로 내려감 */
   border: none;
   width: 100%; /* 원하는 너비 */
@@ -533,7 +533,7 @@ const PriceItemPrice2 = styled.div`
   border-bottom: 0.04vw solid #d3d3d3;
 `;
 const Price = styled.p`
-  font-size: 1.3vw;
+  font-size: 1.5vw;
   font-weight: 400;
   margin-right: 0.4vw;
 `;
@@ -649,7 +649,7 @@ const TotalTd = styled.div<{
     ${(props) => (props.$borderBottom ? props.$borderBottom : "#e4e4e4")};
 `;
 const BottomLine = styled.div`
-  margin-top: 0.4vw;
+  margin-top: 0.8vw;
   width: 100%;
   border-top: 0.1vw solid black;
   margin-bottom: 0.4vw;
@@ -722,7 +722,7 @@ const Index = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 2vw;
+  height: 1vw;
   font-size: 1.2vw;
   font-weight: 300;
 `;
@@ -827,6 +827,7 @@ const FirstPage = (props: any) => {
     optionTotalCharge,
     setIsPreviewModalOpen,
     otherDateData,
+    contractNum,
   } = props;
 
   const divRef = useRef<any>(null);
@@ -1592,7 +1593,7 @@ const FirstPage = (props: any) => {
               <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
               <FooterItem3>
                 <div>SERIAL NO.</div>
-                <div>{reNum} </div>
+                <div>{contractNum} </div>
               </FooterItem3>
             </FooterItemBox>
             <Index>- 1 -</Index>

@@ -37,7 +37,7 @@ const ColumnNameBox = styled.div`
 `;
 
 const ArticleBox = styled.div<{ index: number }>`
-  height: 1.9vw;
+  height: 2vw;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -165,14 +165,14 @@ export default function ContractProductComponent(props: any) {
             <ColumnName2></ColumnName2>
           </ArticleBox>
           <TotalBox index={articleData.articleData.length + 1}>
-            <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
+            <ColumnName></ColumnName>
             <ColumnName2>{totalCbm === 0 ? "" : totalCbm}</ColumnName2>
             <ColumnName2></ColumnName2>
           </TotalBox>
         </>
       ) : (
         <TotalBox index={articleData.articleData.length}>
-          <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
+          <ColumnName></ColumnName>
           <ColumnName2>{totalCbm === 0 ? "" : totalCbm}</ColumnName2>
           <ColumnName2></ColumnName2>
         </TotalBox>

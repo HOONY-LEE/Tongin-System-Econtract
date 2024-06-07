@@ -84,6 +84,8 @@ export default function TabComponent() {
   const [fetchStatus, setFetchStatus] = useState(false); // toast messege
   const [status, setStatus] = useState(""); // toast messege
   const [text, setText] = useState(""); // toast messege
+  const [filterType, setFilterType] = useState("상담일");
+
   const menuArr = [
     { name: "견적리스트", content: "견적리스트 영역" },
     { name: "미계약리스트", content: "미계약 리스트 영역" },
@@ -146,6 +148,13 @@ export default function TabComponent() {
 
     updateLists();
   }, [receiptList]);
+
+  useEffect(() => {
+    if (filterType === "접수일") {
+    } else if (filterType === "상담일") {
+    } else if (filterType === "이사일") {
+    }
+  }, [filterType]);
 
   const onSearchInputFocus = () => {
     setCurrentTab(4); // "전체보기" 탭으로 설정
