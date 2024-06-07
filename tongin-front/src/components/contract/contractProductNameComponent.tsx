@@ -60,7 +60,7 @@ export default function ContractProductNameComponent(props: any) {
           </Wrapper>
         );
       })}
-      {articleDataList.length === 17 ? (
+      {articleDataList.length === 16 ? (
         <>
           <Wrapper2 index={articleDataList.length}>
             <KorNameBox></KorNameBox>

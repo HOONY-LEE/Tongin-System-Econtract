@@ -18,7 +18,7 @@ const ContentsBox = styled.div`
 `;
 
 const RoomName = styled.div`
-  height: 60%;
+  height: 56%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@ const RoomName = styled.div`
 `;
 
 const ColumnNameBox = styled.div`
-  height: 1vw;
+  height: 54%;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -66,7 +66,7 @@ const TotalBox = styled.div<{ index: number }>`
 `;
 
 const ColumnName = styled.div`
-  width: 32%;
+  width: 36%;
   height: 100%;
   display: flex;
   font-size: 1.2vw;
@@ -75,31 +75,23 @@ const ColumnName = styled.div`
   border-right: 0.1vw solid black;
 `;
 
-// const ColumnName2 = styled.div`
-//   width: 10vw;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
+const ColumnName2 = styled.div`
+  width: 32%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2vw;
+  border-right: 0.1vw solid black;
+`;
 const ColumnName3 = styled.div`
   width: 36%;
   height: 100%;
   display: flex;
+  font-size: 1vw;
   justify-content: center;
   align-items: center;
-  font-size: 1.2vw;
-  text-align: center;
-`;
-
-const ColumnName2 = styled.div`
-  width: 36%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2vw;
+  border-right: 0.1vw solid black;
 `;
 
 export default function ContractProductComponent(props: any) {
@@ -132,61 +124,57 @@ export default function ContractProductComponent(props: any) {
       <RoomNameBox>
         <RoomName>{articleData.locationName.substring(0, 13)}</RoomName>
         <ColumnNameBox>
-          <ColumnName>수량</ColumnName>
-          <ColumnName>CBM</ColumnName>
-          <ColumnName3>처리방법</ColumnName3>
+          <ColumnName>메모</ColumnName>
+          <ColumnName2>CBM</ColumnName2>
+          <ColumnName2>처리</ColumnName2>
         </ColumnNameBox>
       </RoomNameBox>
       <ContentsBox>
         {articleData.articleData.map((item: any, index: number) => {
           return (
             <ArticleBox index={index} key={index}>
-              <ColumnName>
-                {item.article.cbm === 0 && item.article.amount === 0
+              <ColumnName3>
+                {item.article.cbm === 0 &&
+                item.article.articleRemark.length === 0
                   ? ""
-                  : item.article.amount}
-              </ColumnName>
+                  : item.article.articleRemark.substring(0, 10)}
+              </ColumnName3>
 
-              <ColumnName>
-                {item.article.cbm === 0 && item.article.amount === 0
+              <ColumnName2>
+                {item.article.cbm === 0 &&
+                item.article.articleRemark.length === 0
                   ? ""
                   : item.article.cbm}
-              </ColumnName>
-              {item.article.articleNameEng === "Etc" ? (
-                <ColumnName2>
-                  {item.article.cbm === 0 && item.article.amount === 0
-                    ? ""
-                    : item.article.articleRemark.substring(0, 12)}
-                </ColumnName2>
-              ) : (
-                <ColumnName3>
-                  {item.article.cbm === 0 && item.article.amount === 0
-                    ? ""
-                    : carryType[item.article.carryType].status}
-                </ColumnName3>
-              )}
+              </ColumnName2>
+
+              <ColumnName2>
+                {item.article.cbm === 0 &&
+                item.article.articleRemark.length === 0
+                  ? ""
+                  : carryType[item.article.carryType].status}
+              </ColumnName2>
             </ArticleBox>
           );
         })}
       </ContentsBox>
-      {articleData.articleData.length === 17 ? (
+      {articleData.articleData.length === 16 ? (
         <>
           <ArticleBox index={articleData.articleData.length}>
             <ColumnName></ColumnName>
-            <ColumnName></ColumnName>
-            <ColumnName3></ColumnName3>
+            <ColumnName2></ColumnName2>
+            <ColumnName2></ColumnName2>
           </ArticleBox>
           <TotalBox index={articleData.articleData.length + 1}>
             <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
-            <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-            <ColumnName3></ColumnName3>
+            <ColumnName2>{totalCbm === 0 ? "" : totalCbm}</ColumnName2>
+            <ColumnName2></ColumnName2>
           </TotalBox>
         </>
       ) : (
         <TotalBox index={articleData.articleData.length}>
           <ColumnName>{totalQuantity === 0 ? "" : totalQuantity}</ColumnName>
-          <ColumnName>{totalCbm === 0 ? "" : totalCbm}</ColumnName>
-          <ColumnName3></ColumnName3>
+          <ColumnName2>{totalCbm === 0 ? "" : totalCbm}</ColumnName2>
+          <ColumnName2></ColumnName2>
         </TotalBox>
       )}
     </Wrapper>

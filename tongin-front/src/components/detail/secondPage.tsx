@@ -25,6 +25,14 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
+
+const BottomLine = styled.div`
+  margin-top: 0.4vw;
+  width: 100%;
+  border-top: 0.1vw solid black;
+  margin-bottom: 0.4vw;
+`;
+
 const Header = styled.div`
   width: 100%;
   height: 4vw;
@@ -67,7 +75,7 @@ const TopArea = styled.div`
   width: 100%;
 `;
 const MidArea = styled.div`
-  margin-top: 1vw;
+  margin-top: 2vw;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -140,6 +148,7 @@ const TopItemArea = styled.div`
 `;
 
 const FooterArea = styled.div`
+  margin-top: 2.3vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -380,6 +389,7 @@ const SecondPage = (props: any) => {
           </MidArea>
         </ContentArea>
         <FooterArea>
+          <BottomLine></BottomLine>
           <FooterItemBox>
             <FooterItem1>www.tonginexp.com</FooterItem1>
             <FooterItem2>고객센터: 1988-0123</FooterItem2>
@@ -387,7 +397,7 @@ const SecondPage = (props: any) => {
             <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
             <FooterItem3>
               <div>SERIAL NO.</div>
-              <div>{reNum}</div>
+              <div>{reNum} </div>
             </FooterItem3>
           </FooterItemBox>
           <Index>- 2 -</Index>
