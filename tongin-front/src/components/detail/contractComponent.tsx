@@ -247,6 +247,9 @@ export default function ContractComponent(props: any) {
     otherDateData,
   } = props;
 
+  // console.log("detailData");
+  // console.log(detailData);
+  const contractNum = detailData.contractNum;
   const [movingCBM, setMovingCBM] = useState<number>(0);
   const [discardCBM, setDiscardCBM] = useState<number>(0);
   const [optionTotalCharge, setOptionTotalCharge] = useState<number>(0);
@@ -603,6 +606,7 @@ export default function ContractComponent(props: any) {
       )}
       {isPreviewModalOpen && (
         <ContractPreviewModalComponent
+          contractNum={contractNum}
           getContractImageList={getContractImageList}
           reNum={reNum}
           setLines={setLines}

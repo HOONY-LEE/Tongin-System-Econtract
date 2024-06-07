@@ -258,6 +258,33 @@ export default function Detail() {
     }
   };
 
+  // 옵션정보 수정API(메모로 이동시)
+  const postOptionData2 = async () => {
+    if (optionData.isEditable === false) {
+      alert("이미 내보내기한 계약서는 수정할 수 없습니다.");
+      return;
+    }
+
+    try {
+      const requestParam = { receiptOptionData: optionData };
+
+      const response = await API.post(`receipt/option2/${reNum}`, requestParam);
+
+      if (response.status === 200) {
+        setFetchStatus(true);
+        setStatus("SUCCESS");
+      } else {
+        setFetchStatus(true);
+        setStatus("FAIL");
+        alert("Fail to saveOptionData()");
+      }
+    } catch (error) {
+      setFetchStatus(true);
+      setStatus("FAIL");
+      alert("옵션정보를 저장하는데 실패했습니다!");
+    }
+  };
+
   //물품정보 저장
   const saveProductList = async () => {
     try {
@@ -269,7 +296,7 @@ export default function Detail() {
         requestParam
       );
       if (response.status === 200) {
-        alert("성공적으로 저장되었습니다.");
+        // alert("성공적으로 저장되었습니다.");
         await getProductList();
       } else {
         alert("물품정보 저장에 실패하였습니다.");
@@ -400,7 +427,7 @@ export default function Detail() {
     }, 500);
   };
   const drawingPanelShow = () => {
-    postOptionData();
+    postOptionData2();
     saveProductList();
 
     navigate(

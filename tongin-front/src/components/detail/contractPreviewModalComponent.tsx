@@ -199,6 +199,7 @@ const ContractPreviewModalComponent = (props: any) => {
     setIsPreviewModalOpen,
     completeReceipt,
     otherDateData,
+    contractNum,
   } = props;
 
   const [contractImageList, setContractImageList] = useState<any[]>([]);
@@ -335,6 +336,7 @@ const ContractPreviewModalComponent = (props: any) => {
               optionTotalCharge={optionTotalCharge}
               getDetailList={getDetailList}
               otherDateData={otherDateData}
+              contractNum={contractNum}
             ></FirstPage>
           )}
           {currentPage === 2 && (
@@ -346,6 +348,7 @@ const ContractPreviewModalComponent = (props: any) => {
               priceDataList={priceDataList}
               articleDataList={articleDataList}
               optionData={optionData}
+              contractNum={contractNum}
             ></SecondPage>
           )}
         </ContractArea>

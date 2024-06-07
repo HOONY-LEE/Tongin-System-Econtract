@@ -27,7 +27,6 @@ const Container = styled.div`
 `;
 
 const BottomLine = styled.div`
-  margin-top: 0.4vw;
   width: 100%;
   border-top: 0.1vw solid black;
   margin-bottom: 0.4vw;
@@ -75,7 +74,7 @@ const TopArea = styled.div`
   width: 100%;
 `;
 const MidArea = styled.div`
-  margin-top: 2vw;
+  margin-top: 0.4vw;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -148,7 +147,7 @@ const TopItemArea = styled.div`
 `;
 
 const FooterArea = styled.div`
-  margin-top: 2.3vw;
+  /* margin-top: 1vw; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -197,15 +196,22 @@ const Index = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 2vw;
+  height: 1vw;
   font-size: 1.2vw;
   font-weight: 300;
 `;
 
 // SecondPage 컴포넌트 정의
 const SecondPage = (props: any) => {
-  const { priceDataList, articleDataList, optionData, lines, reNum, setLines } =
-    props;
+  const {
+    priceDataList,
+    articleDataList,
+    optionData,
+    lines,
+    reNum,
+    setLines,
+    contractNum,
+  } = props;
   const divRef = useRef<any>(null);
   const stageRef = useRef<any>(null);
   const handleMouseDown = (e: any) => {
@@ -389,7 +395,7 @@ const SecondPage = (props: any) => {
           </MidArea>
         </ContentArea>
         <FooterArea>
-          <BottomLine></BottomLine>
+          {/* <BottomLine></BottomLine> */}
           <FooterItemBox>
             <FooterItem1>www.tonginexp.com</FooterItem1>
             <FooterItem2>고객센터: 1988-0123</FooterItem2>
@@ -397,7 +403,7 @@ const SecondPage = (props: any) => {
             <FooterItem2>서울시 서초구 양재대로12길 36</FooterItem2>
             <FooterItem3>
               <div>SERIAL NO.</div>
-              <div>{reNum} </div>
+              <div>{contractNum} </div>
             </FooterItem3>
           </FooterItemBox>
           <Index>- 2 -</Index>
