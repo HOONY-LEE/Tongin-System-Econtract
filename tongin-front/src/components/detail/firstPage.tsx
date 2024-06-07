@@ -104,7 +104,39 @@ const TopTdTitle = styled.div<{
   font-weight: 400;
   justify-content: center;
 `;
+
+const TopTdTitle2 = styled.div<{
+  $width?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
+}>`
+  font-size: 1.3vw;
+  background-color: #f4f4f4;
+  width: 8vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  justify-content: center;
+`;
+
 const TopTd = styled.div<{
+  $width?: string;
+  $borderRight?: string;
+  $borderLeft?: string;
+}>`
+  font-size: 1.4vw;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  width: 13.3vw;
+  height: 3.4vw;
+  border-bottom: 0.1vw solid #e4e4e4;
+  /* border-right: 0.1vw solid black; */
+`;
+
+const TopTd2 = styled.div<{
   $width?: string;
   $borderRight?: string;
   $borderLeft?: string;
@@ -114,7 +146,7 @@ const TopTd = styled.div<{
   font-weight: 500;
   align-items: center;
   justify-content: center;
-  width: 13.3vw;
+  width: 20vw;
   height: 3.4vw;
   border-bottom: 0.1vw solid #e4e4e4;
   /* border-right: 0.1vw solid black; */
@@ -237,7 +269,7 @@ const MemoRound = styled.div`
 
 const TextMemoRound = styled.div`
   width: 100%;
-  height: 38vw;
+  height: 40vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -289,7 +321,7 @@ const BottomComponent = styled.div`
   height: 60vw;
 `;
 const PriceListArea = styled.div`
-  width: 28vw;
+  width: 32vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -301,6 +333,7 @@ const PriceListBox = styled.div`
   width: 100%;
   border-top: 0.16vw solid black;
   border-left: 0.1vw solid black;
+  margin-bottom: 1vw;
 `;
 
 const TotalPriceBox = styled.div`
@@ -376,10 +409,11 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 7vw;
+  height: 8vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 0.16vw solid black;
+  margin-top: 1vw;
 `;
 
 const SignatureTitle = styled.div`
@@ -402,9 +436,16 @@ const PriceItemBox = styled.div`
   height: 3vw;
   display: flex;
 `;
+const PriceItemBox3 = styled.div`
+  width: 100%;
+  height: 3.8vw;
+  display: flex;
+  /* border-left: 0.1vw solid black;
+  border-top: 0.1vw solid black; */
+`;
 
 const PriceItemBox2 = styled.div`
-  width: 13.8vw;
+  width: 15.8vw;
   height: 3vw;
   display: flex;
 `;
@@ -422,7 +463,7 @@ const OptionItemName = styled.div`
 `;
 
 const OptionItem = styled.div`
-  width: 6vw;
+  width: 8vw;
   height: 3vw;
   display: flex;
   justify-content: center;
@@ -430,6 +471,16 @@ const OptionItem = styled.div`
   font-size: 1.3vw;
   border-bottom: 0.1vw solid #b4b4b4;
   /* border-right: 0.1vw solid gray; */
+`;
+
+const OptionItem2 = styled.div`
+  width: 8vw;
+  height: 3vw;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  font-size: 1.3vw;
+  border-bottom: 0.1vw solid #b4b4b4;
 `;
 
 const OptionItemListBox = styled.div`
@@ -627,7 +678,7 @@ const FooterArea = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 5vw;
+  /* height: 5vw; */
 `;
 
 const FooterItemBox = styled.div`
@@ -671,7 +722,7 @@ const Index = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 0.5vw;
+  height: 2vw;
   font-size: 1.2vw;
   font-weight: 300;
 `;
@@ -932,24 +983,24 @@ const FirstPage = (props: any) => {
           </Header>
           <ContentArea>
             <TopTable>
-              <TopTdTitle>고객명</TopTdTitle>
+              <TopTdTitle2>고객명</TopTdTitle2>
               <TopTd>{detailData.name}</TopTd>
               <TopTdTitle $borderLeft={"0.1vw solid black"}>
                 이사종류
               </TopTdTitle>
-              <TopTd>{detailData.movingType}</TopTd>
+              <TopTd2>{detailData.movingType}</TopTd2>
               <TopTdTitle $borderLeft={"0.1vw solid black"}>
                 전화번호
               </TopTdTitle>
               <TopTd>{detailData.contact}</TopTd>
             </TopTable>
             <TopTableTd>
-              <TopTdTitle>담당자</TopTdTitle>
+              <TopTdTitle2>담당자</TopTdTitle2>
               <TopTd>{detailData.planner.name}</TopTd>
               <TopTdTitle $borderLeft={"0.1vw solid black"}>
                 담당자연락처
               </TopTdTitle>
-              <TopTd>{detailData.planner.contact}</TopTd>
+              <TopTd2>{detailData.planner.contact}</TopTd2>
               <TopTdTitle $borderLeft={"0.1vw solid black"}>지점명</TopTdTitle>
               <TopTd>{detailData.branch.region}</TopTd>
             </TopTableTd>
@@ -1027,18 +1078,18 @@ const FirstPage = (props: any) => {
             </ApplyInfoTable2>
             <ApplyInfoTable2>
               <WorkConditionBox>
-                <ApplyInfoTdTitle $width={"18%"}>이사 전 주소</ApplyInfoTdTitle>
+                <ApplyInfoTdTitle $width={"15%"}>이사 전 주소</ApplyInfoTdTitle>
                 <ApplyInfoTd
-                  $width={"52%"}
+                  $width={"60%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
                 </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"18%"}>
+                <ApplyInfoTdTitle $width={"15%"}>
                   작업조건 (전)
                 </ApplyInfoTdTitle>
                 <ApplyInfoTd
-                  $width={"15%"}
+                  $width={"14%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {
@@ -1052,18 +1103,18 @@ const FirstPage = (props: any) => {
                 </ApplyInfoTd>
               </WorkConditionBox>
               <WorkConditionBox>
-                <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
+                <ApplyInfoTdTitle $width={"15%"}>이사 후 주소</ApplyInfoTdTitle>
                 <ApplyInfoTd
-                  $width={"52%"}
+                  $width={"60%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
                 </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"18%"}>
+                <ApplyInfoTdTitle $width={"15%"}>
                   작업조건 (후)
                 </ApplyInfoTdTitle>
                 <ApplyInfoTd
-                  $width={"15%"}
+                  $width={"14%"}
                   $borderRight={"0.1vw solid #e4e4e4"}
                 >
                   {
@@ -1318,46 +1369,50 @@ const FirstPage = (props: any) => {
               </MemoBox>
               <PriceListArea>
                 <PriceListBox>
-                  <PriceItemBox>
+                  {/* <PriceItemBox>
                     <PriceItemName>옵션품목(분해/설치)</PriceItemName>
                     <PriceItemPrice>
                       <Price> {optionTotalCharge.toLocaleString()}</Price>
                       <Unit>₩</Unit>
                     </PriceItemPrice>
-                  </PriceItemBox>
+                  </PriceItemBox> */}
                   <OptionItemListBox>
                     {optionData.optionService.ServiceList.map(
                       (item: any, index: number) => {
                         return (
                           <PriceItemBox2 key={index}>
-                            <OptionItemName>
-                              {item.optionNameEng === "ETC"
-                                ? item.remark
+                            <>
+                              <OptionItemName>
+                                {item.optionNameEng === "ETC"
                                   ? item.remark
-                                  : item.optionName
-                                : item.optionName}
-                            </OptionItemName>
-                            <OptionItem>
-                              {item.decomposition && item.installation
-                                ? "분해 / 설치"
-                                : ""}
-                              {item.decomposition && !item.installation
-                                ? "설치"
-                                : ""}
-                              {!item.decomposition && item.installation
-                                ? "분해"
-                                : ""}
-                              {!item.decomposition && !item.installation
-                                ? "-"
-                                : ""}
-                            </OptionItem>
+                                    ? item.remark
+                                    : item.optionName
+                                  : item.optionName}
+                              </OptionItemName>
+                              <OptionItem>
+                                {item.decomposition && item.installation
+                                  ? "분해 / 설치"
+                                  : ""}
+                                {item.decomposition && !item.installation
+                                  ? "설치"
+                                  : ""}
+                                {!item.decomposition && item.installation
+                                  ? "분해"
+                                  : ""}
+                                {!item.decomposition && !item.installation
+                                  ? "-"
+                                  : ""}
+                              </OptionItem>
+                            </>
                           </PriceItemBox2>
                         );
                       }
                     )}
                     <PriceItemBox2>
-                      <OptionItemName>-</OptionItemName>
-                      <OptionItem>-</OptionItem>
+                      <OptionItemName>옵션금액</OptionItemName>
+                      <OptionItem2>
+                        {optionTotalCharge.toLocaleString()}₩
+                      </OptionItem2>
                     </PriceItemBox2>
                   </OptionItemListBox>
                 </PriceListBox>
@@ -1408,36 +1463,49 @@ const FirstPage = (props: any) => {
                       <Unit>₩</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>
-                  <PriceItemBox>
-                    <PriceItemName>
+                  <PriceItemBox3>
+                    <PriceItemName2>총 비용</PriceItemName2>
+                    <PriceItemPrice2>
+                      <Price2>
+                        {priceDataList[3].amount.toLocaleString()}
+                      </Price2>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice2>
+                  </PriceItemBox3>
+                  <PriceItemBox3>
+                    <PriceItemName2>
                       계약금(
                       {
                         paymentMethodList2[priceDataList[4].paymentMethod]
                           .status
                       }
                       )
-                    </PriceItemName>
+                    </PriceItemName2>
                     <PriceItemPrice2>
-                      <Price>{priceDataList[4].amount.toLocaleString()}</Price>
+                      <Price2>
+                        {priceDataList[4].amount.toLocaleString()}
+                      </Price2>
                       <Unit>₩</Unit>
                     </PriceItemPrice2>
-                  </PriceItemBox>
-                  <PriceItemBox>
-                    <PriceItemName>
+                  </PriceItemBox3>
+                  <PriceItemBox3>
+                    <PriceItemName2>
                       잔금(
                       {
                         paymentMethodList2[priceDataList[5].paymentMethod]
                           .status
                       }
                       )
-                    </PriceItemName>
+                    </PriceItemName2>
                     <PriceItemPrice2>
-                      <Price>{priceDataList[5].amount.toLocaleString()}</Price>
+                      <Price2>
+                        {priceDataList[5].amount.toLocaleString()}
+                      </Price2>
                       <Unit>₩</Unit>
                     </PriceItemPrice2>
-                  </PriceItemBox>
+                  </PriceItemBox3>
                 </PriceListBox>
-                <TotalPriceBox>
+                {/* <TotalPriceBox>
                   <TotalPriceName>
                     <PriceNameInput>총 비용</PriceNameInput>
                     <PriceNameInputEng>(VAT별도)</PriceNameInputEng>
@@ -1448,7 +1516,7 @@ const FirstPage = (props: any) => {
                     </PriceInput>
                     <PriceNameInputEng>₩</PriceNameInputEng>
                   </TotalPriceInput>
-                </TotalPriceBox>
+                </TotalPriceBox> */}
                 {/* <AgreementBox>
                   <AgreementTextLine>
                     본인은 (주)통인익스프레스 견적•계약에 따른 약관 및 이용

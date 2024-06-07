@@ -322,10 +322,10 @@ export default function RoomItemComponent(props: any) {
           </RoomNameBox>
           <SumBox>
             <InputArea>
-              <InputCBMBox>
+              {/* <InputCBMBox>
                 <InputCBMNumber>{totalQuantity}</InputCBMNumber>
               </InputCBMBox>
-              <SubText>개</SubText>
+              <SubText>개</SubText> */}
             </InputArea>
             <InputArea>
               <InputCBMBox>

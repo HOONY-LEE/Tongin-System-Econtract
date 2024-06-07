@@ -589,15 +589,15 @@ export default function SiteDetailComponent(props: any) {
     movingTypeCode,
   ]);
   const movingTypeList = [
-    { id: 0, status: "가정이사(스탠다드)", moveType: "P01225" },
-    { id: 1, status: "가정이사(프리미엄)", moveType: "P01226" },
-    { id: 2, status: "가정이사(VIP)", moveType: "P01224" },
-    { id: 3, status: "보관이사(스탠다드)", moveType: "P01228" },
-    { id: 4, status: "보관이사(프리미엄)", moveType: "P01229" },
-    { id: 5, status: "보관이사(VIP)", moveType: "P01230" },
+    { id: 0, status: "가정이사(스탠다드)", moveType: "P01488" },
+    { id: 1, status: "가정이사(프리미엄)", moveType: "P01489" },
+    { id: 2, status: "가정이사(VIP)", moveType: "P01490" },
+    { id: 3, status: "보관이사(스탠다드)", moveType: "P01491" },
+    { id: 4, status: "보관이사(프리미엄)", moveType: "P01492" },
+    { id: 5, status: "보관이사(VIP)", moveType: "P01493" },
     { id: 6, status: "지방이사(스탠다드)", moveType: "P01017" },
-    { id: 7, status: "지방이사(프리미엄)", moveType: "P01480" },
-    { id: 8, status: "지방이사(VIP)", moveType: "P01481" },
+    { id: 7, status: "지방이사(프리미엄)", moveType: "P01495" },
+    { id: 8, status: "지방이사(VIP)", moveType: "P01496" },
   ];
   useEffect(() => {
     setMovingTypeCode(movingTypeList[selectedMovingType].moveType);
@@ -637,7 +637,7 @@ export default function SiteDetailComponent(props: any) {
                 <InfoLfTitle>고객명</InfoLfTitle>
                 <InfoLfEditContent>
                   <InputBox
-                    placeholder="고객명을 입력해 주세요"
+                    placeholder="고객명"
                     defaultValue={memNm}
                     onChange={(e) => {
                       setMemNm(e.target.value);
@@ -669,7 +669,7 @@ export default function SiteDetailComponent(props: any) {
                 <InfoLfTitle>전화번호</InfoLfTitle>
                 <InfoLfEditContent>
                   <InputBox
-                    placeholder="전화번호를 입력해 주세요"
+                    placeholder="전화번호"
                     defaultValue={hPhone}
                     onChange={onChangUserContact}
                   ></InputBox>
