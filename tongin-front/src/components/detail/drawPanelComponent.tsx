@@ -35,7 +35,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  padding-top: 2vw;
+  /* padding-top: 2vw; */
 `;
 const CalculatorComponentWrapper = styled.div`
   -webkit-user-select: none;
@@ -46,11 +46,11 @@ const CalculatorComponentWrapper = styled.div`
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  width: 90vw;
-  height: 94vh;
+  width: 100vw;
+  height: 100vh;
   background-color: #f2f2f2;
   border-radius: 0.8vw;
-  margin-top: 2vw;
+  /* margin-top: 2vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -175,9 +175,9 @@ const TextPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 86vw;
-  height: 60vw;
-  margin-bottom: 1vw;
+  width: 90vw;
+  height: 123vw;
+  margin-bottom: 3vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
 
@@ -480,7 +480,8 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
               maxLength={1000}
             ></InputBox>
           </TextPanel>
-          <ToolContainer>
+          {/* 그림그리기 부분 */}
+          {/* <ToolContainer>
             <ColorCanvasBox>
               <ColorCanvastitle>
                 {penColorVisible && <div>펜 색상 선택</div>}
@@ -538,7 +539,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
             {/* <CloseBox>
             <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />
           </CloseBox> */}
-          </ToolContainer>
+          {/* </ToolContainer> */}
           {/* <h1>{pointerType}</h1> */}
           <div
             onContextMenu={(e) => {
@@ -546,7 +547,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
             }}
           >
             {/* <h1>현재 타입5 최종 : {pointerType}</h1> */}
-            <CanvasPanel ref={divRef} id={"CanvasPanel"}>
+            {/* <CanvasPanel ref={divRef} id={"CanvasPanel"}>
               <Stage
                 width={dimensions.width}
                 height={dimensions.height}
@@ -577,7 +578,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
                   ))}
                 </Layer>
               </Stage>
-            </CanvasPanel>
+            </CanvasPanel>  */}
           </div>
         </CalculatorComponentWrapper>
         <BtnBox>

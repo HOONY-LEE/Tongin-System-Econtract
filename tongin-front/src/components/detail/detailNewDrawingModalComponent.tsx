@@ -30,8 +30,8 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9997;
-  width: 55vw;
-  height: 30vw;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
   border-radius: 0.8vw;
   display: flex;
