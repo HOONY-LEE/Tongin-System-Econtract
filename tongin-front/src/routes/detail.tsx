@@ -30,6 +30,7 @@ import NewOptionComponent from "../components/detail/newOptionComponent";
 import { newOptionData } from "../components/common/sampleData3";
 import { Toast } from "../components/common/toastMessegeComponent";
 import DrawingComponent from "../components/detail/drawingComponent";
+import DetailNewDrawingModalComponent from "../components/detail/detailNewDrawingModalComponent";
 
 const HomeContainer = styled.div`
   margin-top: 2vw;
@@ -430,26 +431,26 @@ export default function Detail() {
     postOptionData2();
     saveProductList();
 
-    navigate(
-      `/drawing/${reNum}`,
-      JSON.parse(
-        JSON.stringify({
-          state: {
-            setDrawingPanel: setDrawingPanel,
-            setDrawingData: setDrawingData,
-            drawingData: drawingData,
-            textMemoData: textMemoData,
-            setTextMemoData: setTextMemoData,
-            setIsScrolled: setIsScrolled,
-            setLines: setLines,
-            lines: lines,
-            setPreventDefault: setPreventDefault,
-            preventDefault: preventDefault,
-            disableScrollLock: disableScrollLock,
-          },
-        })
-      )
-    );
+    // navigate(
+    //   `/drawing/${reNum}`,
+    //   JSON.parse(
+    //     JSON.stringify({
+    //       state: {
+    //         setDrawingPanel: setDrawingPanel,
+    //         setDrawingData: setDrawingData,
+    //         drawingData: drawingData,
+    //         textMemoData: textMemoData,
+    //         setTextMemoData: setTextMemoData,
+    //         setIsScrolled: setIsScrolled,
+    //         setLines: setLines,
+    //         lines: lines,
+    //         setPreventDefault: setPreventDefault,
+    //         preventDefault: preventDefault,
+    //         disableScrollLock: disableScrollLock,
+    //       },
+    //     })
+    //   )
+    // );
   };
   useEffect(() => {
     disableScrollLock();
@@ -459,6 +460,14 @@ export default function Detail() {
   return (
     <>
       <FlexXY>
+        {drawingPanel && (
+          <DetailNewDrawingModalComponent
+            setDrawingPanel={setDrawingPanel}
+            drawingPanel={drawingPanel}
+            drawingData={drawingData}
+            setDrawingData={setDrawingData}
+          ></DetailNewDrawingModalComponent>
+        )}
         <HomeContainer>
           <TabMenu>
             {menuArr.map((item, index) => (

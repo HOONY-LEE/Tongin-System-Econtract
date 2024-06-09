@@ -24,6 +24,9 @@ const CalculatorComponentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: 0.1vw solid #ebebeb;
+  box-shadow: 0.1vh 0.5vh 0.3vh rgba(0, 0, 0, 0.05),
+    0.1vh 0.5vh 0.3vh rgba(0, 0, 0, 0.03);
 `;
 const Container = styled.div`
   display: flex;
@@ -93,7 +96,7 @@ const DetailDrawBlankModalComponent = ({
 }: CalculatorComponentProps) => {
   return (
     <>
-      <Backdrop /> {/* 모달이 열릴 때 배경을 어둡게 하는 역할을 합니다. */}
+      {/* <Backdrop /> 모달이 열릴 때 배경을 어둡게 하는 역할을 합니다. */}
       <CalculatorComponentWrapper style={style}>
         <Container>
           <Title>

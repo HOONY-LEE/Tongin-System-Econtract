@@ -234,11 +234,13 @@ interface CalculatorComponentProps {
   lines?: any;
   setLines?: any;
   postDrawingData?: any;
+  setDrawingPanel?: any;
 }
 
 const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
   drawingData,
   textMemoData,
+  setDrawingPanel,
   lines,
   setLines,
   setDrawingData,
@@ -417,6 +419,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
   }, []);
   const onSave = () => {
     postDrawingData();
+    setDrawingPanel(false);
   };
   // useEffect(() => {
   //   setTextMemo((prev: any) => {
