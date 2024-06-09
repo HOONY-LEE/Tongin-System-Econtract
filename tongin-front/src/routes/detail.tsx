@@ -422,11 +422,11 @@ export default function Detail() {
   }, [drawingData2]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const onDrawingPanel = async () => {
-    await setTimeout(() => {
-      drawingPanelShow();
-    }, 500);
-  };
+  // const onDrawingPanel = async () => {
+  //   await setTimeout(() => {
+  //     drawingPanelShow();
+  //   }, 500);
+  // };
   const drawingPanelShow = () => {
     postOptionData2();
     saveProductList();
@@ -547,7 +547,7 @@ export default function Detail() {
           <DrawingBtn
             onClick={() => {
               setDrawingPanel(true);
-              onDrawingPanel();
+              // onDrawingPanel();
             }}
           >
             <PencilIcon height={"4vw"} fill={"#ffffff"} />

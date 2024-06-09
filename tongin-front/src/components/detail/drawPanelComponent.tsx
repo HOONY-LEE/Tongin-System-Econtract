@@ -35,6 +35,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  margin-top: 3vw;
   /* padding-top: 2vw; */
 `;
 const CalculatorComponentWrapper = styled.div`
@@ -54,7 +55,7 @@ const CalculatorComponentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 `;
 const ToolContainer = styled.div`
   /* padding-left: 4vw; */
@@ -175,9 +176,9 @@ const TextPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90vw;
-  height: 123vw;
-  margin-bottom: 3vw;
+  width: 86vw;
+  height: 72vw;
+  margin-bottom: 1vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
 
