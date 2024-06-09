@@ -69,9 +69,11 @@ const InfoLfTitle = styled.div`
 `;
 const InfoLfContent = styled.div`
   height: 5vw;
+  width: 20vw;
   display: flex;
+  text-align: start;
   font-size: 2.3vw;
-
+  white-space: pre-line;
   font-weight: 600;
   flex-direction: column;
   align-items: start;
@@ -79,7 +81,6 @@ const InfoLfContent = styled.div`
   justify-content: start;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 const InfoLfNameContent = styled.div`
   height: 5vw;

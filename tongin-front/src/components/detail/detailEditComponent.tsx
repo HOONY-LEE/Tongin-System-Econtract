@@ -873,7 +873,7 @@ export default function DetailEditComponent(props: any) {
             title={"접수일"}
             dateData={receptionDate}
             setDateData={setReceptionDate}
-            readOnly={true}
+            // readOnly={true}
           ></MoveDateInputComponent>
           {/* 계약 확정 시 input */}
           {statusCode === 22 ? (
