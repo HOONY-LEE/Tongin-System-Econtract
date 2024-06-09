@@ -31,7 +31,9 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   z-index: 9997;
   width: 100vw;
-  height: 100vh;
+  height: 98vh;
+  min-height: 98vh;
+  overflow: hidden !important;
   background-color: white;
   border-radius: 0.8vw;
   display: flex;
