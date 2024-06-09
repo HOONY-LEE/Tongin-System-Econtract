@@ -131,17 +131,19 @@ export default function TabComponent() {
         )
       );
       setUncontractedList(
-        receiptList.filter((content) =>
-          ["14", "21"].includes(content.statusCode)
-        )
+        receiptList
+          .filter((content) => ["14", "21"].includes(content.statusCode))
+          .sort((a, b) => b.movingDate.localeCompare(a.movingDate))
       );
       setContractList(
-        receiptList.filter((content) => content.statusCode === "22")
+        receiptList
+          .filter((content) => content.statusCode === "22")
+          .sort((a, b) => b.movingDate.localeCompare(a.movingDate))
       );
       setWorklist(
-        receiptList.filter((content) =>
-          ["31", "32", "41"].includes(content.statusCode)
-        )
+        receiptList
+          .filter((content) => ["31", "32", "41"].includes(content.statusCode))
+          .sort((a, b) => b.movingDate.localeCompare(a.movingDate))
       );
       setSearchedList(receiptList);
     };
