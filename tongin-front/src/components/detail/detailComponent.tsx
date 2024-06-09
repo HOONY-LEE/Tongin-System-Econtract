@@ -57,6 +57,18 @@ export default function DetailComponent(props: any) {
     { id: 8, status: "지방이사(VIP)", moveType: "P01481" },
   ];
 
+  const selfMovingTypeList = [
+    { id: 0, status: "가정이사(스탠다드)", moveType: "P01488" },
+    { id: 1, status: "가정이사(프리미엄)", moveType: "P01489" },
+    { id: 2, status: "가정이사(VIP)", moveType: "P01490" },
+    { id: 3, status: "보관이사(스탠다드)", moveType: "P01491" },
+    { id: 4, status: "보관이사(프리미엄)", moveType: "P01492" },
+    { id: 5, status: "보관이사(VIP)", moveType: "P01493" },
+    { id: 6, status: "지방이사(스탠다드)", moveType: "P01017" },
+    { id: 7, status: "지방이사(프리미엄)", moveType: "P01495" },
+    { id: 8, status: "지방이사(VIP)", moveType: "P01496" },
+  ];
+
   const detailEditVisible = (mode: any) => {
     if (mode) {
       setIsDetailEdit(true);
@@ -87,6 +99,7 @@ export default function DetailComponent(props: any) {
             allSave={allSave}
             setAllSave={setAllSave}
             movingTypeList={movingTypeList}
+            selfMovingTypeList={selfMovingTypeList}
             getDetailList={getDetailList}
             detailData={detailData}
             setDetailData={setDetailData}
@@ -102,6 +115,7 @@ export default function DetailComponent(props: any) {
         ) : (
           <DetailViewComponent
             movingTypeList={movingTypeList}
+            selfMovingTypeList={selfMovingTypeList}
             onEditDisable={onEditDisable}
             setOnEditDisable={setOnEditDisable}
             detailEditVisible={detailEditVisible}

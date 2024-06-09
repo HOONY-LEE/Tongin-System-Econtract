@@ -420,7 +420,9 @@ export default function DetailEditComponent(props: any) {
     setFetchStatus,
     contractImageList,
     movingTypeList,
+    selfMovingTypeList,
   } = props;
+
   const [postData, setPostData] = useState<any>([]);
   const { detailEditVisible } = props;
   const [currentBtn, setCurrentBtn] = useState(0);
@@ -464,6 +466,9 @@ export default function DetailEditComponent(props: any) {
   const [userName, setUserName] = useState(detailData.name);
   const [userContact, setUserContact] = useState(detailData.contact);
   const [movingTypeCode, setMovingTypeCode] = useState(
+    detailData.movingTypeCode
+  );
+  const [selfMovingTypeCode, setSelfMovingTypeCode] = useState(
     detailData.movingTypeCode
   );
   const [selectedMovingType, setSelectedMovingType] = useState<number>(0);
@@ -512,7 +517,11 @@ export default function DetailEditComponent(props: any) {
   ]);
 
   useEffect(() => {
-    setMovingTypeCode(movingTypeList[selectedMovingType]?.moveType);
+    if (detailData?.selfReceipt) {
+      setMovingTypeCode(selfMovingTypeList[selectedMovingType]?.moveType);
+    } else {
+      setMovingTypeCode(movingTypeList[selectedMovingType]?.moveType);
+    }
   }, [selectedMovingType]);
 
   useEffect(() => {
@@ -550,13 +559,26 @@ export default function DetailEditComponent(props: any) {
   // }, [statusCode]);
 
   useEffect(() => {
-    const index = findSelectedIndex(movingTypeCode);
+    let index = 0;
+    if (detailData?.selfReceipt) {
+      index = findSelfSelectedIndex(movingTypeCode);
+    } else {
+      index = findSelectedIndex(movingTypeCode);
+    }
     setSelectedMovingType(index);
   }, []);
 
   // 아이템 코드로 index를 반환하는 함수
   const findSelectedIndex = (movingTypeCode?: string) => {
     const selectedIndex = movingTypeList?.filter(
+      (item: any) => item?.moveType === movingTypeCode
+    );
+    return selectedIndex[0]?.id;
+  };
+
+  // 아이템 코드로 index를 반환하는 함수
+  const findSelfSelectedIndex = (movingTypeCode?: string) => {
+    const selectedIndex = selfMovingTypeList?.filter(
       (item: any) => item?.moveType === movingTypeCode
     );
     return selectedIndex[0]?.id;
@@ -769,7 +791,19 @@ export default function DetailEditComponent(props: any) {
               </InfoLfBox>
             </ContentTopLF2>
             {detailData?.selfReceipt ? (
-              ""
+              <ContentTopLF2>
+                <InfoLfBox>
+                  <InfoLfTitle>이사종류(현장)</InfoLfTitle>
+                  <DropdownBox>
+                    <DropdownComponent
+                      selected={selectedMovingType}
+                      setSelected={setSelectedMovingType}
+                      dropdownList={selfMovingTypeList}
+                      border={`0.2vw solid #dbdbdb;`}
+                    ></DropdownComponent>
+                  </DropdownBox>
+                </InfoLfBox>
+              </ContentTopLF2>
             ) : (
               <ContentTopLF2>
                 <InfoLfBox>
