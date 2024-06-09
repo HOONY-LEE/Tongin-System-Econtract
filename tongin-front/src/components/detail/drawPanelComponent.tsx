@@ -207,6 +207,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
   resize: none;
   /* outline: 1px solid red; */
   outline: none;
+  position: fixed;
   /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none; */
@@ -217,6 +218,8 @@ const InputBox = styled.textarea.attrs({})<{}>`
   -o-user-drag: none; */
 
   appearance: none;
+  overflow: hidden;
+  touch-action: none;
   /* -ms-user-select: none;
   -moz-user-select: -moz-none;
   -webkit-user-select: none;
