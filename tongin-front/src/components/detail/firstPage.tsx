@@ -269,7 +269,7 @@ const MemoRound = styled.div`
 
 const TextMemoRound = styled.div`
   width: 100%;
-  height: 40vw;
+  height: 58vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -1339,7 +1339,7 @@ const FirstPage = (props: any) => {
                 <TextMemoRound>
                   <TextMemoText>{textMemo}</TextMemoText>
                 </TextMemoRound>
-                <MemoRound ref={divRef} id={"CanvasPanel"}>
+                {/* <MemoRound ref={divRef} id={"CanvasPanel"}>
                   <Stage
                     width={dimensions.width}
                     height={dimensions.height}
@@ -1366,7 +1366,7 @@ const FirstPage = (props: any) => {
                       ))}
                     </Layer>
                   </Stage>
-                </MemoRound>
+                </MemoRound> */}
               </MemoBox>
               <PriceListArea>
                 <PriceListBox>
