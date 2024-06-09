@@ -219,7 +219,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
 
   appearance: none;
   overflow: hidden;
-  touch-action: none;
+  /* touch-action: none; */
   /* -ms-user-select: none;
   -moz-user-select: -moz-none;
   -webkit-user-select: none;
