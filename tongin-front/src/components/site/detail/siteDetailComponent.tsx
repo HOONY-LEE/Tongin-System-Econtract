@@ -595,7 +595,7 @@ export default function SiteDetailComponent(props: any) {
     { id: 3, status: "보관이사(스탠다드)", moveType: "P01491" },
     { id: 4, status: "보관이사(프리미엄)", moveType: "P01492" },
     { id: 5, status: "보관이사(VIP)", moveType: "P01493" },
-    { id: 6, status: "지방이사(스탠다드)", moveType: "P01017" },
+    { id: 6, status: "지방이사(스탠다드)", moveType: "P01494" },
     { id: 7, status: "지방이사(프리미엄)", moveType: "P01495" },
     { id: 8, status: "지방이사(VIP)", moveType: "P01496" },
   ];

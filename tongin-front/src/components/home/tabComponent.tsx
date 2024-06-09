@@ -126,19 +126,19 @@ export default function TabComponent() {
   useEffect(() => {
     const updateLists = () => {
       setInvoiceList(
-        receiptList.filter((content) =>
-          ["11", "12", "13"].includes(content.statusCode)
-        )
+        receiptList
+          .filter((content) => ["11", "12", "13"].includes(content.statusCode))
+          .sort((a, b) => b.consultationDate.localeCompare(a.consultationDate))
       );
       setUncontractedList(
         receiptList
           .filter((content) => ["14", "21"].includes(content.statusCode))
-          .sort((a, b) => b.movingDate.localeCompare(a.movingDate))
+          .sort((a, b) => b.consultationDate.localeCompare(a.consultationDate))
       );
       setContractList(
         receiptList
           .filter((content) => content.statusCode === "22")
-          .sort((a, b) => b.movingDate.localeCompare(a.movingDate))
+          .sort((a, b) => b.consultationDate.localeCompare(a.consultationDate))
       );
       setWorklist(
         receiptList
