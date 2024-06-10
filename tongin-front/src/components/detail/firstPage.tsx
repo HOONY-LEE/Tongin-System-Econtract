@@ -1017,6 +1017,15 @@ const FirstPage = (props: any) => {
                         "$1-$2-$3"
                       )}
                 </ApplyInfoTd>
+                <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
+                <ApplyInfoTd>
+                  {detailData.consultationDate === ""
+                    ? "--"
+                    : detailData.consultationDate.replace(
+                        formattedDate,
+                        "$1-$2-$3"
+                      )}
+                </ApplyInfoTd>
                 <ApplyInfoTdTitle>계약일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
                   {detailData.contractDate === "        "
@@ -1025,15 +1034,6 @@ const FirstPage = (props: any) => {
                         "$1-$2-$3"
                       )
                     : detailData.contractDate.replace(
-                        formattedDate,
-                        "$1-$2-$3"
-                      )}
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle>상담일</ApplyInfoTdTitle>
-                <ApplyInfoTd>
-                  {detailData.consultationDate === ""
-                    ? "--"
-                    : detailData.consultationDate.replace(
                         formattedDate,
                         "$1-$2-$3"
                       )}
