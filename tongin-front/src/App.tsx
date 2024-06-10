@@ -21,6 +21,7 @@ import Signature from "./routes/signature";
 import ContractImage from "./components/home/contractImage";
 import DrawingComponent from "./components/detail/drawingComponent";
 import DrawPanelComponent from "./components/detail/drawPanelComponent";
+import Terms from "./routes/terms";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
   {
     path: "/contractImage/:id",
     element: <ContractImage></ContractImage>,
+  },
+  {
+    path: "/terms",
+    element: <Terms></Terms>,
   },
 ]);
 

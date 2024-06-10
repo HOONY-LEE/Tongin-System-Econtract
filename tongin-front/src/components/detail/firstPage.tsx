@@ -998,12 +998,12 @@ const FirstPage = (props: any) => {
             <TopTableTd>
               <TopTdTitle2>담당자</TopTdTitle2>
               <TopTd>{detailData.planner.name}</TopTd>
-              <TopTdTitle $borderLeft={"0.1vw solid black"}>
-                담당자연락처
-              </TopTdTitle>
-              <TopTd2>{detailData.planner.contact}</TopTd2>
               <TopTdTitle $borderLeft={"0.1vw solid black"}>지점명</TopTdTitle>
-              <TopTd>{detailData.branch.region}</TopTd>
+              <TopTd2>{detailData.branch.region}</TopTd2>
+              <TopTdTitle $borderLeft={"0.1vw solid black"}>
+                담당자 연락처
+              </TopTdTitle>
+              <TopTd>{detailData.planner.contact}</TopTd>
             </TopTableTd>
 
             <ApplyInfoTable2>
@@ -1425,6 +1425,15 @@ const FirstPage = (props: any) => {
                       <Unit>cbm</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>이사비용</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>{priceDataList[0].amount.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
                   <PriceItemBox>
                     <PriceItemName>사다리차 비용</PriceItemName>
                     <PriceItemPrice>
@@ -1443,13 +1452,6 @@ const FirstPage = (props: any) => {
                     </PriceItemPrice>
                   </PriceItemBox>
 
-                  <PriceItemBox>
-                    <PriceItemName>이사비용</PriceItemName>
-                    <PriceItemPrice>
-                      <Price>{priceDataList[0].amount.toLocaleString()}</Price>
-                      <Unit>₩</Unit>
-                    </PriceItemPrice>
-                  </PriceItemBox>
                   <PriceItemBox>
                     <PriceItemName>보관비용</PriceItemName>
                     <PriceItemPrice>
