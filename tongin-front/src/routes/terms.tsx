@@ -11,18 +11,22 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   margin-top: 4vw;
+  margin-bottom: 4vw;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   width: 90vw;
   height: 100%;
-  /* background-color: #80808013; */
+  background-color: #f3f3f3;
+  padding: 4vw;
+  border-radius: 1vw;
 `;
 
 const TitleArea = styled.div`
   margin-top: 2vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -37,12 +41,12 @@ const ContentsArea = styled.div`
 
 const Title = styled.div`
   font-size: 4vw;
-  font-weight: 700;
+  font-weight: 800;
 `;
 
 const Subtitle = styled.div`
   font-size: 3vw;
-  font-weight: 500;
+  font-weight: 400;
 `;
 
 const Text1 = styled.p`
@@ -76,11 +80,6 @@ const Text4 = styled.p`
   width: 100%;
   line-height: 3vw;
   text-align: start;
-`;
-
-const BottomArea = styled.div`
-  width: 100%;
-  height: 10vw;
 `;
 
 export default function Terms() {
@@ -486,7 +485,6 @@ export default function Terms() {
           <Text3>
             사업자와 고객간의 소송은 민사소송법상의 관할에 관한 규정에 따릅니다.
           </Text3>
-          <BottomArea></BottomArea>
         </ContentsArea>
       </Wrapper>
     </Container>
