@@ -26,19 +26,19 @@ const Backdrop = styled.div`
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9997;
   width: 100vw;
-  height: 98vh;
-  min-height: 98vh;
+  height: 80vh;
+  min-height: 80vh;
   overflow: hidden !important;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 0.8vw;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 `;
 export default function DetailNewDrawingModalComponent(props: any) {
   const { drawingPanel, drawingData, setDrawingData, setDrawingPanel } = props;
