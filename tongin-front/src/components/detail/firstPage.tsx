@@ -1395,10 +1395,10 @@ const FirstPage = (props: any) => {
                                   ? "분해 / 설치"
                                   : ""}
                                 {item.decomposition && !item.installation
-                                  ? "설치"
+                                  ? "분해"
                                   : ""}
                                 {!item.decomposition && item.installation
-                                  ? "분해"
+                                  ? "설치"
                                   : ""}
                                 {!item.decomposition && !item.installation
                                   ? "-"
