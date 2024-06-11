@@ -219,12 +219,12 @@ const ContractPreviewModalComponent = (props: any) => {
     }
     // 첫 번째 페이지를 렌더링하고 이미지로 변환
     setCurrentPage(1); // 첫 번째 페이지로 설정
-    await new Promise((resolve) => setTimeout(resolve, 500)); // 렌더링 완료를 위한 시간 지연
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // 렌더링 완료를 위한 시간 지연
     const firstPageImage = await makeHtmltoImage._convertToImg(".firstPageBox");
 
     // 두 번째 페이지를 렌더링하고 이미지로 변환
     setCurrentPage(2); // 두 번째 페이지로 설정
-    await new Promise((resolve) => setTimeout(resolve, 500)); // 렌더링 완료를 위한 시간 지연
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // 렌더링 완료를 위한 시간 지연
     const secondPageImage = await makeHtmltoImage._convertToImg(
       ".secondPageBox"
     );

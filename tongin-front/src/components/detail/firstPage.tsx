@@ -1443,7 +1443,14 @@ const FirstPage = (props: any) => {
                   </PriceItemBox>
 
                   <PriceItemBox>
-                    <PriceItemName>기타서비스</PriceItemName>
+                    <PriceItemName>
+                      {optionData.livingService.otherService.description
+                        ? optionData.livingService.otherService.description.substring(
+                            0,
+                            10
+                          )
+                        : "기타서비스"}
+                    </PriceItemName>
                     <PriceItemPrice>
                       <Price>
                         {optionData.livingService.otherService.servicePayment.toLocaleString()}

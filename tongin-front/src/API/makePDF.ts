@@ -12,7 +12,15 @@ const makeHtmltoImage = {
     // html to imageFile
     const page: any = document.querySelector(className);
 
-    const canvas = await html2canvas(page);
+    const canvas = await html2canvas(page, {
+      // scale: 2, // 해상도를 두 배로 설정
+      // logging: true, // 로깅 활성화하여 디버그 정보 확인
+      // width: page.offsetWidth * 4, // 너비를 두 배로 설정
+      // height: page.offsetHeight * 4, // 높이를 두 배로 설정
+      // useCORS: true, // CORS를 사용하여 이미지 그리기
+      // allowTaint: true, // 불러오지 않은 이미지에 대한 허용
+      // backgroundColor: null, // 배경색 지정하지 않음
+    });
 
     const imageFile = canvas.toDataURL("image/png", 1.0);
 
