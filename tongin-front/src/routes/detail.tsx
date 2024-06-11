@@ -182,8 +182,19 @@ export default function Detail() {
     { name: "4. 견적•계약서", content: "작업리스트 영역" },
   ];
 
-  const selectMenuHandler = (index: any) => {
+  // 메뉴 탭 클릭 핸들러
+  const selectMenuHandler = async (index: any) => {
+    await saveProductList();
+    await postOptionData2();
     setCurrentTab(index);
+  };
+
+  // 메모 탭 클릭 핸들러
+
+  const onClickDrawingBtn = async () => {
+    await saveProductList();
+    await postOptionData2();
+    setDrawingPanel(true);
   };
 
   // 계약서 이미지 리스트 API
@@ -274,6 +285,7 @@ export default function Detail() {
       if (response.status === 200) {
         setFetchStatus(true);
         setStatus("SUCCESS");
+        // alert("옵션정보 저장 성공");
       } else {
         setFetchStatus(true);
         setStatus("FAIL");
@@ -282,7 +294,7 @@ export default function Detail() {
     } catch (error) {
       setFetchStatus(true);
       setStatus("FAIL");
-      alert("옵션정보를 저장하는데 실패했습니다!");
+      alert("옵션정보를 저장하는데 실패했습니다. 다시 저장해주세요.");
     }
   };
 
@@ -297,10 +309,10 @@ export default function Detail() {
         requestParam
       );
       if (response.status === 200) {
-        // alert("성공적으로 저장되었습니다.");
+        // alert("물품정보 저장 성공");
         await getProductList();
       } else {
-        alert("물품정보 저장에 실패하였습니다.");
+        alert("물품정보 저장에 실패하였습니다. 반드시 다시 저장해주세요.");
       }
     } catch (error) {
       alert(error);
@@ -546,7 +558,7 @@ export default function Detail() {
 
           <DrawingBtn
             onClick={() => {
-              setDrawingPanel(true);
+              onClickDrawingBtn();
               // onDrawingPanel();
             }}
           >
