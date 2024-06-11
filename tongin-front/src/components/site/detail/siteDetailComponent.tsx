@@ -428,6 +428,8 @@ export default function SiteDetailComponent(props: any) {
     siteDetailData.selfReceiptData.serReqDt
   ); //이사일
 
+  const [isSending, setIsSending] = useState(false);
+
   /////////////////////////////////////////////////////
   ////////////////////주소 모달 시작////////////////////
   //주소 모달 열기 핸들러
@@ -490,6 +492,10 @@ export default function SiteDetailComponent(props: any) {
 
   //완료 후 전송
   const sendData = async () => {
+    if (isSending) return; // 이미 요청이 진행 중이면 함수를 종료합니다.
+
+    setIsSending(true); // 요청 시작 시 상태를 true로 설정합니다.
+
     const requestPram: any = siteDetailData;
 
     // 조건체크
@@ -499,18 +505,24 @@ export default function SiteDetailComponent(props: any) {
 
     const response: any = await API.post("/receipt/self", requestPram);
 
-    if (response.status === 200) {
-      navigate(`/contractlist`, {
-        state: {
-          status: "SUCCESS",
-          text: "현장접수가 완료되었습니다.",
-          fetchStatus: true,
-        },
-      });
-    } else {
-      setText("완료가 되지 않았습니다. 정보를 확인해 주세요.");
-      setStatus("FAIL");
-      setFetchStatus(true);
+    try {
+      if (response.status === 200) {
+        navigate(`/contractlist`, {
+          state: {
+            status: "SUCCESS",
+            text: "현장접수가 완료되었습니다.",
+            fetchStatus: true,
+          },
+        });
+      } else {
+        setText("완료가 되지 않았습니다. 정보를 확인해 주세요.");
+        setStatus("FAIL");
+        setFetchStatus(true);
+      }
+    } catch (error) {
+      alert("현장접수가 정상적으로 등록되지 않았습니다.");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -770,12 +782,12 @@ export default function SiteDetailComponent(props: any) {
             <CustomButton
               width={"100%"}
               height={"6vw"}
-              text={`현장접수 등록하기`}
+              text={isSending ? `전송 중...` : `현장접수 등록하기`}
               size={"2vw"}
               $bgColor={"#6AD959"}
               radius={"0.6vw"}
               onClick={() => sendData()}
-              disabled={!validation}
+              disabled={!validation && !isSending}
             ></CustomButton>
           </BtnBox>
         </ContentBottom>
