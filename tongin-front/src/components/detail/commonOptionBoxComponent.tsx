@@ -5,6 +5,7 @@ import CommonChargePriceInputBox from "./commonChargePriceInputBox";
 import DropdownComponent from "../common/dropdownComponent";
 import { format } from "date-fns";
 import DateModalComponent from "./dateModalComponent";
+import BooleanSelectComponent from "./booleanSelectComponent";
 
 const Wrapper = styled.div``;
 
@@ -33,7 +34,7 @@ const ActivatedArea = styled.div`
 
 const PriceInputArea = styled.div`
   display: flex;
-  width: 30vw;
+  width: 25vw;
 `;
 
 const CategoryBox = styled.div`
@@ -66,6 +67,14 @@ const MoveDateInput = styled.div`
     cursor: pointer;
   }
 `;
+
+const AddressArea = styled.div`
+  width: 8.4vw;
+  height: 5vw;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const InputBox = styled.input.attrs({})<{}>`
   display: flex;
   justify-content: center;
@@ -124,8 +133,10 @@ export default function CommonOptionBoxComponent(props: any) {
     paymentMethodList,
     isSelected,
     setIsSelected,
+    isAfterData,
   } = props;
   const [isChecked, setIsChecked] = useState(isSelected);
+  const [isAfter, setIsAfter] = useState<boolean>(isAfterData);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const [description, setDescription] = useState<string>(
     optionData.description
@@ -207,6 +218,14 @@ export default function CommonOptionBoxComponent(props: any) {
   useEffect(() => {
     setOptionData((prev: any) => {
       const updatedData = { ...prev };
+      updatedData.isAfter = isAfter;
+      return updatedData;
+    });
+  }, [isAfter]);
+
+  useEffect(() => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
       updatedData.description = description;
       return updatedData;
     });
@@ -259,6 +278,12 @@ export default function CommonOptionBoxComponent(props: any) {
               dropdownList={paymentMethodList}
             ></DropdownComponent>
           </PayMethodBox>
+          <AddressArea>
+            <BooleanSelectComponent
+              isAfter={isAfter}
+              setIsAfter={setIsAfter}
+            ></BooleanSelectComponent>
+          </AddressArea>
           <PriceInputArea>
             <CommonChargePriceInputBox
               inputValue={optionData.servicePayment}

@@ -9,7 +9,7 @@ const InputArea = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  width: 28vw;
+  width: 24vw;
   height: 5vw;
 `;
 

@@ -367,6 +367,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={cleaningService.selected}
               setIsSelected={setCleaningSelected}
+              isAfterData={true}
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -377,6 +378,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={organizingService.selected}
               setIsSelected={setOrganizationSelected}
+              isAfterData={true}
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -387,6 +389,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={electronicCleaningService.selected}
               setIsSelected={setElectronicCleaningServiceSelected}
+              isAfterData={true}
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -397,6 +400,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={deodorizationService.selected}
               setIsSelected={setDeodorizationSelected}
+              isAfterData={true}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -407,6 +411,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={apronService.selected}
               setIsSelected={setApronServiceSelected}
+              isAfterData={true}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -427,6 +432,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={otherService.selected}
               setIsSelected={setOtherServiceSelected}
+              isAfterData={true}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
