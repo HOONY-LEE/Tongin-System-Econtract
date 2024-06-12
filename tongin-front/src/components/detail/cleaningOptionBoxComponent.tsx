@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CommonChargePriceInputBox from "./commonChargePriceInputBox";
 import DropdownComponent from "../common/dropdownComponent";
 import DateModalComponent from "./dateModalComponent";
+import BooleanSelectComponent from "./booleanSelectComponent";
 
 const Wrapper = styled.div``;
 
@@ -33,7 +34,7 @@ const ActivatedArea = styled.div`
 const PriceInputArea = styled.div`
   display: flex;
   height: 5vw;
-  width: 30vw;
+  width: 25vw;
 `;
 
 const CategoryBox = styled.div`
@@ -66,6 +67,28 @@ const MoveDateInput = styled.div`
     cursor: pointer;
   }
 `;
+
+const AddressArea = styled.div`
+  width: 8.4vw;
+  height: 5vw;
+  display: flex;
+  justify-content: space-between;
+  /* outline: 1px solid red; */
+  /* background-color: red; */
+`;
+
+const AddressBox = styled.div`
+  width: 4vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.2vw solid #aaaaaa;
+  border-radius: 0.6vw;
+  font-size: 1.8vw;
+  font-weight: 500;
+`;
+
 const InputBox = styled.input.attrs({})<{}>`
   display: flex;
   justify-content: center;
@@ -98,8 +121,10 @@ export default function CleaningOptionBoxComponent(props: any) {
     paymentMethodList,
     isSelected,
     setIsSelected,
+    isAfterData,
   } = props;
   const [isChecked, setIsChecked] = useState(isSelected);
+  const [isAfter, setIsAfter] = useState<boolean>(isAfterData);
   const [isDateModalOpen, setIsDateModalOpen] = useState<boolean>(false);
   const formattedDate = /^(\d{4})(\d{2})(\d{2})$/;
   const dropdownList = [
@@ -186,6 +211,14 @@ export default function CleaningOptionBoxComponent(props: any) {
     });
   }, [isChecked]);
 
+  useEffect(() => {
+    setOptionData((prev: any) => {
+      const updatedData = { ...prev };
+      updatedData.isAfter = isAfter;
+      return updatedData;
+    });
+  }, [isAfter]);
+
   return (
     <Wrapper>
       <CheckedOptionTitle onClick={onClickCheck}>
@@ -229,6 +262,12 @@ export default function CleaningOptionBoxComponent(props: any) {
               dropdownList={paymentMethodList}
             ></DropdownComponent>
           </PayMethodBox>
+          <AddressArea>
+            <BooleanSelectComponent
+              isAfter={isAfter}
+              setIsAfter={setIsAfter}
+            ></BooleanSelectComponent>
+          </AddressArea>
           <PriceInputArea>
             <CommonChargePriceInputBox
               inputValue={optionData.servicePayment}
