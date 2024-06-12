@@ -73,22 +73,7 @@ const AddressArea = styled.div`
   height: 5vw;
   display: flex;
   justify-content: space-between;
-  /* outline: 1px solid red; */
-  /* background-color: red; */
 `;
-
-const AddressBox = styled.div`
-  width: 4vw;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0.2vw solid #aaaaaa;
-  border-radius: 0.6vw;
-  font-size: 1.8vw;
-  font-weight: 500;
-`;
-
 const InputBox = styled.input.attrs({})<{}>`
   display: flex;
   justify-content: center;
