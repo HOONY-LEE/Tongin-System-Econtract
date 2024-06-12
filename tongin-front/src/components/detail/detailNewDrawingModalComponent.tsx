@@ -26,12 +26,12 @@ const Backdrop = styled.div`
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9997;
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
   min-height: 80vh;
   overflow: hidden !important;
   /* background-color: white; */

@@ -10,7 +10,7 @@ import DetailDrawBlankModalComponent from "./detailDrawBlankModal";
 import { AnyRecordWithTtl } from "dns";
 import CustomButton from "../common/customButton";
 import { Image } from "../common/image";
-const TopArea = styled.div``;
+
 // const Backdrop = styled.div`
 
 //   -webkit-user-select: none;
@@ -26,30 +26,29 @@ const TopArea = styled.div``;
 //   flex-direction: column;
 //   align-items: center;
 //   justify-content: center;
-
 // `;
 const Container = styled.div`
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
-  margin-top: 3vw;
-  /* padding-top: 2vw; */
+  justify-content: space-around;
 `;
 const CalculatorComponentWrapper = styled.div`
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
   user-select: none;
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
-  -o-user-drag: none;
+  -o-user-drag: none; */
   width: 100vw;
   height: 100vh;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2;
+  background-color: red; */
   border-radius: 0.8vw;
   /* margin-top: 2vw; */
   display: flex;
@@ -177,7 +176,7 @@ const TextPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 72vw;
+  height: 82vh;
   margin-bottom: 1vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -190,8 +189,9 @@ const CloseBox = styled.div`
   justify-content: end;
   align-items: center;
   width: 85vw;
-  height: 5vw;
-  /* background-color: red; */
+  height: 6vw;
+  margin-top: 3vw;
+  margin-bottom: 2vw;
 `;
 
 const InputBox = styled.textarea.attrs({})<{}>`
@@ -465,7 +465,7 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
           <CloseBox>
             <CloseIcon
               onClick={() => onSave()}
-              height={"2.3vw"}
+              height={"3.4vw"}
               fill={"#AEAEAE"}
             />
           </CloseBox>
