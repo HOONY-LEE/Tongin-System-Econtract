@@ -409,7 +409,7 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 8vw;
+  height: 7vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 0.16vw solid black;
