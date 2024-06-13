@@ -278,12 +278,14 @@ export default function CommonOptionBoxComponent(props: any) {
               dropdownList={paymentMethodList}
             ></DropdownComponent>
           </PayMethodBox>
-          <AddressArea>
-            <BooleanSelectComponent
-              isAfter={isAfter}
-              setIsAfter={setIsAfter}
-            ></BooleanSelectComponent>
-          </AddressArea>
+          {optionData.serviceName === "무브제 디렉터 상담" ? null : (
+            <AddressArea>
+              <BooleanSelectComponent
+                isAfter={isAfter}
+                setIsAfter={setIsAfter}
+              ></BooleanSelectComponent>
+            </AddressArea>
+          )}
           <PriceInputArea>
             <CommonChargePriceInputBox
               inputValue={optionData.servicePayment}

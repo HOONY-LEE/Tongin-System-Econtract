@@ -422,7 +422,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={movjetService.selected}
               setIsSelected={setMovjetServiceSelected}
-              isAfterData={movjetService.isAfter}
+              // isAfterData={movjetService.isAfter}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
