@@ -176,7 +176,7 @@ const TextPanel = styled.div`
   align-items: center;
   justify-content: center;
   width: 86vw;
-  height: 82vh;
+  height: 80vh;
   margin-bottom: 1vw;
   background-color: #ffffff;
   border-radius: 0.8vw;
@@ -190,8 +190,8 @@ const CloseBox = styled.div`
   align-items: center;
   width: 85vw;
   height: 6vw;
-  margin-top: 3vw;
-  margin-bottom: 2vw;
+  margin-top: 8vw;
+  /* background-color: red; */
 `;
 
 const InputBox = styled.textarea.attrs({})<{}>`
@@ -199,10 +199,10 @@ const InputBox = styled.textarea.attrs({})<{}>`
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  line-height: 3.2vw;
+  line-height: 2.2vw;
   /* margin-left: 1vw; */
   font-family: "pretendard";
-  font-size: 3vw;
+  font-size: 2vw;
   font-weight: 400;
   resize: none;
   /* outline: 1px solid red; */
@@ -227,7 +227,7 @@ const InputBox = styled.textarea.attrs({})<{}>`
   /* user-select: none; */
   border: none;
   width: 94%;
-  height: 90%;
+  height: 94%;
 `;
 
 interface CalculatorComponentProps {
@@ -455,37 +455,37 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
         onTouchMove={handleBackdropTouchMove}
       /> */}
       <Container>
-        <CalculatorComponentWrapper>
-          {/* <Image
+        {/* <CalculatorComponentWrapper> */}
+        {/* <Image
             src="/icon/save_close.png"
             width={"88vw"}
             height={"9vw"}
             onClick={() => onSave()}
           ></Image> */}
-          <CloseBox>
-            <CloseIcon
-              onClick={() => onSave()}
-              height={"3.4vw"}
-              fill={"#AEAEAE"}
-            />
-          </CloseBox>
+        <CloseBox>
+          <CloseIcon
+            onClick={() => onSave()}
+            height={"3.4vw"}
+            fill={"#AEAEAE"}
+          />
+        </CloseBox>
 
-          {blankBoxVisible && (
-            <DetailDrawBlankModalComponent
-              onBlank={onBlankData}
-              onClose={BlankClose}
-            ></DetailDrawBlankModalComponent>
-          )}
-          <TextPanel>
-            <InputBox
-              placeholder="메모할 내용을 입력해 주세요."
-              value={textMemoData}
-              onChange={textMemoInput}
-              maxLength={1000}
-            ></InputBox>
-          </TextPanel>
-          {/* 그림그리기 부분 */}
-          {/* <ToolContainer>
+        {/* {blankBoxVisible && (
+          <DetailDrawBlankModalComponent
+            onBlank={onBlankData}
+            onClose={BlankClose}
+          ></DetailDrawBlankModalComponent>
+        )} */}
+        <TextPanel>
+          <InputBox
+            placeholder="메모할 내용을 입력해 주세요."
+            value={textMemoData}
+            onChange={textMemoInput}
+            maxLength={1000}
+          ></InputBox>
+        </TextPanel>
+        {/* 그림그리기 부분 */}
+        {/* <ToolContainer>
             <ColorCanvasBox>
               <ColorCanvastitle>
                 {penColorVisible && <div>펜 색상 선택</div>}
@@ -543,15 +543,15 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
             {/* <CloseBox>
             <CloseIcon onClick={onClose} height={"2.3vw"} fill={"#AEAEAE"} />
           </CloseBox> */}
-          {/* </ToolContainer> */}
-          {/* <h1>{pointerType}</h1> */}
-          <div
-            onContextMenu={(e) => {
-              e.preventDefault();
-            }}
-          >
-            {/* <h1>현재 타입5 최종 : {pointerType}</h1> */}
-            {/* <CanvasPanel ref={divRef} id={"CanvasPanel"}>
+        {/* </ToolContainer> */}
+        {/* <h1>{pointerType}</h1> */}
+        <div
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
+          {/* <h1>현재 타입5 최종 : {pointerType}</h1> */}
+          {/* <CanvasPanel ref={divRef} id={"CanvasPanel"}>
               <Stage
                 width={dimensions.width}
                 height={dimensions.height}
@@ -583,8 +583,8 @@ const DrawPanelComponent: React.FC<CalculatorComponentProps> = ({
                 </Layer>
               </Stage>
             </CanvasPanel>  */}
-          </div>
-        </CalculatorComponentWrapper>
+        </div>
+        {/* </CalculatorComponentWrapper> */}
         <BtnBox>
           {/* <CustomButton
             width={"90vw"}
