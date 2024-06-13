@@ -12,8 +12,8 @@ const Wrapper = styled.div``;
 const CheckedOptionTitle = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 3vh;
+  width: 36vw;
+  height: 5vw;
 `;
 
 const Title = styled.div`
