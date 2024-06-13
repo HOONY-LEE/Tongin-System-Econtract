@@ -115,6 +115,38 @@ const ExportBtn = styled.div<{ $disabled: boolean }>`
   }
 `;
 
+const ExportBtn1 = styled.div<{}>`
+  width: 37vw;
+  height: 6vw;
+  border: 0.2vw solid #505050;
+  border-radius: 0.4vw;
+  font-size: 2.4vw;
+  font-weight: 600;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &&:hover {
+    cursor: pointer;
+  }
+`;
+
+const ExportBtn2 = styled.div<{}>`
+  width: 37vw;
+  height: 6vw;
+  background-color: #ff7f3b;
+  border-radius: 0.4vw;
+  font-size: 2.4vw;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &&:hover {
+    cursor: pointer;
+  }
+`;
+
 const SignatureBtn = styled.div<{ $disabled: boolean }>`
   width: 39vw;
   height: 6vw;
@@ -208,15 +240,57 @@ const ContractPreviewModalComponent = (props: any) => {
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
   const maxIndex = 2;
 
-  const onClickMakePDF = async (e: any) => {
+  const ExportContractAndSend = async (e: any) => {
     e.preventDefault();
     if (
       !window.confirm(`      [ 알림 ]
-      견적서를 내보내면 시스템과 고객님에게 계약서가 전송됩니다.
+      통인 CS와 고객님에게 계약서가 전송됩니다.
       정말 계약서를 내보내시겠습니까?`)
     ) {
       return;
     }
+    await exportAndSendContract(e);
+    // await sendMessage();
+    onClose();
+  };
+
+  const exportContract = async (e: any) => {
+    e.preventDefault();
+    if (
+      !window.confirm(`      [ 알림 ]
+      통인 CS에 계약서를 업로드합니다.
+      정말 계약서를 내보내시겠습니까?`)
+    ) {
+      return;
+    }
+    await onlyExportContract(e);
+    onClose();
+  };
+
+  // const sendMessageHandler = async () => {
+  //   if (
+  //     !window.confirm(`      [ 알림 ]
+  //     문자 발송을 하시면 마지막에 내보내기한 계약서가 고객님께 전송됩니다.
+  //     정말 계약서를 발송하시겠습니까?`)
+  //   ) {
+  //     return;
+  //   }
+  //   await sendMessage();
+  // };
+
+  const sendMessage = async () => {
+    try {
+      const result = await API.post("/receipt/send/message", {
+        recNum: reNum,
+      });
+      alert("문자 발송 성공");
+    } catch (error) {
+      alert("문자 발송에 실패");
+    }
+  };
+
+  const exportAndSendContract = async (e: any) => {
+    e.preventDefault();
     // 첫 번째 페이지를 렌더링하고 이미지로 변환
     setCurrentPage(1); // 첫 번째 페이지로 설정
     await new Promise((resolve) => setTimeout(resolve, 1000)); // 렌더링 완료를 위한 시간 지연
@@ -233,12 +307,41 @@ const ContractPreviewModalComponent = (props: any) => {
     const imageFiles = [firstPageImage, secondPageImage];
     try {
       await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
+
+      await completeReceipt();
+
+      await getContractImageList(); // 이미지 전송후 계약서 이미지 리스트 다시 받아오기
+
+      await sendMessage();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const onlyExportContract = async (e: any) => {
+    e.preventDefault();
+    // 첫 번째 페이지를 렌더링하고 이미지로 변환
+    setCurrentPage(1); // 첫 번째 페이지로 설정
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // 렌더링 완료를 위한 시간 지연
+    const firstPageImage = await makeHtmltoImage._convertToImg(".firstPageBox");
+
+    // 두 번째 페이지를 렌더링하고 이미지로 변환
+    setCurrentPage(2); // 두 번째 페이지로 설정
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // 렌더링 완료를 위한 시간 지연
+    const secondPageImage = await makeHtmltoImage._convertToImg(
+      ".secondPageBox"
+    );
+
+    // 두 이미지를 합쳐서 서버로 전송
+    const imageFiles = [firstPageImage, secondPageImage];
+    try {
+      await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
+
       completeReceipt();
       getContractImageList(); // 이미지 전송후 계약서 이미지 리스트 다시 받아오기
     } catch (error) {
       alert(error);
     }
-    onClose();
   };
 
   const getContractImage = async () => {
@@ -353,12 +456,29 @@ const ContractPreviewModalComponent = (props: any) => {
           )}
         </ContractArea>
         <BottomArea>
-          <ExportBtn
-            $disabled={detailData.pushYN}
-            onClick={(e) => (detailData.pushYN ? onClickMakePDF(e) : "none")}
-          >
-            견적서 내보내기
-          </ExportBtn>
+          {contractImageList.length > 0 ? (
+            <>
+              <ExportBtn1 onClick={(e) => ExportContractAndSend(e)}>
+                고객 문자 발송
+              </ExportBtn1>
+              <ExportBtn2
+                onClick={(e) =>
+                  detailData.pushYN ? exportContract(e) : "none"
+                }
+              >
+                통인 CS 업로드
+              </ExportBtn2>
+            </>
+          ) : (
+            <ExportBtn
+              $disabled={detailData.pushYN}
+              onClick={(e) =>
+                detailData.pushYN ? ExportContractAndSend(e) : "none"
+              }
+            >
+              견적서 내보내기
+            </ExportBtn>
+          )}
           {/* <SignatureBtn
             $disabled={detailData.pushYN}
             // onClick={() => (detailData.pushYN ? "none" : onSignaturePage())}
