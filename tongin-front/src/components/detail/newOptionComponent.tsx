@@ -367,7 +367,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={cleaningService.selected}
               setIsSelected={setCleaningSelected}
-              isAfterData={true}
+              isAfterData={cleaningService.isAfter}
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -378,7 +378,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={organizingService.selected}
               setIsSelected={setOrganizationSelected}
-              isAfterData={true}
+              isAfterData={organizingService.isAfter}
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -389,7 +389,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={electronicCleaningService.selected}
               setIsSelected={setElectronicCleaningServiceSelected}
-              isAfterData={true}
+              isAfterData={electronicCleaningService.isAfter}
             ></CleaningOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -400,7 +400,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={deodorizationService.selected}
               setIsSelected={setDeodorizationSelected}
-              isAfterData={true}
+              isAfterData={deodorizationService.isAfter}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -411,7 +411,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={apronService.selected}
               setIsSelected={setApronServiceSelected}
-              isAfterData={true}
+              isAfterData={apronService.isAfter}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -422,7 +422,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={movjetService.selected}
               setIsSelected={setMovjetServiceSelected}
-              isAfterData={true}
+              isAfterData={movjetService.isAfter}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
@@ -433,7 +433,7 @@ export default function NewOptionComponent(props: any) {
               paymentMethodList={paymentMethodList}
               isSelected={otherService.selected}
               setIsSelected={setOtherServiceSelected}
-              isAfterData={true}
+              isAfterData={otherService.isAfter}
             ></CommonOptionBoxComponent>
           </CheckedOptionBox>
           <CheckedOptionBox>
