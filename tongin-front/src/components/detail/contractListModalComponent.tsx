@@ -185,6 +185,10 @@ const ContractListModalComponent = (props: any) => {
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
   const [maxIndex, setMaxIndex] = useState<number>(contractImageList.length);
 
+  const openContractImage = (path: string) => {
+    window.open(`https://homenmove.net/${path}`);
+  };
+
   const clickPrevPage = (e: any) => {
     if (currentPage <= 1) {
       return;
@@ -221,7 +225,6 @@ const ContractListModalComponent = (props: any) => {
   useEffect(() => {
     setMaxIndex(contractImageList.length);
   }, [contractImageList]);
-
   return (
     <>
       <Backdrop />
@@ -265,12 +268,15 @@ const ContractListModalComponent = (props: any) => {
             {contractImageList.map((item: any, index: number) => {
               if (index + 1 === currentPage) {
                 return (
-                  <Image
-                    src={`https://homenmove.net/${item.path}`}
-                    width={"100%"}
-                    height={"100%"}
-                    key={index}
-                  ></Image>
+                  <>
+                    <Image
+                      onClick={(e: any) => openContractImage(item.path)}
+                      src={`https://homenmove.net/${item.path}`}
+                      width={"100%"}
+                      height={"100%"}
+                      key={index}
+                    ></Image>
+                  </>
                 );
               }
             })}
