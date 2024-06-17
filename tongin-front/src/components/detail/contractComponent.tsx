@@ -325,6 +325,7 @@ export default function ContractComponent(props: any) {
         }
       });
     }
+    totalOptionCharge += optionData.livingService.otherService.servicePayment;
     setOptionTotalCharge(totalOptionCharge);
   };
   useEffect(() => {

@@ -477,7 +477,7 @@ const OptionItem2 = styled.div`
   width: 8vw;
   height: 3vw;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   font-size: 1.3vw;
   border-bottom: 0.1vw solid #b4b4b4;
@@ -1410,9 +1410,14 @@ const FirstPage = (props: any) => {
                       }
                     )}
                     <PriceItemBox2>
-                      <OptionItemName>옵션금액</OptionItemName>
+                      <OptionItemName>
+                        {optionData.livingService.otherService.serviceName}
+                      </OptionItemName>
                       <OptionItem2>
-                        {optionTotalCharge.toLocaleString()}₩
+                        {optionData.livingService.otherService.description ===
+                        ""
+                          ? "-"
+                          : optionData.livingService.otherService.description}
                       </OptionItem2>
                     </PriceItemBox2>
                   </OptionItemListBox>
@@ -1444,17 +1449,16 @@ const FirstPage = (props: any) => {
 
                   <PriceItemBox>
                     <PriceItemName>
-                      {optionData.livingService.otherService.description
+                      옵션비용
+                      {/* {optionData.livingService.otherService.description
                         ? optionData.livingService.otherService.description.substring(
                             0,
                             10
                           )
-                        : "기타서비스"}
+                        : "기타서비스"} */}
                     </PriceItemName>
                     <PriceItemPrice>
-                      <Price>
-                        {optionData.livingService.otherService.servicePayment.toLocaleString()}
-                      </Price>
+                      <Price>{optionTotalCharge.toLocaleString()}</Price>
                       <Unit>₩</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>
