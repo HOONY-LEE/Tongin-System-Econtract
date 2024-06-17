@@ -273,8 +273,7 @@ export default function ContractComponent(props: any) {
       optionData.livingService.deodorizationService.servicePayment +
       optionData.livingService.electronicCleaningService.servicePayment +
       optionData.livingService.apronService.servicePayment +
-      optionData.livingService.movjetService.servicePayment +
-      optionData.livingService.otherService.servicePayment
+      optionData.livingService.movjetService.servicePayment
   );
 
   // const [downCharge, setDownCharge] = useState<number>(priceDataList[4].amount);
@@ -554,7 +553,7 @@ export default function ContractComponent(props: any) {
                 <SubText>원</SubText>
               </PriceInputArea>
             </ListBox>
-            <ListBox>
+            {/* <ListBox>
               <TitleArea>
                 <Title>기타 서비스 비용</Title>
                 <Subtile>/Other Service Charge </Subtile>
@@ -567,7 +566,7 @@ export default function ContractComponent(props: any) {
                 </InputCBMBox>
                 <SubText>원</SubText>
               </PriceInputArea>
-            </ListBox>
+            </ListBox> */}
             <ListBox>
               <TitleArea>
                 <Title>옵션 비용(분해/설치)</Title>
