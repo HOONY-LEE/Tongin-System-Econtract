@@ -23,6 +23,7 @@ const RoomName = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.3vw;
+  font-weight: 700;
   border-bottom: 0.1vw solid black;
 `;
 
@@ -69,6 +70,7 @@ const ColumnName = styled.div`
   width: 36%;
   height: 100%;
   display: flex;
+  font-weight: 600;
   font-size: 1.2vw;
   justify-content: center;
   align-items: center;
@@ -78,6 +80,7 @@ const ColumnName = styled.div`
 const ColumnName2 = styled.div`
   width: 32%;
   height: 100%;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,6 +90,7 @@ const ColumnName2 = styled.div`
 const ColumnName3 = styled.div`
   width: 36%;
   height: 100%;
+  font-weight: 600;
   display: flex;
   font-size: 1vw;
   justify-content: center;
