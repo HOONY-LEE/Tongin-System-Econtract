@@ -240,17 +240,30 @@ const ContractPreviewModalComponent = (props: any) => {
   const [nextBoxActive, setNextBoxActive] = useState<boolean>(true);
   const maxIndex = 2;
 
-  const ExportContractAndSend = async (e: any) => {
+  const sendContractToClient = async (e: any) => {
     e.preventDefault();
     if (
       !window.confirm(`      [ 알림 ]
-      통인 CS와 고객님에게 계약서가 전송됩니다.
-      정말 계약서를 내보내시겠습니까?`)
+      계약서가 CS에 업로드되고 고객님에게 전달됩니다.
+      정말 계약서를 보내시겠습니까?`)
     ) {
       return;
     }
-    await exportAndSendContract(e);
+    await exportAndSendContract(e, true);
     // await sendMessage();
+    onClose();
+  };
+
+  const sendContractToPlaner = async (e: any) => {
+    e.preventDefault();
+    if (
+      !window.confirm(`      [ 알림 ]
+      계약서가 CS에 업로드되고 견적자(플래너에게) 전달됩니다.
+      정말 계약서를 보내시겠습니까?`)
+    ) {
+      return;
+    }
+    await exportAndSendContract(e, false);
     onClose();
   };
 
@@ -278,10 +291,11 @@ const ContractPreviewModalComponent = (props: any) => {
   //   await sendMessage();
   // };
 
-  const sendMessage = async () => {
+  const sendMessage = async (isClent: boolean) => {
     try {
       const result = await API.post("/receipt/send/message", {
         recNum: reNum,
+        isClent: isClent,
       });
       alert("문자 발송 성공");
     } catch (error) {
@@ -289,7 +303,7 @@ const ContractPreviewModalComponent = (props: any) => {
     }
   };
 
-  const exportAndSendContract = async (e: any) => {
+  const exportAndSendContract = async (e: any, isClient: boolean) => {
     e.preventDefault();
     // 첫 번째 페이지를 렌더링하고 이미지로 변환
     setCurrentPage(1); // 첫 번째 페이지로 설정
@@ -308,11 +322,11 @@ const ContractPreviewModalComponent = (props: any) => {
     try {
       await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
 
-      await completeReceipt();
+      await completeReceipt(); // 견적서 통인CS 업로드
 
       await getContractImageList(); // 이미지 전송후 계약서 이미지 리스트 다시 받아오기
 
-      await sendMessage();
+      await sendMessage(isClient); // 견적서 문자 발송API
     } catch (error) {
       alert(error);
     }
@@ -456,29 +470,12 @@ const ContractPreviewModalComponent = (props: any) => {
           )}
         </ContractArea>
         <BottomArea>
-          {contractImageList.length > 0 ? (
-            <>
-              <ExportBtn1 onClick={(e) => ExportContractAndSend(e)}>
-                고객 문자 발송
-              </ExportBtn1>
-              <ExportBtn2
-                onClick={(e) =>
-                  detailData.pushYN ? exportContract(e) : "none"
-                }
-              >
-                통인 CS 업로드
-              </ExportBtn2>
-            </>
-          ) : (
-            <ExportBtn
-              $disabled={detailData.pushYN}
-              onClick={(e) =>
-                detailData.pushYN ? ExportContractAndSend(e) : "none"
-              }
-            >
-              견적서 내보내기
-            </ExportBtn>
-          )}
+          <ExportBtn1 onClick={(e) => sendContractToClient(e)}>
+            고객 문자 발송
+          </ExportBtn1>
+          <ExportBtn2 onClick={(e) => sendContractToPlaner(e)}>
+            플래너 문자 발송
+          </ExportBtn2>
           {/* <SignatureBtn
             $disabled={detailData.pushYN}
             // onClick={() => (detailData.pushYN ? "none" : onSignaturePage())}
