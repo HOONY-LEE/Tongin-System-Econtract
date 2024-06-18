@@ -291,11 +291,11 @@ const ContractPreviewModalComponent = (props: any) => {
   //   await sendMessage();
   // };
 
-  const sendMessage = async (isClent: boolean) => {
+  const sendMessage = async (isClient: boolean) => {
     try {
       const result = await API.post("/receipt/send/message", {
         recNum: reNum,
-        isClent: isClent,
+        isClient: isClient,
       });
       alert("문자 발송 성공");
     } catch (error) {
