@@ -212,6 +212,10 @@ const HomeHeader = () => {
     navigate("profile");
   };
 
+  const doRefresh = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       {openMenu && <Backdrop onClick={closeMenu}></Backdrop>}
@@ -271,7 +275,7 @@ const HomeHeader = () => {
             {openMenu && (
               <MyMenuArea>
                 <NameItem>{loginUser.name} 님</NameItem>
-                <MenuItem>설정</MenuItem>
+                <MenuItem onClick={doRefresh}>강력 새로고침</MenuItem>
                 <MenuItem onClick={goProfile}>프로필</MenuItem>
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </MyMenuArea>
