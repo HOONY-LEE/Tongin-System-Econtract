@@ -101,7 +101,7 @@ const TopTdTitle = styled.div<{
   height: 100%;
   display: flex;
   align-items: center;
-  font-weight: 400;
+  font-weight: 600;
   justify-content: center;
 `;
 
@@ -116,7 +116,7 @@ const TopTdTitle2 = styled.div<{
   height: 100%;
   display: flex;
   align-items: center;
-  font-weight: 400;
+  font-weight: 600;
   justify-content: center;
 `;
 
@@ -127,7 +127,7 @@ const TopTd = styled.div<{
 }>`
   font-size: 1.4vw;
   display: flex;
-  font-weight: 500;
+  font-weight: 700;
   align-items: center;
   justify-content: center;
   width: 13.3vw;
@@ -143,7 +143,7 @@ const TopTd2 = styled.div<{
 }>`
   font-size: 1.3vw;
   display: flex;
-  font-weight: 500;
+  font-weight: 700;
   align-items: center;
   justify-content: center;
   width: 20vw;
@@ -195,7 +195,7 @@ const ApplyInfoTdTitle = styled.div<{
   height: 3.4vw;
   display: flex;
   align-items: center;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1.3vw;
   justify-content: center;
   border-right: ${(props) =>
@@ -209,7 +209,7 @@ const ApplyInfoTd = styled.div<{
 }>`
   width: ${(props) => (props.$width ? props.$width : "10vw")};
   display: flex;
-  font-weight: 300;
+  font-weight: 600;
   align-items: center;
   border-right: ${(props) => (props.$borderRight ? props.$borderRight : "")};
   justify-content: center;
@@ -288,7 +288,7 @@ const TextMemoRound = styled.div`
 // `;
 const TextMemoText = styled.pre`
   font-size: 1.6vw;
-  font-weight: 400;
+  font-weight: 500;
   text-align: start;
   line-height: 2vw;
   color: #000000;
@@ -364,19 +364,19 @@ const TotalPriceInput = styled.div`
 const PriceNameInput = styled.p`
   text-align: start;
   font-size: 1.7vw;
-  font-weight: 600;
+  font-weight: 700;
 `;
 
 const PriceInput = styled.p`
   text-align: end;
   font-size: 1.8vw;
-  font-weight: 600;
+  font-weight: 700;
   width: 10vw;
 `;
 
 const PriceNameInputEng = styled.p`
   font-size: 1.3vw;
-  font-weight: 300;
+  font-weight: 500;
   padding-left: 0.4vw;
   padding-right: 0.8vw;
   padding-top: 0.6vw;
@@ -400,7 +400,7 @@ const AgreementTextLine = styled.div`
   height: 2vw;
   font-size: 0.8vw;
   line-height: 1.1vw;
-  font-weight: 300;
+  font-weight: 500;
   display: flex;
   text-align: start;
   justify-content: space-between;
@@ -453,6 +453,7 @@ const PriceItemBox2 = styled.div`
 const OptionItemName = styled.div`
   width: 8.2vw;
   height: 3vw;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -465,6 +466,7 @@ const OptionItemName = styled.div`
 const OptionItem = styled.div`
   width: 8vw;
   height: 3vw;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -492,6 +494,7 @@ const OptionItemListBox = styled.div`
 const PriceItemName = styled.div`
   width: 48%;
   height: 100%;
+  font-weight: 600;
   background-color: #f4f4f4;
   display: flex;
   align-items: center;
@@ -515,7 +518,7 @@ const PriceItemName2 = styled.div`
   background-color: #f4f4f4;
   display: flex;
   align-items: center;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.6vw;
 
   padding-left: 1vw;
@@ -526,7 +529,7 @@ const PriceItemPrice2 = styled.div`
   width: 52%;
   height: 100%;
   display: flex;
-  font-weight: 600;
+  font-weight: 700;
   justify-content: end;
   align-items: center;
   padding-right: 1vw;
@@ -534,17 +537,17 @@ const PriceItemPrice2 = styled.div`
 `;
 const Price = styled.p`
   font-size: 1.5vw;
-  font-weight: 400;
+  font-weight: 600;
   margin-right: 0.4vw;
 `;
 const Price2 = styled.p`
   font-size: 1.6vw;
-  font-weight: 600;
+  font-weight: 700;
   margin-right: 0.4vw;
 `;
 const Unit = styled.p`
   font-size: 1.3vw;
-  font-weight: 100;
+  font-weight: 300;
   padding-top: 0.3vw;
 `;
 
@@ -579,7 +582,7 @@ const EstimateTitle = styled.div<{
   height: ${(props) => (props.$height ? props.$height : "3.4vw")};
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.3px;
   justify-content: center;
   border-right: ${(props) =>
@@ -693,7 +696,7 @@ const FooterItem1 = styled.div`
   justify-content: start;
   align-items: center;
   font-size: 1vw;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const FooterItem2 = styled.div`
@@ -701,7 +704,7 @@ const FooterItem2 = styled.div`
   justify-content: start;
   align-items: center;
   font-size: 1vw;
-  font-weight: 200;
+  font-weight: 300;
 `;
 
 const FooterItem3 = styled.div`
@@ -756,6 +759,7 @@ const ServiceName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 600;
   background-color: #f4f4f4;
   /* border-left: 0.04vw solid black; */
   border-bottom: 0.04vw solid #e4e4e4;
@@ -765,6 +769,7 @@ const ServiceDate = styled.div`
   width: 9vw;
   height: 100%;
   display: flex;
+  font-weight: 600;
   justify-content: center;
   align-items: center;
   border-left: 0.04vw solid #e4e4e4;
@@ -774,6 +779,7 @@ const ServiceDate = styled.div`
 const ServicePrice = styled.div`
   width: 9vw;
   height: 100%;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -784,6 +790,7 @@ const ServicePrice = styled.div`
 const ServicePaymentMethod = styled.div`
   width: 7vw;
   height: 100%;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
