@@ -13,7 +13,7 @@ const makeHtmltoImage = {
     const page: any = document.querySelector(className);
 
     const canvas = await html2canvas(page, {
-      scale: 3.4, // 해상도를 두 배로 설정
+      scale: 2, // 해상도를 두 배로 설정
       logging: true, // 로깅 활성화하여 디버그 정보 확인
       width: page.offsetWidth, // 너비를 두 배로 설정
       height: page.offsetHeight, // 높이를 두 배로 설정
