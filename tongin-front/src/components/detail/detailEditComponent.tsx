@@ -474,7 +474,9 @@ export default function DetailEditComponent(props: any) {
   const [selectedMovingType, setSelectedMovingType] = useState<number>(0);
 
   const onChangUserName = (e: any) => {
-    setUserName(e.target.value);
+    const inputUserName = e.target.value;
+    const sanitizedUserName = inputUserName.replace(/\//g, "");
+    setUserName(sanitizedUserName);
   };
 
   useEffect(() => {
