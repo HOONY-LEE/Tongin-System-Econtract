@@ -486,6 +486,12 @@ export default function SiteDetailComponent(props: any) {
     dateHandleCloseModal();
   };
 
+  const onChangUserName = (e: any) => {
+    const inputUserName = e.target.value;
+    const sanitizedUserName = inputUserName.replace(/\//g, "");
+    setMemNm(sanitizedUserName);
+  };
+
   //로컬에서 꺼내온 담당자 정보
   const loginUser = JSON.parse(localStorage.getItem("loginUser") || "{}");
   const navigate = useNavigate();
@@ -651,9 +657,7 @@ export default function SiteDetailComponent(props: any) {
                   <InputBox
                     placeholder="고객명"
                     defaultValue={memNm}
-                    onChange={(e) => {
-                      setMemNm(e.target.value);
-                    }}
+                    onChange={onChangUserName}
                   ></InputBox>
                 </InfoLfEditContent>
               </InfoLfBox>
