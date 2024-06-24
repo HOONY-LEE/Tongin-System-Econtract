@@ -15,6 +15,7 @@ import makeHtmltoImage from "../../API/makePDF";
 import SecondPage from "./secondPage";
 import CloseIcon from "../icon/closeIcon";
 import { useNavigate } from "react-router-dom";
+import { Image } from "../common/image";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -40,6 +41,28 @@ const Wrapper = styled.div`
   height: 98%;
   background-color: white;
   border-radius: 0.8vw;
+`;
+
+const Loader = styled.div`
+  position: fixed;
+  top: 34vh;
+  left: 35vw;
+  width: 20vw;
+  height: 20vw;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #3d3d3d8b;
+  border-radius: 2vw;
+  padding: 4vw;
+`;
+
+const LoadingMessage = styled.div`
+  margin-top: 2vw;
+  font-size: 2vw;
+  color: white;
 `;
 
 const TopArea = styled.div`
@@ -234,6 +257,7 @@ const ContractPreviewModalComponent = (props: any) => {
     contractNum,
   } = props;
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [contractImageList, setContractImageList] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [prevBoxActive, setPrevBoxActive] = useState<boolean>(false);
@@ -305,6 +329,8 @@ const ContractPreviewModalComponent = (props: any) => {
 
   const exportAndSendContract = async (e: any, isClient: boolean) => {
     e.preventDefault();
+    setIsLoading(true);
+
     // 첫 번째 페이지를 렌더링하고 이미지로 변환
     setCurrentPage(1); // 첫 번째 페이지로 설정
     await new Promise((resolve) => setTimeout(resolve, 1000)); // 렌더링 완료를 위한 시간 지연
@@ -350,8 +376,8 @@ const ContractPreviewModalComponent = (props: any) => {
     const imageFiles = [firstPageImage, secondPageImage];
     try {
       await makeHtmltoImage._sendImgToServer(imageFiles, reNum);
-
-      completeReceipt();
+      await completeReceipt();
+      setIsLoading(false);
       getContractImageList(); // 이미지 전송후 계약서 이미지 리스트 다시 받아오기
     } catch (error) {
       alert(error);
@@ -483,6 +509,17 @@ const ContractPreviewModalComponent = (props: any) => {
             서명하기
           </SignatureBtn> */}
         </BottomArea>
+        {isLoading ? (
+          <Loader>
+            <Image
+              src={"/icon/orange_circles.gif"}
+              alt="로딩이미지"
+              width={`10vw`}
+              height={`100%`}
+            ></Image>
+            <LoadingMessage>처리중...</LoadingMessage>
+          </Loader>
+        ) : null}
       </Wrapper>
     </>
   );
