@@ -59,10 +59,11 @@ const LogoImg = styled.div`
 
 const ContentArea = styled.div`
   width: 100%;
+  height: 120vw;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 `;
 const TopArea = styled.div`
@@ -167,7 +168,7 @@ const FooterItem1 = styled.div`
   justify-content: start;
   align-items: center;
   font-size: 1vw;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const FooterItem2 = styled.div`
@@ -175,7 +176,7 @@ const FooterItem2 = styled.div`
   justify-content: start;
   align-items: center;
   font-size: 1vw;
-  font-weight: 200;
+  font-weight: 300;
 `;
 
 const FooterItem3 = styled.div`

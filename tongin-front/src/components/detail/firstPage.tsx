@@ -57,6 +57,7 @@ const ContentArea = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 120vw;
 `;
 
 const TopTable = styled.div`
@@ -217,11 +218,11 @@ const ApplyInfoTd = styled.div<{
   height: 3.4vw;
 `;
 const MemoBox = styled.div`
-  width: 41vw;
+  width: 43vw;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
 `;
 
 const TextMemoBox = styled.div`
@@ -269,7 +270,7 @@ const MemoRound = styled.div`
 
 const TextMemoRound = styled.div`
   width: 100%;
-  height: 58vw;
+  height: 50.2vw;
   border: 0.1vw solid #a1a1a1;
   background-color: #fafafa;
   border-radius: 0.6vw;
@@ -277,6 +278,59 @@ const TextMemoRound = styled.div`
   justify-content: start;
   align-items: start;
   padding: 1vw;
+`;
+
+const OptionBoxArea = styled.div`
+  width: 100%;
+  height: 10.8vw;
+  display: flex;
+  justify-content: center;
+  border-top: 0.16vw solid black;
+  border-left: 0.16vw solid black;
+  margin-bottom: 0.6vw;
+`;
+
+const OptionBox = styled.div`
+  width: 33.3%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4vw;
+  font-weight: 500;
+  /* background-color: red; */
+`;
+
+const OptionItemBox = styled.div`
+  width: 100%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.1vw solid #a1a1a1;
+`;
+
+const OptionName = styled.div`
+  width: 56%;
+  height: 100%;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2vw;
+  font-weight: 500;
+  border-right: 0.1vw solid #a1a1a1;
+`;
+
+const OptionText = styled.div`
+  width: 44%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2vw;
+  font-weight: 500;
+  background-color: #ffffff;
+  border-right: 0.1vw solid #a1a1a1;
 `;
 
 // const TextMemoText = styled.pre`
@@ -318,10 +372,10 @@ const BottomComponent = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 60vw;
+  height: 62.6vw;
 `;
 const PriceListArea = styled.div`
-  width: 32vw;
+  width: 30vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -333,7 +387,7 @@ const PriceListBox = styled.div`
   width: 100%;
   border-top: 0.16vw solid black;
   border-left: 0.1vw solid black;
-  margin-bottom: 1vw;
+  margin-bottom: 0.4vw;
 `;
 
 const TotalPriceBox = styled.div`
@@ -384,10 +438,11 @@ const PriceNameInputEng = styled.p`
 
 const AgreementBox = styled.div`
   width: 100%;
-  height: 6.2vw;
+  height: 4vw;
   display: flex;
   /* flex-direction: column; */
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 0.16vw solid black;
   /* background-color: gray; */
 `;
@@ -397,8 +452,7 @@ const ImageBox = styled.div`
 
 const AgreementTextLine = styled.div`
   margin-top: 0.3vw;
-  height: 2vw;
-  font-size: 0.8vw;
+  font-size: 1.6vw;
   line-height: 1.1vw;
   font-weight: 500;
   display: flex;
@@ -409,17 +463,15 @@ const AgreementTextLine = styled.div`
 
 const SignatureBox = styled.div`
   width: 100%;
-  height: 7vw;
+  height: 6.6vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 0.16vw solid black;
-  margin-top: 1vw;
+  margin-top: 0.4vw;
 `;
 
 const SignatureTitle = styled.div`
   width: 30%;
-  height: 100%;
-  margin-top: 0.1vw;
 `;
 
 const SignatureArea = styled.div`
@@ -492,7 +544,7 @@ const OptionItemListBox = styled.div`
 `;
 
 const PriceItemName = styled.div`
-  width: 48%;
+  width: 45%;
   height: 100%;
   font-weight: 600;
   background-color: #f4f4f4;
@@ -504,7 +556,7 @@ const PriceItemName = styled.div`
 `;
 
 const PriceItemPrice = styled.div`
-  width: 52%;
+  width: 55%;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -513,7 +565,7 @@ const PriceItemPrice = styled.div`
   border-bottom: 0.04vw solid #d3d3d3;
 `;
 const PriceItemName2 = styled.div`
-  width: 48%;
+  width: 45%;
   height: 100%;
   background-color: #f4f4f4;
   display: flex;
@@ -526,7 +578,7 @@ const PriceItemName2 = styled.div`
 `;
 
 const PriceItemPrice2 = styled.div`
-  width: 52%;
+  width: 55%;
   height: 100%;
   display: flex;
   font-weight: 700;
@@ -734,15 +786,24 @@ const ServiceArea = styled.div`
   width: 100%;
   margin-bottom: 1vw;
   display: flex;
+  justify-content: center;
   border-bottom: 0.04vw solid #e4e4e4;
   border-top: 0.16vw solid black;
 `;
 
 const ServiceBox = styled.div`
-  width: 50%;
+  width: 33.3%;
   height: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const ServiceNameBox = styled.div`
+  width: 10vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ServiceColumnBox = styled.div`
@@ -1014,6 +1075,59 @@ const FirstPage = (props: any) => {
             </TopTableTd>
 
             <ApplyInfoTable2>
+              <WorkConditionBox>
+                <ApplyInfoTdTitle $width={"15%"}>이사 전 주소</ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"60%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle $width={"15%"}>
+                  작업조건 (전)
+                </ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"14%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {optionData.beforeWorkCondition.pyeong}(평)
+                </ApplyInfoTd>
+                <ApplyInfoTd $width={"15%"}>
+                  {
+                    transportationMethodList[
+                      optionData.beforeWorkCondition.transportationMethod
+                    ].status
+                  }
+                </ApplyInfoTd>
+              </WorkConditionBox>
+              <WorkConditionBox>
+                <ApplyInfoTdTitle $width={"15%"}>이사 후 주소</ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"60%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
+                </ApplyInfoTd>
+                <ApplyInfoTdTitle $width={"15%"}>
+                  작업조건 (후)
+                </ApplyInfoTdTitle>
+                <ApplyInfoTd
+                  $width={"14%"}
+                  $borderRight={"0.1vw solid #e4e4e4"}
+                >
+                  {optionData.afterWorkCondition.pyeong}(평)
+                </ApplyInfoTd>
+                <ApplyInfoTd $width={"15%"}>
+                  {
+                    transportationMethodList[
+                      optionData.afterWorkCondition.transportationMethod
+                    ].status
+                  }
+                </ApplyInfoTd>
+              </WorkConditionBox>
+            </ApplyInfoTable2>
+
+            <ApplyInfoTable2>
               <ApplyInfoTr>
                 <ApplyInfoTdTitle>접수일</ApplyInfoTdTitle>
                 <ApplyInfoTd>
@@ -1084,90 +1198,9 @@ const FirstPage = (props: any) => {
                 <ApplyInfoTd></ApplyInfoTd>
               </ApplyInfoTr>
             </ApplyInfoTable2>
-            <ApplyInfoTable2>
-              <WorkConditionBox>
-                <ApplyInfoTdTitle $width={"15%"}>이사 전 주소</ApplyInfoTdTitle>
-                <ApplyInfoTd
-                  $width={"60%"}
-                  $borderRight={"0.1vw solid #e4e4e4"}
-                >
-                  {`${detailData.preAddress}, ${detailData.preAddressDetail}`}
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"15%"}>
-                  작업조건 (전)
-                </ApplyInfoTdTitle>
-                <ApplyInfoTd
-                  $width={"14%"}
-                  $borderRight={"0.1vw solid #e4e4e4"}
-                >
-                  {
-                    transportationMethodList[
-                      optionData.beforeWorkCondition.transportationMethod
-                    ].status
-                  }
-                </ApplyInfoTd>
-                <ApplyInfoTd $width={"15%"}>
-                  {optionData.beforeWorkCondition.pyeong}(평)
-                </ApplyInfoTd>
-              </WorkConditionBox>
-              <WorkConditionBox>
-                <ApplyInfoTdTitle $width={"15%"}>이사 후 주소</ApplyInfoTdTitle>
-                <ApplyInfoTd
-                  $width={"60%"}
-                  $borderRight={"0.1vw solid #e4e4e4"}
-                >
-                  {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"15%"}>
-                  작업조건 (후)
-                </ApplyInfoTdTitle>
-                <ApplyInfoTd
-                  $width={"14%"}
-                  $borderRight={"0.1vw solid #e4e4e4"}
-                >
-                  {
-                    transportationMethodList[
-                      optionData.afterWorkCondition.transportationMethod
-                    ].status
-                  }
-                </ApplyInfoTd>
-                <ApplyInfoTd $width={"15%"}>
-                  {optionData.afterWorkCondition.pyeong}(평)
-                </ApplyInfoTd>
-              </WorkConditionBox>
-              {/* <ApplyInfoTr>
-                <ApplyInfoTdTitle $width={"18%"}>이사 후 주소</ApplyInfoTdTitle>
-                <ApplyInfoTd $width={"56%"}>
-                  {`${detailData.afterAddress}, ${detailData.afterAddressDetail}`}
-                </ApplyInfoTd>
-                <ApplyInfoTdTitle $width={"18%"}>
-                  작업조건 (후)
-                </ApplyInfoTdTitle>
-                <ApplyInfoTd
-                  $width={"14%"}
-                  $borderRight={"0.1vw solid #e4e4e4"}
-                >
-                  {
-                    transportationMethodList[
-                      optionData.afterWorkCondition.transportationMethod
-                    ].status
-                  }
-                </ApplyInfoTd>
-                <ApplyInfoTd $width={"14%"}>
-                  {optionData.afterWorkCondition.pyeong}(평)
-                </ApplyInfoTd>
-              </ApplyInfoTr> */}
-            </ApplyInfoTable2>
 
             <ServiceArea>
               <ServiceBox>
-                {/* <ServiceColumnBox>
-                <ServiceName>서비스</ServiceName>
-                <ServiceDate>날짜</ServiceDate>
-                <ServicePrice>금액</ServicePrice>
-                <ServicePaymentMethod>결제</ServicePaymentMethod>
-              </ServiceColumnBox> */}
-                {/* 입주청소서비스 */}
                 <ServiceColumnBox>
                   <ServiceName>입주청소서비스</ServiceName>
                   <ServiceDate>
@@ -1175,12 +1208,19 @@ const FirstPage = (props: any) => {
                       ? optionData.livingService.movingCleaningService
                           .serviceRequestDate === ""
                         ? "--"
-                        : optionData.livingService.movingCleaningService
-                            .serviceRequestDate
+                        : `${optionData.livingService.movingCleaningService.serviceRequestDate.substring(
+                            2,
+                            4
+                          )}-${optionData.livingService.movingCleaningService.serviceRequestDate.substring(
+                            4,
+                            6
+                          )}-${optionData.livingService.movingCleaningService.serviceRequestDate.substring(
+                            6,
+                            8
+                          )}`
                       : "-"}
                   </ServiceDate>
                   <ServicePaymentMethod>
-                    {" "}
                     {optionData.livingService.movingCleaningService.selected
                       ? paymentMethodList[
                           optionData.livingService.movingCleaningService
@@ -1188,13 +1228,7 @@ const FirstPage = (props: any) => {
                         ].status
                       : "-"}
                   </ServicePaymentMethod>
-                  <ServicePrice>
-                    {optionData.livingService.movingCleaningService.selected
-                      ? optionData.livingService.movingCleaningService.servicePayment.toLocaleString()
-                      : "-"}
-                  </ServicePrice>
                 </ServiceColumnBox>
-                {/* 정리수납서비스 */}
                 <ServiceColumnBox>
                   <ServiceName>정리수납서비스</ServiceName>
                   <ServiceDate>
@@ -1203,12 +1237,19 @@ const FirstPage = (props: any) => {
                       ? optionData.livingService.organizationStorageService
                           .serviceRequestDate === ""
                         ? "--"
-                        : optionData.livingService.organizationStorageService
-                            .serviceRequestDate
+                        : `${optionData.livingService.organizationStorageService.serviceRequestDate.substring(
+                            2,
+                            4
+                          )}-${optionData.livingService.organizationStorageService.serviceRequestDate.substring(
+                            4,
+                            6
+                          )}-${optionData.livingService.organizationStorageService.serviceRequestDate.substring(
+                            6,
+                            8
+                          )}`
                       : "-"}
                   </ServiceDate>
                   <ServicePaymentMethod>
-                    {" "}
                     {optionData.livingService.organizationStorageService
                       .selected
                       ? paymentMethodList[
@@ -1217,27 +1258,30 @@ const FirstPage = (props: any) => {
                         ].status
                       : "-"}
                   </ServicePaymentMethod>
-                  <ServicePrice>
-                    {optionData.livingService.organizationStorageService
-                      .selected
-                      ? optionData.livingService.organizationStorageService.servicePayment.toLocaleString()
-                      : "-"}
-                  </ServicePrice>
                 </ServiceColumnBox>
-                {/* 정리수납서비스 */}
+              </ServiceBox>
+              <ServiceBox>
                 <ServiceColumnBox>
                   <ServiceName>가전청소서비스</ServiceName>
                   <ServiceDate>
+                    {" "}
                     {optionData.livingService.electronicCleaningService.selected
                       ? optionData.livingService.electronicCleaningService
                           .serviceRequestDate === ""
                         ? "--"
-                        : optionData.livingService.electronicCleaningService
-                            .serviceRequestDate
+                        : `${optionData.livingService.electronicCleaningService.serviceRequestDate.substring(
+                            2,
+                            4
+                          )}-${optionData.livingService.electronicCleaningService.serviceRequestDate.substring(
+                            4,
+                            6
+                          )}-${optionData.livingService.electronicCleaningService.serviceRequestDate.substring(
+                            6,
+                            8
+                          )}`
                       : "-"}
                   </ServiceDate>
                   <ServicePaymentMethod>
-                    {" "}
                     {optionData.livingService.electronicCleaningService.selected
                       ? paymentMethodList[
                           optionData.livingService.electronicCleaningService
@@ -1245,34 +1289,28 @@ const FirstPage = (props: any) => {
                         ].status
                       : "-"}
                   </ServicePaymentMethod>
-                  <ServicePrice>
-                    {optionData.livingService.electronicCleaningService.selected
-                      ? optionData.livingService.electronicCleaningService.servicePayment.toLocaleString()
-                      : "-"}
-                  </ServicePrice>
                 </ServiceColumnBox>
-              </ServiceBox>
-              <ServiceBox>
-                {/* <ServiceColumnBox>
-                <ServiceName>서비스</ServiceName>
-                <ServiceDate>날짜</ServiceDate>
-                <ServicePrice>금액</ServicePrice>
-                <ServicePaymentMethod>결제</ServicePaymentMethod>
-              </ServiceColumnBox> */}
-                {/* 탈취살균서비스 */}
                 <ServiceColumnBox>
                   <ServiceName>탈취살균서비스</ServiceName>
                   <ServiceDate>
+                    {" "}
                     {optionData.livingService.deodorizationService.selected
                       ? optionData.livingService.deodorizationService
                           .serviceRequestDate === ""
                         ? "--"
-                        : optionData.livingService.deodorizationService
-                            .serviceRequestDate
+                        : `${optionData.livingService.deodorizationService.serviceRequestDate.substring(
+                            2,
+                            4
+                          )}-${optionData.livingService.deodorizationService.serviceRequestDate.substring(
+                            4,
+                            6
+                          )}-${optionData.livingService.deodorizationService.serviceRequestDate.substring(
+                            6,
+                            8
+                          )}`
                       : "-"}
                   </ServiceDate>
                   <ServicePaymentMethod>
-                    {" "}
                     {optionData.livingService.deodorizationService.selected
                       ? paymentMethodList[
                           optionData.livingService.deodorizationService
@@ -1280,65 +1318,220 @@ const FirstPage = (props: any) => {
                         ].status
                       : "-"}
                   </ServicePaymentMethod>
-                  <ServicePrice>
-                    {optionData.livingService.deodorizationService.selected
-                      ? optionData.livingService.deodorizationService.servicePayment.toLocaleString()
-                      : "-"}
-                  </ServicePrice>
                 </ServiceColumnBox>
-                {/* 에이프런서비스 */}
+              </ServiceBox>
+              <ServiceBox>
                 <ServiceColumnBox>
                   <ServiceName>에이프런서비스</ServiceName>
                   <ServiceDate>
+                    {" "}
                     {optionData.livingService.apronService.selected
                       ? optionData.livingService.apronService
                           .serviceRequestDate === ""
                         ? "--"
-                        : optionData.livingService.apronService
-                            .serviceRequestDate
+                        : `${optionData.livingService.apronService.serviceRequestDate.substring(
+                            2,
+                            4
+                          )}-${optionData.livingService.apronService.serviceRequestDate.substring(
+                            4,
+                            6
+                          )}-${optionData.livingService.apronService.serviceRequestDate.substring(
+                            6,
+                            8
+                          )}`
                       : "-"}
                   </ServiceDate>
                   <ServicePaymentMethod>
-                    {" "}
                     {optionData.livingService.apronService.selected
                       ? paymentMethodList[
                           optionData.livingService.apronService.paymentMethod
                         ].status
                       : "-"}
                   </ServicePaymentMethod>
-                  <ServicePrice>
-                    {optionData.livingService.apronService.selected
-                      ? optionData.livingService.apronService.servicePayment.toLocaleString()
-                      : "-"}
-                  </ServicePrice>
                 </ServiceColumnBox>
-                {/* 기타서비스 */}
                 <ServiceColumnBox>
                   <ServiceName>무브제서비스</ServiceName>
                   <ServiceDate>
+                    {" "}
                     {optionData.livingService.movjetService.selected
                       ? optionData.livingService.movjetService
                           .serviceRequestDate === ""
                         ? "--"
-                        : optionData.livingService.movjetService
-                            .serviceRequestDate
+                        : `${optionData.livingService.movjetService.serviceRequestDate.substring(
+                            2,
+                            4
+                          )}-${optionData.livingService.movjetService.serviceRequestDate.substring(
+                            4,
+                            6
+                          )}-${optionData.livingService.movjetService.serviceRequestDate.substring(
+                            6,
+                            8
+                          )}`
                       : "-"}
                   </ServiceDate>
                   <ServicePaymentMethod>
-                    {" "}
                     {optionData.livingService.movjetService.selected
                       ? paymentMethodList[
                           optionData.livingService.movjetService.paymentMethod
                         ].status
                       : "-"}
                   </ServicePaymentMethod>
-                  <ServicePrice>
-                    {optionData.livingService.movjetService.selected
-                      ? optionData.livingService.movjetService.servicePayment.toLocaleString()
-                      : "-"}
-                  </ServicePrice>
                 </ServiceColumnBox>
               </ServiceBox>
+
+              {/* <ServiceColumnBox>
+                <ServiceName>입주청소서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.movingCleaningService.selected
+                    ? optionData.livingService.movingCleaningService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.movingCleaningService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.movingCleaningService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.movingCleaningService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.movingCleaningService.selected
+                    ? optionData.livingService.movingCleaningService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox>
+              <ServiceColumnBox>
+                <ServiceName>정리수납서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.organizationStorageService.selected
+                    ? optionData.livingService.organizationStorageService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.organizationStorageService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.organizationStorageService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.organizationStorageService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.organizationStorageService.selected
+                    ? optionData.livingService.organizationStorageService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox>
+              <ServiceColumnBox>
+                <ServiceName>가전청소서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.electronicCleaningService.selected
+                    ? optionData.livingService.electronicCleaningService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.electronicCleaningService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.electronicCleaningService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.electronicCleaningService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.electronicCleaningService.selected
+                    ? optionData.livingService.electronicCleaningService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox>
+              <ServiceColumnBox>
+                <ServiceName>탈취살균서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.deodorizationService.selected
+                    ? optionData.livingService.deodorizationService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.deodorizationService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.deodorizationService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.deodorizationService
+                          .paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.deodorizationService.selected
+                    ? optionData.livingService.deodorizationService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox>
+              <ServiceColumnBox>
+                <ServiceName>에이프런서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.apronService.selected
+                    ? optionData.livingService.apronService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.apronService.serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.apronService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.apronService.paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.apronService.selected
+                    ? optionData.livingService.apronService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox>
+              <ServiceColumnBox>
+                <ServiceName>무브제서비스</ServiceName>
+                <ServiceDate>
+                  {optionData.livingService.movjetService.selected
+                    ? optionData.livingService.movjetService
+                        .serviceRequestDate === ""
+                      ? "--"
+                      : optionData.livingService.movjetService
+                          .serviceRequestDate
+                    : "-"}
+                </ServiceDate>
+                <ServicePaymentMethod>
+                  {" "}
+                  {optionData.livingService.movjetService.selected
+                    ? paymentMethodList[
+                        optionData.livingService.movjetService.paymentMethod
+                      ].status
+                    : "-"}
+                </ServicePaymentMethod>
+                <ServicePrice>
+                  {optionData.livingService.movjetService.selected
+                    ? optionData.livingService.movjetService.servicePayment.toLocaleString()
+                    : "-"}
+                </ServicePrice>
+              </ServiceColumnBox> */}
             </ServiceArea>
 
             <BottomComponent>
@@ -1374,16 +1567,320 @@ const FirstPage = (props: any) => {
                     </Layer>
                   </Stage>
                 </MemoRound> */}
+                <OptionBoxArea>
+                  <OptionBox>
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[0].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[0]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[0].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[0]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[0].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[0]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[0].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[0]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[0].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[1].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[1]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[1].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[1]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[1].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[1]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[1].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[1]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[1].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[2].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[2]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[2].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[2]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[2].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[2]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[2].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[2]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[2].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[3].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[3]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[3].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[3]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[3].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[3]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[3].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[3]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[3].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>
+                  </OptionBox>
+                  <OptionBox>
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[4].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[4]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[4].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[4]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[4].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[4]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[4].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[4]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[4].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[5].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[5]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[5].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[5]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[5].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[5]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[5].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[5]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[5].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[6].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[6]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[6].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[6]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[6].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[6]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[6].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[6]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[6].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[7].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[7]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[7].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[7]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[7].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[7]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[7].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[7]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[7].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>
+                  </OptionBox>
+                  <OptionBox>
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[8].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[8]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[8].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[8]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[8].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[8]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[8].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[8]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[8].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[9].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[9]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[9].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[9]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[9].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[9]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[9].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[9]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[9].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>
+                        {optionData.optionService.ServiceList[10].optionName}
+                      </OptionName>
+                      <OptionText>
+                        {optionData.optionService.ServiceList[10]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[10].installation
+                          ? "분해/설치"
+                          : null}
+                        {optionData.optionService.ServiceList[10]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[10].installation
+                          ? "분해"
+                          : null}
+                        {!optionData.optionService.ServiceList[10]
+                          .decomposition &&
+                        optionData.optionService.ServiceList[10].installation
+                          ? "설치"
+                          : null}
+                        {!optionData.optionService.ServiceList[10]
+                          .decomposition &&
+                        !optionData.optionService.ServiceList[10].installation
+                          ? "-"
+                          : null}
+                      </OptionText>
+                    </OptionItemBox>{" "}
+                    <OptionItemBox>
+                      <OptionName>옵션 합계</OptionName>
+                      <OptionText>
+                        {optionTotalCharge.toLocaleString()}
+                      </OptionText>
+                    </OptionItemBox>
+                  </OptionBox>
+                </OptionBoxArea>
               </MemoBox>
               <PriceListArea>
-                <PriceListBox>
-                  {/* <PriceItemBox>
-                    <PriceItemName>옵션품목(분해/설치)</PriceItemName>
-                    <PriceItemPrice>
-                      <Price> {optionTotalCharge.toLocaleString()}</Price>
-                      <Unit>₩</Unit>
-                    </PriceItemPrice>
-                  </PriceItemBox> */}
+                {/* <PriceListBox>
                   <OptionItemListBox>
                     {optionData.optionService.ServiceList.map(
                       (item: any, index: number) => {
@@ -1428,7 +1925,8 @@ const FirstPage = (props: any) => {
                       </OptionItem2>
                     </PriceItemBox2>
                   </OptionItemListBox>
-                </PriceListBox>
+                </PriceListBox> */}
+
                 <PriceListBox>
                   <PriceItemBox>
                     <PriceItemName>이사물량(운반/폐기)</PriceItemName>
@@ -1455,17 +1953,83 @@ const FirstPage = (props: any) => {
                   </PriceItemBox>
 
                   <PriceItemBox>
-                    <PriceItemName>
-                      옵션비용
-                      {/* {optionData.livingService.otherService.description
-                        ? optionData.livingService.otherService.description.substring(
-                            0,
-                            10
-                          )
-                        : "기타서비스"} */}
-                    </PriceItemName>
+                    <PriceItemName>옵션 비용</PriceItemName>
                     <PriceItemPrice>
                       <Price>{optionTotalCharge.toLocaleString()}</Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>입추청소서비스</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.movingCleaningService.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>정리수납서비스</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.organizationStorageService.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>가전청소서비스</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.electronicCleaningService.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>탈취살균서비스</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.deodorizationService.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>에이프런서비스</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.apronService.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>무브제서비스</PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.movjetService.servicePayment.toLocaleString()}
+                      </Price>
+                      <Unit>₩</Unit>
+                    </PriceItemPrice>
+                  </PriceItemBox>
+
+                  <PriceItemBox>
+                    <PriceItemName>
+                      {optionData.livingService.otherService.description === ""
+                        ? "기타서비스"
+                        : optionData.livingService.otherService.description}
+                    </PriceItemName>
+                    <PriceItemPrice>
+                      <Price>
+                        {optionData.livingService.otherService.servicePayment.toLocaleString()}
+                      </Price>
                       <Unit>₩</Unit>
                     </PriceItemPrice>
                   </PriceItemBox>
@@ -1538,13 +2102,9 @@ const FirstPage = (props: any) => {
                     <PriceNameInputEng>₩</PriceNameInputEng>
                   </TotalPriceInput>
                 </TotalPriceBox> */}
-                {/* <AgreementBox>
+                <AgreementBox>
                   <AgreementTextLine>
-                    본인은 (주)통인익스프레스 견적•계약에 따른 약관 및 이용
-                    안내에<br></br>
-                    대한 설명을 듣고 이해했으며, 이사 및 부대 서비스를 신청하고{" "}
-                    <br></br>
-                    개인정보 수집 및 활용에 동의합니다.
+                    이용약관 및 개인정보 수집/활용 동의
                   </AgreementTextLine>
                   <AgreementTextLine>
                     <ImageBox>
@@ -1557,7 +2117,7 @@ const FirstPage = (props: any) => {
                       ></Image>
                     </ImageBox>
                   </AgreementTextLine>
-                </AgreementBox> */}
+                </AgreementBox>
                 <SignatureBox>
                   <SignatureTitle>
                     <PriceNameInput>고객서명</PriceNameInput>

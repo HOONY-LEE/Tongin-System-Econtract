@@ -526,6 +526,7 @@ export default function Detail() {
                   setOptionData={setOptionData}
                   postOptionData={postOptionData}
                   reNum={reNum}
+                  detailData={detailData}
                 ></NewOptionComponent>
               </OptionTabBox>
             ) : null}
