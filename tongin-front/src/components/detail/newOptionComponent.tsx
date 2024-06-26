@@ -75,6 +75,24 @@ const ConditionTitleBox = styled.div`
   height: 3vh;
 `;
 
+const ConditionTitle = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 2.2vw;
+  font-weight: 700;
+  height: 3vh;
+`;
+
+const ConditionSubtitle = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 1.6vw;
+  font-weight: 500;
+  height: 3vh;
+`;
+
 const CondtionContentsBox = styled.div`
   display: flex;
   justify-content: start;
@@ -108,7 +126,7 @@ const DropdownBox = styled.div`
 `;
 
 export default function NewOptionComponent(props: any) {
-  const { optionData, setOptionData, reNum, postOptionData } = props;
+  const { optionData, setOptionData, postOptionData, detailData } = props;
 
   const transportationMethodList = [
     { id: 0, status: "선택안함" },
@@ -307,7 +325,12 @@ export default function NewOptionComponent(props: any) {
         <OptionArea>
           <WorkConditionArea>
             <ConditionBox>
-              <ConditionTitleBox>작업 조건(전)</ConditionTitleBox>
+              <ConditionTitleBox>
+                <ConditionTitle>전 작업조건</ConditionTitle>
+                <ConditionSubtitle>
+                  ({detailData.preAddressDetail})
+                </ConditionSubtitle>
+              </ConditionTitleBox>
               <CondtionContentsBox>
                 <RoomSizeBox
                   inputValue={prevOptionData.pyeong}
@@ -323,7 +346,12 @@ export default function NewOptionComponent(props: any) {
               </CondtionContentsBox>
             </ConditionBox>
             <ConditionBox>
-              <ConditionTitleBox>작업 조건(후)</ConditionTitleBox>
+              <ConditionTitleBox>
+                <ConditionTitle>후 작업조건</ConditionTitle>
+                <ConditionSubtitle>
+                  ({detailData.afterAddressDetail})
+                </ConditionSubtitle>
+              </ConditionTitleBox>
               <CondtionContentsBox>
                 <RoomSizeBox
                   inputValue={afterOptionData.pyeong}
